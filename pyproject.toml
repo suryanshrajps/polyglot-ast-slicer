@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "polyglot-ast-slicer"
+version = "0.1.0"
+description = "Deterministic Polyglot AST Call-Graph Slicer and Local MCP Server for AI Coding Agents"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+    "tree-sitter>=0.23.0",
+    "tree-sitter-language-pack>=0.1.1",
+    "networkx>=3.3",
+    "fastmcp>=2.1.0",
+    "tiktoken>=0.8.0",
+    "watchfiles>=0.24.0",
+]
+
+[project.scripts]
+polyglot-ast-slicer = "src.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+]

@@ -1,0 +1,20 @@
+# Virtual environment & Python cache
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+*.egg-info/
+
+# Local SQLite AST cache files
+.ast_slicer_cache.db
+.ast_slicer_cache.db-shm
+.ast_slicer_cache.db-wal
+
+# OS & Editor files
+.DS_Store
+.idea/
