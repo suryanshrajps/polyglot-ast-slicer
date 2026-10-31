@@ -219,3 +219,35 @@ def test_class_static_factory_is_not_class_recursion(tmp_path: Path) -> None:
     assert [call.name for call in widget.calls] == []
     create = next(s for s in parsed.symbols if s.qualified_name == "Widget.create")
     assert [call.name for call in create.calls] == ["Widget"]
+
+
+def test_jsx_component_usage_is_a_call(tmp_path: Path) -> None:
+    path = tmp_path / "app.tsx"
+    path.write_text(
+        'import { Widget } from "./widget";\n'
+        "export function App() {\n"
+        "  return <Widget />;\n"
+        "}\n",
+        encoding="utf-8",
+    )
+    try:
+        parsed = PolyglotASTParser().parse_file(path)
+    except GrammarUnavailable as error:
+        pytest.skip(str(error))
+    app = next(symbol for symbol in parsed.symbols if symbol.name == "App")
+    assert [call.name for call in app.calls] == ["Widget"]
+
+
+def test_require_creates_module_binding(tmp_path: Path) -> None:
+    path = tmp_path / "main.cjs"
+    path.write_text(
+        'const util = require("./util");\n'
+        "module.exports = function main() { return util.helper(); };\n",
+        encoding="utf-8",
+    )
+    try:
+        parsed = PolyglotASTParser().parse_file(path)
+    except GrammarUnavailable as error:
+        pytest.skip(str(error))
+    assert any(ref.module == "./util" and ref.alias == "util" for ref in parsed.imports)
+    assert not parsed.has_parse_errors

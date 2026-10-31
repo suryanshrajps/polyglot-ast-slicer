@@ -1,0 +1,211 @@
+{
+  "total_tests": 2262,
+  "before": {
+    "low": {
+      "n": 4,
+      "recall": [
+        0.0,
+        0.062,
+        1.0
+      ],
+      "precision": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "selection": [
+        0.0,
+        0.001,
+        0.002
+      ],
+      "selection_90": [
+        0.002,
+        0.002,
+        0.002
+      ],
+      "mention_recall_p50": 0.0,
+      "mention_selection_p50": 0.147,
+      "same_file_recall_p50": 0.0,
+      "same_file_selection_p50": 0.0
+    },
+    "medium": {
+      "n": 6,
+      "recall": [
+        0.0,
+        0.009,
+        0.012
+      ],
+      "precision": [
+        0.0,
+        0.04,
+        0.5
+      ],
+      "selection": [
+        0.002,
+        0.011,
+        0.019
+      ],
+      "selection_90": [
+        null,
+        null,
+        null
+      ],
+      "mention_recall_p50": 0.0,
+      "mention_selection_p50": 0.01,
+      "same_file_recall_p50": 0.0,
+      "same_file_selection_p50": 0.01
+    },
+    "high": {
+      "n": 3,
+      "recall": [
+        0.056,
+        0.058,
+        0.3
+      ],
+      "precision": [
+        0.145,
+        0.145,
+        0.375
+      ],
+      "selection": [
+        0.004,
+        0.031,
+        0.031
+      ],
+      "selection_90": [
+        null,
+        null,
+        null
+      ],
+      "mention_recall_p50": 0.24,
+      "mention_selection_p50": 0.053,
+      "same_file_recall_p50": 0.0,
+      "same_file_selection_p50": 0.0
+    }
+  },
+  "after": {
+    "low": {
+      "n": 4,
+      "recall_p50": 0.048,
+      "precision_p50": 1.0,
+      "selection_p50": 0.00066
+    },
+    "medium": {
+      "n": 6,
+      "recall_p50": 0.0,
+      "precision_p50": 0.0,
+      "selection_p50": 0.00641
+    },
+    "high": {
+      "n": 3,
+      "recall_p50": 0.025,
+      "precision_p50": 0.014,
+      "selection_p50": 0.0305
+    }
+  },
+  "rows": [
+    {
+      "stratum": "low",
+      "function": "make_pass_decorator.decorator",
+      "recall": 1.0,
+      "precision": 1.0,
+      "selection": 0.0022104332449160036
+    },
+    {
+      "stratum": "low",
+      "function": "Parameter.human_readable_name",
+      "recall": 0.0,
+      "precision": null,
+      "selection": 0.0
+    },
+    {
+      "stratum": "low",
+      "function": "_FixupStream.__init__",
+      "recall": 0.0,
+      "precision": null,
+      "selection": 0.0
+    },
+    {
+      "stratum": "low",
+      "function": "CompletionItem.__init__",
+      "recall": 0.0967741935483871,
+      "precision": 1.0,
+      "selection": 0.001326259946949602
+    },
+    {
+      "stratum": "medium",
+      "function": "HelpFormatter.indent",
+      "recall": 0.0,
+      "precision": 0.0,
+      "selection": 0.0017683465959328027
+    },
+    {
+      "stratum": "medium",
+      "function": "Argument.get_help_spec",
+      "recall": 0.05,
+      "precision": 0.08,
+      "selection": 0.011052166224580018
+    },
+    {
+      "stratum": "medium",
+      "function": "Argument.make_metavar",
+      "recall": 0.05,
+      "precision": 0.08,
+      "selection": 0.011052166224580018
+    },
+    {
+      "stratum": "medium",
+      "function": "HelpFormatter.write_dl",
+      "recall": 0.0,
+      "precision": 0.0,
+      "selection": 0.0017683465959328027
+    },
+    {
+      "stratum": "medium",
+      "function": "Context._close_with_exception_info",
+      "recall": 0.0,
+      "precision": 0.0,
+      "selection": 0.01856763925729443
+    },
+    {
+      "stratum": "medium",
+      "function": "HelpFormatter.write_usage",
+      "recall": 0.0,
+      "precision": 0.0,
+      "selection": 0.0017683465959328027
+    },
+    {
+      "stratum": "high",
+      "function": "Option.get_help_record",
+      "recall": 0.025,
+      "precision": 0.014492753623188406,
+      "selection": 0.03050397877984085
+    },
+    {
+      "stratum": "high",
+      "function": "open_file",
+      "recall": 0.42857142857142855,
+      "precision": 0.375,
+      "selection": 0.0035366931918656055
+    },
+    {
+      "stratum": "high",
+      "function": "Option.get_help_extra",
+      "recall": 0.025,
+      "precision": 0.014492753623188406,
+      "selection": 0.03050397877984085
+    }
+  ],
+  "classes": {
+    "unresolved_call": 339
+  },
+  "examples": {
+    "unresolved_call": [
+      "tests/test_deprecations.py::test_parameter_human_readable_name_deprecated",
+      "tests/test_utils/test_open_file.py::test_open_file_ignore_errors_stdin",
+      "tests/test_shell_completion.py::test_absolute_path",
+      "tests/test_shell_completion.py::test_add_different_name",
+      "tests/test_shell_completion.py::test_argument_default"
+    ]
+  }
+}

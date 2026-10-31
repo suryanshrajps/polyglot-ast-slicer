@@ -404,6 +404,38 @@ class PolyglotASTParser:
                     wildcard=wildcard,
                 )
             )
+
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            if node.type == "variable_declarator":
+                value = node.child_by_field_name("value")
+                name = node.child_by_field_name("name")
+                if (
+                    value is not None
+                    and value.type == "call_expression"
+                    and name is not None
+                    and name.type == "identifier"
+                ):
+                    function = value.child_by_field_name("function")
+                    arguments = value.child_by_field_name("arguments")
+                    if (
+                        function is not None
+                        and self._text(function, source) == "require"
+                        and arguments is not None
+                        and arguments.named_children
+                        and arguments.named_children[0].type == "string"
+                    ):
+                        module = self._clean(arguments.named_children[0], source)
+                        if module:
+                            imports.append(
+                                ImportRef(
+                                    module=module,
+                                    is_module=True,
+                                    alias=self._text(name, source),
+                                )
+                            )
+            stack.extend(node.children)
         return imports
 
     # ------------------------------------------------------------------ entry point
@@ -837,6 +869,26 @@ class PolyglotASTParser:
                 if site is not None and (site.name, site.receiver) not in seen_calls:
                     seen_calls.add((site.name, site.receiver))
                     calls.append(site)
+            elif collect_calls and language != "python" and current.type in (
+                "jsx_opening_element",
+                "jsx_self_closing_element",
+            ):
+                name_node = current.child_by_field_name("name")
+                if name_node is not None:
+                    text = self._text(name_node, source)
+                    short = text.rsplit(".", 1)[-1]
+                    receiver = text.rsplit(".", 1)[0] if "." in text else None
+                    key = (short, receiver)
+                    if short and key not in seen_calls:
+                        seen_calls.add(key)
+                        calls.append(
+                            CallSite(
+                                name=short,
+                                receiver=receiver,
+                                kind="call",
+                                line=current.start_point[0] + 1,
+                            )
+                        )
             elif collect_calls and language != "python" and current.type in (
                 "call_expression",
                 "new_expression",
