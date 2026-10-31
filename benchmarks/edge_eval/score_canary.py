@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-LABELS = ROOT / "labels" / "requests"
 
 
 def wilson(k: int, n: int) -> tuple[float, float]:
@@ -34,6 +34,11 @@ def kappa(a: list[str], b: list[str]) -> float | None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", default="requests")
+    parser.add_argument("--no-prior", action="store_true")
+    args = parser.parse_args()
+    LABELS = ROOT / "labels" / args.repo
     key = json.loads((LABELS / "canary_answer_key.json").read_text())
     verdicts = {
         row["edge_id"]: row["verdict"]
@@ -63,6 +68,8 @@ def main() -> None:
         "false_reject_rate": len(false_rejects) / len(real) if real else 0.0,
         "unsure": len(unsure),
         "unsure_rate": len(unsure) / len(verdicts) if verdicts else 0.0,
+        "prior_pass": bool(any(original.get(eid) for eid in shared))
+        and not args.no_prior,
         "agreement_with_original": agreements,
         "agreement_rate": agreements / len(shared) if shared else 0.0,
         "kappa": kappa(a, b),

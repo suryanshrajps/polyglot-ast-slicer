@@ -1,0 +1,20 @@
+{
+  "seeded": 15,
+  "real": 100,
+  "seeded_labeled_correct": 0,
+  "false_accept_rate": 0.0,
+  "false_accept_ci95": [
+    0.0,
+    0.20388330103584862
+  ],
+  "real_labeled_incorrect": 0,
+  "false_reject_rate": 0.0,
+  "unsure": 0,
+  "unsure_rate": 0.0,
+  "prior_pass": false,
+  "agreement_with_original": 100,
+  "agreement_rate": 1.0,
+  "kappa": null,
+  "false_accept_ids": [],
+  "false_reject_ids": []
+}

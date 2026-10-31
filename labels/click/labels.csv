@@ -1,101 +1,101 @@
 edge_id,verdict,justification
-5794122dc40f,,
-bcc8b7312671,,
-e9a03979a4d8,,
-c2f8fbbb153f,,
-1c6aa2532a09,,
-d06ddb34f8f6,,
-617587aae862,,
-e1c7b191d05e,,
-28101ddab9f7,,
-4e0b5cce2caa,,
-9016253e3b69,,
-29ff5a58ec43,,
-9d373c4da996,,
-33c6e56c5666,,
-5392d4db2a67,,
-4ab6f36556da,,
-b8d3b39e04d9,,
-94528af03cf3,,
-2a4e04388cd2,,
-0cf58987873f,,
-83826967b52e,,
-7f1974d2984d,,
-7680575997ec,,
-46fd32da0f8e,,
-9e8fc9988ad1,,
-1ba32146b112,,
-a11897b47ae3,,
-80a5bbdd6f13,,
-841e0d96de63,,
-e0a21779cac4,,
-36cbd70a09c6,,
-ec3aeb19b464,,
-7c2ba30de790,,
-91436ac584f3,,
-2b8c1e6b5728,,
-f7c50241426b,,
-bb535994f555,,
-67478fe38e14,,
-2b6cefd67fa0,,
-e4550051f640,,
-b1328711c934,,
-ce85d4d8c6ce,,
-2a1ce6e1911e,,
-19d4c2bcc8af,,
-5a47d4bad8f4,,
-b4936f353fb6,,
-4cfe93695a21,,
-2efdd622e943,,
-984f1589c91d,,
-801a04b7b4b5,,
-65c6516f61d7,,
-b3100d379628,,
-680afdacd110,,
-50b7001a30f7,,
-44c8aa865570,,
-ba54da1d6015,,
-79fd8d20d2ba,,
-a5e38ba408fb,,
-e7a9cb65d36e,,
-db64399db9de,,
-9052dfbb5ee8,,
-0c9d5eaafab5,,
-9103f283f8c1,,
-5e588a7d0373,,
-961b6ad94297,,
-45413264d64c,,
-a62992738032,,
-80f114c5e89d,,
-305fcc76dcd8,,
-9aea979795a0,,
-62b59c6c2226,,
-a1ef3807ac2f,,
-f636c1c8a41a,,
-2c8ff949c27f,,
-bbaf3e8d09ba,,
-031429adfeda,,
-0c255edb6018,,
-a1d7484aced2,,
-fcbb552e15f1,,
-5fae5dff4010,,
-1cbe90f7d4bd,,
-046cafdc6323,,
-d7da5e9b2f9e,,
-a01ac0997721,,
-7a973656d852,,
-d827a8a4cb60,,
-f58092147630,,
-aa7962f34414,,
-0eda411869df,,
-2fc5e016057a,,
-49c71aa96e3a,,
-936499d80b7d,,
-656abd59fa9f,,
-f0763ed9342a,,
-92343d0dade1,,
-3c48ca67b918,,
-087e54ec5511,,
-e6bcdc7b808a,,
-adaea11c3b15,,
-8309eceb0164,,
+5794122dc40f,correct,tests/test_commands.py:58 invokes echo defined at src/click/utils.py:240-334.
+bcc8b7312671,correct,tests/typing/typing_password_option.py:11 invokes echo defined at src/click/utils.py:240-334.
+e9a03979a4d8,correct,tests/test_types/test_convert_type.py:95 invokes convert_type defined at src/click/types.py:1356-1397.
+c2f8fbbb153f,correct,tests/test_termui.py:1378 invokes command defined at src/click/decorators.py:168-255.
+1c6aa2532a09,correct,tests/test_commands.py:291 invokes echo defined at src/click/utils.py:240-334.
+d06ddb34f8f6,correct,tests/test_arguments.py:17 invokes argument defined at src/click/decorators.py:324-349.
+617587aae862,correct,tests/test_options.py:1634 invokes Command defined at src/click/core.py:989-1685.
+e1c7b191d05e,correct,tests/test_options.py:1026 invokes option defined at src/click/decorators.py:352-377.
+28101ddab9f7,correct,tests/test_options.py:1224 invokes option defined at src/click/decorators.py:352-377.
+4e0b5cce2caa,correct,tests/test_arguments.py:204 invokes Argument defined at src/click/core.py:3894-4014.
+9016253e3b69,correct,tests/test_options.py:159 invokes Option defined at src/click/core.py:3057-3891.
+29ff5a58ec43,correct,tests/test_basic.py:525 invokes Choice defined at src/click/types.py:342-515.
+9d373c4da996,correct,tests/test_options.py:515 invokes option defined at src/click/decorators.py:352-377.
+33c6e56c5666,correct,tests/test_options.py:166 invokes option defined at src/click/decorators.py:352-377.
+5392d4db2a67,correct,tests/test_abort_interrupt.py:161 invokes command defined at src/click/decorators.py:168-255.
+4ab6f36556da,correct,tests/test_basic.py:720 invokes option defined at src/click/decorators.py:352-377.
+b8d3b39e04d9,correct,tests/test_termui.py:821 invokes _pipepager defined at src/click/_termui_impl.py:548-632.
+94528af03cf3,correct,tests/test_options.py:890 invokes command defined at src/click/decorators.py:168-255.
+2a4e04388cd2,correct,tests/test_options.py:1372 invokes command defined at src/click/decorators.py:168-255.
+0cf58987873f,correct,tests/test_utils/test_confirm.py:7 invokes confirm defined at src/click/termui.py:289-345.
+83826967b52e,correct,tests/test_options.py:3699 invokes echo defined at src/click/utils.py:240-334.
+7f1974d2984d,correct,tests/test_options.py:480 invokes echo defined at src/click/utils.py:240-334.
+7680575997ec,correct,tests/test_utils/test_KeepOpenFile.py:9 invokes _KeepOpenFile defined at src/click/utils.py:199-237.
+46fd32da0f8e,correct,tests/test_arguments.py:51 invokes command defined at src/click/decorators.py:168-255.
+9e8fc9988ad1,correct,tests/test_arguments.py:959 invokes echo defined at src/click/utils.py:240-334.
+1ba32146b112,correct,tests/test_utils/test_open_file.py:93 invokes open_file defined at src/click/utils.py:381-427.
+a11897b47ae3,correct,tests/test_formatting.py:599 invokes HelpFormatter defined at src/click/formatting.py:110-299.
+80a5bbdd6f13,correct,tests/test_chain.py:56 invokes echo defined at src/click/utils.py:240-334.
+841e0d96de63,correct,tests/test_termui.py:409 invokes getchar defined at src/click/termui.py:957-984.
+e0a21779cac4,correct,examples/repo/repo.py:166 invokes echo defined at src/click/utils.py:240-334.
+36cbd70a09c6,correct,tests/test_options.py:1385 invokes command defined at src/click/decorators.py:168-255.
+ec3aeb19b464,correct,tests/test_options.py:926 invokes command defined at src/click/decorators.py:168-255.
+7c2ba30de790,correct,tests/test_commands.py:544 invokes option defined at src/click/decorators.py:352-377.
+91436ac584f3,correct,tests/test_stream_lifecycle.py:519 invokes echo defined at src/click/utils.py:240-334.
+2b8c1e6b5728,correct,tests/test_arguments.py:602 invokes argument defined at src/click/decorators.py:324-349.
+f7c50241426b,correct,tests/test_chain.py:118 invokes argument defined at src/click/decorators.py:324-349.
+bb535994f555,correct,tests/test_basic.py:956 invokes custom_version_option defined at src/click/decorators.py:561-600.
+67478fe38e14,correct,tests/test_utils/test_prompt.py:12 invokes prompt defined at src/click/termui.py:168-286.
+2b6cefd67fa0,correct,tests/test_options.py:234 invokes option defined at src/click/decorators.py:352-377.
+e4550051f640,correct,tests/test_options.py:828 invokes File defined at src/click/types.py:915-1043.
+b1328711c934,correct,tests/test_chain.py:101 invokes echo defined at src/click/utils.py:240-334.
+ce85d4d8c6ce,correct,tests/test_basic.py:795 invokes group defined at src/click/decorators.py:293-311.
+2a1ce6e1911e,correct,tests/test_options.py:1913 invokes echo defined at src/click/utils.py:240-334.
+19d4c2bcc8af,correct,tests/test_utils/test_open_file.py:52 invokes open_file defined at src/click/utils.py:381-427.
+5a47d4bad8f4,correct,tests/test_utils/test_echo_via_pager.py:255 invokes echo_via_pager defined at src/click/termui.py:367-399.
+b4936f353fb6,correct,tests/test_options.py:2939 invokes command defined at src/click/decorators.py:168-255.
+4cfe93695a21,correct,tests/test_stream_lifecycle.py:472 invokes command defined at src/click/decorators.py:168-255.
+2efdd622e943,correct,examples/termui/termui.py:141 invokes pause defined at src/click/termui.py:993-1024.
+984f1589c91d,correct,tests/test_options.py:2901 invokes command defined at src/click/decorators.py:168-255.
+801a04b7b4b5,correct,tests/test_options.py:133 invokes option defined at src/click/decorators.py:352-377.
+65c6516f61d7,correct,tests/test_formatting.py:186 invokes command defined at src/click/decorators.py:168-255.
+b3100d379628,correct,tests/test_options.py:2701 invokes echo defined at src/click/utils.py:240-334.
+680afdacd110,correct,tests/test_context.py:189 invokes get_current_context defined at src/click/globals.py:20-41.
+50b7001a30f7,correct,tests/test_commands.py:468 invokes Context defined at src/click/core.py:238-986.
+44c8aa865570,correct,tests/test_options.py:1932 invokes echo defined at src/click/utils.py:240-334.
+ba54da1d6015,correct,tests/test_testing.py:642 invokes echo defined at src/click/utils.py:240-334.
+79fd8d20d2ba,correct,examples/imagepipe/imagepipe.py:175 invokes BadParameter defined at src/click/exceptions.py:114-156.
+a5e38ba408fb,correct,tests/test_options.py:3931 invokes option defined at src/click/decorators.py:352-377.
+e7a9cb65d36e,correct,tests/test_termui.py:1085 invokes get_pager_file defined at src/click/termui.py:348-364.
+db64399db9de,correct,tests/test_options.py:3769 invokes command defined at src/click/decorators.py:168-255.
+9052dfbb5ee8,correct,tests/test_basic.py:256 invokes echo defined at src/click/utils.py:240-334.
+0c9d5eaafab5,correct,tests/test_utils/test_prompt.py:29 invokes prompt defined at src/click/termui.py:168-286.
+9103f283f8c1,correct,tests/test_options.py:1643 invokes Command defined at src/click/core.py:989-1685.
+5e588a7d0373,correct,tests/test_basic.py:983 invokes Command defined at src/click/core.py:989-1685.
+961b6ad94297,correct,tests/test_arguments.py:411 invokes argument defined at src/click/decorators.py:324-349.
+45413264d64c,correct,tests/test_commands.py:17 invokes echo defined at src/click/utils.py:240-334.
+a62992738032,correct,tests/test_testing.py:469 invokes Path defined at src/click/types.py:1059-1251.
+80f114c5e89d,correct,tests/test_termui.py:1691 invokes echo defined at src/click/utils.py:240-334.
+305fcc76dcd8,correct,tests/test_options.py:1308 invokes option defined at src/click/decorators.py:352-377.
+9aea979795a0,correct,tests/test_commands.py:33 invokes option defined at src/click/decorators.py:352-377.
+62b59c6c2226,correct,tests/test_options.py:233 invokes command defined at src/click/decorators.py:168-255.
+a1ef3807ac2f,correct,tests/test_options.py:986 invokes option defined at src/click/decorators.py:352-377.
+f636c1c8a41a,correct,tests/test_basic.py:847 invokes Command defined at src/click/core.py:989-1685.
+2c8ff949c27f,correct,tests/test_options.py:3773 invokes echo defined at src/click/utils.py:240-334.
+bbaf3e8d09ba,correct,tests/test_options.py:1689 invokes Context defined at src/click/core.py:238-986.
+031429adfeda,correct,tests/test_types/test_Path.py:164 invokes Path defined at src/click/types.py:1059-1251.
+0c255edb6018,correct,tests/test_termui.py:286 invokes command defined at src/click/decorators.py:168-255.
+a1d7484aced2,correct,tests/test_basic.py:852 invokes Path defined at src/click/types.py:1059-1251.
+fcbb552e15f1,correct,examples/imagepipe/imagepipe.py:141 invokes echo defined at src/click/utils.py:240-334.
+5fae5dff4010,correct,tests/test_defaults.py:196 invokes Command defined at src/click/core.py:989-1685.
+1cbe90f7d4bd,correct,tests/test_context.py:78 invokes echo defined at src/click/utils.py:240-334.
+046cafdc6323,correct,tests/test_termui.py:1238 invokes style defined at src/click/termui.py:641-765.
+d7da5e9b2f9e,correct,tests/test_basic.py:813 invokes group defined at src/click/decorators.py:293-311.
+a01ac0997721,correct,src/click/core.py:3307 invokes BoolParamType defined at src/click/types.py:819-885.
+7a973656d852,correct,tests/test_commands.py:589 invokes command defined at src/click/decorators.py:168-255.
+d827a8a4cb60,correct,tests/test_formatting.py:240 invokes echo defined at src/click/utils.py:240-334.
+f58092147630,correct,tests/test_options.py:187 invokes echo defined at src/click/utils.py:240-334.
+aa7962f34414,correct,tests/test_termui.py:1356 invokes option defined at src/click/decorators.py:352-377.
+0eda411869df,correct,tests/test_commands.py:603 invokes option defined at src/click/decorators.py:352-377.
+2fc5e016057a,correct,tests/test_stream_lifecycle.py:230 invokes argument defined at src/click/decorators.py:324-349.
+49c71aa96e3a,correct,tests/test_options.py:1573 invokes echo defined at src/click/utils.py:240-334.
+936499d80b7d,correct,examples/aliases/aliases.py:104 invokes echo defined at src/click/utils.py:240-334.
+656abd59fa9f,correct,tests/test_arguments.py:338 invokes command defined at src/click/decorators.py:168-255.
+f0763ed9342a,correct,tests/test_context.py:367 invokes get_current_context defined at src/click/globals.py:20-41.
+92343d0dade1,correct,tests/test_commands.py:601 invokes command defined at src/click/decorators.py:168-255.
+3c48ca67b918,correct,tests/test_options.py:2436 invokes test_dual_options_custom_type_sentinel_flag_value.ConfigParamType defined at tests/test_options.py:2423-2432.
+087e54ec5511,correct,tests/test_options.py:1618 invokes Option.get_help_record defined at src/click/core.py:3589-3612.
+e6bcdc7b808a,correct,src/click/types.py:733 invokes _NumberRangeBase._describe_range defined at src/click/types.py:717-729.
+adaea11c3b15,correct,src/click/core.py:3670 invokes _split_opt defined at src/click/parser.py:111-117.
+8309eceb0164,correct,examples/imagepipe/imagepipe.py:35 invokes processor defined at examples/imagepipe/imagepipe.py:42-53.

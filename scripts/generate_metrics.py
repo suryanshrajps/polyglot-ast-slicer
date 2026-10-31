@@ -187,33 +187,37 @@ def render(data: dict[str, object]) -> str:
         )
     lines += [
         "",
-        "## Canary check (requests)",
+        "## Canary check (seeded wrong edges mixed into the blind set)",
         "",
+        "| Repo | Seeded | Labeled correct | False-accept rate | False rejects | "
+        "Unsure | Agreement with prior pass | Cohen's kappa |",
+        "|---|---:|---:|---|---:|---:|---|---|",
     ]
-    canary_path = ROOT / "labels" / "requests" / "canary_result.json"
-    if canary_path.exists():
+    for repo in LABEL_REPOS:
+        canary_path = ROOT / "labels" / repo / "canary_result.json"
+        if not canary_path.exists():
+            lines.append(f"| `{repo}` | — | — | UNMEASURED | — | — | — | — |")
+            continue
         canary = json.loads(canary_path.read_text(encoding="utf-8"))
-        kappa_text = (
-            "undefined (no variance)"
-            if canary["kappa"] is None
-            else f"{canary['kappa']:.3f}"
+        if canary.get("prior_pass") and canary["kappa"] is not None:
+            kappa_text = f"{canary['kappa']:.3f}"
+        else:
+            kappa_text = "n/a"
+        agreement = (
+            f"{canary['agreement_with_original']}/{canary['real']}"
+            if canary.get("prior_pass")
+            else "n/a (no prior pass)"
         )
-        lines += [
-            "| Seeded wrong | Labeled correct | False-accept rate | False rejects | Unsure | "
-            "Agreement with pass 1 | Cohen's kappa |",
-            "|---:|---:|---|---:|---:|---|---|",
-            f"| {canary['seeded']} | {canary['seeded_labeled_correct']} | "
+        lines.append(
+            f"| `{repo}` | {canary['seeded']} | {canary['seeded_labeled_correct']} | "
             f"{fmt(canary['false_accept_rate'])} "
             f"(95% CI {fmt(canary['false_accept_ci95'][0])}–"
             f"{fmt(canary['false_accept_ci95'][1])}) | "
             f"{canary['real_labeled_incorrect']}/{canary['real']} | {canary['unsure']} | "
-            f"{canary['agreement_with_original']}/{canary['real']} | "
-            f"{kappa_text} |",
-            "",
-        ]
-    else:
-        lines += ["UNMEASURED", ""]
+            f"{agreement} | {kappa_text} |"
+        )
     lines += [
+        "",
         "## Edge agreement with Jedi (100 random call edges, seed 42)",
         "",
         "| Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |",

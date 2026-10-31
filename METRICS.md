@@ -22,14 +22,16 @@ Pinned inputs: requests `3c7baaa`, click `2247b35`. Intervals are 95% Wilson sco
 | Repo | Labeled | Correct | Unsure | Precision (unsure=incorrect) | Precision (unsure excluded) |
 |---|---:|---:|---:|---|---|
 | `requests` | 100 | 100 | 0 | 100.0% (95% CI 96.3%–100.0%) | 100.0% (95% CI 96.3%–100.0%) |
-| `click` | 0 | — | — | UNMEASURED | UNMEASURED |
+| `click` | 100 | 100 | 0 | 100.0% (95% CI 96.3%–100.0%) | 100.0% (95% CI 96.3%–100.0%) |
 | `zod` | 0 | — | — | UNMEASURED | UNMEASURED |
 
-## Canary check (requests)
+## Canary check (seeded wrong edges mixed into the blind set)
 
-| Seeded wrong | Labeled correct | False-accept rate | False rejects | Unsure | Agreement with pass 1 | Cohen's kappa |
-|---:|---:|---|---:|---:|---|---|
-| 20 | 0 | 0.0% (95% CI 0.0%–16.1%) | 0/100 | 0 | 100/100 | undefined (no variance) |
+| Repo | Seeded | Labeled correct | False-accept rate | False rejects | Unsure | Agreement with prior pass | Cohen's kappa |
+|---|---:|---:|---|---:|---:|---|---|
+| `requests` | 20 | 0 | 0.0% (95% CI 0.0%–16.1%) | 0/100 | 0 | 100/100 | n/a |
+| `click` | 15 | 0 | 0.0% (95% CI 0.0%–20.4%) | 0/100 | 0 | n/a (no prior pass) | n/a |
+| `zod` | — | — | UNMEASURED | — | — | — | — |
 
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 

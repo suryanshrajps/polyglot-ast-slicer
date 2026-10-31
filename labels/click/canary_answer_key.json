@@ -1,0 +1,507 @@
+{
+  "3af6ccddf1e4": {
+    "seeded": true,
+    "real_edge_id": "45413264d64c",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "7f3fee085af6": {
+    "seeded": true,
+    "real_edge_id": "1cbe90f7d4bd",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "bcb306707496": {
+    "seeded": true,
+    "real_edge_id": "46fd32da0f8e",
+    "real_target": "command",
+    "fake_target": "test_wrapping_long_command_name.command",
+    "fake_file": "tests/test_formatting.py"
+  },
+  "542d964dbcf5": {
+    "seeded": true,
+    "real_edge_id": "ba54da1d6015",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "61956ce445b0": {
+    "seeded": true,
+    "real_edge_id": "db64399db9de",
+    "real_target": "command",
+    "fake_target": "test_wrapping_long_options_strings.command",
+    "fake_file": "tests/test_formatting.py"
+  },
+  "c1cb47f3803b": {
+    "seeded": true,
+    "real_edge_id": "7a973656d852",
+    "real_target": "command",
+    "fake_target": "Group.command",
+    "fake_file": "src/click/core.py"
+  },
+  "973be8f59e41": {
+    "seeded": true,
+    "real_edge_id": "b3100d379628",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "db6b899af18d": {
+    "seeded": true,
+    "real_edge_id": "936499d80b7d",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "c6b07c4887f0": {
+    "seeded": true,
+    "real_edge_id": "2a1ce6e1911e",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "9b54170a2bfa": {
+    "seeded": true,
+    "real_edge_id": "c2f8fbbb153f",
+    "real_target": "command",
+    "fake_target": "test_wrapping_long_command_name.command",
+    "fake_file": "tests/test_formatting.py"
+  },
+  "ad3e6be2197a": {
+    "seeded": true,
+    "real_edge_id": "9052dfbb5ee8",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "471498fa33fb": {
+    "seeded": true,
+    "real_edge_id": "49c71aa96e3a",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "854c33b4b40e": {
+    "seeded": true,
+    "real_edge_id": "b1328711c934",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "550015628e5b": {
+    "seeded": true,
+    "real_edge_id": "80f114c5e89d",
+    "real_target": "echo",
+    "fake_target": "test_prompts_eof.echo",
+    "fake_file": "tests/test_utils/test_prompt.py"
+  },
+  "3531ebfd89ed": {
+    "seeded": true,
+    "real_edge_id": "4cfe93695a21",
+    "real_target": "command",
+    "fake_target": "test_wrapping_long_command_name.command",
+    "fake_file": "tests/test_formatting.py"
+  },
+  "5794122dc40f": {
+    "seeded": false,
+    "real_edge_id": "5794122dc40f"
+  },
+  "bcc8b7312671": {
+    "seeded": false,
+    "real_edge_id": "bcc8b7312671"
+  },
+  "e9a03979a4d8": {
+    "seeded": false,
+    "real_edge_id": "e9a03979a4d8"
+  },
+  "c2f8fbbb153f": {
+    "seeded": false,
+    "real_edge_id": "c2f8fbbb153f"
+  },
+  "1c6aa2532a09": {
+    "seeded": false,
+    "real_edge_id": "1c6aa2532a09"
+  },
+  "d06ddb34f8f6": {
+    "seeded": false,
+    "real_edge_id": "d06ddb34f8f6"
+  },
+  "617587aae862": {
+    "seeded": false,
+    "real_edge_id": "617587aae862"
+  },
+  "e1c7b191d05e": {
+    "seeded": false,
+    "real_edge_id": "e1c7b191d05e"
+  },
+  "28101ddab9f7": {
+    "seeded": false,
+    "real_edge_id": "28101ddab9f7"
+  },
+  "4e0b5cce2caa": {
+    "seeded": false,
+    "real_edge_id": "4e0b5cce2caa"
+  },
+  "9016253e3b69": {
+    "seeded": false,
+    "real_edge_id": "9016253e3b69"
+  },
+  "29ff5a58ec43": {
+    "seeded": false,
+    "real_edge_id": "29ff5a58ec43"
+  },
+  "9d373c4da996": {
+    "seeded": false,
+    "real_edge_id": "9d373c4da996"
+  },
+  "33c6e56c5666": {
+    "seeded": false,
+    "real_edge_id": "33c6e56c5666"
+  },
+  "5392d4db2a67": {
+    "seeded": false,
+    "real_edge_id": "5392d4db2a67"
+  },
+  "4ab6f36556da": {
+    "seeded": false,
+    "real_edge_id": "4ab6f36556da"
+  },
+  "b8d3b39e04d9": {
+    "seeded": false,
+    "real_edge_id": "b8d3b39e04d9"
+  },
+  "94528af03cf3": {
+    "seeded": false,
+    "real_edge_id": "94528af03cf3"
+  },
+  "2a4e04388cd2": {
+    "seeded": false,
+    "real_edge_id": "2a4e04388cd2"
+  },
+  "0cf58987873f": {
+    "seeded": false,
+    "real_edge_id": "0cf58987873f"
+  },
+  "83826967b52e": {
+    "seeded": false,
+    "real_edge_id": "83826967b52e"
+  },
+  "7f1974d2984d": {
+    "seeded": false,
+    "real_edge_id": "7f1974d2984d"
+  },
+  "7680575997ec": {
+    "seeded": false,
+    "real_edge_id": "7680575997ec"
+  },
+  "46fd32da0f8e": {
+    "seeded": false,
+    "real_edge_id": "46fd32da0f8e"
+  },
+  "9e8fc9988ad1": {
+    "seeded": false,
+    "real_edge_id": "9e8fc9988ad1"
+  },
+  "1ba32146b112": {
+    "seeded": false,
+    "real_edge_id": "1ba32146b112"
+  },
+  "a11897b47ae3": {
+    "seeded": false,
+    "real_edge_id": "a11897b47ae3"
+  },
+  "80a5bbdd6f13": {
+    "seeded": false,
+    "real_edge_id": "80a5bbdd6f13"
+  },
+  "841e0d96de63": {
+    "seeded": false,
+    "real_edge_id": "841e0d96de63"
+  },
+  "e0a21779cac4": {
+    "seeded": false,
+    "real_edge_id": "e0a21779cac4"
+  },
+  "36cbd70a09c6": {
+    "seeded": false,
+    "real_edge_id": "36cbd70a09c6"
+  },
+  "ec3aeb19b464": {
+    "seeded": false,
+    "real_edge_id": "ec3aeb19b464"
+  },
+  "7c2ba30de790": {
+    "seeded": false,
+    "real_edge_id": "7c2ba30de790"
+  },
+  "91436ac584f3": {
+    "seeded": false,
+    "real_edge_id": "91436ac584f3"
+  },
+  "2b8c1e6b5728": {
+    "seeded": false,
+    "real_edge_id": "2b8c1e6b5728"
+  },
+  "f7c50241426b": {
+    "seeded": false,
+    "real_edge_id": "f7c50241426b"
+  },
+  "bb535994f555": {
+    "seeded": false,
+    "real_edge_id": "bb535994f555"
+  },
+  "67478fe38e14": {
+    "seeded": false,
+    "real_edge_id": "67478fe38e14"
+  },
+  "2b6cefd67fa0": {
+    "seeded": false,
+    "real_edge_id": "2b6cefd67fa0"
+  },
+  "e4550051f640": {
+    "seeded": false,
+    "real_edge_id": "e4550051f640"
+  },
+  "b1328711c934": {
+    "seeded": false,
+    "real_edge_id": "b1328711c934"
+  },
+  "ce85d4d8c6ce": {
+    "seeded": false,
+    "real_edge_id": "ce85d4d8c6ce"
+  },
+  "2a1ce6e1911e": {
+    "seeded": false,
+    "real_edge_id": "2a1ce6e1911e"
+  },
+  "19d4c2bcc8af": {
+    "seeded": false,
+    "real_edge_id": "19d4c2bcc8af"
+  },
+  "5a47d4bad8f4": {
+    "seeded": false,
+    "real_edge_id": "5a47d4bad8f4"
+  },
+  "b4936f353fb6": {
+    "seeded": false,
+    "real_edge_id": "b4936f353fb6"
+  },
+  "4cfe93695a21": {
+    "seeded": false,
+    "real_edge_id": "4cfe93695a21"
+  },
+  "2efdd622e943": {
+    "seeded": false,
+    "real_edge_id": "2efdd622e943"
+  },
+  "984f1589c91d": {
+    "seeded": false,
+    "real_edge_id": "984f1589c91d"
+  },
+  "801a04b7b4b5": {
+    "seeded": false,
+    "real_edge_id": "801a04b7b4b5"
+  },
+  "65c6516f61d7": {
+    "seeded": false,
+    "real_edge_id": "65c6516f61d7"
+  },
+  "b3100d379628": {
+    "seeded": false,
+    "real_edge_id": "b3100d379628"
+  },
+  "680afdacd110": {
+    "seeded": false,
+    "real_edge_id": "680afdacd110"
+  },
+  "50b7001a30f7": {
+    "seeded": false,
+    "real_edge_id": "50b7001a30f7"
+  },
+  "44c8aa865570": {
+    "seeded": false,
+    "real_edge_id": "44c8aa865570"
+  },
+  "ba54da1d6015": {
+    "seeded": false,
+    "real_edge_id": "ba54da1d6015"
+  },
+  "79fd8d20d2ba": {
+    "seeded": false,
+    "real_edge_id": "79fd8d20d2ba"
+  },
+  "a5e38ba408fb": {
+    "seeded": false,
+    "real_edge_id": "a5e38ba408fb"
+  },
+  "e7a9cb65d36e": {
+    "seeded": false,
+    "real_edge_id": "e7a9cb65d36e"
+  },
+  "db64399db9de": {
+    "seeded": false,
+    "real_edge_id": "db64399db9de"
+  },
+  "9052dfbb5ee8": {
+    "seeded": false,
+    "real_edge_id": "9052dfbb5ee8"
+  },
+  "0c9d5eaafab5": {
+    "seeded": false,
+    "real_edge_id": "0c9d5eaafab5"
+  },
+  "9103f283f8c1": {
+    "seeded": false,
+    "real_edge_id": "9103f283f8c1"
+  },
+  "5e588a7d0373": {
+    "seeded": false,
+    "real_edge_id": "5e588a7d0373"
+  },
+  "961b6ad94297": {
+    "seeded": false,
+    "real_edge_id": "961b6ad94297"
+  },
+  "45413264d64c": {
+    "seeded": false,
+    "real_edge_id": "45413264d64c"
+  },
+  "a62992738032": {
+    "seeded": false,
+    "real_edge_id": "a62992738032"
+  },
+  "80f114c5e89d": {
+    "seeded": false,
+    "real_edge_id": "80f114c5e89d"
+  },
+  "305fcc76dcd8": {
+    "seeded": false,
+    "real_edge_id": "305fcc76dcd8"
+  },
+  "9aea979795a0": {
+    "seeded": false,
+    "real_edge_id": "9aea979795a0"
+  },
+  "62b59c6c2226": {
+    "seeded": false,
+    "real_edge_id": "62b59c6c2226"
+  },
+  "a1ef3807ac2f": {
+    "seeded": false,
+    "real_edge_id": "a1ef3807ac2f"
+  },
+  "f636c1c8a41a": {
+    "seeded": false,
+    "real_edge_id": "f636c1c8a41a"
+  },
+  "2c8ff949c27f": {
+    "seeded": false,
+    "real_edge_id": "2c8ff949c27f"
+  },
+  "bbaf3e8d09ba": {
+    "seeded": false,
+    "real_edge_id": "bbaf3e8d09ba"
+  },
+  "031429adfeda": {
+    "seeded": false,
+    "real_edge_id": "031429adfeda"
+  },
+  "0c255edb6018": {
+    "seeded": false,
+    "real_edge_id": "0c255edb6018"
+  },
+  "a1d7484aced2": {
+    "seeded": false,
+    "real_edge_id": "a1d7484aced2"
+  },
+  "fcbb552e15f1": {
+    "seeded": false,
+    "real_edge_id": "fcbb552e15f1"
+  },
+  "5fae5dff4010": {
+    "seeded": false,
+    "real_edge_id": "5fae5dff4010"
+  },
+  "1cbe90f7d4bd": {
+    "seeded": false,
+    "real_edge_id": "1cbe90f7d4bd"
+  },
+  "046cafdc6323": {
+    "seeded": false,
+    "real_edge_id": "046cafdc6323"
+  },
+  "d7da5e9b2f9e": {
+    "seeded": false,
+    "real_edge_id": "d7da5e9b2f9e"
+  },
+  "a01ac0997721": {
+    "seeded": false,
+    "real_edge_id": "a01ac0997721"
+  },
+  "7a973656d852": {
+    "seeded": false,
+    "real_edge_id": "7a973656d852"
+  },
+  "d827a8a4cb60": {
+    "seeded": false,
+    "real_edge_id": "d827a8a4cb60"
+  },
+  "f58092147630": {
+    "seeded": false,
+    "real_edge_id": "f58092147630"
+  },
+  "aa7962f34414": {
+    "seeded": false,
+    "real_edge_id": "aa7962f34414"
+  },
+  "0eda411869df": {
+    "seeded": false,
+    "real_edge_id": "0eda411869df"
+  },
+  "2fc5e016057a": {
+    "seeded": false,
+    "real_edge_id": "2fc5e016057a"
+  },
+  "49c71aa96e3a": {
+    "seeded": false,
+    "real_edge_id": "49c71aa96e3a"
+  },
+  "936499d80b7d": {
+    "seeded": false,
+    "real_edge_id": "936499d80b7d"
+  },
+  "656abd59fa9f": {
+    "seeded": false,
+    "real_edge_id": "656abd59fa9f"
+  },
+  "f0763ed9342a": {
+    "seeded": false,
+    "real_edge_id": "f0763ed9342a"
+  },
+  "92343d0dade1": {
+    "seeded": false,
+    "real_edge_id": "92343d0dade1"
+  },
+  "3c48ca67b918": {
+    "seeded": false,
+    "real_edge_id": "3c48ca67b918"
+  },
+  "087e54ec5511": {
+    "seeded": false,
+    "real_edge_id": "087e54ec5511"
+  },
+  "e6bcdc7b808a": {
+    "seeded": false,
+    "real_edge_id": "e6bcdc7b808a"
+  },
+  "adaea11c3b15": {
+    "seeded": false,
+    "real_edge_id": "adaea11c3b15"
+  },
+  "8309eceb0164": {
+    "seeded": false,
+    "real_edge_id": "8309eceb0164"
+  }
+}
