@@ -1,0 +1,9 @@
+{
+  "70e061ab831e": {
+    "source": "shouldSkipQuery",
+    "target": "getMajorVersion",
+    "confidence": 0.98,
+    "resolution": "same_file",
+    "relation": "calls"
+  }
+}

@@ -1,0 +1,702 @@
+{
+  "5794122dc40f": {
+    "source": "test_forwarded_params_consistency.second",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "bcc8b7312671": {
+    "source": "encrypt",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "e9a03979a4d8": {
+    "source": "test_type_inferred_from_nested_sequence_default",
+    "target": "convert_type",
+    "confidence": 0.9,
+    "resolution": "module:src/click/types.py",
+    "relation": "calls"
+  },
+  "c2f8fbbb153f": {
+    "source": "test_confirmation_prompt",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "1c6aa2532a09": {
+    "source": "test_invoked_subcommand.sync",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "d06ddb34f8f6": {
+    "source": "test_nargs_star",
+    "target": "argument",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "617587aae862": {
+    "source": "test_hide_false_default_boolean_flag_value",
+    "target": "Command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "e1c7b191d05e": {
+    "source": "test_show_envvar_auto_prefix_dash_in_command",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "28101ddab9f7": {
+    "source": "test_option_help_preserve_paragraphs",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "4e0b5cce2caa": {
+    "source": "test_argument_name_check_applies_when_not_exposed",
+    "target": "Argument",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "9016253e3b69": {
+    "source": "test_deprecated_prompt",
+    "target": "Option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "29ff5a58ec43": {
+    "source": "test_choice_option",
+    "target": "Choice",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "9d373c4da996": {
+    "source": "test_envvar_container_type",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "33c6e56c5666": {
+    "source": "test_invalid_nargs",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "5392d4db2a67": {
+    "source": "test_interrupt_while_exiting_after_success",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "4ab6f36556da": {
+    "source": "test_datetime_option_custom",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "b8d3b39e04d9": {
+    "source": "test_pipepager_less_detection_case_insensitive_on_windows",
+    "target": "_pipepager",
+    "confidence": 0.9,
+    "resolution": "module:src/click/_termui_impl.py",
+    "relation": "calls"
+  },
+  "94528af03cf3": {
+    "source": "test_auto_envvar_prefix_is_upper_cased",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "2a4e04388cd2": {
+    "source": "test_help_option_custom_names_and_class",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "0cf58987873f": {
+    "source": "test_prompts.test",
+    "target": "confirm",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "83826967b52e": {
+    "source": "test_flag_group_unset_vs_none_vs_explicit.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "7f1974d2984d": {
+    "source": "test_multiple_envvar.cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "7680575997ec": {
+    "source": "test_iter_keepopenfile",
+    "target": "_KeepOpenFile",
+    "confidence": 0.9,
+    "resolution": "module:src/click/utils.py",
+    "relation": "constructs"
+  },
+  "46fd32da0f8e": {
+    "source": "test_nargs_tup_composite",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "9e8fc9988ad1": {
+    "source": "test_nargs_star_ordering.cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "1ba32146b112": {
+    "source": "test_open_file_atomic_permissions_existing_file.cli",
+    "target": "open_file",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "a11897b47ae3": {
+    "source": "test_help_formatter_write_usage_without_args_styled_prefix",
+    "target": "HelpFormatter",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "80a5bbdd6f13": {
+    "source": "test_chaining_help.sdist",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "841e0d96de63": {
+    "source": "test_getchar_special_key_windows",
+    "target": "getchar",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "e0a21779cac4": {
+    "source": "copy",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "36cbd70a09c6": {
+    "source": "test_bool_flag_with_type",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "ec3aeb19b464": {
+    "source": "test_auto_envvar_upper_can_change_length",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "7c2ba30de790": {
+    "source": "test_unprocessed_options",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "91436ac584f3": {
+    "source": "test_stress_logging_sequential_invocations.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "2b8c1e6b5728": {
+    "source": "test_missing_arg",
+    "target": "argument",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "f7c50241426b": {
+    "source": "test_chaining_with_arguments",
+    "target": "argument",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "bb535994f555": {
+    "source": "test_custom_version_option_receives_context",
+    "target": "custom_version_option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "67478fe38e14": {
+    "source": "test_prompt_cast_default",
+    "target": "prompt",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "2b6cefd67fa0": {
+    "source": "test_multiple_required",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "e4550051f640": {
+    "source": "test_file_type_help_default",
+    "target": "File",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "b1328711c934": {
+    "source": "test_no_command_result_callback.process_result",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "ce85d4d8c6ce": {
+    "source": "test_hidden_command",
+    "target": "group",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "2a1ce6e1911e": {
+    "source": "test_flag_value_and_default.cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "19d4c2bcc8af": {
+    "source": "test_open_file_ignore_errors_stdin.cli",
+    "target": "open_file",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "5a47d4bad8f4": {
+    "source": "test_stress_echo_via_pager_exception_cleanup",
+    "target": "echo_via_pager",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "b4936f353fb6": {
+    "source": "test_custom_type_container_flag_value",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "4cfe93695a21": {
+    "source": "test_sys_streams_restored_after_exception",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "2efdd622e943": {
+    "source": "pause",
+    "target": "pause",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "984f1589c91d": {
+    "source": "test_flag_value_not_stringified_for_custom_types",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "801a04b7b4b5": {
+    "source": "test_deprecated_warning",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "65c6516f61d7": {
+    "source": "test_formatting_usage_error_metavar_bad_arg",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "b3100d379628": {
+    "source": "test_custom_type_flag_value_dual_options.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "680afdacd110": {
+    "source": "test_hiding_of_unset_sentinel_in_callbacks.inspect_other_params",
+    "target": "get_current_context",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "50b7001a30f7": {
+    "source": "test_get_help_option_names",
+    "target": "Context",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "44c8aa865570": {
+    "source": "test_invalid_flag_definition.cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "ba54da1d6015": {
+    "source": "test_capture_fd_os_write.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "79fd8d20d2ba": {
+    "source": "convert_rotation",
+    "target": "BadParameter",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "a5e38ba408fb": {
+    "source": "test_flag_value_on_option_with_zero_or_one_args",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "e7a9cb65d36e": {
+    "source": "test_get_pager_file_nullpager_wraps_textio_stream",
+    "target": "get_pager_file",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "db64399db9de": {
+    "source": "test_flag_group_competition_repeated_cmdline",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "9052dfbb5ee8": {
+    "source": "test_uuid_option.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "0c9d5eaafab5": {
+    "source": "test_prompt_default_round_trips_through_type",
+    "target": "prompt",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "9103f283f8c1": {
+    "source": "test_show_default_string",
+    "target": "Command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "5e588a7d0373": {
+    "source": "test_cast_multi_default",
+    "target": "Command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "961b6ad94297": {
+    "source": "test_argument_has_no_auto_envvar",
+    "target": "argument",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "45413264d64c": {
+    "source": "test_other_command_invoke.other_cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "a62992738032": {
+    "source": "test_tempdir_replacement_pattern",
+    "target": "Path",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "80f114c5e89d": {
+    "source": "test_flag_value_prompt.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "305fcc76dcd8": {
+    "source": "test_option_custom_class_can_override_type_cast_value_and_never_sees_unset",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "9aea979795a0": {
+    "source": "test_other_command_forward",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "62b59c6c2226": {
+    "source": "test_multiple_required",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "a1ef3807ac2f": {
+    "source": "test_nargs_envvar",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "f636c1c8a41a": {
+    "source": "test_help_invalid_default",
+    "target": "Command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "2c8ff949c27f": {
+    "source": "test_flag_group_competition_repeated_cmdline.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "bbaf3e8d09ba": {
+    "source": "test_show_default_with_empty_string",
+    "target": "Context",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "031429adfeda": {
+    "source": "test_invalid_path_with_esc_sequence",
+    "target": "Path",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "0c255edb6018": {
+    "source": "test_file_prompt_default_format",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "a1d7484aced2": {
+    "source": "test_help_invalid_default",
+    "target": "Path",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "fcbb552e15f1": {
+    "source": "resize_cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "5fae5dff4010": {
+    "source": "test_lookup_default_returns_hides_sentinel",
+    "target": "Command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "constructs"
+  },
+  "1cbe90f7d4bd": {
+    "source": "test_get_context_objects_no_ensuring.test",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "046cafdc6323": {
+    "source": "test_tempfile_pager_handles_ansi",
+    "target": "style",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "d7da5e9b2f9e": {
+    "source": "test_hidden_group",
+    "target": "group",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "a01ac0997721": {
+    "source": "Option._pick_type",
+    "target": "BoolParamType",
+    "confidence": 0.9,
+    "resolution": "module:src/click/types.py",
+    "relation": "constructs"
+  },
+  "7a973656d852": {
+    "source": "test_deprecated_in_invocation",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "d827a8a4cb60": {
+    "source": "test_formatting_usage_custom_help.cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "f58092147630": {
+    "source": "test_counting.cli",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "aa7962f34414": {
+    "source": "test_prompt_required_false",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "0eda411869df": {
+    "source": "test_command_parse_args_collects_option_prefixes",
+    "target": "option",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "2fc5e016057a": {
+    "source": "test_sequential_invokes_with_logging",
+    "target": "argument",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "49c71aa96e3a": {
+    "source": "test_option_name_may_be_a_python_keyword.cmd",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "936499d80b7d": {
+    "source": "push",
+    "target": "echo",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "656abd59fa9f": {
+    "source": "test_parameter_name_is_not_nfkc_normalized",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "f0763ed9342a": {
+    "source": "test_close_before_exit.cli.foo",
+    "target": "get_current_context",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "92343d0dade1": {
+    "source": "test_command_parse_args_collects_option_prefixes",
+    "target": "command",
+    "confidence": 0.9,
+    "resolution": "module:src/click/__init__.py",
+    "relation": "calls"
+  },
+  "3c48ca67b918": {
+    "source": "test_dual_options_custom_type_sentinel_flag_value",
+    "target": "test_dual_options_custom_type_sentinel_flag_value.ConfigParamType",
+    "confidence": 0.9,
+    "resolution": "same_file_scope",
+    "relation": "constructs"
+  },
+  "087e54ec5511": {
+    "source": "test_show_true_default_boolean_flag_value",
+    "target": "Option.get_help_record",
+    "confidence": 0.9,
+    "resolution": "typed_receiver:opt->Option",
+    "relation": "calls"
+  },
+  "e6bcdc7b808a": {
+    "source": "_NumberRangeBase.__repr__",
+    "target": "_NumberRangeBase._describe_range",
+    "confidence": 0.95,
+    "resolution": "enclosing_member:_NumberRangeBase",
+    "relation": "calls"
+  },
+  "adaea11c3b15": {
+    "source": "Option.get_help_extra",
+    "target": "_split_opt",
+    "confidence": 0.95,
+    "resolution": "import:src/click/parser.py",
+    "relation": "calls"
+  },
+  "8309eceb0164": {
+    "source": "process_commands",
+    "target": "processor",
+    "confidence": 0.98,
+    "resolution": "same_file",
+    "relation": "calls"
+  }
+}

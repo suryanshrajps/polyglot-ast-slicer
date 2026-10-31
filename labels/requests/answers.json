@@ -1,0 +1,702 @@
+{
+  "bf23594a982f": {
+    "source": "TestTestServer.test_requests_after_timeout_are_not_received",
+    "target": "Server.basic_response_server",
+    "confidence": 0.9,
+    "resolution": "class_receiver:Server",
+    "relation": "calls"
+  },
+  "cfc61987b528": {
+    "source": "TestRequests.test_POSTBIN_SEEKED_OBJECT_WITH_NO_ITER",
+    "target": "post",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "4f2e3747c53a": {
+    "source": "TestRequests.test_invalid_ca_certificate_path",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "18d952129d1b": {
+    "source": "TestRequests.test_links",
+    "target": "Response",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "8511a1a8a2f7": {
+    "source": "TestRequests.test_cookie_removed_on_expire",
+    "target": "session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "b054901c00e5": {
+    "source": "TestRequests.test_params_original_order_is_preserved_by_default",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "977e58c0a1ed": {
+    "source": "test_request_url_handles_leading_path_separators",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "d1b50af2cede": {
+    "source": "TestRequests.test_requests_history_is_saved",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "de033555d2ac": {
+    "source": "test_chunked_upload",
+    "target": "post",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "4f603a2a6dcf": {
+    "source": "TestRequests.test_session_get_adapter_prefix_matching_mixed_case",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "b2a00a23ed5d": {
+    "source": "TestRequests.test_HTTP_200_OK_GET_ALTERNATIVE",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "eb02e1f635a1": {
+    "source": "TestRequests.test_cookie_as_dict_items",
+    "target": "RequestsCookieJar",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/cookies.py",
+    "relation": "constructs"
+  },
+  "f16cdc9e5ebf": {
+    "source": "TestRequests.test_header_with_subclass_types",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "1b7ba5b29402": {
+    "source": "TestRequests.test_getattr_proxy_stream_follows_redirect",
+    "target": "post",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "4a2b60fc14fc": {
+    "source": "TestRequests.test_rewind_partially_read_body",
+    "target": "rewind_body",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "c34914fbefdd": {
+    "source": "TestRequests.test_HTTP_200_OK_GET_WITH_MIXED_PARAMS",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "9192a47b242a": {
+    "source": "TestRequests.test_response_reason_unicode",
+    "target": "Response",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "f742afd28f00": {
+    "source": "TestRequests.test_redirect_history_no_self_reference",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "4a734b0f81b2": {
+    "source": "TestRequests.test_response_context_manager",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "264f0d66b3f2": {
+    "source": "TestRequests.test_request_and_response_are_pickleable",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "d819208157c4": {
+    "source": "TestRequests.test_header_no_leading_space",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "8eca86e5dd15": {
+    "source": "TestRequests.test_unicode_method_name",
+    "target": "request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "38c23dddb192": {
+    "source": "TestRequests.test_different_encodings_dont_break_post",
+    "target": "post",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "db41800ae996": {
+    "source": "TestRequests.test_hook_receives_request_arguments",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "0fd03669495e": {
+    "source": "TestRequests.test_respect_proxy_env_on_request",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "d737b15c959a": {
+    "source": "TestRequests.test_rewind_body_no_seek",
+    "target": "rewind_body",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "7990855b4b4f": {
+    "source": "TestRequests.test_HTTP_200_OK_HEAD",
+    "target": "head",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "85a831e09379": {
+    "source": "test_content_length_for_bytes_data",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "9017e0ef1a99": {
+    "source": "TestRequests.test_should_strip_auth_host_change",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "9f5dfb39c276": {
+    "source": "PreparedRequest.prepare_body",
+    "target": "has_read",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/_types.py",
+    "relation": "calls"
+  },
+  "17c183c02eb6": {
+    "source": "TestRequests.test_override_content_length",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "19077dc23d6d": {
+    "source": "TestRequests.test_unconsumed_session_response_closes_connection",
+    "target": "session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "1181a10ed9f4": {
+    "source": "TestRequests.test_basic_building",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "3bd795b86517": {
+    "source": "TestRequests.test_cookie_as_dict_values",
+    "target": "RequestsCookieJar",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/cookies.py",
+    "relation": "constructs"
+  },
+  "975d781eacf5": {
+    "source": "TestRequests.test_params_are_merged_case_sensitive",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "d3746d99ee63": {
+    "source": "test_redirect_rfc1808_to_non_ascii_location",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "7287bd48d143": {
+    "source": "TestRequests.test_hook_receives_request_arguments",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "48148833449f": {
+    "source": "TestPreparingURLs.test_url_mutation",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "b631ee3d237d": {
+    "source": "test_default_hooks",
+    "target": "default_hooks",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/hooks.py",
+    "relation": "calls"
+  },
+  "868a1c9d3c7a": {
+    "source": "TestRequests.test_path_is_not_double_encoded",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "2323e0289048": {
+    "source": "TestRequests.test_unicode_multipart_post",
+    "target": "post",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "4633eec09980": {
+    "source": "TestRequests.test_session_hooks_are_overridden_by_request_hooks",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "2b27e04af0c2": {
+    "source": "TestRequests.test_history_is_always_a_list",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "0282a65df545": {
+    "source": "TestRequests.test_session_close_proxy_clear",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "34cf8ac4651f": {
+    "source": "TestRequests.test_DIGEST_AUTH_SETS_SESSION_COOKIES",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "ab5ce4070648": {
+    "source": "TestRequests.test_prepared_from_session",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "236ca8487255": {
+    "source": "TestRequests.test_unicode_header_name",
+    "target": "put",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "37dfbfbddf19": {
+    "source": "TestPreparingURLs.test_preparing_url",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "716f850b7f7b": {
+    "source": "TestRequests.test_http_301_doesnt_change_head_to_get",
+    "target": "head",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "dbdad1f4c522": {
+    "source": "TestRequests.test_unicode_multipart_post_fieldnames",
+    "target": "Request",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "16d47c3468f7": {
+    "source": "TestRequests.test_DIGESTAUTH_WRONG_HTTP_401_GET",
+    "target": "session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "457f60051197": {
+    "source": "TestRequests.test_session_get_adapter_prefix_with_trailing_slash",
+    "target": "Session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "constructs"
+  },
+  "76e6003124f1": {
+    "source": "TestRequests.test_set_cookie_on_301",
+    "target": "session",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "a8c139b16a42": {
+    "source": "TestPreparingURLs.test_post_json_nan",
+    "target": "post",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "d777883bf735": {
+    "source": "TestRequests.test_header_validation",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "ed4d86f297de": {
+    "source": "TestRequests.test_cookie_parameters",
+    "target": "RequestsCookieJar",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/cookies.py",
+    "relation": "constructs"
+  },
+  "59da8a5a6d76": {
+    "source": "TestRequests.test_user_agent_transfers",
+    "target": "get",
+    "confidence": 0.9,
+    "resolution": "module:src/requests/__init__.py",
+    "relation": "calls"
+  },
+  "b68d0733b3d5": {
+    "source": "TestRequests.test_post_with_custom_mapping",
+    "target": "TestRequests.test_post_with_custom_mapping.CustomMapping",
+    "confidence": 0.9,
+    "resolution": "same_file_scope",
+    "relation": "constructs"
+  },
+  "c6edaae5acc9": {
+    "source": "test_requests_are_updated_each_time",
+    "target": "RedirectSession.send",
+    "confidence": 0.9,
+    "resolution": "typed_receiver:session->RedirectSession",
+    "relation": "calls"
+  },
+  "e0799b061cf7": {
+    "source": "RequestsCookieJar.set",
+    "target": "RequestsCookieJar.set_cookie",
+    "confidence": 0.95,
+    "resolution": "enclosing_member:RequestsCookieJar",
+    "relation": "calls"
+  },
+  "3d8bdb5ef5a7": {
+    "source": "SessionRedirectMixin.rebuild_proxies",
+    "target": "_basic_auth_str",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/auth.py",
+    "relation": "calls"
+  },
+  "eddee4ab8b95": {
+    "source": "HTTPAdapter.send",
+    "target": "ProxyError",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/exceptions.py",
+    "relation": "constructs"
+  },
+  "e325617a9477": {
+    "source": "HTTPAdapter.build_response",
+    "target": "extract_cookies_to_jar",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/cookies.py",
+    "relation": "calls"
+  },
+  "f3782f102ff0": {
+    "source": "test_proxy_env_vars_override_default",
+    "target": "PreparedRequest",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/models.py",
+    "relation": "constructs"
+  },
+  "22e476b4d02e": {
+    "source": "test_to_native_string",
+    "target": "to_native_string",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "5cf5cc5f53a0": {
+    "source": "test_should_bypass_proxies_no_proxy",
+    "target": "should_bypass_proxies",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "5678840b513b": {
+    "source": "TestGetEnvironProxies.test_bypass",
+    "target": "get_environ_proxies",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "703866ab76ba": {
+    "source": "Session.send",
+    "target": "resolve_proxies",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "230e80242409": {
+    "source": "TestPreparingURLs.test_different_connection_pool_for_tls_settings_verify_bundle_unexpired_cert",
+    "target": "TLSServer",
+    "confidence": 0.95,
+    "resolution": "import:tests/testserver/server.py",
+    "relation": "constructs"
+  },
+  "9a8a6034694e": {
+    "source": "test_digestauth_only_on_4xx",
+    "target": "Server",
+    "confidence": 0.95,
+    "resolution": "import:tests/testserver/server.py",
+    "relation": "constructs"
+  },
+  "a61d3dfd66f5": {
+    "source": "SessionRedirectMixin.resolve_redirects",
+    "target": "rewind_body",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "7b0c51d02a1a": {
+    "source": "test_should_bypass_proxies_win_registry_bad_values",
+    "target": "should_bypass_proxies",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "a6b8ffbbfab0": {
+    "source": "TestRequests.test_DIGEST_STREAM",
+    "target": "HTTPDigestAuth",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/auth.py",
+    "relation": "constructs"
+  },
+  "81f53160ecdd": {
+    "source": "Session.merge_environment_settings",
+    "target": "get_environ_proxies",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "5a9c4df07a5b": {
+    "source": "RedirectSession.build_response",
+    "target": "CaseInsensitiveDict",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/structures.py",
+    "relation": "constructs"
+  },
+  "7a7f97215931": {
+    "source": "HTTPAdapter.proxy_manager_for",
+    "target": "get_auth_from_url",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "227e51fad0c6": {
+    "source": "PreparedRequest.prepare_auth",
+    "target": "HTTPBasicAuth",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/auth.py",
+    "relation": "constructs"
+  },
+  "865e388ee7e8": {
+    "source": "TestTestServer.test_basic",
+    "target": "Server",
+    "confidence": 0.95,
+    "resolution": "import:tests/testserver/server.py",
+    "relation": "constructs"
+  },
+  "12cf55f02ded": {
+    "source": "TestRequests.test_set_basicauth",
+    "target": "_basic_auth_str",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/auth.py",
+    "relation": "calls"
+  },
+  "8f27beb8461c": {
+    "source": "test_json_decode_compatibility_for_alt_utf_encodings",
+    "target": "Server",
+    "confidence": 0.95,
+    "resolution": "import:tests/testserver/server.py",
+    "relation": "constructs"
+  },
+  "d91d1ecaf9b2": {
+    "source": "test_fragment_update_on_redirect",
+    "target": "Server",
+    "confidence": 0.95,
+    "resolution": "import:tests/testserver/server.py",
+    "relation": "constructs"
+  },
+  "bc65dc6d5514": {
+    "source": "rewind_body",
+    "target": "UnrewindableBodyError",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/exceptions.py",
+    "relation": "constructs"
+  },
+  "7e6328ea9efc": {
+    "source": "HTTPAdapter.proxy_headers",
+    "target": "_basic_auth_str",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/auth.py",
+    "relation": "calls"
+  },
+  "0c0724527180": {
+    "source": "TestRequests.test_respect_proxy_env_on_send_self_prepared_request",
+    "target": "override_environ",
+    "confidence": 0.95,
+    "resolution": "import:tests/utils.py",
+    "relation": "calls"
+  },
+  "2fa445e8c040": {
+    "source": "TestSuperLen.test_super_len_with_fileno",
+    "target": "super_len",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "52dc545eba0e": {
+    "source": "TestContentEncodingDetection.test_none",
+    "target": "get_encodings_from_content",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "f34c4084b6aa": {
+    "source": "HTTPAdapter.build_response",
+    "target": "CaseInsensitiveDict",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/structures.py",
+    "relation": "constructs"
+  },
+  "c0609f98c7fa": {
+    "source": "PreparedRequest.prepare_url",
+    "target": "InvalidURL",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/exceptions.py",
+    "relation": "constructs"
+  },
+  "b6926d9f2356": {
+    "source": "TestRequests.test_prepared_request_with_hook_is_pickleable",
+    "target": "default_hooks",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/hooks.py",
+    "relation": "calls"
+  },
+  "dedf5aff4e35": {
+    "source": "TestRequests.test_proxy_auth_empty_pass",
+    "target": "HTTPAdapter",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/adapters.py",
+    "relation": "constructs"
+  },
+  "a2a53ed1fa61": {
+    "source": "Response.iter_content",
+    "target": "iter_slices",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "1afa6a19e620": {
+    "source": "test_use_proxy_from_environment",
+    "target": "override_environ",
+    "confidence": 0.95,
+    "resolution": "import:tests/utils.py",
+    "relation": "calls"
+  },
+  "daf61f8526ad": {
+    "source": "test__parse_content_type_header",
+    "target": "_parse_content_type_header",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "e06f49e8c49a": {
+    "source": "test_unquote_unreserved",
+    "target": "unquote_unreserved",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "859c036efe5c": {
+    "source": "PreparedRequest.prepare_headers",
+    "target": "check_header_validity",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "608208aee0bd": {
+    "source": "TestGuessFilename.test_guess_filename_invalid",
+    "target": "guess_filename",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "410227e1f1c3": {
+    "source": "test_digestauth_only_on_4xx.digest_response_handler",
+    "target": "consume_socket_content",
+    "confidence": 0.95,
+    "resolution": "import:tests/testserver/server.py",
+    "relation": "calls"
+  },
+  "68809d755c95": {
+    "source": "Response.json",
+    "target": "guess_json_utf",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "1174f526f837": {
+    "source": "test_add_dict_to_cookiejar",
+    "target": "add_dict_to_cookiejar",
+    "confidence": 0.95,
+    "resolution": "import:src/requests/utils.py",
+    "relation": "calls"
+  },
+  "21427c488584": {
+    "source": "Session.prepare_request",
+    "target": "merge_setting",
+    "confidence": 0.98,
+    "resolution": "same_file",
+    "relation": "calls"
+  }
+}

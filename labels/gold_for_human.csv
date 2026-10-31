@@ -1,0 +1,908 @@
+edge_id,repo,call_site,call_context,target,target_definition,verdict,justification
+9052dfbb5ee8,click,tests/test_basic.py:256,"  250 | def test_uuid_option(runner, args, expect):
+  251 |     @click.command()
+  252 |     @click.option(
+  253 |         ""--u"", default=""ba122011-349f-423b-873b-9d6a79c688ab"", type=click.UUID
+  254 |     )
+  255 |     def cli(u):
+  256 |         click.echo(f""U:[{u}]"")
+  257 | 
+  258 |     result = runner.invoke(cli, args)
+  259 |     assert expect in result.output
+  260 | 
+  261 |     if expect.startswith(""Error:""):
+  262 |         assert result.exception is not None",echo (src/click/utils.py:240-334),"  240 | def echo(
+  241 |     message: object = None,
+  242 |     file: t.IO[t.Any] | None = None,
+  243 |     nl: bool = True,
+  244 |     err: bool = False,
+  245 |     color: bool | None = None,
+  246 | ) -> None:
+  247 |     """"""Print a message and newline to stdout or a file. This should be
+  248 |     used instead of :func:`print` because it provides better support
+  249 |     for different data, files, and environments.
+  250 | 
+  251 |     Compared to :func:`print`, this does the following:
+  252 | 
+  253 |     -   Ensures that the output encoding is not misconfigured on Linux.
+  254 |     -   Supports Unicode in the Windows console.
+  255 |     -   Supports writing to binary outputs, and supports writing bytes
+  256 |         to text outputs.
+  257 |     -   Removes ANSI color and style codes if the output does not look
+  258 |         like an interactive terminal.
+  259 |     -   Always flushes the output.
+  260 | 
+  261 |     :param message: The string or bytes to output. Other objects are
+  262 |         converted to strings.
+  263 |     :param file: The file to write to. Defaults to ``stdout``.
+  264 |     :param err: Write to ``stderr`` instead of ``stdout``.",,
+e325617a9477,requests,src/requests/adapters.py:395,"  389 |         if isinstance(req.url, bytes):
+  390 |             response.url = req.url.decode(""utf-8"")
+  391 |         else:
+  392 |             response.url = req.url
+  393 | 
+  394 |         # Add new cookies from the server.
+  395 |         extract_cookies_to_jar(response.cookies, req, resp)
+  396 | 
+  397 |         # Give the Response some context.
+  398 |         response.request = req
+  399 |         response.connection = self
+  400 | 
+  401 |         return response",extract_cookies_to_jar (src/requests/cookies.py:135-150),"  135 | def extract_cookies_to_jar(
+  136 |     jar: CookieJar, request: PreparedRequest, response: Any
+  137 | ) -> None:
+  138 |     """"""Extract the cookies from the response into a CookieJar.
+  139 | 
+  140 |     :param jar: http.cookiejar.CookieJar (not necessarily a RequestsCookieJar)
+  141 |     :param request: our own requests.Request object
+  142 |     :param response: urllib3.HTTPResponse object
+  143 |     """"""
+  144 |     if not (hasattr(response, ""_original_response"") and response._original_response):
+  145 |         return
+  146 |     # the _original_response field is the wrapped httplib.HTTPResponse object,
+  147 |     req = MockRequest(request)
+  148 |     # pull out the HTTPMessage with the headers and put it in the mock:
+  149 |     res = MockResponse(response._original_response.msg)
+  150 |     jar.extract_cookies(res, req)  # type: ignore[arg-type]",,
+0c8aa35d1d30,zod,deno/lib/types.ts:2773," 2767 |     util.objectKeys(this.shape).forEach((key) => {
+ 2768 |       if (!mask[key]) {
+ 2769 |         shape[key] = this.shape[key];
+ 2770 |       }
+ 2771 |     });
+ 2772 | 
+ 2773 |     return new ZodObject({
+ 2774 |       ...this._def,
+ 2775 |       shape: () => shape,
+ 2776 |     }) as any;
+ 2777 |   }
+ 2778 | 
+ 2779 |   /**",ZodObject (deno/lib/types.ts:2412-2907)," 2412 | export class ZodObject<
+ 2413 |   T extends ZodRawShape,
+ 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,
+ 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,
+ 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,
+ 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>
+ 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {
+ 2419 |   private _cached: { shape: T; keys: string[] } | null = null;
+ 2420 | 
+ 2421 |   _getCached(): { shape: T; keys: string[] } {
+ 2422 |     if (this._cached !== null) return this._cached;
+ 2423 |     const shape = this._def.shape();
+ 2424 |     const keys = util.objectKeys(shape);
+ 2425 |     return (this._cached = { shape, keys });
+ 2426 |   }
+ 2427 | 
+ 2428 |   _parse(input: ParseInput): ParseReturnType<this[""_output""]> {
+ 2429 |     const parsedType = this._getType(input);
+ 2430 |     if (parsedType !== ZodParsedType.object) {
+ 2431 |       const ctx = this._getOrReturnCtx(input);
+ 2432 |       addIssueToContext(ctx, {
+ 2433 |         code: ZodIssueCode.invalid_type,
+ 2434 |         expected: ZodParsedType.object,
+ 2435 |         received: ctx.parsedType,
+ 2436 |       });",,
+714a7e96aa85,zod,src/types.ts:2046," 2040 |   _parse(input: ParseInput): ParseReturnType<this[""_output""]> {
+ 2041 |     return OK(input.data);
+ 2042 |   }
+ 2043 |   static create = (params?: RawCreateParams): ZodAny => {
+ 2044 |     return new ZodAny({
+ 2045 |       typeName: ZodFirstPartyTypeKind.ZodAny,
+ 2046 |       ...processCreateParams(params),
+ 2047 |     });
+ 2048 |   };
+ 2049 | }
+ 2050 | 
+ 2051 | //////////////////////////////////////////
+ 2052 | //////////////////////////////////////////",processCreateParams (src/types.ts:129-151),"  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
+  130 |   if (!params) return {};
+  131 |   const { errorMap, invalid_type_error, required_error, description } = params;
+  132 |   if (errorMap && (invalid_type_error || required_error)) {
+  133 |     throw new Error(
+  134 |       `Can't use ""invalid_type_error"" or ""required_error"" in conjunction with custom error map.`
+  135 |     );
+  136 |   }
+  137 |   if (errorMap) return { errorMap: errorMap, description };
+  138 |   const customMap: ZodErrorMap = (iss, ctx) => {
+  139 |     const { message } = params;
+  140 | 
+  141 |     if (iss.code === ""invalid_enum_value"") {
+  142 |       return { message: message ?? ctx.defaultError };
+  143 |     }
+  144 |     if (typeof ctx.data === ""undefined"") {
+  145 |       return { message: message ?? required_error ?? ctx.defaultError };
+  146 |     }
+  147 |     if (iss.code !== ""invalid_type"") return { message: ctx.defaultError };
+  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };
+  149 |   };
+  150 |   return { errorMap: customMap, description };
+  151 | }",,
+680afdacd110,click,tests/test_context.py:189,"  183 | 
+  184 | def test_hiding_of_unset_sentinel_in_callbacks():
+  185 |     """"""Fix: https://github.com/pallets/click/issues/3136""""""
+  186 | 
+  187 |     def inspect_other_params(ctx, param, value):
+  188 |         """"""A callback that inspects other parameters' values via the context.""""""
+  189 |         assert click.get_current_context() is ctx
+  190 |         click.echo(f""callback.my_arg: {ctx.params.get('my_arg')!r}"")
+  191 |         click.echo(f""callback.my_opt: {ctx.params.get('my_opt')!r}"")
+  192 |         click.echo(f""callback.my_callback: {ctx.params.get('my_callback')!r}"")
+  193 | 
+  194 |         click.echo(f""callback.param: {param!r}"")
+  195 |         click.echo(f""callback.value: {value!r}"")",get_current_context (src/click/globals.py:20-41),"   20 | def get_current_context(silent: bool = False) -> Context | None:
+   21 |     """"""Returns the current click context.  This can be used as a way to
+   22 |     access the current context object from anywhere.  This is a more implicit
+   23 |     alternative to the :func:`pass_context` decorator.  This function is
+   24 |     primarily useful for helpers such as :func:`echo` which might be
+   25 |     interested in changing its behavior based on the current context.
+   26 | 
+   27 |     To push the current context, :meth:`Context.scope` can be used.
+   28 | 
+   29 |     .. versionadded:: 5.0
+   30 | 
+   31 |     :param silent: if set to `True` the return value is `None` if no context
+   32 |                    is available.  The default behavior is to raise a
+   33 |                    :exc:`RuntimeError`.
+   34 |     """"""
+   35 |     try:
+   36 |         return t.cast(""Context"", _local.stack[-1])
+   37 |     except (AttributeError, IndexError) as e:
+   38 |         if not silent:
+   39 |             raise RuntimeError(""There is no active click context."") from e
+   40 | 
+   41 |     return None",,
+1b7ba5b29402,requests,tests/test_requests.py:2112," 2106 |             def __init__(self):
+ 2107 |                 self._file = io.BytesIO(b""data"")
+ 2108 | 
+ 2109 |             def __getattr__(self, name):
+ 2110 |                 return getattr(self._file, name)
+ 2111 | 
+ 2112 |         r = requests.post(
+ 2113 |             httpbin(""redirect-to?url=/post&status_code=307""), data=AttrProxy()
+ 2114 |         )
+ 2115 |         assert r.json()[""data""] == ""data""
+ 2116 | 
+ 2117 |     def _patch_adapter_gzipped_redirect(self, session, url):
+ 2118 |         adapter = session.get_adapter(url=url)",post (src/requests/api.py:117-134),"  117 | def post(
+  118 |     url: _t.UriType,
+  119 |     data: _t.DataType = None,
+  120 |     json: _t.JsonType = None,
+  121 |     **kwargs: Unpack[_t.PostKwargs],
+  122 | ) -> Response:
+  123 |     r""""""Sends a POST request.
+  124 | 
+  125 |     :param url: URL for the new :class:`Request` object.
+  126 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like
+  127 |         object to send in the body of the :class:`Request`.
+  128 |     :param json: (optional) A JSON serializable Python object to send in the body of the :class:`Request`.
+  129 |     :param \*\*kwargs: Optional arguments that ``request`` takes.
+  130 |     :return: :class:`Response <Response>` object
+  131 |     :rtype: requests.Response
+  132 |     """"""
+  133 | 
+  134 |     return request(""post"", url, data=data, json=json, **kwargs)",,
+057ee9d51bc7,zod,src/types.ts:3318," 3312 |       parsedRight: SyncParseReturnType
+ 3313 |     ): SyncParseReturnType<T & U> => {
+ 3314 |       if (isAborted(parsedLeft) || isAborted(parsedRight)) {
+ 3315 |         return INVALID;
+ 3316 |       }
+ 3317 | 
+ 3318 |       const merged = mergeValues(parsedLeft.value, parsedRight.value);
+ 3319 | 
+ 3320 |       if (!merged.valid) {
+ 3321 |         addIssueToContext(ctx, {
+ 3322 |           code: ZodIssueCode.invalid_intersection_types,
+ 3323 |         });
+ 3324 |         return INVALID;",mergeValues (src/types.ts:3245-3298)," 3245 | function mergeValues(
+ 3246 |   a: any,
+ 3247 |   b: any
+ 3248 | ): { valid: true; data: any } | { valid: false } {
+ 3249 |   const aType = getParsedType(a);
+ 3250 |   const bType = getParsedType(b);
+ 3251 | 
+ 3252 |   if (a === b) {
+ 3253 |     return { valid: true, data: a };
+ 3254 |   } else if (aType === ZodParsedType.object && bType === ZodParsedType.object) {
+ 3255 |     const bKeys = util.objectKeys(b);
+ 3256 |     const sharedKeys = util
+ 3257 |       .objectKeys(a)
+ 3258 |       .filter((key) => bKeys.indexOf(key) !== -1);
+ 3259 | 
+ 3260 |     const newObj: any = { ...a, ...b };
+ 3261 |     for (const key of sharedKeys) {
+ 3262 |       const sharedValue = mergeValues(a[key], b[key]);
+ 3263 |       if (!sharedValue.valid) {
+ 3264 |         return { valid: false };
+ 3265 |       }
+ 3266 |       newObj[key] = sharedValue.data;
+ 3267 |     }
+ 3268 | 
+ 3269 |     return { valid: true, data: newObj };",,
+3fd0ebbcfed8,zod,deno/lib/types.ts:1840," 1834 |             type: ""date"",
+ 1835 |           });
+ 1836 |           status.dirty();
+ 1837 |         }
+ 1838 |       } else if (check.kind === ""max"") {
+ 1839 |         if (input.data.getTime() > check.value) {
+ 1840 |           ctx = this._getOrReturnCtx(input, ctx);
+ 1841 |           addIssueToContext(ctx, {
+ 1842 |             code: ZodIssueCode.too_big,
+ 1843 |             message: check.message,
+ 1844 |             inclusive: true,
+ 1845 |             exact: false,
+ 1846 |             maximum: check.value,",ZodType._getOrReturnCtx (deno/lib/types.ts:188-204),"  188 |   _getOrReturnCtx(
+  189 |     input: ParseInput,
+  190 |     ctx?: ParseContext | undefined
+  191 |   ): ParseContext {
+  192 |     return (
+  193 |       ctx || {
+  194 |         common: input.parent.common,
+  195 |         data: input.data,
+  196 | 
+  197 |         parsedType: getParsedType(input.data),
+  198 | 
+  199 |         schemaErrorMap: this._def.errorMap,
+  200 |         path: input.path,
+  201 |         parent: input.parent,
+  202 |       }
+  203 |     );
+  204 |   }",,
+d6d7cb0ba39c,zod,src/types.ts:3611," 3605 |         valueType: second,
+ 3606 |         typeName: ZodFirstPartyTypeKind.ZodRecord,
+ 3607 |         ...processCreateParams(third),
+ 3608 |       });
+ 3609 |     }
+ 3610 | 
+ 3611 |     return new ZodRecord({
+ 3612 |       keyType: ZodString.create(),
+ 3613 |       valueType: first,
+ 3614 |       typeName: ZodFirstPartyTypeKind.ZodRecord,
+ 3615 |       ...processCreateParams(second),
+ 3616 |     });
+ 3617 |   }",ZodRecord (src/types.ts:3537-3618)," 3537 | export class ZodRecord<
+ 3538 |   Key extends KeySchema = ZodString,
+ 3539 |   Value extends ZodTypeAny = ZodTypeAny
+ 3540 | > extends ZodType<
+ 3541 |   RecordType<Key[""_output""], Value[""_output""]>,
+ 3542 |   ZodRecordDef<Key, Value>,
+ 3543 |   RecordType<Key[""_input""], Value[""_input""]>
+ 3544 | > {
+ 3545 |   get keySchema() {
+ 3546 |     return this._def.keyType;
+ 3547 |   }
+ 3548 |   get valueSchema() {
+ 3549 |     return this._def.valueType;
+ 3550 |   }
+ 3551 |   _parse(input: ParseInput): ParseReturnType<this[""_output""]> {
+ 3552 |     const { status, ctx } = this._processInputParams(input);
+ 3553 |     if (ctx.parsedType !== ZodParsedType.object) {
+ 3554 |       addIssueToContext(ctx, {
+ 3555 |         code: ZodIssueCode.invalid_type,
+ 3556 |         expected: ZodParsedType.object,
+ 3557 |         received: ctx.parsedType,
+ 3558 |       });
+ 3559 |       return INVALID;
+ 3560 |     }
+ 3561 | ",,
+3a79a68ed918,zod,deno/lib/types.ts:2891," 2885 |   ): ZodObject<T, ""strict""> => {
+ 2886 |     return new ZodObject({
+ 2887 |       shape: () => shape,
+ 2888 |       unknownKeys: ""strict"",
+ 2889 |       catchall: ZodNever.create(),
+ 2890 |       typeName: ZodFirstPartyTypeKind.ZodObject,
+ 2891 |       ...processCreateParams(params),
+ 2892 |     }) as any;
+ 2893 |   };
+ 2894 | 
+ 2895 |   static lazycreate = <T extends ZodRawShape>(
+ 2896 |     shape: () => T,
+ 2897 |     params?: RawCreateParams",processCreateParams (deno/lib/types.ts:129-151),"  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
+  130 |   if (!params) return {};
+  131 |   const { errorMap, invalid_type_error, required_error, description } = params;
+  132 |   if (errorMap && (invalid_type_error || required_error)) {
+  133 |     throw new Error(
+  134 |       `Can't use ""invalid_type_error"" or ""required_error"" in conjunction with custom error map.`
+  135 |     );
+  136 |   }
+  137 |   if (errorMap) return { errorMap: errorMap, description };
+  138 |   const customMap: ZodErrorMap = (iss, ctx) => {
+  139 |     const { message } = params;
+  140 | 
+  141 |     if (iss.code === ""invalid_enum_value"") {
+  142 |       return { message: message ?? ctx.defaultError };
+  143 |     }
+  144 |     if (typeof ctx.data === ""undefined"") {
+  145 |       return { message: message ?? required_error ?? ctx.defaultError };
+  146 |     }
+  147 |     if (iss.code !== ""invalid_type"") return { message: ctx.defaultError };
+  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };
+  149 |   };
+  150 |   return { errorMap: customMap, description };
+  151 | }",,
+94ababae91d8,zod,deno/lib/__tests__/Mocker.ts:9,"    3 | }
+    4 | 
+    5 | const testSymbol = Symbol(""test"");
+    6 | 
+    7 | export class Mocker {
+    8 |   pick = (...args: any[]) => {
+    9 |     return args[getRandomInt(args.length)];
+   10 |   };
+   11 | 
+   12 |   get string() {
+   13 |     return Math.random().toString(36).substring(7);
+   14 |   }
+   15 |   get number() {",getRandomInt (deno/lib/__tests__/Mocker.ts:1-3),"    1 | function getRandomInt(max: number) {
+    2 |   return Math.floor(Math.random() * Math.floor(max));
+    3 | }",,
+b8709372a5e3,zod,src/types.ts:2904," 2898 |   ): ZodObject<T, ""strip""> => {
+ 2899 |     return new ZodObject({
+ 2900 |       shape,
+ 2901 |       unknownKeys: ""strip"",
+ 2902 |       catchall: ZodNever.create(),
+ 2903 |       typeName: ZodFirstPartyTypeKind.ZodObject,
+ 2904 |       ...processCreateParams(params),
+ 2905 |     }) as any;
+ 2906 |   };
+ 2907 | }
+ 2908 | 
+ 2909 | export type AnyZodObject = ZodObject<any, any, any>;
+ 2910 | ",processCreateParams (src/types.ts:129-151),"  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
+  130 |   if (!params) return {};
+  131 |   const { errorMap, invalid_type_error, required_error, description } = params;
+  132 |   if (errorMap && (invalid_type_error || required_error)) {
+  133 |     throw new Error(
+  134 |       `Can't use ""invalid_type_error"" or ""required_error"" in conjunction with custom error map.`
+  135 |     );
+  136 |   }
+  137 |   if (errorMap) return { errorMap: errorMap, description };
+  138 |   const customMap: ZodErrorMap = (iss, ctx) => {
+  139 |     const { message } = params;
+  140 | 
+  141 |     if (iss.code === ""invalid_enum_value"") {
+  142 |       return { message: message ?? ctx.defaultError };
+  143 |     }
+  144 |     if (typeof ctx.data === ""undefined"") {
+  145 |       return { message: message ?? required_error ?? ctx.defaultError };
+  146 |     }
+  147 |     if (iss.code !== ""invalid_type"") return { message: ctx.defaultError };
+  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };
+  149 |   };
+  150 |   return { errorMap: customMap, description };
+  151 | }",,
+c6e7d62339e7,zod,src/ZodError.ts:318,"  312 |       }
+  313 |     }
+  314 |     return { formErrors, fieldErrors };
+  315 |   }
+  316 | 
+  317 |   get formErrors() {
+  318 |     return this.flatten();
+  319 |   }
+  320 | }
+  321 | 
+  322 | type stripPath<T extends object> = T extends any
+  323 |   ? util.OmitKeys<T, ""path"">
+  324 |   : never;",ZodError.flatten (src/ZodError.ts:301-315),"  301 |   flatten<U = string>(
+  302 |     mapper: (issue: ZodIssue) => U = (issue: ZodIssue) => issue.message as any
+  303 |   ): any {
+  304 |     const fieldErrors: any = {};
+  305 |     const formErrors: U[] = [];
+  306 |     for (const sub of this.issues) {
+  307 |       if (sub.path.length > 0) {
+  308 |         fieldErrors[sub.path[0]] = fieldErrors[sub.path[0]] || [];
+  309 |         fieldErrors[sub.path[0]].push(mapper(sub));
+  310 |       } else {
+  311 |         formErrors.push(mapper(sub));
+  312 |       }
+  313 |     }
+  314 |     return { formErrors, fieldErrors };
+  315 |   }",,
+8eca86e5dd15,requests,tests/test_requests.py:1151," 1145 |         assert b'name=""stuff""' in prep.body
+ 1146 |         assert b""name=\""b'stuff'\"""" not in prep.body
+ 1147 | 
+ 1148 |     def test_unicode_method_name(self, httpbin):
+ 1149 |         with open(__file__, ""rb"") as f:
+ 1150 |             files = {""file"": f}
+ 1151 |             r = requests.request(
+ 1152 |                 method=""POST"",
+ 1153 |                 url=httpbin(""post""),
+ 1154 |                 files=files,
+ 1155 |             )
+ 1156 |         assert r.status_code == 200
+ 1157 | ",request (src/requests/api.py:24-71),"   24 | def request(
+   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]
+   26 | ) -> Response:
+   27 |     """"""Constructs and sends a :class:`Request <Request>`.
+   28 | 
+   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.
+   30 |     :param url: URL for the new :class:`Request` object.
+   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send
+   32 |         in the query string for the :class:`Request`.
+   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like
+   34 |         object to send in the body of the :class:`Request`.
+   35 |     :param json: (optional) A JSON serializable Python object to send in the body of the :class:`Request`.
+   36 |     :param headers: (optional) Dictionary of HTTP Headers to send with the :class:`Request`.
+   37 |     :param cookies: (optional) Dict or CookieJar object to send with the :class:`Request`.
+   38 |     :param files: (optional) Dictionary of ``'name': file-like-objects`` (or ``{'name': file-tuple}``) for multipart encoding upload.
+   39 |         ``file-tuple`` can be a 2-tuple ``('filename', fileobj)``, 3-tuple ``('filename', fileobj, 'content_type')``
+   40 |         or a 4-tuple ``('filename', fileobj, 'content_type', custom_headers)``, where ``'content_type'`` is a string
+   41 |         defining the content type of the given file and ``custom_headers`` a dict-like object containing additional headers
+   42 |         to add for the file.
+   43 |     :param auth: (optional) Auth tuple to enable Basic/Digest/Custom HTTP Auth.
+   44 |     :param timeout: (optional) How many seconds to wait for the server to send data
+   45 |         before giving up, as a float, or a :ref:`(connect timeout, read
+   46 |         timeout) <timeouts>` tuple.
+   47 |     :type timeout: float or tuple
+   48 |     :param allow_redirects: (optional) Boolean. Enable/disable GET/OPTIONS/POST/PUT/PATCH/DELETE/HEAD redirection. Defaults to ``True``.",,
+bcc8b7312671,click,tests/typing/typing_password_option.py:11,"    5 | import click
+    6 | 
+    7 | 
+    8 | @click.command()
+    9 | @click.password_option()
+   10 | def encrypt(password: str) -> None:
+   11 |     click.echo(f""encoded: to {codecs.encode(password, 'rot13')}"")
+   12 | 
+   13 | 
+   14 | assert_type(encrypt, click.Command)",echo (src/click/utils.py:240-334),"  240 | def echo(
+  241 |     message: object = None,
+  242 |     file: t.IO[t.Any] | None = None,
+  243 |     nl: bool = True,
+  244 |     err: bool = False,
+  245 |     color: bool | None = None,
+  246 | ) -> None:
+  247 |     """"""Print a message and newline to stdout or a file. This should be
+  248 |     used instead of :func:`print` because it provides better support
+  249 |     for different data, files, and environments.
+  250 | 
+  251 |     Compared to :func:`print`, this does the following:
+  252 | 
+  253 |     -   Ensures that the output encoding is not misconfigured on Linux.
+  254 |     -   Supports Unicode in the Windows console.
+  255 |     -   Supports writing to binary outputs, and supports writing bytes
+  256 |         to text outputs.
+  257 |     -   Removes ANSI color and style codes if the output does not look
+  258 |         like an interactive terminal.
+  259 |     -   Always flushes the output.
+  260 | 
+  261 |     :param message: The string or bytes to output. Other objects are
+  262 |         converted to strings.
+  263 |     :param file: The file to write to. Defaults to ``stdout``.
+  264 |     :param err: Write to ``stderr`` instead of ``stdout``.",,
+ce85d4d8c6ce,click,tests/test_basic.py:795,"  789 |     result = runner.invoke(cli, [""--help""])
+  790 |     assert result.exit_code == 0
+  791 |     assert ""--nope"" not in result.output
+  792 | 
+  793 | 
+  794 | def test_hidden_command(runner):
+  795 |     @click.group()
+  796 |     def cli():
+  797 |         pass
+  798 | 
+  799 |     @cli.command(hidden=True)
+  800 |     def nope():
+  801 |         pass",group (src/click/decorators.py:293-311),"  293 | def group(
+  294 |     name: str | _AnyCallable | None = None,
+  295 |     cls: type[GrpType] | None = None,
+  296 |     **attrs: t.Any,
+  297 | ) -> Group | t.Callable[[_AnyCallable], Group | GrpType]:
+  298 |     """"""Creates a new :class:`Group` with a function as callback.  This
+  299 |     works otherwise the same as :func:`command` just that the `cls`
+  300 |     parameter is set to :class:`Group`.
+  301 | 
+  302 |     .. versionchanged:: 8.1
+  303 |         This decorator can be applied without parentheses.
+  304 |     """"""
+  305 |     if cls is None:
+  306 |         cls = t.cast(""type[GrpType]"", Group)
+  307 | 
+  308 |     if callable(name):
+  309 |         return command(cls=cls, **attrs)(name)
+  310 | 
+  311 |     return command(name, cls, **attrs)",,
+79fd8d20d2ba,click,examples/imagepipe/imagepipe.py:175,"  169 |     if value in (""90"", ""r"", ""right""):
+  170 |         return (Image.ROTATE_90, 90)
+  171 |     if value in (""180"", ""-180""):
+  172 |         return (Image.ROTATE_180, 180)
+  173 |     if value in (""-90"", ""270"", ""l"", ""left""):
+  174 |         return (Image.ROTATE_270, 270)
+  175 |     raise click.BadParameter(f""invalid rotation '{value}'"")
+  176 | 
+  177 | 
+  178 | def convert_flip(ctx, param, value):
+  179 |     if value is None:
+  180 |         return
+  181 |     value = value.lower()",BadParameter (src/click/exceptions.py:114-156),"  114 | class BadParameter(UsageError):
+  115 |     """"""An exception that formats out a standardized error message for a
+  116 |     bad parameter.  This is useful when thrown from a callback or type as
+  117 |     Click will attach contextual information to it (for instance, which
+  118 |     parameter it is).
+  119 | 
+  120 |     .. versionadded:: 2.0
+  121 | 
+  122 |     :param param: the parameter object that caused this error.  This can
+  123 |                   be left out, and Click will attach this info itself
+  124 |                   if possible.
+  125 |     :param param_hint: a string that shows up as parameter name.  This
+  126 |                        can be used as alternative to `param` in cases
+  127 |                        where custom validation should happen.  If it is
+  128 |                        a string it's used as such, if it's a list then
+  129 |                        each item is quoted and separated.
+  130 |     """"""
+  131 | 
+  132 |     param: Parameter | None
+  133 |     param_hint: cabc.Sequence[str] | str | None
+  134 | 
+  135 |     def __init__(
+  136 |         self,
+  137 |         message: str,
+  138 |         ctx: Context | None = None,",,
+236ca8487255,requests,tests/test_requests.py:960,"  954 |         ),
+  955 |     )
+  956 |     def test_unicode_get(self, httpbin, url, params):
+  957 |         requests.get(httpbin(url), params=params)
+  958 | 
+  959 |     def test_unicode_header_name(self, httpbin):
+  960 |         requests.put(
+  961 |             httpbin(""put""),
+  962 |             headers={""Content-Type"": ""application/octet-stream""},
+  963 |             data=""\xff"",
+  964 |         )  # compat.str is unicode.
+  965 | 
+  966 |     def test_pyopenssl_redirect(self, httpbin_secure, httpbin_ca_bundle):",put (src/requests/api.py:137-151),"  137 | def put(
+  138 |     url: _t.UriType, data: _t.DataType = None, **kwargs: Unpack[_t.DataKwargs]
+  139 | ) -> Response:
+  140 |     r""""""Sends a PUT request.
+  141 | 
+  142 |     :param url: URL for the new :class:`Request` object.
+  143 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like
+  144 |         object to send in the body of the :class:`Request`.
+  145 |     :param json: (optional) A JSON serializable Python object to send in the body of the :class:`Request`.
+  146 |     :param \*\*kwargs: Optional arguments that ``request`` takes.
+  147 |     :return: :class:`Response <Response>` object
+  148 |     :rtype: requests.Response
+  149 |     """"""
+  150 | 
+  151 |     return request(""put"", url, data=data, **kwargs)",,
+65c6516f61d7,click,tests/test_formatting.py:186,"  180 |         """",
+  181 |         ""Error: Missing argument 'metavar'."",
+  182 |     ]
+  183 | 
+  184 | 
+  185 | def test_formatting_usage_error_metavar_bad_arg(runner):
+  186 |     @click.command()
+  187 |     @click.argument(""arg"", type=click.INT, metavar=""metavar"")
+  188 |     def cmd(arg):
+  189 |         pass
+  190 | 
+  191 |     result = runner.invoke(cmd, [""3.14""])
+  192 |     assert result.exit_code == 2",command (src/click/decorators.py:168-255),"  168 | def command(
+  169 |     name: str | _AnyCallable | None = None,
+  170 |     cls: type[CmdType] | None = None,
+  171 |     **attrs: t.Any,
+  172 | ) -> Command | t.Callable[[_AnyCallable], Command | CmdType]:
+  173 |     r""""""Creates a new :class:`Command` and uses the decorated function as
+  174 |     callback.  This will also automatically attach all decorated
+  175 |     :func:`option`\s and :func:`argument`\s as parameters to the command.
+  176 | 
+  177 |     The name of the command defaults to the name of the function, converted to
+  178 |     lowercase, with underscores ``_`` replaced by dashes ``-``, and the suffixes
+  179 |     ``_command``, ``_cmd``, ``_group``, and ``_grp`` are removed. For example,
+  180 |     ``init_data_command`` becomes ``init-data``.
+  181 | 
+  182 |     All keyword arguments are forwarded to the underlying command class.
+  183 |     For the ``params`` argument, any decorated params are appended to
+  184 |     the end of the list.
+  185 | 
+  186 |     Once decorated the function turns into a :class:`Command` instance
+  187 |     that can be invoked as a command line utility or be attached to a
+  188 |     command :class:`Group`.
+  189 | 
+  190 |     :param name: The name of the command. Defaults to modifying the function's
+  191 |         name as described above.
+  192 |     :param cls: The command class to create. Defaults to :class:`Command`.",,
+1b66afbae665,zod,deno/lib/types.ts:1065," 1059 |         typeof options?.precision === ""undefined"" ? null : options?.precision,
+ 1060 |       ...errorUtil.errToObj(options?.message),
+ 1061 |     });
+ 1062 |   }
+ 1063 | 
+ 1064 |   duration(message?: errorUtil.ErrMessage) {
+ 1065 |     return this._addCheck({ kind: ""duration"", ...errorUtil.errToObj(message) });
+ 1066 |   }
+ 1067 | 
+ 1068 |   regex(regex: RegExp, message?: errorUtil.ErrMessage) {
+ 1069 |     return this._addCheck({
+ 1070 |       kind: ""regex"",
+ 1071 |       regex: regex,",ZodString._addCheck (deno/lib/types.ts:964-969),"  964 |   _addCheck(check: ZodStringCheck) {
+  965 |     return new ZodString({
+  966 |       ...this._def,
+  967 |       checks: [...this._def.checks, check],
+  968 |     });
+  969 |   }",,
+d06ddb34f8f6,click,tests/test_arguments.py:17,"   11 | from click._utils import UNSET
+   12 | 
+   13 | 
+   14 | def test_nargs_star(runner):
+   15 |     @click.command()
+   16 |     @click.argument(""src"", nargs=-1)
+   17 |     @click.argument(""dst"")
+   18 |     def copy(src, dst):
+   19 |         click.echo(f""src={'|'.join(src)}"")
+   20 |         click.echo(f""dst={dst}"")
+   21 | 
+   22 |     result = runner.invoke(copy, [""foo.txt"", ""bar.txt"", ""dir""])
+   23 |     assert not result.exception",argument (src/click/decorators.py:324-349),"  324 | def argument(
+  325 |     *param_decls: str, cls: type[Argument] | None = None, **attrs: t.Any
+  326 | ) -> t.Callable[[FC], FC]:
+  327 |     """"""Attaches an argument to the command.  All positional arguments are
+  328 |     passed as parameter declarations to :class:`Argument`; all keyword
+  329 |     arguments are forwarded unchanged (except ``cls``).
+  330 |     This is equivalent to creating an :class:`Argument` instance manually
+  331 |     and attaching it to the :attr:`Command.params` list.
+  332 | 
+  333 |     For the default argument class, refer to :class:`Argument` and
+  334 |     :class:`Parameter` for descriptions of parameters.
+  335 | 
+  336 |     :param cls: the argument class to instantiate.  This defaults to
+  337 |                 :class:`Argument`.
+  338 |     :param param_decls: Passed as positional arguments to the constructor of
+  339 |         ``cls``.
+  340 |     :param attrs: Passed as keyword arguments to the constructor of ``cls``.
+  341 |     """"""
+  342 |     if cls is None:
+  343 |         cls = Argument
+  344 | 
+  345 |     def decorator(f: FC) -> FC:
+  346 |         _param_memo(f, cls(param_decls, **attrs))
+  347 |         return f
+  348 | ",,
+e0799b061cf7,requests,src/requests/cookies.py:247,"  241 |             return
+  242 | 
+  243 |         if isinstance(value, Morsel):
+  244 |             c = morsel_to_cookie(value)
+  245 |         else:
+  246 |             c = create_cookie(name, value, **kwargs)
+  247 |         self.set_cookie(c)
+  248 |         return c
+  249 | 
+  250 |     def iterkeys(self) -> Iterator[str]:
+  251 |         """"""Dict-like iterkeys() that returns an iterator of names of cookies
+  252 |         from the jar.
+  253 | ",RequestsCookieJar.set_cookie (src/requests/cookies.py:382-389),"  382 |     def set_cookie(self, cookie: Cookie, *args: Any, **kwargs: Any) -> None:
+  383 |         if (
+  384 |             (value := cookie.value) is not None
+  385 |             and value.startswith('""')
+  386 |             and value.endswith('""')
+  387 |         ):
+  388 |             cookie.value = value.replace('\\""', """")
+  389 |         return super().set_cookie(cookie, *args, **kwargs)",,
+977e58c0a1ed,requests,tests/test_adapters.py:7,"    1 | import requests.adapters
+    2 | 
+    3 | 
+    4 | def test_request_url_handles_leading_path_separators():
+    5 |     """"""See also https://github.com/psf/requests/issues/6643.""""""
+    6 |     a = requests.adapters.HTTPAdapter()
+    7 |     p = requests.Request(method=""GET"", url=""http://127.0.0.1:10000//v:h"").prepare()
+    8 |     assert ""//v:h"" == a.request_url(p, {})",Request (src/requests/models.py:284-375),"  284 | class Request(RequestHooksMixin):
+  285 |     """"""A user-created :class:`Request <Request>` object.
+  286 | 
+  287 |     Used to prepare a :class:`PreparedRequest <PreparedRequest>`, which is sent to the server.
+  288 | 
+  289 |     :param method: HTTP method to use.
+  290 |     :param url: URL to send.
+  291 |     :param headers: dictionary of headers to send.
+  292 |     :param files: dictionary of {filename: fileobject} files to multipart upload.
+  293 |     :param data: the body to attach to the request. If a dictionary or
+  294 |         list of tuples ``[(key, value)]`` is provided, form-encoding will
+  295 |         take place.
+  296 |     :param json: json for the body to attach to the request (if files or data is not specified).
+  297 |     :param params: URL parameters to append to the URL. If a dictionary or
+  298 |         list of tuples ``[(key, value)]`` is provided, form-encoding will
+  299 |         take place.
+  300 |     :param auth: Auth handler or (user, pass) tuple.
+  301 |     :param cookies: dictionary or CookieJar of cookies to attach to this request.
+  302 |     :param hooks: dictionary of callback hooks, for internal usage.
+  303 | 
+  304 |     Usage::
+  305 | 
+  306 |       >>> import requests
+  307 |       >>> req = requests.Request('GET', 'https://httpbin.org/get')
+  308 |       >>> req.prepare()",,
+adb7d1560d73,zod,deno/lib/types.ts:2006," 2000 | export interface ZodNullDef extends ZodTypeDef {
+ 2001 |   typeName: ZodFirstPartyTypeKind.ZodNull;
+ 2002 | }
+ 2003 | 
+ 2004 | export class ZodNull extends ZodType<null, ZodNullDef, null> {
+ 2005 |   _parse(input: ParseInput): ParseReturnType<this[""_output""]> {
+ 2006 |     const parsedType = this._getType(input);
+ 2007 |     if (parsedType !== ZodParsedType.null) {
+ 2008 |       const ctx = this._getOrReturnCtx(input);
+ 2009 |       addIssueToContext(ctx, {
+ 2010 |         code: ZodIssueCode.invalid_type,
+ 2011 |         expected: ZodParsedType.null,
+ 2012 |         received: ctx.parsedType,",ZodType._getType (deno/lib/types.ts:184-186),"  184 |   _getType(input: ParseInput): string {
+  185 |     return getParsedType(input.data);
+  186 |   }",,
+85a831e09379,requests,tests/test_requests.py:3068," 3062 | 
+ 3063 | 
+ 3064 | def test_content_length_for_bytes_data(httpbin):
+ 3065 |     data = ""This is a string containing multi-byte UTF-8 ☃️""
+ 3066 |     encoded_data = data.encode(""utf-8"")
+ 3067 |     length = str(len(encoded_data))
+ 3068 |     req = requests.Request(""POST"", httpbin(""post""), data=encoded_data)
+ 3069 |     p = req.prepare()
+ 3070 | 
+ 3071 |     assert p.headers[""Content-Length""] == length
+ 3072 | 
+ 3073 | 
+ 3074 | @pytest.mark.skipif(",Request (src/requests/models.py:284-375),"  284 | class Request(RequestHooksMixin):
+  285 |     """"""A user-created :class:`Request <Request>` object.
+  286 | 
+  287 |     Used to prepare a :class:`PreparedRequest <PreparedRequest>`, which is sent to the server.
+  288 | 
+  289 |     :param method: HTTP method to use.
+  290 |     :param url: URL to send.
+  291 |     :param headers: dictionary of headers to send.
+  292 |     :param files: dictionary of {filename: fileobject} files to multipart upload.
+  293 |     :param data: the body to attach to the request. If a dictionary or
+  294 |         list of tuples ``[(key, value)]`` is provided, form-encoding will
+  295 |         take place.
+  296 |     :param json: json for the body to attach to the request (if files or data is not specified).
+  297 |     :param params: URL parameters to append to the URL. If a dictionary or
+  298 |         list of tuples ``[(key, value)]`` is provided, form-encoding will
+  299 |         take place.
+  300 |     :param auth: Auth handler or (user, pass) tuple.
+  301 |     :param cookies: dictionary or CookieJar of cookies to attach to this request.
+  302 |     :param hooks: dictionary of callback hooks, for internal usage.
+  303 | 
+  304 |     Usage::
+  305 | 
+  306 |       >>> import requests
+  307 |       >>> req = requests.Request('GET', 'https://httpbin.org/get')
+  308 |       >>> req.prepare()",,
+865e388ee7e8,requests,tests/test_testserver.py:22,"   16 | 
+   17 |         def handler(sock):
+   18 |             text = sock.recv(1000)
+   19 |             assert text == question
+   20 |             sock.sendall(answer)
+   21 | 
+   22 |         with Server(handler) as (host, port):
+   23 |             sock = socket.socket()
+   24 |             sock.connect((host, port))
+   25 |             sock.sendall(question)
+   26 |             text = sock.recv(1000)
+   27 |             assert text == answer
+   28 |             sock.close()",Server (tests/testserver/server.py:25-135),"   25 | class Server(threading.Thread):
+   26 |     """"""Dummy server using for unit testing""""""
+   27 | 
+   28 |     WAIT_EVENT_TIMEOUT = 5
+   29 | 
+   30 |     def __init__(
+   31 |         self,
+   32 |         handler=None,
+   33 |         host=""localhost"",
+   34 |         port=0,
+   35 |         requests_to_handle=1,
+   36 |         wait_to_close_event=None,
+   37 |     ):
+   38 |         super().__init__()
+   39 | 
+   40 |         self.handler = handler or consume_socket_content
+   41 |         self.handler_results = []
+   42 | 
+   43 |         self.host = host
+   44 |         self.port = port
+   45 |         self.requests_to_handle = requests_to_handle
+   46 | 
+   47 |         self.wait_to_close_event = wait_to_close_event
+   48 |         self.ready_event = threading.Event()
+   49 |         self.stop_event = threading.Event()",,
+bc65dc6d5514,requests,src/requests/utils.py:1155," 1149 |             body_seek(prepared_request._body_position)
+ 1150 |         except OSError:
+ 1151 |             raise UnrewindableBodyError(
+ 1152 |                 ""An error occurred when rewinding request body for redirect.""
+ 1153 |             )
+ 1154 |     else:
+ 1155 |         raise UnrewindableBodyError(""Unable to rewind request body for redirect."")",UnrewindableBodyError (src/requests/exceptions.py:146-147),"  146 | class UnrewindableBodyError(RequestException):
+  147 |     """"""Requests encountered an error when trying to rewind a body.""""""",,
+1afa6a19e620,requests,tests/test_lowlevel.py:296,"  290 | def test_use_proxy_from_environment(httpbin, var, scheme):
+  291 |     url = f""{scheme}://httpbin.org""
+  292 |     fake_proxy = Server()  # do nothing with the requests; just close the socket
+  293 |     with fake_proxy as (host, port):
+  294 |         proxy_url = f""socks5://{host}:{port}""
+  295 |         kwargs = {var: proxy_url}
+  296 |         with override_environ(**kwargs):
+  297 |             # fake proxy's lack of response will cause a ConnectionError
+  298 |             with pytest.raises(requests.exceptions.ConnectionError):
+  299 |                 requests.get(url)
+  300 | 
+  301 |         # the fake proxy received a request
+  302 |         assert len(fake_proxy.handler_results) == 1",override_environ (tests/utils.py:5-17),"    5 | @contextlib.contextmanager
+    6 | def override_environ(**kwargs):
+    7 |     save_env = dict(os.environ)
+    8 |     for key, value in kwargs.items():
+    9 |         if value is None:
+   10 |             del os.environ[key]
+   11 |         else:
+   12 |             os.environ[key] = value
+   13 |     try:
+   14 |         yield
+   15 |     finally:
+   16 |         os.environ.clear()
+   17 |         os.environ.update(save_env)",,
+e4550051f640,click,tests/test_options.py:828,"  822 |     should be displayed in help, not an open file object.
+  823 | 
+  824 |     Type casting is only applied to defaults in processing, not when
+  825 |     getting the default value.
+  826 |     """"""
+  827 |     option = click.Option(
+  828 |         [""--infile""], type=click.File(), default=__file__, show_default=True
+  829 |     )
+  830 |     context = click.Context(click.Command(""test""))
+  831 |     assert option.get_help_extra(context) == {""default"": __file__}
+  832 |     result = option.get_help_record(context)[1]
+  833 |     assert __file__ in result
+  834 | ",File (src/click/types.py:915-1043),"  915 | class File(ParamType[t.IO[t.Any]]):
+  916 |     """"""Declares a parameter to be a file for reading or writing.  The file
+  917 |     is automatically closed once the context tears down (after the command
+  918 |     finished working).
+  919 | 
+  920 |     Files can be opened for reading or writing.  The special value ``-``
+  921 |     indicates stdin or stdout depending on the mode.
+  922 | 
+  923 |     By default, the file is opened for reading text data, but it can also be
+  924 |     opened in binary mode or for writing.  The encoding parameter can be used
+  925 |     to force a specific encoding.
+  926 | 
+  927 |     The `lazy` flag controls if the file should be opened immediately or upon
+  928 |     first IO. The default is to be non-lazy for standard input and output
+  929 |     streams as well as files opened for reading, `lazy` otherwise. When opening a
+  930 |     file lazily for reading, it is still opened temporarily for validation, but
+  931 |     will not be held open until first IO. lazy is mainly useful when opening
+  932 |     for writing to avoid creating the file until it is needed.
+  933 | 
+  934 |     Files can also be opened atomically in which case all writes go into a
+  935 |     separate file in the same folder and upon completion the file will
+  936 |     be moved over to the original location.  This is useful if a file
+  937 |     regularly read by other users is modified.
+  938 | 
+  939 |     See :ref:`file-args` for more information.",,
+81f53160ecdd,requests,src/requests/sessions.py:848,"  842 |         :rtype: dict
+  843 |         """"""
+  844 |         # Gather clues from the surrounding environment.
+  845 |         if self.trust_env:
+  846 |             # Set environment's proxies.
+  847 |             no_proxy = proxies.get(""no_proxy"") if proxies is not None else None
+  848 |             env_proxies = get_environ_proxies(url, no_proxy=no_proxy)
+  849 |             if proxies is not None:
+  850 |                 for k, v in env_proxies.items():
+  851 |                     proxies.setdefault(k, v)
+  852 | 
+  853 |             # Look for requests environment configuration
+  854 |             # and be compatible with cURL.",get_environ_proxies (src/requests/utils.py:873-882),"  873 | def get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]:
+  874 |     """"""
+  875 |     Return a dict of environment proxies.
+  876 | 
+  877 |     :rtype: dict
+  878 |     """"""
+  879 |     if should_bypass_proxies(url, no_proxy=no_proxy):
+  880 |         return {}
+  881 |     else:
+  882 |         return getproxies()",,

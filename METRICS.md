@@ -4,23 +4,38 @@
 
 Pinned inputs: requests `3c7baaa`, click `2247b35`. Statistical intervals are 95% Wilson score intervals.
 
-## Edge precision (100 random call edges, seed 42)
+## Definitions
 
-| Repo | Supported | Precision | Strict (direct) |
+- **Confirmed by Jedi (strict)** — Jedi's definition lands inside the claimed target's
+  file and line span. This is the only figure that means "the edge points at the
+  definition".
+- **Not contradicted by Jedi (canonical)** — strict, or Jedi lands on a file that
+  re-exports the claimed symbol through the engine's import table. This is *not*
+  precision and is not the headline.
+- **Hand-labeled precision (headline)** — human verdict on the blind 100-edge packet.
+  **UNMEASURED**: labels/gold_for_human.csv is awaiting labels; no number is claimed.
+- **Conditional recall** — found edges divided by call sites Jedi resolves to a project
+  symbol. **Unconditional recall is UNMEASURED** (requires reading each call site).
+- CommonJS JavaScript edges are not measured: `require()`/`module.exports` are not
+  resolved, so an express sample cannot reach 100 edges.
+
+## Edge agreement with Jedi (100 random call edges, seed 42)
+
+| Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |
 |---|---:|---:|---:|
-| `requests` | 99/100 | 99.0% (95% CI 94.6%–99.8%) | 35/100 |
-| `click` | 100/100 | 100.0% (95% CI 96.3%–100.0%) | 30/100 |
+| `requests` | 100 | 35/100 | 99/100 (99.0%; 95% CI 94.6%–99.8%) |
+| `click` | 100 | 30/100 | 100/100 (100.0%; 95% CI 96.3%–100.0%) |
 
-Strict counts require Jedi to land on the definition itself; the precision column also accepts re-export hops the engine resolves.
+The canonical column also accepts re-export hops; it is not hand-labeled precision.
 
-## Conditional recall (150 call sites, seed 7)
+## Conditional recall (150 call sites, seed 7; Jedi-resolvable only)
 
 | Repo | Found / resolvable | Recall | Unresolved by Jedi |
 |---|---:|---:|---:|
 | `requests` | 46/64 | 71.9% (95% CI 59.9%–81.4%) | 86 |
 | `click` | 64/75 | 85.3% (95% CI 75.6%–91.6%) | 75 |
 
-Recall is conditional on Jedi resolving the call site to a project symbol; unconditional recall (hand-labelled true targets) is a Stage 1 deliverable and is not reported here.
+Unconditional recall (hand-labelled true targets) is UNMEASURED.
 
 ## Synthetic token benchmark (hops=2)
 

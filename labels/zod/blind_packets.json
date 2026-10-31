@@ -1,0 +1,802 @@
+[
+  {
+    "edge_id": "2bd75af2a1d3",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2889",
+    "call_context": " 2883 |     shape: T,\n 2884 |     params?: RawCreateParams\n 2885 |   ): ZodObject<T, \"strict\"> => {\n 2886 |     return new ZodObject({\n 2887 |       shape: () => shape,\n 2888 |       unknownKeys: \"strict\",\n 2889 |       catchall: ZodNever.create(),\n 2890 |       typeName: ZodFirstPartyTypeKind.ZodObject,\n 2891 |       ...processCreateParams(params),\n 2892 |     }) as any;\n 2893 |   };\n 2894 | \n 2895 |   static lazycreate = <T extends ZodRawShape>(",
+    "target": "ZodNever.create (deno/lib/types.ts:2098-2103)",
+    "target_definition": " 2098 |   static create = (params?: RawCreateParams): ZodNever => {\n 2099 |     return new ZodNever({\n 2100 |       typeName: ZodFirstPartyTypeKind.ZodNever,\n 2101 |       ...processCreateParams(params),\n 2102 |     });\n 2103 |   };"
+  },
+  {
+    "edge_id": "6b1305417d7e",
+    "repo": "zod",
+    "call_site": "src/helpers/parseUtil.ts:111",
+    "call_context": "  105 |     status: ParseStatus,\n  106 |     results: SyncParseReturnType<any>[]\n  107 |   ): SyncParseReturnType {\n  108 |     const arrayValue: any[] = [];\n  109 |     for (const s of results) {\n  110 |       if (s.status === \"aborted\") return INVALID;\n  111 |       if (s.status === \"dirty\") status.dirty();\n  112 |       arrayValue.push(s.value);\n  113 |     }\n  114 | \n  115 |     return { status: status.value, value: arrayValue };\n  116 |   }\n  117 | ",
+    "target": "ParseStatus.dirty (src/helpers/parseUtil.ts:97-99)",
+    "target_definition": "   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }"
+  },
+  {
+    "edge_id": "adb7d1560d73",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2006",
+    "call_context": " 2000 | export interface ZodNullDef extends ZodTypeDef {\n 2001 |   typeName: ZodFirstPartyTypeKind.ZodNull;\n 2002 | }\n 2003 | \n 2004 | export class ZodNull extends ZodType<null, ZodNullDef, null> {\n 2005 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2006 |     const parsedType = this._getType(input);\n 2007 |     if (parsedType !== ZodParsedType.null) {\n 2008 |       const ctx = this._getOrReturnCtx(input);\n 2009 |       addIssueToContext(ctx, {\n 2010 |         code: ZodIssueCode.invalid_type,\n 2011 |         expected: ZodParsedType.null,\n 2012 |         received: ctx.parsedType,",
+    "target": "ZodType._getType (deno/lib/types.ts:184-186)",
+    "target_definition": "  184 |   _getType(input: ParseInput): string {\n  185 |     return getParsedType(input.data);\n  186 |   }"
+  },
+  {
+    "edge_id": "80dd49b4608c",
+    "repo": "zod",
+    "call_site": "deno/lib/__tests__/Mocker.ts:40",
+    "call_context": "   34 |     return undefined;\n   35 |   }\n   36 |   get stringOptional() {\n   37 |     return this.pick(this.string, this.undefined);\n   38 |   }\n   39 |   get stringNullable() {\n   40 |     return this.pick(this.string, this.null);\n   41 |   }\n   42 |   get numberOptional() {\n   43 |     return this.pick(this.number, this.undefined);\n   44 |   }\n   45 |   get numberNullable() {\n   46 |     return this.pick(this.number, this.null);",
+    "target": "Mocker.pick (deno/lib/__tests__/Mocker.ts:8-10)",
+    "target_definition": "    8 |   pick = (...args: any[]) => {\n    9 |     return args[getRandomInt(args.length)];\n   10 |   };"
+  },
+  {
+    "edge_id": "085b4ea051fa",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1380",
+    "call_context": " 1374 |   lte(value: number, message?: errorUtil.ErrMessage) {\n 1375 |     return this.setLimit(\"max\", value, true, errorUtil.toString(message));\n 1376 |   }\n 1377 |   max = this.lte;\n 1378 | \n 1379 |   lt(value: number, message?: errorUtil.ErrMessage) {\n 1380 |     return this.setLimit(\"max\", value, false, errorUtil.toString(message));\n 1381 |   }\n 1382 | \n 1383 |   protected setLimit(\n 1384 |     kind: \"min\" | \"max\",\n 1385 |     value: number,\n 1386 |     inclusive: boolean,",
+    "target": "ZodNumber.setLimit (deno/lib/types.ts:1383-1401)",
+    "target_definition": " 1383 |   protected setLimit(\n 1384 |     kind: \"min\" | \"max\",\n 1385 |     value: number,\n 1386 |     inclusive: boolean,\n 1387 |     message?: string\n 1388 |   ) {\n 1389 |     return new ZodNumber({\n 1390 |       ...this._def,\n 1391 |       checks: [\n 1392 |         ...this._def.checks,\n 1393 |         {\n 1394 |           kind,\n 1395 |           value,\n 1396 |           inclusive,\n 1397 |           message: errorUtil.toString(message),\n 1398 |         },\n 1399 |       ],\n 1400 |     });\n 1401 |   }"
+  },
+  {
+    "edge_id": "51532213e915",
+    "repo": "zod",
+    "call_site": "src/types.ts:1683",
+    "call_context": " 1677 |       inclusive: false,\n 1678 |       message: errorUtil.toString(message),\n 1679 |     });\n 1680 |   }\n 1681 | \n 1682 |   negative(message?: errorUtil.ErrMessage) {\n 1683 |     return this._addCheck({\n 1684 |       kind: \"max\",\n 1685 |       value: BigInt(0),\n 1686 |       inclusive: false,\n 1687 |       message: errorUtil.toString(message),\n 1688 |     });\n 1689 |   }",
+    "target": "ZodBigInt._addCheck (src/types.ts:1666-1671)",
+    "target_definition": " 1666 |   _addCheck(check: ZodBigIntCheck) {\n 1667 |     return new ZodBigInt({\n 1668 |       ...this._def,\n 1669 |       checks: [...this._def.checks, check],\n 1670 |     });\n 1671 |   }"
+  },
+  {
+    "edge_id": "ba8670f1c460",
+    "repo": "zod",
+    "call_site": "src/types.ts:980",
+    "call_context": "  974 | \n  975 |   url(message?: errorUtil.ErrMessage) {\n  976 |     return this._addCheck({ kind: \"url\", ...errorUtil.errToObj(message) });\n  977 |   }\n  978 | \n  979 |   emoji(message?: errorUtil.ErrMessage) {\n  980 |     return this._addCheck({ kind: \"emoji\", ...errorUtil.errToObj(message) });\n  981 |   }\n  982 | \n  983 |   uuid(message?: errorUtil.ErrMessage) {\n  984 |     return this._addCheck({ kind: \"uuid\", ...errorUtil.errToObj(message) });\n  985 |   }\n  986 |   nanoid(message?: errorUtil.ErrMessage) {",
+    "target": "ZodString._addCheck (src/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "8fcdb069b140",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2090",
+    "call_context": " 2084 | export interface ZodNeverDef extends ZodTypeDef {\n 2085 |   typeName: ZodFirstPartyTypeKind.ZodNever;\n 2086 | }\n 2087 | \n 2088 | export class ZodNever extends ZodType<never, ZodNeverDef, never> {\n 2089 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2090 |     const ctx = this._getOrReturnCtx(input);\n 2091 |     addIssueToContext(ctx, {\n 2092 |       code: ZodIssueCode.invalid_type,\n 2093 |       expected: ZodParsedType.never,\n 2094 |       received: ctx.parsedType,\n 2095 |     });\n 2096 |     return INVALID;",
+    "target": "ZodType._getOrReturnCtx (deno/lib/types.ts:188-204)",
+    "target_definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),\n  198 | \n  199 |         schemaErrorMap: this._def.errorMap,\n  200 |         path: input.path,\n  201 |         parent: input.parent,\n  202 |       }\n  203 |     );\n  204 |   }"
+  },
+  {
+    "edge_id": "2596bfd099e3",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2934",
+    "call_context": " 2928 | export class ZodUnion<T extends ZodUnionOptions> extends ZodType<\n 2929 |   T[number][\"_output\"],\n 2930 |   ZodUnionDef<T>,\n 2931 |   T[number][\"_input\"]\n 2932 | > {\n 2933 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2934 |     const { ctx } = this._processInputParams(input);\n 2935 |     const options = this._def.options;\n 2936 | \n 2937 |     function handleResults(\n 2938 |       results: { ctx: ParseContext; result: SyncParseReturnType<any> }[]\n 2939 |     ) {\n 2940 |       // return first issue-free validation if it exists",
+    "target": "ZodType._processInputParams (deno/lib/types.ts:206-223)",
+    "target_definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | \n  216 |         parsedType: getParsedType(input.data),\n  217 | \n  218 |         schemaErrorMap: this._def.errorMap,\n  219 |         path: input.path,\n  220 |         parent: input.parent,\n  221 |       },\n  222 |     };\n  223 |   }"
+  },
+  {
+    "edge_id": "53748a8e1930",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1601",
+    "call_context": " 1595 |             message: check.message,\n 1596 |           });\n 1597 |           status.dirty();\n 1598 |         }\n 1599 |       } else if (check.kind === \"multipleOf\") {\n 1600 |         if (input.data % check.value !== BigInt(0)) {\n 1601 |           ctx = this._getOrReturnCtx(input, ctx);\n 1602 |           addIssueToContext(ctx, {\n 1603 |             code: ZodIssueCode.not_multiple_of,\n 1604 |             multipleOf: check.value,\n 1605 |             message: check.message,\n 1606 |           });\n 1607 |           status.dirty();",
+    "target": "ZodType._getOrReturnCtx (deno/lib/types.ts:188-204)",
+    "target_definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),\n  198 | \n  199 |         schemaErrorMap: this._def.errorMap,\n  200 |         path: input.path,\n  201 |         parent: input.parent,\n  202 |       }\n  203 |     );\n  204 |   }"
+  },
+  {
+    "edge_id": "29a3d4ae53a1",
+    "repo": "zod",
+    "call_site": "deno/lib/__tests__/Mocker.ts:37",
+    "call_context": "   31 |     return null;\n   32 |   }\n   33 |   get undefined(): undefined {\n   34 |     return undefined;\n   35 |   }\n   36 |   get stringOptional() {\n   37 |     return this.pick(this.string, this.undefined);\n   38 |   }\n   39 |   get stringNullable() {\n   40 |     return this.pick(this.string, this.null);\n   41 |   }\n   42 |   get numberOptional() {\n   43 |     return this.pick(this.number, this.undefined);",
+    "target": "Mocker.pick (deno/lib/__tests__/Mocker.ts:8-10)",
+    "target_definition": "    8 |   pick = (...args: any[]) => {\n    9 |     return args[getRandomInt(args.length)];\n   10 |   };"
+  },
+  {
+    "edge_id": "a3706ddbda54",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:957",
+    "call_context": "  951 | \n  952 |   protected _regex(\n  953 |     regex: RegExp,\n  954 |     validation: StringValidation,\n  955 |     message?: errorUtil.ErrMessage\n  956 |   ) {\n  957 |     return this.refinement((data) => regex.test(data), {\n  958 |       validation,\n  959 |       code: ZodIssueCode.invalid_string,\n  960 |       ...errorUtil.errToObj(message),\n  961 |     });\n  962 |   }\n  963 | ",
+    "target": "ZodType.refinement (deno/lib/types.ts:356-372)",
+    "target_definition": "  356 |   refinement(\n  357 |     check: (arg: Output) => unknown,\n  358 |     refinementData: IssueData | ((arg: Output, ctx: RefinementCtx) => IssueData)\n  359 |   ): ZodEffects<this, Output, Input> {\n  360 |     return this._refinement((val, ctx) => {\n  361 |       if (!check(val)) {\n  362 |         ctx.addIssue(\n  363 |           typeof refinementData === \"function\"\n  364 |             ? refinementData(val, ctx)\n  365 |             : refinementData\n  366 |         );\n  367 |         return false;\n  368 |       } else {\n  369 |         return true;\n  370 |       }\n  371 |     });\n  372 |   }"
+  },
+  {
+    "edge_id": "8700d7367839",
+    "repo": "zod",
+    "call_site": "src/types.ts:987",
+    "call_context": "  981 |   }\n  982 | \n  983 |   uuid(message?: errorUtil.ErrMessage) {\n  984 |     return this._addCheck({ kind: \"uuid\", ...errorUtil.errToObj(message) });\n  985 |   }\n  986 |   nanoid(message?: errorUtil.ErrMessage) {\n  987 |     return this._addCheck({ kind: \"nanoid\", ...errorUtil.errToObj(message) });\n  988 |   }\n  989 |   cuid(message?: errorUtil.ErrMessage) {\n  990 |     return this._addCheck({ kind: \"cuid\", ...errorUtil.errToObj(message) });\n  991 |   }\n  992 | \n  993 |   cuid2(message?: errorUtil.ErrMessage) {",
+    "target": "ZodString._addCheck (src/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "4856a3e5f71a",
+    "repo": "zod",
+    "call_site": "src/types.ts:1634",
+    "call_context": " 1628 |   gte(value: bigint, message?: errorUtil.ErrMessage) {\n 1629 |     return this.setLimit(\"min\", value, true, errorUtil.toString(message));\n 1630 |   }\n 1631 |   min = this.gte;\n 1632 | \n 1633 |   gt(value: bigint, message?: errorUtil.ErrMessage) {\n 1634 |     return this.setLimit(\"min\", value, false, errorUtil.toString(message));\n 1635 |   }\n 1636 | \n 1637 |   lte(value: bigint, message?: errorUtil.ErrMessage) {\n 1638 |     return this.setLimit(\"max\", value, true, errorUtil.toString(message));\n 1639 |   }\n 1640 |   max = this.lte;",
+    "target": "ZodBigInt.setLimit (src/types.ts:1646-1664)",
+    "target_definition": " 1646 |   protected setLimit(\n 1647 |     kind: \"min\" | \"max\",\n 1648 |     value: bigint,\n 1649 |     inclusive: boolean,\n 1650 |     message?: string\n 1651 |   ) {\n 1652 |     return new ZodBigInt({\n 1653 |       ...this._def,\n 1654 |       checks: [\n 1655 |         ...this._def.checks,\n 1656 |         {\n 1657 |           kind,\n 1658 |           value,\n 1659 |           inclusive,\n 1660 |           message: errorUtil.toString(message),\n 1661 |         },\n 1662 |       ],\n 1663 |     });\n 1664 |   }"
+  },
+  {
+    "edge_id": "3fd0ebbcfed8",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1840",
+    "call_context": " 1834 |             type: \"date\",\n 1835 |           });\n 1836 |           status.dirty();\n 1837 |         }\n 1838 |       } else if (check.kind === \"max\") {\n 1839 |         if (input.data.getTime() > check.value) {\n 1840 |           ctx = this._getOrReturnCtx(input, ctx);\n 1841 |           addIssueToContext(ctx, {\n 1842 |             code: ZodIssueCode.too_big,\n 1843 |             message: check.message,\n 1844 |             inclusive: true,\n 1845 |             exact: false,\n 1846 |             maximum: check.value,",
+    "target": "ZodType._getOrReturnCtx (deno/lib/types.ts:188-204)",
+    "target_definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),\n  198 | \n  199 |         schemaErrorMap: this._def.errorMap,\n  200 |         path: input.path,\n  201 |         parent: input.parent,\n  202 |       }\n  203 |     );\n  204 |   }"
+  },
+  {
+    "edge_id": "177abe4c6196",
+    "repo": "zod",
+    "call_site": "src/types.ts:4009",
+    "call_context": " 4003 | \n 4004 |   implement<F extends InnerTypeOfFunction<Args, Returns>>(\n 4005 |     func: F\n 4006 |   ): ReturnType<F> extends Returns[\"_output\"]\n 4007 |     ? (...args: Args[\"_input\"]) => ReturnType<F>\n 4008 |     : OuterTypeOfFunction<Args, Returns> {\n 4009 |     const validatedFunc = this.parse(func);\n 4010 |     return validatedFunc as any;\n 4011 |   }\n 4012 | \n 4013 |   strictImplement(\n 4014 |     func: InnerTypeOfFunction<Args, Returns>\n 4015 |   ): InnerTypeOfFunction<Args, Returns> {",
+    "target": "ZodType.parse (src/types.ts:238-242)",
+    "target_definition": "  238 |   parse(data: unknown, params?: Partial<ParseParams>): Output {\n  239 |     const result = this.safeParse(data, params);\n  240 |     if (result.success) return result.data;\n  241 |     throw result.error;\n  242 |   }"
+  },
+  {
+    "edge_id": "6e9cec9cf6bf",
+    "repo": "zod",
+    "call_site": "src/types.ts:976",
+    "call_context": "  970 | \n  971 |   email(message?: errorUtil.ErrMessage) {\n  972 |     return this._addCheck({ kind: \"email\", ...errorUtil.errToObj(message) });\n  973 |   }\n  974 | \n  975 |   url(message?: errorUtil.ErrMessage) {\n  976 |     return this._addCheck({ kind: \"url\", ...errorUtil.errToObj(message) });\n  977 |   }\n  978 | \n  979 |   emoji(message?: errorUtil.ErrMessage) {\n  980 |     return this._addCheck({ kind: \"emoji\", ...errorUtil.errToObj(message) });\n  981 |   }\n  982 | ",
+    "target": "ZodString._addCheck (src/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "6af80a24bfa8",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:260",
+    "call_context": "  254 |       path: params?.path || [],\n  255 |       schemaErrorMap: this._def.errorMap,\n  256 |       parent: null,\n  257 |       data,\n  258 |       parsedType: getParsedType(data),\n  259 |     };\n  260 |     const result = this._parseSync({ data, path: ctx.path, parent: ctx });\n  261 | \n  262 |     return handleResult(ctx, result);\n  263 |   }\n  264 | \n  265 |   async parseAsync(\n  266 |     data: unknown,",
+    "target": "ZodType._parseSync (deno/lib/types.ts:225-231)",
+    "target_definition": "  225 |   _parseSync(input: ParseInput): SyncParseReturnType<Output> {\n  226 |     const result = this._parse(input);\n  227 |     if (isAsync(result)) {\n  228 |       throw new Error(\"Synchronous parse encountered promise.\");\n  229 |     }\n  230 |     return result;\n  231 |   }"
+  },
+  {
+    "edge_id": "3f185febc31d",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1110",
+    "call_context": " 1104 |       value: minLength,\n 1105 |       ...errorUtil.errToObj(message),\n 1106 |     });\n 1107 |   }\n 1108 | \n 1109 |   max(maxLength: number, message?: errorUtil.ErrMessage) {\n 1110 |     return this._addCheck({\n 1111 |       kind: \"max\",\n 1112 |       value: maxLength,\n 1113 |       ...errorUtil.errToObj(message),\n 1114 |     });\n 1115 |   }\n 1116 | ",
+    "target": "ZodString._addCheck (deno/lib/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "7dd42e56de08",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:322",
+    "call_context": "  316 |       } else if (typeof message === \"function\") {\n  317 |         return message(val);\n  318 |       } else {\n  319 |         return message;\n  320 |       }\n  321 |     };\n  322 |     return this._refinement((val, ctx) => {\n  323 |       const result = check(val);\n  324 |       const setError = () =>\n  325 |         ctx.addIssue({\n  326 |           code: ZodIssueCode.custom,\n  327 |           ...getIssueProperties(val),\n  328 |         });",
+    "target": "ZodType._refinement (deno/lib/types.ts:374-382)",
+    "target_definition": "  374 |   _refinement(\n  375 |     refinement: RefinementEffect<Output>[\"refinement\"]\n  376 |   ): ZodEffects<this, Output, Input> {\n  377 |     return new ZodEffects({\n  378 |       schema: this,\n  379 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n  380 |       effect: { type: \"refinement\", refinement },\n  381 |     });\n  382 |   }"
+  },
+  {
+    "edge_id": "b9cc02571b97",
+    "repo": "zod",
+    "call_site": "src/types.ts:3827",
+    "call_context": " 3821 |       ...this._def,\n 3822 |       maxSize: { value: maxSize, message: errorUtil.toString(message) },\n 3823 |     }) as any;\n 3824 |   }\n 3825 | \n 3826 |   size(size: number, message?: errorUtil.ErrMessage): this {\n 3827 |     return this.min(size, message).max(size, message) as any;\n 3828 |   }\n 3829 | \n 3830 |   nonempty(message?: errorUtil.ErrMessage): ZodSet<Value> {\n 3831 |     return this.min(1, message) as any;\n 3832 |   }\n 3833 | ",
+    "target": "ZodSet.min (src/types.ts:3812-3817)",
+    "target_definition": " 3812 |   min(minSize: number, message?: errorUtil.ErrMessage): this {\n 3813 |     return new ZodSet({\n 3814 |       ...this._def,\n 3815 |       minSize: { value: minSize, message: errorUtil.toString(message) },\n 3816 |     }) as any;\n 3817 |   }"
+  },
+  {
+    "edge_id": "41cf9a62e949",
+    "repo": "zod",
+    "call_site": "src/types.ts:1758",
+    "call_context": " 1752 |     if (this._def.coerce) {\n 1753 |       input.data = Boolean(input.data);\n 1754 |     }\n 1755 |     const parsedType = this._getType(input);\n 1756 | \n 1757 |     if (parsedType !== ZodParsedType.boolean) {\n 1758 |       const ctx = this._getOrReturnCtx(input);\n 1759 |       addIssueToContext(ctx, {\n 1760 |         code: ZodIssueCode.invalid_type,\n 1761 |         expected: ZodParsedType.boolean,\n 1762 |         received: ctx.parsedType,\n 1763 |       });\n 1764 |       return INVALID;",
+    "target": "ZodType._getOrReturnCtx (src/types.ts:188-204)",
+    "target_definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),\n  198 | \n  199 |         schemaErrorMap: this._def.errorMap,\n  200 |         path: input.path,\n  201 |         parent: input.parent,\n  202 |       }\n  203 |     );\n  204 |   }"
+  },
+  {
+    "edge_id": "585219c701f9",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:269",
+    "call_context": "  263 |   }\n  264 | \n  265 |   async parseAsync(\n  266 |     data: unknown,\n  267 |     params?: Partial<ParseParams>\n  268 |   ): Promise<Output> {\n  269 |     const result = await this.safeParseAsync(data, params);\n  270 |     if (result.success) return result.data;\n  271 |     throw result.error;\n  272 |   }\n  273 | \n  274 |   async safeParseAsync(\n  275 |     data: unknown,",
+    "target": "ZodType.safeParseAsync (deno/lib/types.ts:274-296)",
+    "target_definition": "  274 |   async safeParseAsync(\n  275 |     data: unknown,\n  276 |     params?: Partial<ParseParams>\n  277 |   ): Promise<SafeParseReturnType<Input, Output>> {\n  278 |     const ctx: ParseContext = {\n  279 |       common: {\n  280 |         issues: [],\n  281 |         contextualErrorMap: params?.errorMap,\n  282 |         async: true,\n  283 |       },\n  284 |       path: params?.path || [],\n  285 |       schemaErrorMap: this._def.errorMap,\n  286 |       parent: null,\n  287 |       data,\n  288 |       parsedType: getParsedType(data),\n  289 |     };\n  290 | \n  291 |     const maybeAsyncResult = this._parse({ data, path: ctx.path, parent: ctx });\n  292 |     const result = await (isAsync(maybeAsyncResult)\n  293 |       ? maybeAsyncResult\n  294 |       : Promise.resolve(maybeAsyncResult));\n  295 |     return handleResult(ctx, result);\n  296 |   }"
+  },
+  {
+    "edge_id": "984821b72880",
+    "repo": "zod",
+    "call_site": "src/types.ts:1339",
+    "call_context": " 1333 |             message: check.message,\n 1334 |           });\n 1335 |           status.dirty();\n 1336 |         }\n 1337 |       } else if (check.kind === \"finite\") {\n 1338 |         if (!Number.isFinite(input.data)) {\n 1339 |           ctx = this._getOrReturnCtx(input, ctx);\n 1340 |           addIssueToContext(ctx, {\n 1341 |             code: ZodIssueCode.not_finite,\n 1342 |             message: check.message,\n 1343 |           });\n 1344 |           status.dirty();\n 1345 |         }",
+    "target": "ZodType._getOrReturnCtx (src/types.ts:188-204)",
+    "target_definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),\n  198 | \n  199 |         schemaErrorMap: this._def.errorMap,\n  200 |         path: input.path,\n  201 |         parent: input.parent,\n  202 |       }\n  203 |     );\n  204 |   }"
+  },
+  {
+    "edge_id": "c6e7d62339e7",
+    "repo": "zod",
+    "call_site": "src/ZodError.ts:318",
+    "call_context": "  312 |       }\n  313 |     }\n  314 |     return { formErrors, fieldErrors };\n  315 |   }\n  316 | \n  317 |   get formErrors() {\n  318 |     return this.flatten();\n  319 |   }\n  320 | }\n  321 | \n  322 | type stripPath<T extends object> = T extends any\n  323 |   ? util.OmitKeys<T, \"path\">\n  324 |   : never;",
+    "target": "ZodError.flatten (src/ZodError.ts:301-315)",
+    "target_definition": "  301 |   flatten<U = string>(\n  302 |     mapper: (issue: ZodIssue) => U = (issue: ZodIssue) => issue.message as any\n  303 |   ): any {\n  304 |     const fieldErrors: any = {};\n  305 |     const formErrors: U[] = [];\n  306 |     for (const sub of this.issues) {\n  307 |       if (sub.path.length > 0) {\n  308 |         fieldErrors[sub.path[0]] = fieldErrors[sub.path[0]] || [];\n  309 |         fieldErrors[sub.path[0]].push(mapper(sub));\n  310 |       } else {\n  311 |         formErrors.push(mapper(sub));\n  312 |       }\n  313 |     }\n  314 |     return { formErrors, fieldErrors };\n  315 |   }"
+  },
+  {
+    "edge_id": "2ce21354aa9d",
+    "repo": "zod",
+    "call_site": "src/types.ts:260",
+    "call_context": "  254 |       path: params?.path || [],\n  255 |       schemaErrorMap: this._def.errorMap,\n  256 |       parent: null,\n  257 |       data,\n  258 |       parsedType: getParsedType(data),\n  259 |     };\n  260 |     const result = this._parseSync({ data, path: ctx.path, parent: ctx });\n  261 | \n  262 |     return handleResult(ctx, result);\n  263 |   }\n  264 | \n  265 |   async parseAsync(\n  266 |     data: unknown,",
+    "target": "ZodType._parseSync (src/types.ts:225-231)",
+    "target_definition": "  225 |   _parseSync(input: ParseInput): SyncParseReturnType<Output> {\n  226 |     const result = this._parse(input);\n  227 |     if (isAsync(result)) {\n  228 |       throw new Error(\"Synchronous parse encountered promise.\");\n  229 |     }\n  230 |     return result;\n  231 |   }"
+  },
+  {
+    "edge_id": "476c4733ba1e",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:987",
+    "call_context": "  981 |   }\n  982 | \n  983 |   uuid(message?: errorUtil.ErrMessage) {\n  984 |     return this._addCheck({ kind: \"uuid\", ...errorUtil.errToObj(message) });\n  985 |   }\n  986 |   nanoid(message?: errorUtil.ErrMessage) {\n  987 |     return this._addCheck({ kind: \"nanoid\", ...errorUtil.errToObj(message) });\n  988 |   }\n  989 |   cuid(message?: errorUtil.ErrMessage) {\n  990 |     return this._addCheck({ kind: \"cuid\", ...errorUtil.errToObj(message) });\n  991 |   }\n  992 | \n  993 |   cuid2(message?: errorUtil.ErrMessage) {",
+    "target": "ZodString._addCheck (deno/lib/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "5ca4fd7a34d4",
+    "repo": "zod",
+    "call_site": "src/types.ts:2119",
+    "call_context": " 2113 | export interface ZodVoidDef extends ZodTypeDef {\n 2114 |   typeName: ZodFirstPartyTypeKind.ZodVoid;\n 2115 | }\n 2116 | \n 2117 | export class ZodVoid extends ZodType<void, ZodVoidDef, void> {\n 2118 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2119 |     const parsedType = this._getType(input);\n 2120 |     if (parsedType !== ZodParsedType.undefined) {\n 2121 |       const ctx = this._getOrReturnCtx(input);\n 2122 |       addIssueToContext(ctx, {\n 2123 |         code: ZodIssueCode.invalid_type,\n 2124 |         expected: ZodParsedType.void,\n 2125 |         received: ctx.parsedType,",
+    "target": "ZodType._getType (src/types.ts:184-186)",
+    "target_definition": "  184 |   _getType(input: ParseInput): string {\n  185 |     return getParsedType(input.data);\n  186 |   }"
+  },
+  {
+    "edge_id": "ef065da6d6b2",
+    "repo": "zod",
+    "call_site": "src/types.ts:269",
+    "call_context": "  263 |   }\n  264 | \n  265 |   async parseAsync(\n  266 |     data: unknown,\n  267 |     params?: Partial<ParseParams>\n  268 |   ): Promise<Output> {\n  269 |     const result = await this.safeParseAsync(data, params);\n  270 |     if (result.success) return result.data;\n  271 |     throw result.error;\n  272 |   }\n  273 | \n  274 |   async safeParseAsync(\n  275 |     data: unknown,",
+    "target": "ZodType.safeParseAsync (src/types.ts:274-296)",
+    "target_definition": "  274 |   async safeParseAsync(\n  275 |     data: unknown,\n  276 |     params?: Partial<ParseParams>\n  277 |   ): Promise<SafeParseReturnType<Input, Output>> {\n  278 |     const ctx: ParseContext = {\n  279 |       common: {\n  280 |         issues: [],\n  281 |         contextualErrorMap: params?.errorMap,\n  282 |         async: true,\n  283 |       },\n  284 |       path: params?.path || [],\n  285 |       schemaErrorMap: this._def.errorMap,\n  286 |       parent: null,\n  287 |       data,\n  288 |       parsedType: getParsedType(data),\n  289 |     };\n  290 | \n  291 |     const maybeAsyncResult = this._parse({ data, path: ctx.path, parent: ctx });\n  292 |     const result = await (isAsync(maybeAsyncResult)\n  293 |       ? maybeAsyncResult\n  294 |       : Promise.resolve(maybeAsyncResult));\n  295 |     return handleResult(ctx, result);\n  296 |   }"
+  },
+  {
+    "edge_id": "1b66afbae665",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1065",
+    "call_context": " 1059 |         typeof options?.precision === \"undefined\" ? null : options?.precision,\n 1060 |       ...errorUtil.errToObj(options?.message),\n 1061 |     });\n 1062 |   }\n 1063 | \n 1064 |   duration(message?: errorUtil.ErrMessage) {\n 1065 |     return this._addCheck({ kind: \"duration\", ...errorUtil.errToObj(message) });\n 1066 |   }\n 1067 | \n 1068 |   regex(regex: RegExp, message?: errorUtil.ErrMessage) {\n 1069 |     return this._addCheck({\n 1070 |       kind: \"regex\",\n 1071 |       regex: regex,",
+    "target": "ZodString._addCheck (deno/lib/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "946071119e64",
+    "repo": "zod",
+    "call_site": "src/types.ts:1086",
+    "call_context": " 1080 |       position: options?.position,\n 1081 |       ...errorUtil.errToObj(options?.message),\n 1082 |     });\n 1083 |   }\n 1084 | \n 1085 |   startsWith(value: string, message?: errorUtil.ErrMessage) {\n 1086 |     return this._addCheck({\n 1087 |       kind: \"startsWith\",\n 1088 |       value: value,\n 1089 |       ...errorUtil.errToObj(message),\n 1090 |     });\n 1091 |   }\n 1092 | ",
+    "target": "ZodString._addCheck (src/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "896b84478114",
+    "repo": "zod",
+    "call_site": "src/types.ts:4730",
+    "call_context": " 4724 | export class ZodDefault<T extends ZodTypeAny> extends ZodType<\n 4725 |   util.noUndefined<T[\"_output\"]>,\n 4726 |   ZodDefaultDef<T>,\n 4727 |   T[\"_input\"] | undefined\n 4728 | > {\n 4729 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4730 |     const { ctx } = this._processInputParams(input);\n 4731 |     let data = ctx.data;\n 4732 |     if (ctx.parsedType === ZodParsedType.undefined) {\n 4733 |       data = this._def.defaultValue();\n 4734 |     }\n 4735 |     return this._def.innerType._parse({\n 4736 |       data,",
+    "target": "ZodType._processInputParams (src/types.ts:206-223)",
+    "target_definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | \n  216 |         parsedType: getParsedType(input.data),\n  217 | \n  218 |         schemaErrorMap: this._def.errorMap,\n  219 |         path: input.path,\n  220 |         parent: input.parent,\n  221 |       },\n  222 |     };\n  223 |   }"
+  },
+  {
+    "edge_id": "e5168a7bfe61",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1366",
+    "call_context": " 1360 |       coerce: params?.coerce || false,\n 1361 |       ...processCreateParams(params),\n 1362 |     });\n 1363 |   };\n 1364 | \n 1365 |   gte(value: number, message?: errorUtil.ErrMessage) {\n 1366 |     return this.setLimit(\"min\", value, true, errorUtil.toString(message));\n 1367 |   }\n 1368 |   min = this.gte;\n 1369 | \n 1370 |   gt(value: number, message?: errorUtil.ErrMessage) {\n 1371 |     return this.setLimit(\"min\", value, false, errorUtil.toString(message));\n 1372 |   }",
+    "target": "ZodNumber.setLimit (deno/lib/types.ts:1383-1401)",
+    "target_definition": " 1383 |   protected setLimit(\n 1384 |     kind: \"min\" | \"max\",\n 1385 |     value: number,\n 1386 |     inclusive: boolean,\n 1387 |     message?: string\n 1388 |   ) {\n 1389 |     return new ZodNumber({\n 1390 |       ...this._def,\n 1391 |       checks: [\n 1392 |         ...this._def.checks,\n 1393 |         {\n 1394 |           kind,\n 1395 |           value,\n 1396 |           inclusive,\n 1397 |           message: errorUtil.toString(message),\n 1398 |         },\n 1399 |       ],\n 1400 |     });\n 1401 |   }"
+  },
+  {
+    "edge_id": "ee918ae12013",
+    "repo": "zod",
+    "call_site": "src/types.ts:239",
+    "call_context": "  233 |   _parseAsync(input: ParseInput): AsyncParseReturnType<Output> {\n  234 |     const result = this._parse(input);\n  235 |     return Promise.resolve(result);\n  236 |   }\n  237 | \n  238 |   parse(data: unknown, params?: Partial<ParseParams>): Output {\n  239 |     const result = this.safeParse(data, params);\n  240 |     if (result.success) return result.data;\n  241 |     throw result.error;\n  242 |   }\n  243 | \n  244 |   safeParse(\n  245 |     data: unknown,",
+    "target": "ZodType.safeParse (src/types.ts:244-263)",
+    "target_definition": "  244 |   safeParse(\n  245 |     data: unknown,\n  246 |     params?: Partial<ParseParams>\n  247 |   ): SafeParseReturnType<Input, Output> {\n  248 |     const ctx: ParseContext = {\n  249 |       common: {\n  250 |         issues: [],\n  251 |         async: params?.async ?? false,\n  252 |         contextualErrorMap: params?.errorMap,\n  253 |       },\n  254 |       path: params?.path || [],\n  255 |       schemaErrorMap: this._def.errorMap,\n  256 |       parent: null,\n  257 |       data,\n  258 |       parsedType: getParsedType(data),\n  259 |     };\n  260 |     const result = this._parseSync({ data, path: ctx.path, parent: ctx });\n  261 | \n  262 |     return handleResult(ctx, result);\n  263 |   }"
+  },
+  {
+    "edge_id": "7d10284dbded",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1878",
+    "call_context": " 1872 |       value: minDate.getTime(),\n 1873 |       message: errorUtil.toString(message),\n 1874 |     });\n 1875 |   }\n 1876 | \n 1877 |   max(maxDate: Date, message?: errorUtil.ErrMessage) {\n 1878 |     return this._addCheck({\n 1879 |       kind: \"max\",\n 1880 |       value: maxDate.getTime(),\n 1881 |       message: errorUtil.toString(message),\n 1882 |     });\n 1883 |   }\n 1884 | ",
+    "target": "ZodDate._addCheck (deno/lib/types.ts:1862-1867)",
+    "target_definition": " 1862 |   _addCheck(check: ZodDateCheck) {\n 1863 |     return new ZodDate({\n 1864 |       ...this._def,\n 1865 |       checks: [...this._def.checks, check],\n 1866 |     });\n 1867 |   }"
+  },
+  {
+    "edge_id": "b390733ddef7",
+    "repo": "zod",
+    "call_site": "src/types.ts:1971",
+    "call_context": " 1965 | export class ZodUndefined extends ZodType<\n 1966 |   undefined,\n 1967 |   ZodUndefinedDef,\n 1968 |   undefined\n 1969 | > {\n 1970 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 1971 |     const parsedType = this._getType(input);\n 1972 |     if (parsedType !== ZodParsedType.undefined) {\n 1973 |       const ctx = this._getOrReturnCtx(input);\n 1974 |       addIssueToContext(ctx, {\n 1975 |         code: ZodIssueCode.invalid_type,\n 1976 |         expected: ZodParsedType.undefined,\n 1977 |         received: ctx.parsedType,",
+    "target": "ZodType._getType (src/types.ts:184-186)",
+    "target_definition": "  184 |   _getType(input: ParseInput): string {\n  185 |     return getParsedType(input.data);\n  186 |   }"
+  },
+  {
+    "edge_id": "7c22bf0d0f7f",
+    "repo": "zod",
+    "call_site": "src/types.ts:1026",
+    "call_context": " 1020 |         precision: null,\n 1021 |         offset: false,\n 1022 |         local: false,\n 1023 |         message: options,\n 1024 |       });\n 1025 |     }\n 1026 |     return this._addCheck({\n 1027 |       kind: \"datetime\",\n 1028 | \n 1029 |       precision:\n 1030 |         typeof options?.precision === \"undefined\" ? null : options?.precision,\n 1031 |       offset: options?.offset ?? false,\n 1032 |       local: options?.local ?? false,",
+    "target": "ZodString._addCheck (src/types.ts:964-969)",
+    "target_definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+  },
+  {
+    "edge_id": "c355998d1356",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1130",
+    "call_context": " 1124 | \n 1125 |   /**\n 1126 |    * @deprecated Use z.string().min(1) instead.\n 1127 |    * @see {@link ZodString.min}\n 1128 |    */\n 1129 |   nonempty(message?: errorUtil.ErrMessage) {\n 1130 |     return this.min(1, errorUtil.errToObj(message));\n 1131 |   }\n 1132 | \n 1133 |   trim() {\n 1134 |     return new ZodString({\n 1135 |       ...this._def,\n 1136 |       checks: [...this._def.checks, { kind: \"trim\" }],",
+    "target": "ZodString.min (deno/lib/types.ts:1101-1107)",
+    "target_definition": " 1101 |   min(minLength: number, message?: errorUtil.ErrMessage) {\n 1102 |     return this._addCheck({\n 1103 |       kind: \"min\",\n 1104 |       value: minLength,\n 1105 |       ...errorUtil.errToObj(message),\n 1106 |     });\n 1107 |   }"
+  },
+  {
+    "edge_id": "83d102f123dc",
+    "repo": "zod",
+    "call_site": "src/types.ts:4947",
+    "call_context": " 4941 | \n 4942 | export class ZodPipeline<\n 4943 |   A extends ZodTypeAny,\n 4944 |   B extends ZodTypeAny\n 4945 | > extends ZodType<B[\"_output\"], ZodPipelineDef<A, B>, A[\"_input\"]> {\n 4946 |   _parse(input: ParseInput): ParseReturnType<any> {\n 4947 |     const { status, ctx } = this._processInputParams(input);\n 4948 |     if (ctx.common.async) {\n 4949 |       const handleAsync = async () => {\n 4950 |         const inResult = await this._def.in._parseAsync({\n 4951 |           data: ctx.data,\n 4952 |           path: ctx.path,\n 4953 |           parent: ctx,",
+    "target": "ZodType._processInputParams (src/types.ts:206-223)",
+    "target_definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | \n  216 |         parsedType: getParsedType(input.data),\n  217 | \n  218 |         schemaErrorMap: this._def.errorMap,\n  219 |         path: input.path,\n  220 |         parent: input.parent,\n  221 |       },\n  222 |     };\n  223 |   }"
+  },
+  {
+    "edge_id": "0a6497fa9c62",
+    "repo": "zod",
+    "call_site": "src/types.ts:258",
+    "call_context": "  252 |         contextualErrorMap: params?.errorMap,\n  253 |       },\n  254 |       path: params?.path || [],\n  255 |       schemaErrorMap: this._def.errorMap,\n  256 |       parent: null,\n  257 |       data,\n  258 |       parsedType: getParsedType(data),\n  259 |     };\n  260 |     const result = this._parseSync({ data, path: ctx.path, parent: ctx });\n  261 | \n  262 |     return handleResult(ctx, result);\n  263 |   }\n  264 | ",
+    "target": "getParsedType (src/helpers/util.ts:166-220)",
+    "target_definition": "  166 | export const getParsedType = (data: any): ZodParsedType => {\n  167 |   const t = typeof data;\n  168 | \n  169 |   switch (t) {\n  170 |     case \"undefined\":\n  171 |       return ZodParsedType.undefined;\n  172 | \n  173 |     case \"string\":\n  174 |       return ZodParsedType.string;\n  175 | \n  176 |     case \"number\":\n  177 |       return isNaN(data) ? ZodParsedType.nan : ZodParsedType.number;\n  178 | \n  179 |     case \"boolean\":\n  180 |       return ZodParsedType.boolean;\n  181 | \n  182 |     case \"function\":\n  183 |       return ZodParsedType.function;\n  184 | \n  185 |     case \"bigint\":\n  186 |       return ZodParsedType.bigint;\n  187 | \n  188 |     case \"symbol\":\n  189 |       return ZodParsedType.symbol;\n  190 | "
+  },
+  {
+    "edge_id": "195c5b42c688",
+    "repo": "zod",
+    "call_site": "src/types.ts:1667",
+    "call_context": " 1661 |         },\n 1662 |       ],\n 1663 |     });\n 1664 |   }\n 1665 | \n 1666 |   _addCheck(check: ZodBigIntCheck) {\n 1667 |     return new ZodBigInt({\n 1668 |       ...this._def,\n 1669 |       checks: [...this._def.checks, check],\n 1670 |     });\n 1671 |   }\n 1672 | \n 1673 |   positive(message?: errorUtil.ErrMessage) {",
+    "target": "ZodBigInt (src/types.ts:1549-1736)",
+    "target_definition": " 1549 | export class ZodBigInt extends ZodType<bigint, ZodBigIntDef, bigint> {\n 1550 |   _parse(input: ParseInput): ParseReturnType<bigint> {\n 1551 |     if (this._def.coerce) {\n 1552 |       input.data = BigInt(input.data);\n 1553 |     }\n 1554 |     const parsedType = this._getType(input);\n 1555 |     if (parsedType !== ZodParsedType.bigint) {\n 1556 |       const ctx = this._getOrReturnCtx(input);\n 1557 |       addIssueToContext(ctx, {\n 1558 |         code: ZodIssueCode.invalid_type,\n 1559 |         expected: ZodParsedType.bigint,\n 1560 |         received: ctx.parsedType,\n 1561 |       });\n 1562 |       return INVALID;\n 1563 |     }\n 1564 | \n 1565 |     let ctx: undefined | ParseContext = undefined;\n 1566 |     const status = new ParseStatus();\n 1567 | \n 1568 |     for (const check of this._def.checks) {\n 1569 |       if (check.kind === \"min\") {\n 1570 |         const tooSmall = check.inclusive\n 1571 |           ? input.data < check.value\n 1572 |           : input.data <= check.value;\n 1573 |         if (tooSmall) {"
+  },
+  {
+    "edge_id": "81bfb0a8d16b",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2873",
+    "call_context": " 2867 |     T,\n 2868 |     \"strip\",\n 2869 |     ZodTypeAny,\n 2870 |     objectOutputType<T, ZodTypeAny, \"strip\">,\n 2871 |     objectInputType<T, ZodTypeAny, \"strip\">\n 2872 |   > => {\n 2873 |     return new ZodObject({\n 2874 |       shape: () => shape,\n 2875 |       unknownKeys: \"strip\",\n 2876 |       catchall: ZodNever.create(),\n 2877 |       typeName: ZodFirstPartyTypeKind.ZodObject,\n 2878 |       ...processCreateParams(params),\n 2879 |     }) as any;",
+    "target": "ZodObject (deno/lib/types.ts:2412-2907)",
+    "target_definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {\n 2422 |     if (this._cached !== null) return this._cached;\n 2423 |     const shape = this._def.shape();\n 2424 |     const keys = util.objectKeys(shape);\n 2425 |     return (this._cached = { shape, keys });\n 2426 |   }\n 2427 | \n 2428 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2429 |     const parsedType = this._getType(input);\n 2430 |     if (parsedType !== ZodParsedType.object) {\n 2431 |       const ctx = this._getOrReturnCtx(input);\n 2432 |       addIssueToContext(ctx, {\n 2433 |         code: ZodIssueCode.invalid_type,\n 2434 |         expected: ZodParsedType.object,\n 2435 |         received: ctx.parsedType,\n 2436 |       });"
+  },
+  {
+    "edge_id": "80e5ab7b9410",
+    "repo": "zod",
+    "call_site": "src/types.ts:492",
+    "call_context": "  486 |     def: (ctx: { error: ZodError; input: Input }) => Output\n  487 |   ): ZodCatch<this>;\n  488 |   catch(def: any) {\n  489 |     const catchValueFunc = typeof def === \"function\" ? def : () => def;\n  490 | \n  491 |     return new ZodCatch({\n  492 |       ...processCreateParams(this._def),\n  493 |       innerType: this,\n  494 |       catchValue: catchValueFunc,\n  495 |       typeName: ZodFirstPartyTypeKind.ZodCatch,\n  496 |     }) as any;\n  497 |   }\n  498 | ",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "121a05754c12",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4410",
+    "call_context": " 4404 |     schema: T,\n 4405 |     params?: RawCreateParams\n 4406 |   ): ZodPromise<T> => {\n 4407 |     return new ZodPromise({\n 4408 |       type: schema,\n 4409 |       typeName: ZodFirstPartyTypeKind.ZodPromise,\n 4410 |       ...processCreateParams(params),\n 4411 |     });\n 4412 |   };\n 4413 | }\n 4414 | \n 4415 | //////////////////////////////////////////////\n 4416 | //////////////////////////////////////////////",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "0ebf04788d9c",
+    "repo": "zod",
+    "call_site": "src/types.ts:4658",
+    "call_context": " 4652 |   }\n 4653 | \n 4654 |   static create = <T extends ZodTypeAny>(\n 4655 |     type: T,\n 4656 |     params?: RawCreateParams\n 4657 |   ): ZodOptional<T> => {\n 4658 |     return new ZodOptional({\n 4659 |       innerType: type,\n 4660 |       typeName: ZodFirstPartyTypeKind.ZodOptional,\n 4661 |       ...processCreateParams(params),\n 4662 |     }) as any;\n 4663 |   };\n 4664 | }",
+    "target": "ZodOptional (src/types.ts:4637-4664)",
+    "target_definition": " 4637 | export class ZodOptional<T extends ZodTypeAny> extends ZodType<\n 4638 |   T[\"_output\"] | undefined,\n 4639 |   ZodOptionalDef<T>,\n 4640 |   T[\"_input\"] | undefined\n 4641 | > {\n 4642 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4643 |     const parsedType = this._getType(input);\n 4644 |     if (parsedType === ZodParsedType.undefined) {\n 4645 |       return OK(undefined);\n 4646 |     }\n 4647 |     return this._def.innerType._parse(input);\n 4648 |   }\n 4649 | \n 4650 |   unwrap() {\n 4651 |     return this._def.innerType;\n 4652 |   }\n 4653 | \n 4654 |   static create = <T extends ZodTypeAny>(\n 4655 |     type: T,\n 4656 |     params?: RawCreateParams\n 4657 |   ): ZodOptional<T> => {\n 4658 |     return new ZodOptional({\n 4659 |       innerType: type,\n 4660 |       typeName: ZodFirstPartyTypeKind.ZodOptional,\n 4661 |       ...processCreateParams(params),"
+  },
+  {
+    "edge_id": "f306e5beb409",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1652",
+    "call_context": " 1646 |   protected setLimit(\n 1647 |     kind: \"min\" | \"max\",\n 1648 |     value: bigint,\n 1649 |     inclusive: boolean,\n 1650 |     message?: string\n 1651 |   ) {\n 1652 |     return new ZodBigInt({\n 1653 |       ...this._def,\n 1654 |       checks: [\n 1655 |         ...this._def.checks,\n 1656 |         {\n 1657 |           kind,\n 1658 |           value,",
+    "target": "ZodBigInt (deno/lib/types.ts:1549-1736)",
+    "target_definition": " 1549 | export class ZodBigInt extends ZodType<bigint, ZodBigIntDef, bigint> {\n 1550 |   _parse(input: ParseInput): ParseReturnType<bigint> {\n 1551 |     if (this._def.coerce) {\n 1552 |       input.data = BigInt(input.data);\n 1553 |     }\n 1554 |     const parsedType = this._getType(input);\n 1555 |     if (parsedType !== ZodParsedType.bigint) {\n 1556 |       const ctx = this._getOrReturnCtx(input);\n 1557 |       addIssueToContext(ctx, {\n 1558 |         code: ZodIssueCode.invalid_type,\n 1559 |         expected: ZodParsedType.bigint,\n 1560 |         received: ctx.parsedType,\n 1561 |       });\n 1562 |       return INVALID;\n 1563 |     }\n 1564 | \n 1565 |     let ctx: undefined | ParseContext = undefined;\n 1566 |     const status = new ParseStatus();\n 1567 | \n 1568 |     for (const check of this._def.checks) {\n 1569 |       if (check.kind === \"min\") {\n 1570 |         const tooSmall = check.inclusive\n 1571 |           ? input.data < check.value\n 1572 |           : input.data <= check.value;\n 1573 |         if (tooSmall) {"
+  },
+  {
+    "edge_id": "5826cd36b987",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:3047",
+    "call_context": " 3041 |     types: T,\n 3042 |     params?: RawCreateParams\n 3043 |   ): ZodUnion<T> => {\n 3044 |     return new ZodUnion({\n 3045 |       options: types,\n 3046 |       typeName: ZodFirstPartyTypeKind.ZodUnion,\n 3047 |       ...processCreateParams(params),\n 3048 |     });\n 3049 |   };\n 3050 | }\n 3051 | \n 3052 | /////////////////////////////////////////////////////\n 3053 | /////////////////////////////////////////////////////",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "62757ae709b9",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4702",
+    "call_context": " 4696 |   }\n 4697 | \n 4698 |   static create = <T extends ZodTypeAny>(\n 4699 |     type: T,\n 4700 |     params?: RawCreateParams\n 4701 |   ): ZodNullable<T> => {\n 4702 |     return new ZodNullable({\n 4703 |       innerType: type,\n 4704 |       typeName: ZodFirstPartyTypeKind.ZodNullable,\n 4705 |       ...processCreateParams(params),\n 4706 |     }) as any;\n 4707 |   };\n 4708 | }",
+    "target": "ZodNullable (deno/lib/types.ts:4681-4708)",
+    "target_definition": " 4681 | export class ZodNullable<T extends ZodTypeAny> extends ZodType<\n 4682 |   T[\"_output\"] | null,\n 4683 |   ZodNullableDef<T>,\n 4684 |   T[\"_input\"] | null\n 4685 | > {\n 4686 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4687 |     const parsedType = this._getType(input);\n 4688 |     if (parsedType === ZodParsedType.null) {\n 4689 |       return OK(null);\n 4690 |     }\n 4691 |     return this._def.innerType._parse(input);\n 4692 |   }\n 4693 | \n 4694 |   unwrap() {\n 4695 |     return this._def.innerType;\n 4696 |   }\n 4697 | \n 4698 |   static create = <T extends ZodTypeAny>(\n 4699 |     type: T,\n 4700 |     params?: RawCreateParams\n 4701 |   ): ZodNullable<T> => {\n 4702 |     return new ZodNullable({\n 4703 |       innerType: type,\n 4704 |       typeName: ZodFirstPartyTypeKind.ZodNullable,\n 4705 |       ...processCreateParams(params),"
+  },
+  {
+    "edge_id": "41a48ef80361",
+    "repo": "zod",
+    "call_site": "src/types.ts:652",
+    "call_context": "  646 | // Adapted from https://stackoverflow.com/a/3143231\n  647 | export function datetimeRegex(args: {\n  648 |   precision?: number | null;\n  649 |   offset?: boolean;\n  650 |   local?: boolean;\n  651 | }) {\n  652 |   let regex = `${dateRegexSource}T${timeRegexSource(args)}`;\n  653 | \n  654 |   const opts: string[] = [];\n  655 |   opts.push(args.local ? `Z?` : `Z`);\n  656 |   if (args.offset) opts.push(`([+-]\\\\d{2}:?\\\\d{2})`);\n  657 |   regex = `${regex}(${opts.join(\"|\")})`;\n  658 |   return new RegExp(`^${regex}$`);",
+    "target": "timeRegexSource (src/types.ts:627-637)",
+    "target_definition": "  627 | function timeRegexSource(args: { precision?: number | null }) {\n  628 |   // let regex = `\\\\d{2}:\\\\d{2}:\\\\d{2}`;\n  629 |   let regex = `([01]\\\\d|2[0-3]):[0-5]\\\\d:[0-5]\\\\d`;\n  630 | \n  631 |   if (args.precision) {\n  632 |     regex = `${regex}\\\\.\\\\d{${args.precision}}`;\n  633 |   } else if (args.precision == null) {\n  634 |     regex = `${regex}(\\\\.\\\\d+)?`;\n  635 |   }\n  636 |   return regex;\n  637 | }"
+  },
+  {
+    "edge_id": "e3942f0c5bee",
+    "repo": "zod",
+    "call_site": "src/types.ts:2273",
+    "call_context": " 2267 |       ...this._def,\n 2268 |       maxLength: { value: maxLength, message: errorUtil.toString(message) },\n 2269 |     }) as any;\n 2270 |   }\n 2271 | \n 2272 |   length(len: number, message?: errorUtil.ErrMessage): this {\n 2273 |     return new ZodArray({\n 2274 |       ...this._def,\n 2275 |       exactLength: { value: len, message: errorUtil.toString(message) },\n 2276 |     }) as any;\n 2277 |   }\n 2278 | \n 2279 |   nonempty(message?: errorUtil.ErrMessage): ZodArray<T, \"atleastone\"> {",
+    "target": "ZodArray (src/types.ts:2164-2296)",
+    "target_definition": " 2164 | export class ZodArray<\n 2165 |   T extends ZodTypeAny,\n 2166 |   Cardinality extends ArrayCardinality = \"many\"\n 2167 | > extends ZodType<\n 2168 |   arrayOutputType<T, Cardinality>,\n 2169 |   ZodArrayDef<T>,\n 2170 |   Cardinality extends \"atleastone\"\n 2171 |     ? [T[\"_input\"], ...T[\"_input\"][]]\n 2172 |     : T[\"_input\"][]\n 2173 | > {\n 2174 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2175 |     const { ctx, status } = this._processInputParams(input);\n 2176 | \n 2177 |     const def = this._def;\n 2178 | \n 2179 |     if (ctx.parsedType !== ZodParsedType.array) {\n 2180 |       addIssueToContext(ctx, {\n 2181 |         code: ZodIssueCode.invalid_type,\n 2182 |         expected: ZodParsedType.array,\n 2183 |         received: ctx.parsedType,\n 2184 |       });\n 2185 |       return INVALID;\n 2186 |     }\n 2187 | \n 2188 |     if (def.exactLength !== null) {"
+  },
+  {
+    "edge_id": "94ababae91d8",
+    "repo": "zod",
+    "call_site": "deno/lib/__tests__/Mocker.ts:9",
+    "call_context": "    3 | }\n    4 | \n    5 | const testSymbol = Symbol(\"test\");\n    6 | \n    7 | export class Mocker {\n    8 |   pick = (...args: any[]) => {\n    9 |     return args[getRandomInt(args.length)];\n   10 |   };\n   11 | \n   12 |   get string() {\n   13 |     return Math.random().toString(36).substring(7);\n   14 |   }\n   15 |   get number() {",
+    "target": "getRandomInt (deno/lib/__tests__/Mocker.ts:1-3)",
+    "target_definition": "    1 | function getRandomInt(max: number) {\n    2 |   return Math.floor(Math.random() * Math.floor(max));\n    3 | }"
+  },
+  {
+    "edge_id": "950e8eca9822",
+    "repo": "zod",
+    "call_site": "src/types.ts:3500",
+    "call_context": " 3494 |     schemas: T,\n 3495 |     params?: RawCreateParams\n 3496 |   ): ZodTuple<T, null> => {\n 3497 |     if (!Array.isArray(schemas)) {\n 3498 |       throw new Error(\"You must pass an array of schemas to z.tuple([ ... ])\");\n 3499 |     }\n 3500 |     return new ZodTuple({\n 3501 |       items: schemas,\n 3502 |       typeName: ZodFirstPartyTypeKind.ZodTuple,\n 3503 |       rest: null,\n 3504 |       ...processCreateParams(params),\n 3505 |     });\n 3506 |   };",
+    "target": "ZodTuple (src/types.ts:3419-3507)",
+    "target_definition": " 3419 | export class ZodTuple<\n 3420 |   T extends [ZodTypeAny, ...ZodTypeAny[]] | [] = [ZodTypeAny, ...ZodTypeAny[]],\n 3421 |   Rest extends ZodTypeAny | null = null\n 3422 | > extends ZodType<\n 3423 |   OutputTypeOfTupleWithRest<T, Rest>,\n 3424 |   ZodTupleDef<T, Rest>,\n 3425 |   InputTypeOfTupleWithRest<T, Rest>\n 3426 | > {\n 3427 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3428 |     const { status, ctx } = this._processInputParams(input);\n 3429 |     if (ctx.parsedType !== ZodParsedType.array) {\n 3430 |       addIssueToContext(ctx, {\n 3431 |         code: ZodIssueCode.invalid_type,\n 3432 |         expected: ZodParsedType.array,\n 3433 |         received: ctx.parsedType,\n 3434 |       });\n 3435 |       return INVALID;\n 3436 |     }\n 3437 | \n 3438 |     if (ctx.data.length < this._def.items.length) {\n 3439 |       addIssueToContext(ctx, {\n 3440 |         code: ZodIssueCode.too_small,\n 3441 |         minimum: this._def.items.length,\n 3442 |         inclusive: true,\n 3443 |         exact: false,"
+  },
+  {
+    "edge_id": "9a45221bdad8",
+    "repo": "zod",
+    "call_site": "src/types.ts:2395",
+    "call_context": " 2389 |     }\n 2390 |     return new ZodObject({\n 2391 |       ...schema._def,\n 2392 |       shape: () => newShape,\n 2393 |     }) as any;\n 2394 |   } else if (schema instanceof ZodArray) {\n 2395 |     return new ZodArray({\n 2396 |       ...schema._def,\n 2397 |       type: deepPartialify(schema.element),\n 2398 |     });\n 2399 |   } else if (schema instanceof ZodOptional) {\n 2400 |     return ZodOptional.create(deepPartialify(schema.unwrap()));\n 2401 |   } else if (schema instanceof ZodNullable) {",
+    "target": "ZodArray (src/types.ts:2164-2296)",
+    "target_definition": " 2164 | export class ZodArray<\n 2165 |   T extends ZodTypeAny,\n 2166 |   Cardinality extends ArrayCardinality = \"many\"\n 2167 | > extends ZodType<\n 2168 |   arrayOutputType<T, Cardinality>,\n 2169 |   ZodArrayDef<T>,\n 2170 |   Cardinality extends \"atleastone\"\n 2171 |     ? [T[\"_input\"], ...T[\"_input\"][]]\n 2172 |     : T[\"_input\"][]\n 2173 | > {\n 2174 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2175 |     const { ctx, status } = this._processInputParams(input);\n 2176 | \n 2177 |     const def = this._def;\n 2178 | \n 2179 |     if (ctx.parsedType !== ZodParsedType.array) {\n 2180 |       addIssueToContext(ctx, {\n 2181 |         code: ZodIssueCode.invalid_type,\n 2182 |         expected: ZodParsedType.array,\n 2183 |         received: ctx.parsedType,\n 2184 |       });\n 2185 |       return INVALID;\n 2186 |     }\n 2187 | \n 2188 |     if (def.exactLength !== null) {"
+  },
+  {
+    "edge_id": "82d76ccd69d9",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4995",
+    "call_context": " 4989 |   }\n 4990 | \n 4991 |   static create<A extends ZodTypeAny, B extends ZodTypeAny>(\n 4992 |     a: A,\n 4993 |     b: B\n 4994 |   ): ZodPipeline<A, B> {\n 4995 |     return new ZodPipeline({\n 4996 |       in: a,\n 4997 |       out: b,\n 4998 |       typeName: ZodFirstPartyTypeKind.ZodPipeline,\n 4999 |     });\n 5000 |   }\n 5001 | }",
+    "target": "ZodPipeline (deno/lib/types.ts:4942-5001)",
+    "target_definition": " 4942 | export class ZodPipeline<\n 4943 |   A extends ZodTypeAny,\n 4944 |   B extends ZodTypeAny\n 4945 | > extends ZodType<B[\"_output\"], ZodPipelineDef<A, B>, A[\"_input\"]> {\n 4946 |   _parse(input: ParseInput): ParseReturnType<any> {\n 4947 |     const { status, ctx } = this._processInputParams(input);\n 4948 |     if (ctx.common.async) {\n 4949 |       const handleAsync = async () => {\n 4950 |         const inResult = await this._def.in._parseAsync({\n 4951 |           data: ctx.data,\n 4952 |           path: ctx.path,\n 4953 |           parent: ctx,\n 4954 |         });\n 4955 |         if (inResult.status === \"aborted\") return INVALID;\n 4956 |         if (inResult.status === \"dirty\") {\n 4957 |           status.dirty();\n 4958 |           return DIRTY(inResult.value);\n 4959 |         } else {\n 4960 |           return this._def.out._parseAsync({\n 4961 |             data: inResult.value,\n 4962 |             path: ctx.path,\n 4963 |             parent: ctx,\n 4964 |           });\n 4965 |         }\n 4966 |       };"
+  },
+  {
+    "edge_id": "846e26e95841",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2247",
+    "call_context": " 2241 |         return ParseStatus.mergeArray(status, result);\n 2242 |       });\n 2243 |     }\n 2244 | \n 2245 |     const result = ([...ctx.data] as any[]).map((item, i) => {\n 2246 |       return def.type._parseSync(\n 2247 |         new ParseInputLazyPath(ctx, item, ctx.path, i)\n 2248 |       );\n 2249 |     });\n 2250 | \n 2251 |     return ParseStatus.mergeArray(status, result);\n 2252 |   }\n 2253 | ",
+    "target": "ParseInputLazyPath (deno/lib/types.ts:61-89)",
+    "target_definition": "   61 | class ParseInputLazyPath implements ParseInput {\n   62 |   parent: ParseContext;\n   63 |   data: any;\n   64 |   _path: ParsePath;\n   65 |   _key: string | number | (string | number)[];\n   66 |   _cachedPath: ParsePath = [];\n   67 |   constructor(\n   68 |     parent: ParseContext,\n   69 |     value: any,\n   70 |     path: ParsePath,\n   71 |     key: string | number | (string | number)[]\n   72 |   ) {\n   73 |     this.parent = parent;\n   74 |     this.data = value;\n   75 |     this._path = path;\n   76 |     this._key = key;\n   77 |   }\n   78 |   get path() {\n   79 |     if (!this._cachedPath.length) {\n   80 |       if (this._key instanceof Array) {\n   81 |         this._cachedPath.push(...this._path, ...this._key);\n   82 |       } else {\n   83 |         this._cachedPath.push(...this._path, this._key);\n   84 |       }\n   85 |     }"
+  },
+  {
+    "edge_id": "35d80297c7e7",
+    "repo": "zod",
+    "call_site": "src/types.ts:3224",
+    "call_context": " 3218 |       Types\n 3219 |     >({\n 3220 |       typeName: ZodFirstPartyTypeKind.ZodDiscriminatedUnion,\n 3221 |       discriminator,\n 3222 |       options,\n 3223 |       optionsMap,\n 3224 |       ...processCreateParams(params),\n 3225 |     });\n 3226 |   }\n 3227 | }\n 3228 | \n 3229 | ///////////////////////////////////////////////\n 3230 | ///////////////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "0c8aa35d1d30",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2773",
+    "call_context": " 2767 |     util.objectKeys(this.shape).forEach((key) => {\n 2768 |       if (!mask[key]) {\n 2769 |         shape[key] = this.shape[key];\n 2770 |       }\n 2771 |     });\n 2772 | \n 2773 |     return new ZodObject({\n 2774 |       ...this._def,\n 2775 |       shape: () => shape,\n 2776 |     }) as any;\n 2777 |   }\n 2778 | \n 2779 |   /**",
+    "target": "ZodObject (deno/lib/types.ts:2412-2907)",
+    "target_definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {\n 2422 |     if (this._cached !== null) return this._cached;\n 2423 |     const shape = this._def.shape();\n 2424 |     const keys = util.objectKeys(shape);\n 2425 |     return (this._cached = { shape, keys });\n 2426 |   }\n 2427 | \n 2428 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2429 |     const parsedType = this._getType(input);\n 2430 |     if (parsedType !== ZodParsedType.object) {\n 2431 |       const ctx = this._getOrReturnCtx(input);\n 2432 |       addIssueToContext(ctx, {\n 2433 |         code: ZodIssueCode.invalid_type,\n 2434 |         expected: ZodParsedType.object,\n 2435 |         received: ctx.parsedType,\n 2436 |       });"
+  },
+  {
+    "edge_id": "e7c9c9a5fcd5",
+    "repo": "zod",
+    "call_site": "src/types.ts:3487",
+    "call_context": " 3481 | \n 3482 |   get items() {\n 3483 |     return this._def.items;\n 3484 |   }\n 3485 | \n 3486 |   rest<Rest extends ZodTypeAny>(rest: Rest): ZodTuple<T, Rest> {\n 3487 |     return new ZodTuple({\n 3488 |       ...this._def,\n 3489 |       rest,\n 3490 |     });\n 3491 |   }\n 3492 | \n 3493 |   static create = <T extends [ZodTypeAny, ...ZodTypeAny[]] | []>(",
+    "target": "ZodTuple (src/types.ts:3419-3507)",
+    "target_definition": " 3419 | export class ZodTuple<\n 3420 |   T extends [ZodTypeAny, ...ZodTypeAny[]] | [] = [ZodTypeAny, ...ZodTypeAny[]],\n 3421 |   Rest extends ZodTypeAny | null = null\n 3422 | > extends ZodType<\n 3423 |   OutputTypeOfTupleWithRest<T, Rest>,\n 3424 |   ZodTupleDef<T, Rest>,\n 3425 |   InputTypeOfTupleWithRest<T, Rest>\n 3426 | > {\n 3427 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3428 |     const { status, ctx } = this._processInputParams(input);\n 3429 |     if (ctx.parsedType !== ZodParsedType.array) {\n 3430 |       addIssueToContext(ctx, {\n 3431 |         code: ZodIssueCode.invalid_type,\n 3432 |         expected: ZodParsedType.array,\n 3433 |         received: ctx.parsedType,\n 3434 |       });\n 3435 |       return INVALID;\n 3436 |     }\n 3437 | \n 3438 |     if (ctx.data.length < this._def.items.length) {\n 3439 |       addIssueToContext(ctx, {\n 3440 |         code: ZodIssueCode.too_small,\n 3441 |         minimum: this._def.items.length,\n 3442 |         inclusive: true,\n 3443 |         exact: false,"
+  },
+  {
+    "edge_id": "4bcfe80e353b",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:879",
+    "call_context": "  873 |             validation: { endsWith: check.value },\n  874 |             message: check.message,\n  875 |           });\n  876 |           status.dirty();\n  877 |         }\n  878 |       } else if (check.kind === \"datetime\") {\n  879 |         const regex = datetimeRegex(check);\n  880 | \n  881 |         if (!regex.test(input.data)) {\n  882 |           ctx = this._getOrReturnCtx(input, ctx);\n  883 |           addIssueToContext(ctx, {\n  884 |             code: ZodIssueCode.invalid_string,\n  885 |             validation: \"datetime\",",
+    "target": "datetimeRegex (deno/lib/types.ts:647-659)",
+    "target_definition": "  647 | export function datetimeRegex(args: {\n  648 |   precision?: number | null;\n  649 |   offset?: boolean;\n  650 |   local?: boolean;\n  651 | }) {\n  652 |   let regex = `${dateRegexSource}T${timeRegexSource(args)}`;\n  653 | \n  654 |   const opts: string[] = [];\n  655 |   opts.push(args.local ? `Z?` : `Z`);\n  656 |   if (args.offset) opts.push(`([+-]\\\\d{2}:?\\\\d{2})`);\n  657 |   regex = `${regex}(${opts.join(\"|\")})`;\n  658 |   return new RegExp(`^${regex}$`);\n  659 | }"
+  },
+  {
+    "edge_id": "d68a67dd4995",
+    "repo": "zod",
+    "call_site": "src/types.ts:1775",
+    "call_context": " 1769 |   static create = (\n 1770 |     params?: RawCreateParams & { coerce?: boolean }\n 1771 |   ): ZodBoolean => {\n 1772 |     return new ZodBoolean({\n 1773 |       typeName: ZodFirstPartyTypeKind.ZodBoolean,\n 1774 |       coerce: params?.coerce || false,\n 1775 |       ...processCreateParams(params),\n 1776 |     });\n 1777 |   };\n 1778 | }\n 1779 | \n 1780 | ///////////////////////////////////////\n 1781 | ///////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "0f4c3123dd9b",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4082",
+    "call_context": " 4076 |   }\n 4077 | \n 4078 |   static create = <T extends ZodTypeAny>(\n 4079 |     getter: () => T,\n 4080 |     params?: RawCreateParams\n 4081 |   ): ZodLazy<T> => {\n 4082 |     return new ZodLazy({\n 4083 |       getter: getter,\n 4084 |       typeName: ZodFirstPartyTypeKind.ZodLazy,\n 4085 |       ...processCreateParams(params),\n 4086 |     });\n 4087 |   };\n 4088 | }",
+    "target": "ZodLazy (deno/lib/types.ts:4063-4088)",
+    "target_definition": " 4063 | export class ZodLazy<T extends ZodTypeAny> extends ZodType<\n 4064 |   output<T>,\n 4065 |   ZodLazyDef<T>,\n 4066 |   input<T>\n 4067 | > {\n 4068 |   get schema(): T {\n 4069 |     return this._def.getter();\n 4070 |   }\n 4071 | \n 4072 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4073 |     const { ctx } = this._processInputParams(input);\n 4074 |     const lazySchema = this._def.getter();\n 4075 |     return lazySchema._parse({ data: ctx.data, path: ctx.path, parent: ctx });\n 4076 |   }\n 4077 | \n 4078 |   static create = <T extends ZodTypeAny>(\n 4079 |     getter: () => T,\n 4080 |     params?: RawCreateParams\n 4081 |   ): ZodLazy<T> => {\n 4082 |     return new ZodLazy({\n 4083 |       getter: getter,\n 4084 |       typeName: ZodFirstPartyTypeKind.ZodLazy,\n 4085 |       ...processCreateParams(params),\n 4086 |     });\n 4087 |   };"
+  },
+  {
+    "edge_id": "714a7e96aa85",
+    "repo": "zod",
+    "call_site": "src/types.ts:2046",
+    "call_context": " 2040 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2041 |     return OK(input.data);\n 2042 |   }\n 2043 |   static create = (params?: RawCreateParams): ZodAny => {\n 2044 |     return new ZodAny({\n 2045 |       typeName: ZodFirstPartyTypeKind.ZodAny,\n 2046 |       ...processCreateParams(params),\n 2047 |     });\n 2048 |   };\n 2049 | }\n 2050 | \n 2051 | //////////////////////////////////////////\n 2052 | //////////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "3e81e9f1c4d3",
+    "repo": "zod",
+    "call_site": "src/types.ts:2603",
+    "call_context": " 2597 |   //       }),\n 2598 |   //     }) as any;\n 2599 |   //   };\n 2600 |   extend<Augmentation extends ZodRawShape>(\n 2601 |     augmentation: Augmentation\n 2602 |   ): ZodObject<objectUtil.extendShape<T, Augmentation>, UnknownKeys, Catchall> {\n 2603 |     return new ZodObject({\n 2604 |       ...this._def,\n 2605 |       shape: () => ({\n 2606 |         ...this._def.shape(),\n 2607 |         ...augmentation,\n 2608 |       }),\n 2609 |     }) as any;",
+    "target": "ZodObject (src/types.ts:2412-2907)",
+    "target_definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {\n 2422 |     if (this._cached !== null) return this._cached;\n 2423 |     const shape = this._def.shape();\n 2424 |     const keys = util.objectKeys(shape);\n 2425 |     return (this._cached = { shape, keys });\n 2426 |   }\n 2427 | \n 2428 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2429 |     const parsedType = this._getType(input);\n 2430 |     if (parsedType !== ZodParsedType.object) {\n 2431 |       const ctx = this._getOrReturnCtx(input);\n 2432 |       addIssueToContext(ctx, {\n 2433 |         code: ZodIssueCode.invalid_type,\n 2434 |         expected: ZodParsedType.object,\n 2435 |         received: ctx.parsedType,\n 2436 |       });"
+  },
+  {
+    "edge_id": "39247afba6eb",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2390",
+    "call_context": " 2384 |     const newShape: any = {};\n 2385 | \n 2386 |     for (const key in schema.shape) {\n 2387 |       const fieldSchema = schema.shape[key];\n 2388 |       newShape[key] = ZodOptional.create(deepPartialify(fieldSchema));\n 2389 |     }\n 2390 |     return new ZodObject({\n 2391 |       ...schema._def,\n 2392 |       shape: () => newShape,\n 2393 |     }) as any;\n 2394 |   } else if (schema instanceof ZodArray) {\n 2395 |     return new ZodArray({\n 2396 |       ...schema._def,",
+    "target": "ZodObject (deno/lib/types.ts:2412-2907)",
+    "target_definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {\n 2422 |     if (this._cached !== null) return this._cached;\n 2423 |     const shape = this._def.shape();\n 2424 |     const keys = util.objectKeys(shape);\n 2425 |     return (this._cached = { shape, keys });\n 2426 |   }\n 2427 | \n 2428 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2429 |     const parsedType = this._getType(input);\n 2430 |     if (parsedType !== ZodParsedType.object) {\n 2431 |       const ctx = this._getOrReturnCtx(input);\n 2432 |       addIssueToContext(ctx, {\n 2433 |         code: ZodIssueCode.invalid_type,\n 2434 |         expected: ZodParsedType.object,\n 2435 |         received: ctx.parsedType,\n 2436 |       });"
+  },
+  {
+    "edge_id": "3ae7905bae1a",
+    "repo": "zod",
+    "call_site": "src/types.ts:2783",
+    "call_context": " 2777 |   }\n 2778 | \n 2779 |   /**\n 2780 |    * @deprecated\n 2781 |    */\n 2782 |   deepPartial(): partialUtil.DeepPartial<this> {\n 2783 |     return deepPartialify(this) as any;\n 2784 |   }\n 2785 | \n 2786 |   partial(): ZodObject<\n 2787 |     { [k in keyof T]: ZodOptional<T[k]> },\n 2788 |     UnknownKeys,\n 2789 |     Catchall",
+    "target": "deepPartialify (src/types.ts:2382-2410)",
+    "target_definition": " 2382 | function deepPartialify(schema: ZodTypeAny): any {\n 2383 |   if (schema instanceof ZodObject) {\n 2384 |     const newShape: any = {};\n 2385 | \n 2386 |     for (const key in schema.shape) {\n 2387 |       const fieldSchema = schema.shape[key];\n 2388 |       newShape[key] = ZodOptional.create(deepPartialify(fieldSchema));\n 2389 |     }\n 2390 |     return new ZodObject({\n 2391 |       ...schema._def,\n 2392 |       shape: () => newShape,\n 2393 |     }) as any;\n 2394 |   } else if (schema instanceof ZodArray) {\n 2395 |     return new ZodArray({\n 2396 |       ...schema._def,\n 2397 |       type: deepPartialify(schema.element),\n 2398 |     });\n 2399 |   } else if (schema instanceof ZodOptional) {\n 2400 |     return ZodOptional.create(deepPartialify(schema.unwrap()));\n 2401 |   } else if (schema instanceof ZodNullable) {\n 2402 |     return ZodNullable.create(deepPartialify(schema.unwrap()));\n 2403 |   } else if (schema instanceof ZodTuple) {\n 2404 |     return ZodTuple.create(\n 2405 |       schema.items.map((item: any) => deepPartialify(item))\n 2406 |     );"
+  },
+  {
+    "edge_id": "6512b11e8bdd",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:3087",
+    "call_context": " 3081 |     return [null, ...getDiscriminator(type.unwrap())];\n 3082 |   } else if (type instanceof ZodBranded) {\n 3083 |     return getDiscriminator(type.unwrap());\n 3084 |   } else if (type instanceof ZodReadonly) {\n 3085 |     return getDiscriminator(type.unwrap());\n 3086 |   } else if (type instanceof ZodCatch) {\n 3087 |     return getDiscriminator(type._def.innerType);\n 3088 |   } else {\n 3089 |     return [];\n 3090 |   }\n 3091 | };\n 3092 | \n 3093 | export type ZodDiscriminatedUnionOption<Discriminator extends string> =",
+    "target": "getDiscriminator (deno/lib/types.ts:3060-3091)",
+    "target_definition": " 3060 | const getDiscriminator = <T extends ZodTypeAny>(type: T): Primitive[] => {\n 3061 |   if (type instanceof ZodLazy) {\n 3062 |     return getDiscriminator(type.schema);\n 3063 |   } else if (type instanceof ZodEffects) {\n 3064 |     return getDiscriminator(type.innerType());\n 3065 |   } else if (type instanceof ZodLiteral) {\n 3066 |     return [type.value];\n 3067 |   } else if (type instanceof ZodEnum) {\n 3068 |     return type.options;\n 3069 |   } else if (type instanceof ZodNativeEnum) {\n 3070 |     // eslint-disable-next-line ban/ban\n 3071 |     return util.objectValues(type.enum as any);\n 3072 |   } else if (type instanceof ZodDefault) {\n 3073 |     return getDiscriminator(type._def.innerType);\n 3074 |   } else if (type instanceof ZodUndefined) {\n 3075 |     return [undefined];\n 3076 |   } else if (type instanceof ZodNull) {\n 3077 |     return [null];\n 3078 |   } else if (type instanceof ZodOptional) {\n 3079 |     return [undefined, ...getDiscriminator(type.unwrap())];\n 3080 |   } else if (type instanceof ZodNullable) {\n 3081 |     return [null, ...getDiscriminator(type.unwrap())];\n 3082 |   } else if (type instanceof ZodBranded) {\n 3083 |     return getDiscriminator(type.unwrap());\n 3084 |   } else if (type instanceof ZodReadonly) {"
+  },
+  {
+    "edge_id": "6ab5b1fe5300",
+    "repo": "zod",
+    "call_site": "src/types.ts:4082",
+    "call_context": " 4076 |   }\n 4077 | \n 4078 |   static create = <T extends ZodTypeAny>(\n 4079 |     getter: () => T,\n 4080 |     params?: RawCreateParams\n 4081 |   ): ZodLazy<T> => {\n 4082 |     return new ZodLazy({\n 4083 |       getter: getter,\n 4084 |       typeName: ZodFirstPartyTypeKind.ZodLazy,\n 4085 |       ...processCreateParams(params),\n 4086 |     });\n 4087 |   };\n 4088 | }",
+    "target": "ZodLazy (src/types.ts:4063-4088)",
+    "target_definition": " 4063 | export class ZodLazy<T extends ZodTypeAny> extends ZodType<\n 4064 |   output<T>,\n 4065 |   ZodLazyDef<T>,\n 4066 |   input<T>\n 4067 | > {\n 4068 |   get schema(): T {\n 4069 |     return this._def.getter();\n 4070 |   }\n 4071 | \n 4072 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4073 |     const { ctx } = this._processInputParams(input);\n 4074 |     const lazySchema = this._def.getter();\n 4075 |     return lazySchema._parse({ data: ctx.data, path: ctx.path, parent: ctx });\n 4076 |   }\n 4077 | \n 4078 |   static create = <T extends ZodTypeAny>(\n 4079 |     getter: () => T,\n 4080 |     params?: RawCreateParams\n 4081 |   ): ZodLazy<T> => {\n 4082 |     return new ZodLazy({\n 4083 |       getter: getter,\n 4084 |       typeName: ZodFirstPartyTypeKind.ZodLazy,\n 4085 |       ...processCreateParams(params),\n 4086 |     });\n 4087 |   };"
+  },
+  {
+    "edge_id": "dd1d519be9eb",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4347",
+    "call_context": " 4341 |     values: T,\n 4342 |     params?: RawCreateParams\n 4343 |   ): ZodNativeEnum<T> => {\n 4344 |     return new ZodNativeEnum({\n 4345 |       values: values,\n 4346 |       typeName: ZodFirstPartyTypeKind.ZodNativeEnum,\n 4347 |       ...processCreateParams(params),\n 4348 |     });\n 4349 |   };\n 4350 | }\n 4351 | \n 4352 | //////////////////////////////////////////\n 4353 | //////////////////////////////////////////",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "4c0d2dbff32f",
+    "repo": "zod",
+    "call_site": "src/types.ts:4615",
+    "call_context": " 4609 |     params?: RawCreateParams\n 4610 |   ): ZodEffects<I, I[\"_output\"], unknown> => {\n 4611 |     return new ZodEffects({\n 4612 |       schema,\n 4613 |       effect: { type: \"preprocess\", transform: preprocess },\n 4614 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n 4615 |       ...processCreateParams(params),\n 4616 |     });\n 4617 |   };\n 4618 | }\n 4619 | \n 4620 | export { ZodEffects as ZodTransformer };\n 4621 | ",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "c6ee28dad8b5",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2661",
+    "call_context": " 2655 |     merging: Incoming\n 2656 |   ): ZodObject<\n 2657 |     objectUtil.extendShape<T, Augmentation>,\n 2658 |     Incoming[\"_def\"][\"unknownKeys\"],\n 2659 |     Incoming[\"_def\"][\"catchall\"]\n 2660 |   > {\n 2661 |     const merged: any = new ZodObject({\n 2662 |       unknownKeys: merging._def.unknownKeys,\n 2663 |       catchall: merging._def.catchall,\n 2664 |       shape: () => ({\n 2665 |         ...this._def.shape(),\n 2666 |         ...merging._def.shape(),\n 2667 |       }),",
+    "target": "ZodObject (deno/lib/types.ts:2412-2907)",
+    "target_definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {\n 2422 |     if (this._cached !== null) return this._cached;\n 2423 |     const shape = this._def.shape();\n 2424 |     const keys = util.objectKeys(shape);\n 2425 |     return (this._cached = { shape, keys });\n 2426 |   }\n 2427 | \n 2428 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2429 |     const parsedType = this._getType(input);\n 2430 |     if (parsedType !== ZodParsedType.object) {\n 2431 |       const ctx = this._getOrReturnCtx(input);\n 2432 |       addIssueToContext(ctx, {\n 2433 |         code: ZodIssueCode.invalid_type,\n 2434 |         expected: ZodParsedType.object,\n 2435 |         received: ctx.parsedType,\n 2436 |       });"
+  },
+  {
+    "edge_id": "960f22f4cae7",
+    "repo": "zod",
+    "call_site": "src/types.ts:5203",
+    "call_context": " 5197 | const instanceOfType = <T extends typeof Class>(\n 5198 |   // const instanceOfType = <T extends new (...args: any[]) => any>(\n 5199 |   cls: T,\n 5200 |   params: CustomParams = {\n 5201 |     message: `Input not instance of ${cls.name}`,\n 5202 |   }\n 5203 | ) => custom<InstanceType<T>>((data) => data instanceof cls, params);\n 5204 | \n 5205 | const stringType = ZodString.create;\n 5206 | const numberType = ZodNumber.create;\n 5207 | const nanType = ZodNaN.create;\n 5208 | const bigIntType = ZodBigInt.create;\n 5209 | const booleanType = ZodBoolean.create;",
+    "target": "custom (src/types.ts:5079-5109)",
+    "target_definition": " 5079 | export function custom<T>(\n 5080 |   check?: (data: any) => any,\n 5081 |   params: string | CustomParams | ((input: any) => CustomParams) = {},\n 5082 |   /**\n 5083 |    * @deprecated\n 5084 |    *\n 5085 |    * Pass `fatal` into the params object instead:\n 5086 |    *\n 5087 |    * ```ts\n 5088 |    * z.string().custom((val) => val.length > 5, { fatal: false })\n 5089 |    * ```\n 5090 |    *\n 5091 |    */\n 5092 |   fatal?: boolean\n 5093 | ): ZodType<T, ZodTypeDef, T> {\n 5094 |   if (check)\n 5095 |     return ZodAny.create().superRefine((data, ctx) => {\n 5096 |       if (!check(data)) {\n 5097 |         const p =\n 5098 |           typeof params === \"function\"\n 5099 |             ? params(data)\n 5100 |             : typeof params === \"string\"\n 5101 |             ? { message: params }\n 5102 |             : params;\n 5103 |         const _fatal = p.fatal ?? fatal ?? true;"
+  },
+  {
+    "edge_id": "540f586a8e59",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:3838",
+    "call_context": " 3832 |   }\n 3833 | \n 3834 |   static create = <Value extends ZodTypeAny = ZodTypeAny>(\n 3835 |     valueType: Value,\n 3836 |     params?: RawCreateParams\n 3837 |   ): ZodSet<Value> => {\n 3838 |     return new ZodSet({\n 3839 |       valueType,\n 3840 |       minSize: null,\n 3841 |       maxSize: null,\n 3842 |       typeName: ZodFirstPartyTypeKind.ZodSet,\n 3843 |       ...processCreateParams(params),\n 3844 |     });",
+    "target": "ZodSet (deno/lib/types.ts:3743-3846)",
+    "target_definition": " 3743 | export class ZodSet<Value extends ZodTypeAny = ZodTypeAny> extends ZodType<\n 3744 |   Set<Value[\"_output\"]>,\n 3745 |   ZodSetDef<Value>,\n 3746 |   Set<Value[\"_input\"]>\n 3747 | > {\n 3748 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3749 |     const { status, ctx } = this._processInputParams(input);\n 3750 |     if (ctx.parsedType !== ZodParsedType.set) {\n 3751 |       addIssueToContext(ctx, {\n 3752 |         code: ZodIssueCode.invalid_type,\n 3753 |         expected: ZodParsedType.set,\n 3754 |         received: ctx.parsedType,\n 3755 |       });\n 3756 |       return INVALID;\n 3757 |     }\n 3758 | \n 3759 |     const def = this._def;\n 3760 | \n 3761 |     if (def.minSize !== null) {\n 3762 |       if (ctx.data.size < def.minSize.value) {\n 3763 |         addIssueToContext(ctx, {\n 3764 |           code: ZodIssueCode.too_small,\n 3765 |           minimum: def.minSize.value,\n 3766 |           type: \"set\",\n 3767 |           inclusive: true,"
+  },
+  {
+    "edge_id": "4f21e9e4d93f",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:1148",
+    "call_context": " 1142 |       ...this._def,\n 1143 |       checks: [...this._def.checks, { kind: \"toLowerCase\" }],\n 1144 |     });\n 1145 |   }\n 1146 | \n 1147 |   toUpperCase() {\n 1148 |     return new ZodString({\n 1149 |       ...this._def,\n 1150 |       checks: [...this._def.checks, { kind: \"toUpperCase\" }],\n 1151 |     });\n 1152 |   }\n 1153 | \n 1154 |   get isDatetime() {",
+    "target": "ZodString (deno/lib/types.ts:672-1232)",
+    "target_definition": "  672 | export class ZodString extends ZodType<string, ZodStringDef, string> {\n  673 |   _parse(input: ParseInput): ParseReturnType<string> {\n  674 |     if (this._def.coerce) {\n  675 |       input.data = String(input.data);\n  676 |     }\n  677 |     const parsedType = this._getType(input);\n  678 | \n  679 |     if (parsedType !== ZodParsedType.string) {\n  680 |       const ctx = this._getOrReturnCtx(input);\n  681 |       addIssueToContext(ctx, {\n  682 |         code: ZodIssueCode.invalid_type,\n  683 |         expected: ZodParsedType.string,\n  684 |         received: ctx.parsedType,\n  685 |       });\n  686 |       return INVALID;\n  687 |     }\n  688 | \n  689 |     const status = new ParseStatus();\n  690 |     let ctx: undefined | ParseContext = undefined;\n  691 | \n  692 |     for (const check of this._def.checks) {\n  693 |       if (check.kind === \"min\") {\n  694 |         if (input.data.length < check.value) {\n  695 |           ctx = this._getOrReturnCtx(input, ctx);\n  696 |           addIssueToContext(ctx, {"
+  },
+  {
+    "edge_id": "d9fcb80eec7c",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4181",
+    "call_context": " 4175 |   values: [string, ...string[]],\n 4176 |   params?: RawCreateParams\n 4177 | ) {\n 4178 |   return new ZodEnum({\n 4179 |     values,\n 4180 |     typeName: ZodFirstPartyTypeKind.ZodEnum,\n 4181 |     ...processCreateParams(params),\n 4182 |   });\n 4183 | }\n 4184 | \n 4185 | export class ZodEnum<T extends [string, ...string[]]> extends ZodType<\n 4186 |   T[number],\n 4187 |   ZodEnumDef<T>,",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "949de76ca848",
+    "repo": "zod",
+    "call_site": "src/types.ts:3279",
+    "call_context": " 3273 |     }\n 3274 | \n 3275 |     const newArray: unknown[] = [];\n 3276 |     for (let index = 0; index < a.length; index++) {\n 3277 |       const itemA = a[index];\n 3278 |       const itemB = b[index];\n 3279 |       const sharedValue = mergeValues(itemA, itemB);\n 3280 | \n 3281 |       if (!sharedValue.valid) {\n 3282 |         return { valid: false };\n 3283 |       }\n 3284 | \n 3285 |       newArray.push(sharedValue.data);",
+    "target": "mergeValues (src/types.ts:3245-3298)",
+    "target_definition": " 3245 | function mergeValues(\n 3246 |   a: any,\n 3247 |   b: any\n 3248 | ): { valid: true; data: any } | { valid: false } {\n 3249 |   const aType = getParsedType(a);\n 3250 |   const bType = getParsedType(b);\n 3251 | \n 3252 |   if (a === b) {\n 3253 |     return { valid: true, data: a };\n 3254 |   } else if (aType === ZodParsedType.object && bType === ZodParsedType.object) {\n 3255 |     const bKeys = util.objectKeys(b);\n 3256 |     const sharedKeys = util\n 3257 |       .objectKeys(a)\n 3258 |       .filter((key) => bKeys.indexOf(key) !== -1);\n 3259 | \n 3260 |     const newObj: any = { ...a, ...b };\n 3261 |     for (const key of sharedKeys) {\n 3262 |       const sharedValue = mergeValues(a[key], b[key]);\n 3263 |       if (!sharedValue.valid) {\n 3264 |         return { valid: false };\n 3265 |       }\n 3266 |       newObj[key] = sharedValue.data;\n 3267 |     }\n 3268 | \n 3269 |     return { valid: true, data: newObj };"
+  },
+  {
+    "edge_id": "477bfb5612a5",
+    "repo": "zod",
+    "call_site": "src/types.ts:3813",
+    "call_context": " 3807 |     } else {\n 3808 |       return finalizeSet(elements as SyncParseReturnType[]);\n 3809 |     }\n 3810 |   }\n 3811 | \n 3812 |   min(minSize: number, message?: errorUtil.ErrMessage): this {\n 3813 |     return new ZodSet({\n 3814 |       ...this._def,\n 3815 |       minSize: { value: minSize, message: errorUtil.toString(message) },\n 3816 |     }) as any;\n 3817 |   }\n 3818 | \n 3819 |   max(maxSize: number, message?: errorUtil.ErrMessage): this {",
+    "target": "ZodSet (src/types.ts:3743-3846)",
+    "target_definition": " 3743 | export class ZodSet<Value extends ZodTypeAny = ZodTypeAny> extends ZodType<\n 3744 |   Set<Value[\"_output\"]>,\n 3745 |   ZodSetDef<Value>,\n 3746 |   Set<Value[\"_input\"]>\n 3747 | > {\n 3748 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3749 |     const { status, ctx } = this._processInputParams(input);\n 3750 |     if (ctx.parsedType !== ZodParsedType.set) {\n 3751 |       addIssueToContext(ctx, {\n 3752 |         code: ZodIssueCode.invalid_type,\n 3753 |         expected: ZodParsedType.set,\n 3754 |         received: ctx.parsedType,\n 3755 |       });\n 3756 |       return INVALID;\n 3757 |     }\n 3758 | \n 3759 |     const def = this._def;\n 3760 | \n 3761 |     if (def.minSize !== null) {\n 3762 |       if (ctx.data.size < def.minSize.value) {\n 3763 |         addIssueToContext(ctx, {\n 3764 |           code: ZodIssueCode.too_small,\n 3765 |           minimum: def.minSize.value,\n 3766 |           type: \"set\",\n 3767 |           inclusive: true,"
+  },
+  {
+    "edge_id": "4a4f293808aa",
+    "repo": "zod",
+    "call_site": "src/types.ts:1914",
+    "call_context": " 1908 |     params?: RawCreateParams & { coerce?: boolean }\n 1909 |   ): ZodDate => {\n 1910 |     return new ZodDate({\n 1911 |       checks: [],\n 1912 |       coerce: params?.coerce || false,\n 1913 |       typeName: ZodFirstPartyTypeKind.ZodDate,\n 1914 |       ...processCreateParams(params),\n 1915 |     });\n 1916 |   };\n 1917 | }\n 1918 | \n 1919 | ////////////////////////////////////////////\n 1920 | ////////////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "0195fc5df3aa",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:3215",
+    "call_context": " 3209 |         }\n 3210 | \n 3211 |         optionsMap.set(value, type);\n 3212 |       }\n 3213 |     }\n 3214 | \n 3215 |     return new ZodDiscriminatedUnion<\n 3216 |       Discriminator,\n 3217 |       // DiscriminatorValue,\n 3218 |       Types\n 3219 |     >({\n 3220 |       typeName: ZodFirstPartyTypeKind.ZodDiscriminatedUnion,\n 3221 |       discriminator,",
+    "target": "ZodDiscriminatedUnion (deno/lib/types.ts:3110-3227)",
+    "target_definition": " 3110 | export class ZodDiscriminatedUnion<\n 3111 |   Discriminator extends string,\n 3112 |   Options extends ZodDiscriminatedUnionOption<Discriminator>[]\n 3113 | > extends ZodType<\n 3114 |   output<Options[number]>,\n 3115 |   ZodDiscriminatedUnionDef<Discriminator, Options>,\n 3116 |   input<Options[number]>\n 3117 | > {\n 3118 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3119 |     const { ctx } = this._processInputParams(input);\n 3120 | \n 3121 |     if (ctx.parsedType !== ZodParsedType.object) {\n 3122 |       addIssueToContext(ctx, {\n 3123 |         code: ZodIssueCode.invalid_type,\n 3124 |         expected: ZodParsedType.object,\n 3125 |         received: ctx.parsedType,\n 3126 |       });\n 3127 |       return INVALID;\n 3128 |     }\n 3129 | \n 3130 |     const discriminator = this.discriminator;\n 3131 | \n 3132 |     const discriminatorValue: string = ctx.data[discriminator];\n 3133 | \n 3134 |     const option = this.optionsMap.get(discriminatorValue);"
+  },
+  {
+    "edge_id": "560f583f1633",
+    "repo": "zod",
+    "call_site": "src/types.ts:4039",
+    "call_context": " 4033 |   >(args: T, returns: U, params?: RawCreateParams): ZodFunction<T, U>;\n 4034 |   static create(\n 4035 |     args?: AnyZodTuple,\n 4036 |     returns?: ZodTypeAny,\n 4037 |     params?: RawCreateParams\n 4038 |   ) {\n 4039 |     return new ZodFunction({\n 4040 |       args: (args\n 4041 |         ? args\n 4042 |         : ZodTuple.create([]).rest(ZodUnknown.create())) as any,\n 4043 |       returns: returns || ZodUnknown.create(),\n 4044 |       typeName: ZodFirstPartyTypeKind.ZodFunction,\n 4045 |       ...processCreateParams(params),",
+    "target": "ZodFunction (src/types.ts:3878-4048)",
+    "target_definition": " 3878 | export class ZodFunction<\n 3879 |   Args extends ZodTuple<any, any>,\n 3880 |   Returns extends ZodTypeAny\n 3881 | > extends ZodType<\n 3882 |   OuterTypeOfFunction<Args, Returns>,\n 3883 |   ZodFunctionDef<Args, Returns>,\n 3884 |   InnerTypeOfFunction<Args, Returns>\n 3885 | > {\n 3886 |   _parse(input: ParseInput): ParseReturnType<any> {\n 3887 |     const { ctx } = this._processInputParams(input);\n 3888 |     if (ctx.parsedType !== ZodParsedType.function) {\n 3889 |       addIssueToContext(ctx, {\n 3890 |         code: ZodIssueCode.invalid_type,\n 3891 |         expected: ZodParsedType.function,\n 3892 |         received: ctx.parsedType,\n 3893 |       });\n 3894 |       return INVALID;\n 3895 |     }\n 3896 | \n 3897 |     function makeArgsIssue(args: any, error: ZodError): ZodIssue {\n 3898 |       return makeIssue({\n 3899 |         data: args,\n 3900 |         path: ctx.path,\n 3901 |         errorMaps: [\n 3902 |           ctx.common.contextualErrorMap,"
+  },
+  {
+    "edge_id": "3a79a68ed918",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2891",
+    "call_context": " 2885 |   ): ZodObject<T, \"strict\"> => {\n 2886 |     return new ZodObject({\n 2887 |       shape: () => shape,\n 2888 |       unknownKeys: \"strict\",\n 2889 |       catchall: ZodNever.create(),\n 2890 |       typeName: ZodFirstPartyTypeKind.ZodObject,\n 2891 |       ...processCreateParams(params),\n 2892 |     }) as any;\n 2893 |   };\n 2894 | \n 2895 |   static lazycreate = <T extends ZodRawShape>(\n 2896 |     shape: () => T,\n 2897 |     params?: RawCreateParams",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "eb46525cd839",
+    "repo": "zod",
+    "call_site": "src/types.ts:2739",
+    "call_context": " 2733 |   //   return merged;\n 2734 |   // }\n 2735 | \n 2736 |   catchall<Index extends ZodTypeAny>(\n 2737 |     index: Index\n 2738 |   ): ZodObject<T, UnknownKeys, Index> {\n 2739 |     return new ZodObject({\n 2740 |       ...this._def,\n 2741 |       catchall: index,\n 2742 |     }) as any;\n 2743 |   }\n 2744 | \n 2745 |   pick<Mask extends util.Exactly<{ [k in keyof T]?: true }, Mask>>(",
+    "target": "ZodObject (src/types.ts:2412-2907)",
+    "target_definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {\n 2422 |     if (this._cached !== null) return this._cached;\n 2423 |     const shape = this._def.shape();\n 2424 |     const keys = util.objectKeys(shape);\n 2425 |     return (this._cached = { shape, keys });\n 2426 |   }\n 2427 | \n 2428 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2429 |     const parsedType = this._getType(input);\n 2430 |     if (parsedType !== ZodParsedType.object) {\n 2431 |       const ctx = this._getOrReturnCtx(input);\n 2432 |       addIssueToContext(ctx, {\n 2433 |         code: ZodIssueCode.invalid_type,\n 2434 |         expected: ZodParsedType.object,\n 2435 |         received: ctx.parsedType,\n 2436 |       });"
+  },
+  {
+    "edge_id": "c372161519ff",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:2266",
+    "call_context": " 2260 |       ...this._def,\n 2261 |       minLength: { value: minLength, message: errorUtil.toString(message) },\n 2262 |     }) as any;\n 2263 |   }\n 2264 | \n 2265 |   max(maxLength: number, message?: errorUtil.ErrMessage): this {\n 2266 |     return new ZodArray({\n 2267 |       ...this._def,\n 2268 |       maxLength: { value: maxLength, message: errorUtil.toString(message) },\n 2269 |     }) as any;\n 2270 |   }\n 2271 | \n 2272 |   length(len: number, message?: errorUtil.ErrMessage): this {",
+    "target": "ZodArray (deno/lib/types.ts:2164-2296)",
+    "target_definition": " 2164 | export class ZodArray<\n 2165 |   T extends ZodTypeAny,\n 2166 |   Cardinality extends ArrayCardinality = \"many\"\n 2167 | > extends ZodType<\n 2168 |   arrayOutputType<T, Cardinality>,\n 2169 |   ZodArrayDef<T>,\n 2170 |   Cardinality extends \"atleastone\"\n 2171 |     ? [T[\"_input\"], ...T[\"_input\"][]]\n 2172 |     : T[\"_input\"][]\n 2173 | > {\n 2174 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2175 |     const { ctx, status } = this._processInputParams(input);\n 2176 | \n 2177 |     const def = this._def;\n 2178 | \n 2179 |     if (ctx.parsedType !== ZodParsedType.array) {\n 2180 |       addIssueToContext(ctx, {\n 2181 |         code: ZodIssueCode.invalid_type,\n 2182 |         expected: ZodParsedType.array,\n 2183 |         received: ctx.parsedType,\n 2184 |       });\n 2185 |       return INVALID;\n 2186 |     }\n 2187 | \n 2188 |     if (def.exactLength !== null) {"
+  },
+  {
+    "edge_id": "60301f6a5cc1",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4705",
+    "call_context": " 4699 |     type: T,\n 4700 |     params?: RawCreateParams\n 4701 |   ): ZodNullable<T> => {\n 4702 |     return new ZodNullable({\n 4703 |       innerType: type,\n 4704 |       typeName: ZodFirstPartyTypeKind.ZodNullable,\n 4705 |       ...processCreateParams(params),\n 4706 |     }) as any;\n 4707 |   };\n 4708 | }\n 4709 | \n 4710 | ////////////////////////////////////////////\n 4711 | ////////////////////////////////////////////",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "057ee9d51bc7",
+    "repo": "zod",
+    "call_site": "src/types.ts:3318",
+    "call_context": " 3312 |       parsedRight: SyncParseReturnType\n 3313 |     ): SyncParseReturnType<T & U> => {\n 3314 |       if (isAborted(parsedLeft) || isAborted(parsedRight)) {\n 3315 |         return INVALID;\n 3316 |       }\n 3317 | \n 3318 |       const merged = mergeValues(parsedLeft.value, parsedRight.value);\n 3319 | \n 3320 |       if (!merged.valid) {\n 3321 |         addIssueToContext(ctx, {\n 3322 |           code: ZodIssueCode.invalid_intersection_types,\n 3323 |         });\n 3324 |         return INVALID;",
+    "target": "mergeValues (src/types.ts:3245-3298)",
+    "target_definition": " 3245 | function mergeValues(\n 3246 |   a: any,\n 3247 |   b: any\n 3248 | ): { valid: true; data: any } | { valid: false } {\n 3249 |   const aType = getParsedType(a);\n 3250 |   const bType = getParsedType(b);\n 3251 | \n 3252 |   if (a === b) {\n 3253 |     return { valid: true, data: a };\n 3254 |   } else if (aType === ZodParsedType.object && bType === ZodParsedType.object) {\n 3255 |     const bKeys = util.objectKeys(b);\n 3256 |     const sharedKeys = util\n 3257 |       .objectKeys(a)\n 3258 |       .filter((key) => bKeys.indexOf(key) !== -1);\n 3259 | \n 3260 |     const newObj: any = { ...a, ...b };\n 3261 |     for (const key of sharedKeys) {\n 3262 |       const sharedValue = mergeValues(a[key], b[key]);\n 3263 |       if (!sharedValue.valid) {\n 3264 |         return { valid: false };\n 3265 |       }\n 3266 |       newObj[key] = sharedValue.data;\n 3267 |     }\n 3268 | \n 3269 |     return { valid: true, data: newObj };"
+  },
+  {
+    "edge_id": "3c8feb07d600",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4849",
+    "call_context": " 4843 |   ): ZodCatch<T> => {\n 4844 |     return new ZodCatch({\n 4845 |       innerType: type,\n 4846 |       typeName: ZodFirstPartyTypeKind.ZodCatch,\n 4847 |       catchValue:\n 4848 |         typeof params.catch === \"function\" ? params.catch : () => params.catch,\n 4849 |       ...processCreateParams(params),\n 4850 |     });\n 4851 |   };\n 4852 | }\n 4853 | \n 4854 | /////////////////////////////////////////\n 4855 | /////////////////////////////////////////",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "8dfea598ea13",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4085",
+    "call_context": " 4079 |     getter: () => T,\n 4080 |     params?: RawCreateParams\n 4081 |   ): ZodLazy<T> => {\n 4082 |     return new ZodLazy({\n 4083 |       getter: getter,\n 4084 |       typeName: ZodFirstPartyTypeKind.ZodLazy,\n 4085 |       ...processCreateParams(params),\n 4086 |     });\n 4087 |   };\n 4088 | }\n 4089 | \n 4090 | //////////////////////////////////////////\n 4091 | //////////////////////////////////////////",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "c2ee61854a8d",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:377",
+    "call_context": "  371 |     });\n  372 |   }\n  373 | \n  374 |   _refinement(\n  375 |     refinement: RefinementEffect<Output>[\"refinement\"]\n  376 |   ): ZodEffects<this, Output, Input> {\n  377 |     return new ZodEffects({\n  378 |       schema: this,\n  379 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n  380 |       effect: { type: \"refinement\", refinement },\n  381 |     });\n  382 |   }\n  383 | ",
+    "target": "ZodEffects (deno/lib/types.ts:4453-4618)",
+    "target_definition": " 4453 | export class ZodEffects<\n 4454 |   T extends ZodTypeAny,\n 4455 |   Output = output<T>,\n 4456 |   Input = input<T>\n 4457 | > extends ZodType<Output, ZodEffectsDef<T>, Input> {\n 4458 |   innerType() {\n 4459 |     return this._def.schema;\n 4460 |   }\n 4461 | \n 4462 |   sourceType(): T {\n 4463 |     return this._def.schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects\n 4464 |       ? (this._def.schema as unknown as ZodEffects<T>).sourceType()\n 4465 |       : (this._def.schema as T);\n 4466 |   }\n 4467 | \n 4468 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4469 |     const { status, ctx } = this._processInputParams(input);\n 4470 | \n 4471 |     const effect = this._def.effect || null;\n 4472 | \n 4473 |     const checkCtx: RefinementCtx = {\n 4474 |       addIssue: (arg: IssueData) => {\n 4475 |         addIssueToContext(ctx, arg);\n 4476 |         if (arg.fatal) {\n 4477 |           status.abort();"
+  },
+  {
+    "edge_id": "7e922ddd4deb",
+    "repo": "zod",
+    "call_site": "src/types.ts:455",
+    "call_context": "  449 |   }\n  450 | \n  451 |   transform<NewOut>(\n  452 |     transform: (arg: Output, ctx: RefinementCtx) => NewOut | Promise<NewOut>\n  453 |   ): ZodEffects<this, NewOut> {\n  454 |     return new ZodEffects({\n  455 |       ...processCreateParams(this._def),\n  456 |       schema: this,\n  457 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n  458 |       effect: { type: \"transform\", transform },\n  459 |     }) as any;\n  460 |   }\n  461 | ",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "a99052eeadb6",
+    "repo": "zod",
+    "call_site": "src/types.ts:454",
+    "call_context": "  448 |     return ZodIntersection.create(this, incoming, this._def);\n  449 |   }\n  450 | \n  451 |   transform<NewOut>(\n  452 |     transform: (arg: Output, ctx: RefinementCtx) => NewOut | Promise<NewOut>\n  453 |   ): ZodEffects<this, NewOut> {\n  454 |     return new ZodEffects({\n  455 |       ...processCreateParams(this._def),\n  456 |       schema: this,\n  457 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n  458 |       effect: { type: \"transform\", transform },\n  459 |     }) as any;\n  460 |   }",
+    "target": "ZodEffects (src/types.ts:4453-4618)",
+    "target_definition": " 4453 | export class ZodEffects<\n 4454 |   T extends ZodTypeAny,\n 4455 |   Output = output<T>,\n 4456 |   Input = input<T>\n 4457 | > extends ZodType<Output, ZodEffectsDef<T>, Input> {\n 4458 |   innerType() {\n 4459 |     return this._def.schema;\n 4460 |   }\n 4461 | \n 4462 |   sourceType(): T {\n 4463 |     return this._def.schema._def.typeName === ZodFirstPartyTypeKind.ZodEffects\n 4464 |       ? (this._def.schema as unknown as ZodEffects<T>).sourceType()\n 4465 |       : (this._def.schema as T);\n 4466 |   }\n 4467 | \n 4468 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4469 |     const { status, ctx } = this._processInputParams(input);\n 4470 | \n 4471 |     const effect = this._def.effect || null;\n 4472 | \n 4473 |     const checkCtx: RefinementCtx = {\n 4474 |       addIssue: (arg: IssueData) => {\n 4475 |         addIssueToContext(ctx, arg);\n 4476 |         if (arg.fatal) {\n 4477 |           status.abort();"
+  },
+  {
+    "edge_id": "a737e20a139a",
+    "repo": "zod",
+    "call_site": "src/types.ts:4181",
+    "call_context": " 4175 |   values: [string, ...string[]],\n 4176 |   params?: RawCreateParams\n 4177 | ) {\n 4178 |   return new ZodEnum({\n 4179 |     values,\n 4180 |     typeName: ZodFirstPartyTypeKind.ZodEnum,\n 4181 |     ...processCreateParams(params),\n 4182 |   });\n 4183 | }\n 4184 | \n 4185 | export class ZodEnum<T extends [string, ...string[]]> extends ZodType<\n 4186 |   T[number],\n 4187 |   ZodEnumDef<T>,",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "bf5886ff3243",
+    "repo": "zod",
+    "call_site": "src/types.ts:4759",
+    "call_context": " 4753 |       innerType: type,\n 4754 |       typeName: ZodFirstPartyTypeKind.ZodDefault,\n 4755 |       defaultValue:\n 4756 |         typeof params.default === \"function\"\n 4757 |           ? params.default\n 4758 |           : () => params.default as any,\n 4759 |       ...processCreateParams(params),\n 4760 |     }) as any;\n 4761 |   };\n 4762 | }\n 4763 | \n 4764 | //////////////////////////////////////////\n 4765 | //////////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "6072a6f5478e",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4844",
+    "call_context": " 4838 |   static create = <T extends ZodTypeAny>(\n 4839 |     type: T,\n 4840 |     params: RawCreateParams & {\n 4841 |       catch: T[\"_output\"] | (() => T[\"_output\"]);\n 4842 |     }\n 4843 |   ): ZodCatch<T> => {\n 4844 |     return new ZodCatch({\n 4845 |       innerType: type,\n 4846 |       typeName: ZodFirstPartyTypeKind.ZodCatch,\n 4847 |       catchValue:\n 4848 |         typeof params.catch === \"function\" ? params.catch : () => params.catch,\n 4849 |       ...processCreateParams(params),\n 4850 |     });",
+    "target": "ZodCatch (deno/lib/types.ts:4778-4852)",
+    "target_definition": " 4778 | export class ZodCatch<T extends ZodTypeAny> extends ZodType<\n 4779 |   T[\"_output\"],\n 4780 |   ZodCatchDef<T>,\n 4781 |   unknown // any input will pass validation // T[\"_input\"]\n 4782 | > {\n 4783 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4784 |     const { ctx } = this._processInputParams(input);\n 4785 | \n 4786 |     // newCtx is used to not collect issues from inner types in ctx\n 4787 |     const newCtx: ParseContext = {\n 4788 |       ...ctx,\n 4789 |       common: {\n 4790 |         ...ctx.common,\n 4791 |         issues: [],\n 4792 |       },\n 4793 |     };\n 4794 | \n 4795 |     const result = this._def.innerType._parse({\n 4796 |       data: newCtx.data,\n 4797 |       path: newCtx.path,\n 4798 |       parent: {\n 4799 |         ...newCtx,\n 4800 |       },\n 4801 |     });\n 4802 | "
+  },
+  {
+    "edge_id": "d6d7cb0ba39c",
+    "repo": "zod",
+    "call_site": "src/types.ts:3611",
+    "call_context": " 3605 |         valueType: second,\n 3606 |         typeName: ZodFirstPartyTypeKind.ZodRecord,\n 3607 |         ...processCreateParams(third),\n 3608 |       });\n 3609 |     }\n 3610 | \n 3611 |     return new ZodRecord({\n 3612 |       keyType: ZodString.create(),\n 3613 |       valueType: first,\n 3614 |       typeName: ZodFirstPartyTypeKind.ZodRecord,\n 3615 |       ...processCreateParams(second),\n 3616 |     });\n 3617 |   }",
+    "target": "ZodRecord (src/types.ts:3537-3618)",
+    "target_definition": " 3537 | export class ZodRecord<\n 3538 |   Key extends KeySchema = ZodString,\n 3539 |   Value extends ZodTypeAny = ZodTypeAny\n 3540 | > extends ZodType<\n 3541 |   RecordType<Key[\"_output\"], Value[\"_output\"]>,\n 3542 |   ZodRecordDef<Key, Value>,\n 3543 |   RecordType<Key[\"_input\"], Value[\"_input\"]>\n 3544 | > {\n 3545 |   get keySchema() {\n 3546 |     return this._def.keyType;\n 3547 |   }\n 3548 |   get valueSchema() {\n 3549 |     return this._def.valueType;\n 3550 |   }\n 3551 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3552 |     const { status, ctx } = this._processInputParams(input);\n 3553 |     if (ctx.parsedType !== ZodParsedType.object) {\n 3554 |       addIssueToContext(ctx, {\n 3555 |         code: ZodIssueCode.invalid_type,\n 3556 |         expected: ZodParsedType.object,\n 3557 |         received: ctx.parsedType,\n 3558 |       });\n 3559 |       return INVALID;\n 3560 |     }\n 3561 | "
+  },
+  {
+    "edge_id": "93328a00b882",
+    "repo": "zod",
+    "call_site": "src/types.ts:2259",
+    "call_context": " 2253 | \n 2254 |   get element() {\n 2255 |     return this._def.type;\n 2256 |   }\n 2257 | \n 2258 |   min(minLength: number, message?: errorUtil.ErrMessage): this {\n 2259 |     return new ZodArray({\n 2260 |       ...this._def,\n 2261 |       minLength: { value: minLength, message: errorUtil.toString(message) },\n 2262 |     }) as any;\n 2263 |   }\n 2264 | \n 2265 |   max(maxLength: number, message?: errorUtil.ErrMessage): this {",
+    "target": "ZodArray (src/types.ts:2164-2296)",
+    "target_definition": " 2164 | export class ZodArray<\n 2165 |   T extends ZodTypeAny,\n 2166 |   Cardinality extends ArrayCardinality = \"many\"\n 2167 | > extends ZodType<\n 2168 |   arrayOutputType<T, Cardinality>,\n 2169 |   ZodArrayDef<T>,\n 2170 |   Cardinality extends \"atleastone\"\n 2171 |     ? [T[\"_input\"], ...T[\"_input\"][]]\n 2172 |     : T[\"_input\"][]\n 2173 | > {\n 2174 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2175 |     const { ctx, status } = this._processInputParams(input);\n 2176 | \n 2177 |     const def = this._def;\n 2178 | \n 2179 |     if (ctx.parsedType !== ZodParsedType.array) {\n 2180 |       addIssueToContext(ctx, {\n 2181 |         code: ZodIssueCode.invalid_type,\n 2182 |         expected: ZodParsedType.array,\n 2183 |         received: ctx.parsedType,\n 2184 |       });\n 2185 |       return INVALID;\n 2186 |     }\n 2187 | \n 2188 |     if (def.exactLength !== null) {"
+  },
+  {
+    "edge_id": "a7533c83e242",
+    "repo": "zod",
+    "call_site": "src/types.ts:4347",
+    "call_context": " 4341 |     values: T,\n 4342 |     params?: RawCreateParams\n 4343 |   ): ZodNativeEnum<T> => {\n 4344 |     return new ZodNativeEnum({\n 4345 |       values: values,\n 4346 |       typeName: ZodFirstPartyTypeKind.ZodNativeEnum,\n 4347 |       ...processCreateParams(params),\n 4348 |     });\n 4349 |   };\n 4350 | }\n 4351 | \n 4352 | //////////////////////////////////////////\n 4353 | //////////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "358abd665522",
+    "repo": "zod",
+    "call_site": "src/types.ts:4045",
+    "call_context": " 4039 |     return new ZodFunction({\n 4040 |       args: (args\n 4041 |         ? args\n 4042 |         : ZodTuple.create([]).rest(ZodUnknown.create())) as any,\n 4043 |       returns: returns || ZodUnknown.create(),\n 4044 |       typeName: ZodFirstPartyTypeKind.ZodFunction,\n 4045 |       ...processCreateParams(params),\n 4046 |     }) as any;\n 4047 |   }\n 4048 | }\n 4049 | \n 4050 | ///////////////////////////////////////\n 4051 | ///////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "c7363387b7d5",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:480",
+    "call_context": "  474 | \n  475 |   brand<B extends string | number | symbol>(brand?: B): ZodBranded<this, B>;\n  476 |   brand<B extends string | number | symbol>(): ZodBranded<this, B> {\n  477 |     return new ZodBranded({\n  478 |       typeName: ZodFirstPartyTypeKind.ZodBranded,\n  479 |       type: this,\n  480 |       ...processCreateParams(this._def),\n  481 |     });\n  482 |   }\n  483 | \n  484 |   catch(def: Output): ZodCatch<this>;\n  485 |   catch(\n  486 |     def: (ctx: { error: ZodError; input: Input }) => Output",
+    "target": "processCreateParams (deno/lib/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "4d7774f81d5e",
+    "repo": "zod",
+    "call_site": "deno/lib/types.ts:4178",
+    "call_context": " 4172 |   params?: RawCreateParams\n 4173 | ): ZodEnum<T>;\n 4174 | function createZodEnum(\n 4175 |   values: [string, ...string[]],\n 4176 |   params?: RawCreateParams\n 4177 | ) {\n 4178 |   return new ZodEnum({\n 4179 |     values,\n 4180 |     typeName: ZodFirstPartyTypeKind.ZodEnum,\n 4181 |     ...processCreateParams(params),\n 4182 |   });\n 4183 | }\n 4184 | ",
+    "target": "ZodEnum (deno/lib/types.ts:4185-4279)",
+    "target_definition": " 4185 | export class ZodEnum<T extends [string, ...string[]]> extends ZodType<\n 4186 |   T[number],\n 4187 |   ZodEnumDef<T>,\n 4188 |   T[number]\n 4189 | > {\n 4190 |   #cache: Set<T[number]> | undefined;\n 4191 | \n 4192 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4193 |     if (typeof input.data !== \"string\") {\n 4194 |       const ctx = this._getOrReturnCtx(input);\n 4195 |       const expectedValues = this._def.values;\n 4196 |       addIssueToContext(ctx, {\n 4197 |         expected: util.joinValues(expectedValues) as \"string\",\n 4198 |         received: ctx.parsedType,\n 4199 |         code: ZodIssueCode.invalid_type,\n 4200 |       });\n 4201 |       return INVALID;\n 4202 |     }\n 4203 | \n 4204 |     if (!this.#cache) {\n 4205 |       this.#cache = new Set(this._def.values);\n 4206 |     }\n 4207 | \n 4208 |     if (!this.#cache.has(input.data)) {\n 4209 |       const ctx = this._getOrReturnCtx(input);"
+  },
+  {
+    "edge_id": "dceed05a8ac9",
+    "repo": "zod",
+    "call_site": "src/types.ts:2101",
+    "call_context": " 2095 |     });\n 2096 |     return INVALID;\n 2097 |   }\n 2098 |   static create = (params?: RawCreateParams): ZodNever => {\n 2099 |     return new ZodNever({\n 2100 |       typeName: ZodFirstPartyTypeKind.ZodNever,\n 2101 |       ...processCreateParams(params),\n 2102 |     });\n 2103 |   };\n 2104 | }\n 2105 | \n 2106 | ///////////////////////////////////////\n 2107 | ///////////////////////////////////////",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  },
+  {
+    "edge_id": "b8709372a5e3",
+    "repo": "zod",
+    "call_site": "src/types.ts:2904",
+    "call_context": " 2898 |   ): ZodObject<T, \"strip\"> => {\n 2899 |     return new ZodObject({\n 2900 |       shape,\n 2901 |       unknownKeys: \"strip\",\n 2902 |       catchall: ZodNever.create(),\n 2903 |       typeName: ZodFirstPartyTypeKind.ZodObject,\n 2904 |       ...processCreateParams(params),\n 2905 |     }) as any;\n 2906 |   };\n 2907 | }\n 2908 | \n 2909 | export type AnyZodObject = ZodObject<any, any, any>;\n 2910 | ",
+    "target": "processCreateParams (src/types.ts:129-151)",
+    "target_definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {\n  139 |     const { message } = params;\n  140 | \n  141 |     if (iss.code === \"invalid_enum_value\") {\n  142 |       return { message: message ?? ctx.defaultError };\n  143 |     }\n  144 |     if (typeof ctx.data === \"undefined\") {\n  145 |       return { message: message ?? required_error ?? ctx.defaultError };\n  146 |     }\n  147 |     if (iss.code !== \"invalid_type\") return { message: ctx.defaultError };\n  148 |     return { message: message ?? invalid_type_error ?? ctx.defaultError };\n  149 |   };\n  150 |   return { errorMap: customMap, description };\n  151 | }"
+  }
+]
