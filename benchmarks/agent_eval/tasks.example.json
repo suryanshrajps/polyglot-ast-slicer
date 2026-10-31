@@ -1,0 +1,9 @@
+[
+  {
+    "id": "requests-1",
+    "repo": "/tmp/requests",
+    "issue": "Example: inspect Session.send before changing redirect handling",
+    "symbols": ["src/requests/sessions.py::Session.send"],
+    "test_command": "python -m pytest tests/test_requests.py -q"
+  }
+]

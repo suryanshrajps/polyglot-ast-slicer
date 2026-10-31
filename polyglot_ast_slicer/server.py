@@ -191,6 +191,23 @@ def explain_edge(repo_path: str = ".", source: str = "", target: str = "") -> di
 
 
 @mcp.tool()
+def impact_of_diff(
+    repo_path: str = ".",
+    base: str = "HEAD~1",
+    head: str = "HEAD",
+    diff: str | None = None,
+    max_depth: int = 3,
+) -> dict[str, Any]:
+    """Map a git diff to changed symbols, impacted callers and impacted tests."""
+    try:
+        return _get_engine(repo_path).impact_of_diff(
+            base=base, head=head, diff=diff, max_depth=max_depth
+        )
+    except Exception as error:
+        return {"error": f"{type(error).__name__}: {error}"}
+
+
+@mcp.tool()
 def get_index_stats(repo_path: str = ".") -> dict[str, Any]:
     """Report index size, language mix, token totals, cache health, and unresolved call sites."""
     try:
@@ -297,6 +314,31 @@ def _cmd_search(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_impact(args: argparse.Namespace) -> int:
+    result = _get_engine(args.repo, watch_enabled=False).impact_of_diff(
+        base=args.base, head=args.head, max_depth=args.depth
+    )
+    if args.json:
+        _print_json(result)
+        return 0 if "error" not in result else 1
+    if "error" in result:
+        print(result["error"], file=sys.stderr)
+        return 1
+    print(
+        f"Changed symbols: {result['total_changed_symbols']} "
+        f"in {len(result['changed_files'])} files"
+    )
+    for item in result["changed_symbols"]:
+        print(f"  ~ {item['qualified_name']} ({item['file_path']}:{item['lines']})")
+    print(f"Impacted symbols: {result['total_impacted_symbols']} ({result['risk_level']})")
+    for item in result["impacted_symbols"]:
+        print(f"  <- {item['qualified_name']} hop {item['hop_distance']}")
+    print(f"Impacted tests: {result['total_impacted_tests']}")
+    for item in result["impacted_tests"]:
+        print(f"  * {item['qualified_name']} ({item['file_path']})")
+    return 0
+
+
 def _cmd_stats(args: argparse.Namespace) -> int:
     result = _get_engine(args.repo, watch_enabled=False).get_index_stats()
     _print_json(result)
@@ -350,6 +392,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_search.add_argument("--kind", default=None, help="Filter by symbol kind")
     p_search.add_argument("--limit", type=int, default=20)
     p_search.set_defaults(handler=_cmd_search)
+
+    p_impact = sub.add_parser("impact", parents=[common], help="Diff to impacted symbols/tests")
+    p_impact.add_argument("--base", default="HEAD~1", help="Base git revision")
+    p_impact.add_argument("--head", default="HEAD", help="Head git revision")
+    p_impact.add_argument("--depth", type=int, default=3, help="Upstream hop depth")
+    p_impact.set_defaults(handler=_cmd_impact)
 
     p_stats = sub.add_parser("stats", parents=[common], help="Index and cache statistics")
     p_stats.set_defaults(handler=_cmd_stats)

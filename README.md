@@ -74,6 +74,17 @@ with Jedi 0.20.1 and canonicalized through re-export sites:
 resolve (untyped fixtures, dynamic receivers) are excluded. Removing the old name-only
 fallback cost recall and bought precision — a deliberate trade.
 
+**Scale (synthetic, one function per file, measured on this machine).**
+
+| Files | Cold | Warm | Query p50 | Refresh p95 | RSS |
+|---:|---:|---:|---:|---:|---:|
+| 5,000 | 1.3 s | 755 ms | 1.1 ms | — | 105 MB |
+| 20,000 | 6.1 s | 3.2 s | 3.1 ms | — | 212 MB |
+| 50,000 | 19.0 s | 10.8 s | 3.1 ms | 1.2 ms | 400 MB |
+
+Warm start is O(edges) because the graph is rebuilt from the cache on every open; 50k files
+takes 10.8 s, which is the main scale caveat.
+
 Default payloads are capped at 6,000 tokens **on the exact JSON returned**. The worst real hub
 found, `src/click/decorators.py::command`, now returns 5,493 tokens and reports 321 omitted
 upstream entries instead of the 89,698-token payload measured in v0.2.0.
@@ -132,6 +143,7 @@ Options that apply to every tool call:
 | `index_codebase` | Build/refresh the graph. Incremental via SHA-256 cache. |
 | `get_ast_call_slice` | "Give me exactly the context for this symbol." 6k payload cap by default. |
 | `explain_edge` | "Why does this edge exist?" Call-site line, confidence, resolution path. |
+| `impact_of_diff` | "What does this diff touch and which tests are impacted?" |
 | `get_blast_radius` | "What breaks if I change this signature?" Grouped by hop. |
 | `find_circular_dependencies` | Tarjan SCC over both the call graph and the import graph. |
 | `search_symbols` | "What is this thing actually called?" |
@@ -218,6 +230,9 @@ Design notes:
   never emitted twice and token counts are not inflated.
 - **Re-export chains are followed.** `from .generic import *` in a package `__init__.py` still
   links `import pkg; pkg.fn()` to the module that defines `fn` (up to 6 hops, cycle-safe).
+  TypeScript `export * from "./x"` barrels and `tsconfig` `baseUrl`/`paths` aliases resolve too.
+- **Method slices carry context.** Each region is prefixed with its enclosing `class X:` and the
+  file imports it references, so an agent can edit without re-reading the file.
 - **Degrades gracefully.** A missing grammar (e.g. `.tsx` when the grammar cannot be fetched),
   a binary file, an oversized file, or a symlink escaping the repository is reported in
   `skipped_files` instead of aborting the index.
@@ -234,7 +249,7 @@ Being precise about this is part of being trustworthy:
 - **Dynamic dispatch is not resolved.** `getattr(obj, name)()`, dependency injection, and
   `*args` forwarding produce no edges. Measured recall is 70–85% on the sites Jedi can resolve;
   end-to-end recall on untyped code is lower and not measured here.
-- **`tsconfig` path aliases** (`@app/*`) are not followed yet; relative imports are.
+- **`tsconfig` aliases** are supported for `baseUrl` and `paths`; `extends` is not merged yet.
 - **Monorepo package boundaries** are inferred from the repo root, `src/`, and `lib/`.
 - **Decorators and metaclasses** that rewrite functions are not interpreted.
 - **No cross-language edges** — Python calling into TypeScript is not linked.
@@ -244,7 +259,7 @@ Being precise about this is part of being trustworthy:
 
 ```bash
 uv sync --all-extras
-uv run pytest              # 70 tests
+uv run pytest              # 75 tests
 uv run python benchmarks/token_bench.py
 uv run ruff check .
 uv run mypy polyglot_ast_slicer
@@ -259,7 +274,7 @@ polyglot_ast_slicer/
   graph_engine.py  resolution, BFS slices, blast radius, Tarjan SCC
   server.py        FastMCP tools + CLI
   __main__.py      python -m polyglot_ast_slicer
-tests/             70 tests across parser, cache, engine, server, safety, differential
+tests/             75 tests across parser, cache, engine, server, safety, differential
 benchmarks/        token-reduction + latency benchmark
 ```
 

@@ -392,8 +392,17 @@ class PolyglotASTParser:
                             local = self._text(spec.child_by_field_name("alias"), source)
                             if original:
                                 names.append((local or original, original))
+            wildcard = child.type == "export_statement" and any(
+                part.type == "*" for part in child.children
+            )
             imports.append(
-                ImportRef(module=module, names=tuple(names), is_module=is_module, alias=alias)
+                ImportRef(
+                    module=module,
+                    names=tuple(names),
+                    is_module=is_module,
+                    alias=alias,
+                    wildcard=wildcard,
+                )
             )
         return imports
 

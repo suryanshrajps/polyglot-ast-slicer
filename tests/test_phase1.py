@@ -361,3 +361,112 @@ def test_nested_symbol_resolves_within_its_scope(tmp_path: Path) -> None:
     targets = {engine._symbols[v].qualified_name for v in engine.graph.successors(caller.symbol_id)}
     assert "test_case.LocalError" in targets
     engine.close()
+
+
+def test_slice_includes_enclosing_class_and_imports(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "models.py": "class Payload:\n    pass\n",
+            "service.py": (
+                "from models import Payload\n\n"
+                "class Engine:\n"
+                "    def run(self, payload: Payload) -> str:\n"
+                "        return 'ok'\n"
+            ),
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    context = engine.get_ast_call_slice("service.py::Engine.run", hops=1)["compiled_context"]
+    assert "# class Engine:" in context
+    assert "# import: from models import Payload" in context
+    assert context.count("def run(") == 1
+    engine.close()
+
+
+def test_impact_of_diff_on_real_commits(tmp_path: Path) -> None:
+    import subprocess
+
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "b.py": "def helper() -> int:\n    return 1\n",
+            "a.py": "from b import helper\n\ndef use() -> int:\n    return helper()\n",
+            "tests/test_a.py": "from a import use\n\ndef test_use():\n    assert use() == 1\n",
+        },
+    )
+
+    def git(*args: str) -> None:
+        subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True)
+
+    git("init", "-q")
+    git("config", "user.email", "review@example.com")
+    git("config", "user.name", "Review")
+    git("add", "-A")
+    git("commit", "-qm", "initial")
+    (repo / "b.py").write_text("def helper() -> int:\n    return 2\n")
+    git("commit", "-qam", "change helper")
+
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    result = engine.impact_of_diff("HEAD~1", "HEAD")
+    assert result["changed_symbols"][0]["qualified_name"] == "helper"
+    assert {item["qualified_name"] for item in result["impacted_symbols"]} >= {"use"}
+    assert {item["qualified_name"] for item in result["impacted_tests"]} == {"test_use"}
+    engine.close()
+
+    engine2 = GraphEngine(repo)
+    engine2.index_repository(force_rebuild=True)
+    diff = (
+        "--- a/b.py\n+++ b/b.py\n@@ -1 +1 @@\n-def helper() -> int:\n+def helper() -> int:\n"
+    )
+    literal = engine2.impact_of_diff(diff=diff)
+    assert literal["changed_files"] == ["b.py"]
+    engine2.close()
+
+
+def test_tsconfig_paths_and_barrel_reexports(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "tsconfig.json": (
+                '{\n  // base for aliases\n  "compilerOptions": {\n'
+                '    "baseUrl": ".",\n    "paths": {"@lib/*": ["src/lib/*"]}\n  }\n}\n'
+            ),
+            "src/lib/util.ts": "export function helper(x: number): number { return x; }\n",
+            "src/lib/index.ts": 'export * from "./util";\n',
+            "src/app.ts": (
+                'import { helper } from "@lib/index";\n\n'
+                "export function run(): number { return helper(1); }\n"
+            ),
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    result = engine.get_ast_call_slice("src/app.ts::run", hops=1, include_metadata=True)
+    assert "helper" in {item["qualified_name"] for item in result["downstream_callees"]}
+    engine.close()
+
+
+def test_tsx_and_js_grammars_when_available(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "widget.tsx": (
+                "export interface Props { title: string }\n\n"
+                "export function Widget({ title }: Props) {\n"
+                '  return <div className="widget">{title}</div>;\n'
+                "}\n"
+            ),
+            "legacy.js": "function oldSchool(x) { return x + 1; }\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    stats = engine.index_repository(force_rebuild=True)
+    if any("grammar" in reason.lower() for reason in stats["skipped_files"].values()):
+        engine.close()
+        pytest.skip("grammar download unavailable in this environment")
+    assert engine.resolve_strict("Widget")[0] is not None
+    assert engine.resolve_strict("oldSchool")[0] is not None
+    engine.close()

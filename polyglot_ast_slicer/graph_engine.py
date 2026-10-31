@@ -27,6 +27,8 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
+import subprocess
 import threading
 import time
 from collections import Counter, deque
@@ -121,7 +123,15 @@ class _Region:
     start_line: int
     end_line: int
     symbols: list[str] = field(default_factory=list)
+    symbol_ids: list[str] = field(default_factory=list)
     roles: set[str] = field(default_factory=set)
+
+
+def _strip_jsonc(text: str) -> str:
+    """Removes comments and trailing commas from a tsconfig-style JSON file."""
+    text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+    text = re.sub(r"^\s*//.*$", "", text, flags=re.M)
+    return re.sub(r",\s*([}\]])", r"\1", text)
 
 
 class GraphEngine:
@@ -187,6 +197,7 @@ class GraphEngine:
         self._ignore_patterns = (
             self._load_gitignore() if respect_gitignore else []
         )
+        self._tsconfig_base, self._tsconfig_paths = self._load_tsconfig()
         self._max_file_bytes = max_file_bytes
         self._indexed_at: float = 0.0
         self._last_index_stats: dict[str, Any] = {}
@@ -625,17 +636,73 @@ class GraphEngine:
         return parts[:-1]
 
     def _resolve_ts_module(self, spec: str, caller_file: str) -> str | None:
-        if not spec.startswith("."):
-            return None
-        base = os.path.normpath(os.path.join(os.path.dirname(caller_file), spec))
+        if spec.startswith("."):
+            base = os.path.normpath(os.path.join(os.path.dirname(caller_file), spec))
+            return self._first_ts_file(base)
+
+        for pattern, targets in self._tsconfig_paths.items():
+            if "*" in pattern:
+                prefix, _, suffix = pattern.partition("*")
+                if not (spec.startswith(prefix) and spec.endswith(suffix)):
+                    continue
+                middle = spec[len(prefix) : len(spec) - len(suffix) if suffix else None]
+                for target in targets:
+                    found = self._first_ts_file(
+                        os.path.join(self._tsconfig_root(), target.replace("*", middle))
+                    )
+                    if found is not None:
+                        return found
+            elif spec == pattern:
+                for target in targets:
+                    found = self._first_ts_file(os.path.join(self._tsconfig_root(), target))
+                    if found is not None:
+                        return found
+
+        if self._tsconfig_base is not None:
+            return self._first_ts_file(os.path.join(str(self._tsconfig_base), spec))
+        return None
+
+    def _tsconfig_root(self) -> str:
+        return str(self._tsconfig_base or self.repo_path)
+
+    def _first_ts_file(self, base: str) -> str | None:
         extensions = (".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".cts")
-        candidates = [base] if Path(base).suffix else []
+        candidates: list[str] = [base] if Path(base).suffix else []
         candidates += [base + extension for extension in extensions]
         candidates += [os.path.join(base, f"index{ext}") for ext in (".ts", ".tsx", ".js", ".jsx")]
         for candidate in candidates:
-            if candidate in self._by_file:
-                return candidate
+            normalised = os.path.normpath(candidate)
+            if normalised in self._by_file:
+                return normalised
         return None
+
+    def _load_tsconfig(self) -> tuple[Path | None, dict[str, list[str]]]:
+        path = self.repo_path / "tsconfig.json"
+        if not path.is_file():
+            return None, {}
+        text = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            data = json.loads(_strip_jsonc(text))
+        except json.JSONDecodeError:
+            return None, {}
+        if not isinstance(data, dict):
+            return None, {}
+        options = data.get("compilerOptions", {})
+        if not isinstance(options, dict):
+            options = {}
+        base_url = options.get("baseUrl")
+        base = (
+            (path.parent / base_url).resolve()
+            if isinstance(base_url, str)
+            else path.parent.resolve()
+        )
+        raw_paths = options.get("paths", {})
+        patterns: dict[str, list[str]] = {}
+        if isinstance(raw_paths, dict):
+            for alias, targets in raw_paths.items():
+                if isinstance(targets, list) and all(isinstance(item, str) for item in targets):
+                    patterns[str(alias)] = targets
+        return base, patterns
 
     # -- edges ----------------------------------------------------------
 
@@ -1237,6 +1304,7 @@ class GraphEngine:
                     "lines": f"{region.start_line}-{region.end_line}",
                     "byte_range": [region.start_byte, region.end_byte],
                     "symbols": region.symbols,
+                    "symbol_ids": region.symbol_ids,
                     "roles": sorted(region.roles),
                 }
                 for region in regions
@@ -1364,6 +1432,7 @@ class GraphEngine:
                     current.end_line = max(current.end_line, symbol.end_line)
                     if symbol.qualified_name not in current.symbols:
                         current.symbols.append(symbol.qualified_name)
+                        current.symbol_ids.append(snippet.symbol.symbol_id)
                     current.roles.add(snippet.role)
                     continue
                 if current is not None:
@@ -1375,6 +1444,7 @@ class GraphEngine:
                     start_line=symbol.start_line,
                     end_line=symbol.end_line,
                     symbols=[symbol.qualified_name],
+                    symbol_ids=[snippet.symbol.symbol_id],
                     roles={snippet.role},
                 )
             if current is not None:
@@ -1395,11 +1465,55 @@ class GraphEngine:
             code = data[region.start_byte : region.end_byte].decode("utf-8", errors="replace")
             symbols = ", ".join(region.symbols)
             roles = ", ".join(sorted(region.roles))
-            chunks.append(
+            context = self._context_lines(region, code)
+            header = (
                 f"### {self._rel(region.file_path)}:{region.start_line}-{region.end_line} "
-                f"[{symbols}] ({roles})\n{code.rstrip()}"
+                f"[{symbols}] ({roles})"
             )
+            chunks.append("\n".join([header, *context, code.rstrip()]))
         return "\n\n".join(chunks)
+
+    def _context_lines(self, region: _Region, code: str) -> list[str]:
+        """Adds enclosing-class and import context without repeating the sliced code."""
+        if not region.symbol_ids:
+            return []
+        symbol = self._symbols.get(region.symbol_ids[0])
+        if symbol is None:
+            return []
+        lines: list[str] = []
+        for enclosing in self._enclosing_classes(symbol):
+            if enclosing.qualified_name in region.symbols:
+                break
+            lines.append(
+                f"# class {enclosing.qualified_name}: "
+                f"({self._rel(enclosing.file_path)}:{enclosing.start_line}-{enclosing.end_line})"
+            )
+            break
+        parsed = self._parsed.get(region.file_path)
+        if parsed is not None:
+            rendered: list[str] = []
+            for ref in parsed.imports:
+                text = self._format_import(ref)
+                if not text or len(rendered) >= 8:
+                    continue
+                names = [original for _, original in ref.names] or [ref.alias or ref.module]
+                if any(name and name in code for name in names) or ref.wildcard:
+                    rendered.append(f"# import: {text}")
+            if rendered:
+                lines.extend(rendered)
+        return lines
+
+    def _format_import(self, ref: Any) -> str:
+        if ref.is_module:
+            alias = f" as {ref.alias}" if ref.alias and ref.alias != ref.module else ""
+            return f"import {ref.module}{alias}"
+        if ref.names:
+            names = ", ".join(
+                original if local == original else f"{original} as {local}"
+                for local, original in ref.names
+            )
+            return f"from {ref.module} import {names}"
+        return ""
 
     @staticmethod
     def _reduction(part: int, whole: int) -> float:
@@ -1592,6 +1706,138 @@ class GraphEngine:
                 "resolution": edge.get("resolution"),
                 "call_site": call_site,
             }
+
+    def impact_of_diff(
+        self,
+        base: str = "HEAD~1",
+        head: str = "HEAD",
+        diff: str | None = None,
+        max_depth: int = 3,
+    ) -> dict[str, Any]:
+        """Maps a git diff to changed symbols, impacted symbols and impacted tests."""
+        with self.lock:
+            if not self._symbols:
+                self.index_repository()
+
+            if diff is None:
+                diff_text, error = self._git_diff(base, head)
+                if error is not None:
+                    return {"error": error, "base": base, "head": head}
+                source = f"git diff {base}..{head}"
+            else:
+                diff_text, source = diff, "provided diff"
+
+            changed_lines = self._parse_unified_diff(diff_text)
+            changed_symbols: list[SymbolNode] = []
+            for relative, lines in sorted(changed_lines.items()):
+                absolute = str((self.repo_path / relative).resolve())
+                for symbol_id in sorted(self._by_file.get(absolute, set())):
+                    symbol = self._symbols[symbol_id]
+                    if any(symbol.start_line <= line <= symbol.end_line for line in lines):
+                        changed_symbols.append(symbol)
+
+            changed_ids = {symbol.symbol_id for symbol in changed_symbols}
+            impacted: dict[str, int] = {}
+            for symbol in changed_symbols:
+                for caller_id, hop in self._upstream_tags(symbol.symbol_id, max_depth).items():
+                    if caller_id in changed_ids:
+                        continue
+                    impacted[caller_id] = min(hop, impacted.get(caller_id, hop))
+
+            impacted_tests = [
+                self._symbol_meta(self._symbols[symbol_id], include_doc=False)
+                for symbol_id in sorted(impacted)
+                if self._looks_like_test(self._symbols[symbol_id])
+            ]
+
+            return {
+                "source": source,
+                "base": base,
+                "head": head,
+                "changed_files": sorted(changed_lines),
+                "changed_symbols": [
+                    self._symbol_meta(symbol, include_doc=False) for symbol in changed_symbols
+                ],
+                "impacted_symbols": [
+                    {
+                        **self._symbol_meta(self._symbols[symbol_id], include_doc=False),
+                        "hop_distance": hop,
+                    }
+                    for symbol_id, hop in sorted(
+                        impacted.items(), key=lambda item: (item[1], item[0])
+                    )
+                ],
+                "impacted_tests": impacted_tests,
+                "total_changed_symbols": len(changed_symbols),
+                "total_impacted_symbols": len(impacted),
+                "total_impacted_tests": len(impacted_tests),
+                "risk_level": self._risk_level(len(impacted)),
+                "note": "Impact is upstream call-graph reachability over calls/constructs.",
+            }
+
+    def _git_diff(self, base: str, head: str) -> tuple[str, str | None]:
+        if base.startswith("-") or head.startswith("-"):
+            return "", "invalid git revision"
+        try:
+            completed = subprocess.run(
+                ["git", "-C", str(self.repo_path), "diff", "-U0", base, head, "--"],
+                capture_output=True,
+                text=True,
+                timeout=120,
+                check=False,
+            )
+        except (OSError, subprocess.SubprocessError) as error:
+            return "", f"git diff failed: {error}"
+        if completed.returncode != 0:
+            return "", (completed.stderr.strip()[:500] or "git diff failed")
+        return completed.stdout, None
+
+    @staticmethod
+    def _parse_unified_diff(diff_text: str) -> dict[str, set[int]]:
+        changed: dict[str, set[int]] = {}
+        current: str | None = None
+        for line in diff_text.splitlines():
+            if line.startswith("+++ "):
+                target = line[4:].split("\t")[0].strip()
+                current = target[2:] if target.startswith("b/") else None
+                if current is not None:
+                    changed.setdefault(current, set())
+            elif line.startswith("@@") and current is not None:
+                match = re.search(r"\+(\d+)(?:,(\d+))?", line)
+                if match:
+                    start = int(match.group(1))
+                    count = int(match.group(2) or 1)
+                    changed[current].update(range(start, start + max(count, 1)))
+        return {path: lines for path, lines in changed.items() if lines}
+
+    def _upstream_tags(self, start: str, max_depth: int) -> dict[str, int]:
+        found: dict[str, int] = {}
+        queue: deque[tuple[str, int]] = deque([(start, 0)])
+        visited = {start}
+        while queue:
+            current, depth = queue.popleft()
+            if depth >= max_depth:
+                continue
+            for caller in sorted(self.graph.predecessors(current)):
+                edge = self.graph.get_edge_data(caller, current) or {}
+                if edge.get("relation") not in CALL_RELATIONS or caller in visited:
+                    continue
+                visited.add(caller)
+                found[caller] = depth + 1
+                queue.append((caller, depth + 1))
+        return found
+
+    @staticmethod
+    def _looks_like_test(symbol: SymbolNode) -> bool:
+        parts = {part.lower() for part in Path(symbol.file_path).parts}
+        name = symbol.qualified_name.lower()
+        return (
+            "tests" in parts
+            or "test" in parts
+            or name.startswith("test_")
+            or ".test." in name
+            or "_test." in name
+        )
 
     def get_index_stats(self) -> dict[str, Any]:
         with self.lock:
