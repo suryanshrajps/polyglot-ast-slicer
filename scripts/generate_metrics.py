@@ -255,29 +255,32 @@ def render(data: dict[str, object]) -> str:
         )
     lines += [
         "",
-        "## Stage B (offline outcome study)",
+        "## Stage B v2 (non-test entry points, budgeted co-change recall)",
         "",
     ]
-    stage_path = ROOT / "benchmarks" / "stage_b" / "summary.json"
+    stage_path = ROOT / "benchmarks" / "stage_b" / "summary_v2.json"
     if stage_path.exists():
         stage = json.loads(stage_path.read_text(encoding="utf-8"))
         lines += [
-            f"Commits: {stage['n']}, usable: {stage['ok']}.",
+            f"Entries: {stage['entries']}; commits dropped (fewer than 2 changed non-test "
+            f"symbols): {stage['dropped_commits']}.",
             "",
-            "| Metric | p50 | p90 |",
-            "|---|---:|---:|",
-            f"| co-change recall | {stage['co_change']['p50']} | {stage['co_change']['p90']} |",
-            f"| test recall | {stage['test_recall']['p50']} | {stage['test_recall']['p90']} |",
-            f"| payload tokens | {stage['payload']['p50']} | {stage['payload']['p90']} |",
-            f"| touched files | {stage['touched']['p50']} | {stage['touched']['p90']} |",
-            f"| grep -C20 | {stage['grep']['p50']} | {stage['grep']['p90']} |",
-            f"| repo map | {stage['map']['p50']} | {stage['map']['p90']} |",
+            "| Budget | Co-change recall (median) |",
+            "|---|---:|",
+        ]
+        for budget, value in stage["recall"].items():
+            label = "unlimited" if budget == "1000000000" else budget
+            lines.append(f"| {label} | {value} |")
+        lines += [
             "",
-            f"Payload beats grep {stage['baselines']['payload_beats_grep']}/{stage['ok']}, "
-            f"map {stage['baselines']['payload_beats_map']}/{stage['ok']}, "
-            f"touched files {stage['baselines']['payload_beats_touched']}/{stage['ok']}. "
-            f"Grep wins {stage['baselines']['grep_wins']}, map wins "
-            f"{stage['baselines']['map_wins']}.",
+            f"2-hop reachable (upper bound): {stage['reachable2_median']}; "
+            f"grep -C20 recall: {stage['grep_recall_median']}; "
+            f"touched-file recall: {stage['touched_recall_median']}.",
+            "",
+            "Miss classes: " + ", ".join(f"{k}={v}" for k, v in stage["classes"].items()) + ".",
+            "",
+            f"Median payload tokens: {stage['payload_median']}; median grep tokens: "
+            f"{stage['grep_tokens_median']}.",
             "",
         ]
     else:

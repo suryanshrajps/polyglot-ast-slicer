@@ -1,0 +1,20 @@
+{
+  "entries": 22,
+  "dropped_commits": 21,
+  "recall": {
+    "3000": 0.0,
+    "6000": 0.0,
+    "12000": 0.0,
+    "1000000000": 0.0
+  },
+  "reachable2_median": 0.321,
+  "grep_recall_median": 1.0,
+  "touched_recall_median": 1.0,
+  "classes": {
+    "not_connected_other": 10,
+    "not_connected_same_file": 24,
+    "connected_pruned": 5
+  },
+  "payload_median": 2195.5,
+  "grep_tokens_median": 14358.5
+}

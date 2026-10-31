@@ -1,630 +1,606 @@
 [
   {
-    "site_id": "c492fdc98020",
-    "repo": "requests",
-    "file": "tests/test_testserver.py",
-    "call_text": "Server.basic_response_server(requests_to_handle=2)",
-    "call_range": [
-      98,
-      17,
-      98,
-      67
-    ],
-    "call_context": "   96 |         \"\"\"can check the requests content\"\"\"\n   97 |         # TODO: figure out why this sometimes fails when using pytest-xdist.\n   98 |         server = Server.basic_response_server(requests_to_handle=2)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   99 |         first_request = b\"put your hands up in the air\"",
-    "callee": "basic_response_server",
-    "receiver": "Server",
-    "callee_short": "basic_response_server"
-  },
-  {
-    "site_id": "72d0b1f97cf4",
-    "repo": "requests",
-    "file": "tests/test_testserver.py",
-    "call_text": "Server.basic_response_server(requests_to_handle=requests_to_handle)",
-    "call_range": [
-      82,
-      17,
-      82,
-      84
-    ],
-    "call_context": "   80 |         requests_to_handle = 5\n   81 | \n   82 |         server = Server.basic_response_server(requests_to_handle=requests_to_handle)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   83 | ",
-    "callee": "basic_response_server",
-    "receiver": "Server",
-    "callee_short": "basic_response_server"
-  },
-  {
-    "site_id": "7020dece0803",
-    "repo": "requests",
-    "file": "src/requests/models.py",
-    "call_text": "_t.has_read(data)",
-    "call_range": [
-      641,
-      55,
-      641,
-      72
-    ],
-    "call_context": "  639 |                 if raw_data:\n  640 |                     body = self._encode_params(raw_data)\n  641 |                     if isinstance(data, basestring) or _t.has_read(data):\n      |                                                        ^^^^^^^^^^^^^^^^^\n  642 |                         content_type = None",
-    "callee": "has_read",
-    "receiver": "_t",
-    "callee_short": "has_read"
-  },
-  {
-    "site_id": "ef415d8bb1d8",
-    "repo": "requests",
-    "file": "tests/test_testserver.py",
-    "call_text": "Server.text_response_server(\n            \"HTTP/1.1 200 OK\\r\\nContent-Length: 6\\r\\n\\r\\nroflol\"\n        )",
-    "call_range": [
-      44,
-      17,
-      46,
-      9
-    ],
-    "call_context": "   42 |     def test_text_response(self):\n   43 |         \"\"\"the text_response_server sends the given text\"\"\"\n   44 |         server = Server.text_response_server(\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   45 |             \"HTTP/1.1 200 OK\\r\\nContent-Length: 6\\r\\n\\r\\nroflol\"\n   46 |         )\n   47 | ",
-    "callee": "text_response_server",
-    "receiver": "Server",
-    "callee_short": "text_response_server"
-  },
-  {
-    "site_id": "498c3866dd1f",
-    "repo": "requests",
-    "file": "src/requests/sessions.py",
-    "call_text": "DEFAULT_PORTS.get(old_parsed.scheme, None)",
-    "call_range": [
-      175,
-      24,
-      175,
-      66
-    ],
-    "call_context": "  173 |         changed_port = old_parsed.port != new_parsed.port\n  174 |         changed_scheme = old_parsed.scheme != new_parsed.scheme\n  175 |         default_port = (DEFAULT_PORTS.get(old_parsed.scheme, None), None)\n      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  176 |         if (",
-    "callee": "get",
-    "receiver": "DEFAULT_PORTS",
-    "callee_short": "get"
-  },
-  {
-    "site_id": "6be637154683",
-    "repo": "requests",
-    "file": "tests/test_lowlevel.py",
-    "call_text": "Server.basic_response_server(wait_to_close_event=close_server)",
-    "call_range": [
-      27,
-      13,
-      27,
-      75
-    ],
-    "call_context": "   25 |     \"\"\"can safely send generators\"\"\"\n   26 |     close_server = threading.Event()\n   27 |     server = Server.basic_response_server(wait_to_close_event=close_server)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   28 |     data = iter([b\"a\", b\"b\", b\"c\"])",
-    "callee": "basic_response_server",
-    "receiver": "Server",
-    "callee_short": "basic_response_server"
-  },
-  {
-    "site_id": "345709eaafe1",
-    "repo": "requests",
-    "file": "tests/test_testserver.py",
-    "call_text": "Server.basic_response_server()",
-    "call_range": [
-      146,
-      17,
-      146,
-      47
-    ],
-    "call_context": "  144 |     def test_server_finishes_on_error(self):\n  145 |         \"\"\"the server thread exits even if an exception exits the context manager\"\"\"\n  146 |         server = Server.basic_response_server()\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  147 |         with pytest.raises(Exception):",
-    "callee": "basic_response_server",
-    "receiver": "Server",
-    "callee_short": "basic_response_server"
-  },
-  {
-    "site_id": "00454979e022",
-    "repo": "requests",
-    "file": "tests/test_adapters.py",
-    "call_text": "requests.Request(method=\"GET\", url=\"http://127.0.0.1:10000//v:h\")",
-    "call_range": [
-      7,
-      8,
-      7,
-      73
-    ],
-    "call_context": "    5 |     \"\"\"See also https://github.com/psf/requests/issues/6643.\"\"\"\n    6 |     a = requests.adapters.HTTPAdapter()\n    7 |     p = requests.Request(method=\"GET\", url=\"http://127.0.0.1:10000//v:h\").prepare()\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    8 |     assert \"//v:h\" == a.request_url(p, {})",
-    "callee": "Request",
-    "receiver": "requests",
-    "callee_short": "Request"
-  },
-  {
-    "site_id": "abee9f24c3c8",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "morsel_to_cookie(morsel)",
-    "call_range": [
-      2533,
-      12,
-      2533,
-      36
-    ],
-    "call_context": " 2531 |         morsel[\"max-age\"] = \"woops\"\n 2532 |         with pytest.raises(TypeError):\n 2533 |             morsel_to_cookie(morsel)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^\n 2534 | ",
-    "callee": "morsel_to_cookie",
-    "receiver": null,
-    "callee_short": "morsel_to_cookie"
-  },
-  {
-    "site_id": "224ac6e6b376",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "httpbin(\"cookies\")",
-    "call_range": [
-      436,
-      18,
-      436,
-      36
-    ],
-    "call_context": "  434 |         s = requests.session()\n  435 |         s.cookies = cj\n  436 |         r = s.get(httpbin(\"cookies\"))\n      |                   ^^^^^^^^^^^^^^^^^^\n  437 |         # Make sure the cookie was sent",
-    "callee": "httpbin",
-    "receiver": null,
-    "callee_short": "httpbin"
-  },
-  {
-    "site_id": "3b8c9cc4278a",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "next(it)",
-    "call_range": [
-      2182,
-      8,
-      2182,
-      16
-    ],
-    "call_context": " 2180 | \n 2181 |         it = r.iter_lines()\n 2182 |         next(it)\n      |         ^^^^^^^^\n 2183 |         assert len(list(it)) == 3",
-    "callee": "next",
-    "receiver": null,
-    "callee_short": "next"
-  },
-  {
-    "site_id": "094118887d73",
-    "repo": "requests",
-    "file": "src/requests/status_codes.py",
-    "call_text": "doc(code)",
-    "call_range": [
-      122,
-      35,
-      122,
-      44
-    ],
-    "call_context": "  120 |     global __doc__\n  121 |     __doc__ = (\n  122 |         __doc__ + \"\\n\" + \"\\n\".join(doc(code) for code in sorted(_codes))\n      |                                    ^^^^^^^^^\n  123 |         if __doc__ is not None",
-    "callee": "doc",
-    "receiver": null,
-    "callee_short": "doc"
-  },
-  {
-    "site_id": "f89d99f3c267",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "httpbin(\"get\")",
-    "call_range": [
-      1767,
-      18,
-      1767,
-      32
-    ],
-    "call_context": " 1765 |         s = requests.Session()\n 1766 |         s.params[\"foo\"] = \"bar\"\n 1767 |         r = s.get(httpbin(\"get\"), params={\"FOO\": \"bar\"})\n      |                   ^^^^^^^^^^^^^^\n 1768 |         assert r.json()[\"args\"] == {\"foo\": \"bar\", \"FOO\": \"bar\"}",
-    "callee": "httpbin",
-    "receiver": null,
-    "callee_short": "httpbin"
-  },
-  {
-    "site_id": "66ab8ac8c6f3",
-    "repo": "requests",
-    "file": "src/requests/models.py",
-    "call_text": "parse_header_links(header)",
-    "call_range": [
-      1135,
-      20,
-      1135,
-      46
-    ],
-    "call_context": " 1133 | \n 1134 |         if header:\n 1135 |             links = parse_header_links(header)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1136 | ",
-    "callee": "parse_header_links",
-    "receiver": null,
-    "callee_short": "parse_header_links"
-  },
-  {
-    "site_id": "eb9bcd0cfd93",
-    "repo": "requests",
-    "file": "tests/test_utils.py",
-    "call_text": "get_encoding_from_headers(value)",
-    "call_range": [
-      655,
-      11,
-      655,
-      43
-    ],
-    "call_context": "  653 | )\n  654 | def test_get_encoding_from_headers(value, expected):\n  655 |     assert get_encoding_from_headers(value) == expected\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  656 | ",
-    "callee": "get_encoding_from_headers",
-    "receiver": null,
-    "callee_short": "get_encoding_from_headers"
-  },
-  {
-    "site_id": "c3b82ee07b6e",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "httpbin(method.lower())",
-    "call_range": [
-      131,
-      39,
-      131,
-      62
-    ],
-    "call_context": "  129 |     @pytest.mark.parametrize(\"method\", (\"POST\", \"PUT\", \"PATCH\", \"OPTIONS\"))\n  130 |     def test_no_body_content_length(self, httpbin, method):\n  131 |         req = requests.Request(method, httpbin(method.lower())).prepare()\n      |                                        ^^^^^^^^^^^^^^^^^^^^^^^\n  132 |         assert req.headers[\"Content-Length\"] == \"0\"",
-    "callee": "httpbin",
-    "receiver": null,
-    "callee_short": "httpbin"
-  },
-  {
-    "site_id": "619cbb90f502",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.codes.get(\"unordered_collection\")",
-    "call_range": [
-      2919,
-      13,
-      2919,
-      55
-    ],
-    "call_context": " 2917 |         r4 = requests.codes.get(\"unordered\")\n 2918 |         r5 = requests.codes.get(\"UNORDERED_COLLECTION\")\n 2919 |         r6 = requests.codes.get(\"unordered_collection\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2920 | ",
-    "callee": "get",
-    "receiver": "requests.codes",
-    "callee_short": "get"
-  },
-  {
-    "site_id": "5616b9fcb4fa",
-    "repo": "requests",
-    "file": "src/requests/models.py",
-    "call_text": "self.raw.close()",
-    "call_range": [
-      1180,
-      12,
-      1180,
-      28
-    ],
-    "call_context": " 1178 |         \"\"\"\n 1179 |         if not self._content_consumed:\n 1180 |             self.raw.close()\n      |             ^^^^^^^^^^^^^^^^\n 1181 | ",
-    "callee": "close",
-    "receiver": "self.raw",
-    "callee_short": "close"
-  },
-  {
-    "site_id": "c7bdced86a61",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.post(url).raise_for_status()",
-    "call_range": [
-      884,
-      8,
-      884,
-      45
-    ],
-    "call_context": "  882 |     def test_POSTBIN_GET_POST_FILES_WITH_DATA(self, httpbin):\n  883 |         url = httpbin(\"post\")\n  884 |         requests.post(url).raise_for_status()\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  885 | ",
-    "callee": "raise_for_status",
-    "receiver": "requests.post(url)",
-    "callee_short": "raise_for_status"
-  },
-  {
-    "site_id": "e407ebd6d7ac",
-    "repo": "requests",
-    "file": "tests/test_adapters.py",
-    "call_text": "requests.adapters.HTTPAdapter()",
-    "call_range": [
-      6,
-      8,
-      6,
-      39
-    ],
-    "call_context": "    4 | def test_request_url_handles_leading_path_separators():\n    5 |     \"\"\"See also https://github.com/psf/requests/issues/6643.\"\"\"\n    6 |     a = requests.adapters.HTTPAdapter()\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    7 |     p = requests.Request(method=\"GET\", url=\"http://127.0.0.1:10000//v:h\").prepare()",
-    "callee": "HTTPAdapter",
-    "receiver": "requests.adapters",
-    "callee_short": "HTTPAdapter"
-  },
-  {
-    "site_id": "1e102c24a13a",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.cookies.RequestsCookieJar()",
-    "call_range": [
-      1305,
-      14,
-      1305,
-      50
-    ],
-    "call_context": " 1303 |         rest = {\"HttpOnly\": True}\n 1304 | \n 1305 |         jar = requests.cookies.RequestsCookieJar()\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1306 |         jar.set(key, value, secure=secure, domain=domain, rest=rest)",
-    "callee": "RequestsCookieJar",
-    "receiver": "requests.cookies",
-    "callee_short": "RequestsCookieJar"
-  },
-  {
-    "site_id": "3a758802dc07",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.cookies.RequestsCookieJar()",
-    "call_range": [
-      1394,
-      14,
-      1394,
-      50
-    ],
-    "call_context": " 1392 |         value1 = \"some_value1\"\n 1393 | \n 1394 |         jar = requests.cookies.RequestsCookieJar()\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1395 |         jar.set(key, value)",
-    "callee": "RequestsCookieJar",
-    "receiver": "requests.cookies",
-    "callee_short": "RequestsCookieJar"
-  },
-  {
-    "site_id": "2aa84d03f7a9",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.cookies.RequestsCookieJar()",
-    "call_range": [
-      1429,
-      14,
-      1429,
-      50
-    ],
-    "call_context": " 1427 |         path = \"some_path\"\n 1428 | \n 1429 |         jar = requests.cookies.RequestsCookieJar()\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1430 |         jar.set(key, value, path=path)",
-    "callee": "RequestsCookieJar",
-    "receiver": "requests.cookies",
-    "callee_short": "RequestsCookieJar"
-  },
-  {
-    "site_id": "b375d269fbc2",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
-    "call_range": [
-      2051,
-      15,
-      2051,
-      81
-    ],
-    "call_context": " 2049 | \n 2050 |         data = BadFileObj(\"the data\")\n 2051 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2052 |         assert prep._body_position == 0",
-    "callee": "prepare",
-    "receiver": "requests.Request(\"GET\", \"http://example.com\", data=data)",
-    "callee_short": "prepare"
-  },
-  {
-    "site_id": "c36f7a164c4e",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "s.get(\n            httpbin(\"response-headers\"),\n            params={\"Set-Cookie\": \"foo=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT\"},\n        )",
-    "call_range": [
-      400,
-      8,
-      403,
-      9
-    ],
-    "call_context": "  398 |         s.get(httpbin(\"cookies/set?foo=bar\"))\n  399 |         assert s.cookies[\"foo\"] == \"bar\"\n  400 |         s.get(\n      |         ^^^^^^\n  401 |             httpbin(\"response-headers\"),\n  402 |             params={\"Set-Cookie\": \"foo=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT\"},\n  403 |         )\n  404 |         assert \"foo\" not in s.cookies",
-    "callee": "get",
-    "receiver": "s",
-    "callee_short": "get"
-  },
-  {
-    "site_id": "c9182f19190e",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "s.resolve_redirects(resp, prep_req)",
-    "call_range": [
-      468,
-      20,
-      468,
-      55
-    ],
-    "call_context": "  466 |         resp.status_code = 302\n  467 |         resp.headers[\"location\"] = httpbin(\"get\")\n  468 |         redirects = s.resolve_redirects(resp, prep_req)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  469 |         resp = next(redirects)",
-    "callee": "resolve_redirects",
-    "receiver": "s",
-    "callee_short": "resolve_redirects"
-  },
-  {
-    "site_id": "780d70bdaa4c",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.Request(\"GET\", \"http://example.com\", data=data)",
-    "call_range": [
-      2028,
-      15,
-      2028,
-      71
-    ],
-    "call_context": " 2026 |         data = io.BytesIO(b\"the data\")\n 2027 |         data.read(4)  # read some data\n 2028 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2029 |         assert prep._body_position == 4",
-    "callee": "Request",
-    "receiver": "requests",
-    "callee_short": "Request"
-  },
-  {
-    "site_id": "53a185bc45b0",
-    "repo": "requests",
-    "file": "tests/test_lowlevel.py",
-    "call_text": "r.json()",
-    "call_range": [
-      425,
-      8,
-      425,
-      16
-    ],
-    "call_context": "  423 |     r.encoding = None\n  424 |     with pytest.raises(requests.exceptions.JSONDecodeError) as excinfo:\n  425 |         r.json()\n      |         ^^^^^^^^\n  426 |     assert isinstance(excinfo.value, requests.exceptions.RequestException)",
-    "callee": "json",
-    "receiver": "r",
-    "callee_short": "json"
-  },
-  {
-    "site_id": "5923daeba007",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.Session()",
-    "call_range": [
-      1951,
-      12,
-      1951,
-      30
-    ],
-    "call_context": " 1949 | \n 1950 |     def test_should_strip_auth_https_upgrade(self):\n 1951 |         s = requests.Session()\n      |             ^^^^^^^^^^^^^^^^^^\n 1952 |         assert not s.should_strip_auth(",
-    "callee": "Session",
-    "receiver": "requests",
-    "callee_short": "Session"
-  },
-  {
-    "site_id": "fdaad818cc60",
-    "repo": "requests",
-    "file": "tests/test_requests.py",
-    "call_text": "requests.Request(\"GET\", url)",
-    "call_range": [
-      677,
-      14,
-      677,
-      42
-    ],
-    "call_context": "  675 |             \"https\": \"http://test:pass@localhost:8090\",\n  676 |         }\n  677 |         req = requests.Request(\"GET\", url)\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  678 |         prep = req.prepare()",
-    "callee": "Request",
-    "receiver": "requests",
-    "callee_short": "Request"
-  },
-  {
-    "site_id": "53ac0bcf56a5",
+    "site_id": "cd25e233f77a",
     "repo": "requests",
     "file": "tests/test_requests.py",
     "call_text": "requests.get(httpbin(\"get\"))",
     "call_range": [
-      1547,
-      12,
-      1547,
-      40
+      490,
+      15,
+      490,
+      43
     ],
-    "call_context": " 1545 | \n 1546 |     def test_request_and_response_are_pickleable(self, httpbin):\n 1547 |         r = requests.get(httpbin(\"get\"))\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1548 | ",
+    "call_context": "  488 |     def test_history_is_always_a_list(self, httpbin):\n  489 |         \"\"\"Show that even with redirects, Response.history is always a list.\"\"\"\n  490 |         resp = requests.get(httpbin(\"get\"))\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  491 |         assert isinstance(resp.history, list)",
     "callee": "get",
-    "receiver": "requests",
-    "callee_short": "get"
+    "receiver": "requests"
   },
   {
-    "site_id": "69b40f6aa068",
-    "repo": "requests",
-    "file": "src/requests/sessions.py",
-    "call_text": "session_hooks.get(\"response\")",
-    "call_range": [
-      118,
-      32,
-      118,
-      61
-    ],
-    "call_context": "  116 |     merge breaks Session hooks entirely.\n  117 |     \"\"\"\n  118 |     if session_hooks is None or session_hooks.get(\"response\") == []:\n      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  119 |         return request_hooks",
-    "callee": "get",
-    "receiver": "session_hooks",
-    "callee_short": "get"
-  },
-  {
-    "site_id": "167e2826dffd",
+    "site_id": "8231a3a2c127",
     "repo": "requests",
     "file": "tests/test_requests.py",
-    "call_text": "requests.Request(\"GET\", httpbin(\"get\"))",
+    "call_text": "requests.get(httpbin(\"stream/4\"), stream=True)",
     "call_range": [
-      206,
+      2178,
       12,
-      206,
-      51
+      2178,
+      58
     ],
-    "call_context": "  204 | \n  205 |     def test_HTTP_200_OK_GET_ALTERNATIVE(self, httpbin):\n  206 |         r = requests.Request(\"GET\", httpbin(\"get\"))\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  207 |         s = requests.Session()",
-    "callee": "Request",
-    "receiver": "requests",
-    "callee_short": "Request"
+    "call_context": " 2176 | \n 2177 |     def test_response_iter_lines(self, httpbin):\n 2178 |         r = requests.get(httpbin(\"stream/4\"), stream=True)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2179 |         assert r.status_code == 200",
+    "callee": "get",
+    "receiver": "requests"
   },
   {
-    "site_id": "824909ba83ac",
+    "site_id": "d287f1b89029",
     "repo": "requests",
-    "file": "tests/test_lowlevel.py",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.head(httpbin(\"status\", \"302\"), allow_redirects=True)",
+    "call_range": [
+      300,
+      12,
+      300,
+      73
+    ],
+    "call_context": "  298 | \n  299 |     def test_http_302_doesnt_change_head_to_get(self, httpbin):\n  300 |         r = requests.head(httpbin(\"status\", \"302\"), allow_redirects=True)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  301 |         assert r.status_code == 200",
+    "callee": "head",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "2911386f4a23",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.get(url)",
+    "call_range": [
+      698,
+      16,
+      698,
+      33
+    ],
+    "call_context": "  696 | \n  697 |             # Should use netrc and work.\n  698 |             r = requests.get(url)\n      |                 ^^^^^^^^^^^^^^^^^\n  699 |             assert r.status_code == 200",
+    "callee": "get",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "3d6c063c57aa",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
     "call_text": "requests.get(url, auth=auth)",
     "call_range": [
-      268,
+      799,
+      16,
+      799,
+      44
+    ],
+    "call_context": "  797 |             url = httpbin(\"digest-auth\", \"auth\", \"user\", \"pass\", authtype)\n  798 | \n  799 |             r = requests.get(url, auth=auth)\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  800 |             assert r.status_code == 401",
+    "callee": "get",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "49442f6f8f6a",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.get(TARPIT, timeout=timeout)",
+    "call_range": [
+      2583,
       12,
-      268,
+      2583,
+      49
+    ],
+    "call_context": " 2581 |     def test_connect_timeout(self, timeout):\n 2582 |         try:\n 2583 |             requests.get(TARPIT, timeout=timeout)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2584 |             pytest.fail(\"The connect() request should time out.\")",
+    "callee": "get",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "1f699ab2afb0",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.session()",
+    "call_range": [
+      418,
+      12,
+      418,
+      30
+    ],
+    "call_context": "  416 | \n  417 |     def test_request_cookie_overrides_session_cookie(self, httpbin):\n  418 |         s = requests.session()\n      |             ^^^^^^^^^^^^^^^^^^\n  419 |         s.cookies[\"foo\"] = \"bar\"",
+    "callee": "session",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "e6c17176f270",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"bytes/20\")",
+    "call_range": [
+      2900,
+      25,
+      2900,
+      44
+    ],
+    "call_context": " 2898 | \n 2899 |     def test_json_decode_compatibility(self, httpbin):\n 2900 |         r = requests.get(httpbin(\"bytes/20\"))\n      |                          ^^^^^^^^^^^^^^^^^^^\n 2901 |         with pytest.raises(requests.exceptions.JSONDecodeError) as excinfo:",
+    "callee": "httpbin",
+    "receiver": null
+  },
+  {
+    "site_id": "b2869b697fa2",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"post\")",
+    "call_range": [
+      1905,
+      39,
+      1905,
+      54
+    ],
+    "call_context": " 1903 |         data = \"this is a string\"\n 1904 |         length = \"16\"\n 1905 |         req = requests.Request(\"POST\", httpbin(\"post\"), data=data)\n      |                                        ^^^^^^^^^^^^^^^\n 1906 |         p = req.prepare()",
+    "callee": "httpbin",
+    "receiver": null
+  },
+  {
+    "site_id": "c4563d418298",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"/status/204\")",
+    "call_range": [
+      2231,
+      25,
+      2231,
+      47
+    ],
+    "call_context": " 2229 | \n 2230 |     def test_response_json_when_content_is_None(self, httpbin):\n 2231 |         r = requests.get(httpbin(\"/status/204\"))\n      |                          ^^^^^^^^^^^^^^^^^^^^^^\n 2232 |         # Make sure r.content is None",
+    "callee": "httpbin",
+    "receiver": null
+  },
+  {
+    "site_id": "fc143614b6ca",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"get\")",
+    "call_range": [
+      532,
+      26,
+      532,
       40
     ],
-    "call_context": "  266 |     with server as (host, port):\n  267 |         url = f'http://{host}:{port}/'\n  268 |         r = requests.get(url, auth=auth)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  269 |         # Verify server didn't receive auth from us.",
-    "callee": "get",
-    "receiver": "requests",
-    "callee_short": "get"
+    "call_context": "  530 | \n  531 |     def test_HTTP_200_OK_HEAD(self, httpbin):\n  532 |         r = requests.head(httpbin(\"get\"))\n      |                           ^^^^^^^^^^^^^^\n  533 |         assert r.status_code == 200",
+    "callee": "httpbin",
+    "receiver": null
   },
   {
-    "site_id": "1c055bb01f2b",
+    "site_id": "08b925d8b757",
     "repo": "requests",
-    "file": "src/requests/structures.py",
-    "call_text": "self.update(data, **kwargs)",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"get\")",
     "call_range": [
-      57,
-      8,
-      57,
-      35
+      380,
+      12,
+      380,
+      26
     ],
-    "call_context": "   55 |         if data is None:\n   56 |             data = {}\n   57 |         self.update(data, **kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   58 | ",
-    "callee": "update",
-    "receiver": "self",
-    "callee_short": "update"
+    "call_context": "  378 | \n  379 |         r = requests.get(\n  380 |             httpbin(\"get\") + \"?test=true\", params={\"q\": \"test\"}, headers=heads\n      |             ^^^^^^^^^^^^^^\n  381 |         )",
+    "callee": "httpbin",
+    "receiver": null
   },
   {
-    "site_id": "2b7958665728",
+    "site_id": "0bfb3673df83",
     "repo": "requests",
-    "file": "src/requests/auth.py",
-    "call_text": "self.build_digest_header(\n                cast(str, prep.method), cast(str, prep.url)\n            )",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"post\")",
     "call_range": [
-      307,
-      27,
-      309,
-      13
+      141,
+      37,
+      141,
+      52
     ],
-    "call_context": "  305 |             prep.prepare_cookies(cookie_jar)\n  306 | \n  307 |             _digest_auth = self.build_digest_header(\n      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^\n  308 |                 cast(str, prep.method), cast(str, prep.url)\n  309 |             )\n  310 |             if _digest_auth:",
-    "callee": "build_digest_header",
-    "receiver": "self",
-    "callee_short": "build_digest_header"
+    "call_context": "  139 |     def test_override_content_length(self, httpbin):\n  140 |         headers = {\"Content-Length\": \"not zero\"}\n  141 |         r = requests.Request(\"POST\", httpbin(\"post\"), headers=headers).prepare()\n      |                                      ^^^^^^^^^^^^^^^\n  142 |         assert \"Content-Length\" in r.headers",
+    "callee": "httpbin",
+    "receiver": null
   },
   {
-    "site_id": "6b8f23d68254",
+    "site_id": "b984150196dc",
     "repo": "requests",
-    "file": "src/requests/cookies.py",
-    "call_text": "self.iteritems()",
+    "file": "tests/test_requests.py",
+    "call_text": "httpbin(\"post\")",
     "call_range": [
-      300,
-      20,
-      300,
-      36
+      2162,
+      26,
+      2162,
+      41
     ],
-    "call_context": "  298 |         .. seealso:: keys() and values().\n  299 |         \"\"\"\n  300 |         return list(self.iteritems())\n      |                     ^^^^^^^^^^^^^^^^\n  301 | ",
-    "callee": "iteritems",
-    "receiver": "self",
-    "callee_short": "iteritems"
+    "call_context": " 2160 | \n 2161 |     def test_json_param_post_content_type_works(self, httpbin):\n 2162 |         r = requests.post(httpbin(\"post\"), json={\"life\": 42})\n      |                           ^^^^^^^^^^^^^^^\n 2163 |         assert r.status_code == 200",
+    "callee": "httpbin",
+    "receiver": null
   },
   {
-    "site_id": "d117fc200c75",
-    "repo": "requests",
-    "file": "src/requests/models.py",
-    "call_text": "self.close()",
-    "call_range": [
-      816,
-      8,
-      816,
-      20
-    ],
-    "call_context": "  814 | \n  815 |     def __exit__(self, *args: Any) -> None:\n  816 |         self.close()\n      |         ^^^^^^^^^^^^\n  817 | ",
-    "callee": "close",
-    "receiver": "self",
-    "callee_short": "close"
-  },
-  {
-    "site_id": "968113a34910",
+    "site_id": "b7033a119462",
     "repo": "requests",
     "file": "src/requests/adapters.py",
-    "call_text": "self.get_connection_with_tls_context(\n                request, verify, proxies=proxies, cert=cert\n            )",
+    "call_text": "request",
     "call_range": [
-      662,
-      19,
-      664,
-      13
+      581,
+      28,
+      581,
+      35
     ],
-    "call_context": "  660 | \n  661 |         try:\n  662 |             conn = self.get_connection_with_tls_context(\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  663 |                 request, verify, proxies=proxies, cert=cert\n  664 |             )\n  665 |         except LocationValueError as e:",
-    "callee": "get_connection_with_tls_context",
-    "receiver": "self",
-    "callee_short": "get_connection_with_tls_context"
+    "call_context": "  579 |         :rtype: str\n  580 |         \"\"\"\n  581 |         assert _is_prepared(request)\n      |                             ^^^^^^^\n  582 | ",
+    "callee": "request",
+    "receiver": null
   },
   {
-    "site_id": "6e5234d2f8c8",
+    "site_id": "ee4dd434cc54",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "items",
+    "call_range": [
+      1401,
+      35,
+      1401,
+      40
+    ],
+    "call_context": " 1399 |         assert items == list(items)\n 1400 |         # make sure one can use items multiple times\n 1401 |         assert list(items) == list(items)\n      |                                    ^^^^^\n 1402 | ",
+    "callee": "items",
+    "receiver": null
+  },
+  {
+    "site_id": "1ef3881f5af8",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "values",
+    "call_range": [
+      1383,
+      30,
+      1383,
+      36
+    ],
+    "call_context": " 1381 | \n 1382 |         values = jar.values()\n 1383 |         assert values == list(values)\n      |                               ^^^^^^\n 1384 |         # make sure one can use values multiple times",
+    "callee": "values",
+    "receiver": null
+  },
+  {
+    "site_id": "49df4d2f0c37",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "hook2",
+    "call_range": [
+      1220,
+      35,
+      1220,
+      40
+    ],
+    "call_context": " 1218 |         assert hook1 is not hook2\n 1219 |         s = requests.Session()\n 1220 |         s.hooks[\"response\"].append(hook2)\n      |                                    ^^^^^\n 1221 |         r = requests.Request(\"GET\", httpbin(), hooks={\"response\": [hook1]})",
+    "callee": "hook2",
+    "receiver": null
+  },
+  {
+    "site_id": "8ccc066a3958",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "r.content",
+    "call_range": [
+      286,
+      14,
+      286,
+      23
+    ],
+    "call_context": "  284 |     def test_http_301_doesnt_change_head_to_get(self, httpbin):\n  285 |         r = requests.head(httpbin(\"status\", \"301\"), allow_redirects=True)\n  286 |         print(r.content)\n      |               ^^^^^^^^^\n  287 |         assert r.status_code == 200",
+    "callee": "content",
+    "receiver": "r"
+  },
+  {
+    "site_id": "49df4d2f0c37",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "hook2",
+    "call_range": [
+      1220,
+      35,
+      1220,
+      40
+    ],
+    "call_context": " 1218 |         assert hook1 is not hook2\n 1219 |         s = requests.Session()\n 1220 |         s.hooks[\"response\"].append(hook2)\n      |                                    ^^^^^\n 1221 |         r = requests.Request(\"GET\", httpbin(), hooks={\"response\": [hook1]})",
+    "callee": "hook2",
+    "receiver": null
+  },
+  {
+    "site_id": "508f335ff1b7",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
+    "call_range": [
+      2074,
+      15,
+      2074,
+      81
+    ],
+    "call_context": " 2072 | \n 2073 |         data = BadFileObj(\"the data\")\n 2074 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2075 |         assert prep._body_position == 0",
+    "callee": "prepare",
+    "receiver": "requests.Request(\"GET\", \"http://example.com\", data=data)"
+  },
+  {
+    "site_id": "7816d2ec6a5a",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "resp.headers.get(\"location\")",
+    "call_range": [
+      2315,
+      27,
+      2315,
+      55
+    ],
+    "call_context": " 2313 |                     return resp.headers[\"location\"]\n 2314 |                 # edge case - check to see if 'location' is in headers anyways\n 2315 |                 location = resp.headers.get(\"location\")\n      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2316 |                 if location and (location != resp.url):",
+    "callee": "get",
+    "receiver": "resp.headers"
+  },
+  {
+    "site_id": "0cbaefe972d9",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.headers.keys()",
+    "call_range": [
+      1787,
+      25,
+      1787,
+      41
+    ],
+    "call_context": " 1785 |         # we go.\n 1786 |         assert \"unicode\" in p.headers.keys()\n 1787 |         assert \"byte\" in p.headers.keys()\n      |                          ^^^^^^^^^^^^^^^^\n 1788 | ",
+    "callee": "keys",
+    "receiver": "p.headers"
+  },
+  {
+    "site_id": "c5574f201ec1",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
+    "call_range": [
+      2028,
+      15,
+      2028,
+      81
+    ],
+    "call_context": " 2026 |         data = io.BytesIO(b\"the data\")\n 2027 |         data.read(4)  # read some data\n 2028 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2029 |         assert prep._body_position == 4",
+    "callee": "prepare",
+    "receiver": "requests.Request(\"GET\", \"http://example.com\", data=data)"
+  },
+  {
+    "site_id": "ed18fbdbedbb",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.utils.rewind_body(prep)",
+    "call_range": [
+      2022,
+      8,
+      2022,
+      40
+    ],
+    "call_context": " 2020 | \n 2021 |         # rewind it back\n 2022 |         requests.utils.rewind_body(prep)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2023 |         assert prep.body.read() == b\"the data\"",
+    "callee": "rewind_body",
+    "receiver": "requests.utils"
+  },
+  {
+    "site_id": "7ee98a97dd59",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "session.headers.update({\"Proxy-Authorization\": proxy_auth_value})",
+    "call_range": [
+      656,
+      8,
+      656,
+      73
+    ],
+    "call_context": "  654 |         proxy_auth_value = \"Bearer XXX\"\n  655 |         session = requests.Session()\n  656 |         session.headers.update({\"Proxy-Authorization\": proxy_auth_value})\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  657 |         resp = session.request(method=\"GET\", url=httpbin(\"get\"))",
+    "callee": "update",
+    "receiver": "session.headers"
+  },
+  {
+    "site_id": "556e3411667c",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.Session()",
+    "call_range": [
+      1713,
+      12,
+      1713,
+      30
+    ],
+    "call_context": " 1711 |         url_matching_prefix = mixed_case_prefix + \"/full_url\"\n 1712 | \n 1713 |         s = requests.Session()\n      |             ^^^^^^^^^^^^^^^^^^\n 1714 |         my_adapter = HTTPAdapter()",
+    "callee": "Session",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "ffe714fb5692",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.Request(\"GET\", url)",
+    "call_range": [
+      201,
+      12,
+      201,
+      40
+    ],
+    "call_context": "  199 |         parts = urlparse(httpbin(\"get\"))\n  200 |         url = scheme + parts.netloc + parts.path\n  201 |         r = requests.Request(\"GET\", url)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  202 |         r = s.send(r.prepare())",
+    "callee": "Request",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "8782eab87437",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "CaseInsensitiveDict()",
+    "call_range": [
+      2398,
+      14,
+      2398,
+      35
+    ],
+    "call_context": " 2396 | \n 2397 |     def test_update(self):\n 2398 |         cid = CaseInsensitiveDict()\n      |               ^^^^^^^^^^^^^^^^^^^^^\n 2399 |         cid[\"spam\"] = \"blueval\"",
+    "callee": "CaseInsensitiveDict",
+    "receiver": null
+  },
+  {
+    "site_id": "86a70ed52e8b",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.auth.AuthBase",
+    "call_range": [
+      1240,
+      24,
+      1240,
+      46
+    ],
+    "call_context": " 1238 | \n 1239 |     def test_prepared_from_session(self, httpbin):\n 1240 |         class DummyAuth(requests.auth.AuthBase):\n      |                         ^^^^^^^^^^^^^^^^^^^^^^\n 1241 |             def __call__(self, r):",
+    "callee": "AuthBase",
+    "receiver": "requests.auth"
+  },
+  {
+    "site_id": "c7dd48904583",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "HTTPAdapter()",
+    "call_range": [
+      1751,
+      18,
+      1751,
+      31
+    ],
+    "call_context": " 1749 | \n 1750 |         s = requests.Session()\n 1751 |         adapter = HTTPAdapter()\n      |                   ^^^^^^^^^^^^^\n 1752 |         s.mount(prefix, adapter)",
+    "callee": "HTTPAdapter",
+    "receiver": null
+  },
+  {
+    "site_id": "ac6e76e49b47",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "requests.Response()",
+    "call_range": [
+      1456,
+      12,
+      1456,
+      31
+    ],
+    "call_context": " 1454 | \n 1455 |     def test_response_is_iterable(self):\n 1456 |         r = requests.Response()\n      |             ^^^^^^^^^^^^^^^^^^^\n 1457 |         io = StringIO.StringIO(\"abc\")",
+    "callee": "Response",
+    "receiver": "requests"
+  },
+  {
+    "site_id": "c4188958d090",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "s.get(httpbin(\"get\"))",
+    "call_range": [
+      1634,
+      12,
+      1634,
+      33
+    ],
+    "call_context": " 1632 |         s.headers.update({\"ACCEPT\": \"BOGUS\"})\n 1633 |         s.headers.update({\"accept\": \"application/json\"})\n 1634 |         r = s.get(httpbin(\"get\"))\n      |             ^^^^^^^^^^^^^^^^^^^^^\n 1635 |         headers = r.request.headers",
+    "callee": "get",
+    "receiver": "s"
+  },
+  {
+    "site_id": "d31feed803c6",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "r.json()",
+    "call_range": [
+      2239,
+      12,
+      2239,
+      20
+    ],
+    "call_context": " 2237 |         assert r.content is None\n 2238 |         with pytest.raises(ValueError):\n 2239 |             r.json()\n      |             ^^^^^^^^\n 2240 | ",
+    "callee": "json",
+    "receiver": "r"
+  },
+  {
+    "site_id": "65057380e047",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "s.should_strip_auth(\n            \"http://example.com:80/foo\", \"https://example.com/bar\"\n        )",
+    "call_range": [
+      1955,
+      19,
+      1957,
+      9
+    ],
+    "call_context": " 1953 |             \"http://example.com/foo\", \"https://example.com/bar\"\n 1954 |         )\n 1955 |         assert not s.should_strip_auth(\n      |                    ^^^^^^^^^^^^^^^^^^^^\n 1956 |             \"http://example.com:80/foo\", \"https://example.com/bar\"\n 1957 |         )\n 1958 |         assert not s.should_strip_auth(",
+    "callee": "should_strip_auth",
+    "receiver": "s"
+  },
+  {
+    "site_id": "dbc6a286c840",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "resp.json()",
+    "call_range": [
+      658,
+      23,
+      658,
+      34
+    ],
+    "call_context": "  656 |         session.headers.update({\"Proxy-Authorization\": proxy_auth_value})\n  657 |         resp = session.request(method=\"GET\", url=httpbin(\"get\"))\n  658 |         sent_headers = resp.json().get(\"headers\", {})\n      |                        ^^^^^^^^^^^\n  659 | ",
+    "callee": "json",
+    "receiver": "resp"
+  },
+  {
+    "site_id": "a48092caebac",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "s.mount(prefix, adapter)",
+    "call_range": [
+      1739,
+      8,
+      1739,
+      32
+    ],
+    "call_context": " 1737 |         s = requests.Session()\n 1738 |         adapter = HTTPAdapter()\n 1739 |         s.mount(prefix, adapter)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^\n 1740 | ",
+    "callee": "mount",
+    "receiver": "s"
+  },
+  {
+    "site_id": "e00c2fbe3699",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "jar.get(key, domain=domain1)",
+    "call_range": [
+      1421,
+      17,
+      1421,
+      45
+    ],
+    "call_context": " 1419 | \n 1420 |         # Verify that CookieConflictError is not raised if domain is specified\n 1421 |         cookie = jar.get(key, domain=domain1)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1422 |         assert cookie == value",
+    "callee": "get",
+    "receiver": "jar"
+  },
+  {
+    "site_id": "ae8fae5d2aa1",
+    "repo": "requests",
+    "file": "tests/testserver/server.py",
+    "call_text": "self._create_socket_and_bind()",
+    "call_range": [
+      69,
+      31,
+      69,
+      61
+    ],
+    "call_context": "   67 |     def run(self):\n   68 |         try:\n   69 |             self.server_sock = self._create_socket_and_bind()\n      |                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   70 |             # in case self.port = 0",
+    "callee": "_create_socket_and_bind",
+    "receiver": "self"
+  },
+  {
+    "site_id": "627987de10a1",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "self._build_raw()",
+    "call_range": [
+      2631,
+      16,
+      2631,
+      33
+    ],
+    "call_context": " 2629 | \n 2630 |         r.headers = CaseInsensitiveDict({\"Location\": \"/\"})\n 2631 |         r.raw = self._build_raw()\n      |                 ^^^^^^^^^^^^^^^^^\n 2632 |         r.request = request",
+    "callee": "_build_raw",
+    "receiver": "self"
+  },
+  {
+    "site_id": "c334d5b7d586",
     "repo": "requests",
     "file": "src/requests/models.py",
     "call_text": "self._encode_params(params)",
@@ -636,56 +612,67 @@
     ],
     "call_context": "  550 | \n  551 |         if params is not None:\n  552 |             enc_params = self._encode_params(params)\n      |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  553 |         else:",
     "callee": "_encode_params",
-    "receiver": "self",
-    "callee_short": "_encode_params"
+    "receiver": "self"
   },
   {
-    "site_id": "800429a5eea7",
+    "site_id": "373dcfdcf41e",
     "repo": "requests",
-    "file": "src/requests/adapters.py",
-    "call_text": "self.init_poolmanager(\n            self._pool_connections, self._pool_maxsize, block=self._pool_block\n        )",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.request(\"DELETE\", url, **kwargs)",
     "call_range": [
-      235,
+      750,
+      15,
+      750,
+      52
+    ],
+    "call_context": "  748 |         \"\"\"\n  749 | \n  750 |         return self.request(\"DELETE\", url, **kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  751 | ",
+    "callee": "request",
+    "receiver": "self"
+  },
+  {
+    "site_id": "1819a1313bbc",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.prepare_cookies(cookies)",
+    "call_range": [
+      443,
       8,
-      237,
+      443,
+      37
+    ],
+    "call_context": "  441 |         self.prepare_url(url, params)\n  442 |         self.prepare_headers(headers)\n  443 |         self.prepare_cookies(cookies)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  444 |         self.prepare_body(data, files, json)",
+    "callee": "prepare_cookies",
+    "receiver": "self"
+  },
+  {
+    "site_id": "bb5266fed79b",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "self.is_unverifiable()",
+    "call_range": [
+      103,
+      15,
+      103,
+      37
+    ],
+    "call_context": "  101 |     @property\n  102 |     def unverifiable(self) -> bool:\n  103 |         return self.is_unverifiable()\n      |                ^^^^^^^^^^^^^^^^^^^^^^\n  104 | ",
+    "callee": "is_unverifiable",
+    "receiver": "self"
+  },
+  {
+    "site_id": "11dcba40ec75",
+    "repo": "requests",
+    "file": "tests/testserver/server.py",
+    "call_text": "super().__init__(\n            handler=handler,\n            host=host,\n            port=port,\n            requests_to_handle=requests_to_handle,\n            wait_to_close_event=wait_to_close_event,\n        )",
+    "call_range": [
+      152,
+      8,
+      158,
       9
     ],
-    "call_context": "  233 |             setattr(self, attr, value)\n  234 | \n  235 |         self.init_poolmanager(\n      |         ^^^^^^^^^^^^^^^^^^^^^^\n  236 |             self._pool_connections, self._pool_maxsize, block=self._pool_block\n  237 |         )\n  238 | ",
-    "callee": "init_poolmanager",
-    "receiver": "self",
-    "callee_short": "init_poolmanager"
-  },
-  {
-    "site_id": "7725aa610747",
-    "repo": "requests",
-    "file": "tests/testserver/server.py",
-    "call_text": "self._close_server_sock_ignore_errors()",
-    "call_range": [
-      133,
-      8,
-      133,
-      47
-    ],
-    "call_context": "  131 | \n  132 |         # ensure server thread doesn't get stuck waiting for connections\n  133 |         self._close_server_sock_ignore_errors()\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  134 |         self.join()",
-    "callee": "_close_server_sock_ignore_errors",
-    "receiver": "self",
-    "callee_short": "_close_server_sock_ignore_errors"
-  },
-  {
-    "site_id": "595e6fcfaef5",
-    "repo": "requests",
-    "file": "tests/testserver/server.py",
-    "call_text": "super().__init__()",
-    "call_range": [
-      38,
-      8,
-      38,
-      26
-    ],
-    "call_context": "   36 |         wait_to_close_event=None,\n   37 |     ):\n   38 |         super().__init__()\n      |         ^^^^^^^^^^^^^^^^^^\n   39 | ",
+    "call_context": "  150 |         cacert=None,\n  151 |     ):\n  152 |         super().__init__(\n      |         ^^^^^^^^^^^^^^^^^\n  153 |             handler=handler,\n  154 |             host=host,\n  155 |             port=port,\n  156 |             requests_to_handle=requests_to_handle,\n  157 |             wait_to_close_event=wait_to_close_event,\n  158 |         )\n  159 |         self.cert_chain = cert_chain",
     "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
+    "receiver": "super()"
   },
   {
     "site_id": "cf046800c744",
@@ -700,88 +687,7 @@
     ],
     "call_context": "  124 | \n  125 |     def __init__(self) -> None:\n  126 |         super().__init__()\n      |         ^^^^^^^^^^^^^^^^^^\n  127 | ",
     "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
-  },
-  {
-    "site_id": "45c4e1a0a287",
-    "repo": "requests",
-    "file": "src/requests/cookies.py",
-    "call_text": "super().update(other)",
-    "call_range": [
-      399,
-      12,
-      399,
-      33
-    ],
-    "call_context": "  397 |                 self.set_cookie(copy.copy(cookie))\n  398 |         else:\n  399 |             super().update(other)\n      |             ^^^^^^^^^^^^^^^^^^^^^\n  400 | ",
-    "callee": "update",
-    "receiver": "super()",
-    "callee_short": "update"
-  },
-  {
-    "site_id": "a8ca2c4a5699",
-    "repo": "requests",
-    "file": "src/requests/structures.py",
-    "call_text": "super().__init__()",
-    "call_range": [
-      103,
-      8,
-      103,
-      26
-    ],
-    "call_context": "  101 |     def __init__(self, name: Any = None) -> None:\n  102 |         self.name = name\n  103 |         super().__init__()\n      |         ^^^^^^^^^^^^^^^^^^\n  104 | ",
-    "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
-  },
-  {
-    "site_id": "710788e0eb92",
-    "repo": "requests",
-    "file": "src/requests/exceptions.py",
-    "call_text": "super().__init__(*args, **kwargs)",
-    "call_range": [
-      35,
-      8,
-      35,
-      41
-    ],
-    "call_context": "   33 |         if response is not None and not self.request and hasattr(response, \"request\"):\n   34 |             self.request = response.request\n   35 |         super().__init__(*args, **kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   36 | ",
-    "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
-  },
-  {
-    "site_id": "17ace511c79a",
-    "repo": "requests",
-    "file": "src/requests/cookies.py",
-    "call_text": "super().__contains__(name)",
-    "call_range": [
-      354,
-      19,
-      354,
-      45
-    ],
-    "call_context": "  352 |     def __contains__(self, name: object) -> bool:\n  353 |         try:\n  354 |             return super().__contains__(name)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  355 |         except CookieConflictError:",
-    "callee": "__contains__",
-    "receiver": "super()",
-    "callee_short": "__contains__"
-  },
-  {
-    "site_id": "9f6ec499fa2d",
-    "repo": "requests",
-    "file": "src/requests/cookies.py",
-    "call_text": "super().set_cookie(cookie, *args, **kwargs)",
-    "call_range": [
-      389,
-      15,
-      389,
-      58
-    ],
-    "call_context": "  387 |         ):\n  388 |             cookie.value = value.replace('\\\\\"', \"\")\n  389 |         return super().set_cookie(cookie, *args, **kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  390 | ",
-    "callee": "set_cookie",
-    "receiver": "super()",
-    "callee_short": "set_cookie"
+    "receiver": "super()"
   },
   {
     "site_id": "0eaed5ec7997",
@@ -796,7 +702,51 @@
     ],
     "call_context": "  213 |         self.proxy_manager = {}\n  214 | \n  215 |         super().__init__()\n      |         ^^^^^^^^^^^^^^^^^^\n  216 | ",
     "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
+    "receiver": "super()"
+  },
+  {
+    "site_id": "cf046800c744",
+    "repo": "requests",
+    "file": "src/requests/adapters.py",
+    "call_text": "super().__init__()",
+    "call_range": [
+      126,
+      8,
+      126,
+      26
+    ],
+    "call_context": "  124 | \n  125 |     def __init__(self) -> None:\n  126 |         super().__init__()\n      |         ^^^^^^^^^^^^^^^^^^\n  127 | ",
+    "callee": "__init__",
+    "receiver": "super()"
+  },
+  {
+    "site_id": "d76c3c6f657c",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "super().__iter__()",
+    "call_range": [
+      350,
+      15,
+      350,
+      33
+    ],
+    "call_context": "  348 |     def __iter__(self) -> Iterator[Cookie]:  # type: ignore[override]\n  349 |         \"\"\"RequestCookieJar's __iter__ comes from CookieJar not MutableMapping.\"\"\"\n  350 |         return super().__iter__()\n      |                ^^^^^^^^^^^^^^^^^^\n  351 | ",
+    "callee": "__iter__",
+    "receiver": "super()"
+  },
+  {
+    "site_id": "d76c3c6f657c",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "super().__iter__()",
+    "call_range": [
+      350,
+      15,
+      350,
+      33
+    ],
+    "call_context": "  348 |     def __iter__(self) -> Iterator[Cookie]:  # type: ignore[override]\n  349 |         \"\"\"RequestCookieJar's __iter__ comes from CookieJar not MutableMapping.\"\"\"\n  350 |         return super().__iter__()\n      |                ^^^^^^^^^^^^^^^^^^\n  351 | ",
+    "callee": "__iter__",
+    "receiver": "super()"
   }
 ]

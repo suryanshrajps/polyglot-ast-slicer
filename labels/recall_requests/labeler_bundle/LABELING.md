@@ -1,12 +1,9 @@
 # Blind recall labeling
 
-`packets.json` lists call sites with the exact call expression marked by `^^^^`.
-No tool output is included.
+`packets.json` lists call sites and callback references with the exact expression marked by
+`^^^^`. No tool output is included.
 
-For each site:
-1. Read the call expression and surrounding code.
-2. Find the definition this call actually refers to by reading the repository
-   (imports, class hierarchy, aliases). Write `<path>:<line>` in `true_target`.
-3. If you cannot determine it, leave `true_target` empty and say why in `notes`.
+For each site, read the repository and write the definition it refers to as `<path>:<line>`
+in `true_target`. If it cannot be determined, leave it blank and explain in `notes`.
 
-Do not use this project's tooling or any static analyzer; label by reading.
+Do not use this project's tooling or any static analyzer.

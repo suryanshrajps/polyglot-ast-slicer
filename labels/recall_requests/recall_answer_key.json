@@ -1,410 +1,345 @@
 {
-  "c492fdc98020": {
+  "cd25e233f77a": {
     "form": "aliased_import",
-    "source": "TestTestServer.test_request_recovery",
-    "call_site": "tests/test_testserver.py:98",
-    "tool_edge": [
-      "Server.basic_response_server"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:490",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "72d0b1f97cf4": {
+  "8231a3a2c127": {
     "form": "aliased_import",
-    "source": "TestTestServer.test_multiple_requests",
-    "call_site": "tests/test_testserver.py:82",
-    "tool_edge": [
-      "Server.basic_response_server"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:2178",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "7020dece0803": {
+  "d287f1b89029": {
     "form": "aliased_import",
-    "source": "PreparedRequest.prepare_body",
-    "call_site": "src/requests/models.py:641",
-    "tool_edge": [
-      "has_read"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:300",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "ef415d8bb1d8": {
+  "2911386f4a23": {
     "form": "aliased_import",
-    "source": "TestTestServer.test_text_response",
-    "call_site": "tests/test_testserver.py:44",
-    "tool_edge": [
-      "Server.text_response_server"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:698",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "498c3866dd1f": {
+  "3d6c063c57aa": {
     "form": "aliased_import",
-    "source": "SessionRedirectMixin.should_strip_auth",
-    "call_site": "src/requests/sessions.py:175",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:799",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "6be637154683": {
+  "49442f6f8f6a": {
     "form": "aliased_import",
-    "source": "test_chunked_upload",
-    "call_site": "tests/test_lowlevel.py:27",
-    "tool_edge": [
-      "Server.basic_response_server"
-    ],
-    "tool_outcome": "found"
+    "source": "TestTimeout",
+    "call_site": "tests/test_requests.py:2583",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "345709eaafe1": {
+  "1f699ab2afb0": {
     "form": "aliased_import",
-    "source": "TestTestServer.test_server_finishes_on_error",
-    "call_site": "tests/test_testserver.py:146",
-    "tool_edge": [
-      "Server.basic_response_server"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests.test_request_cookie_overrides_session_cookie",
+    "call_site": "tests/test_requests.py:418",
+    "tool_outcome": "found",
+    "tool_edges": [
+      "session"
+    ]
   },
-  "00454979e022": {
-    "form": "aliased_import",
-    "source": "test_request_url_handles_leading_path_separators",
-    "call_site": "tests/test_adapters.py:7",
-    "tool_edge": [
-      "Request"
-    ],
-    "tool_outcome": "found"
-  },
-  "abee9f24c3c8": {
+  "e6c17176f270": {
     "form": "bare",
-    "source": "TestMorselToCookieMaxAge.test_max_age_invalid_str",
-    "call_site": "tests/test_requests.py:2533",
-    "tool_edge": [
-      "morsel_to_cookie"
-    ],
-    "tool_outcome": "found"
+    "source": "TestPreparingURLs.test_json_decode_compatibility",
+    "call_site": "tests/test_requests.py:2900",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "224ac6e6b376": {
+  "b2869b697fa2": {
     "form": "bare",
-    "source": "TestRequests.test_generic_cookiejar_works",
-    "call_site": "tests/test_requests.py:436",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests.test_autoset_header_values_are_native",
+    "call_site": "tests/test_requests.py:1905",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "3b8c9cc4278a": {
+  "c4563d418298": {
     "form": "bare",
-    "source": "TestRequests.test_response_iter_lines",
-    "call_site": "tests/test_requests.py:2182",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:2231",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "094118887d73": {
+  "fc143614b6ca": {
     "form": "bare",
-    "source": "_init",
-    "call_site": "src/requests/status_codes.py:122",
-    "tool_edge": [
-      "_init.doc"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests.test_HTTP_200_OK_HEAD",
+    "call_site": "tests/test_requests.py:532",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "f89d99f3c267": {
+  "08b925d8b757": {
     "form": "bare",
-    "source": "TestRequests.test_params_are_merged_case_sensitive",
-    "call_site": "tests/test_requests.py:1767",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:380",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "66ab8ac8c6f3": {
+  "0bfb3673df83": {
     "form": "bare",
-    "source": "Response.links",
-    "call_site": "src/requests/models.py:1135",
-    "tool_edge": [
-      "parse_header_links"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests.test_override_content_length",
+    "call_site": "tests/test_requests.py:141",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "eb9bcd0cfd93": {
+  "b984150196dc": {
     "form": "bare",
-    "source": "test_get_encoding_from_headers",
-    "call_site": "tests/test_utils.py:655",
-    "tool_edge": [
-      "get_encoding_from_headers"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:2162",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "c3b82ee07b6e": {
-    "form": "bare",
-    "source": "TestRequests.test_no_body_content_length",
-    "call_site": "tests/test_requests.py:131",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+  "b7033a119462": {
+    "form": "callback",
+    "source": "HTTPAdapter.request_url",
+    "call_site": "src/requests/adapters.py:581",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "619cbb90f502": {
+  "ee4dd434cc54": {
+    "form": "callback",
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:1401",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "1ef3881f5af8": {
+    "form": "callback",
+    "source": "TestRequests.test_cookie_as_dict_values",
+    "call_site": "tests/test_requests.py:1383",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "49df4d2f0c37": {
+    "form": "callback",
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:1220",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "8ccc066a3958": {
+    "form": "callback",
+    "source": "TestRequests.test_http_301_doesnt_change_head_to_get",
+    "call_site": "tests/test_requests.py:286",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "508f335ff1b7": {
     "form": "chained_attribute",
-    "source": "TestPreparingURLs.test_status_code_425",
-    "call_site": "tests/test_requests.py:2919",
-    "tool_edge": [
-      "get"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests.test_rewind_body_failed_seek",
+    "call_site": "tests/test_requests.py:2074",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "5616b9fcb4fa": {
+  "7816d2ec6a5a": {
     "form": "chained_attribute",
-    "source": "Response.close",
-    "call_site": "src/requests/models.py:1180",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests.test_custom_redirect_mixin",
+    "call_site": "tests/test_requests.py:2315",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "c7bdced86a61": {
+  "0cbaefe972d9": {
     "form": "chained_attribute",
-    "source": "TestRequests.test_POSTBIN_GET_POST_FILES_WITH_DATA",
-    "call_site": "tests/test_requests.py:884",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests.test_header_keys_are_native",
+    "call_site": "tests/test_requests.py:1787",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "e407ebd6d7ac": {
+  "c5574f201ec1": {
     "form": "chained_attribute",
-    "source": "test_request_url_handles_leading_path_separators",
-    "call_site": "tests/test_adapters.py:6",
-    "tool_edge": [
-      "HTTPAdapter"
-    ],
-    "tool_outcome": "found"
-  },
-  "1e102c24a13a": {
-    "form": "chained_attribute",
-    "source": "TestRequests.test_cookie_parameters",
-    "call_site": "tests/test_requests.py:1305",
-    "tool_edge": [
-      "RequestsCookieJar"
-    ],
-    "tool_outcome": "found"
-  },
-  "3a758802dc07": {
-    "form": "chained_attribute",
-    "source": "TestRequests.test_cookie_as_dict_items",
-    "call_site": "tests/test_requests.py:1394",
-    "tool_edge": [
-      "RequestsCookieJar"
-    ],
-    "tool_outcome": "found"
-  },
-  "2aa84d03f7a9": {
-    "form": "chained_attribute",
-    "source": "TestRequests.test_cookie_duplicate_names_raises_cookie_conflict_error",
-    "call_site": "tests/test_requests.py:1429",
-    "tool_edge": [
-      "RequestsCookieJar"
-    ],
-    "tool_outcome": "found"
-  },
-  "b375d269fbc2": {
-    "form": "chained_attribute",
-    "source": "TestRequests.test_rewind_body_no_seek",
-    "call_site": "tests/test_requests.py:2051",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "c36f7a164c4e": {
-    "form": "module_attr",
-    "source": "TestRequests.test_cookie_removed_on_expire",
-    "call_site": "tests/test_requests.py:400",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "c9182f19190e": {
-    "form": "module_attr",
-    "source": "TestRequests.test_cookielib_cookiejar_on_redirect",
-    "call_site": "tests/test_requests.py:468",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "780d70bdaa4c": {
-    "form": "module_attr",
-    "source": "TestRequests.test_rewind_partially_read_body",
+    "source": "TestRequests",
     "call_site": "tests/test_requests.py:2028",
-    "tool_edge": [
-      "Request"
-    ],
-    "tool_outcome": "found"
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "53a185bc45b0": {
-    "form": "module_attr",
-    "source": "test_json_decode_compatibility_for_alt_utf_encodings",
-    "call_site": "tests/test_lowlevel.py:425",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+  "ed18fbdbedbb": {
+    "form": "chained_attribute",
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:2022",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "5923daeba007": {
-    "form": "module_attr",
-    "source": "TestRequests.test_should_strip_auth_https_upgrade",
-    "call_site": "tests/test_requests.py:1951",
-    "tool_edge": [
+  "7ee98a97dd59": {
+    "form": "chained_attribute",
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:656",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "556e3411667c": {
+    "form": "constructor",
+    "source": "TestRequests.test_session_get_adapter_prefix_matching_mixed_case",
+    "call_site": "tests/test_requests.py:1713",
+    "tool_outcome": "found",
+    "tool_edges": [
       "Session"
-    ],
-    "tool_outcome": "found"
+    ]
   },
-  "fdaad818cc60": {
+  "ffe714fb5692": {
+    "form": "constructor",
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:201",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "8782eab87437": {
+    "form": "constructor",
+    "source": "TestCaseInsensitiveDict.test_update",
+    "call_site": "tests/test_requests.py:2398",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": [
+      "CaseInsensitiveDict"
+    ]
+  },
+  "86a70ed52e8b": {
+    "form": "constructor",
+    "source": "TestRequests.test_prepared_from_session.DummyAuth",
+    "call_site": "tests/test_requests.py:1240",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "c7dd48904583": {
+    "form": "constructor",
+    "source": "TestRequests.test_session_get_adapter_prefix_without_trailing_slash",
+    "call_site": "tests/test_requests.py:1751",
+    "tool_outcome": "found",
+    "tool_edges": [
+      "HTTPAdapter"
+    ]
+  },
+  "ac6e76e49b47": {
+    "form": "constructor",
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:1456",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "c4188958d090": {
     "form": "module_attr",
-    "source": "TestRequests.test_proxy_authorization_not_appended_to_https_request",
-    "call_site": "tests/test_requests.py:677",
-    "tool_edge": [
-      "Request"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests.test_fixes_1329",
+    "call_site": "tests/test_requests.py:1634",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "53ac0bcf56a5": {
+  "d31feed803c6": {
     "form": "module_attr",
-    "source": "TestRequests.test_request_and_response_are_pickleable",
-    "call_site": "tests/test_requests.py:1547",
-    "tool_edge": [
-      "get"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:2239",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "69b40f6aa068": {
+  "65057380e047": {
     "form": "module_attr",
-    "source": "merge_hooks",
-    "call_site": "src/requests/sessions.py:118",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:1955",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "167e2826dffd": {
+  "dbc6a286c840": {
     "form": "module_attr",
-    "source": "TestRequests.test_HTTP_200_OK_GET_ALTERNATIVE",
-    "call_site": "tests/test_requests.py:206",
-    "tool_edge": [
-      "Request"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests",
+    "call_site": "tests/test_requests.py:658",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "824909ba83ac": {
+  "a48092caebac": {
     "form": "module_attr",
-    "source": "test_digestauth_only_on_4xx",
-    "call_site": "tests/test_lowlevel.py:268",
-    "tool_edge": [
-      "get"
-    ],
-    "tool_outcome": "found"
+    "source": "TestRequests.test_session_get_adapter_prefix_with_trailing_slash",
+    "call_site": "tests/test_requests.py:1739",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "1c055bb01f2b": {
-    "form": "self_method",
-    "source": "CaseInsensitiveDict.__init__",
-    "call_site": "src/requests/structures.py:57",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+  "e00c2fbe3699": {
+    "form": "module_attr",
+    "source": "TestRequests.test_cookie_duplicate_names_different_domains",
+    "call_site": "tests/test_requests.py:1421",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
-  "2b7958665728": {
+  "ae8fae5d2aa1": {
     "form": "self_method",
-    "source": "HTTPDigestAuth.handle_401",
-    "call_site": "src/requests/auth.py:307",
-    "tool_edge": [
-      "HTTPDigestAuth.build_digest_header"
-    ],
-    "tool_outcome": "found"
+    "source": "Server",
+    "call_site": "tests/testserver/server.py:69",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "6b8f23d68254": {
+  "627987de10a1": {
     "form": "self_method",
-    "source": "RequestsCookieJar.items",
-    "call_site": "src/requests/cookies.py:300",
-    "tool_edge": [
-      "RequestsCookieJar.iteritems"
-    ],
-    "tool_outcome": "found"
+    "source": "RedirectSession.build_response",
+    "call_site": "tests/test_requests.py:2631",
+    "tool_outcome": "found",
+    "tool_edges": [
+      "RedirectSession._build_raw"
+    ]
   },
-  "d117fc200c75": {
+  "c334d5b7d586": {
     "form": "self_method",
-    "source": "Response.__exit__",
-    "call_site": "src/requests/models.py:816",
-    "tool_edge": [
-      "Response.close"
-    ],
-    "tool_outcome": "found"
-  },
-  "968113a34910": {
-    "form": "self_method",
-    "source": "HTTPAdapter.send",
-    "call_site": "src/requests/adapters.py:662",
-    "tool_edge": [
-      "HTTPAdapter.get_connection_with_tls_context"
-    ],
-    "tool_outcome": "found"
-  },
-  "6e5234d2f8c8": {
-    "form": "self_method",
-    "source": "PreparedRequest.prepare_url",
+    "source": "PreparedRequest",
     "call_site": "src/requests/models.py:552",
-    "tool_edge": [
-      "RequestEncodingMixin._encode_params"
-    ],
-    "tool_outcome": "found"
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
-  "800429a5eea7": {
+  "373dcfdcf41e": {
     "form": "self_method",
-    "source": "HTTPAdapter.__setstate__",
-    "call_site": "src/requests/adapters.py:235",
-    "tool_edge": [
-      "HTTPAdapter.init_poolmanager"
-    ],
-    "tool_outcome": "found"
+    "source": "Session.delete",
+    "call_site": "src/requests/sessions.py:750",
+    "tool_outcome": "found",
+    "tool_edges": [
+      "Session.request"
+    ]
   },
-  "7725aa610747": {
+  "1819a1313bbc": {
     "form": "self_method",
-    "source": "Server.__exit__",
-    "call_site": "tests/testserver/server.py:133",
-    "tool_edge": [
-      "Server._close_server_sock_ignore_errors"
-    ],
-    "tool_outcome": "found"
+    "source": "PreparedRequest.prepare",
+    "call_site": "src/requests/models.py:443",
+    "tool_outcome": "found",
+    "tool_edges": [
+      "PreparedRequest.prepare_cookies"
+    ]
   },
-  "595e6fcfaef5": {
+  "bb5266fed79b": {
+    "form": "self_method",
+    "source": "MockRequest",
+    "call_site": "src/requests/cookies.py:103",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
+  },
+  "11dcba40ec75": {
     "form": "super",
-    "source": "Server.__init__",
-    "call_site": "tests/testserver/server.py:38",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "source": "TLSServer",
+    "call_site": "tests/testserver/server.py:152",
+    "tool_outcome": "no_call_site_extracted",
+    "tool_edges": []
   },
   "cf046800c744": {
     "form": "super",
     "source": "BaseAdapter.__init__",
     "call_site": "src/requests/adapters.py:126",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "45c4e1a0a287": {
-    "form": "super",
-    "source": "RequestsCookieJar.update",
-    "call_site": "src/requests/cookies.py:399",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "a8ca2c4a5699": {
-    "form": "super",
-    "source": "LookupDict.__init__",
-    "call_site": "src/requests/structures.py:103",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "710788e0eb92": {
-    "form": "super",
-    "source": "RequestException.__init__",
-    "call_site": "src/requests/exceptions.py:35",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "17ace511c79a": {
-    "form": "super",
-    "source": "RequestsCookieJar.__contains__",
-    "call_site": "src/requests/cookies.py:354",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
-  },
-  "9f6ec499fa2d": {
-    "form": "super",
-    "source": "RequestsCookieJar.set_cookie",
-    "call_site": "src/requests/cookies.py:389",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   },
   "0eaed5ec7997": {
     "form": "super",
     "source": "HTTPAdapter.__init__",
     "call_site": "src/requests/adapters.py:215",
-    "tool_edge": [],
-    "tool_outcome": "no_edge"
+    "tool_outcome": "no_edge",
+    "tool_edges": []
+  },
+  "d76c3c6f657c": {
+    "form": "super",
+    "source": "RequestsCookieJar.__iter__",
+    "call_site": "src/requests/cookies.py:350",
+    "tool_outcome": "no_edge",
+    "tool_edges": []
   }
 }

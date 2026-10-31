@@ -1,726 +1,711 @@
 [
   {
-    "site_id": "fb6b5d55b7ef",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "click.prompt(\"Prompt to stderr with no suffix\", prompt_suffix=\"\", err=True)",
-    "call_range": [
-      130,
-      4,
-      130,
-      79
-    ],
-    "call_context": "  128 |     # https://github.com/pallets/click/issues/3019\n  129 |     emulate_input(\"asdlkj\\n\")\n  130 |     click.prompt(\"Prompt to stderr with no suffix\", prompt_suffix=\"\", err=True)\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  131 |     out, err = capfd.readouterr()",
-    "callee": "prompt",
-    "receiver": "click",
-    "callee_short": "prompt"
-  },
-  {
-    "site_id": "de1e466e8179",
-    "repo": "click",
-    "file": "tests/test_info_dict.py",
-    "call_text": "click.command()",
-    "call_range": [
-      335,
-      5,
-      335,
-      20
-    ],
-    "call_context": "  333 | \n  334 | def test_command_to_info_dict_multiple_arguments():\n  335 |     @click.command()\n      |      ^^^^^^^^^^^^^^^\n  336 |     @click.argument(\"src\", help=\"source path\")",
-    "callee": "command",
-    "receiver": "click",
-    "callee_short": "command"
-  },
-  {
-    "site_id": "83e491d9d62b",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "click.echo(\"Capture me.\")",
-    "call_range": [
-      56,
-      4,
-      56,
-      29
-    ],
-    "call_context": "   54 | \n   55 | def test_echo_with_capsys(capsys):\n   56 |     click.echo(\"Capture me.\")\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^\n   57 |     out, err = capsys.readouterr()",
-    "callee": "echo",
-    "receiver": "click",
-    "callee_short": "echo"
-  },
-  {
-    "site_id": "765ffc1f902f",
-    "repo": "click",
-    "file": "tests/test_info_dict.py",
-    "call_text": "click.argument(\"dst\", help=\"destination path\")",
-    "call_range": [
-      337,
-      5,
-      337,
-      51
-    ],
-    "call_context": "  335 |     @click.command()\n  336 |     @click.argument(\"src\", help=\"source path\")\n  337 |     @click.argument(\"dst\", help=\"destination path\")\n      |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  338 |     def cli(src, dst):",
-    "callee": "argument",
-    "receiver": "click",
-    "callee_short": "argument"
-  },
-  {
-    "site_id": "7748636c6eb8",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "click.echo(bytearray(b\"\\x1b[31mx\\x1b[39m\"), nl=False)",
-    "call_range": [
-      32,
-      8,
-      32,
-      61
-    ],
-    "call_context": "   30 |     # Ensure we do not strip for bytes.\n   31 |     with runner.isolation() as outstreams:\n   32 |         click.echo(bytearray(b\"\\x1b[31mx\\x1b[39m\"), nl=False)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   33 |         assert outstreams[0].getvalue() == b\"\\x1b[31mx\\x1b[39m\"",
-    "callee": "echo",
-    "receiver": "click",
-    "callee_short": "echo"
-  },
-  {
-    "site_id": "aacfa185cc79",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "click.echo(\"test\", err=True)",
-    "call_range": [
-      52,
-      8,
-      52,
-      36
-    ],
-    "call_context": "   50 |         sys.stderr = None\n   51 |         click.echo(\"test\")\n   52 |         click.echo(\"test\", err=True)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   53 | ",
-    "callee": "echo",
-    "receiver": "click",
-    "callee_short": "echo"
-  },
-  {
-    "site_id": "8d9be5c10668",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "click.echo(styled_text, color=True)",
-    "call_range": [
-      86,
-      4,
-      86,
-      39
-    ],
-    "call_context": "   84 |     assert out == f\"{text}\\n\"\n   85 | \n   86 |     click.echo(styled_text, color=True)\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   87 |     out, err = capfd.readouterr()",
-    "callee": "echo",
-    "receiver": "click",
-    "callee_short": "echo"
-  },
-  {
-    "site_id": "4004fda7d60e",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "click.confirm(\"Prompt to stderr with no suffix\", prompt_suffix=\"\", err=True)",
-    "call_range": [
-      156,
-      4,
-      156,
-      80
-    ],
-    "call_context": "  154 |     # https://github.com/pallets/click/issues/3019\n  155 |     emulate_input(\"y\\n\")\n  156 |     click.confirm(\"Prompt to stderr with no suffix\", prompt_suffix=\"\", err=True)\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  157 |     out, err = capfd.readouterr()",
-    "callee": "confirm",
-    "receiver": "click",
-    "callee_short": "confirm"
-  },
-  {
-    "site_id": "83414d412525",
-    "repo": "click",
-    "file": "src/click/testing.py",
-    "call_text": "EchoingStdin(bytes_input, stream_mixer.stdout)",
-    "call_range": [
-      447,
-      28,
-      447,
-      74
-    ],
-    "call_context": "  445 |         if self.echo_stdin:\n  446 |             bytes_input = echo_input = t.cast(\n  447 |                 t.BinaryIO, EchoingStdin(bytes_input, stream_mixer.stdout)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  448 |             )",
-    "callee": "EchoingStdin",
-    "receiver": null,
-    "callee_short": "EchoingStdin"
-  },
-  {
-    "site_id": "8f01f896d98c",
-    "repo": "click",
-    "file": "tests/test_compat.py",
-    "call_text": "term_len(text)",
-    "call_range": [
-      239,
-      11,
-      239,
-      25
-    ],
-    "call_context": "  237 | )\n  238 | def test_term_len(text, visible):\n  239 |     assert term_len(text) == visible\n      |            ^^^^^^^^^^^^^^\n  240 | ",
-    "callee": "term_len",
-    "receiver": null,
-    "callee_short": "term_len"
-  },
-  {
-    "site_id": "d50971cb2bdf",
-    "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "Choice([\"Au\", \"al\", \"Bc\"], case_sensitive=value)",
-    "call_range": [
-      500,
-      36,
-      500,
-      84
-    ],
-    "call_context": "  498 |     cli = Command(\n  499 |         \"cli\",\n  500 |         params=[Option([\"-a\"], type=Choice([\"Au\", \"al\", \"Bc\"], case_sensitive=value))],\n      |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  501 |     )",
-    "callee": "Choice",
-    "receiver": null,
-    "callee_short": "Choice"
-  },
-  {
-    "site_id": "63954985489e",
-    "repo": "click",
-    "file": "src/click/testing.py",
-    "call_text": "_FDCapture(2)",
-    "call_range": [
-      659,
-      22,
-      659,
-      35
-    ],
-    "call_context": "  657 |         if self.capture == \"fd\":\n  658 |             cap_out = _FDCapture(1)\n  659 |             cap_err = _FDCapture(2)\n      |                       ^^^^^^^^^^^^^\n  660 |             try:",
-    "callee": "_FDCapture",
-    "receiver": null,
-    "callee_short": "_FDCapture"
-  },
-  {
-    "site_id": "3041f07ea7ac",
-    "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "Option([\"-z\"])",
-    "call_range": [
-      281,
-      12,
-      281,
-      26
-    ],
-    "call_context": "  279 |             Argument([\"x\"], type=Choice([\"a\", \"b\"]), nargs=2),\n  280 |             Argument([\"y\"], type=Choice([\"c\", \"d\"]), nargs=-1),\n  281 |             Option([\"-z\"]),\n      |             ^^^^^^^^^^^^^^\n  282 |         ],",
-    "callee": "Option",
-    "receiver": null,
-    "callee_short": "Option"
-  },
-  {
-    "site_id": "45ff300d7649",
-    "repo": "click",
-    "file": "tests/test_stream_lifecycle.py",
-    "call_text": "CliRunner()",
-    "call_range": [
-      415,
-      13,
-      415,
-      24
-    ],
-    "call_context": "  413 |         click.echo(\"err2\", err=True)\n  414 | \n  415 |     runner = CliRunner()\n      |              ^^^^^^^^^^^\n  416 |     result = runner.invoke(cli)",
-    "callee": "CliRunner",
-    "receiver": null,
-    "callee_short": "CliRunner"
-  },
-  {
-    "site_id": "89538a58d193",
-    "repo": "click",
-    "file": "src/click/shell_completion.py",
-    "call_text": "_is_incomplete_option(ctx, args, param)",
-    "call_range": [
-      790,
-      11,
-      790,
-      50
-    ],
-    "call_context": "  788 |     # value, the option will provide value completions.\n  789 |     for param in params:\n  790 |         if _is_incomplete_option(ctx, args, param):\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  791 |             return param, incomplete",
-    "callee": "_is_incomplete_option",
-    "receiver": null,
-    "callee_short": "_is_incomplete_option"
-  },
-  {
-    "site_id": "1d25bf9b0f34",
-    "repo": "click",
-    "file": "tests/test_abort_interrupt.py",
-    "call_text": "InterruptedReport(\"boom\")",
-    "call_range": [
-      128,
-      14,
-      128,
-      39
-    ],
-    "call_context": "  126 |     @click.command()\n  127 |     def cli():\n  128 |         raise InterruptedReport(\"boom\")\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^\n  129 | ",
-    "callee": "InterruptedReport",
-    "receiver": null,
-    "callee_short": "InterruptedReport"
-  },
-  {
-    "site_id": "4ebdefe0026c",
-    "repo": "click",
-    "file": "tests/test_commands.py",
-    "call_text": "self.parser.get_usage()",
-    "call_range": [
-      166,
-      19,
-      166,
-      42
-    ],
-    "call_context": "  164 | \n  165 |         def get_usage(self, ctx):\n  166 |             return self.parser.get_usage()\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^\n  167 | ",
-    "callee": "get_usage",
-    "receiver": "self.parser",
-    "callee_short": "get_usage"
-  },
-  {
-    "site_id": "8cca47f6571b",
-    "repo": "click",
-    "file": "src/click/exceptions.py",
-    "call_text": "self.param.type.get_missing_message(\n                param=self.param, ctx=self.ctx\n            )",
-    "call_range": [
-      201,
-      24,
-      203,
-      13
-    ],
-    "call_context": "  199 |         msg = self.message\n  200 |         if self.param is not None:\n  201 |             msg_extra = self.param.type.get_missing_message(\n      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  202 |                 param=self.param, ctx=self.ctx\n  203 |             )\n  204 |             if msg_extra:",
-    "callee": "get_missing_message",
-    "receiver": "self.param.type",
-    "callee_short": "get_missing_message"
-  },
-  {
-    "site_id": "f64a71e64bd9",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.type.shell_complete(ctx, self, incomplete)",
-    "call_range": [
-      3054,
-      15,
-      3054,
-      62
-    ],
-    "call_context": " 3052 |             return t.cast(\"list[CompletionItem]\", results)\n 3053 | \n 3054 |         return self.type.shell_complete(ctx, self, incomplete)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3055 | ",
-    "callee": "shell_complete",
-    "receiver": "self.type",
-    "callee_short": "shell_complete"
-  },
-  {
-    "site_id": "d089452c3929",
-    "repo": "click",
-    "file": "src/click/utils.py",
-    "call_text": "self._f.close()",
-    "call_range": [
-      174,
-      12,
-      174,
-      27
-    ],
-    "call_context": "  172 |         \"\"\"Closes the underlying file, no matter what.\"\"\"\n  173 |         if self._f is not None:\n  174 |             self._f.close()\n      |             ^^^^^^^^^^^^^^^\n  175 | ",
-    "callee": "close",
-    "receiver": "self._f",
-    "callee_short": "close"
-  },
-  {
-    "site_id": "10c9e4447cd8",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.command.get_help(self)",
-    "call_range": [
-      869,
-      15,
-      869,
-      42
-    ],
-    "call_context": "  867 |         context and command.\n  868 |         \"\"\"\n  869 |         return self.command.get_help(self)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  870 | ",
-    "callee": "get_help",
-    "receiver": "self.command",
-    "callee_short": "get_help"
-  },
-  {
-    "site_id": "a1f06c67f0d4",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "sys.stdout.fileno()",
-    "call_range": [
-      749,
-      12,
-      749,
-      31
-    ],
-    "call_context": "  747 |     def cli():\n  748 |         with pytest.raises(io.UnsupportedOperation):\n  749 |             sys.stdout.fileno()\n      |             ^^^^^^^^^^^^^^^^^^^\n  750 |         with pytest.raises(io.UnsupportedOperation):",
-    "callee": "fileno",
-    "receiver": "sys.stdout",
-    "callee_short": "fileno"
-  },
-  {
-    "site_id": "8b9cdcb99076",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.type.split_envvar_value(value)",
-    "call_range": [
-      2718,
-      28,
-      2718,
-      63
-    ],
-    "call_context": " 2716 |                 # parameters, matching value_from_envvar behavior.\n 2717 |                 if isinstance(value, str) and self.nargs != 1:\n 2718 |                     value = self.type.split_envvar_value(value)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2719 | ",
-    "callee": "split_envvar_value",
-    "receiver": "self.type",
-    "callee_short": "split_envvar_value"
-  },
-  {
-    "site_id": "1e4c685f6ca2",
-    "repo": "click",
-    "file": "src/click/globals.py",
-    "call_text": "_local.stack.pop()",
-    "call_range": [
-      51,
-      4,
-      51,
-      22
-    ],
-    "call_context": "   49 | def pop_context() -> None:\n   50 |     \"\"\"Removes the top level from the stack.\"\"\"\n   51 |     _local.stack.pop()\n      |     ^^^^^^^^^^^^^^^^^^\n   52 | ",
-    "callee": "pop",
-    "receiver": "_local.stack",
-    "callee_short": "pop"
-  },
-  {
-    "site_id": "62a946df96ab",
-    "repo": "click",
-    "file": "tests/test_formatting.py",
-    "call_text": "click.HelpFormatter(width=len(\"  Lorem ipsum dolor sit amet,\"))",
-    "call_range": [
-      431,
-      16,
-      431,
-      79
-    ],
-    "call_context": "  429 | def test_help_formatter_write_text():\n  430 |     text = \"Lorem ipsum dolor sit amet, consectetur adipiscing elit\"\n  431 |     formatter = click.HelpFormatter(width=len(\"  Lorem ipsum dolor sit amet,\"))\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  432 |     formatter.current_indent = 2",
-    "callee": "HelpFormatter",
-    "receiver": "click",
-    "callee_short": "HelpFormatter"
-  },
-  {
-    "site_id": "5ef727617771",
-    "repo": "click",
-    "file": "tests/test_basic.py",
-    "call_text": "cli.get_help_option(ctx)",
-    "call_range": [
-      60,
-      18,
-      60,
-      42
-    ],
-    "call_context": "   58 | \n   59 |     ctx = click.Context(cli, help_option_names=help_names)\n   60 |     help_option = cli.get_help_option(ctx)\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^\n   61 |     assert help_option is not None",
-    "callee": "get_help_option",
-    "receiver": "cli",
-    "callee_short": "get_help_option"
-  },
-  {
-    "site_id": "9f4f81d0b2b6",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.get_help_extra(ctx)",
-    "call_range": [
-      1617,
-      11,
-      1617,
-      34
-    ],
-    "call_context": " 1615 |     )\n 1616 |     ctx = click.Context(click.Command(\"test\"))\n 1617 |     assert opt.get_help_extra(ctx) == {\"default\": \"True\"}\n      |            ^^^^^^^^^^^^^^^^^^^^^^^\n 1618 |     message = opt.get_help_record(ctx)[1]",
-    "callee": "get_help_extra",
-    "receiver": "opt",
-    "callee_short": "get_help_extra"
-  },
-  {
-    "site_id": "3ccf38fea2d7",
-    "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "runner.invoke(cli, env={\"_CLI_COMPLETE\": f\"{shell}_source\"})",
-    "call_range": [
-      353,
-      13,
-      353,
-      73
-    ],
-    "call_context": "  351 | def test_full_source(runner, shell):\n  352 |     cli = Group(\"cli\", commands=[Command(\"a\"), Command(\"b\")])\n  353 |     result = runner.invoke(cli, env={\"_CLI_COMPLETE\": f\"{shell}_source\"})\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  354 |     assert f\"_CLI_COMPLETE={shell}_complete\" in result.output",
-    "callee": "invoke",
-    "receiver": "runner",
-    "callee_short": "invoke"
-  },
-  {
-    "site_id": "9aec472b5b9a",
-    "repo": "click",
-    "file": "tests/test_commands.py",
-    "call_text": "click.option(\"-a\", **opt_params)",
-    "call_range": [
-      269,
-      5,
-      269,
-      37
-    ],
-    "call_context": "  267 | \n  268 |     @click.command()\n  269 |     @click.option(\"-a\", **opt_params)\n      |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  270 |     @click.pass_context",
-    "callee": "option",
-    "receiver": "click",
-    "callee_short": "option"
-  },
-  {
-    "site_id": "0cd07c2dcec8",
-    "repo": "click",
-    "file": "tests/test_commands.py",
-    "call_text": "cli.command()",
-    "call_range": [
-      79,
-      5,
-      79,
-      18
-    ],
-    "call_context": "   77 |         \"\"\"Login and store the token in ~/.netrc.\"\"\"\n   78 | \n   79 |     @cli.command()\n      |      ^^^^^^^^^^^^^\n   80 |     def long():",
-    "callee": "command",
-    "receiver": "cli",
-    "callee_short": "command"
-  },
-  {
-    "site_id": "0b5d3242db6b",
+    "site_id": "aecaf85f4cb6",
     "repo": "click",
     "file": "tests/test_termui.py",
-    "call_text": "runner.invoke(cli, input=\"firstone\\nsecondone\\nfinalone\\nfinalone\\n\")",
+    "call_text": "click.echo(value)",
     "call_range": [
-      1957,
-      13,
-      1957,
-      82
-    ],
-    "call_context": " 1955 | \n 1956 |     # First pair mismatches, second pair matches.\n 1957 |     result = runner.invoke(cli, input=\"firstone\\nsecondone\\nfinalone\\nfinalone\\n\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1958 |     assert \"Error: The two entered values do not match.\" in result.output",
-    "callee": "invoke",
-    "receiver": "runner",
-    "callee_short": "invoke"
-  },
-  {
-    "site_id": "873d10592557",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "click.Option([\"--a\"], required=True, deprecated=True)",
-    "call_range": [
-      154,
+      1980,
       8,
-      154,
-      61
+      1980,
+      25
     ],
-    "call_context": "  152 | def test_deprecated_required(runner):\n  153 |     with pytest.raises(ValueError, match=\"is deprecated and still required\"):\n  154 |         click.Option([\"--a\"], required=True, deprecated=True)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  155 | ",
-    "callee": "Option",
-    "receiver": "click",
-    "callee_short": "Option"
+    "call_context": " 1978 |             err=True,\n 1979 |         )\n 1980 |         click.echo(value)\n      |         ^^^^^^^^^^^^^^^^^\n 1981 | ",
+    "callee": "echo",
+    "receiver": "click"
   },
   {
-    "site_id": "8cb6c07908e5",
+    "site_id": "c3fccd3d2100",
     "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "os.write(2, b\"fd-err\\n\")",
+    "file": "tests/test_termui.py",
+    "call_text": "click.echo(repr(flag))",
     "call_range": [
-      769,
+      1691,
       8,
-      769,
-      32
-    ],
-    "call_context": "  767 |         click.echo(\"py-err\", err=True)\n  768 |         os.write(1, b\"fd-out\\n\")\n  769 |         os.write(2, b\"fd-err\\n\")\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^\n  770 | ",
-    "callee": "write",
-    "receiver": "os",
-    "callee_short": "write"
-  },
-  {
-    "site_id": "832add627ead",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(cli, prog_name=\"foobar\")",
-    "call_range": [
-      414,
-      13,
-      414,
-      51
-    ],
-    "call_context": "  412 | \n  413 |     runner = CliRunner()\n  414 |     result = runner.invoke(cli, prog_name=\"foobar\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  415 |     assert not result.exception",
-    "callee": "invoke",
-    "receiver": "runner",
-    "callee_short": "invoke"
-  },
-  {
-    "site_id": "dc2de89471ff",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self._pick_type(type, flag_value, count, self.is_flag)",
-    "call_range": [
-      3204,
-      20,
-      3204,
-      74
-    ],
-    "call_context": " 3202 |         # Phase 3: type inference. Override the type set by :meth:`Parameter.__init__`\n 3203 |         # when this option is a flag or a count.\n 3204 |         self.type = self._pick_type(type, flag_value, count, self.is_flag)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3205 | ",
-    "callee": "_pick_type",
-    "receiver": "self",
-    "callee_short": "_pick_type"
-  },
-  {
-    "site_id": "84a7044247b7",
-    "repo": "click",
-    "file": "src/click/_winconsole.py",
-    "call_text": "self._get_error_message(GetLastError())",
-    "call_range": [
-      186,
-      26,
-      186,
-      65
-    ],
-    "call_context": "  184 | \n  185 |         if bytes_written == 0 and bytes_to_be_written > 0:\n  186 |             raise OSError(self._get_error_message(GetLastError()))\n      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  187 |         return bytes_written",
-    "callee": "_get_error_message",
-    "receiver": "self",
-    "callee_short": "_get_error_message"
-  },
-  {
-    "site_id": "cb58c75fdd74",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.get_params(ctx)",
-    "call_range": [
-      1344,
-      35,
-      1344,
-      55
-    ],
-    "call_context": " 1342 |         positional arguments, matching the usage line.\n 1343 |         \"\"\"\n 1344 |         args = [param for param in self.get_params(ctx) if isinstance(param, Argument)]\n      |                                    ^^^^^^^^^^^^^^^^^^^^\n 1345 | ",
-    "callee": "get_params",
-    "receiver": "self",
-    "callee_short": "get_params"
-  },
-  {
-    "site_id": "0f9e51439874",
-    "repo": "click",
-    "file": "src/click/types.py",
-    "call_text": "self.convert(value, param, ctx)",
-    "call_range": [
-      166,
-      19,
-      166,
-      50
-    ],
-    "call_context": "  164 |     ) -> _ValueT_co | None:\n  165 |         if value is not None:\n  166 |             return self.convert(value, param, ctx)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  167 |         return None",
-    "callee": "convert",
-    "receiver": "self",
-    "callee_short": "convert"
-  },
-  {
-    "site_id": "a55c3bbe207e",
-    "repo": "click",
-    "file": "src/click/formatting.py",
-    "call_text": "self.write_paragraph()",
-    "call_range": [
-      280,
-      8,
-      280,
+      1691,
       30
     ],
-    "call_context": "  278 |         :param name: the section name that is written as heading.\n  279 |         \"\"\"\n  280 |         self.write_paragraph()\n      |         ^^^^^^^^^^^^^^^^^^^^^^\n  281 |         self.write_heading(name)",
-    "callee": "write_paragraph",
-    "receiver": "self",
-    "callee_short": "write_paragraph"
+    "call_context": " 1689 |     @click.option(opt_decls, **opt_params)\n 1690 |     def cli(flag):\n 1691 |         click.echo(repr(flag))\n      |         ^^^^^^^^^^^^^^^^^^^^^^\n 1692 | ",
+    "callee": "echo",
+    "receiver": "click"
   },
   {
-    "site_id": "0d9528d758c9",
+    "site_id": "898bdca8cc0d",
     "repo": "click",
-    "file": "src/click/types.py",
-    "call_text": "self.str_to_bool(value)",
+    "file": "tests/test_options.py",
+    "call_text": "click.command()",
     "call_range": [
-      873,
-      21,
-      873,
-      44
+      926,
+      5,
+      926,
+      20
     ],
-    "call_context": "  871 |         self, value: t.Any, param: Parameter | None, ctx: Context | None\n  872 |     ) -> bool:\n  873 |         normalized = self.str_to_bool(value)\n      |                      ^^^^^^^^^^^^^^^^^^^^^^^\n  874 |         if normalized is None:",
-    "callee": "str_to_bool",
-    "receiver": "self",
-    "callee_short": "str_to_bool"
+    "call_context": "  924 |     \"\"\"Deriving the envvar is not the inverse of deriving the name.\"\"\"\n  925 | \n  926 |     @click.command()\n      |      ^^^^^^^^^^^^^^^\n  927 |     @click.option(\"--\u1e9e\")",
+    "callee": "command",
+    "receiver": "click"
   },
   {
-    "site_id": "1fde478b7243",
+    "site_id": "46a674b25fe9",
     "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self._check_name_is_usable(name, decls)",
+    "file": "tests/test_context.py",
+    "call_text": "click.echo(f\"before_change.my_opt: {ctx.params.get('my_opt')!r}\")",
     "call_range": [
-      3512,
+      224,
       8,
-      3512,
-      47
+      224,
+      73
     ],
-    "call_context": " 3510 |             self._check_name_is_normalized(explicit_name, decls)\n 3511 | \n 3512 |         self._check_name_is_usable(name, decls)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3513 | ",
-    "callee": "_check_name_is_usable",
-    "receiver": "self",
-    "callee_short": "_check_name_is_usable"
+    "call_context": "  222 |         assert click.get_current_context() is ctx\n  223 |         click.echo(f\"before_change.my_arg: {ctx.params.get('my_arg')!r}\")\n  224 |         click.echo(f\"before_change.my_opt: {ctx.params.get('my_opt')!r}\")\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  225 |         click.echo(f\"before_change.my_callback: {ctx.params.get('my_callback')!r}\")",
+    "callee": "echo",
+    "receiver": "click"
   },
   {
-    "site_id": "4a3298f815a3",
+    "site_id": "49eb12a2b7ca",
     "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.get_command(ctx, name)",
+    "file": "tests/test_options.py",
+    "call_text": "click.option(*option_args, is_flag=True)",
     "call_range": [
-      1822,
-      22,
-      1822,
-      49
-    ],
-    "call_context": " 1820 | \n 1821 |         for name in self.list_commands(ctx):\n 1822 |             command = self.get_command(ctx, name)\n      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1823 | ",
-    "callee": "get_command",
-    "receiver": "self",
-    "callee_short": "get_command"
-  },
-  {
-    "site_id": "ea315e0fb2b4",
-    "repo": "click",
-    "file": "src/click/testing.py",
-    "call_text": "super().fileno()",
-    "call_range": [
-      200,
-      15,
-      200,
-      31
-    ],
-    "call_context": "  198 |         if self._original_fd >= 0:\n  199 |             return self._original_fd\n  200 |         return super().fileno()\n      |                ^^^^^^^^^^^^^^^^\n  201 | ",
-    "callee": "fileno",
-    "receiver": "super()",
-    "callee_short": "fileno"
-  },
-  {
-    "site_id": "df31b24fe8f0",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "super().collect_usage_pieces(ctx)",
-    "call_range": [
-      2002,
-      13,
-      2002,
-      46
-    ],
-    "call_context": " 2000 | \n 2001 |     def collect_usage_pieces(self, ctx: Context) -> list[str]:\n 2002 |         rv = super().collect_usage_pieces(ctx)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2003 |         rv.append(self.subcommand_metavar)",
-    "callee": "collect_usage_pieces",
-    "receiver": "super()",
-    "callee_short": "collect_usage_pieces"
-  },
-  {
-    "site_id": "2704aa1c79d8",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "super().to_info_dict(ctx)",
-    "call_range": [
-      1818,
-      20,
-      1818,
+      1451,
+      5,
+      1451,
       45
     ],
-    "call_context": " 1816 | \n 1817 |     def to_info_dict(self, ctx: Context) -> dict[str, t.Any]:\n 1818 |         info_dict = super().to_info_dict(ctx)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^\n 1819 |         commands = {}",
-    "callee": "to_info_dict",
-    "receiver": "super()",
-    "callee_short": "to_info_dict"
+    "call_context": " 1449 | def test_option_names(runner, option_args, expected):\n 1450 |     @click.command()\n 1451 |     @click.option(*option_args, is_flag=True)\n      |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1452 |     def cmd(**kwargs):",
+    "callee": "option",
+    "receiver": "click"
   },
   {
-    "site_id": "d08ae323e842",
+    "site_id": "2fd82902dac6",
+    "repo": "click",
+    "file": "tests/test_basic.py",
+    "call_text": "click.command()",
+    "call_range": [
+      132,
+      5,
+      132,
+      20
+    ],
+    "call_context": "  130 | \n  131 | def test_return_values():\n  132 |     @click.command()\n      |      ^^^^^^^^^^^^^^^\n  133 |     def cli():",
+    "callee": "command",
+    "receiver": "click"
+  },
+  {
+    "site_id": "94338450f5e0",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "click.echo(whatever)",
+    "call_range": [
+      1090,
+      8,
+      1090,
+      28
+    ],
+    "call_context": " 1088 |     @click.option(\"-whatever\")\n 1089 |     def cmd(whatever):\n 1090 |         click.echo(whatever)\n      |         ^^^^^^^^^^^^^^^^^^^^\n 1091 | ",
+    "callee": "echo",
+    "receiver": "click"
+  },
+  {
+    "site_id": "218f56f6926f",
+    "repo": "click",
+    "file": "src/click/exceptions.py",
+    "call_text": "_format_possibilities(self.possibilities)",
+    "call_range": [
+      265,
+      33,
+      265,
+      74
+    ],
+    "call_context": "  263 |         if not self.possibilities:\n  264 |             return self.message\n  265 |         return f\"{self.message} {_format_possibilities(self.possibilities)}\"\n      |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  266 | ",
+    "callee": "_format_possibilities",
+    "receiver": null
+  },
+  {
+    "site_id": "729ae40dd539",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "push_context(self)",
+    "call_range": [
+      581,
+      8,
+      581,
+      26
+    ],
+    "call_context": "  579 |     def __enter__(self) -> Self:\n  580 |         self._depth += 1\n  581 |         push_context(self)\n      |         ^^^^^^^^^^^^^^^^^^\n  582 |         return self",
+    "callee": "push_context",
+    "receiver": null
+  },
+  {
+    "site_id": "03c2435f3163",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "_create_progress(\n        length,\n        width=8,\n        show_percent=show_percent,\n        pos=pos,\n        show_pos=show_pos,\n    )",
+    "call_range": [
+      206,
+      9,
+      212,
+      5
+    ],
+    "call_context": "  204 |     runner, length, show_percent, show_pos, pos, expected\n  205 | ):\n  206 |     with _create_progress(\n      |          ^^^^^^^^^^^^^^^^^\n  207 |         length,\n  208 |         width=8,\n  209 |         show_percent=show_percent,\n  210 |         pos=pos,\n  211 |         show_pos=show_pos,\n  212 |     ) as progress:\n  213 |         assert progress.format_progress_line() == expected",
+    "callee": "_create_progress",
+    "receiver": null
+  },
+  {
+    "site_id": "4d223218881e",
+    "repo": "click",
+    "file": "src/click/termui.py",
+    "call_text": "prompt_func(confirmation_prompt)",
+    "call_range": [
+      280,
+      21,
+      280,
+      53
+    ],
+    "call_context": "  278 |             return result\n  279 |         while True:\n  280 |             value2 = prompt_func(confirmation_prompt)\n      |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  281 |             is_empty = not value and not value2",
+    "callee": "prompt_func",
+    "receiver": null
+  },
+  {
+    "site_id": "6b3b95ae4381",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "_get_binary_stream(\"stdin\")",
+    "call_range": [
+      19,
+      12,
+      19,
+      39
+    ],
+    "call_context": "   17 |     @click.command()\n   18 |     def test():\n   19 |         i = _get_binary_stream(\"stdin\")\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   20 |         o = _get_binary_stream(\"stdout\")",
+    "callee": "_get_binary_stream",
+    "receiver": null
+  },
+  {
+    "site_id": "103b4bdd4c23",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "make_str(args[0])",
+    "call_range": [
+      2123,
+      19,
+      2123,
+      36
+    ],
+    "call_context": " 2121 |         self, ctx: Context, args: list[str]\n 2122 |     ) -> tuple[str | None, Command | None, list[str]]:\n 2123 |         cmd_name = make_str(args[0])\n      |                    ^^^^^^^^^^^^^^^^^\n 2124 | ",
+    "callee": "make_str",
+    "receiver": null
+  },
+  {
+    "site_id": "84cfa26941a9",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "_make_default_short_help(self.help, limit)",
+    "call_range": [
+      1279,
+      19,
+      1279,
+      61
+    ],
+    "call_context": " 1277 |             text = inspect.cleandoc(self.short_help)\n 1278 |         elif self.help:\n 1279 |             text = _make_default_short_help(self.help, limit)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1280 |         else:",
+    "callee": "_make_default_short_help",
+    "receiver": null
+  },
+  {
+    "site_id": "f20401c97071",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "cmd",
+    "call_range": [
+      1079,
+      27,
+      1079,
+      30
+    ],
+    "call_context": " 1077 |     result = runner.invoke(cmd, [\"/no-debug\"], help_option_names=[\"/?\"])\n 1078 |     assert result.output == \"False\\n\"\n 1079 |     result = runner.invoke(cmd, [], help_option_names=[\"/?\"])\n      |                            ^^^\n 1080 |     assert result.output == \"False\\n\"",
+    "callee": "cmd",
+    "receiver": null
+  },
+  {
+    "site_id": "7e5d43167c0f",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "cmd",
+    "call_range": [
+      1237,
+      27,
+      1237,
+      30
+    ],
+    "call_context": " 1235 |         pass\n 1236 | \n 1237 |     result = runner.invoke(cmd, [\"--help\"])\n      |                            ^^^\n 1238 |     assert result.exit_code == 0",
+    "callee": "cmd",
+    "receiver": null
+  },
+  {
+    "site_id": "3369b87feb38",
+    "repo": "click",
+    "file": "tests/test_arguments.py",
+    "call_text": "from_bytes",
+    "call_range": [
+      465,
+      8,
+      465,
+      18
+    ],
+    "call_context": "  463 | \n  464 |     runner.invoke(\n  465 |         from_bytes,\n      |         ^^^^^^^^^^\n  466 |         [\"Something outside of ASCII range: \u6797\".encode()],",
+    "callee": "from_bytes",
+    "receiver": null
+  },
+  {
+    "site_id": "008a6c51085f",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "f",
+    "call_range": [
+      717,
+      41,
+      717,
+      42
+    ],
+    "call_context": "  715 |         :param f: The function to execute on teardown.\n  716 |         \"\"\"\n  717 |         return self._exit_stack.callback(f)\n      |                                          ^\n  718 | ",
+    "callee": "f",
+    "receiver": null
+  },
+  {
+    "site_id": "158ab4017511",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "cli_with_choices",
+    "call_range": [
+      275,
+      27,
+      275,
+      43
+    ],
+    "call_context": "  273 |         pass\n  274 | \n  275 |     result = runner.invoke(cli_with_choices, [], input=\"none\")\n      |                            ^^^^^^^^^^^^^^^^\n  276 |     assert \"(none, day, week, month)\" in result.output",
+    "callee": "cli_with_choices",
+    "receiver": null
+  },
+  {
+    "site_id": "0481ca8f0b75",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "cmd",
+    "call_range": [
+      1938,
+      29,
+      1938,
+      32
+    ],
+    "call_context": " 1936 |         def decorator(f: t.Callable[..., t.Any]) -> Group:\n 1937 |             cmd: Group = group(*args, **kwargs)(f)\n 1938 |             self.add_command(cmd)\n      |                              ^^^\n 1939 |             return cmd",
+    "callee": "cmd",
+    "receiver": null
+  },
+  {
+    "site_id": "4d90dd65d2a2",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.type.split_envvar_value(rv)",
+    "call_range": [
+      2925,
+      19,
+      2925,
+      51
+    ],
+    "call_context": " 2923 | \n 2924 |         if rv is not None and self.nargs != 1:\n 2925 |             return self.type.split_envvar_value(rv)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2926 | ",
+    "callee": "split_envvar_value",
+    "receiver": "self.type"
+  },
+  {
+    "site_id": "f2936d41f3b7",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.type.get_metavar(param=self, ctx=ctx)",
+    "call_range": [
+      2624,
+      18,
+      2624,
+      60
+    ],
+    "call_context": " 2622 |             return self.metavar\n 2623 | \n 2624 |         metavar = self.type.get_metavar(param=self, ctx=ctx)\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2625 | ",
+    "callee": "get_metavar",
+    "receiver": "self.type"
+  },
+  {
+    "site_id": "558e3cc4f431",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "types.BoolParamType.str_to_bool(rv)",
+    "call_range": [
+      3804,
+      21,
+      3804,
+      56
+    ],
+    "call_context": " 3802 |             if rv == self.flag_value:\n 3803 |                 return self.flag_value\n 3804 |             parsed = types.BoolParamType.str_to_bool(rv)\n      |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3805 |             if parsed is None:",
+    "callee": "str_to_bool",
+    "receiver": "types.BoolParamType"
+  },
+  {
+    "site_id": "4d90dd65d2a2",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.type.split_envvar_value(rv)",
+    "call_range": [
+      2925,
+      19,
+      2925,
+      51
+    ],
+    "call_context": " 2923 | \n 2924 |         if rv is not None and self.nargs != 1:\n 2925 |             return self.type.split_envvar_value(rv)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2926 | ",
+    "callee": "split_envvar_value",
+    "receiver": "self.type"
+  },
+  {
+    "site_id": "5abcf7f3cd4e",
+    "repo": "click",
+    "file": "tests/test_basic.py",
+    "call_text": "os.path.exists(f)",
+    "call_range": [
+      514,
+      29,
+      514,
+      46
+    ],
+    "call_context": "  512 |     @click.option(\"-f\", type=click.Path())\n  513 |     def exists(f):\n  514 |         click.echo(f\"exists={os.path.exists(f)}\")\n      |                              ^^^^^^^^^^^^^^^^^\n  515 | ",
+    "callee": "exists",
+    "receiver": "os.path"
+  },
+  {
+    "site_id": "0d8dd999000b",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "click.Path(exists=True, dir_okay=False).convert(\n                    value, param, ctx\n                )",
+    "call_range": [
+      2430,
+      23,
+      2432,
+      17
+    ],
+    "call_context": " 2428 |                 return \"No configuration file provided.\"\n 2429 |             else:\n 2430 |                 return click.Path(exists=True, dir_okay=False).convert(\n      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2431 |                     value, param, ctx\n 2432 |                 )\n 2433 | ",
+    "callee": "convert",
+    "receiver": "click.Path(exists=True, dir_okay=False)"
+  },
+  {
+    "site_id": "bd591e8189d1",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "click.Choice([\"foo\", \"bar\"])",
+    "call_range": [
+      1142,
+      32,
+      1142,
+      60
+    ],
+    "call_context": " 1140 | def test_missing_choice(runner):\n 1141 |     @click.command()\n 1142 |     @click.option(\"--foo\", type=click.Choice([\"foo\", \"bar\"]), required=True)\n      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1143 |     def cmd(foo):",
+    "callee": "Choice",
+    "receiver": "click"
+  },
+  {
+    "site_id": "ae27aafc6618",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "click.Option([\"--bound\"])",
+    "call_range": [
+      226,
+      23,
+      226,
+      48
+    ],
+    "call_context": "  224 | def test_suggest_possible_options(runner, value, expect):\n  225 |     cli = click.Command(\n  226 |         \"cli\", params=[click.Option([\"--bound\"]), click.Option([\"--count\"])]\n      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^\n  227 |     )",
+    "callee": "Option",
+    "receiver": "click"
+  },
+  {
+    "site_id": "2c65227b21bb",
+    "repo": "click",
+    "file": "tests/test_basic.py",
+    "call_text": "click.DateTime(formats=[\"%Y-%m-%d\"])",
+    "call_range": [
+      682,
+      33,
+      682,
+      69
+    ],
+    "call_context": "  680 | \n  681 |     @click.command()\n  682 |     @click.argument(\"when\", type=click.DateTime(formats=[\"%Y-%m-%d\"]), required=False)\n      |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  683 |     def cli(when):",
+    "callee": "DateTime",
+    "receiver": "click"
+  },
+  {
+    "site_id": "e42ce2ff5b8f",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "click.Tuple",
+    "call_range": [
+      701,
+      32,
+      701,
+      43
+    ],
+    "call_context": "  699 |     assert opt.nargs == 2\n  700 |     assert opt.multiple\n  701 |     assert isinstance(opt.type, click.Tuple)\n      |                                 ^^^^^^^^^^^\n  702 |     assert opt.type.types == [click.INT, click.STRING]",
+    "callee": "Tuple",
+    "receiver": "click"
+  },
+  {
+    "site_id": "0bff262405c1",
+    "repo": "click",
+    "file": "tests/test_shell_completion.py",
+    "call_text": "Argument([\"x\"], type=Choice([\"a\", \"b\"]), nargs=2)",
+    "call_range": [
+      279,
+      12,
+      279,
+      61
+    ],
+    "call_context": "  277 |         \"cli\",\n  278 |         params=[\n  279 |             Argument([\"x\"], type=Choice([\"a\", \"b\"]), nargs=2),\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  280 |             Argument([\"y\"], type=Choice([\"c\", \"d\"]), nargs=-1),",
+    "callee": "Argument",
+    "receiver": null
+  },
+  {
+    "site_id": "10350d21e97a",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "click.Command(\"test\")",
+    "call_range": [
+      830,
+      28,
+      830,
+      49
+    ],
+    "call_context": "  828 |         [\"--infile\"], type=click.File(), default=__file__, show_default=True\n  829 |     )\n  830 |     context = click.Context(click.Command(\"test\"))\n      |                             ^^^^^^^^^^^^^^^^^^^^^\n  831 |     assert option.get_help_extra(context) == {\"default\": __file__}",
+    "callee": "Command",
+    "receiver": "click"
+  },
+  {
+    "site_id": "8ff9e057a382",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "runner.invoke(cli, [\"--my-option\", \"hello\"])",
+    "call_range": [
+      144,
+      13,
+      144,
+      57
+    ],
+    "call_context": "  142 |     assert \"is deprecated\" not in result.output\n  143 | \n  144 |     result = runner.invoke(cli, [\"--my-option\", \"hello\"])\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  145 |     assert result.exit_code == 0, result.output",
+    "callee": "invoke",
+    "receiver": "runner"
+  },
+  {
+    "site_id": "5156bc10ddcf",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "runner.invoke(cli, args)",
+    "call_range": [
+      3276,
+      13,
+      3276,
+      37
+    ],
+    "call_context": " 3274 |         click.echo(repr(enable_xyz), nl=False)\n 3275 | \n 3276 |     result = runner.invoke(cli, args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^\n 3277 |     assert result.exit_code == 0, result.output",
+    "callee": "invoke",
+    "receiver": "runner"
+  },
+  {
+    "site_id": "b204ff9c2a81",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "runner.invoke(cmd, [], auto_envvar_prefix=\"TEST\", env={\"TEST_SS\": \"foo\"})",
+    "call_range": [
+      931,
+      13,
+      931,
+      86
+    ],
+    "call_context": "  929 |         click.echo(repr(kwargs))\n  930 | \n  931 |     result = runner.invoke(cmd, [], auto_envvar_prefix=\"TEST\", env={\"TEST_SS\": \"foo\"})\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  932 |     assert not result.exception",
+    "callee": "invoke",
+    "receiver": "runner"
+  },
+  {
+    "site_id": "e6550445e2db",
+    "repo": "click",
+    "file": "tests/test_commands.py",
+    "call_text": "runner.invoke(cli, args)",
+    "call_range": [
+      139,
+      13,
+      139,
+      37
+    ],
+    "call_context": "  137 |         click.echo(\"move\")\n  138 | \n  139 |     result = runner.invoke(cli, args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^\n  140 |     assert result.exit_code == exit_code",
+    "callee": "invoke",
+    "receiver": "runner"
+  },
+  {
+    "site_id": "0f68258948a1",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "runner.invoke(cli, args)",
+    "call_range": [
+      3839,
+      13,
+      3839,
+      37
+    ],
+    "call_context": " 3837 |         cli = click.option(opt_name, \"case\", **opt_kwargs)(cli)\n 3838 | \n 3839 |     result = runner.invoke(cli, args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^\n 3840 |     assert result.exit_code == 0, result.output",
+    "callee": "invoke",
+    "receiver": "runner"
+  },
+  {
+    "site_id": "6941f7bc51ae",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "pager.write(\"\")",
+    "call_range": [
+      738,
+      35,
+      738,
+      50
+    ],
+    "call_context": "  736 |             id=\"preserve ansi\",\n  737 |         ),\n  738 |         pytest.param(lambda pager: pager.write(\"\"), False, \"\", id=\"empty string\"),\n      |                                    ^^^^^^^^^^^^^^^\n  739 |     ],",
+    "callee": "write",
+    "receiver": "pager"
+  },
+  {
+    "site_id": "93c4825504a7",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self._parse_decls(\n            param_decls or (), expose_value\n        )",
+    "call_range": [
+      2436,
+      52,
+      2438,
+      9
+    ],
+    "call_context": " 2434 |         help: str | None = None,\n 2435 |     ) -> None:\n 2436 |         self.name, self.opts, self.secondary_opts = self._parse_decls(\n      |                                                     ^^^^^^^^^^^^^^^^^^\n 2437 |             param_decls or (), expose_value\n 2438 |         )\n 2439 |         self.type: types.ParamType[t.Any] = types.convert_type(type, default)",
+    "callee": "_parse_decls",
+    "receiver": "self"
+  },
+  {
+    "site_id": "d148c22bc510",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.resolve_envvar_value(ctx)",
+    "call_range": [
+      3785,
+      13,
+      3785,
+      43
+    ],
+    "call_context": " 3783 |         :meta private:\n 3784 |         \"\"\"\n 3785 |         rv = self.resolve_envvar_value(ctx)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3786 | ",
+    "callee": "resolve_envvar_value",
+    "receiver": "self"
+  },
+  {
+    "site_id": "a54c1d360227",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.get_command(ctx, subcommand)",
+    "call_range": [
+      2016,
+      18,
+      2016,
+      51
+    ],
+    "call_context": " 2014 |         commands = []\n 2015 |         for subcommand in self.list_commands(ctx):\n 2016 |             cmd = self.get_command(ctx, subcommand)\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2017 |             # What is this, the tool lied about a command.  Ignore it",
+    "callee": "get_command",
+    "receiver": "self"
+  },
+  {
+    "site_id": "c3c118e15734",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "self.fail(f\"rejected: {value}\", param, ctx)",
+    "call_range": [
+      1789,
+      8,
+      1789,
+      51
+    ],
+    "call_context": " 1787 | \n 1788 |     def convert(self, value, param, ctx):\n 1789 |         self.fail(f\"rejected: {value}\", param, ctx)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1790 | ",
+    "callee": "fail",
+    "receiver": "self"
+  },
+  {
+    "site_id": "69de620f29bb",
+    "repo": "click",
+    "file": "src/click/types.py",
+    "call_text": "self.fail(\n                    _(\"{name} {filename!r} is not writable.\").format(\n                        name=self.name.title(), filename=format_filename(value)\n                    ),\n                    param,\n                    ctx,\n                )",
+    "call_range": [
+      1216,
+      16,
+      1222,
+      17
+    ],
+    "call_context": " 1214 | \n 1215 |             if self.writable and not os.access(rv, os.W_OK):\n 1216 |                 self.fail(\n      |                 ^^^^^^^^^^\n 1217 |                     _(\"{name} {filename!r} is not writable.\").format(\n 1218 |                         name=self.name.title(), filename=format_filename(value)\n 1219 |                     ),\n 1220 |                     param,\n 1221 |                     ctx,\n 1222 |                 )\n 1223 | ",
+    "callee": "fail",
+    "receiver": "self"
+  },
+  {
+    "site_id": "216145fe2053",
+    "repo": "click",
+    "file": "src/click/types.py",
+    "call_text": "self.fail(\n                ngettext(\n                    \"{len_type} values are required, but {len_value} was given.\",\n                    \"{len_type} values are required, but {len_value} were given.\",\n                    len_value,\n                ).format(len_type=len_type, len_value=len_value),\n                param=param,\n                ctx=ctx,\n            )",
+    "call_range": [
+      1296,
+      12,
+      1304,
+      13
+    ],
+    "call_context": " 1294 | \n 1295 |         if len_value != len_type:\n 1296 |             self.fail(\n      |             ^^^^^^^^^^\n 1297 |                 ngettext(\n 1298 |                     \"{len_type} values are required, but {len_value} was given.\",\n 1299 |                     \"{len_type} values are required, but {len_value} were given.\",\n 1300 |                     len_value,\n 1301 |                 ).format(len_type=len_type, len_value=len_value),\n 1302 |                 param=param,\n 1303 |                 ctx=ctx,\n 1304 |             )\n 1305 | ",
+    "callee": "fail",
+    "receiver": "self"
+  },
+  {
+    "site_id": "005ec60827df",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "super().parse_args(ctx, args)",
+    "call_range": [
+      2042,
+      15,
+      2042,
+      44
+    ],
+    "call_context": " 2040 |             raise NoArgsIsHelpError(ctx)\n 2041 | \n 2042 |         rest = super().parse_args(ctx, args)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2043 | ",
+    "callee": "parse_args",
+    "receiver": "super()"
+  },
+  {
+    "site_id": "760f776f6968",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "super().invoke(ctx)",
+    "call_range": [
+      2095,
+      12,
+      2095,
+      31
+    ],
+    "call_context": " 2093 |         with ctx:\n 2094 |             ctx.invoked_subcommand = \"*\" if args else None\n 2095 |             super().invoke(ctx)\n      |             ^^^^^^^^^^^^^^^^^^^\n 2096 | ",
+    "callee": "invoke",
+    "receiver": "super()"
+  },
+  {
+    "site_id": "005ec60827df",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "super().parse_args(ctx, args)",
+    "call_range": [
+      2042,
+      15,
+      2042,
+      44
+    ],
+    "call_context": " 2040 |             raise NoArgsIsHelpError(ctx)\n 2041 | \n 2042 |         rest = super().parse_args(ctx, args)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2043 | ",
+    "callee": "parse_args",
+    "receiver": "super()"
+  },
+  {
+    "site_id": "31a99219905d",
     "repo": "click",
     "file": "src/click/core.py",
     "call_text": "super().process_value(ctx, value)",
@@ -732,71 +717,36 @@
     ],
     "call_context": " 3889 | \n 3890 |         # in the normal case, rely on Parameter.process_value\n 3891 |         return super().process_value(ctx, value)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3892 | ",
     "callee": "process_value",
-    "receiver": "super()",
-    "callee_short": "process_value"
+    "receiver": "super()"
   },
   {
-    "site_id": "d1a82dcbdb8a",
+    "site_id": "796b7e1c8b29",
     "repo": "click",
     "file": "src/click/core.py",
-    "call_text": "super().__init_subclass__(**kwargs)",
+    "call_text": "super().to_info_dict(ctx)",
     "call_range": [
-      2393,
-      8,
-      2393,
-      43
+      1818,
+      20,
+      1818,
+      45
     ],
-    "call_context": " 2391 | \n 2392 |     def __init_subclass__(cls, **kwargs: t.Any) -> None:\n 2393 |         super().__init_subclass__(**kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2394 | ",
-    "callee": "__init_subclass__",
-    "receiver": "super()",
-    "callee_short": "__init_subclass__"
+    "call_context": " 1816 | \n 1817 |     def to_info_dict(self, ctx: Context) -> dict[str, t.Any]:\n 1818 |         info_dict = super().to_info_dict(ctx)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^\n 1819 |         commands = {}",
+    "callee": "to_info_dict",
+    "receiver": "super()"
   },
   {
-    "site_id": "a212b90cf710",
+    "site_id": "bddfe8cdecdb",
     "repo": "click",
-    "file": "src/click/exceptions.py",
-    "call_text": "super().__init__(hint)",
+    "file": "src/click/types.py",
+    "call_text": "super().__init__(\n            min=min, max=max, min_open=min_open, max_open=max_open, clamp=clamp\n        )",
     "call_range": [
-      352,
+      802,
       8,
-      352,
-      30
+      804,
+      9
     ],
-    "call_context": "  350 |             hint = _(\"unknown error\")\n  351 | \n  352 |         super().__init__(hint)\n      |         ^^^^^^^^^^^^^^^^^^^^^^\n  353 |         self.ui_filename = format_filename(filename)",
+    "call_context": "  800 |         clamp: bool = False,\n  801 |     ) -> None:\n  802 |         super().__init__(\n      |         ^^^^^^^^^^^^^^^^^\n  803 |             min=min, max=max, min_open=min_open, max_open=max_open, clamp=clamp\n  804 |         )\n  805 | ",
     "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
-  },
-  {
-    "site_id": "6494fdb8c83b",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "super().__init__(name, **kwargs)",
-    "call_range": [
-      1775,
-      8,
-      1775,
-      40
-    ],
-    "call_context": " 1773 |         **kwargs: t.Any,\n 1774 |     ) -> None:\n 1775 |         super().__init__(name, **kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1776 | ",
-    "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
-  },
-  {
-    "site_id": "36f973b5df2a",
-    "repo": "click",
-    "file": "src/click/exceptions.py",
-    "call_text": "super().__init__(message, ctx)",
-    "call_range": [
-      142,
-      8,
-      142,
-      38
-    ],
-    "call_context": "  140 |         param_hint: cabc.Sequence[str] | str | None = None,\n  141 |     ) -> None:\n  142 |         super().__init__(message, ctx)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  143 |         self.param = param",
-    "callee": "__init__",
-    "receiver": "super()",
-    "callee_short": "__init__"
+    "receiver": "super()"
   }
 ]

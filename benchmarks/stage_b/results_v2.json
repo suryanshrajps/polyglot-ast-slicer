@@ -1,0 +1,411 @@
+[
+  {
+    "repo": "sb_requests",
+    "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+    "target": "_implementation",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 0.0,
+    "touched_recall": 0.0,
+    "classes": {
+      "not_connected_other": 2
+    },
+    "payload_tokens": 1498,
+    "grep_tokens": 2638
+  },
+  {
+    "repo": "sb_requests",
+    "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+    "target": "RequestEncodingMixin._encode_files",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 0.0,
+    "touched_recall": 0.5,
+    "classes": {
+      "not_connected_other": 1,
+      "not_connected_same_file": 1
+    },
+    "payload_tokens": 2851,
+    "grep_tokens": 2579
+  },
+  {
+    "repo": "sb_requests",
+    "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+    "target": "Response.iter_lines",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 0.0,
+    "touched_recall": 0.5,
+    "classes": {
+      "not_connected_other": 1,
+      "not_connected_same_file": 1
+    },
+    "payload_tokens": 1968,
+    "grep_tokens": 9608
+  },
+  {
+    "repo": "sb_requests",
+    "sha": "e511bc72777a94c45d004e010c597925092e1efe",
+    "target": "Request.__init__",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 1.0,
+    "touched_recall": 0.0,
+    "classes": {
+      "not_connected_other": 1
+    },
+    "payload_tokens": 774,
+    "grep_tokens": 32564
+  },
+  {
+    "repo": "sb_requests",
+    "sha": "e511bc72777a94c45d004e010c597925092e1efe",
+    "target": "Session.request",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {
+      "not_connected_other": 1
+    },
+    "payload_tokens": 5636,
+    "grep_tokens": 984313
+  },
+  {
+    "repo": "sb_click",
+    "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+    "target": "_pager_contextmanager",
+    "recall": {
+      "3000": 0.5,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 2807,
+    "grep_tokens": 4025
+  },
+  {
+    "repo": "sb_click",
+    "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+    "target": "_pipepager",
+    "recall": {
+      "3000": 0.5,
+      "6000": 0.5,
+      "12000": 0.5,
+      "1000000000": 0.5
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {
+      "connected_pruned": 1
+    },
+    "payload_tokens": 1693,
+    "grep_tokens": 9264
+  },
+  {
+    "repo": "sb_click",
+    "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+    "target": "_tempfilepager",
+    "recall": {
+      "3000": 0.5,
+      "6000": 0.5,
+      "12000": 0.5,
+      "1000000000": 0.5
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {
+      "connected_pruned": 1
+    },
+    "payload_tokens": 1561,
+    "grep_tokens": 11018
+  },
+  {
+    "repo": "sb_click",
+    "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+    "target": "split_arg_string",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 0.5,
+    "touched_recall": 0.0,
+    "classes": {
+      "not_connected_other": 2
+    },
+    "payload_tokens": 1303,
+    "grep_tokens": 12834
+  },
+  {
+    "repo": "sb_click",
+    "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+    "target": "style",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.5,
+    "grep_recall": 0.5,
+    "touched_recall": 0.0,
+    "classes": {
+      "not_connected_other": 1,
+      "connected_pruned": 1
+    },
+    "payload_tokens": 5009,
+    "grep_tokens": 85197
+  },
+  {
+    "repo": "sb_click",
+    "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+    "target": "echo",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.5,
+    "grep_recall": 1.0,
+    "touched_recall": 0.5,
+    "classes": {
+      "not_connected_other": 1,
+      "connected_pruned": 1
+    },
+    "payload_tokens": 5479,
+    "grep_tokens": 442829
+  },
+  {
+    "repo": "sb_click",
+    "sha": "3495fba163dd61dea837cd557095df6c21515ac8",
+    "target": "Command.get_help_option",
+    "recall": {
+      "3000": 1.0,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 2423,
+    "grep_tokens": 6062
+  },
+  {
+    "repo": "sb_click",
+    "sha": "3495fba163dd61dea837cd557095df6c21515ac8",
+    "target": "Command.get_params",
+    "recall": {
+      "3000": 1.0,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 3176,
+    "grep_tokens": 11628
+  },
+  {
+    "repo": "sb_click",
+    "sha": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+    "target": "_interpret_color",
+    "recall": {
+      "3000": 1.0,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 4864,
+    "grep_tokens": 3020
+  },
+  {
+    "repo": "sb_click",
+    "sha": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+    "target": "style",
+    "recall": {
+      "3000": 0.0,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 4864,
+    "grep_tokens": 77712
+  },
+  {
+    "repo": "sb_click",
+    "sha": "bec59289d8cf9b9b4010642b2fee483e5f8eeefc",
+    "target": "version_option",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {
+      "not_connected_same_file": 1
+    },
+    "payload_tokens": 1521,
+    "grep_tokens": 10076
+  },
+  {
+    "repo": "sb_click",
+    "sha": "bec59289d8cf9b9b4010642b2fee483e5f8eeefc",
+    "target": "version_option.callback",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {
+      "not_connected_same_file": 1
+    },
+    "payload_tokens": 1795,
+    "grep_tokens": 140217
+  },
+  {
+    "repo": "sb_click",
+    "sha": "051bb0f30b545cf7426deef819811815297c2798",
+    "target": "_SkipClose.__getattr__",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 0.5714285714285714,
+    "touched_recall": 1.0,
+    "classes": {
+      "not_connected_same_file": 7
+    },
+    "payload_tokens": 215,
+    "grep_tokens": 15883
+  },
+  {
+    "repo": "sb_click",
+    "sha": "051bb0f30b545cf7426deef819811815297c2798",
+    "target": "_SkipClose.__init__",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.0,
+    "grep_recall": 0.7142857142857143,
+    "touched_recall": 1.0,
+    "classes": {
+      "not_connected_same_file": 7
+    },
+    "payload_tokens": 215,
+    "grep_tokens": 101860
+  },
+  {
+    "repo": "sb_click",
+    "sha": "051bb0f30b545cf7426deef819811815297c2798",
+    "target": "_SkipClose.buffer",
+    "recall": {
+      "3000": 0.0,
+      "6000": 0.0,
+      "12000": 0.0,
+      "1000000000": 0.0
+    },
+    "reachable2": 0.14285714285714285,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {
+      "not_connected_same_file": 6,
+      "connected_pruned": 1
+    },
+    "payload_tokens": 291,
+    "grep_tokens": 44517
+  },
+  {
+    "repo": "sb_flask",
+    "sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
+    "target": "Flask.request_context",
+    "recall": {
+      "3000": 1.0,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 4318,
+    "grep_tokens": 59081
+  },
+  {
+    "repo": "sb_flask",
+    "sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
+    "target": "Flask.test_request_context",
+    "recall": {
+      "3000": 1.0,
+      "6000": 1.0,
+      "12000": 1.0,
+      "1000000000": 1.0
+    },
+    "reachable2": 1.0,
+    "grep_recall": 1.0,
+    "touched_recall": 1.0,
+    "classes": {},
+    "payload_tokens": 3581,
+    "grep_tokens": 43347
+  }
+]
