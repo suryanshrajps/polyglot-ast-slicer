@@ -1,0 +1,98 @@
+[
+  {
+    "repo": "sb_click",
+    "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+    "target": "_pipepager",
+    "missing": "_tempfilepager",
+    "missing_file": "src/click/_termui_impl.py",
+    "path": [
+      "_pipepager",
+      "_pager_contextmanager",
+      "_tempfilepager"
+    ],
+    "relations": [
+      "calls",
+      "calls"
+    ],
+    "directions": [
+      "backward",
+      "forward"
+    ],
+    "degrees": [
+      1,
+      6,
+      2
+    ],
+    "omitted": {
+      "upstream": 0,
+      "downstream": 0,
+      "types": 0
+    },
+    "max_total_snippets": 40,
+    "explanation": "mixed upstream/downstream path, not covered by either directional BFS"
+  },
+  {
+    "repo": "sb_click",
+    "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+    "target": "_tempfilepager",
+    "missing": "_pipepager",
+    "missing_file": "src/click/_termui_impl.py",
+    "path": [
+      "_tempfilepager",
+      "_pager_contextmanager",
+      "_pipepager"
+    ],
+    "relations": [
+      "calls",
+      "calls"
+    ],
+    "directions": [
+      "backward",
+      "forward"
+    ],
+    "degrees": [
+      2,
+      6,
+      1
+    ],
+    "omitted": {
+      "upstream": 0,
+      "downstream": 0,
+      "types": 0
+    },
+    "max_total_snippets": 40,
+    "explanation": "mixed upstream/downstream path, not covered by either directional BFS"
+  },
+  {
+    "repo": "sb_click",
+    "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+    "target": "style",
+    "missing": "echo",
+    "missing_file": "src/click/utils.py",
+    "path": [
+      "style",
+      "cli",
+      "echo"
+    ],
+    "relations": [
+      "calls",
+      "calls"
+    ],
+    "directions": [
+      "backward",
+      "forward"
+    ],
+    "degrees": [
+      18,
+      2,
+      317
+    ],
+    "omitted": {
+      "upstream": 7,
+      "downstream": 0,
+      "types": 0
+    },
+    "max_total_snippets": 40,
+    "explanation": "mixed upstream/downstream path, not covered by either directional BFS"
+  }
+]

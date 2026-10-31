@@ -56,7 +56,15 @@ Entries: 22; commits dropped (fewer than 2 changed non-test symbols): 21.
 
 Miss classes: not_connected_other=10, not_connected_same_file=24, connected_pruned=5.
 
-Median payload tokens: 2195.5; median grep tokens: 14358.5.
+
+| Baseline | Recall (median) | Tokens (median) |
+|---|---:|---:|
+| slice | 0.0 | 2195.5 |
+| entry file only | 1.0 | 7266.0 |
+| grep -C20 entry name | 1.0 | 14358.5 |
+| touched files (upper bound, not a competitor) | 1.0 | n/a |
+
+Grep recall is inflated by name collisions (e.g. `request` matching `pyproject.toml`), not by finding the co-changed definition.
 
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 

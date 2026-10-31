@@ -279,10 +279,25 @@ def render(data: dict[str, object]) -> str:
             "",
             "Miss classes: " + ", ".join(f"{k}={v}" for k, v in stage["classes"].items()) + ".",
             "",
-            f"Median payload tokens: {stage['payload_median']}; median grep tokens: "
-            f"{stage['grep_tokens_median']}.",
             "",
         ]
+        baseline_path = ROOT / "benchmarks" / "stage_b" / "baselines.json"
+        if baseline_path.exists():
+            base = json.loads(baseline_path.read_text(encoding="utf-8"))["summary"]
+            lines += [
+                "| Baseline | Recall (median) | Tokens (median) |",
+                "|---|---:|---:|",
+                f"| slice | {stage['recall']['6000']} | {stage['payload_median']} |",
+                f"| entry file only | {base['entry_file_recall_p50']} | "
+                f"{base['entry_file_tokens_p50']} |",
+                f"| grep -C20 entry name | {base['grep_recall_p50']} | "
+                f"{base['grep_tokens_p50']} |",
+                "| touched files (upper bound, not a competitor) | 1.0 | n/a |",
+                "",
+                "Grep recall is inflated by name collisions (e.g. `request` matching "
+                "`pyproject.toml`), not by finding the co-changed definition.",
+                "",
+            ]
     else:
         lines += ["UNMEASURED", ""]
     lines += [

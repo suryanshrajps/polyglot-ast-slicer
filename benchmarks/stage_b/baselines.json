@@ -1,0 +1,249 @@
+{
+  "summary": {
+    "n": 22,
+    "entry_file_recall_p50": 1.0,
+    "entry_file_tokens_p50": 7266.0,
+    "grep_recall_p50": 1.0,
+    "grep_tokens_p50": 14358.5,
+    "payload_tokens_p50": 2195.5,
+    "grep_examples": [
+      {
+        "repo": "sb_requests",
+        "co_changed": "request",
+        "grep_line": "/private/tmp/sb_work_v2/base-sb_requests-e511bc72/pyproject.toml-78-version = {attr = \"requests.__version__.__version__\"}"
+      },
+      {
+        "repo": "sb_requests",
+        "co_changed": "__init__",
+        "grep_line": "/private/tmp/sb_work_v2/base-sb_requests-e511bc72/pyproject.toml:98:per-file-ignores = {\"src/requests/__init__.py\" = [\"E402\", \"F401\"], \"src/requests/compat.py\" "
+      },
+      {
+        "repo": "sb_click",
+        "co_changed": "_pipepager",
+        "grep_line": "/private/tmp/sb_work_v2/base-sb_click-a6256bfb/src/click/_termui_impl.py-493-    return _pipepager(cmd_path, cmd_params, color)"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "repo": "sb_requests",
+      "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+      "target": "_implementation",
+      "entry_file_recall": 0.0,
+      "entry_file_tokens": 947,
+      "grep_recall": 0.0,
+      "grep_tokens": 2638,
+      "payload_tokens": 1498
+    },
+    {
+      "repo": "sb_requests",
+      "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+      "target": "RequestEncodingMixin._encode_files",
+      "entry_file_recall": 0.5,
+      "entry_file_tokens": 9195,
+      "grep_recall": 0.0,
+      "grep_tokens": 2579,
+      "payload_tokens": 2851
+    },
+    {
+      "repo": "sb_requests",
+      "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+      "target": "Response.iter_lines",
+      "entry_file_recall": 0.5,
+      "entry_file_tokens": 9195,
+      "grep_recall": 0.0,
+      "grep_tokens": 9608,
+      "payload_tokens": 1968
+    },
+    {
+      "repo": "sb_requests",
+      "sha": "e511bc72777a94c45d004e010c597925092e1efe",
+      "target": "Request.__init__",
+      "entry_file_recall": 0.0,
+      "entry_file_tokens": 9209,
+      "grep_recall": 1.0,
+      "grep_tokens": 32564,
+      "payload_tokens": 774
+    },
+    {
+      "repo": "sb_requests",
+      "sha": "e511bc72777a94c45d004e010c597925092e1efe",
+      "target": "Session.request",
+      "entry_file_recall": 0.0,
+      "entry_file_tokens": 7390,
+      "grep_recall": 1.0,
+      "grep_tokens": 984313,
+      "payload_tokens": 5636
+    },
+    {
+      "repo": "sb_click",
+      "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+      "target": "_pager_contextmanager",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 7142,
+      "grep_recall": 1.0,
+      "grep_tokens": 4025,
+      "payload_tokens": 2807
+    },
+    {
+      "repo": "sb_click",
+      "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+      "target": "_pipepager",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 7142,
+      "grep_recall": 1.0,
+      "grep_tokens": 9264,
+      "payload_tokens": 1693
+    },
+    {
+      "repo": "sb_click",
+      "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+      "target": "_tempfilepager",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 7142,
+      "grep_recall": 1.0,
+      "grep_tokens": 11018,
+      "payload_tokens": 1561
+    },
+    {
+      "repo": "sb_click",
+      "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+      "target": "split_arg_string",
+      "entry_file_recall": 0.0,
+      "entry_file_tokens": 6042,
+      "grep_recall": 0.5,
+      "grep_tokens": 12834,
+      "payload_tokens": 1303
+    },
+    {
+      "repo": "sb_click",
+      "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+      "target": "style",
+      "entry_file_recall": 0.0,
+      "entry_file_tokens": 8401,
+      "grep_recall": 0.5,
+      "grep_tokens": 85197,
+      "payload_tokens": 5009
+    },
+    {
+      "repo": "sb_click",
+      "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+      "target": "echo",
+      "entry_file_recall": 0.0,
+      "entry_file_tokens": 5161,
+      "grep_recall": 1.0,
+      "grep_tokens": 442829,
+      "payload_tokens": 5479
+    },
+    {
+      "repo": "sb_click",
+      "sha": "3495fba163dd61dea837cd557095df6c21515ac8",
+      "target": "Command.get_help_option",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 30292,
+      "grep_recall": 1.0,
+      "grep_tokens": 6062,
+      "payload_tokens": 2423
+    },
+    {
+      "repo": "sb_click",
+      "sha": "3495fba163dd61dea837cd557095df6c21515ac8",
+      "target": "Command.get_params",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 30292,
+      "grep_recall": 1.0,
+      "grep_tokens": 11628,
+      "payload_tokens": 3176
+    },
+    {
+      "repo": "sb_click",
+      "sha": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+      "target": "_interpret_color",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 7955,
+      "grep_recall": 1.0,
+      "grep_tokens": 3020,
+      "payload_tokens": 4864
+    },
+    {
+      "repo": "sb_click",
+      "sha": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+      "target": "style",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 7955,
+      "grep_recall": 1.0,
+      "grep_tokens": 77712,
+      "payload_tokens": 4864
+    },
+    {
+      "repo": "sb_click",
+      "sha": "bec59289d8cf9b9b4010642b2fee483e5f8eeefc",
+      "target": "version_option",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 4468,
+      "grep_recall": 1.0,
+      "grep_tokens": 10076,
+      "payload_tokens": 1521
+    },
+    {
+      "repo": "sb_click",
+      "sha": "bec59289d8cf9b9b4010642b2fee483e5f8eeefc",
+      "target": "version_option.callback",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 4468,
+      "grep_recall": 1.0,
+      "grep_tokens": 140217,
+      "payload_tokens": 1795
+    },
+    {
+      "repo": "sb_click",
+      "sha": "051bb0f30b545cf7426deef819811815297c2798",
+      "target": "_SkipClose.__getattr__",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 6970,
+      "grep_recall": 0.5714285714285714,
+      "grep_tokens": 15883,
+      "payload_tokens": 215
+    },
+    {
+      "repo": "sb_click",
+      "sha": "051bb0f30b545cf7426deef819811815297c2798",
+      "target": "_SkipClose.__init__",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 6970,
+      "grep_recall": 0.7142857142857143,
+      "grep_tokens": 101860,
+      "payload_tokens": 215
+    },
+    {
+      "repo": "sb_click",
+      "sha": "051bb0f30b545cf7426deef819811815297c2798",
+      "target": "_SkipClose.buffer",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 6970,
+      "grep_recall": 1.0,
+      "grep_tokens": 44517,
+      "payload_tokens": 291
+    },
+    {
+      "repo": "sb_flask",
+      "sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
+      "target": "Flask.request_context",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 13737,
+      "grep_recall": 1.0,
+      "grep_tokens": 59081,
+      "payload_tokens": 4318
+    },
+    {
+      "repo": "sb_flask",
+      "sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
+      "target": "Flask.test_request_context",
+      "entry_file_recall": 1.0,
+      "entry_file_tokens": 13737,
+      "grep_recall": 1.0,
+      "grep_tokens": 43347,
+      "payload_tokens": 3581
+    }
+  ]
+}
