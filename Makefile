@@ -1,8 +1,8 @@
 PY ?= uv run --extra dev
 
-.PHONY: gate lint types test lock metrics install-hooks
+.PHONY: gate lint types test lock metrics metrics-check install-hooks
 
-gate: lint types test lock metrics
+gate: lint types test lock metrics-check
 
 lint:
 	$(PY) ruff check .
@@ -17,6 +17,9 @@ lock:
 	uv lock --check
 
 metrics:
+	$(PY) python scripts/generate_metrics.py
+
+metrics-check:
 	$(PY) python scripts/generate_metrics.py --check
 
 install-hooks:

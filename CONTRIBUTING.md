@@ -4,9 +4,9 @@
 
 ```bash
 uv sync --all-extras
-uv run pytest
-uv run ruff check .
-uv run mypy polyglot_ast_slicer
+make gate          # offline: ruff, mypy, pytest, lock, metrics-check
+make install-hooks # routes git commit through .githooks/pre-commit
+make metrics       # network: clones pinned repos and rewrites artifacts + METRICS.md
 ```
 
 ## Gates (must pass before a PR is reviewed)
@@ -16,8 +16,10 @@ uv run mypy polyglot_ast_slicer
 2. `uv run ruff check .`
 3. `uv run mypy polyglot_ast_slicer`
 4. `uv lock --check`
-5. `uv run python scripts/generate_metrics.py --check` — `METRICS.md` must be regenerated,
-   never hand-edited. PRs that change resolution must include the regenerated file.
+5. `uv run python scripts/generate_metrics.py --check` — offline; renders `METRICS.md` from
+   the committed `metrics/*.json` artifacts, never clones. `make metrics` is the networked
+   path: it clones the pinned repos (verifying their SHAs), reruns the harnesses, and rewrites
+   both the artifacts and `METRICS.md`. Never hand-edit either.
 6. A wheel install smoke test: `uv build --wheel`, install into a fresh venv, run
    `polyglot-ast-slicer --version`.
 

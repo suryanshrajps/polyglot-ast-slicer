@@ -1,0 +1,28 @@
+{
+  "files": 4,
+  "symbols": 252,
+  "edges": 16,
+  "slices": [
+    {
+      "qualified_name": "process_payment",
+      "touched_files_tokens": 10540,
+      "full_repo_tokens": 12214,
+      "slice_tokens": 537,
+      "saved_vs_files_pct": 94.91
+    },
+    {
+      "qualified_name": "handle_checkout_webhook",
+      "touched_files_tokens": 10540,
+      "full_repo_tokens": 12214,
+      "slice_tokens": 539,
+      "saved_vs_files_pct": 94.89
+    },
+    {
+      "qualified_name": "submitOrderCheckout",
+      "touched_files_tokens": 1674,
+      "full_repo_tokens": 12214,
+      "slice_tokens": 168,
+      "saved_vs_files_pct": 89.96
+    }
+  ]
+}

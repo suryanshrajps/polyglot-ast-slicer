@@ -1,0 +1,45 @@
+{
+  "sites_sampled": 150,
+  "jedi_project_targets": 64,
+  "tool_edges_present": 46,
+  "recall": 0.71875,
+  "recall_ci95": [
+    0.5986606971779259,
+    0.8140662766627217
+  ],
+  "unresolved_by_jedi": 86,
+  "misses": [
+    [
+      "TestRequests.test_prepared_request_hook",
+      "send"
+    ],
+    [
+      "TestRequests.test_session_get_adapter_prefix_without_trailing_slash",
+      "get_adapter"
+    ],
+    [
+      "RequestsCookieJar.update",
+      "copy"
+    ],
+    [
+      "_copy_cookie_jar",
+      "copy"
+    ],
+    [
+      "TestRequests.test_response_iter_lines",
+      "iter_lines"
+    ],
+    [
+      "TestRequests.test_unicode_multipart_post_fieldnames",
+      "prepare"
+    ],
+    [
+      "TestRequests.test_session_get_adapter_prefix_matching",
+      "get_adapter"
+    ],
+    [
+      "super_len",
+      "seek"
+    ]
+  ]
+}

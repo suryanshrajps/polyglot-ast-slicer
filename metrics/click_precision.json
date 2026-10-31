@@ -1,0 +1,28 @@
+{
+  "sampled": 100,
+  "strict": 30,
+  "canonical": 100,
+  "precision": 1.0,
+  "precision_ci95": [
+    0.9630065017930143,
+    1.0
+  ],
+  "by_tier": {
+    "0.98": {
+      "n": 15,
+      "strict": 15,
+      "canonical": 15
+    },
+    "0.95": {
+      "n": 26,
+      "strict": 9,
+      "canonical": 26
+    },
+    "0.9": {
+      "n": 59,
+      "strict": 6,
+      "canonical": 59
+    }
+  },
+  "failures": []
+}
