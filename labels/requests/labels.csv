@@ -74,28 +74,28 @@ a61d3dfd66f5,correct,src/requests/sessions.py:284 calls rewind_body; src/request
 a6b8ffbbfab0,correct,tests/test_requests.py:785 constructs HTTPDigestAuth; src/requests/auth.py:124 defines it.
 81f53160ecdd,correct,src/requests/sessions.py:848 calls get_environ_proxies; src/requests/utils.py:873 defines it.
 5a9c4df07a5b,correct,tests/test_requests.py:2630 constructs CaseInsensitiveDict; src/requests/structures.py:20 defines it.
-7a7f97215931,,
-227e51fad0c6,,
-865e388ee7e8,,
-12cf55f02ded,,
-8f27beb8461c,,
-d91d1ecaf9b2,,
-bc65dc6d5514,,
-7e6328ea9efc,,
-0c0724527180,,
-2fa445e8c040,,
-52dc545eba0e,,
-f34c4084b6aa,,
-c0609f98c7fa,,
-b6926d9f2356,,
-dedf5aff4e35,,
-a2a53ed1fa61,,
-1afa6a19e620,,
-daf61f8526ad,,
-e06f49e8c49a,,
-859c036efe5c,,
-608208aee0bd,,
-410227e1f1c3,,
-68809d755c95,,
-1174f526f837,,
-21427c488584,,
+7a7f97215931,correct,src/requests/adapters.py:284 calls get_auth_from_url; src/requests/utils.py:1070 defines it.
+227e51fad0c6,correct,src/requests/models.py:685 constructs HTTPBasicAuth; src/requests/auth.py:85 defines it.
+865e388ee7e8,correct,tests/test_testserver.py:22 constructs Server; tests/testserver/server.py:25 defines it.
+12cf55f02ded,correct,tests/test_requests.py:570 calls _basic_auth_str; src/requests/auth.py:34 defines it.
+8f27beb8461c,correct,tests/test_lowlevel.py:418 constructs Server; tests/testserver/server.py:25 defines it.
+d91d1ecaf9b2,correct,tests/test_lowlevel.py:389 constructs Server; tests/testserver/server.py:25 defines it.
+bc65dc6d5514,correct,src/requests/utils.py:1155 raises UnrewindableBodyError; src/requests/exceptions.py:146 defines it.
+7e6328ea9efc,correct,src/requests/adapters.py:630 calls _basic_auth_str; src/requests/auth.py:34 defines it.
+0c0724527180,correct,tests/test_requests.py:618 calls override_environ; tests/utils.py:6 defines it.
+2fa445e8c040,correct,tests/test_utils.py:147 calls super_len; src/requests/utils.py:160 defines it.
+52dc545eba0e,correct,tests/test_utils.py:378 calls get_encodings_from_content; src/requests/utils.py:522 defines it.
+f34c4084b6aa,correct,src/requests/adapters.py:382 constructs CaseInsensitiveDict; src/requests/structures.py:20 defines it.
+c0609f98c7fa,correct,src/requests/models.py:534 raises InvalidURL; src/requests/exceptions.py:118 defines it.
+b6926d9f2356,correct,tests/test_requests.py:1589 calls default_hooks; src/requests/hooks.py:25 defines it.
+dedf5aff4e35,correct,tests/test_requests.py:2226 constructs HTTPAdapter; src/requests/adapters.py:158 defines it.
+a2a53ed1fa61,correct,src/requests/models.py:970 calls iter_slices; src/requests/utils.py:621 defines it.
+1afa6a19e620,correct,tests/test_lowlevel.py:296 calls override_environ; tests/utils.py:6 defines it.
+daf61f8526ad,correct,tests/test_utils.py:636 calls _parse_content_type_header; src/requests/utils.py:547 defines it.
+e06f49e8c49a,correct,tests/test_utils.py:512 calls unquote_unreserved; src/requests/utils.py:680 defines it.
+859c036efe5c,correct,src/requests/models.py:572 calls check_header_validity; src/requests/utils.py:1087 defines it.
+608208aee0bd,correct,tests/test_utils.py:326 calls guess_filename; src/requests/utils.py:283 defines it.
+410227e1f1c3,correct,tests/test_lowlevel.py:258 calls consume_socket_content; tests/testserver/server.py:7 defines it.
+68809d755c95,correct,src/requests/models.py:1106 calls guess_json_utf; src/requests/utils.py:1008 defines it.
+1174f526f837,correct,tests/test_utils.py:808 calls add_dict_to_cookiejar; src/requests/utils.py:511 defines it.
+21427c488584,correct,src/requests/sessions.py:551 calls merge_setting; src/requests/sessions.py:76 defines it.
