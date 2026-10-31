@@ -17,6 +17,14 @@ Pinned inputs: requests `3c7baaa`, click `2247b35`. Intervals are 95% Wilson sco
 - CommonJS JavaScript edges are not measured: `require()`/`module.exports` are not
   resolved, so an express sample cannot reach 100 edges.
 
+## Hand-labeled precision (headline)
+
+| Repo | Labeled | Correct | Unsure | Precision (unsure=incorrect) | Precision (unsure excluded) |
+|---|---:|---:|---:|---|---|
+| `requests` | 100 | 100 | 0 | 100.0% (95% CI 96.3%–100.0%) | 100.0% (95% CI 96.3%–100.0%) |
+| `click` | 0 | — | — | UNMEASURED | UNMEASURED |
+| `zod` | 0 | — | — | UNMEASURED | UNMEASURED |
+
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 
 | Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |

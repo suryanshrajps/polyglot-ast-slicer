@@ -9,8 +9,10 @@ The commit-time gate never clones or runs the harnesses.
 from __future__ import annotations
 
 import argparse
+import csv
 import difflib
 import json
+import math
 import subprocess
 import sys
 from pathlib import Path
@@ -22,6 +24,36 @@ PINNED = {
     "click": ("https://github.com/pallets/click.git", "2247b35ea1c47c727d7a06e51fa280e12a863ff6"),
 }
 SCALE_FILES = 5000
+LABEL_REPOS = ("requests", "click", "zod")
+
+
+def wilson(successes: int, total: int) -> tuple[float, float]:
+    if total <= 0:
+        return (0.0, 0.0)
+    z = 1.959963984540054
+    p = successes / total
+    denominator = 1 + z * z / total
+    centre = (p + z * z / (2 * total)) / denominator
+    margin = z * math.sqrt(p * (1 - p) / total + z * z / (4 * total * total)) / denominator
+    return (max(0.0, centre - margin), min(1.0, centre + margin))
+
+
+def hand_metrics() -> dict[str, dict[str, int]]:
+    result: dict[str, dict[str, int]] = {}
+    for repo in LABEL_REPOS:
+        path = ROOT / "labels" / repo / "labels.csv"
+        if not path.exists():
+            continue
+        rows = list(csv.DictReader(path.open(encoding="utf-8")))
+        verdicts = [row["verdict"] for row in rows if row["verdict"]]
+        if verdicts:
+            result[repo] = {
+                "correct": sum(1 for verdict in verdicts if verdict == "correct"),
+                "incorrect": sum(1 for verdict in verdicts if verdict == "incorrect"),
+                "unsure": sum(1 for verdict in verdicts if verdict == "unsure"),
+                "total": len(verdicts),
+            }
+    return result
 
 
 def run_json(*args: str) -> dict:
@@ -131,6 +163,30 @@ def render(data: dict[str, object]) -> str:
         "- CommonJS JavaScript edges are not measured: `require()`/`module.exports` are not",
         "  resolved, so an express sample cannot reach 100 edges.",
         "",
+        "## Hand-labeled precision (headline)",
+        "",
+        "| Repo | Labeled | Correct | Unsure | Precision (unsure=incorrect) | "
+        "Precision (unsure excluded) |",
+        "|---|---:|---:|---:|---|---|",
+    ]
+    hand = hand_metrics()
+    for repo in LABEL_REPOS:
+        entry = hand.get(repo)
+        if entry is None:
+            lines.append(f"| `{repo}` | 0 | — | — | UNMEASURED | UNMEASURED |")
+            continue
+        total, correct, unsure = entry["total"], entry["correct"], entry["unsure"]
+        low, high = wilson(correct, total)
+        decided = correct + entry["incorrect"]
+        low2, high2 = wilson(correct, decided)
+        lines.append(
+            f"| `{repo}` | {total} | {correct} | {unsure} | "
+            f"{fmt(correct / total)} (95% CI {fmt(low)}–{fmt(high)}) | "
+            f"{fmt(correct / decided) if decided else 'n/a'} "
+            f"(95% CI {fmt(low2)}–{fmt(high2)}) |"
+        )
+    lines += [
+        "",
         "## Edge agreement with Jedi (100 random call edges, seed 42)",
         "",
         "| Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |",
@@ -214,8 +270,14 @@ def write_artifacts(data: dict[str, object]) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="offline: verify METRICS.md")
+    parser.add_argument("--render", action="store_true", help="offline: rewrite METRICS.md")
     parser.add_argument("--repos-dir", type=Path, default=Path("/tmp/eval-repos"))
     args = parser.parse_args()
+
+    if args.render:
+        (ROOT / "METRICS.md").write_text(render(load_artifacts()), encoding="utf-8")
+        print("rewrote METRICS.md from artifacts and labels")
+        return
 
     if args.check:
         rendered = render(load_artifacts())
