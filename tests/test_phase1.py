@@ -496,3 +496,26 @@ def test_tsconfig_extends_relative_and_package(tmp_path: Path) -> None:
     result = engine.get_ast_call_slice("src/app.ts::run", hops=1, include_metadata=True)
     assert "helper" in {item["qualified_name"] for item in result["downstream_callees"]}
     engine.close()
+
+
+def test_commonjs_exports_and_require_destructuring(tmp_path: Path) -> None:
+    (tmp_path / "util.cjs").write_text(
+        "exports.helper = function helper() { return 1; };\n", encoding="utf-8"
+    )
+    (tmp_path / "main.cjs").write_text(
+        'const { helper } = require("./util");\n'
+        "module.exports.run = function run() { return helper(); };\n",
+        encoding="utf-8",
+    )
+    engine = GraphEngine(tmp_path)
+    stats = engine.index_repository(force_rebuild=True)
+    if any("grammar" in reason.lower() for reason in stats["skipped_files"].values()):
+        engine.close()
+        pytest.skip("JavaScript grammar unavailable")
+    run = engine.resolve_strict("main.cjs::run")[0]
+    assert run is not None and run.exported
+    assert any(
+        engine._symbols[v].qualified_name == "helper"
+        for v in engine.graph.successors(run.symbol_id)
+    )
+    engine.close()

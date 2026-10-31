@@ -415,7 +415,6 @@ class PolyglotASTParser:
                     value is not None
                     and value.type == "call_expression"
                     and name is not None
-                    and name.type == "identifier"
                 ):
                     function = value.child_by_field_name("function")
                     arguments = value.child_by_field_name("arguments")
@@ -428,13 +427,24 @@ class PolyglotASTParser:
                     ):
                         module = self._clean(arguments.named_children[0], source)
                         if module:
-                            imports.append(
-                                ImportRef(
-                                    module=module,
-                                    is_module=True,
-                                    alias=self._text(name, source),
+                            if name.type == "object_pattern":
+                                destructured = tuple(
+                                    (self._text(child, source), self._text(child, source))
+                                    for child in name.named_children
+                                    if child.type
+                                    in ("shorthand_property_identifier_pattern", "identifier")
                                 )
-                            )
+                                imports.append(
+                                    ImportRef(module=module, names=destructured)
+                                )
+                            else:
+                                imports.append(
+                                    ImportRef(
+                                        module=module,
+                                        is_module=True,
+                                        alias=self._text(name, source),
+                                    )
+                                )
             stack.extend(node.children)
         return imports
 
@@ -773,6 +783,39 @@ class PolyglotASTParser:
                                 exported=is_export,
                             )
                         )
+
+            elif child.type == "expression_statement":
+                assignment = child.named_children[0] if child.named_children else None
+                if assignment is not None and assignment.type == "assignment_expression":
+                    left = assignment.child_by_field_name("left")
+                    right = assignment.child_by_field_name("right")
+                    left_text = self._text(left, source) if left is not None else ""
+                    if right is not None and (
+                        left_text.startswith("module.exports.")
+                        or left_text.startswith("exports.")
+                    ):
+                        prop = left_text.rsplit(".", 1)[-1]
+                        if right.type in ("function_expression", "arrow_function", "class"):
+                            kind = "class" if right.type == "class" else "function"
+                            calls, type_refs, local_types = self._analyze_body(
+                                right, source, language
+                            )
+                            out.append(
+                                self._make_symbol(
+                                    name=prop,
+                                    qualified=".".join([*scope, prop]),
+                                    kind=kind,
+                                    span=child,
+                                    source=source,
+                                    file_path=file_path,
+                                    language=language,
+                                    calls=calls,
+                                    type_refs=type_refs,
+                                    local_types=local_types,
+                                    doc=self._leading_comment_doc(span, source),
+                                    exported=True,
+                                )
+                            )
 
             elif child.type == "statement_block":
                 self._walk_ts(

@@ -5,10 +5,12 @@
 - `impact_of_diff` now returns changed and impacted symbols only.
 - Next: Phase 2 (TS/JS completion).
 
-## Phase 2 — TS/JS completion: NOT STARTED
-Needed: `module.exports`/`exports.x`, require destructuring, class members/`super`,
-default/named/namespace imports re-verified, grammars verified. JSX, `require()` and
-`tsconfig extends` already exist from earlier work.
+## Phase 2 — TS/JS completion: DONE (code only, unmeasured)
+- Added `module.exports.x` / `exports.x` function and class extraction.
+- Added `require()` object destructuring (`const {helper} = require(...)`).
+- Existing: JSX edges, namespace require, `tsconfig extends`/paths, barrels, `.mjs`/`.cjs`.
+- Grammars load with `HOME=/tmp/tshome`; the default sandbox blocks the download.
+- Precision and recall remain UNMEASURED (Phase 3 not built).
 
 ## Phase 3 — automatic ground truth: NOT STARTED
 No Jedi/TS-compiler harness in this session.
