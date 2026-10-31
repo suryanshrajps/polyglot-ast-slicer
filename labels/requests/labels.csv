@@ -24,31 +24,31 @@ d819208157c4,correct,tests/test_requests.py:1859 calls requests.get; src/request
 38c23dddb192,correct,tests/test_requests.py:1082 calls requests.post; src/requests/api.py:117 defines post.
 db41800ae996,correct,tests/test_requests.py:1196 constructs requests.Request; src/requests/models.py:284 defines Request.
 0fd03669495e,correct,tests/test_requests.py:650 constructs requests.Session; src/requests/sessions.py:395 defines Session.
-d737b15c959a,,
-7990855b4b4f,,
-85a831e09379,,
-9017e0ef1a99,,
-9f5dfb39c276,,
-17c183c02eb6,,
-19077dc23d6d,,
-1181a10ed9f4,,
-3bd795b86517,,
-975d781eacf5,,
-d3746d99ee63,,
-7287bd48d143,,
-48148833449f,,
-b631ee3d237d,,
-868a1c9d3c7a,,
-2323e0289048,,
-4633eec09980,,
-2b27e04af0c2,,
-0282a65df545,,
-34cf8ac4651f,,
-ab5ce4070648,,
-236ca8487255,,
-37dfbfbddf19,,
-716f850b7f7b,,
-dbdad1f4c522,,
+d737b15c959a,correct,tests/test_requests.py:2055 calls requests.utils.rewind_body; src/requests/utils.py:1139 defines it.
+7990855b4b4f,correct,tests/test_requests.py:532 calls requests.head; src/requests/api.py:102 defines head.
+85a831e09379,correct,tests/test_requests.py:3068 constructs requests.Request; src/requests/models.py:284 defines Request.
+9017e0ef1a99,correct,tests/test_requests.py:1941 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+9f5dfb39c276,correct,src/requests/models.py:641 calls _t.has_read; src/requests/_types.py:32 defines has_read.
+17c183c02eb6,correct,tests/test_requests.py:141 constructs requests.Request; src/requests/models.py:284 defines Request.
+19077dc23d6d,correct,tests/test_requests.py:2192 calls requests.session; src/requests/sessions.py:908 defines session.
+1181a10ed9f4,correct,tests/test_requests.py:116 constructs requests.Request; src/requests/models.py:284 defines Request.
+3bd795b86517,correct,tests/test_requests.py:1378 constructs requests.cookies.RequestsCookieJar; src/requests/cookies.py:191 defines it.
+975d781eacf5,correct,tests/test_requests.py:1765 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+d3746d99ee63,correct,tests/test_lowlevel.py:332 calls requests.get; src/requests/api.py:74 defines get.
+7287bd48d143,correct,tests/test_requests.py:1195 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+48148833449f,correct,tests/test_requests.py:2856 constructs requests.Request; src/requests/models.py:284 defines Request.
+b631ee3d237d,correct,tests/test_hooks.py:22 calls hooks.default_hooks; src/requests/hooks.py:25 defines default_hooks.
+868a1c9d3c7a,correct,tests/test_requests.py:146 constructs requests.Request; src/requests/models.py:284 defines Request.
+2323e0289048,correct,tests/test_requests.py:1127 calls requests.post; src/requests/api.py:117 defines post.
+4633eec09980,correct,tests/test_requests.py:1221 constructs requests.Request; src/requests/models.py:284 defines Request.
+2b27e04af0c2,correct,tests/test_requests.py:492 calls requests.get; src/requests/api.py:74 defines get.
+0282a65df545,correct,tests/test_requests.py:2214 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+34cf8ac4651f,correct,tests/test_requests.py:779 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+ab5ce4070648,correct,tests/test_requests.py:1248 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+236ca8487255,correct,tests/test_requests.py:960 calls requests.put; src/requests/api.py:137 defines put.
+37dfbfbddf19,correct,tests/test_requests.py:2800 constructs requests.Request; src/requests/models.py:284 defines Request.
+716f850b7f7b,correct,tests/test_requests.py:285 calls requests.head; src/requests/api.py:102 defines head.
+dbdad1f4c522,correct,tests/test_requests.py:1137 constructs requests.Request; src/requests/models.py:284 defines Request.
 16d47c3468f7,,
 457f60051197,,
 76e6003124f1,,
