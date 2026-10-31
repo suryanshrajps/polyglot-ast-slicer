@@ -187,6 +187,33 @@ def render(data: dict[str, object]) -> str:
         )
     lines += [
         "",
+        "## Canary check (requests)",
+        "",
+    ]
+    canary_path = ROOT / "labels" / "requests" / "canary_result.json"
+    if canary_path.exists():
+        canary = json.loads(canary_path.read_text(encoding="utf-8"))
+        kappa_text = (
+            "undefined (no variance)"
+            if canary["kappa"] is None
+            else f"{canary['kappa']:.3f}"
+        )
+        lines += [
+            "| Seeded wrong | Labeled correct | False-accept rate | False rejects | Unsure | "
+            "Agreement with pass 1 | Cohen's kappa |",
+            "|---:|---:|---|---:|---:|---|---|",
+            f"| {canary['seeded']} | {canary['seeded_labeled_correct']} | "
+            f"{fmt(canary['false_accept_rate'])} "
+            f"(95% CI {fmt(canary['false_accept_ci95'][0])}–"
+            f"{fmt(canary['false_accept_ci95'][1])}) | "
+            f"{canary['real_labeled_incorrect']}/{canary['real']} | {canary['unsure']} | "
+            f"{canary['agreement_with_original']}/{canary['real']} | "
+            f"{kappa_text} |",
+            "",
+        ]
+    else:
+        lines += ["UNMEASURED", ""]
+    lines += [
         "## Edge agreement with Jedi (100 random call edges, seed 42)",
         "",
         "| Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |",

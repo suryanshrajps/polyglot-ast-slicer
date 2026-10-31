@@ -25,6 +25,12 @@ Pinned inputs: requests `3c7baaa`, click `2247b35`. Intervals are 95% Wilson sco
 | `click` | 0 | — | — | UNMEASURED | UNMEASURED |
 | `zod` | 0 | — | — | UNMEASURED | UNMEASURED |
 
+## Canary check (requests)
+
+| Seeded wrong | Labeled correct | False-accept rate | False rejects | Unsure | Agreement with pass 1 | Cohen's kappa |
+|---:|---:|---|---:|---:|---|---|
+| 20 | 0 | 0.0% (95% CI 0.0%–16.1%) | 0/100 | 0 | 100/100 | undefined (no variance) |
+
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 
 | Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |
