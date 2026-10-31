@@ -109,11 +109,12 @@ def main() -> None:
         scored.append((stratum, degree, symbol))
     rng = random.Random(42)
     chosen = []
-    for stratum in ("low", "medium", "high"):
+    targets = {"low": 7, "medium": 7, "high": 6}
+    for stratum, count in targets.items():
         pool = sorted((item for item in scored if item[0] == stratum),
                       key=lambda item: item[2].symbol_id)
         rng.shuffle(pool)
-        chosen.extend(pool[:10])
+        chosen.extend(pool[:count])
 
     baseline = clone()
     first = run_suite(baseline)

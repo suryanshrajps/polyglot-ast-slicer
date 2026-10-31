@@ -117,7 +117,7 @@ def main() -> None:
                                    "fixture_or_conftest", "parametrization", "other")},
         })
 
-    output = {"total_tests": total, "rows": results,
+    output = {"total_tests": total, "usable": len(results), "rows": results,
               "classes": dict(sum((Counter(r["classes"]) for r in results), Counter()))}
     for stratum in ("low", "medium", "high"):
         part = [r for r in results if r["stratum"] == stratum]

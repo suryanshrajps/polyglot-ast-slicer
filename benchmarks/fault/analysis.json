@@ -1,5 +1,6 @@
 {
   "total_tests": 2262,
+  "usable": 13,
   "rows": [
     {
       "stratum": "low",
@@ -134,86 +135,6 @@
           "tests/test_shell_completion.py::test_argument_default",
           "tests/test_shell_completion.py::test_argument_nargs",
           "tests/test_shell_completion.py::test_argument_order"
-        ]
-      }
-    },
-    {
-      "stratum": "low",
-      "function": "Choice.shell_complete",
-      "recall": 0.8571428571428571,
-      "precision": 0.42857142857142855,
-      "selection": 0.01237842617152962,
-      "selection_90": null,
-      "all_tests": [
-        1.0,
-        1.0
-      ],
-      "mention": [
-        0.8571428571428571,
-        0.016799292661361626
-      ],
-      "same_file": [
-        0.0,
-        0.0
-      ],
-      "classes": {
-        "parametrization": 2
-      },
-      "examples": {
-        "unresolved_call": [],
-        "dynamic_dispatch": [],
-        "fixture_or_conftest": [],
-        "parametrization": [
-          "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
-          "tests/test_shell_completion.py::test_choice_case_sensitive[True-expect1]"
-        ],
-        "other": []
-      }
-    },
-    {
-      "stratum": "low",
-      "function": "Command.get_help",
-      "recall": 0.043478260869565216,
-      "precision": 0.075,
-      "selection": 0.03536693191865606,
-      "selection_90": null,
-      "all_tests": [
-        1.0,
-        1.0
-      ],
-      "mention": [
-        0.06,
-        0.015473032714412025
-      ],
-      "same_file": [
-        0.0,
-        0.0
-      ],
-      "classes": {
-        "other": 26,
-        "parametrization": 20,
-        "unresolved_call": 2
-      },
-      "examples": {
-        "unresolved_call": [
-          "tests/test_commands.py::test_aliased_command_canonical_name",
-          "tests/test_commands.py::test_auto_shorthelp"
-        ],
-        "dynamic_dispatch": [],
-        "fixture_or_conftest": [],
-        "parametrization": [
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
-        ],
-        "other": [
-          "tests/test_arguments.py::test_argument_help",
-          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
-          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
-          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
-          "tests/test_arguments.py::test_argument_help_optional_metavar"
         ]
       }
     },
@@ -476,54 +397,6 @@
       }
     },
     {
-      "stratum": "medium",
-      "function": "Context.get_help",
-      "recall": 0.007246376811594203,
-      "precision": 0.024390243902439025,
-      "selection": 0.018125552608311227,
-      "selection_90": null,
-      "all_tests": [
-        1.0,
-        1.0
-      ],
-      "mention": [
-        0.06,
-        0.015473032714412025
-      ],
-      "same_file": [
-        0.0,
-        0.0
-      ],
-      "classes": {
-        "other": 27,
-        "parametrization": 20,
-        "unresolved_call": 3
-      },
-      "examples": {
-        "unresolved_call": [
-          "tests/test_commands.py::test_aliased_command_canonical_name",
-          "tests/test_commands.py::test_auto_shorthelp",
-          "tests/test_commands.py::test_command_no_args_is_help"
-        ],
-        "dynamic_dispatch": [],
-        "fixture_or_conftest": [],
-        "parametrization": [
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
-          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
-        ],
-        "other": [
-          "tests/test_arguments.py::test_argument_help",
-          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
-          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
-          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
-          "tests/test_arguments.py::test_argument_help_optional_metavar"
-        ]
-      }
-    },
-    {
       "stratum": "high",
       "function": "Option.get_help_record",
       "recall": 0.05649717514124294,
@@ -655,70 +528,29 @@
           "tests/test_arguments.py::test_argument_help_optional_metavar"
         ]
       }
-    },
-    {
-      "stratum": "high",
-      "function": "group",
-      "recall": 0.5645161290322581,
-      "precision": 0.8333333333333334,
-      "selection": 0.01856763925729443,
-      "selection_90": null,
-      "all_tests": [
-        1.0,
-        1.0
-      ],
-      "mention": [
-        0.62,
-        0.16887709991158267
-      ],
-      "same_file": [
-        0.0,
-        0.0
-      ],
-      "classes": {
-        "parametrization": 19,
-        "unresolved_call": 3
-      },
-      "examples": {
-        "unresolved_call": [
-          "tests/test_command_decorators.py::test_group_no_parens",
-          "tests/test_custom_classes.py::test_group_group_class",
-          "tests/test_custom_classes.py::test_group_group_class_self"
-        ],
-        "dynamic_dispatch": [],
-        "fixture_or_conftest": [],
-        "parametrization": [
-          "tests/test_chain.py::test_chaining_help[args0-COMMAND1",
-          "tests/test_chain.py::test_chaining_help[args1-ROOT",
-          "tests/test_chain.py::test_chaining_help[args2-SDIST",
-          "tests/test_chain.py::test_chaining_help[args3-BDIST",
-          "tests/test_chain.py::test_chaining_help[args4-SDIST"
-        ],
-        "other": []
-      }
     }
   ],
   "classes": {
-    "parametrization": 313,
-    "other": 229,
-    "unresolved_call": 33
+    "parametrization": 252,
+    "other": 176,
+    "unresolved_call": 25
   },
   "low": {
-    "n": 6,
+    "n": 4,
     "recall": [
       0.0,
       0.062,
       1.0
     ],
     "precision": [
-      0.075,
+      1.0,
       1.0,
       1.0
     ],
     "selection": [
       0.0,
-      0.002,
-      0.035
+      0.001,
+      0.002
     ],
     "selection_90": [
       0.002,
@@ -726,15 +558,15 @@
       0.002
     ],
     "mention_recall_p50": 0.0,
-    "mention_selection_p50": 0.097,
+    "mention_selection_p50": 0.147,
     "same_file_recall_p50": 0.0,
     "same_file_selection_p50": 0.0
   },
   "medium": {
-    "n": 7,
+    "n": 6,
     "recall": [
       0.0,
-      0.008,
+      0.009,
       0.012
     ],
     "precision": [
@@ -755,19 +587,19 @@
     "mention_recall_p50": 0.0,
     "mention_selection_p50": 0.01,
     "same_file_recall_p50": 0.0,
-    "same_file_selection_p50": 0.0
+    "same_file_selection_p50": 0.01
   },
   "high": {
-    "n": 4,
+    "n": 3,
     "recall": [
       0.056,
-      0.3,
-      0.565
+      0.058,
+      0.3
     ],
     "precision": [
       0.145,
-      0.375,
-      0.833
+      0.145,
+      0.375
     ],
     "selection": [
       0.004,
@@ -779,8 +611,8 @@
       null,
       null
     ],
-    "mention_recall_p50": 0.6,
-    "mention_selection_p50": 0.08,
+    "mention_recall_p50": 0.24,
+    "mention_selection_p50": 0.053,
     "same_file_recall_p50": 0.0,
     "same_file_selection_p50": 0.0
   }

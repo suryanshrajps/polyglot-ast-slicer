@@ -66,6 +66,18 @@ Miss classes: not_connected_other=10, not_connected_same_file=24, connected_prun
 
 Grep recall is inflated by name collisions (e.g. `request` matching `pyproject.toml`), not by finding the co-changed definition.
 
+## Fault injection (click, 20 functions, stratified by in-degree)
+
+Usable functions: 13; total tests: 2262.
+
+| Stratum | n | Recall p50 | Precision p50 | Selection p50 |
+|---|---:|---:|---:|---:|
+| low | 4 | 0.062 | 1.0 | 0.001 |
+| medium | 6 | 0.009 | 0.04 | 0.011 |
+| high | 3 | 0.058 | 0.145 | 0.031 |
+
+Miss classes: parametrization=252, other=176, unresolved_call=25. Classification is heuristic; examples are in `benchmarks/fault/analysis.json`.
+
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 
 | Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |
