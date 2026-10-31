@@ -1,0 +1,74 @@
+{
+  "requests_hard": {
+    "seeded": 17,
+    "failures": 5,
+    "examples": [
+      {
+        "edge_id": "a7e5db99af40",
+        "call": "tests/conftest.py",
+        "fake": "PreparedRequest.prepare_url",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "72952d85692f",
+        "call": "src/requests/help.py",
+        "fake": "MockResponse.info",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "a225de7bfe6f",
+        "call": "src/requests/models.py",
+        "fake": "Session.close",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "04babbd76494",
+        "call": "src/requests/models.py",
+        "fake": "prepare_url",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "ec3d821cd959",
+        "call": "tests/test_structures.py",
+        "fake": "get",
+        "reason": "owner not same-file/imported/inherited"
+      }
+    ]
+  },
+  "click_hard": {
+    "seeded": 18,
+    "failures": 9,
+    "examples": [
+      {
+        "edge_id": "89f892f06975",
+        "call": "tests/test_testing.py",
+        "fake": "test_custom_parser.OptParseCommand.invoke",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "62aa869a6c29",
+        "call": "tests/test_testing.py",
+        "fake": "Command.invoke",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "c096512e8f8a",
+        "call": "tests/test_testing.py",
+        "fake": "Group.invoke",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "983c1b5dd206",
+        "call": "tests/test_options.py",
+        "fake": "Parameter.get_help_record",
+        "reason": "owner not same-file/imported/inherited"
+      },
+      {
+        "edge_id": "11b5eeeb807e",
+        "call": "src/click/core.py",
+        "fake": "AliasedGroup.resolve_command",
+        "reason": "owner not same-file/imported/inherited"
+      }
+    ]
+  }
+}

@@ -719,112 +719,130 @@
     "source": "test_args",
     "target": "CliRunner.invoke"
   },
-  "eed47a2ec0cd": {
+  "c8c579759bc9": {
     "seeded": true,
     "kind": "typed_receiver",
-    "real_target": "Parameter.type_cast_value",
-    "fake_target": "test_option_custom_class_can_override_type_cast_value_and_never_sees_unset.CustomOption.type_cast_value"
-  },
-  "bf9e4be80dc5": {
-    "seeded": true,
-    "kind": "same_file_scope",
-    "real_target": "command.decorator",
-    "fake_target": "argument.decorator"
-  },
-  "626ec064545b": {
-    "seeded": true,
-    "kind": "typed_receiver",
-    "real_target": "Context.fail",
-    "fake_target": "ParamType.fail"
-  },
-  "89f892f06975": {
-    "seeded": true,
-    "kind": "typed_receiver",
-    "real_target": "CliRunner.invoke",
-    "fake_target": "test_custom_parser.OptParseCommand.invoke"
-  },
-  "ecc639ffaf1f": {
-    "seeded": true,
-    "kind": "enclosing_member",
-    "real_target": "Parameter.process_value",
-    "fake_target": "Option.process_value"
-  },
-  "62aa869a6c29": {
-    "seeded": true,
-    "kind": "typed_receiver",
-    "real_target": "CliRunner.invoke",
-    "fake_target": "Command.invoke"
-  },
-  "c096512e8f8a": {
-    "seeded": true,
-    "kind": "typed_receiver",
-    "real_target": "CliRunner.invoke",
-    "fake_target": "Group.invoke"
-  },
-  "3ca206d306f1": {
-    "seeded": true,
-    "kind": "same_file_scope",
-    "real_target": "test_with_resource_nested_exception.TestContext",
-    "fake_target": "test_with_resource_exception.TestContext"
-  },
-  "c7e78ce2ce98": {
-    "seeded": true,
-    "kind": "same_file_scope",
-    "real_target": "test_with_resource_nested_exception.TestException",
-    "fake_target": "test_with_resource_exception.TestException"
-  },
-  "983c1b5dd206": {
-    "seeded": true,
-    "kind": "typed_receiver",
+    "source": "test_hide_false_default_boolean_flag_value",
     "real_target": "Option.get_help_record",
-    "fake_target": "Parameter.get_help_record"
-  },
-  "11b5eeeb807e": {
-    "seeded": true,
-    "kind": "enclosing_member",
-    "real_target": "Group.resolve_command",
-    "fake_target": "AliasedGroup.resolve_command"
-  },
-  "1af0a3d65bdd": {
-    "seeded": true,
-    "kind": "typed_receiver",
-    "real_target": "CliRunner.invoke",
-    "fake_target": "Group.invoke"
-  },
-  "e01f48861dbc": {
-    "seeded": true,
-    "kind": "same_file_scope",
-    "real_target": "test_catch_exceptions_cli_runner.CustomError",
-    "fake_target": "test_catch_exceptions.CustomError"
-  },
-  "54ed5dae2578": {
-    "seeded": true,
-    "kind": "enclosing_member",
-    "real_target": "Group.get_command",
-    "fake_target": "ComplexCLI.get_command"
+    "fake_target": "test_option_custom_class_reusable.CustomOption.get_help_record"
   },
   "bad472bb0cd0": {
     "seeded": true,
     "kind": "same_file_scope",
+    "source": "test_with_resource_exception",
     "real_target": "test_with_resource_exception.TestException",
     "fake_target": "test_with_resource_nested_exception.TestException"
   },
-  "34698146b00a": {
+  "d60ca7f11bf9": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "source": "test_get_context_objects.cli",
+    "real_target": "test_get_context_objects.Foo",
+    "fake_target": "test_make_pass_decorator_args.Foo"
+  },
+  "626ec064545b": {
     "seeded": true,
     "kind": "typed_receiver",
-    "real_target": "CliRunner.invoke",
-    "fake_target": "Command.invoke"
+    "source": "Command.parse_args",
+    "real_target": "Context.fail",
+    "fake_target": "ParamType.fail"
   },
-  "70e95f397256": {
+  "2ea3e6cbe185": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "source": "Option.get_help_extra",
+    "real_target": "Option.get_default",
+    "fake_target": "Parameter.get_default"
+  },
+  "961816f2ae5e": {
     "seeded": true,
     "kind": "same_file_scope",
-    "real_target": "test_param_type_subclass_omitting_input_parameter.DoublingType",
-    "fake_target": "test_prompt_default_round_trips_through_type.DoublingType"
+    "source": "command",
+    "real_target": "command.decorator",
+    "fake_target": "Group.result_callback.decorator"
   },
-  "d2f3bf98fcca": {
+  "0933c309b378": {
     "seeded": true,
     "kind": "same_file_scope",
-    "real_target": "test_get_context_objects.Foo",
-    "fake_target": "test_get_context_objects_missing.Foo"
+    "source": "test_context_formatter_class",
+    "real_target": "test_context_formatter_class.CustomContext",
+    "fake_target": "test_context_invoke_type.CustomContext"
+  },
+  "18a4e9562ec3": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "source": "Group.format_commands",
+    "real_target": "Group.get_command",
+    "fake_target": "CommandCollection.get_command"
+  },
+  "94fdbb7496c1": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "source": "test_group_command_class",
+    "real_target": "test_group_command_class.CustomGroup",
+    "fake_target": "test_group_group_class.CustomGroup"
+  },
+  "12c7cbbf6af4": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "source": "test_catch_exceptions.cli",
+    "real_target": "test_catch_exceptions.CustomError",
+    "fake_target": "test_catch_exceptions_cli_runner.CustomError"
+  },
+  "92c447c88c3b": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "source": "Parameter.consume_value",
+    "real_target": "Parameter.get_default",
+    "fake_target": "Option.get_default"
+  },
+  "06dff8896ad3": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "source": "test_multiple_default_type",
+    "real_target": "Option.get_default",
+    "fake_target": "test_argument_custom_class.CustomArgument.get_default"
+  },
+  "c7e78ce2ce98": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "source": "test_with_resource_nested_exception",
+    "real_target": "test_with_resource_nested_exception.TestException",
+    "fake_target": "test_with_resource_exception.TestException"
+  },
+  "4d6556e2adb3": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "source": "Group.to_info_dict",
+    "real_target": "Group.get_command",
+    "fake_target": "CommandCollection.get_command"
+  },
+  "3265ce71ce02": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "source": "test_with_resource_exception",
+    "real_target": "test_with_resource_exception.TestContext",
+    "fake_target": "test_with_resource_nested_exception.TestContext"
+  },
+  "38e0554d3759": {
+    "seeded": true,
+    "kind": "same_file",
+    "source": "group",
+    "real_target": "command",
+    "fake_target": "Group.command"
+  },
+  "e01f48861dbc": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "source": "test_catch_exceptions_cli_runner.cli",
+    "real_target": "test_catch_exceptions_cli_runner.CustomError",
+    "fake_target": "test_catch_exceptions.CustomError"
+  },
+  "ecc639ffaf1f": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "source": "Parameter.handle_parse_result",
+    "real_target": "Parameter.process_value",
+    "fake_target": "Option.process_value"
   }
 }

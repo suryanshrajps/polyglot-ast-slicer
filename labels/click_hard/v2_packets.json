@@ -1,5 +1,152 @@
 [
   {
+    "edge_id": "27dc1e143a53",
+    "repo": "click",
+    "file": "tests/test_custom_classes.py",
+    "call_text": "CustomGroup()",
+    "call_range": [
+      77,
+      12,
+      77,
+      25
+    ],
+    "call_context": "   75 |         command_class = CustomCommand\n   76 | \n   77 |     group = CustomGroup()\n      |             ^^^^^^^^^^^^^\n   78 |     subcommand = group.command()(lambda: None)",
+    "callee": "CustomGroup",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_group_command_class.CustomGroup",
+      "file": "tests/test_custom_classes.py",
+      "lines": "74-75",
+      "definition": "   74 |     class CustomGroup(click.Group):\n   75 |         command_class = CustomCommand"
+    }
+  },
+  {
+    "edge_id": "89863e9d0f8c",
+    "repo": "click",
+    "file": "src/click/types.py",
+    "call_text": "self._describe_range()",
+    "call_range": [
+      691,
+      36,
+      691,
+      58
+    ],
+    "call_context": "  689 |             self.fail(\n  690 |                 _(\"{value} is not in the range {range}.\").format(\n  691 |                     value=rv, range=self._describe_range()\n      |                                     ^^^^^^^^^^^^^^^^^^^^^^\n  692 |                 ),",
+    "callee": "_describe_range",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "_NumberRangeBase._describe_range",
+      "file": "src/click/types.py",
+      "lines": "717-729",
+      "definition": "  717 |     def _describe_range(self) -> str:\n  718 |         \"\"\"Describe the range for use in help text.\"\"\"\n  719 |         if self.min is None:\n  720 |             op = \"<\" if self.max_open else \"<=\"\n  721 |             return f\"x{op}{self.max}\"\n  722 | \n  723 |         if self.max is None:\n  724 |             op = \">\" if self.min_open else \">=\"\n  725 |             return f\"x{op}{self.min}\"\n  726 | "
+    }
+  },
+  {
+    "edge_id": "d1a3b92f7aed",
+    "repo": "click",
+    "file": "tests/test_stream_lifecycle.py",
+    "call_text": "runner.invoke(cli)",
+    "call_range": [
+      284,
+      17,
+      284,
+      35
+    ],
+    "call_context": "  282 | \n  283 |         runner = CliRunner()\n  284 |         result = runner.invoke(cli)\n      |                  ^^^^^^^^^^^^^^^^^^\n  285 |         assert result.exit_code == 0",
+    "callee": "invoke",
+    "receiver": "runner",
+    "target": {
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+    }
+  },
+  {
+    "edge_id": "fa81d2b61288",
+    "repo": "click",
+    "file": "tests/test_context.py",
+    "call_text": "Foo()",
+    "call_range": [
+      49,
+      18,
+      49,
+      23
+    ],
+    "call_context": "   47 |     @click.pass_context\n   48 |     def cli(ctx):\n   49 |         ctx.obj = Foo()\n      |                   ^^^^^\n   50 |         ctx.obj.title = \"test\"",
+    "callee": "Foo",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_get_context_objects.Foo",
+      "file": "tests/test_context.py",
+      "lines": "40-42",
+      "definition": "   40 |     class Foo:\n   41 |         def __init__(self):\n   42 |             self.title = \"default\""
+    }
+  },
+  {
+    "edge_id": "31571e9cb45e",
+    "repo": "click",
+    "file": "src/click/parser.py",
+    "call_text": "_fetch(args)",
+    "call_range": [
+      86,
+      38,
+      86,
+      50
+    ],
+    "call_context": "   84 |             rv.append(_fetch(args))\n   85 |         elif nargs > 1:\n   86 |             x: list[str | T_UNSET] = [_fetch(args) for _ in range(nargs)]\n      |                                       ^^^^^^^^^^^^\n   87 | ",
+    "callee": "_fetch",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_unpack_args._fetch",
+      "file": "src/click/parser.py",
+      "lines": "68-75",
+      "definition": "   68 |     def _fetch(c: deque[str]) -> str | T_UNSET:\n   69 |         try:\n   70 |             if spos is None:\n   71 |                 return c.popleft()\n   72 |             else:\n   73 |                 return c.pop()\n   74 |         except IndexError:\n   75 |             return UNSET"
+    }
+  },
+  {
+    "edge_id": "df3e75d94ff1",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "runner.invoke(cmd, args)",
+    "call_range": [
+      3943,
+      13,
+      3943,
+      37
+    ],
+    "call_context": " 3941 | \n 3942 |     runner = CliRunner()\n 3943 |     result = runner.invoke(cmd, args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^\n 3944 |     assert result.exit_code == 0",
+    "callee": "invoke",
+    "receiver": "runner",
+    "target": {
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+    }
+  },
+  {
+    "edge_id": "65f6cea7b41b",
+    "repo": "click",
+    "file": "tests/test_shell_completion.py",
+    "call_text": "_get_completions(cli, [\"-f\"], \"ab\")",
+    "call_range": [
+      198,
+      10,
+      198,
+      45
+    ],
+    "call_context": "  196 | def test_path_types(type, expect):\n  197 |     cli = Command(\"cli\", params=[Option([\"-f\"], type=type)])\n  198 |     out = _get_completions(cli, [\"-f\"], \"ab\")\n      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  199 |     assert len(out) == 1",
+    "callee": "_get_completions",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_get_completions",
+      "file": "tests/test_shell_completion.py",
+      "lines": "24-26",
+      "definition": "   24 | def _get_completions(cli, args, incomplete):\n   25 |     comp = ShellComplete(cli, {}, cli.name, \"_CLICK_COMPLETE\")\n   26 |     return comp.get_completions(args, incomplete)"
+    }
+  },
+  {
     "edge_id": "e65e0dd563c3",
     "repo": "click",
     "file": "tests/test_options.py",
@@ -18,48 +165,6 @@
       "file": "tests/test_options.py",
       "lines": "781-786",
       "definition": "  781 |     class Value:\n  782 |         def __call__(self):\n  783 |             return 42\n  784 | \n  785 |         def __str__(self):\n  786 |             return \"special value\""
-    }
-  },
-  {
-    "edge_id": "488419be92d1",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "CustomError(1)",
-    "call_range": [
-      200,
-      14,
-      200,
-      28
-    ],
-    "call_context": "  198 |     @click.command()\n  199 |     def cli():\n  200 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  201 | ",
-    "callee": "CustomError",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_catch_exceptions_cli_runner.CustomError",
-      "file": "tests/test_testing.py",
-      "lines": "195-196",
-      "definition": "  195 |     class CustomError(Exception):\n  196 |         pass"
-    }
-  },
-  {
-    "edge_id": "f61b62aedc15",
-    "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "_get_words(cli, [\"a1\", \"--flag\", \"-c\"], \"\")",
-    "call_range": [
-      237,
-      11,
-      237,
-      54
-    ],
-    "call_context": "  235 |         ],\n  236 |     )\n  237 |     assert _get_words(cli, [\"a1\", \"--flag\", \"-c\"], \"\") == [\"p\", \"q\"]\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  238 | ",
-    "callee": "_get_words",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_get_words",
-      "file": "tests/test_shell_completion.py",
-      "lines": "29-30",
-      "definition": "   29 | def _get_words(cli, args, incomplete):\n   30 |     return [c.value for c in _get_completions(cli, args, incomplete)]"
     }
   },
   {
@@ -84,24 +189,234 @@
     }
   },
   {
-    "edge_id": "89f892f06975",
+    "edge_id": "488419be92d1",
     "repo": "click",
     "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(test_multiple_prompts, input=\"one\\ntwo\\n\")",
+    "call_text": "CustomError(1)",
     "call_range": [
-      87,
-      13,
-      87,
-      69
+      200,
+      14,
+      200,
+      28
     ],
-    "call_context": "   85 |         click.echo(f\"foo={foo}, bar={bar}\")\n   86 | \n   87 |     result = runner.invoke(test_multiple_prompts, input=\"one\\ntwo\\n\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   88 |     assert not result.exception",
+    "call_context": "  198 |     @click.command()\n  199 |     def cli():\n  200 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  201 | ",
+    "callee": "CustomError",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_catch_exceptions_cli_runner.CustomError",
+      "file": "tests/test_testing.py",
+      "lines": "195-196",
+      "definition": "  195 |     class CustomError(Exception):\n  196 |         pass"
+    }
+  },
+  {
+    "edge_id": "3fbb48fb6932",
+    "repo": "click",
+    "file": "src/click/testing.py",
+    "call_text": "self._echo(self._input.read(n))",
+    "call_range": [
+      52,
+      15,
+      52,
+      46
+    ],
+    "call_context": "   50 | \n   51 |     def read(self, n: int = -1) -> bytes:\n   52 |         return self._echo(self._input.read(n))\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   53 | ",
+    "callee": "_echo",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "EchoingStdin._echo",
+      "file": "src/click/testing.py",
+      "lines": "45-49",
+      "definition": "   45 |     def _echo(self, rv: bytes) -> bytes:\n   46 |         if not self._paused:\n   47 |             self._output.write(rv)\n   48 | \n   49 |         return rv"
+    }
+  },
+  {
+    "edge_id": "8f2a2756db3f",
+    "repo": "click",
+    "file": "tests/test_context.py",
+    "call_text": "ctx.scope()",
+    "call_range": [
+      313,
+      9,
+      313,
+      20
+    ],
+    "call_context": "  311 |     assert rv == []\n  312 | \n  313 |     with ctx.scope():\n      |          ^^^^^^^^^^^\n  314 |         # Internal",
+    "callee": "scope",
+    "receiver": "ctx",
+    "target": {
+      "qualified_name": "Context.scope",
+      "file": "src/click/core.py",
+      "lines": "598-634",
+      "definition": "  598 |     @contextmanager\n  599 |     def scope(self, cleanup: bool = True) -> cabc.Generator[Context]:\n  600 |         \"\"\"This helper method can be used with the context object to promote\n  601 |         it to the current thread local (see :func:`get_current_context`).\n  602 |         The default behavior of this is to invoke the cleanup functions which\n  603 |         can be disabled by setting `cleanup` to `False`.  The cleanup\n  604 |         functions are typically used for things such as closing file handles.\n  605 | \n  606 |         If the cleanup is intended the context object can also be directly\n  607 |         used as a context manager."
+    }
+  },
+  {
+    "edge_id": "87d316e27f45",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "runner.invoke(cli_args, args=args)",
+    "call_range": [
+      403,
+      13,
+      403,
+      47
+    ],
+    "call_context": "  401 | \n  402 |     runner = CliRunner()\n  403 |     result = runner.invoke(cli_args, args=args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  404 |     assert result.exit_code == 0",
     "callee": "invoke",
     "receiver": "runner",
     "target": {
-      "qualified_name": "test_custom_parser.OptParseCommand.invoke",
-      "file": "tests/test_commands.py",
-      "lines": "171-172",
-      "definition": "  171 |         def invoke(self, ctx):\n  172 |             ctx.invoke(self.callback, ctx.args, **ctx.params)"
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+    }
+  },
+  {
+    "edge_id": "a57878edf923",
+    "repo": "click",
+    "file": "src/click/parser.py",
+    "call_text": "_Argument(obj, dest=dest, nargs=nargs)",
+    "call_range": [
+      296,
+      26,
+      296,
+      64
+    ],
+    "call_context": "  294 |         that is returned from the parser.\n  295 |         \"\"\"\n  296 |         self._args.append(_Argument(obj, dest=dest, nargs=nargs))\n      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  297 | ",
+    "callee": "_Argument",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_Argument",
+      "file": "src/click/parser.py",
+      "lines": "185-213",
+      "definition": "  185 | class _Argument:\n  186 |     def __init__(self, obj: CoreArgument, dest: str | None, nargs: int = 1):\n  187 |         self.dest = dest\n  188 |         self.nargs = nargs\n  189 |         self.obj = obj\n  190 | \n  191 |     def process(\n  192 |         self,\n  193 |         value: str | cabc.Sequence[str | T_UNSET] | T_UNSET,\n  194 |         state: _ParsingState,"
+    }
+  },
+  {
+    "edge_id": "abb483590e9c",
+    "repo": "click",
+    "file": "src/click/shell_completion.py",
+    "call_text": "cmd.make_context(\n                            name,\n                            args,\n                            parent=ctx,\n                            allow_extra_args=True,\n                            allow_interspersed_args=False,\n                            resilient_parsing=True,\n                        )",
+    "call_range": [
+      738,
+      29,
+      745,
+      25
+    ],
+    "call_context": "  736 |                             return ctx\n  737 | \n  738 |                         with cmd.make_context(\n      |                              ^^^^^^^^^^^^^^^^^\n  739 |                             name,\n  740 |                             args,\n  741 |                             parent=ctx,\n  742 |                             allow_extra_args=True,\n  743 |                             allow_interspersed_args=False,\n  744 |                             resilient_parsing=True,\n  745 |                         ) as sub_sub_ctx:\n  746 |                             sub_ctx = sub_sub_ctx",
+    "callee": "make_context",
+    "receiver": "cmd",
+    "target": {
+      "qualified_name": "Command.make_context",
+      "file": "src/click/core.py",
+      "lines": "1359-1394",
+      "definition": " 1359 |     def make_context(\n 1360 |         self,\n 1361 |         info_name: str | None,\n 1362 |         args: list[str],\n 1363 |         parent: Context | None = None,\n 1364 |         **extra: t.Any,\n 1365 |     ) -> Context:\n 1366 |         \"\"\"This function when given an info name and arguments will kick\n 1367 |         off the parsing and create a new :class:`Context`.  It does not\n 1368 |         invoke the actual command callback though."
+    }
+  },
+  {
+    "edge_id": "66c624af583d",
+    "repo": "click",
+    "file": "src/click/testing.py",
+    "call_text": "self._echo(self._input.readline(n))",
+    "call_range": [
+      58,
+      15,
+      58,
+      50
+    ],
+    "call_context": "   56 | \n   57 |     def readline(self, n: int = -1) -> bytes:\n   58 |         return self._echo(self._input.readline(n))\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   59 | ",
+    "callee": "_echo",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "EchoingStdin._echo",
+      "file": "src/click/testing.py",
+      "lines": "45-49",
+      "definition": "   45 |     def _echo(self, rv: bytes) -> bytes:\n   46 |         if not self._paused:\n   47 |             self._output.write(rv)\n   48 | \n   49 |         return rv"
+    }
+  },
+  {
+    "edge_id": "a8fd3dda4d25",
+    "repo": "click",
+    "file": "tests/test_utils/test_echo.py",
+    "call_text": "emulate_input(\"y\\n\")",
+    "call_range": [
+      155,
+      4,
+      155,
+      24
+    ],
+    "call_context": "  153 | \n  154 |     # https://github.com/pallets/click/issues/3019\n  155 |     emulate_input(\"y\\n\")\n      |     ^^^^^^^^^^^^^^^^^^^^\n  156 |     click.confirm(\"Prompt to stderr with no suffix\", prompt_suffix=\"\", err=True)",
+    "callee": "emulate_input",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_echo_writing_to_standard_error.emulate_input",
+      "file": "tests/test_utils/test_echo.py",
+      "lines": "93-95",
+      "definition": "   93 |     def emulate_input(text):\n   94 |         \"\"\"Emulate keyboard input.\"\"\"\n   95 |         monkeypatch.setattr(sys, \"stdin\", StringIO(text))"
+    }
+  },
+  {
+    "edge_id": "4d6556e2adb3",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.get_command(ctx, name)",
+    "call_range": [
+      1822,
+      22,
+      1822,
+      49
+    ],
+    "call_context": " 1820 | \n 1821 |         for name in self.list_commands(ctx):\n 1822 |             command = self.get_command(ctx, name)\n      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1823 | ",
+    "callee": "get_command",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "CommandCollection.get_command",
+      "file": "src/click/core.py",
+      "lines": "2205-2220",
+      "definition": " 2205 |     def get_command(self, ctx: Context, cmd_name: str) -> Command | None:\n 2206 |         rv = super().get_command(ctx, cmd_name)\n 2207 | \n 2208 |         if rv is not None:\n 2209 |             return rv\n 2210 | \n 2211 |         for source in self.sources:\n 2212 |             rv = source.get_command(ctx, cmd_name)\n 2213 | \n 2214 |             if rv is not None:"
+    }
+  },
+  {
+    "edge_id": "bbe5df6f1e4a",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "ConfigParamType()",
+    "call_range": [
+      2436,
+      69,
+      2436,
+      86
+    ],
+    "call_context": " 2434 |     @click.command()\n 2435 |     @click.option(\"-c\", \"--config\", type=ConfigParamType())\n 2436 |     @click.option(\"--no-config\", \"config\", flag_value=sentinel, type=ConfigParamType())\n      |                                                                      ^^^^^^^^^^^^^^^^^\n 2437 |     def main(config):",
+    "callee": "ConfigParamType",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_dual_options_custom_type_sentinel_flag_value.ConfigParamType",
+      "file": "tests/test_options.py",
+      "lines": "2423-2432",
+      "definition": " 2423 |     class ConfigParamType(click.ParamType):\n 2424 |         \"\"\"A custom type that accepts a file path or a sentinel value.\"\"\"\n 2425 | \n 2426 |         def convert(self, value, param, ctx):\n 2427 |             if value is sentinel:\n 2428 |                 return \"No configuration file provided.\"\n 2429 |             else:\n 2430 |                 return click.Path(exists=True, dir_okay=False).convert(\n 2431 |                     value, param, ctx\n 2432 |                 )"
+    }
+  },
+  {
+    "edge_id": "f6a1ed4dc2d9",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.get_help_option_names(ctx)",
+    "call_range": [
+      1235,
+      28,
+      1235,
+      59
+    ],
+    "call_context": " 1233 |             The help option is now cached to avoid creating it multiple times.\n 1234 |         \"\"\"\n 1235 |         help_option_names = self.get_help_option_names(ctx)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1236 | ",
+    "callee": "get_help_option_names",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Command.get_help_option_names",
+      "file": "src/click/core.py",
+      "lines": "1207-1220",
+      "definition": " 1207 |     def get_help_option_names(self, ctx: Context) -> list[str]:\n 1208 |         \"\"\"Returns the names for the help option.\n 1209 | \n 1210 |         Drops duplicates and names already reserved by another parameter. Order of\n 1211 |         :attr:`Context.help_option_names` is preserved, so the result is stable.\n 1212 | \n 1213 |         .. versionchanged:: 8.5.0\n 1214 |             Names keep their declaration order.\n 1215 |         \"\"\"\n 1216 |         all_names = dict.fromkeys(ctx.help_option_names)"
     }
   },
   {
@@ -126,24 +441,465 @@
     }
   },
   {
-    "edge_id": "65f6cea7b41b",
+    "edge_id": "c7c1b5dd22ef",
     "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "_get_completions(cli, [\"-f\"], \"ab\")",
+    "file": "tests/test_options.py",
+    "call_text": "opt.get_help_record(ctx)",
     "call_range": [
-      198,
-      10,
-      198,
-      45
+      1636,
+      14,
+      1636,
+      38
     ],
-    "call_context": "  196 | def test_path_types(type, expect):\n  197 |     cli = Command(\"cli\", params=[Option([\"-f\"], type=type)])\n  198 |     out = _get_completions(cli, [\"-f\"], \"ab\")\n      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  199 |     assert len(out) == 1",
-    "callee": "_get_completions",
+    "call_context": " 1634 |     ctx = click.Context(click.Command(\"test\"))\n 1635 |     assert opt.get_help_extra(ctx) == {}\n 1636 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1637 |     assert \"[default: \" not in message",
+    "callee": "get_help_record",
+    "receiver": "opt",
+    "target": {
+      "qualified_name": "Option.get_help_record",
+      "file": "src/click/core.py",
+      "lines": "3589-3612",
+      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
+    }
+  },
+  {
+    "edge_id": "3c7441b880e0",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.get_command(ctx, name)",
+    "call_range": [
+      1822,
+      22,
+      1822,
+      49
+    ],
+    "call_context": " 1820 | \n 1821 |         for name in self.list_commands(ctx):\n 1822 |             command = self.get_command(ctx, name)\n      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1823 | ",
+    "callee": "get_command",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Group.get_command",
+      "file": "src/click/core.py",
+      "lines": "1991-1995",
+      "definition": " 1991 |     def get_command(self, ctx: Context, cmd_name: str) -> Command | None:\n 1992 |         \"\"\"Given a context and a command name, this returns a :class:`Command`\n 1993 |         object if it exists or returns ``None``.\n 1994 |         \"\"\"\n 1995 |         return self.commands.get(cmd_name)"
+    }
+  },
+  {
+    "edge_id": "ec215b67b9c1",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.prompt_for_value(ctx)",
+    "call_range": [
+      3871,
+      20,
+      3871,
+      46
+    ],
+    "call_context": " 3869 |             and not ctx.resilient_parsing\n 3870 |         ):\n 3871 |             value = self.prompt_for_value(ctx)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3872 |             source = ParameterSource.PROMPT",
+    "callee": "prompt_for_value",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Option.prompt_for_value",
+      "file": "src/click/core.py",
+      "lines": "3698-3746",
+      "definition": " 3698 |     def prompt_for_value(self, ctx: Context) -> t.Any:\n 3699 |         \"\"\"This is an alternative flow that can be activated in the full\n 3700 |         value processing if a value does not exist.  It will prompt the\n 3701 |         user until a valid value exists and then returns the processed\n 3702 |         value as result.\n 3703 |         \"\"\"\n 3704 |         assert self.prompt is not None\n 3705 | \n 3706 |         # Calculate the default before prompting anything to lock in the value before\n 3707 |         # attempting any user interaction."
+    }
+  },
+  {
+    "edge_id": "ee4ac01464e8",
+    "repo": "click",
+    "file": "src/click/formatting.py",
+    "call_text": "self.write(f\"{'':>{self.current_indent}}{heading}:\\n\")",
+    "call_range": [
+      206,
+      8,
+      206,
+      62
+    ],
+    "call_context": "  204 |     def write_heading(self, heading: str) -> None:\n  205 |         \"\"\"Writes a heading into the buffer.\"\"\"\n  206 |         self.write(f\"{'':>{self.current_indent}}{heading}:\\n\")\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  207 | ",
+    "callee": "write",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "HelpFormatter.write",
+      "file": "src/click/formatting.py",
+      "lines": "146-148",
+      "definition": "  146 |     def write(self, string: str) -> None:\n  147 |         \"\"\"Writes a unicode string into the internal buffer.\"\"\"\n  148 |         self.buffer.append(string)"
+    }
+  },
+  {
+    "edge_id": "5e16e8feb8ed",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "runner_fd.invoke(cli)",
+    "call_range": [
+      718,
+      16,
+      718,
+      37
+    ],
+    "call_context": "  716 |     # fd-level capture catches it by redirecting fd 2.\n  717 |     runner_fd = CliRunner(capture=\"fd\")\n  718 |     result_fd = runner_fd.invoke(cli)\n      |                 ^^^^^^^^^^^^^^^^^^^^^\n  719 |     assert \"normal echo\" in result_fd.output",
+    "callee": "invoke",
+    "receiver": "runner_fd",
+    "target": {
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+    }
+  },
+  {
+    "edge_id": "626ec064545b",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "ctx.fail(\n                ngettext(\n                    \"Got unexpected extra argument ({args})\",\n                    \"Got unexpected extra arguments ({args})\",\n                    len(args),\n                ).format(args=\" \".join(map(str, args)))\n            )",
+    "call_range": [
+      1420,
+      12,
+      1426,
+      13
+    ],
+    "call_context": " 1418 | \n 1419 |         if args and not ctx.allow_extra_args and not ctx.resilient_parsing:\n 1420 |             ctx.fail(\n      |             ^^^^^^^^^\n 1421 |                 ngettext(\n 1422 |                     \"Got unexpected extra argument ({args})\",\n 1423 |                     \"Got unexpected extra arguments ({args})\",\n 1424 |                     len(args),\n 1425 |                 ).format(args=\" \".join(map(str, args)))\n 1426 |             )\n 1427 | ",
+    "callee": "fail",
+    "receiver": "ctx",
+    "target": {
+      "qualified_name": "ParamType.fail",
+      "file": "src/click/types.py",
+      "lines": "215-222",
+      "definition": "  215 |     def fail(\n  216 |         self,\n  217 |         message: str,\n  218 |         param: Parameter | None = None,\n  219 |         ctx: Context | None = None,\n  220 |     ) -> t.NoReturn:\n  221 |         \"\"\"Helper method to fail with an invalid value message.\"\"\"\n  222 |         raise BadParameter(message, ctx=ctx, param=param)"
+    }
+  },
+  {
+    "edge_id": "313586b3d5de",
+    "repo": "click",
+    "file": "src/click/_compat.py",
+    "call_text": "_force_correct_text_writer(sys.stdout, encoding, errors, force_writable=True)",
+    "call_range": [
+      351,
+      11,
+      351,
+      88
+    ],
+    "call_context": "  349 |     if rv is not None:\n  350 |         return rv\n  351 |     return _force_correct_text_writer(sys.stdout, encoding, errors, force_writable=True)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  352 | ",
+    "callee": "_force_correct_text_writer",
     "receiver": null,
     "target": {
-      "qualified_name": "_get_completions",
+      "qualified_name": "_force_correct_text_writer",
+      "file": "src/click/_compat.py",
+      "lines": "303-316",
+      "definition": "  303 | def _force_correct_text_writer(\n  304 |     text_writer: t.IO[t.Any],\n  305 |     encoding: str | None,\n  306 |     errors: str | None,\n  307 |     force_writable: bool = False,\n  308 | ) -> t.TextIO:\n  309 |     return _force_correct_text_stream(\n  310 |         text_writer,\n  311 |         encoding,\n  312 |         errors,"
+    }
+  },
+  {
+    "edge_id": "05b158018009",
+    "repo": "click",
+    "file": "src/click/_termui_impl.py",
+    "call_text": "self.make_step(self._completed_intervals)",
+    "call_range": [
+      340,
+      12,
+      340,
+      53
+    ],
+    "call_context": "  338 | \n  339 |         if self._completed_intervals >= self.update_min_steps:\n  340 |             self.make_step(self._completed_intervals)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  341 |             self.render_progress()",
+    "callee": "make_step",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "ProgressBar.make_step",
+      "file": "src/click/_termui_impl.py",
+      "lines": "296-316",
+      "definition": "  296 |     def make_step(self, n_steps: int) -> None:\n  297 |         self.pos += n_steps\n  298 |         if self.length is not None and self.pos >= self.length:\n  299 |             self.finished = True\n  300 | \n  301 |         if (time.time() - self.last_eta) < 1.0:\n  302 |             return\n  303 | \n  304 |         self.last_eta = time.time()\n  305 | "
+    }
+  },
+  {
+    "edge_id": "c44c1d469a9c",
+    "repo": "click",
+    "file": "tests/test_chain.py",
+    "call_text": "debug()",
+    "call_range": [
+      237,
+      8,
+      237,
+      15
+    ],
+    "call_context": "  235 |     @l1a.command()\n  236 |     def l2b():\n  237 |         debug()\n      |         ^^^^^^^\n  238 | ",
+    "callee": "debug",
+    "receiver": null,
+    "target": {
+      "qualified_name": "debug",
+      "file": "tests/test_chain.py",
+      "lines": "8-12",
+      "definition": "    8 | def debug():\n    9 |     click.echo(\n   10 |         f\"{sys._getframe(1).f_code.co_name}\"\n   11 |         f\"={'|'.join(click.get_current_context().args)}\"\n   12 |     )"
+    }
+  },
+  {
+    "edge_id": "66939e0818bd",
+    "repo": "click",
+    "file": "src/click/parser.py",
+    "call_text": "_normalize_opt(long_opt, self.ctx)",
+    "call_range": [
+      479,
+      24,
+      479,
+      58
+    ],
+    "call_context": "  477 |         else:\n  478 |             long_opt = arg\n  479 |         norm_long_opt = _normalize_opt(long_opt, self.ctx)\n      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  480 | ",
+    "callee": "_normalize_opt",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_normalize_opt",
+      "file": "src/click/parser.py",
+      "lines": "120-124",
+      "definition": "  120 | def _normalize_opt(opt: str, ctx: Context | None) -> str:\n  121 |     if ctx is None or ctx.token_normalize_func is None:\n  122 |         return opt\n  123 |     prefix, opt = _split_opt(opt)\n  124 |     return f\"{prefix}{ctx.token_normalize_func(opt)}\""
+    }
+  },
+  {
+    "edge_id": "8c5ff20fd25f",
+    "repo": "click",
+    "file": "tests/test_context.py",
+    "call_text": "ctx.scope()",
+    "call_range": [
+      531,
+      9,
+      531,
+      20
+    ],
+    "call_context": "  529 |     ctx = click.Context(click.Command(\"test\"))\n  530 | \n  531 |     with ctx.scope():\n      |          ^^^^^^^^^^^\n  532 |         rv = ctx.with_resource(manager())",
+    "callee": "scope",
+    "receiver": "ctx",
+    "target": {
+      "qualified_name": "Context.scope",
+      "file": "src/click/core.py",
+      "lines": "598-634",
+      "definition": "  598 |     @contextmanager\n  599 |     def scope(self, cleanup: bool = True) -> cabc.Generator[Context]:\n  600 |         \"\"\"This helper method can be used with the context object to promote\n  601 |         it to the current thread local (see :func:`get_current_context`).\n  602 |         The default behavior of this is to invoke the cleanup functions which\n  603 |         can be disabled by setting `cleanup` to `False`.  The cleanup\n  604 |         functions are typically used for things such as closing file handles.\n  605 | \n  606 |         If the cleanup is intended the context object can also be directly\n  607 |         used as a context manager."
+    }
+  },
+  {
+    "edge_id": "c8e8f67bfd77",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.process_value(ctx, value)",
+    "call_range": [
+      2977,
+      24,
+      2977,
+      54
+    ],
+    "call_context": " 2975 |             # Process the value through the parameter's type.\n 2976 |             try:\n 2977 |                 value = self.process_value(ctx, value)\n      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2978 |             except Exception:",
+    "callee": "process_value",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Parameter.process_value",
+      "file": "src/click/core.py",
+      "lines": "2802-2866",
+      "definition": " 2802 |     def process_value(self, ctx: Context, value: t.Any) -> t.Any:\n 2803 |         \"\"\"Process the value of this parameter:\n 2804 | \n 2805 |         1. Type cast the value using :meth:`type_cast_value`.\n 2806 |         2. Check if the value is missing (see: :meth:`value_is_missing`), and raise\n 2807 |            :exc:`MissingParameter` if it is required.\n 2808 |         3. If a :attr:`callback` is set, call it to have the value replaced by the\n 2809 |            result of the callback. If the value was not set, the callback receive\n 2810 |            ``None``. This keep the legacy behavior as it was before the introduction of\n 2811 |            the :attr:`UNSET` sentinel."
+    }
+  },
+  {
+    "edge_id": "8cdde648d549",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.get_default(ctx, call=False)",
+    "call_range": [
+      3641,
+      28,
+      3641,
+      61
+    ],
+    "call_context": " 3639 | \n 3640 |         try:\n 3641 |             default_value = self.get_default(ctx, call=False)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3642 |         finally:",
+    "callee": "get_default",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Option.get_default",
+      "file": "src/click/core.py",
+      "lines": "3389-3421",
+      "definition": " 3389 |     def get_default(\n 3390 |         self, ctx: Context, call: bool = True\n 3391 |     ) -> t.Any | t.Callable[[], t.Any] | None:\n 3392 |         \"\"\"Return the default value for this option.\n 3393 | \n 3394 |         Several auto-derived defaults are resolved lazily here rather than eagerly in\n 3395 |         :meth:`__init__`. This keeps :attr:`default` raw at construction time, so\n 3396 |         ``self.default is UNSET`` reliably answers \"did the user pass a default?\" for\n 3397 |         feature-switch-group arbitration and for anything else that needs to distinguish\n 3398 |         \"absent\" from a chosen value. The resolution rules live in"
+    }
+  },
+  {
+    "edge_id": "0702de6bce0f",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "_format_deprecated_label(self.deprecated)",
+    "call_range": [
+      1284,
+      32,
+      1284,
+      73
+    ],
+    "call_context": " 1282 | \n 1283 |         if self.deprecated:\n 1284 |             text = f\"{_(text)} {_format_deprecated_label(self.deprecated)}\"\n      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1285 | ",
+    "callee": "_format_deprecated_label",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_format_deprecated_label",
+      "file": "src/click/core.py",
+      "lines": "132-137",
+      "definition": "  132 | def _format_deprecated_label(deprecated: bool | str) -> str:\n  133 |     \"\"\"Return the parenthesized deprecation label shown in help text.\"\"\"\n  134 |     label = _(\"deprecated\").upper()\n  135 |     if isinstance(deprecated, str):\n  136 |         return f\"({label}: {deprecated})\"\n  137 |     return f\"({label})\""
+    }
+  },
+  {
+    "edge_id": "5a75e356d0bd",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "runner.invoke(cli_no_error)",
+    "call_range": [
+      336,
+      13,
+      336,
+      40
+    ],
+    "call_context": "  334 |     assert result.output == \"hello world\\n1.0\\n\"\n  335 | \n  336 |     result = runner.invoke(cli_no_error)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  337 |     assert result.exit_code == 0",
+    "callee": "invoke",
+    "receiver": "runner",
+    "target": {
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+    }
+  },
+  {
+    "edge_id": "239de675b694",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "opt.type_cast_value(ctx, opt.get_default(ctx))",
+    "call_range": [
+      704,
+      11,
+      704,
+      57
+    ],
+    "call_context": "  702 |     assert opt.type.types == [click.INT, click.STRING]\n  703 |     ctx = click.Context(click.Command(\"test\"))\n  704 |     assert opt.type_cast_value(ctx, opt.get_default(ctx)) == ((1, \"a\"),)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  705 | ",
+    "callee": "type_cast_value",
+    "receiver": "opt",
+    "target": {
+      "qualified_name": "Parameter.type_cast_value",
+      "file": "src/click/core.py",
+      "lines": "2728-2782",
+      "definition": " 2728 |     def type_cast_value(self, ctx: Context, value: t.Any) -> t.Any:\n 2729 |         \"\"\"Convert and validate a value against the parameter's\n 2730 |         :attr:`type`, :attr:`multiple`, and :attr:`nargs`.\n 2731 |         \"\"\"\n 2732 |         if value is None:\n 2733 |             if self.multiple or self.nargs == -1:\n 2734 |                 return ()\n 2735 |             else:\n 2736 |                 return value\n 2737 | "
+    }
+  },
+  {
+    "edge_id": "028f297e0c0d",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "opt.get_help_record(ctx)",
+    "call_range": [
+      1645,
+      14,
+      1645,
+      38
+    ],
+    "call_context": " 1643 |     ctx = click.Context(click.Command(\"cli\"))\n 1644 |     assert opt.get_help_extra(ctx) == {\"default\": \"(unlimited)\"}\n 1645 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1646 |     assert \"[default: (unlimited)]\" in message",
+    "callee": "get_help_record",
+    "receiver": "opt",
+    "target": {
+      "qualified_name": "Option.get_help_record",
+      "file": "src/click/core.py",
+      "lines": "3589-3612",
+      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
+    }
+  },
+  {
+    "edge_id": "6521ecf46c77",
+    "repo": "click",
+    "file": "src/click/decorators.py",
+    "call_text": "decorator(func)",
+    "call_range": [
+      253,
+      15,
+      253,
+      30
+    ],
+    "call_context": "  251 | \n  252 |     if func is not None:\n  253 |         return decorator(func)\n      |                ^^^^^^^^^^^^^^^\n  254 | ",
+    "callee": "decorator",
+    "receiver": null,
+    "target": {
+      "qualified_name": "command.decorator",
+      "file": "src/click/decorators.py",
+      "lines": "217-250",
+      "definition": "  217 |     def decorator(f: _AnyCallable) -> CmdType:\n  218 |         if isinstance(f, Command):\n  219 |             raise TypeError(\"Attempted to convert a callback into a command twice.\")\n  220 | \n  221 |         attr_params = attrs.pop(\"params\", None)\n  222 |         params = attr_params if attr_params is not None else []\n  223 | \n  224 |         try:\n  225 |             decorator_params = f.__click_params__  # type: ignore\n  226 |         except AttributeError:"
+    }
+  },
+  {
+    "edge_id": "f61b62aedc15",
+    "repo": "click",
+    "file": "tests/test_shell_completion.py",
+    "call_text": "_get_words(cli, [\"a1\", \"--flag\", \"-c\"], \"\")",
+    "call_range": [
+      237,
+      11,
+      237,
+      54
+    ],
+    "call_context": "  235 |         ],\n  236 |     )\n  237 |     assert _get_words(cli, [\"a1\", \"--flag\", \"-c\"], \"\") == [\"p\", \"q\"]\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  238 | ",
+    "callee": "_get_words",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_get_words",
       "file": "tests/test_shell_completion.py",
-      "lines": "24-26",
-      "definition": "   24 | def _get_completions(cli, args, incomplete):\n   25 |     comp = ShellComplete(cli, {}, cli.name, \"_CLICK_COMPLETE\")\n   26 |     return comp.get_completions(args, incomplete)"
+      "lines": "29-30",
+      "definition": "   29 | def _get_words(cli, args, incomplete):\n   30 |     return [c.value for c in _get_completions(cli, args, incomplete)]"
+    }
+  },
+  {
+    "edge_id": "9b4f450b00af",
+    "repo": "click",
+    "file": "tests/test_shell_completion.py",
+    "call_text": "fc.format_completion(item)",
+    "call_range": [
+      604,
+      11,
+      604,
+      37
+    ],
+    "call_context": "  602 |     # The newline is escaped to the literal characters backslash-n and the tab\n  603 |     # becomes a space, so each completion stays on one line for fish.\n  604 |     assert fc.format_completion(item) == \"plain,--at\\tfirst\\\\nsecond third\"\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  605 | ",
+    "callee": "format_completion",
+    "receiver": "fc",
+    "target": {
+      "qualified_name": "FishComplete.format_completion",
+      "file": "src/click/shell_completion.py",
+      "lines": "504-518",
+      "definition": "  504 |     def format_completion(self, item: CompletionItem[str]) -> str:\n  505 |         \"\"\"\n  506 |         .. versionchanged:: 8.4.2\n  507 |             Escape newlines and replace tabs with spaces in the help text to\n  508 |             fix completion errors with multi-line help strings.\n  509 |         \"\"\"\n  510 |         # According to https://fishshell.com/docs/current/cmds/complete.html\n  511 |         # Command substitutions found in ARGUMENTS should return a newline-\n  512 |         # separated list of arguments, and each argument may optionally have a tab\n  513 |         # character followed by the argument description."
+    }
+  },
+  {
+    "edge_id": "3470a0cbaade",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.collect_usage_pieces(ctx)",
+    "call_range": [
+      1193,
+      17,
+      1193,
+      47
+    ],
+    "call_context": " 1191 |         This is a low-level method called by :meth:`get_usage`.\n 1192 |         \"\"\"\n 1193 |         pieces = self.collect_usage_pieces(ctx)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1194 |         formatter.write_usage(ctx.command_path, \" \".join(pieces))",
+    "callee": "collect_usage_pieces",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Command.collect_usage_pieces",
+      "file": "src/click/core.py",
+      "lines": "1196-1205",
+      "definition": " 1196 |     def collect_usage_pieces(self, ctx: Context) -> list[str]:\n 1197 |         \"\"\"Returns all the pieces that go into the usage line and returns\n 1198 |         it as a list of strings.\n 1199 |         \"\"\"\n 1200 |         rv = [self.options_metavar] if self.options_metavar else []\n 1201 | \n 1202 |         for param in self.get_params(ctx):\n 1203 |             rv.extend(param.get_usage_pieces(ctx))\n 1204 | \n 1205 |         return rv"
+    }
+  },
+  {
+    "edge_id": "562312102536",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "_create_progress(\n        length,\n        width=8,\n        show_percent=show_percent,\n        pos=pos,\n        show_pos=show_pos,\n    )",
+    "call_range": [
+      206,
+      9,
+      212,
+      5
+    ],
+    "call_context": "  204 |     runner, length, show_percent, show_pos, pos, expected\n  205 | ):\n  206 |     with _create_progress(\n      |          ^^^^^^^^^^^^^^^^^\n  207 |         length,\n  208 |         width=8,\n  209 |         show_percent=show_percent,\n  210 |         pos=pos,\n  211 |         show_pos=show_pos,\n  212 |     ) as progress:\n  213 |         assert progress.format_progress_line() == expected",
+    "callee": "_create_progress",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_create_progress",
+      "file": "tests/test_termui.py",
+      "lines": "37-41",
+      "definition": "   37 | def _create_progress(length=10, **kwargs):\n   38 |     progress = click.progressbar(tuple(range(length)))\n   39 |     for key, value in kwargs.items():\n   40 |         setattr(progress, key, value)\n   41 |     return progress"
     }
   },
   {
@@ -189,192 +945,24 @@
     }
   },
   {
-    "edge_id": "89863e9d0f8c",
-    "repo": "click",
-    "file": "src/click/types.py",
-    "call_text": "self._describe_range()",
-    "call_range": [
-      691,
-      36,
-      691,
-      58
-    ],
-    "call_context": "  689 |             self.fail(\n  690 |                 _(\"{value} is not in the range {range}.\").format(\n  691 |                     value=rv, range=self._describe_range()\n      |                                     ^^^^^^^^^^^^^^^^^^^^^^\n  692 |                 ),",
-    "callee": "_describe_range",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "_NumberRangeBase._describe_range",
-      "file": "src/click/types.py",
-      "lines": "717-729",
-      "definition": "  717 |     def _describe_range(self) -> str:\n  718 |         \"\"\"Describe the range for use in help text.\"\"\"\n  719 |         if self.min is None:\n  720 |             op = \"<\" if self.max_open else \"<=\"\n  721 |             return f\"x{op}{self.max}\"\n  722 | \n  723 |         if self.max is None:\n  724 |             op = \">\" if self.min_open else \">=\"\n  725 |             return f\"x{op}{self.min}\"\n  726 | "
-    }
-  },
-  {
-    "edge_id": "fb065bec4664",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(cli)",
-    "call_range": [
-      755,
-      13,
-      755,
-      31
-    ],
-    "call_context": "  753 | \n  754 |     runner = CliRunner(capture=\"sys\")\n  755 |     result = runner.invoke(cli)\n      |              ^^^^^^^^^^^^^^^^^^\n  756 |     assert result.exit_code == 0, result.output",
-    "callee": "invoke",
-    "receiver": "runner",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "d3b318858f09",
-    "repo": "click",
-    "file": "src/click/shell_completion.py",
-    "call_text": "self._check_version()",
-    "call_range": [
-      429,
-      8,
-      429,
-      29
-    ],
-    "call_context": "  427 | \n  428 |     def source(self) -> str:\n  429 |         self._check_version()\n      |         ^^^^^^^^^^^^^^^^^^^^^\n  430 |         return super().source()",
-    "callee": "_check_version",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "BashComplete._check_version",
-      "file": "src/click/shell_completion.py",
-      "lines": "395-426",
-      "definition": "  395 |     @staticmethod\n  396 |     def _check_version() -> None:\n  397 |         import shutil\n  398 |         import subprocess\n  399 | \n  400 |         bash_exe = shutil.which(\"bash\")\n  401 | \n  402 |         if bash_exe is None:\n  403 |             match = None\n  404 |         else:"
-    }
-  },
-  {
-    "edge_id": "df3e75d94ff1",
+    "edge_id": "3d263f9b6a5b",
     "repo": "click",
     "file": "tests/test_options.py",
-    "call_text": "runner.invoke(cmd, args)",
+    "call_text": "opt.get_help_record(ctx)",
     "call_range": [
-      3943,
-      13,
-      3943,
-      37
-    ],
-    "call_context": " 3941 | \n 3942 |     runner = CliRunner()\n 3943 |     result = runner.invoke(cmd, args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^\n 3944 |     assert result.exit_code == 0",
-    "callee": "invoke",
-    "receiver": "runner",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "9b4f450b00af",
-    "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "fc.format_completion(item)",
-    "call_range": [
-      604,
-      11,
-      604,
-      37
-    ],
-    "call_context": "  602 |     # The newline is escaped to the literal characters backslash-n and the tab\n  603 |     # becomes a space, so each completion stays on one line for fish.\n  604 |     assert fc.format_completion(item) == \"plain,--at\\tfirst\\\\nsecond third\"\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  605 | ",
-    "callee": "format_completion",
-    "receiver": "fc",
-    "target": {
-      "qualified_name": "FishComplete.format_completion",
-      "file": "src/click/shell_completion.py",
-      "lines": "504-518",
-      "definition": "  504 |     def format_completion(self, item: CompletionItem[str]) -> str:\n  505 |         \"\"\"\n  506 |         .. versionchanged:: 8.4.2\n  507 |             Escape newlines and replace tabs with spaces in the help text to\n  508 |             fix completion errors with multi-line help strings.\n  509 |         \"\"\"\n  510 |         # According to https://fishshell.com/docs/current/cmds/complete.html\n  511 |         # Command substitutions found in ARGUMENTS should return a newline-\n  512 |         # separated list of arguments, and each argument may optionally have a tab\n  513 |         # character followed by the argument description."
-    }
-  },
-  {
-    "edge_id": "8c5ff20fd25f",
-    "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "ctx.scope()",
-    "call_range": [
-      531,
-      9,
-      531,
-      20
-    ],
-    "call_context": "  529 |     ctx = click.Context(click.Command(\"test\"))\n  530 | \n  531 |     with ctx.scope():\n      |          ^^^^^^^^^^^\n  532 |         rv = ctx.with_resource(manager())",
-    "callee": "scope",
-    "receiver": "ctx",
-    "target": {
-      "qualified_name": "Context.scope",
-      "file": "src/click/core.py",
-      "lines": "598-634",
-      "definition": "  598 |     @contextmanager\n  599 |     def scope(self, cleanup: bool = True) -> cabc.Generator[Context]:\n  600 |         \"\"\"This helper method can be used with the context object to promote\n  601 |         it to the current thread local (see :func:`get_current_context`).\n  602 |         The default behavior of this is to invoke the cleanup functions which\n  603 |         can be disabled by setting `cleanup` to `False`.  The cleanup\n  604 |         functions are typically used for things such as closing file handles.\n  605 | \n  606 |         If the cleanup is intended the context object can also be directly\n  607 |         used as a context manager."
-    }
-  },
-  {
-    "edge_id": "f6a1ed4dc2d9",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.get_help_option_names(ctx)",
-    "call_range": [
-      1235,
-      28,
-      1235,
-      59
-    ],
-    "call_context": " 1233 |             The help option is now cached to avoid creating it multiple times.\n 1234 |         \"\"\"\n 1235 |         help_option_names = self.get_help_option_names(ctx)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1236 | ",
-    "callee": "get_help_option_names",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "Command.get_help_option_names",
-      "file": "src/click/core.py",
-      "lines": "1207-1220",
-      "definition": " 1207 |     def get_help_option_names(self, ctx: Context) -> list[str]:\n 1208 |         \"\"\"Returns the names for the help option.\n 1209 | \n 1210 |         Drops duplicates and names already reserved by another parameter. Order of\n 1211 |         :attr:`Context.help_option_names` is preserved, so the result is stable.\n 1212 | \n 1213 |         .. versionchanged:: 8.5.0\n 1214 |             Names keep their declaration order.\n 1215 |         \"\"\"\n 1216 |         all_names = dict.fromkeys(ctx.help_option_names)"
-    }
-  },
-  {
-    "edge_id": "70e95f397256",
-    "repo": "click",
-    "file": "tests/test_types/test_ParamType.py",
-    "call_text": "DoublingType()",
-    "call_range": [
-      22,
-      15,
-      22,
-      29
-    ],
-    "call_context": "   20 |             return int(value) * 2\n   21 | \n   22 |     doubling = DoublingType()\n      |                ^^^^^^^^^^^^^^\n   23 |     assert doubling(\"21\") == 42",
-    "callee": "DoublingType",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_prompt_default_round_trips_through_type.DoublingType",
-      "file": "tests/test_utils/test_prompt.py",
-      "lines": "22-26",
-      "definition": "   22 |     class DoublingType(click.ParamType[int]):\n   23 |         name = \"doubling\"\n   24 | \n   25 |         def convert(self, value, param, ctx):\n   26 |             return int(value) * 2"
-    }
-  },
-  {
-    "edge_id": "4c5714157fc6",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "CustomError(1)",
-    "call_range": [
-      173,
+      1710,
       14,
-      173,
-      28
+      1710,
+      38
     ],
-    "call_context": "  171 |     @click.command()\n  172 |     def cli():\n  173 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  174 | ",
-    "callee": "CustomError",
-    "receiver": null,
+    "call_context": " 1708 |     ctx = click.Context(click.Command(\"cli\"))\n 1709 |     assert opt.get_help_extra(ctx) == {}\n 1710 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1711 |     assert message == \"values\"",
+    "callee": "get_help_record",
+    "receiver": "opt",
     "target": {
-      "qualified_name": "test_catch_exceptions.CustomError",
-      "file": "tests/test_testing.py",
-      "lines": "168-169",
-      "definition": "  168 |     class CustomError(Exception):\n  169 |         pass"
+      "qualified_name": "Option.get_help_record",
+      "file": "src/click/core.py",
+      "lines": "3589-3612",
+      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
     }
   },
   {
@@ -399,154 +987,7 @@
     }
   },
   {
-    "edge_id": "562312102536",
-    "repo": "click",
-    "file": "tests/test_termui.py",
-    "call_text": "_create_progress(\n        length,\n        width=8,\n        show_percent=show_percent,\n        pos=pos,\n        show_pos=show_pos,\n    )",
-    "call_range": [
-      206,
-      9,
-      212,
-      5
-    ],
-    "call_context": "  204 |     runner, length, show_percent, show_pos, pos, expected\n  205 | ):\n  206 |     with _create_progress(\n      |          ^^^^^^^^^^^^^^^^^\n  207 |         length,\n  208 |         width=8,\n  209 |         show_percent=show_percent,\n  210 |         pos=pos,\n  211 |         show_pos=show_pos,\n  212 |     ) as progress:\n  213 |         assert progress.format_progress_line() == expected",
-    "callee": "_create_progress",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_create_progress",
-      "file": "tests/test_termui.py",
-      "lines": "37-41",
-      "definition": "   37 | def _create_progress(length=10, **kwargs):\n   38 |     progress = click.progressbar(tuple(range(length)))\n   39 |     for key, value in kwargs.items():\n   40 |         setattr(progress, key, value)\n   41 |     return progress"
-    }
-  },
-  {
-    "edge_id": "a8fd3dda4d25",
-    "repo": "click",
-    "file": "tests/test_utils/test_echo.py",
-    "call_text": "emulate_input(\"y\\n\")",
-    "call_range": [
-      155,
-      4,
-      155,
-      24
-    ],
-    "call_context": "  153 | \n  154 |     # https://github.com/pallets/click/issues/3019\n  155 |     emulate_input(\"y\\n\")\n      |     ^^^^^^^^^^^^^^^^^^^^\n  156 |     click.confirm(\"Prompt to stderr with no suffix\", prompt_suffix=\"\", err=True)",
-    "callee": "emulate_input",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_echo_writing_to_standard_error.emulate_input",
-      "file": "tests/test_utils/test_echo.py",
-      "lines": "93-95",
-      "definition": "   93 |     def emulate_input(text):\n   94 |         \"\"\"Emulate keyboard input.\"\"\"\n   95 |         monkeypatch.setattr(sys, \"stdin\", StringIO(text))"
-    }
-  },
-  {
-    "edge_id": "05b158018009",
-    "repo": "click",
-    "file": "src/click/_termui_impl.py",
-    "call_text": "self.make_step(self._completed_intervals)",
-    "call_range": [
-      340,
-      12,
-      340,
-      53
-    ],
-    "call_context": "  338 | \n  339 |         if self._completed_intervals >= self.update_min_steps:\n  340 |             self.make_step(self._completed_intervals)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  341 |             self.render_progress()",
-    "callee": "make_step",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "ProgressBar.make_step",
-      "file": "src/click/_termui_impl.py",
-      "lines": "296-316",
-      "definition": "  296 |     def make_step(self, n_steps: int) -> None:\n  297 |         self.pos += n_steps\n  298 |         if self.length is not None and self.pos >= self.length:\n  299 |             self.finished = True\n  300 | \n  301 |         if (time.time() - self.last_eta) < 1.0:\n  302 |             return\n  303 | \n  304 |         self.last_eta = time.time()\n  305 | "
-    }
-  },
-  {
-    "edge_id": "0d5d6beb0f1a",
-    "repo": "click",
-    "file": "tests/test_termui.py",
-    "call_text": "RecordingStream()",
-    "call_range": [
-      946,
-      13,
-      946,
-      30
-    ],
-    "call_context": "  944 |             calls.append(\"flush\")\n  945 | \n  946 |     stream = RecordingStream()\n      |              ^^^^^^^^^^^^^^^^^\n  947 |     monkeypatch.setattr(click._termui_impl, \"isatty\", lambda _: False)",
-    "callee": "RecordingStream",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_echo_via_pager_streams_each_write.RecordingStream",
-      "file": "tests/test_termui.py",
-      "lines": "934-944",
-      "definition": "  934 |     class RecordingStream(io.StringIO):\n  935 |         def __init__(self):\n  936 |             super().__init__()\n  937 |             self.color = None\n  938 | \n  939 |         def write(self, s):\n  940 |             calls.append(\"write\")\n  941 |             return super().write(s)\n  942 | \n  943 |         def flush(self):"
-    }
-  },
-  {
-    "edge_id": "66c624af583d",
-    "repo": "click",
-    "file": "src/click/testing.py",
-    "call_text": "self._echo(self._input.readline(n))",
-    "call_range": [
-      58,
-      15,
-      58,
-      50
-    ],
-    "call_context": "   56 | \n   57 |     def readline(self, n: int = -1) -> bytes:\n   58 |         return self._echo(self._input.readline(n))\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   59 | ",
-    "callee": "_echo",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "EchoingStdin._echo",
-      "file": "src/click/testing.py",
-      "lines": "45-49",
-      "definition": "   45 |     def _echo(self, rv: bytes) -> bytes:\n   46 |         if not self._paused:\n   47 |             self._output.write(rv)\n   48 | \n   49 |         return rv"
-    }
-  },
-  {
-    "edge_id": "3c7441b880e0",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.get_command(ctx, name)",
-    "call_range": [
-      1822,
-      22,
-      1822,
-      49
-    ],
-    "call_context": " 1820 | \n 1821 |         for name in self.list_commands(ctx):\n 1822 |             command = self.get_command(ctx, name)\n      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1823 | ",
-    "callee": "get_command",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "Group.get_command",
-      "file": "src/click/core.py",
-      "lines": "1991-1995",
-      "definition": " 1991 |     def get_command(self, ctx: Context, cmd_name: str) -> Command | None:\n 1992 |         \"\"\"Given a context and a command name, this returns a :class:`Command`\n 1993 |         object if it exists or returns ``None``.\n 1994 |         \"\"\"\n 1995 |         return self.commands.get(cmd_name)"
-    }
-  },
-  {
-    "edge_id": "66939e0818bd",
-    "repo": "click",
-    "file": "src/click/parser.py",
-    "call_text": "_normalize_opt(long_opt, self.ctx)",
-    "call_range": [
-      479,
-      24,
-      479,
-      58
-    ],
-    "call_context": "  477 |         else:\n  478 |             long_opt = arg\n  479 |         norm_long_opt = _normalize_opt(long_opt, self.ctx)\n      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  480 | ",
-    "callee": "_normalize_opt",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_normalize_opt",
-      "file": "src/click/parser.py",
-      "lines": "120-124",
-      "definition": "  120 | def _normalize_opt(opt: str, ctx: Context | None) -> str:\n  121 |     if ctx is None or ctx.token_normalize_func is None:\n  122 |         return opt\n  123 |     prefix, opt = _split_opt(opt)\n  124 |     return f\"{prefix}{ctx.token_normalize_func(opt)}\""
-    }
-  },
-  {
-    "edge_id": "c8e8f67bfd77",
+    "edge_id": "ecc639ffaf1f",
     "repo": "click",
     "file": "src/click/core.py",
     "call_text": "self.process_value(ctx, value)",
@@ -560,367 +1001,31 @@
     "callee": "process_value",
     "receiver": "self",
     "target": {
-      "qualified_name": "Parameter.process_value",
+      "qualified_name": "Option.process_value",
       "file": "src/click/core.py",
-      "lines": "2802-2866",
-      "definition": " 2802 |     def process_value(self, ctx: Context, value: t.Any) -> t.Any:\n 2803 |         \"\"\"Process the value of this parameter:\n 2804 | \n 2805 |         1. Type cast the value using :meth:`type_cast_value`.\n 2806 |         2. Check if the value is missing (see: :meth:`value_is_missing`), and raise\n 2807 |            :exc:`MissingParameter` if it is required.\n 2808 |         3. If a :attr:`callback` is set, call it to have the value replaced by the\n 2809 |            result of the callback. If the value was not set, the callback receive\n 2810 |            ``None``. This keep the legacy behavior as it was before the introduction of\n 2811 |            the :attr:`UNSET` sentinel."
+      "lines": "3876-3891",
+      "definition": " 3876 |     def process_value(self, ctx: Context, value: t.Any) -> t.Any:\n 3877 |         # process_value has to be overridden on Options in order to capture\n 3878 |         # `value == UNSET` cases before `type_cast_value()` gets called.\n 3879 |         #\n 3880 |         # Refs:\n 3881 |         # https://github.com/pallets/click/issues/3069\n 3882 |         if self.is_flag and not self.required and self.is_bool_flag and value is UNSET:\n 3883 |             value = False\n 3884 | \n 3885 |             if self.callback is not None:"
     }
   },
   {
-    "edge_id": "ee0e4486da33",
+    "edge_id": "961816f2ae5e",
     "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.get_default(ctx)",
+    "file": "src/click/decorators.py",
+    "call_text": "decorator(func)",
     "call_range": [
-      694,
-      11,
-      694,
-      31
+      253,
+      15,
+      253,
+      30
     ],
-    "call_context": "  692 |     assert opt.type is click.INT\n  693 |     ctx = click.Context(click.Command(\"test\"))\n  694 |     assert opt.get_default(ctx) == (1, 2)\n      |            ^^^^^^^^^^^^^^^^^^^^\n  695 | ",
-    "callee": "get_default",
-    "receiver": "opt",
-    "target": {
-      "qualified_name": "Option.get_default",
-      "file": "src/click/core.py",
-      "lines": "3389-3421",
-      "definition": " 3389 |     def get_default(\n 3390 |         self, ctx: Context, call: bool = True\n 3391 |     ) -> t.Any | t.Callable[[], t.Any] | None:\n 3392 |         \"\"\"Return the default value for this option.\n 3393 | \n 3394 |         Several auto-derived defaults are resolved lazily here rather than eagerly in\n 3395 |         :meth:`__init__`. This keeps :attr:`default` raw at construction time, so\n 3396 |         ``self.default is UNSET`` reliably answers \"did the user pass a default?\" for\n 3397 |         feature-switch-group arbitration and for anything else that needs to distinguish\n 3398 |         \"absent\" from a chosen value. The resolution rules live in"
-    }
-  },
-  {
-    "edge_id": "8f2a2756db3f",
-    "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "ctx.scope()",
-    "call_range": [
-      313,
-      9,
-      313,
-      20
-    ],
-    "call_context": "  311 |     assert rv == []\n  312 | \n  313 |     with ctx.scope():\n      |          ^^^^^^^^^^^\n  314 |         # Internal",
-    "callee": "scope",
-    "receiver": "ctx",
-    "target": {
-      "qualified_name": "Context.scope",
-      "file": "src/click/core.py",
-      "lines": "598-634",
-      "definition": "  598 |     @contextmanager\n  599 |     def scope(self, cleanup: bool = True) -> cabc.Generator[Context]:\n  600 |         \"\"\"This helper method can be used with the context object to promote\n  601 |         it to the current thread local (see :func:`get_current_context`).\n  602 |         The default behavior of this is to invoke the cleanup functions which\n  603 |         can be disabled by setting `cleanup` to `False`.  The cleanup\n  604 |         functions are typically used for things such as closing file handles.\n  605 | \n  606 |         If the cleanup is intended the context object can also be directly\n  607 |         used as a context manager."
-    }
-  },
-  {
-    "edge_id": "ec173cf3cbb7",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "option.get_help_record(context)",
-    "call_range": [
-      807,
-      13,
-      807,
-      44
-    ],
-    "call_context": "  805 |     context = click.Context(click.Command(\"test\"))\n  806 |     assert option.get_help_extra(context) == {\"default\": \"2\", \"range\": expect}\n  807 |     result = option.get_help_record(context)[1]\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  808 |     assert expect in result",
-    "callee": "get_help_record",
-    "receiver": "option",
-    "target": {
-      "qualified_name": "Option.get_help_record",
-      "file": "src/click/core.py",
-      "lines": "3589-3612",
-      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
-    }
-  },
-  {
-    "edge_id": "ee4ac01464e8",
-    "repo": "click",
-    "file": "src/click/formatting.py",
-    "call_text": "self.write(f\"{'':>{self.current_indent}}{heading}:\\n\")",
-    "call_range": [
-      206,
-      8,
-      206,
-      62
-    ],
-    "call_context": "  204 |     def write_heading(self, heading: str) -> None:\n  205 |         \"\"\"Writes a heading into the buffer.\"\"\"\n  206 |         self.write(f\"{'':>{self.current_indent}}{heading}:\\n\")\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  207 | ",
-    "callee": "write",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "HelpFormatter.write",
-      "file": "src/click/formatting.py",
-      "lines": "146-148",
-      "definition": "  146 |     def write(self, string: str) -> None:\n  147 |         \"\"\"Writes a unicode string into the internal buffer.\"\"\"\n  148 |         self.buffer.append(string)"
-    }
-  },
-  {
-    "edge_id": "f01eb02cfecc",
-    "repo": "click",
-    "file": "tests/test_termui.py",
-    "call_text": "_create_progress(label=\"see nothing\", hidden=True)",
-    "call_range": [
-      104,
-      13,
-      104,
-      63
-    ],
-    "call_context": "  102 |     @click.command()\n  103 |     def cli():\n  104 |         with _create_progress(label=\"see nothing\", hidden=True) as progress:\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  105 |             for _ in progress:",
-    "callee": "_create_progress",
+    "call_context": "  251 | \n  252 |     if func is not None:\n  253 |         return decorator(func)\n      |                ^^^^^^^^^^^^^^^\n  254 | ",
+    "callee": "decorator",
     "receiver": null,
     "target": {
-      "qualified_name": "_create_progress",
-      "file": "tests/test_termui.py",
-      "lines": "37-41",
-      "definition": "   37 | def _create_progress(length=10, **kwargs):\n   38 |     progress = click.progressbar(tuple(range(length)))\n   39 |     for key, value in kwargs.items():\n   40 |         setattr(progress, key, value)\n   41 |     return progress"
-    }
-  },
-  {
-    "edge_id": "313586b3d5de",
-    "repo": "click",
-    "file": "src/click/_compat.py",
-    "call_text": "_force_correct_text_writer(sys.stdout, encoding, errors, force_writable=True)",
-    "call_range": [
-      351,
-      11,
-      351,
-      88
-    ],
-    "call_context": "  349 |     if rv is not None:\n  350 |         return rv\n  351 |     return _force_correct_text_writer(sys.stdout, encoding, errors, force_writable=True)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  352 | ",
-    "callee": "_force_correct_text_writer",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_force_correct_text_writer",
-      "file": "src/click/_compat.py",
-      "lines": "303-316",
-      "definition": "  303 | def _force_correct_text_writer(\n  304 |     text_writer: t.IO[t.Any],\n  305 |     encoding: str | None,\n  306 |     errors: str | None,\n  307 |     force_writable: bool = False,\n  308 | ) -> t.TextIO:\n  309 |     return _force_correct_text_stream(\n  310 |         text_writer,\n  311 |         encoding,\n  312 |         errors,"
-    }
-  },
-  {
-    "edge_id": "d8d9ea92612d",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.isolation()",
-    "call_range": [
-      554,
-      9,
-      554,
-      27
-    ],
-    "call_context": "  552 |     runner = CliRunner()\n  553 | \n  554 |     with runner.isolation() as (_, err, _):\n      |          ^^^^^^^^^^^^^^^^^^\n  555 |         click.echo(\"\\udce2\", err=True, nl=False)",
-    "callee": "isolation",
-    "receiver": "runner",
-    "target": {
-      "qualified_name": "CliRunner.isolation",
-      "file": "src/click/testing.py",
-      "lines": "398-594",
-      "definition": "  398 |     @contextlib.contextmanager\n  399 |     def isolation(\n  400 |         self,\n  401 |         input: str | bytes | t.IO[t.Any] | None = None,\n  402 |         env: cabc.Mapping[str, str | None] | None = None,\n  403 |         color: bool = False,\n  404 |     ) -> cabc.Generator[tuple[io.BytesIO, io.BytesIO, io.BytesIO]]:\n  405 |         \"\"\"A context manager that sets up the isolation for invoking of a\n  406 |         command line tool.  This sets up `<stdin>` with the given input data\n  407 |         and `os.environ` with the overrides from the given dictionary."
-    }
-  },
-  {
-    "edge_id": "f01d2cc816e8",
-    "repo": "click",
-    "file": "tests/test_stream_lifecycle.py",
-    "call_text": "runner.invoke(hello, input=\"Peter\")",
-    "call_range": [
-      215,
-      13,
-      215,
-      48
-    ],
-    "call_context": "  213 | \n  214 |     runner = CliRunner()\n  215 |     result = runner.invoke(hello, input=\"Peter\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  216 |     assert result.exit_code == 0",
-    "callee": "invoke",
-    "receiver": "runner",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "a57878edf923",
-    "repo": "click",
-    "file": "src/click/parser.py",
-    "call_text": "_Argument(obj, dest=dest, nargs=nargs)",
-    "call_range": [
-      296,
-      26,
-      296,
-      64
-    ],
-    "call_context": "  294 |         that is returned from the parser.\n  295 |         \"\"\"\n  296 |         self._args.append(_Argument(obj, dest=dest, nargs=nargs))\n      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  297 | ",
-    "callee": "_Argument",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_Argument",
-      "file": "src/click/parser.py",
-      "lines": "185-213",
-      "definition": "  185 | class _Argument:\n  186 |     def __init__(self, obj: CoreArgument, dest: str | None, nargs: int = 1):\n  187 |         self.dest = dest\n  188 |         self.nargs = nargs\n  189 |         self.obj = obj\n  190 | \n  191 |     def process(\n  192 |         self,\n  193 |         value: str | cabc.Sequence[str | T_UNSET] | T_UNSET,\n  194 |         state: _ParsingState,"
-    }
-  },
-  {
-    "edge_id": "f97b213b354b",
-    "repo": "click",
-    "file": "tests/test_compat.py",
-    "call_text": "JupyterKernelFakeStream()",
-    "call_range": [
-      82,
-      58,
-      82,
-      83
-    ],
-    "call_context": "   80 |     # implementation detail, aka cheapskate test\n   81 |     JupyterKernelFakeStream.__module__ = \"ipykernel.faked\"\n   82 |     assert click._compat._is_jupyter_kernel_output(stream=JupyterKernelFakeStream())\n      |                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^\n   83 | ",
-    "callee": "JupyterKernelFakeStream",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_is_jupyter_kernel_output.JupyterKernelFakeStream",
-      "file": "tests/test_compat.py",
-      "lines": "77-78",
-      "definition": "   77 |     class JupyterKernelFakeStream:\n   78 |         pass"
-    }
-  },
-  {
-    "edge_id": "3470a0cbaade",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.collect_usage_pieces(ctx)",
-    "call_range": [
-      1193,
-      17,
-      1193,
-      47
-    ],
-    "call_context": " 1191 |         This is a low-level method called by :meth:`get_usage`.\n 1192 |         \"\"\"\n 1193 |         pieces = self.collect_usage_pieces(ctx)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1194 |         formatter.write_usage(ctx.command_path, \" \".join(pieces))",
-    "callee": "collect_usage_pieces",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "Command.collect_usage_pieces",
+      "qualified_name": "Group.result_callback.decorator",
       "file": "src/click/core.py",
-      "lines": "1196-1205",
-      "definition": " 1196 |     def collect_usage_pieces(self, ctx: Context) -> list[str]:\n 1197 |         \"\"\"Returns all the pieces that go into the usage line and returns\n 1198 |         it as a list of strings.\n 1199 |         \"\"\"\n 1200 |         rv = [self.options_metavar] if self.options_metavar else []\n 1201 | \n 1202 |         for param in self.get_params(ctx):\n 1203 |             rv.extend(param.get_usage_pieces(ctx))\n 1204 | \n 1205 |         return rv"
-    }
-  },
-  {
-    "edge_id": "c44c1d469a9c",
-    "repo": "click",
-    "file": "tests/test_chain.py",
-    "call_text": "debug()",
-    "call_range": [
-      237,
-      8,
-      237,
-      15
-    ],
-    "call_context": "  235 |     @l1a.command()\n  236 |     def l2b():\n  237 |         debug()\n      |         ^^^^^^^\n  238 | ",
-    "callee": "debug",
-    "receiver": null,
-    "target": {
-      "qualified_name": "debug",
-      "file": "tests/test_chain.py",
-      "lines": "8-12",
-      "definition": "    8 | def debug():\n    9 |     click.echo(\n   10 |         f\"{sys._getframe(1).f_code.co_name}\"\n   11 |         f\"={'|'.join(click.get_current_context().args)}\"\n   12 |     )"
-    }
-  },
-  {
-    "edge_id": "0b9d91502b31",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "ctx.fail(\n                ngettext(\n                    \"Got unexpected extra argument ({args})\",\n                    \"Got unexpected extra arguments ({args})\",\n                    len(args),\n                ).format(args=\" \".join(map(str, args)))\n            )",
-    "call_range": [
-      1420,
-      12,
-      1426,
-      13
-    ],
-    "call_context": " 1418 | \n 1419 |         if args and not ctx.allow_extra_args and not ctx.resilient_parsing:\n 1420 |             ctx.fail(\n      |             ^^^^^^^^^\n 1421 |                 ngettext(\n 1422 |                     \"Got unexpected extra argument ({args})\",\n 1423 |                     \"Got unexpected extra arguments ({args})\",\n 1424 |                     len(args),\n 1425 |                 ).format(args=\" \".join(map(str, args)))\n 1426 |             )\n 1427 | ",
-    "callee": "fail",
-    "receiver": "ctx",
-    "target": {
-      "qualified_name": "Context.fail",
-      "file": "src/click/core.py",
-      "lines": "837-843",
-      "definition": "  837 |     def fail(self, message: str) -> t.NoReturn:\n  838 |         \"\"\"Aborts the execution of the program with a specific error\n  839 |         message.\n  840 | \n  841 |         :param message: the error message to fail with.\n  842 |         \"\"\"\n  843 |         raise UsageError(message, self)"
-    }
-  },
-  {
-    "edge_id": "c7c1b5dd22ef",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.get_help_record(ctx)",
-    "call_range": [
-      1636,
-      14,
-      1636,
-      38
-    ],
-    "call_context": " 1634 |     ctx = click.Context(click.Command(\"test\"))\n 1635 |     assert opt.get_help_extra(ctx) == {}\n 1636 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1637 |     assert \"[default: \" not in message",
-    "callee": "get_help_record",
-    "receiver": "opt",
-    "target": {
-      "qualified_name": "Option.get_help_record",
-      "file": "src/click/core.py",
-      "lines": "3589-3612",
-      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
-    }
-  },
-  {
-    "edge_id": "0702de6bce0f",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "_format_deprecated_label(self.deprecated)",
-    "call_range": [
-      1284,
-      32,
-      1284,
-      73
-    ],
-    "call_context": " 1282 | \n 1283 |         if self.deprecated:\n 1284 |             text = f\"{_(text)} {_format_deprecated_label(self.deprecated)}\"\n      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1285 | ",
-    "callee": "_format_deprecated_label",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_format_deprecated_label",
-      "file": "src/click/core.py",
-      "lines": "132-137",
-      "definition": "  132 | def _format_deprecated_label(deprecated: bool | str) -> str:\n  133 |     \"\"\"Return the parenthesized deprecation label shown in help text.\"\"\"\n  134 |     label = _(\"deprecated\").upper()\n  135 |     if isinstance(deprecated, str):\n  136 |         return f\"({label}: {deprecated})\"\n  137 |     return f\"({label})\""
-    }
-  },
-  {
-    "edge_id": "c256f2215adc",
-    "repo": "click",
-    "file": "tests/test_defaults.py",
-    "call_text": "Source()",
-    "call_range": [
-      292,
-      38,
-      292,
-      46
-    ],
-    "call_context": "  290 |     @click.command()\n  291 |     @click.option(\"--default\", type=Source(), default=\"/tmp/file\")\n  292 |     @click.option(\"--nodefault\", type=Source())\n      |                                       ^^^^^^^^\n  293 |     def cli(default, nodefault):",
-    "callee": "Source",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_parameter_source_during_paramtype_convert.Source",
-      "file": "tests/test_defaults.py",
-      "lines": "281-288",
-      "definition": "  281 |     class Source(click.ParamType):\n  282 |         name = \"source\"\n  283 | \n  284 |         def convert(self, value, param, ctx):\n  285 |             return {\n  286 |                 \"value\": value,\n  287 |                 \"source\": ctx.get_parameter_source(param.name),\n  288 |             }"
-    }
-  },
-  {
-    "edge_id": "7a98abc776c1",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "formatter.write_text(text)",
-    "call_range": [
-      1323,
-      16,
-      1323,
-      42
-    ],
-    "call_context": " 1321 | \n 1322 |             with formatter.indentation():\n 1323 |                 formatter.write_text(text)\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1324 | ",
-    "callee": "write_text",
-    "receiver": "formatter",
-    "target": {
-      "qualified_name": "HelpFormatter.write_text",
-      "file": "src/click/formatting.py",
-      "lines": "213-227",
-      "definition": "  213 |     def write_text(self, text: str) -> None:\n  214 |         \"\"\"Writes re-indented text into the buffer.  This rewraps and\n  215 |         preserves paragraphs.\n  216 |         \"\"\"\n  217 |         indent = \" \" * self.current_indent\n  218 |         self.write(\n  219 |             wrap_text(\n  220 |                 text,\n  221 |                 self.width,\n  222 |                 initial_indent=indent,"
+      "lines": "1975-1987",
+      "definition": " 1975 |         def decorator(f: F) -> F:\n 1976 |             old_callback = self._result_callback\n 1977 | \n 1978 |             if old_callback is None or replace:\n 1979 |                 self._result_callback = f\n 1980 |                 return f\n 1981 | \n 1982 |             def function(value: t.Any, /, *args: t.Any, **kwargs: t.Any) -> t.Any:\n 1983 |                 inner = old_callback(value, *args, **kwargs)\n 1984 |                 return f(inner, *args, **kwargs)"
     }
   },
   {
@@ -945,59 +1050,17 @@
     }
   },
   {
-    "edge_id": "6521ecf46c77",
+    "edge_id": "e78f90ab8aa7",
     "repo": "click",
-    "file": "src/click/decorators.py",
-    "call_text": "decorator(func)",
+    "file": "tests/test_stream_lifecycle.py",
+    "call_text": "runner.invoke(cli, [word])",
     "call_range": [
-      253,
-      15,
-      253,
-      30
+      399,
+      17,
+      399,
+      43
     ],
-    "call_context": "  251 | \n  252 |     if func is not None:\n  253 |         return decorator(func)\n      |                ^^^^^^^^^^^^^^^\n  254 | ",
-    "callee": "decorator",
-    "receiver": null,
-    "target": {
-      "qualified_name": "command.decorator",
-      "file": "src/click/decorators.py",
-      "lines": "217-250",
-      "definition": "  217 |     def decorator(f: _AnyCallable) -> CmdType:\n  218 |         if isinstance(f, Command):\n  219 |             raise TypeError(\"Attempted to convert a callback into a command twice.\")\n  220 | \n  221 |         attr_params = attrs.pop(\"params\", None)\n  222 |         params = attr_params if attr_params is not None else []\n  223 | \n  224 |         try:\n  225 |             decorator_params = f.__click_params__  # type: ignore\n  226 |         except AttributeError:"
-    }
-  },
-  {
-    "edge_id": "39ca1714549e",
-    "repo": "click",
-    "file": "src/click/decorators.py",
-    "call_text": "command(name, cls, **attrs)",
-    "call_range": [
-      311,
-      11,
-      311,
-      38
-    ],
-    "call_context": "  309 |         return command(cls=cls, **attrs)(name)\n  310 | \n  311 |     return command(name, cls, **attrs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  312 | ",
-    "callee": "command",
-    "receiver": null,
-    "target": {
-      "qualified_name": "command",
-      "file": "src/click/decorators.py",
-      "lines": "168-255",
-      "definition": "  168 | def command(\n  169 |     name: str | _AnyCallable | None = None,\n  170 |     cls: type[CmdType] | None = None,\n  171 |     **attrs: t.Any,\n  172 | ) -> Command | t.Callable[[_AnyCallable], Command | CmdType]:\n  173 |     r\"\"\"Creates a new :class:`Command` and uses the decorated function as\n  174 |     callback.  This will also automatically attach all decorated\n  175 |     :func:`option`\\s and :func:`argument`\\s as parameters to the command.\n  176 | \n  177 |     The name of the command defaults to the name of the function, converted to"
-    }
-  },
-  {
-    "edge_id": "5a75e356d0bd",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(cli_no_error)",
-    "call_range": [
-      336,
-      13,
-      336,
-      40
-    ],
-    "call_context": "  334 |     assert result.output == \"hello world\\n1.0\\n\"\n  335 | \n  336 |     result = runner.invoke(cli_no_error)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  337 |     assert result.exit_code == 0",
+    "call_context": "  397 |     runner = CliRunner()\n  398 |     for word in (\"err1\", \"err2\", \"err3\"):\n  399 |         result = runner.invoke(cli, [word])\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  400 |         assert result.exit_code == 0",
     "callee": "invoke",
     "receiver": "runner",
     "target": {
@@ -1008,276 +1071,24 @@
     }
   },
   {
-    "edge_id": "3ca206d306f1",
+    "edge_id": "c256f2215adc",
     "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "TestContext(base_val=base_val_nested, handle_exception=False)",
+    "file": "tests/test_defaults.py",
+    "call_text": "Source()",
     "call_range": [
-      658,
-      12,
-      658,
-      73
-    ],
-    "call_context": "  656 |         rv = ctx.with_resource(TestContext(base_val=base_val, handle_exception=False))\n  657 |         rv_nested = ctx.with_resource(\n  658 |             TestContext(base_val=base_val_nested, handle_exception=False)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  659 |         )",
-    "callee": "TestContext",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_with_resource_exception.TestContext",
-      "file": "tests/test_context.py",
-      "lines": "539-563",
-      "definition": "  539 |     class TestContext(AbstractContextManager[list[int]]):\n  540 |         _handle_exception: bool\n  541 |         _base_val: int\n  542 |         val: list[int]\n  543 | \n  544 |         def __init__(self, base_val: int = 1, *, handle_exception: bool = True) -> None:\n  545 |             self._handle_exception = handle_exception\n  546 |             self._base_val = base_val\n  547 | \n  548 |         def __enter__(self) -> list[int]:"
-    }
-  },
-  {
-    "edge_id": "cf9381963bdc",
-    "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "_get_words(cli, [\"a\", \"b\"], \"c\")",
-    "call_range": [
-      253,
-      11,
-      253,
-      43
-    ],
-    "call_context": "  251 |     )\n  252 |     assert _get_words(cli, [\"a\", \"b\"], \"\") == [\"\"]\n  253 |     assert _get_words(cli, [\"a\", \"b\"], \"c\") == [\"C\"]\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  254 | ",
-    "callee": "_get_words",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_get_words",
-      "file": "tests/test_shell_completion.py",
-      "lines": "29-30",
-      "definition": "   29 | def _get_words(cli, args, incomplete):\n   30 |     return [c.value for c in _get_completions(cli, args, incomplete)]"
-    }
-  },
-  {
-    "edge_id": "c7e78ce2ce98",
-    "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "TestException()",
-    "call_range": [
-      660,
-      14,
-      660,
-      29
-    ],
-    "call_context": "  658 |             TestContext(base_val=base_val_nested, handle_exception=False)\n  659 |         )\n  660 |         raise TestException()\n      |               ^^^^^^^^^^^^^^^\n  661 | ",
-    "callee": "TestException",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_with_resource_exception.TestException",
-      "file": "tests/test_context.py",
-      "lines": "565-566",
-      "definition": "  565 |     class TestException(Exception):\n  566 |         pass"
-    }
-  },
-  {
-    "edge_id": "fa81d2b61288",
-    "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "Foo()",
-    "call_range": [
-      49,
-      18,
-      49,
-      23
-    ],
-    "call_context": "   47 |     @click.pass_context\n   48 |     def cli(ctx):\n   49 |         ctx.obj = Foo()\n      |                   ^^^^^\n   50 |         ctx.obj.title = \"test\"",
-    "callee": "Foo",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_get_context_objects.Foo",
-      "file": "tests/test_context.py",
-      "lines": "40-42",
-      "definition": "   40 |     class Foo:\n   41 |         def __init__(self):\n   42 |             self.title = \"default\""
-    }
-  },
-  {
-    "edge_id": "8339b05994cb",
-    "repo": "click",
-    "file": "src/click/_compat.py",
-    "call_text": "self.close(delete=exc_type is not None)",
-    "call_range": [
-      485,
-      8,
-      485,
-      47
-    ],
-    "call_context": "  483 |         tb: TracebackType | None,\n  484 |     ) -> None:\n  485 |         self.close(delete=exc_type is not None)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  486 | ",
-    "callee": "close",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "_AtomicFile.close",
-      "file": "src/click/_compat.py",
-      "lines": "466-471",
-      "definition": "  466 |     def close(self, delete: bool = False) -> None:\n  467 |         if self.closed:\n  468 |             return\n  469 |         self._f.close()\n  470 |         os.replace(self._tmp_filename, self._real_filename)\n  471 |         self.closed = True"
-    }
-  },
-  {
-    "edge_id": "bbe5df6f1e4a",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "ConfigParamType()",
-    "call_range": [
-      2436,
-      69,
-      2436,
-      86
-    ],
-    "call_context": " 2434 |     @click.command()\n 2435 |     @click.option(\"-c\", \"--config\", type=ConfigParamType())\n 2436 |     @click.option(\"--no-config\", \"config\", flag_value=sentinel, type=ConfigParamType())\n      |                                                                      ^^^^^^^^^^^^^^^^^\n 2437 |     def main(config):",
-    "callee": "ConfigParamType",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_dual_options_custom_type_sentinel_flag_value.ConfigParamType",
-      "file": "tests/test_options.py",
-      "lines": "2423-2432",
-      "definition": " 2423 |     class ConfigParamType(click.ParamType):\n 2424 |         \"\"\"A custom type that accepts a file path or a sentinel value.\"\"\"\n 2425 | \n 2426 |         def convert(self, value, param, ctx):\n 2427 |             if value is sentinel:\n 2428 |                 return \"No configuration file provided.\"\n 2429 |             else:\n 2430 |                 return click.Path(exists=True, dir_okay=False).convert(\n 2431 |                     value, param, ctx\n 2432 |                 )"
-    }
-  },
-  {
-    "edge_id": "adad94a6a1bb",
-    "repo": "click",
-    "file": "src/click/_winconsole.py",
-    "call_text": "ConsoleStream(text_stream, buffer_stream)",
-    "call_range": [
-      229,
-      28,
-      229,
-      69
-    ],
-    "call_context": "  227 |         line_buffering=True,\n  228 |     )\n  229 |     return t.cast(t.TextIO, ConsoleStream(text_stream, buffer_stream))\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  230 | ",
-    "callee": "ConsoleStream",
-    "receiver": null,
-    "target": {
-      "qualified_name": "ConsoleStream",
-      "file": "src/click/_winconsole.py",
-      "lines": "190-219",
-      "definition": "  190 | class ConsoleStream:\n  191 |     def __init__(self, text_stream: t.TextIO, byte_stream: t.BinaryIO) -> None:\n  192 |         self._text_stream = text_stream\n  193 |         self.buffer = byte_stream\n  194 | \n  195 |     @property\n  196 |     def name(self) -> str:\n  197 |         return self.buffer.name\n  198 | \n  199 |     def write(self, x: t.AnyStr) -> int:"
-    }
-  },
-  {
-    "edge_id": "d2f3bf98fcca",
-    "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "Foo()",
-    "call_range": [
-      49,
-      18,
-      49,
-      23
-    ],
-    "call_context": "   47 |     @click.pass_context\n   48 |     def cli(ctx):\n   49 |         ctx.obj = Foo()\n      |                   ^^^^^\n   50 |         ctx.obj.title = \"test\"",
-    "callee": "Foo",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_get_context_objects_missing.Foo",
-      "file": "tests/test_context.py",
-      "lines": "86-87",
-      "definition": "   86 |     class Foo:\n   87 |         pass"
-    }
-  },
-  {
-    "edge_id": "3fbb48fb6932",
-    "repo": "click",
-    "file": "src/click/testing.py",
-    "call_text": "self._echo(self._input.read(n))",
-    "call_range": [
-      52,
-      15,
-      52,
+      292,
+      38,
+      292,
       46
     ],
-    "call_context": "   50 | \n   51 |     def read(self, n: int = -1) -> bytes:\n   52 |         return self._echo(self._input.read(n))\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   53 | ",
-    "callee": "_echo",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "EchoingStdin._echo",
-      "file": "src/click/testing.py",
-      "lines": "45-49",
-      "definition": "   45 |     def _echo(self, rv: bytes) -> bytes:\n   46 |         if not self._paused:\n   47 |             self._output.write(rv)\n   48 | \n   49 |         return rv"
-    }
-  },
-  {
-    "edge_id": "27dc1e143a53",
-    "repo": "click",
-    "file": "tests/test_custom_classes.py",
-    "call_text": "CustomGroup()",
-    "call_range": [
-      77,
-      12,
-      77,
-      25
-    ],
-    "call_context": "   75 |         command_class = CustomCommand\n   76 | \n   77 |     group = CustomGroup()\n      |             ^^^^^^^^^^^^^\n   78 |     subcommand = group.command()(lambda: None)",
-    "callee": "CustomGroup",
+    "call_context": "  290 |     @click.command()\n  291 |     @click.option(\"--default\", type=Source(), default=\"/tmp/file\")\n  292 |     @click.option(\"--nodefault\", type=Source())\n      |                                       ^^^^^^^^\n  293 |     def cli(default, nodefault):",
+    "callee": "Source",
     "receiver": null,
     "target": {
-      "qualified_name": "test_group_command_class.CustomGroup",
-      "file": "tests/test_custom_classes.py",
-      "lines": "74-75",
-      "definition": "   74 |     class CustomGroup(click.Group):\n   75 |         command_class = CustomCommand"
-    }
-  },
-  {
-    "edge_id": "3d263f9b6a5b",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.get_help_record(ctx)",
-    "call_range": [
-      1710,
-      14,
-      1710,
-      38
-    ],
-    "call_context": " 1708 |     ctx = click.Context(click.Command(\"cli\"))\n 1709 |     assert opt.get_help_extra(ctx) == {}\n 1710 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1711 |     assert message == \"values\"",
-    "callee": "get_help_record",
-    "receiver": "opt",
-    "target": {
-      "qualified_name": "Option.get_help_record",
-      "file": "src/click/core.py",
-      "lines": "3589-3612",
-      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
-    }
-  },
-  {
-    "edge_id": "63ada0830734",
-    "repo": "click",
-    "file": "tests/test_custom_classes.py",
-    "call_text": "CustomContext(\n        click.Command(\"test\", params=[click.Option([\"--value\"])]), color=True\n    )",
-    "call_range": [
-      60,
-      14,
-      62,
-      5
-    ],
-    "call_context": "   58 |         formatter_class = CustomFormatter\n   59 | \n   60 |     context = CustomContext(\n      |               ^^^^^^^^^^^^^^\n   61 |         click.Command(\"test\", params=[click.Option([\"--value\"])]), color=True\n   62 |     )\n   63 |     assert \"\\x1b[33mOptions\\x1b[0m:\" in context.get_help()",
-    "callee": "CustomContext",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_context_formatter_class.CustomContext",
-      "file": "tests/test_custom_classes.py",
-      "lines": "57-58",
-      "definition": "   57 |     class CustomContext(click.Context):\n   58 |         formatter_class = CustomFormatter"
-    }
-  },
-  {
-    "edge_id": "8cdde648d549",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.get_default(ctx, call=False)",
-    "call_range": [
-      3641,
-      28,
-      3641,
-      61
-    ],
-    "call_context": " 3639 | \n 3640 |         try:\n 3641 |             default_value = self.get_default(ctx, call=False)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3642 |         finally:",
-    "callee": "get_default",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "Option.get_default",
-      "file": "src/click/core.py",
-      "lines": "3389-3421",
-      "definition": " 3389 |     def get_default(\n 3390 |         self, ctx: Context, call: bool = True\n 3391 |     ) -> t.Any | t.Callable[[], t.Any] | None:\n 3392 |         \"\"\"Return the default value for this option.\n 3393 | \n 3394 |         Several auto-derived defaults are resolved lazily here rather than eagerly in\n 3395 |         :meth:`__init__`. This keeps :attr:`default` raw at construction time, so\n 3396 |         ``self.default is UNSET`` reliably answers \"did the user pass a default?\" for\n 3397 |         feature-switch-group arbitration and for anything else that needs to distinguish\n 3398 |         \"absent\" from a chosen value. The resolution rules live in"
+      "qualified_name": "test_parameter_source_during_paramtype_convert.Source",
+      "file": "tests/test_defaults.py",
+      "lines": "281-288",
+      "definition": "  281 |     class Source(click.ParamType):\n  282 |         name = \"source\"\n  283 | \n  284 |         def convert(self, value, param, ctx):\n  285 |             return {\n  286 |                 \"value\": value,\n  287 |                 \"source\": ctx.get_parameter_source(param.name),\n  288 |             }"
     }
   },
   {
@@ -1302,6 +1113,153 @@
     }
   },
   {
+    "edge_id": "f01eb02cfecc",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "_create_progress(label=\"see nothing\", hidden=True)",
+    "call_range": [
+      104,
+      13,
+      104,
+      63
+    ],
+    "call_context": "  102 |     @click.command()\n  103 |     def cli():\n  104 |         with _create_progress(label=\"see nothing\", hidden=True) as progress:\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  105 |             for _ in progress:",
+    "callee": "_create_progress",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_create_progress",
+      "file": "tests/test_termui.py",
+      "lines": "37-41",
+      "definition": "   37 | def _create_progress(length=10, **kwargs):\n   38 |     progress = click.progressbar(tuple(range(length)))\n   39 |     for key, value in kwargs.items():\n   40 |         setattr(progress, key, value)\n   41 |     return progress"
+    }
+  },
+  {
+    "edge_id": "12c7cbbf6af4",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "CustomError(1)",
+    "call_range": [
+      173,
+      14,
+      173,
+      28
+    ],
+    "call_context": "  171 |     @click.command()\n  172 |     def cli():\n  173 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  174 | ",
+    "callee": "CustomError",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_catch_exceptions_cli_runner.CustomError",
+      "file": "tests/test_testing.py",
+      "lines": "195-196",
+      "definition": "  195 |     class CustomError(Exception):\n  196 |         pass"
+    }
+  },
+  {
+    "edge_id": "cf9381963bdc",
+    "repo": "click",
+    "file": "tests/test_shell_completion.py",
+    "call_text": "_get_words(cli, [\"a\", \"b\"], \"c\")",
+    "call_range": [
+      253,
+      11,
+      253,
+      43
+    ],
+    "call_context": "  251 |     )\n  252 |     assert _get_words(cli, [\"a\", \"b\"], \"\") == [\"\"]\n  253 |     assert _get_words(cli, [\"a\", \"b\"], \"c\") == [\"C\"]\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  254 | ",
+    "callee": "_get_words",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_get_words",
+      "file": "tests/test_shell_completion.py",
+      "lines": "29-30",
+      "definition": "   29 | def _get_words(cli, args, incomplete):\n   30 |     return [c.value for c in _get_completions(cli, args, incomplete)]"
+    }
+  },
+  {
+    "edge_id": "92c447c88c3b",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.get_default(ctx)",
+    "call_range": [
+      2721,
+      28,
+      2721,
+      49
+    ],
+    "call_context": " 2719 | \n 2720 |         if value is UNSET:\n 2721 |             default_value = self.get_default(ctx)\n      |                             ^^^^^^^^^^^^^^^^^^^^^\n 2722 |             if default_value is not UNSET:",
+    "callee": "get_default",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Option.get_default",
+      "file": "src/click/core.py",
+      "lines": "3389-3421",
+      "definition": " 3389 |     def get_default(\n 3390 |         self, ctx: Context, call: bool = True\n 3391 |     ) -> t.Any | t.Callable[[], t.Any] | None:\n 3392 |         \"\"\"Return the default value for this option.\n 3393 | \n 3394 |         Several auto-derived defaults are resolved lazily here rather than eagerly in\n 3395 |         :meth:`__init__`. This keeps :attr:`default` raw at construction time, so\n 3396 |         ``self.default is UNSET`` reliably answers \"did the user pass a default?\" for\n 3397 |         feature-switch-group arbitration and for anything else that needs to distinguish\n 3398 |         \"absent\" from a chosen value. The resolution rules live in"
+    }
+  },
+  {
+    "edge_id": "4c5714157fc6",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "CustomError(1)",
+    "call_range": [
+      173,
+      14,
+      173,
+      28
+    ],
+    "call_context": "  171 |     @click.command()\n  172 |     def cli():\n  173 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  174 | ",
+    "callee": "CustomError",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_catch_exceptions.CustomError",
+      "file": "tests/test_testing.py",
+      "lines": "168-169",
+      "definition": "  168 |     class CustomError(Exception):\n  169 |         pass"
+    }
+  },
+  {
+    "edge_id": "d8d9ea92612d",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "runner.isolation()",
+    "call_range": [
+      554,
+      9,
+      554,
+      27
+    ],
+    "call_context": "  552 |     runner = CliRunner()\n  553 | \n  554 |     with runner.isolation() as (_, err, _):\n      |          ^^^^^^^^^^^^^^^^^^\n  555 |         click.echo(\"\\udce2\", err=True, nl=False)",
+    "callee": "isolation",
+    "receiver": "runner",
+    "target": {
+      "qualified_name": "CliRunner.isolation",
+      "file": "src/click/testing.py",
+      "lines": "398-594",
+      "definition": "  398 |     @contextlib.contextmanager\n  399 |     def isolation(\n  400 |         self,\n  401 |         input: str | bytes | t.IO[t.Any] | None = None,\n  402 |         env: cabc.Mapping[str, str | None] | None = None,\n  403 |         color: bool = False,\n  404 |     ) -> cabc.Generator[tuple[io.BytesIO, io.BytesIO, io.BytesIO]]:\n  405 |         \"\"\"A context manager that sets up the isolation for invoking of a\n  406 |         command line tool.  This sets up `<stdin>` with the given input data\n  407 |         and `os.environ` with the overrides from the given dictionary."
+    }
+  },
+  {
+    "edge_id": "8339b05994cb",
+    "repo": "click",
+    "file": "src/click/_compat.py",
+    "call_text": "self.close(delete=exc_type is not None)",
+    "call_range": [
+      485,
+      8,
+      485,
+      47
+    ],
+    "call_context": "  483 |         tb: TracebackType | None,\n  484 |     ) -> None:\n  485 |         self.close(delete=exc_type is not None)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  486 | ",
+    "callee": "close",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "_AtomicFile.close",
+      "file": "src/click/_compat.py",
+      "lines": "466-471",
+      "definition": "  466 |     def close(self, delete: bool = False) -> None:\n  467 |         if self.closed:\n  468 |             return\n  469 |         self._f.close()\n  470 |         os.replace(self._tmp_filename, self._real_filename)\n  471 |         self.closed = True"
+    }
+  },
+  {
     "edge_id": "49bbdc73dbac",
     "repo": "click",
     "file": "src/click/types.py",
@@ -1323,45 +1281,66 @@
     }
   },
   {
-    "edge_id": "c3469c835f3c",
+    "edge_id": "f01d2cc816e8",
     "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.resolve_command(ctx, args)",
+    "file": "tests/test_stream_lifecycle.py",
+    "call_text": "runner.invoke(hello, input=\"Peter\")",
     "call_range": [
-      2102,
-      38,
-      2102,
-      69
+      215,
+      13,
+      215,
+      48
     ],
-    "call_context": " 2100 |             contexts = []\n 2101 |             while args:\n 2102 |                 cmd_name, cmd, args = self.resolve_command(ctx, args)\n      |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2103 |                 assert cmd is not None",
-    "callee": "resolve_command",
-    "receiver": "self",
+    "call_context": "  213 | \n  214 |     runner = CliRunner()\n  215 |     result = runner.invoke(hello, input=\"Peter\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  216 |     assert result.exit_code == 0",
+    "callee": "invoke",
+    "receiver": "runner",
     "target": {
-      "qualified_name": "Group.resolve_command",
-      "file": "src/click/core.py",
-      "lines": "2120-2144",
-      "definition": " 2120 |     def resolve_command(\n 2121 |         self, ctx: Context, args: list[str]\n 2122 |     ) -> tuple[str | None, Command | None, list[str]]:\n 2123 |         cmd_name = make_str(args[0])\n 2124 | \n 2125 |         # Get the command\n 2126 |         cmd = self.get_command(ctx, cmd_name)\n 2127 | \n 2128 |         # If we can't find the command but there is a normalization\n 2129 |         # function available, we try with that one."
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
     }
   },
   {
-    "edge_id": "19c2ed648404",
+    "edge_id": "067227ab9689",
     "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.resolve_envvar_value(ctx)",
+    "file": "src/click/types.py",
+    "call_text": "self.convert(value, param, ctx)",
     "call_range": [
-      3785,
-      13,
-      3785,
-      43
+      166,
+      19,
+      166,
+      50
     ],
-    "call_context": " 3783 |         :meta private:\n 3784 |         \"\"\"\n 3785 |         rv = self.resolve_envvar_value(ctx)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3786 | ",
-    "callee": "resolve_envvar_value",
+    "call_context": "  164 |     ) -> _ValueT_co | None:\n  165 |         if value is not None:\n  166 |             return self.convert(value, param, ctx)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  167 |         return None",
+    "callee": "convert",
     "receiver": "self",
     "target": {
-      "qualified_name": "Option.resolve_envvar_value",
-      "file": "src/click/core.py",
-      "lines": "3748-3770",
-      "definition": " 3748 |     def resolve_envvar_value(self, ctx: Context) -> str | None:\n 3749 |         \"\"\":class:`Option` resolves its environment variable the same way as\n 3750 |         :func:`Parameter.resolve_envvar_value`, but it also supports\n 3751 |         :attr:`Context.auto_envvar_prefix`. If we could not find an environment from\n 3752 |         the :attr:`envvar` property, we fallback on :attr:`Context.auto_envvar_prefix`\n 3753 |         to build dynamiccaly the environment variable name using the\n 3754 |         :python:`{ctx.auto_envvar_prefix}_{self.name.upper()}` template.\n 3755 | \n 3756 |         :meta private:\n 3757 |         \"\"\""
+      "qualified_name": "ParamType.convert",
+      "file": "src/click/types.py",
+      "lines": "179-203",
+      "definition": "  179 |     def convert(\n  180 |         self, value: _InputT_contra, param: Parameter | None, ctx: Context | None\n  181 |     ) -> _ValueT_co:\n  182 |         \"\"\"Convert the value to the correct type. This is not called if\n  183 |         the value is ``None`` (the missing value).\n  184 | \n  185 |         This must accept string values from the command line, as well as\n  186 |         values that are already the correct type. It may also convert\n  187 |         other compatible types.\n  188 | "
+    }
+  },
+  {
+    "edge_id": "d3b318858f09",
+    "repo": "click",
+    "file": "src/click/shell_completion.py",
+    "call_text": "self._check_version()",
+    "call_range": [
+      429,
+      8,
+      429,
+      29
+    ],
+    "call_context": "  427 | \n  428 |     def source(self) -> str:\n  429 |         self._check_version()\n      |         ^^^^^^^^^^^^^^^^^^^^^\n  430 |         return super().source()",
+    "callee": "_check_version",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "BashComplete._check_version",
+      "file": "src/click/shell_completion.py",
+      "lines": "395-426",
+      "definition": "  395 |     @staticmethod\n  396 |     def _check_version() -> None:\n  397 |         import shutil\n  398 |         import subprocess\n  399 | \n  400 |         bash_exe = shutil.which(\"bash\")\n  401 | \n  402 |         if bash_exe is None:\n  403 |             match = None\n  404 |         else:"
     }
   },
   {
@@ -1386,24 +1365,171 @@
     }
   },
   {
-    "edge_id": "54ed5dae2578",
+    "edge_id": "d4f11de58355",
+    "repo": "click",
+    "file": "tests/test_testing.py",
+    "call_text": "runner.invoke(test_multiple_prompts, input=\"one\\ntwo\\n\")",
+    "call_range": [
+      87,
+      13,
+      87,
+      69
+    ],
+    "call_context": "   85 |         click.echo(f\"foo={foo}, bar={bar}\")\n   86 | \n   87 |     result = runner.invoke(test_multiple_prompts, input=\"one\\ntwo\\n\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   88 |     assert not result.exception",
+    "callee": "invoke",
+    "receiver": "runner",
+    "target": {
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+    }
+  },
+  {
+    "edge_id": "0d5d6beb0f1a",
+    "repo": "click",
+    "file": "tests/test_termui.py",
+    "call_text": "RecordingStream()",
+    "call_range": [
+      946,
+      13,
+      946,
+      30
+    ],
+    "call_context": "  944 |             calls.append(\"flush\")\n  945 | \n  946 |     stream = RecordingStream()\n      |              ^^^^^^^^^^^^^^^^^\n  947 |     monkeypatch.setattr(click._termui_impl, \"isatty\", lambda _: False)",
+    "callee": "RecordingStream",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_echo_via_pager_streams_each_write.RecordingStream",
+      "file": "tests/test_termui.py",
+      "lines": "934-944",
+      "definition": "  934 |     class RecordingStream(io.StringIO):\n  935 |         def __init__(self):\n  936 |             super().__init__()\n  937 |             self.color = None\n  938 | \n  939 |         def write(self, s):\n  940 |             calls.append(\"write\")\n  941 |             return super().write(s)\n  942 | \n  943 |         def flush(self):"
+    }
+  },
+  {
+    "edge_id": "39ca1714549e",
+    "repo": "click",
+    "file": "src/click/decorators.py",
+    "call_text": "command(name, cls, **attrs)",
+    "call_range": [
+      311,
+      11,
+      311,
+      38
+    ],
+    "call_context": "  309 |         return command(cls=cls, **attrs)(name)\n  310 | \n  311 |     return command(name, cls, **attrs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  312 | ",
+    "callee": "command",
+    "receiver": null,
+    "target": {
+      "qualified_name": "command",
+      "file": "src/click/decorators.py",
+      "lines": "168-255",
+      "definition": "  168 | def command(\n  169 |     name: str | _AnyCallable | None = None,\n  170 |     cls: type[CmdType] | None = None,\n  171 |     **attrs: t.Any,\n  172 | ) -> Command | t.Callable[[_AnyCallable], Command | CmdType]:\n  173 |     r\"\"\"Creates a new :class:`Command` and uses the decorated function as\n  174 |     callback.  This will also automatically attach all decorated\n  175 |     :func:`option`\\s and :func:`argument`\\s as parameters to the command.\n  176 | \n  177 |     The name of the command defaults to the name of the function, converted to"
+    }
+  },
+  {
+    "edge_id": "adad94a6a1bb",
+    "repo": "click",
+    "file": "src/click/_winconsole.py",
+    "call_text": "ConsoleStream(text_stream, buffer_stream)",
+    "call_range": [
+      229,
+      28,
+      229,
+      69
+    ],
+    "call_context": "  227 |         line_buffering=True,\n  228 |     )\n  229 |     return t.cast(t.TextIO, ConsoleStream(text_stream, buffer_stream))\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  230 | ",
+    "callee": "ConsoleStream",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ConsoleStream",
+      "file": "src/click/_winconsole.py",
+      "lines": "190-219",
+      "definition": "  190 | class ConsoleStream:\n  191 |     def __init__(self, text_stream: t.TextIO, byte_stream: t.BinaryIO) -> None:\n  192 |         self._text_stream = text_stream\n  193 |         self.buffer = byte_stream\n  194 | \n  195 |     @property\n  196 |     def name(self) -> str:\n  197 |         return self.buffer.name\n  198 | \n  199 |     def write(self, x: t.AnyStr) -> int:"
+    }
+  },
+  {
+    "edge_id": "c3469c835f3c",
     "repo": "click",
     "file": "src/click/core.py",
-    "call_text": "self.get_command(ctx, subcommand)",
+    "call_text": "self.resolve_command(ctx, args)",
     "call_range": [
-      2016,
-      18,
-      2016,
-      51
+      2102,
+      38,
+      2102,
+      69
     ],
-    "call_context": " 2014 |         commands = []\n 2015 |         for subcommand in self.list_commands(ctx):\n 2016 |             cmd = self.get_command(ctx, subcommand)\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2017 |             # What is this, the tool lied about a command.  Ignore it",
-    "callee": "get_command",
+    "call_context": " 2100 |             contexts = []\n 2101 |             while args:\n 2102 |                 cmd_name, cmd, args = self.resolve_command(ctx, args)\n      |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2103 |                 assert cmd is not None",
+    "callee": "resolve_command",
     "receiver": "self",
     "target": {
-      "qualified_name": "ComplexCLI.get_command",
-      "file": "examples/complex/complex/cli.py",
-      "lines": "40-45",
-      "definition": "   40 |     def get_command(self, ctx, name):\n   41 |         try:\n   42 |             mod = __import__(f\"complex.commands.cmd_{name}\", None, None, [\"cli\"])\n   43 |         except ImportError:\n   44 |             return\n   45 |         return mod.cli"
+      "qualified_name": "Group.resolve_command",
+      "file": "src/click/core.py",
+      "lines": "2120-2144",
+      "definition": " 2120 |     def resolve_command(\n 2121 |         self, ctx: Context, args: list[str]\n 2122 |     ) -> tuple[str | None, Command | None, list[str]]:\n 2123 |         cmd_name = make_str(args[0])\n 2124 | \n 2125 |         # Get the command\n 2126 |         cmd = self.get_command(ctx, cmd_name)\n 2127 | \n 2128 |         # If we can't find the command but there is a normalization\n 2129 |         # function available, we try with that one."
+    }
+  },
+  {
+    "edge_id": "94fdbb7496c1",
+    "repo": "click",
+    "file": "tests/test_custom_classes.py",
+    "call_text": "CustomGroup()",
+    "call_range": [
+      77,
+      12,
+      77,
+      25
+    ],
+    "call_context": "   75 |         command_class = CustomCommand\n   76 | \n   77 |     group = CustomGroup()\n      |             ^^^^^^^^^^^^^\n   78 |     subcommand = group.command()(lambda: None)",
+    "callee": "CustomGroup",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_group_group_class.CustomGroup",
+      "file": "tests/test_custom_classes.py",
+      "lines": "92-93",
+      "definition": "   92 |     class CustomGroup(click.Group):\n   93 |         group_class = CustomSubGroup"
+    }
+  },
+  {
+    "edge_id": "63ada0830734",
+    "repo": "click",
+    "file": "tests/test_custom_classes.py",
+    "call_text": "CustomContext(\n        click.Command(\"test\", params=[click.Option([\"--value\"])]), color=True\n    )",
+    "call_range": [
+      60,
+      14,
+      62,
+      5
+    ],
+    "call_context": "   58 |         formatter_class = CustomFormatter\n   59 | \n   60 |     context = CustomContext(\n      |               ^^^^^^^^^^^^^^\n   61 |         click.Command(\"test\", params=[click.Option([\"--value\"])]), color=True\n   62 |     )\n   63 |     assert \"\\x1b[33mOptions\\x1b[0m:\" in context.get_help()",
+    "callee": "CustomContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_context_formatter_class.CustomContext",
+      "file": "tests/test_custom_classes.py",
+      "lines": "57-58",
+      "definition": "   57 |     class CustomContext(click.Context):\n   58 |         formatter_class = CustomFormatter"
+    }
+  },
+  {
+    "edge_id": "38e0554d3759",
+    "repo": "click",
+    "file": "src/click/decorators.py",
+    "call_text": "command(name, cls, **attrs)",
+    "call_range": [
+      311,
+      11,
+      311,
+      38
+    ],
+    "call_context": "  309 |         return command(cls=cls, **attrs)(name)\n  310 | \n  311 |     return command(name, cls, **attrs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  312 | ",
+    "callee": "command",
+    "receiver": null,
+    "target": {
+      "qualified_name": "Group.command",
+      "file": "src/click/core.py",
+      "lines": "1853-1892",
+      "definition": " 1853 |     def command(\n 1854 |         self, *args: t.Any, **kwargs: t.Any\n 1855 |     ) -> t.Callable[[t.Callable[..., t.Any]], Command] | Command:\n 1856 |         \"\"\"A shortcut decorator for declaring and attaching a command to\n 1857 |         the group. This takes the same arguments as :func:`command` and\n 1858 |         immediately registers the created command with this group by\n 1859 |         calling :meth:`add_command`.\n 1860 | \n 1861 |         To customize the command class used, set the\n 1862 |         :attr:`command_class` attribute."
     }
   },
   {
@@ -1449,24 +1575,24 @@
     }
   },
   {
-    "edge_id": "bad472bb0cd0",
+    "edge_id": "6f3987b5e171",
     "repo": "click",
-    "file": "tests/test_context.py",
-    "call_text": "TestException()",
+    "file": "tests/test_testing.py",
+    "call_text": "runner.invoke(test, input=\"wau wau\\n\")",
     "call_range": [
-      589,
-      18,
-      589,
-      33
+      132,
+      13,
+      132,
+      51
     ],
-    "call_context": "  587 |                 TestContext(base_val=base_val, handle_exception=False)\n  588 |             )\n  589 |             raise TestException()\n      |                   ^^^^^^^^^^^^^^^\n  590 | ",
-    "callee": "TestException",
-    "receiver": null,
+    "call_context": "  130 | \n  131 |     runner = CliRunner()\n  132 |     result = runner.invoke(test, input=\"wau wau\\n\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  133 |     assert not result.exception",
+    "callee": "invoke",
+    "receiver": "runner",
     "target": {
-      "qualified_name": "test_with_resource_nested_exception.TestException",
-      "file": "tests/test_context.py",
-      "lines": "619-620",
-      "definition": "  619 |     class TestException(Exception):\n  620 |         pass"
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
     }
   },
   {
@@ -1512,24 +1638,24 @@
     }
   },
   {
-    "edge_id": "eed47a2ec0cd",
+    "edge_id": "e01f48861dbc",
     "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.type_cast_value(ctx, opt.get_default(ctx))",
+    "file": "tests/test_testing.py",
+    "call_text": "CustomError(1)",
     "call_range": [
-      704,
-      11,
-      704,
-      57
+      200,
+      14,
+      200,
+      28
     ],
-    "call_context": "  702 |     assert opt.type.types == [click.INT, click.STRING]\n  703 |     ctx = click.Context(click.Command(\"test\"))\n  704 |     assert opt.type_cast_value(ctx, opt.get_default(ctx)) == ((1, \"a\"),)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  705 | ",
-    "callee": "type_cast_value",
-    "receiver": "opt",
+    "call_context": "  198 |     @click.command()\n  199 |     def cli():\n  200 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  201 | ",
+    "callee": "CustomError",
+    "receiver": null,
     "target": {
-      "qualified_name": "test_option_custom_class_can_override_type_cast_value_and_never_sees_unset.CustomOption.type_cast_value",
-      "file": "tests/test_options.py",
-      "lines": "1303-1305",
-      "definition": " 1303 |         def type_cast_value(self, ctx, value):\n 1304 |             assert value is not UNSET\n 1305 |             return value"
+      "qualified_name": "test_catch_exceptions.CustomError",
+      "file": "tests/test_testing.py",
+      "lines": "168-169",
+      "definition": "  168 |     class CustomError(Exception):\n  169 |         pass"
     }
   },
   {
@@ -1575,24 +1701,24 @@
     }
   },
   {
-    "edge_id": "239de675b694",
+    "edge_id": "f97b213b354b",
     "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.type_cast_value(ctx, opt.get_default(ctx))",
+    "file": "tests/test_compat.py",
+    "call_text": "JupyterKernelFakeStream()",
     "call_range": [
-      704,
-      11,
-      704,
-      57
+      82,
+      58,
+      82,
+      83
     ],
-    "call_context": "  702 |     assert opt.type.types == [click.INT, click.STRING]\n  703 |     ctx = click.Context(click.Command(\"test\"))\n  704 |     assert opt.type_cast_value(ctx, opt.get_default(ctx)) == ((1, \"a\"),)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  705 | ",
-    "callee": "type_cast_value",
-    "receiver": "opt",
+    "call_context": "   80 |     # implementation detail, aka cheapskate test\n   81 |     JupyterKernelFakeStream.__module__ = \"ipykernel.faked\"\n   82 |     assert click._compat._is_jupyter_kernel_output(stream=JupyterKernelFakeStream())\n      |                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^\n   83 | ",
+    "callee": "JupyterKernelFakeStream",
+    "receiver": null,
     "target": {
-      "qualified_name": "Parameter.type_cast_value",
-      "file": "src/click/core.py",
-      "lines": "2728-2782",
-      "definition": " 2728 |     def type_cast_value(self, ctx: Context, value: t.Any) -> t.Any:\n 2729 |         \"\"\"Convert and validate a value against the parameter's\n 2730 |         :attr:`type`, :attr:`multiple`, and :attr:`nargs`.\n 2731 |         \"\"\"\n 2732 |         if value is None:\n 2733 |             if self.multiple or self.nargs == -1:\n 2734 |                 return ()\n 2735 |             else:\n 2736 |                 return value\n 2737 | "
+      "qualified_name": "test_is_jupyter_kernel_output.JupyterKernelFakeStream",
+      "file": "tests/test_compat.py",
+      "lines": "77-78",
+      "definition": "   77 |     class JupyterKernelFakeStream:\n   78 |         pass"
     }
   },
   {
@@ -1638,45 +1764,45 @@
     }
   },
   {
-    "edge_id": "abb483590e9c",
+    "edge_id": "0b9d91502b31",
     "repo": "click",
-    "file": "src/click/shell_completion.py",
-    "call_text": "cmd.make_context(\n                            name,\n                            args,\n                            parent=ctx,\n                            allow_extra_args=True,\n                            allow_interspersed_args=False,\n                            resilient_parsing=True,\n                        )",
+    "file": "src/click/core.py",
+    "call_text": "ctx.fail(\n                ngettext(\n                    \"Got unexpected extra argument ({args})\",\n                    \"Got unexpected extra arguments ({args})\",\n                    len(args),\n                ).format(args=\" \".join(map(str, args)))\n            )",
     "call_range": [
-      738,
-      29,
-      745,
-      25
+      1420,
+      12,
+      1426,
+      13
     ],
-    "call_context": "  736 |                             return ctx\n  737 | \n  738 |                         with cmd.make_context(\n      |                              ^^^^^^^^^^^^^^^^^\n  739 |                             name,\n  740 |                             args,\n  741 |                             parent=ctx,\n  742 |                             allow_extra_args=True,\n  743 |                             allow_interspersed_args=False,\n  744 |                             resilient_parsing=True,\n  745 |                         ) as sub_sub_ctx:\n  746 |                             sub_ctx = sub_sub_ctx",
-    "callee": "make_context",
-    "receiver": "cmd",
+    "call_context": " 1418 | \n 1419 |         if args and not ctx.allow_extra_args and not ctx.resilient_parsing:\n 1420 |             ctx.fail(\n      |             ^^^^^^^^^\n 1421 |                 ngettext(\n 1422 |                     \"Got unexpected extra argument ({args})\",\n 1423 |                     \"Got unexpected extra arguments ({args})\",\n 1424 |                     len(args),\n 1425 |                 ).format(args=\" \".join(map(str, args)))\n 1426 |             )\n 1427 | ",
+    "callee": "fail",
+    "receiver": "ctx",
     "target": {
-      "qualified_name": "Command.make_context",
+      "qualified_name": "Context.fail",
       "file": "src/click/core.py",
-      "lines": "1359-1394",
-      "definition": " 1359 |     def make_context(\n 1360 |         self,\n 1361 |         info_name: str | None,\n 1362 |         args: list[str],\n 1363 |         parent: Context | None = None,\n 1364 |         **extra: t.Any,\n 1365 |     ) -> Context:\n 1366 |         \"\"\"This function when given an info name and arguments will kick\n 1367 |         off the parsing and create a new :class:`Context`.  It does not\n 1368 |         invoke the actual command callback though."
+      "lines": "837-843",
+      "definition": "  837 |     def fail(self, message: str) -> t.NoReturn:\n  838 |         \"\"\"Aborts the execution of the program with a specific error\n  839 |         message.\n  840 | \n  841 |         :param message: the error message to fail with.\n  842 |         \"\"\"\n  843 |         raise UsageError(message, self)"
     }
   },
   {
-    "edge_id": "31571e9cb45e",
+    "edge_id": "fb065bec4664",
     "repo": "click",
-    "file": "src/click/parser.py",
-    "call_text": "_fetch(args)",
+    "file": "tests/test_testing.py",
+    "call_text": "runner.invoke(cli)",
     "call_range": [
-      86,
-      38,
-      86,
-      50
+      755,
+      13,
+      755,
+      31
     ],
-    "call_context": "   84 |             rv.append(_fetch(args))\n   85 |         elif nargs > 1:\n   86 |             x: list[str | T_UNSET] = [_fetch(args) for _ in range(nargs)]\n      |                                       ^^^^^^^^^^^^\n   87 | ",
-    "callee": "_fetch",
-    "receiver": null,
+    "call_context": "  753 | \n  754 |     runner = CliRunner(capture=\"sys\")\n  755 |     result = runner.invoke(cli)\n      |              ^^^^^^^^^^^^^^^^^^\n  756 |     assert result.exit_code == 0, result.output",
+    "callee": "invoke",
+    "receiver": "runner",
     "target": {
-      "qualified_name": "_unpack_args._fetch",
-      "file": "src/click/parser.py",
-      "lines": "68-75",
-      "definition": "   68 |     def _fetch(c: deque[str]) -> str | T_UNSET:\n   69 |         try:\n   70 |             if spos is None:\n   71 |                 return c.popleft()\n   72 |             else:\n   73 |                 return c.pop()\n   74 |         except IndexError:\n   75 |             return UNSET"
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
     }
   },
   {
@@ -1722,45 +1848,45 @@
     }
   },
   {
-    "edge_id": "983c1b5dd206",
+    "edge_id": "06dff8896ad3",
     "repo": "click",
     "file": "tests/test_options.py",
-    "call_text": "option.get_help_record(context)",
+    "call_text": "opt.get_default(ctx)",
     "call_range": [
-      807,
-      13,
-      807,
-      44
+      694,
+      11,
+      694,
+      31
     ],
-    "call_context": "  805 |     context = click.Context(click.Command(\"test\"))\n  806 |     assert option.get_help_extra(context) == {\"default\": \"2\", \"range\": expect}\n  807 |     result = option.get_help_record(context)[1]\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  808 |     assert expect in result",
-    "callee": "get_help_record",
-    "receiver": "option",
+    "call_context": "  692 |     assert opt.type is click.INT\n  693 |     ctx = click.Context(click.Command(\"test\"))\n  694 |     assert opt.get_default(ctx) == (1, 2)\n      |            ^^^^^^^^^^^^^^^^^^^^\n  695 | ",
+    "callee": "get_default",
+    "receiver": "opt",
     "target": {
-      "qualified_name": "Parameter.get_help_record",
-      "file": "src/click/core.py",
-      "lines": "3017-3018",
-      "definition": " 3017 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3018 |         return None"
+      "qualified_name": "test_argument_custom_class.CustomArgument.get_default",
+      "file": "tests/test_options.py",
+      "lines": "1251-1253",
+      "definition": " 1251 |         def get_default(self, ctx, call=True):\n 1252 |             \"\"\"a dumb override of a default value for testing\"\"\"\n 1253 |             return \"I am a default\""
     }
   },
   {
-    "edge_id": "1af0a3d65bdd",
+    "edge_id": "bad472bb0cd0",
     "repo": "click",
-    "file": "tests/test_stream_lifecycle.py",
-    "call_text": "runner.invoke(cli)",
+    "file": "tests/test_context.py",
+    "call_text": "TestException()",
     "call_range": [
-      284,
-      17,
-      284,
-      35
+      589,
+      18,
+      589,
+      33
     ],
-    "call_context": "  282 | \n  283 |         runner = CliRunner()\n  284 |         result = runner.invoke(cli)\n      |                  ^^^^^^^^^^^^^^^^^^\n  285 |         assert result.exit_code == 0",
-    "callee": "invoke",
-    "receiver": "runner",
+    "call_context": "  587 |                 TestContext(base_val=base_val, handle_exception=False)\n  588 |             )\n  589 |             raise TestException()\n      |                   ^^^^^^^^^^^^^^^\n  590 | ",
+    "callee": "TestException",
+    "receiver": null,
     "target": {
-      "qualified_name": "Group.invoke",
-      "file": "src/click/core.py",
-      "lines": "2052-2118",
-      "definition": " 2052 |     def invoke(self, ctx: Context) -> t.Any:\n 2053 |         def _process_result(value: t.Any) -> t.Any:\n 2054 |             if self._result_callback is not None:\n 2055 |                 value = ctx.invoke(self._result_callback, value, **ctx.params)\n 2056 |             return value\n 2057 | \n 2058 |         if not ctx._protected_args:\n 2059 |             if self.invoke_without_command:\n 2060 |                 # No subcommand was invoked, so the result callback is\n 2061 |                 # invoked with the group return value for regular"
+      "qualified_name": "test_with_resource_nested_exception.TestException",
+      "file": "tests/test_context.py",
+      "lines": "619-620",
+      "definition": "  619 |     class TestException(Exception):\n  620 |         pass"
     }
   },
   {
@@ -1806,24 +1932,24 @@
     }
   },
   {
-    "edge_id": "ecc639ffaf1f",
+    "edge_id": "7a98abc776c1",
     "repo": "click",
     "file": "src/click/core.py",
-    "call_text": "self.process_value(ctx, value)",
+    "call_text": "formatter.write_text(text)",
     "call_range": [
-      2977,
-      24,
-      2977,
-      54
+      1323,
+      16,
+      1323,
+      42
     ],
-    "call_context": " 2975 |             # Process the value through the parameter's type.\n 2976 |             try:\n 2977 |                 value = self.process_value(ctx, value)\n      |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2978 |             except Exception:",
-    "callee": "process_value",
-    "receiver": "self",
+    "call_context": " 1321 | \n 1322 |             with formatter.indentation():\n 1323 |                 formatter.write_text(text)\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1324 | ",
+    "callee": "write_text",
+    "receiver": "formatter",
     "target": {
-      "qualified_name": "Option.process_value",
-      "file": "src/click/core.py",
-      "lines": "3876-3891",
-      "definition": " 3876 |     def process_value(self, ctx: Context, value: t.Any) -> t.Any:\n 3877 |         # process_value has to be overridden on Options in order to capture\n 3878 |         # `value == UNSET` cases before `type_cast_value()` gets called.\n 3879 |         #\n 3880 |         # Refs:\n 3881 |         # https://github.com/pallets/click/issues/3069\n 3882 |         if self.is_flag and not self.required and self.is_bool_flag and value is UNSET:\n 3883 |             value = False\n 3884 | \n 3885 |             if self.callback is not None:"
+      "qualified_name": "HelpFormatter.write_text",
+      "file": "src/click/formatting.py",
+      "lines": "213-227",
+      "definition": "  213 |     def write_text(self, text: str) -> None:\n  214 |         \"\"\"Writes re-indented text into the buffer.  This rewraps and\n  215 |         preserves paragraphs.\n  216 |         \"\"\"\n  217 |         indent = \" \" * self.current_indent\n  218 |         self.write(\n  219 |             wrap_text(\n  220 |                 text,\n  221 |                 self.width,\n  222 |                 initial_indent=indent,"
     }
   },
   {
@@ -1848,24 +1974,24 @@
     }
   },
   {
-    "edge_id": "e78f90ab8aa7",
+    "edge_id": "3265ce71ce02",
     "repo": "click",
-    "file": "tests/test_stream_lifecycle.py",
-    "call_text": "runner.invoke(cli, [word])",
+    "file": "tests/test_context.py",
+    "call_text": "TestContext(base_val=base_val, handle_exception=False)",
     "call_range": [
-      399,
-      17,
-      399,
-      43
+      587,
+      16,
+      587,
+      70
     ],
-    "call_context": "  397 |     runner = CliRunner()\n  398 |     for word in (\"err1\", \"err2\", \"err3\"):\n  399 |         result = runner.invoke(cli, [word])\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  400 |         assert result.exit_code == 0",
-    "callee": "invoke",
-    "receiver": "runner",
+    "call_context": "  585 |         with ctx.scope():\n  586 |             rv = ctx.with_resource(\n  587 |                 TestContext(base_val=base_val, handle_exception=False)\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  588 |             )",
+    "callee": "TestContext",
+    "receiver": null,
     "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+      "qualified_name": "test_with_resource_nested_exception.TestContext",
+      "file": "tests/test_context.py",
+      "lines": "593-617",
+      "definition": "  593 |     class TestContext(AbstractContextManager[list[int]]):\n  594 |         _handle_exception: bool\n  595 |         _base_val: int\n  596 |         val: list[int]\n  597 | \n  598 |         def __init__(self, base_val: int = 1, *, handle_exception: bool = True) -> None:\n  599 |             self._handle_exception = handle_exception\n  600 |             self._base_val = base_val\n  601 | \n  602 |         def __enter__(self) -> list[int]:"
     }
   },
   {
@@ -1887,6 +2013,27 @@
       "file": "tests/test_context.py",
       "lines": "63-65",
       "definition": "   63 |     class Foo:\n   64 |         def __init__(self):\n   65 |             self.title = \"default\""
+    }
+  },
+  {
+    "edge_id": "ec173cf3cbb7",
+    "repo": "click",
+    "file": "tests/test_options.py",
+    "call_text": "option.get_help_record(context)",
+    "call_range": [
+      807,
+      13,
+      807,
+      44
+    ],
+    "call_context": "  805 |     context = click.Context(click.Command(\"test\"))\n  806 |     assert option.get_help_extra(context) == {\"default\": \"2\", \"range\": expect}\n  807 |     result = option.get_help_record(context)[1]\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  808 |     assert expect in result",
+    "callee": "get_help_record",
+    "receiver": "option",
+    "target": {
+      "qualified_name": "Option.get_help_record",
+      "file": "src/click/core.py",
+      "lines": "3589-3612",
+      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
     }
   },
   {
@@ -1953,24 +2100,24 @@
     }
   },
   {
-    "edge_id": "87d316e27f45",
+    "edge_id": "709e63cd7691",
     "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(cli_args, args=args)",
+    "file": "tests/test_termui.py",
+    "call_text": "_create_progress(label=\"working\")",
     "call_range": [
-      403,
+      93,
       13,
-      403,
-      47
+      93,
+      46
     ],
-    "call_context": "  401 | \n  402 |     runner = CliRunner()\n  403 |     result = runner.invoke(cli_args, args=args)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  404 |     assert result.exit_code == 0",
-    "callee": "invoke",
-    "receiver": "runner",
+    "call_context": "   91 |     @click.command()\n   92 |     def cli():\n   93 |         with _create_progress(label=\"working\") as progress:\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   94 |             for _ in progress:",
+    "callee": "_create_progress",
+    "receiver": null,
     "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+      "qualified_name": "_create_progress",
+      "file": "tests/test_termui.py",
+      "lines": "37-41",
+      "definition": "   37 | def _create_progress(length=10, **kwargs):\n   38 |     progress = click.progressbar(tuple(range(length)))\n   39 |     for key, value in kwargs.items():\n   40 |         setattr(progress, key, value)\n   41 |     return progress"
     }
   },
   {
@@ -2058,24 +2205,24 @@
     }
   },
   {
-    "edge_id": "62aa869a6c29",
+    "edge_id": "f8996f808818",
     "repo": "click",
     "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(cli_no_error)",
+    "call_text": "inner_runner.invoke(inner_cli)",
     "call_range": [
-      336,
-      13,
-      336,
-      40
+      797,
+      23,
+      797,
+      53
     ],
-    "call_context": "  334 |     assert result.output == \"hello world\\n1.0\\n\"\n  335 | \n  336 |     result = runner.invoke(cli_no_error)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  337 |     assert result.exit_code == 0",
+    "call_context": "  795 |         os.write(1, b\"outer fd\\n\")\n  796 |         inner_runner = CliRunner(capture=\"fd\")\n  797 |         inner_result = inner_runner.invoke(inner_cli)\n      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  798 |         click.echo(f\"inner captured: {inner_result.stdout.strip()}\")",
     "callee": "invoke",
-    "receiver": "runner",
+    "receiver": "inner_runner",
     "target": {
-      "qualified_name": "Command.invoke",
-      "file": "src/click/core.py",
-      "lines": "1432-1446",
-      "definition": " 1432 |     def invoke(self, ctx: Context) -> t.Any:\n 1433 |         \"\"\"Given a context, this invokes the attached callback (if it exists)\n 1434 |         in the right way.\n 1435 |         \"\"\"\n 1436 |         if self.deprecated:\n 1437 |             message = _(\n 1438 |                 \"DeprecationWarning: The command {name!r} is deprecated.{extra_message}\"\n 1439 |             ).format(\n 1440 |                 name=self.name,\n 1441 |                 extra_message=_format_deprecated_suffix(self.deprecated),"
+      "qualified_name": "CliRunner.invoke",
+      "file": "src/click/testing.py",
+      "lines": "596-739",
+      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
     }
   },
   {
@@ -2121,24 +2268,24 @@
     }
   },
   {
-    "edge_id": "d4f11de58355",
+    "edge_id": "ee0e4486da33",
     "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(test_multiple_prompts, input=\"one\\ntwo\\n\")",
+    "file": "tests/test_options.py",
+    "call_text": "opt.get_default(ctx)",
     "call_range": [
-      87,
-      13,
-      87,
-      69
+      694,
+      11,
+      694,
+      31
     ],
-    "call_context": "   85 |         click.echo(f\"foo={foo}, bar={bar}\")\n   86 | \n   87 |     result = runner.invoke(test_multiple_prompts, input=\"one\\ntwo\\n\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   88 |     assert not result.exception",
-    "callee": "invoke",
-    "receiver": "runner",
+    "call_context": "  692 |     assert opt.type is click.INT\n  693 |     ctx = click.Context(click.Command(\"test\"))\n  694 |     assert opt.get_default(ctx) == (1, 2)\n      |            ^^^^^^^^^^^^^^^^^^^^\n  695 | ",
+    "callee": "get_default",
+    "receiver": "opt",
     "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+      "qualified_name": "Option.get_default",
+      "file": "src/click/core.py",
+      "lines": "3389-3421",
+      "definition": " 3389 |     def get_default(\n 3390 |         self, ctx: Context, call: bool = True\n 3391 |     ) -> t.Any | t.Callable[[], t.Any] | None:\n 3392 |         \"\"\"Return the default value for this option.\n 3393 | \n 3394 |         Several auto-derived defaults are resolved lazily here rather than eagerly in\n 3395 |         :meth:`__init__`. This keeps :attr:`default` raw at construction time, so\n 3396 |         ``self.default is UNSET`` reliably answers \"did the user pass a default?\" for\n 3397 |         feature-switch-group arbitration and for anything else that needs to distinguish\n 3398 |         \"absent\" from a chosen value. The resolution rules live in"
     }
   },
   {
@@ -2184,45 +2331,45 @@
     }
   },
   {
-    "edge_id": "626ec064545b",
+    "edge_id": "c8c579759bc9",
     "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "ctx.fail(\n                ngettext(\n                    \"Got unexpected extra argument ({args})\",\n                    \"Got unexpected extra arguments ({args})\",\n                    len(args),\n                ).format(args=\" \".join(map(str, args)))\n            )",
+    "file": "tests/test_options.py",
+    "call_text": "opt.get_help_record(ctx)",
     "call_range": [
-      1420,
-      12,
-      1426,
-      13
+      1636,
+      14,
+      1636,
+      38
     ],
-    "call_context": " 1418 | \n 1419 |         if args and not ctx.allow_extra_args and not ctx.resilient_parsing:\n 1420 |             ctx.fail(\n      |             ^^^^^^^^^\n 1421 |                 ngettext(\n 1422 |                     \"Got unexpected extra argument ({args})\",\n 1423 |                     \"Got unexpected extra arguments ({args})\",\n 1424 |                     len(args),\n 1425 |                 ).format(args=\" \".join(map(str, args)))\n 1426 |             )\n 1427 | ",
-    "callee": "fail",
-    "receiver": "ctx",
+    "call_context": " 1634 |     ctx = click.Context(click.Command(\"test\"))\n 1635 |     assert opt.get_help_extra(ctx) == {}\n 1636 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1637 |     assert \"[default: \" not in message",
+    "callee": "get_help_record",
+    "receiver": "opt",
     "target": {
-      "qualified_name": "ParamType.fail",
-      "file": "src/click/types.py",
-      "lines": "215-222",
-      "definition": "  215 |     def fail(\n  216 |         self,\n  217 |         message: str,\n  218 |         param: Parameter | None = None,\n  219 |         ctx: Context | None = None,\n  220 |     ) -> t.NoReturn:\n  221 |         \"\"\"Helper method to fail with an invalid value message.\"\"\"\n  222 |         raise BadParameter(message, ctx=ctx, param=param)"
+      "qualified_name": "test_option_custom_class_reusable.CustomOption.get_help_record",
+      "file": "tests/test_options.py",
+      "lines": "1321-1323",
+      "definition": " 1321 |         def get_help_record(self, ctx):\n 1322 |             \"\"\"a dumb override of a help text for testing\"\"\"\n 1323 |             return (\"--help\", \"I am a help text\")"
     }
   },
   {
-    "edge_id": "34698146b00a",
+    "edge_id": "2ea3e6cbe185",
     "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(cli)",
+    "file": "src/click/core.py",
+    "call_text": "self.get_default(ctx, call=False)",
     "call_range": [
-      187,
-      13,
-      187,
-      31
+      3641,
+      28,
+      3641,
+      61
     ],
-    "call_context": "  185 |     CustomError = SystemExit\n  186 | \n  187 |     result = runner.invoke(cli)\n      |              ^^^^^^^^^^^^^^^^^^\n  188 |     assert result.exit_code == 1",
-    "callee": "invoke",
-    "receiver": "runner",
+    "call_context": " 3639 | \n 3640 |         try:\n 3641 |             default_value = self.get_default(ctx, call=False)\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3642 |         finally:",
+    "callee": "get_default",
+    "receiver": "self",
     "target": {
-      "qualified_name": "Command.invoke",
+      "qualified_name": "Parameter.get_default",
       "file": "src/click/core.py",
-      "lines": "1432-1446",
-      "definition": " 1432 |     def invoke(self, ctx: Context) -> t.Any:\n 1433 |         \"\"\"Given a context, this invokes the attached callback (if it exists)\n 1434 |         in the right way.\n 1435 |         \"\"\"\n 1436 |         if self.deprecated:\n 1437 |             message = _(\n 1438 |                 \"DeprecationWarning: The command {name!r} is deprecated.{extra_message}\"\n 1439 |             ).format(\n 1440 |                 name=self.name,\n 1441 |                 extra_message=_format_deprecated_suffix(self.deprecated),"
+      "lines": "2644-2675",
+      "definition": " 2644 |     def get_default(\n 2645 |         self, ctx: Context, call: bool = True\n 2646 |     ) -> t.Any | t.Callable[[], t.Any] | None:\n 2647 |         \"\"\"Get the default for the parameter. Tries\n 2648 |         :meth:`Context.lookup_default` first, then the local default.\n 2649 | \n 2650 |         :param ctx: Current context.\n 2651 |         :param call: If the default is a callable, call it. Disable to\n 2652 |             return the callable instead.\n 2653 | "
     }
   },
   {
@@ -2289,24 +2436,24 @@
     }
   },
   {
-    "edge_id": "32c3365f156b",
+    "edge_id": "18a4e9562ec3",
     "repo": "click",
-    "file": "tests/test_shell_completion.py",
-    "call_text": "comp.get_completions(args, incomplete)",
+    "file": "src/click/core.py",
+    "call_text": "self.get_command(ctx, subcommand)",
     "call_range": [
-      26,
-      11,
-      26,
-      49
+      2016,
+      18,
+      2016,
+      51
     ],
-    "call_context": "   24 | def _get_completions(cli, args, incomplete):\n   25 |     comp = ShellComplete(cli, {}, cli.name, \"_CLICK_COMPLETE\")\n   26 |     return comp.get_completions(args, incomplete)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   27 | ",
-    "callee": "get_completions",
-    "receiver": "comp",
+    "call_context": " 2014 |         commands = []\n 2015 |         for subcommand in self.list_commands(ctx):\n 2016 |             cmd = self.get_command(ctx, subcommand)\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2017 |             # What is this, the tool lied about a command.  Ignore it",
+    "callee": "get_command",
+    "receiver": "self",
     "target": {
-      "qualified_name": "ShellComplete.get_completions",
-      "file": "src/click/shell_completion.py",
-      "lines": "354-366",
-      "definition": "  354 |     def get_completions(\n  355 |         self, args: list[str], incomplete: str\n  356 |     ) -> list[CompletionItem[str]]:\n  357 |         \"\"\"Determine the context and last complete command or parameter\n  358 |         from the complete args. Call that object's ``shell_complete``\n  359 |         method to get the completions for the incomplete value.\n  360 | \n  361 |         :param args: List of complete args before the incomplete value.\n  362 |         :param incomplete: Value being completed. May be empty.\n  363 |         \"\"\""
+      "qualified_name": "CommandCollection.get_command",
+      "file": "src/click/core.py",
+      "lines": "2205-2220",
+      "definition": " 2205 |     def get_command(self, ctx: Context, cmd_name: str) -> Command | None:\n 2206 |         rv = super().get_command(ctx, cmd_name)\n 2207 | \n 2208 |         if rv is not None:\n 2209 |             return rv\n 2210 | \n 2211 |         for source in self.sources:\n 2212 |             rv = source.get_command(ctx, cmd_name)\n 2213 | \n 2214 |             if rv is not None:"
     }
   },
   {
@@ -2436,24 +2583,45 @@
     }
   },
   {
-    "edge_id": "11b5eeeb807e",
+    "edge_id": "d60ca7f11bf9",
     "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.resolve_command(ctx, args)",
+    "file": "tests/test_context.py",
+    "call_text": "Foo()",
     "call_range": [
-      2102,
-      38,
-      2102,
-      69
+      49,
+      18,
+      49,
+      23
     ],
-    "call_context": " 2100 |             contexts = []\n 2101 |             while args:\n 2102 |                 cmd_name, cmd, args = self.resolve_command(ctx, args)\n      |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2103 |                 assert cmd is not None",
-    "callee": "resolve_command",
-    "receiver": "self",
+    "call_context": "   47 |     @click.pass_context\n   48 |     def cli(ctx):\n   49 |         ctx.obj = Foo()\n      |                   ^^^^^\n   50 |         ctx.obj.title = \"test\"",
+    "callee": "Foo",
+    "receiver": null,
     "target": {
-      "qualified_name": "AliasedGroup.resolve_command",
-      "file": "tests/typing/typing_aliased_group.py",
-      "lines": "22-28",
-      "definition": "   22 |     def resolve_command(\n   23 |         self, ctx: click.Context, args: list[str]\n   24 |     ) -> tuple[str | None, click.Command, list[str]]:\n   25 |         # always return the full command name\n   26 |         _, cmd, args = super().resolve_command(ctx, args)\n   27 |         assert cmd is not None\n   28 |         return cmd.name, cmd, args"
+      "qualified_name": "test_make_pass_decorator_args.Foo",
+      "file": "tests/test_context.py",
+      "lines": "669-670",
+      "definition": "  669 |     class Foo:\n  670 |         title = \"foocmd\""
+    }
+  },
+  {
+    "edge_id": "c7e78ce2ce98",
+    "repo": "click",
+    "file": "tests/test_context.py",
+    "call_text": "TestException()",
+    "call_range": [
+      660,
+      14,
+      660,
+      29
+    ],
+    "call_context": "  658 |             TestContext(base_val=base_val_nested, handle_exception=False)\n  659 |         )\n  660 |         raise TestException()\n      |               ^^^^^^^^^^^^^^^\n  661 | ",
+    "callee": "TestException",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_with_resource_exception.TestException",
+      "file": "tests/test_context.py",
+      "lines": "565-566",
+      "definition": "  565 |     class TestException(Exception):\n  566 |         pass"
     }
   },
   {
@@ -2499,171 +2667,45 @@
     }
   },
   {
-    "edge_id": "709e63cd7691",
+    "edge_id": "32c3365f156b",
     "repo": "click",
-    "file": "tests/test_termui.py",
-    "call_text": "_create_progress(label=\"working\")",
+    "file": "tests/test_shell_completion.py",
+    "call_text": "comp.get_completions(args, incomplete)",
     "call_range": [
-      93,
+      26,
+      11,
+      26,
+      49
+    ],
+    "call_context": "   24 | def _get_completions(cli, args, incomplete):\n   25 |     comp = ShellComplete(cli, {}, cli.name, \"_CLICK_COMPLETE\")\n   26 |     return comp.get_completions(args, incomplete)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   27 | ",
+    "callee": "get_completions",
+    "receiver": "comp",
+    "target": {
+      "qualified_name": "ShellComplete.get_completions",
+      "file": "src/click/shell_completion.py",
+      "lines": "354-366",
+      "definition": "  354 |     def get_completions(\n  355 |         self, args: list[str], incomplete: str\n  356 |     ) -> list[CompletionItem[str]]:\n  357 |         \"\"\"Determine the context and last complete command or parameter\n  358 |         from the complete args. Call that object's ``shell_complete``\n  359 |         method to get the completions for the incomplete value.\n  360 | \n  361 |         :param args: List of complete args before the incomplete value.\n  362 |         :param incomplete: Value being completed. May be empty.\n  363 |         \"\"\""
+    }
+  },
+  {
+    "edge_id": "19c2ed648404",
+    "repo": "click",
+    "file": "src/click/core.py",
+    "call_text": "self.resolve_envvar_value(ctx)",
+    "call_range": [
+      3785,
       13,
-      93,
-      46
+      3785,
+      43
     ],
-    "call_context": "   91 |     @click.command()\n   92 |     def cli():\n   93 |         with _create_progress(label=\"working\") as progress:\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   94 |             for _ in progress:",
-    "callee": "_create_progress",
-    "receiver": null,
-    "target": {
-      "qualified_name": "_create_progress",
-      "file": "tests/test_termui.py",
-      "lines": "37-41",
-      "definition": "   37 | def _create_progress(length=10, **kwargs):\n   38 |     progress = click.progressbar(tuple(range(length)))\n   39 |     for key, value in kwargs.items():\n   40 |         setattr(progress, key, value)\n   41 |     return progress"
-    }
-  },
-  {
-    "edge_id": "028f297e0c0d",
-    "repo": "click",
-    "file": "tests/test_options.py",
-    "call_text": "opt.get_help_record(ctx)",
-    "call_range": [
-      1645,
-      14,
-      1645,
-      38
-    ],
-    "call_context": " 1643 |     ctx = click.Context(click.Command(\"cli\"))\n 1644 |     assert opt.get_help_extra(ctx) == {\"default\": \"(unlimited)\"}\n 1645 |     message = opt.get_help_record(ctx)[1]\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^\n 1646 |     assert \"[default: (unlimited)]\" in message",
-    "callee": "get_help_record",
-    "receiver": "opt",
-    "target": {
-      "qualified_name": "Option.get_help_record",
-      "file": "src/click/core.py",
-      "lines": "3589-3612",
-      "definition": " 3589 |     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n 3590 |         if self.hidden:\n 3591 |             return None\n 3592 | \n 3593 |         help = self.help or \"\"\n 3594 | \n 3595 |         extra = self.get_help_extra(ctx)\n 3596 |         extra_items = []\n 3597 |         if \"envvars\" in extra:\n 3598 |             extra_items.append("
-    }
-  },
-  {
-    "edge_id": "067227ab9689",
-    "repo": "click",
-    "file": "src/click/types.py",
-    "call_text": "self.convert(value, param, ctx)",
-    "call_range": [
-      166,
-      19,
-      166,
-      50
-    ],
-    "call_context": "  164 |     ) -> _ValueT_co | None:\n  165 |         if value is not None:\n  166 |             return self.convert(value, param, ctx)\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  167 |         return None",
-    "callee": "convert",
+    "call_context": " 3783 |         :meta private:\n 3784 |         \"\"\"\n 3785 |         rv = self.resolve_envvar_value(ctx)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3786 | ",
+    "callee": "resolve_envvar_value",
     "receiver": "self",
     "target": {
-      "qualified_name": "ParamType.convert",
-      "file": "src/click/types.py",
-      "lines": "179-203",
-      "definition": "  179 |     def convert(\n  180 |         self, value: _InputT_contra, param: Parameter | None, ctx: Context | None\n  181 |     ) -> _ValueT_co:\n  182 |         \"\"\"Convert the value to the correct type. This is not called if\n  183 |         the value is ``None`` (the missing value).\n  184 | \n  185 |         This must accept string values from the command line, as well as\n  186 |         values that are already the correct type. It may also convert\n  187 |         other compatible types.\n  188 | "
-    }
-  },
-  {
-    "edge_id": "6f3987b5e171",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner.invoke(test, input=\"wau wau\\n\")",
-    "call_range": [
-      132,
-      13,
-      132,
-      51
-    ],
-    "call_context": "  130 | \n  131 |     runner = CliRunner()\n  132 |     result = runner.invoke(test, input=\"wau wau\\n\")\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  133 |     assert not result.exception",
-    "callee": "invoke",
-    "receiver": "runner",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "e01f48861dbc",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "CustomError(1)",
-    "call_range": [
-      200,
-      14,
-      200,
-      28
-    ],
-    "call_context": "  198 |     @click.command()\n  199 |     def cli():\n  200 |         raise CustomError(1)\n      |               ^^^^^^^^^^^^^^\n  201 | ",
-    "callee": "CustomError",
-    "receiver": null,
-    "target": {
-      "qualified_name": "test_catch_exceptions.CustomError",
-      "file": "tests/test_testing.py",
-      "lines": "168-169",
-      "definition": "  168 |     class CustomError(Exception):\n  169 |         pass"
-    }
-  },
-  {
-    "edge_id": "d1a3b92f7aed",
-    "repo": "click",
-    "file": "tests/test_stream_lifecycle.py",
-    "call_text": "runner.invoke(cli)",
-    "call_range": [
-      284,
-      17,
-      284,
-      35
-    ],
-    "call_context": "  282 | \n  283 |         runner = CliRunner()\n  284 |         result = runner.invoke(cli)\n      |                  ^^^^^^^^^^^^^^^^^^\n  285 |         assert result.exit_code == 0",
-    "callee": "invoke",
-    "receiver": "runner",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "f8996f808818",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "inner_runner.invoke(inner_cli)",
-    "call_range": [
-      797,
-      23,
-      797,
-      53
-    ],
-    "call_context": "  795 |         os.write(1, b\"outer fd\\n\")\n  796 |         inner_runner = CliRunner(capture=\"fd\")\n  797 |         inner_result = inner_runner.invoke(inner_cli)\n      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  798 |         click.echo(f\"inner captured: {inner_result.stdout.strip()}\")",
-    "callee": "invoke",
-    "receiver": "inner_runner",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "5e16e8feb8ed",
-    "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "runner_fd.invoke(cli)",
-    "call_range": [
-      718,
-      16,
-      718,
-      37
-    ],
-    "call_context": "  716 |     # fd-level capture catches it by redirecting fd 2.\n  717 |     runner_fd = CliRunner(capture=\"fd\")\n  718 |     result_fd = runner_fd.invoke(cli)\n      |                 ^^^^^^^^^^^^^^^^^^^^^\n  719 |     assert \"normal echo\" in result_fd.output",
-    "callee": "invoke",
-    "receiver": "runner_fd",
-    "target": {
-      "qualified_name": "CliRunner.invoke",
-      "file": "src/click/testing.py",
-      "lines": "596-739",
-      "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
+      "qualified_name": "Option.resolve_envvar_value",
+      "file": "src/click/core.py",
+      "lines": "3748-3770",
+      "definition": " 3748 |     def resolve_envvar_value(self, ctx: Context) -> str | None:\n 3749 |         \"\"\":class:`Option` resolves its environment variable the same way as\n 3750 |         :func:`Parameter.resolve_envvar_value`, but it also supports\n 3751 |         :attr:`Context.auto_envvar_prefix`. If we could not find an environment from\n 3752 |         the :attr:`envvar` property, we fallback on :attr:`Context.auto_envvar_prefix`\n 3753 |         to build dynamiccaly the environment variable name using the\n 3754 |         :python:`{ctx.auto_envvar_prefix}_{self.name.upper()}` template.\n 3755 | \n 3756 |         :meta private:\n 3757 |         \"\"\""
     }
   },
   {
@@ -2751,24 +2793,24 @@
     }
   },
   {
-    "edge_id": "c096512e8f8a",
+    "edge_id": "0933c309b378",
     "repo": "click",
-    "file": "tests/test_testing.py",
-    "call_text": "inner_runner.invoke(inner_cli)",
+    "file": "tests/test_custom_classes.py",
+    "call_text": "CustomContext(\n        click.Command(\"test\", params=[click.Option([\"--value\"])]), color=True\n    )",
     "call_range": [
-      797,
-      23,
-      797,
-      53
+      60,
+      14,
+      62,
+      5
     ],
-    "call_context": "  795 |         os.write(1, b\"outer fd\\n\")\n  796 |         inner_runner = CliRunner(capture=\"fd\")\n  797 |         inner_result = inner_runner.invoke(inner_cli)\n      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  798 |         click.echo(f\"inner captured: {inner_result.stdout.strip()}\")",
-    "callee": "invoke",
-    "receiver": "inner_runner",
+    "call_context": "   58 |         formatter_class = CustomFormatter\n   59 | \n   60 |     context = CustomContext(\n      |               ^^^^^^^^^^^^^^\n   61 |         click.Command(\"test\", params=[click.Option([\"--value\"])]), color=True\n   62 |     )\n   63 |     assert \"\\x1b[33mOptions\\x1b[0m:\" in context.get_help()",
+    "callee": "CustomContext",
+    "receiver": null,
     "target": {
-      "qualified_name": "Group.invoke",
-      "file": "src/click/core.py",
-      "lines": "2052-2118",
-      "definition": " 2052 |     def invoke(self, ctx: Context) -> t.Any:\n 2053 |         def _process_result(value: t.Any) -> t.Any:\n 2054 |             if self._result_callback is not None:\n 2055 |                 value = ctx.invoke(self._result_callback, value, **ctx.params)\n 2056 |             return value\n 2057 | \n 2058 |         if not ctx._protected_args:\n 2059 |             if self.invoke_without_command:\n 2060 |                 # No subcommand was invoked, so the result callback is\n 2061 |                 # invoked with the group return value for regular"
+      "qualified_name": "test_context_invoke_type.CustomContext",
+      "file": "tests/test_custom_classes.py",
+      "lines": "25-26",
+      "definition": "   25 |     class CustomContext(click.Context):\n   26 |         pass"
     }
   },
   {
@@ -2853,48 +2895,6 @@
       "file": "src/click/testing.py",
       "lines": "596-739",
       "definition": "  596 |     def invoke(\n  597 |         self,\n  598 |         cli: Command,\n  599 |         args: str | cabc.Sequence[str] | None = None,\n  600 |         input: str | bytes | t.IO[t.Any] | None = None,\n  601 |         env: cabc.Mapping[str, str | None] | None = None,\n  602 |         catch_exceptions: bool | None = None,\n  603 |         color: bool = False,\n  604 |         **extra: t.Any,\n  605 |     ) -> Result:"
-    }
-  },
-  {
-    "edge_id": "ec215b67b9c1",
-    "repo": "click",
-    "file": "src/click/core.py",
-    "call_text": "self.prompt_for_value(ctx)",
-    "call_range": [
-      3871,
-      20,
-      3871,
-      46
-    ],
-    "call_context": " 3869 |             and not ctx.resilient_parsing\n 3870 |         ):\n 3871 |             value = self.prompt_for_value(ctx)\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3872 |             source = ParameterSource.PROMPT",
-    "callee": "prompt_for_value",
-    "receiver": "self",
-    "target": {
-      "qualified_name": "Option.prompt_for_value",
-      "file": "src/click/core.py",
-      "lines": "3698-3746",
-      "definition": " 3698 |     def prompt_for_value(self, ctx: Context) -> t.Any:\n 3699 |         \"\"\"This is an alternative flow that can be activated in the full\n 3700 |         value processing if a value does not exist.  It will prompt the\n 3701 |         user until a valid value exists and then returns the processed\n 3702 |         value as result.\n 3703 |         \"\"\"\n 3704 |         assert self.prompt is not None\n 3705 | \n 3706 |         # Calculate the default before prompting anything to lock in the value before\n 3707 |         # attempting any user interaction."
-    }
-  },
-  {
-    "edge_id": "bf9e4be80dc5",
-    "repo": "click",
-    "file": "src/click/decorators.py",
-    "call_text": "decorator(func)",
-    "call_range": [
-      253,
-      15,
-      253,
-      30
-    ],
-    "call_context": "  251 | \n  252 |     if func is not None:\n  253 |         return decorator(func)\n      |                ^^^^^^^^^^^^^^^\n  254 | ",
-    "callee": "decorator",
-    "receiver": null,
-    "target": {
-      "qualified_name": "argument.decorator",
-      "file": "src/click/decorators.py",
-      "lines": "345-347",
-      "definition": "  345 |     def decorator(f: FC) -> FC:\n  346 |         _param_memo(f, cls(param_decls, **attrs))\n  347 |         return f"
     }
   }
 ]

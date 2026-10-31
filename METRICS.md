@@ -33,6 +33,14 @@ Pinned inputs: requests `3c7baaa`, click `2247b35`. Intervals are 95% Wilson sco
 | `click` | 15 | 0 | 0.0% (95% CI 0.0%–20.4%) | 0/100 | 0 | n/a (no prior pass) | n/a |
 | `zod` | — | — | UNMEASURED | — | — | — | — |
 
+## Hard-kind precision (v2 packets)
+
+| Repo | Kind | n | Correct | Unsure | Precision (unsure=incorrect) |
+|---|---|---:|---:|---:|---|
+| `requests` | all | — | — | — | UNMEASURED |
+| `click` | all | — | — | — | UNMEASURED |
+| `zod` | all | — | — | — | UNMEASURED |
+
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 
 | Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |

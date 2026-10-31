@@ -1,247 +1,223 @@
 edge_id,repo,file,call_text,call_range,call_context,callee,receiver,claimed_target,target_definition,verdict,justification
-68fe86e4a4b9,requests,src/requests/api.py,"request(""get"", url, params=params, **kwargs)","[87, 11, 87, 55]","   85 |     """"""
-   86 | 
-   87 |     return request(""get"", url, params=params, **kwargs)
-      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   88 | ",request,,request,"   24 | def request(
-   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]
-   26 | ) -> Response:
-   27 |     """"""Constructs and sends a :class:`Request <Request>`.
-   28 | 
-   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.
-   30 |     :param url: URL for the new :class:`Request` object.
-   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send
-   32 |         in the query string for the :class:`Request`.
-   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like",,
-f01eb02cfecc,click,tests/test_termui.py,"_create_progress(label=""see nothing"", hidden=True)","[104, 13, 104, 63]","  102 |     @click.command()
-  103 |     def cli():
-  104 |         with _create_progress(label=""see nothing"", hidden=True) as progress:
-      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  105 |             for _ in progress:",_create_progress,,_create_progress,"   37 | def _create_progress(length=10, **kwargs):
-   38 |     progress = click.progressbar(tuple(range(length)))
-   39 |     for key, value in kwargs.items():
-   40 |         setattr(progress, key, value)
-   41 |     return progress",,
-f8996f808818,click,tests/test_testing.py,inner_runner.invoke(inner_cli),"[797, 23, 797, 53]","  795 |         os.write(1, b""outer fd\n"")
-  796 |         inner_runner = CliRunner(capture=""fd"")
-  797 |         inner_result = inner_runner.invoke(inner_cli)
-      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  798 |         click.echo(f""inner captured: {inner_result.stdout.strip()}"")",invoke,inner_runner,CliRunner.invoke,"  596 |     def invoke(
-  597 |         self,
-  598 |         cli: Command,
-  599 |         args: str | cabc.Sequence[str] | None = None,
-  600 |         input: str | bytes | t.IO[t.Any] | None = None,
-  601 |         env: cabc.Mapping[str, str | None] | None = None,
-  602 |         catch_exceptions: bool | None = None,
-  603 |         color: bool = False,
-  604 |         **extra: t.Any,
-  605 |     ) -> Result:",,
-a85ba1907b87,click,tests/test_stream_lifecycle.py,"runner.invoke(cli, [f""msg-{i}""])","[237, 17, 237, 49]","  235 |     runner = CliRunner()
-  236 |     for i in range(5):
-  237 |         result = runner.invoke(cli, [f""msg-{i}""])
-      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  238 |         assert result.exit_code == 0, f""Failed on invocation {i}: {result.exception}""",invoke,runner,CliRunner.invoke,"  596 |     def invoke(
-  597 |         self,
-  598 |         cli: Command,
-  599 |         args: str | cabc.Sequence[str] | None = None,
-  600 |         input: str | bytes | t.IO[t.Any] | None = None,
-  601 |         env: cabc.Mapping[str, str | None] | None = None,
-  602 |         catch_exceptions: bool | None = None,
-  603 |         color: bool = False,
-  604 |         **extra: t.Any,
-  605 |     ) -> Result:",,
-75b6b31d0088,requests,tests/test_testserver.py,Server.basic_response_server(request_timeout=3),"[132, 17, 132, 64]","  130 |     def test_request_recovery_with_bigger_timeout(self):
-  131 |         """"""a biggest timeout can be specified""""""
-  132 |         server = Server.basic_response_server(request_timeout=3)
-      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  133 |         data = b""bananadine""",basic_response_server,Server,Server.basic_response_server,"   61 |     @classmethod
-   62 |     def basic_response_server(cls, **kwargs):
-   63 |         return cls.text_response_server(
-   64 |             ""HTTP/1.1 200 OK\r\n"" + ""Content-Length: 0\r\n\r\n"", **kwargs
-   65 |         )",,
-9498f74ade69,requests,src/requests/sessions.py,"self.send(prep, **send_kwargs)","[651, 15, 651, 45]","  649 |         }
-  650 |         send_kwargs.update(settings)
-  651 |         resp = self.send(prep, **send_kwargs)
-      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  652 | ",send,self,Session.send,"  752 |     def send(self, request: PreparedRequest, **kwargs: Any) -> Response:
-  753 |         """"""Send a given PreparedRequest.
-  754 | 
-  755 |         :rtype: requests.Response
-  756 |         """"""
-  757 |         # Set defaults that the hooks can utilize to ensure they always have
-  758 |         # the correct parameters to reproduce the previous request.
-  759 |         kwargs.setdefault(""stream"", self.stream)
-  760 |         kwargs.setdefault(""verify"", self.verify)
-  761 |         kwargs.setdefault(""cert"", self.cert)",,
-1af0a3d65bdd,click,tests/test_stream_lifecycle.py,runner.invoke(cli),"[284, 17, 284, 35]","  282 | 
-  283 |         runner = CliRunner()
-  284 |         result = runner.invoke(cli)
-      |                  ^^^^^^^^^^^^^^^^^^
-  285 |         assert result.exit_code == 0",invoke,runner,Group.invoke," 2052 |     def invoke(self, ctx: Context) -> t.Any:
- 2053 |         def _process_result(value: t.Any) -> t.Any:
- 2054 |             if self._result_callback is not None:
- 2055 |                 value = ctx.invoke(self._result_callback, value, **ctx.params)
- 2056 |             return value
- 2057 | 
- 2058 |         if not ctx._protected_args:
- 2059 |             if self.invoke_without_command:
- 2060 |                 # No subcommand was invoked, so the result callback is
- 2061 |                 # invoked with the group return value for regular",,
-709e63cd7691,click,tests/test_termui.py,"_create_progress(label=""working"")","[93, 13, 93, 46]","   91 |     @click.command()
-   92 |     def cli():
-   93 |         with _create_progress(label=""working"") as progress:
-      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   94 |             for _ in progress:",_create_progress,,_create_progress,"   37 | def _create_progress(length=10, **kwargs):
-   38 |     progress = click.progressbar(tuple(range(length)))
-   39 |     for key, value in kwargs.items():
-   40 |         setattr(progress, key, value)
-   41 |     return progress",,
-87d316e27f45,click,tests/test_testing.py,"runner.invoke(cli_args, args=args)","[403, 13, 403, 47]","  401 | 
-  402 |     runner = CliRunner()
-  403 |     result = runner.invoke(cli_args, args=args)
-      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  404 |     assert result.exit_code == 0",invoke,runner,CliRunner.invoke,"  596 |     def invoke(
-  597 |         self,
-  598 |         cli: Command,
-  599 |         args: str | cabc.Sequence[str] | None = None,
-  600 |         input: str | bytes | t.IO[t.Any] | None = None,
-  601 |         env: cabc.Mapping[str, str | None] | None = None,
-  602 |         catch_exceptions: bool | None = None,
-  603 |         color: bool = False,
-  604 |         **extra: t.Any,
-  605 |     ) -> Result:",,
-631573091b5c,requests,src/requests/sessions.py,"merge_setting(auth, self.auth)","[551, 17, 551, 47]","  549 |             ),
-  550 |             params=merge_setting(request.params, self.params),
-  551 |             auth=merge_setting(auth, self.auth),
-      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  552 |             cookies=merged_cookies,",merge_setting,,merge_setting,"   76 | def merge_setting(
-   77 |     request_setting: Any, session_setting: Any, dict_class: type = OrderedDict
-   78 | ) -> Any:
-   79 |     """"""Determines appropriate setting for a given request, taking into account
-   80 |     the explicit setting on that request, and the setting in the session. If a
-   81 |     setting is a dictionary, they will be merged together using `dict_class`
-   82 |     """"""
-   83 | 
-   84 |     if session_setting is None:
-   85 |         return request_setting",,
-5d3a5d25ed30,requests,tests/test_requests.py,self.build_response(),"[2618, 15, 2618, 36]"," 2616 |     def send(self, *args, **kwargs):
- 2617 |         self.calls.append(SendCall(args, kwargs))
- 2618 |         return self.build_response()
-      |                ^^^^^^^^^^^^^^^^^^^^^
- 2619 | ",build_response,self,HTTPAdapter.build_response,"  365 |     def build_response(self, req: PreparedRequest, resp: Any) -> Response:
-  366 |         """"""Builds a :class:`Response <requests.Response>` object from a urllib3
-  367 |         response. This should not be called from user code, and is only exposed
-  368 |         for use when subclassing the
-  369 |         :class:`HTTPAdapter <requests.adapters.HTTPAdapter>`
-  370 | 
-  371 |         :param req: The :class:`PreparedRequest <PreparedRequest>` used to generate the response.
-  372 |         :param resp: The urllib3 response object.
-  373 |         :rtype: requests.Response
-  374 |         """"""",,
-a9b0d67f5550,requests,src/requests/utils.py,proxy_bypass(hostname),"[863, 21, 863, 43]","  861 |     with set_environ(""no_proxy"", no_proxy_arg):
-  862 |         try:
-  863 |             bypass = proxy_bypass(hostname)
-      |                      ^^^^^^^^^^^^^^^^^^^^^^
-  864 |         except (TypeError, socket.gaierror):",proxy_bypass,,proxy_bypass,"  137 |     def proxy_bypass(host: str) -> bool:  # noqa
-  138 |         """"""Return True, if the host should be bypassed.
-  139 | 
-  140 |         Checks proxy settings gathered from the environment, if specified,
-  141 |         or the registry.
-  142 |         """"""
-  143 |         if getproxies_environment():
-  144 |             return proxy_bypass_environment(host)
-  145 |         else:
-  146 |             return proxy_bypass_registry(host)",,
-e4f10f225dd9,requests,tests/test_utils.py,RegHandle(),"[898, 18, 898, 29]","  896 |             pass
-  897 | 
-  898 |     ie_settings = RegHandle()
-      |                   ^^^^^^^^^^^
-  899 |     proxyEnableValues = deque([1, ""1""])",RegHandle,,test_should_bypass_proxies_win_registry.RegHandle,"  894 |     class RegHandle:
-  895 |         def Close(self):
-  896 |             pass",,
-f6a1ed4dc2d9,click,src/click/core.py,self.get_help_option_names(ctx),"[1235, 28, 1235, 59]"," 1233 |             The help option is now cached to avoid creating it multiple times.
- 1234 |         """"""
- 1235 |         help_option_names = self.get_help_option_names(ctx)
+62e53487ee95,requests,tests/testserver/server.py,self._close_server_sock_ignore_errors(),"[79, 12, 79, 51]","   77 |         finally:
+   78 |             self.ready_event.set()  # just in case of exception
+   79 |             self._close_server_sock_ignore_errors()
+      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   80 |             self.stop_event.set()",_close_server_sock_ignore_errors,self,Server._close_server_sock_ignore_errors,"   88 |     def _close_server_sock_ignore_errors(self):
+   89 |         try:
+   90 |             self.server_sock.close()
+   91 |         except OSError:
+   92 |             pass",,
+8c5ff20fd25f,click,tests/test_context.py,ctx.scope(),"[531, 9, 531, 20]","  529 |     ctx = click.Context(click.Command(""test""))
+  530 | 
+  531 |     with ctx.scope():
+      |          ^^^^^^^^^^^
+  532 |         rv = ctx.with_resource(manager())",scope,ctx,Context.scope,"  598 |     @contextmanager
+  599 |     def scope(self, cleanup: bool = True) -> cabc.Generator[Context]:
+  600 |         """"""This helper method can be used with the context object to promote
+  601 |         it to the current thread local (see :func:`get_current_context`).
+  602 |         The default behavior of this is to invoke the cleanup functions which
+  603 |         can be disabled by setting `cleanup` to `False`.  The cleanup
+  604 |         functions are typically used for things such as closing file handles.
+  605 | 
+  606 |         If the cleanup is intended the context object can also be directly
+  607 |         used as a context manager.",,
+611e523e531b,click,src/click/core.py,"self.format_usage(ctx, formatter)","[1129, 8, 1129, 41]"," 1127 |         """"""
+ 1128 |         formatter = ctx.make_formatter()
+ 1129 |         self.format_usage(ctx, formatter)
+      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 1130 |         return formatter.getvalue().rstrip(""\n"")",format_usage,self,Command.format_usage," 1188 |     def format_usage(self, ctx: Context, formatter: HelpFormatter) -> None:
+ 1189 |         """"""Writes the usage line into the formatter.
+ 1190 | 
+ 1191 |         This is a low-level method called by :meth:`get_usage`.
+ 1192 |         """"""
+ 1193 |         pieces = self.collect_usage_pieces(ctx)
+ 1194 |         formatter.write_usage(ctx.command_path, "" "".join(pieces))",,
+603bc3e4b5c3,click,tests/test_shell_completion.py,"_get_words(cli, [""-c"", ""f""], ""-"")","[265, 23, 265, 56]","  263 |     assert _get_words(cli, [""-m"", ""a"", ""-m""], """") == [""a"", ""b""]
+  264 |     # used single options aren't suggested again
+  265 |     assert ""-c"" not in _get_words(cli, [""-c"", ""f""], ""-"")
+      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  266 | ",_get_words,,_get_words,"   29 | def _get_words(cli, args, incomplete):
+   30 |     return [c.value for c in _get_completions(cli, args, incomplete)]",,
+9e08cfdf14c6,zod,src/helpers/parseUtil.ts,status.dirty(),"[111, 32, 111, 46]","  109 |     for (const s of results) {
+  110 |       if (s.status === ""aborted"") return INVALID;
+  111 |       if (s.status === ""dirty"") status.dirty();
+      |                                 ^^^^^^^^^^^^^^
+  112 |       arrayValue.push(s.value);",dirty,status,ParseStatus.dirty,"   97 |   dirty() {
+   98 |     if (this.value === ""valid"") this.value = ""dirty"";
+   99 |   }",,
+35895043c66f,requests,src/requests/sessions.py,"self.request(""DELETE"", url, **kwargs)","[750, 15, 750, 52]","  748 |         """"""
+  749 | 
+  750 |         return self.request(""DELETE"", url, **kwargs)
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  751 | ",request,self,Session.request,"  557 |     def request(
+  558 |         self,
+  559 |         method: str,
+  560 |         url: _t.UriType,
+  561 |         params: _t.ParamsType = None,
+  562 |         data: _t.DataType = None,
+  563 |         headers: _t.HeadersType = None,
+  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,
+  565 |         files: _t.FilesType = None,
+  566 |         auth: _t.AuthType = None,",,
+000d01a901df,requests,tests/test_utils.py,LenFile(),"[137, 25, 137, 34]","  135 |                 self.len = 5
+  136 | 
+  137 |         assert super_len(LenFile()) == 5
+      |                          ^^^^^^^^^
+  138 | ",LenFile,,TestSuperLen.test_super_len_with_no__len__.LenFile,"  133 |         class LenFile:
+  134 |             def __init__(self):
+  135 |                 self.len = 5",,
+01ff6fef35fb,zod,src/types.ts,"new ZodEnum({
+    values,
+    typeName: ZodFirstPartyTypeKind.ZodEnum,
+    ...processCreateParams(params),
+  })","[4178, 9, 4182, 4]"," 4176 |   params?: RawCreateParams
+ 4177 | ) {
+ 4178 |   return new ZodEnum({
+      |          ^^^^^^^^^^^^^
+ 4179 |     values,
+ 4180 |     typeName: ZodFirstPartyTypeKind.ZodEnum,
+ 4181 |     ...processCreateParams(params),
+ 4182 |   });
+ 4183 | }",ZodEnum,,ZodEnum," 4185 | export class ZodEnum<T extends [string, ...string[]]> extends ZodType<
+ 4186 |   T[number],
+ 4187 |   ZodEnumDef<T>,
+ 4188 |   T[number]
+ 4189 | > {
+ 4190 |   #cache: Set<T[number]> | undefined;
+ 4191 | 
+ 4192 |   _parse(input: ParseInput): ParseReturnType<this[""_output""]> {
+ 4193 |     if (typeof input.data !== ""string"") {
+ 4194 |       const ctx = this._getOrReturnCtx(input);",,
+0c59f0219e52,zod,src/types.ts,OK(input.data),"[1766, 11, 1766, 25]"," 1764 |       return INVALID;
+ 1765 |     }
+ 1766 |     return OK(input.data);
+      |            ^^^^^^^^^^^^^^
+ 1767 |   }",OK,,OK,"  175 | export const OK = <T>(value: T): OK<T> => ({ status: ""valid"", value });",,
+8c60d8a1a739,zod,src/types.ts,"new ParseInputLazyPath(ctx, value, ctx.path, [index, ""value""])","[3671, 12, 3671, 74]"," 3669 |           ),
+ 3670 |           value: valueType._parse(
+ 3671 |             new ParseInputLazyPath(ctx, value, ctx.path, [index, ""value""])
+      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 3672 |           ),",ParseInputLazyPath,,ParseInputLazyPath,"   61 | class ParseInputLazyPath implements ParseInput {
+   62 |   parent: ParseContext;
+   63 |   data: any;
+   64 |   _path: ParsePath;
+   65 |   _key: string | number | (string | number)[];
+   66 |   _cachedPath: ParsePath = [];
+   67 |   constructor(
+   68 |     parent: ParseContext,
+   69 |     value: any,
+   70 |     path: ParsePath,",,
+21b16481fd96,click,src/click/core.py,"self.format_arguments(ctx, formatter)","[1303, 8, 1303, 45]"," 1301 |         self.format_usage(ctx, formatter)
+ 1302 |         self.format_help_text(ctx, formatter)
+ 1303 |         self.format_arguments(ctx, formatter)
+      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 1304 |         self.format_options(ctx, formatter)",format_arguments,self,Command.format_arguments," 1337 |     def format_arguments(self, ctx: Context, formatter: HelpFormatter) -> None:
+ 1338 |         """"""Writes all arguments into the formatter, if at least one is documented.
+ 1339 | 
+ 1340 |         An argument with no help gets an empty description, the same way an option
+ 1341 |         with no help does. That keeps the section an exhaustive list of the
+ 1342 |         positional arguments, matching the usage line.
+ 1343 |         """"""
+ 1344 |         args = [param for param in self.get_params(ctx) if isinstance(param, Argument)]
+ 1345 | 
+ 1346 |         if any(arg.help is not None for arg in args):",,
+1a0150edaba5,zod,src/types.ts,"this._addCheck({
+      kind: ""max"",
+      value: BigInt(0),
+      inclusive: false,
+      message: errorUtil.toString(message),
+    })","[1683, 11, 1688, 6]"," 1681 | 
+ 1682 |   negative(message?: errorUtil.ErrMessage) {
+ 1683 |     return this._addCheck({
+      |            ^^^^^^^^^^^^^^^^
+ 1684 |       kind: ""max"",
+ 1685 |       value: BigInt(0),
+ 1686 |       inclusive: false,
+ 1687 |       message: errorUtil.toString(message),
+ 1688 |     });
+ 1689 |   }",_addCheck,this,ZodBigInt._addCheck," 1666 |   _addCheck(check: ZodBigIntCheck) {
+ 1667 |     return new ZodBigInt({
+ 1668 |       ...this._def,
+ 1669 |       checks: [...this._def.checks, check],
+ 1670 |     });
+ 1671 |   }",,
+ae069bae2e39,zod,src/types.ts,ZodNever.create(),"[2876, 16, 2876, 33]"," 2874 |       shape: () => shape,
+ 2875 |       unknownKeys: ""strip"",
+ 2876 |       catchall: ZodNever.create(),
+      |                 ^^^^^^^^^^^^^^^^^
+ 2877 |       typeName: ZodFirstPartyTypeKind.ZodObject,",create,ZodNever,ZodNever.create," 2098 |   static create = (params?: RawCreateParams): ZodNever => {
+ 2099 |     return new ZodNever({
+ 2100 |       typeName: ZodFirstPartyTypeKind.ZodNever,
+ 2101 |       ...processCreateParams(params),
+ 2102 |     });
+ 2103 |   };",,
+7cf424cdac11,zod,src/types.ts,this._processInputParams(input),"[2440, 28, 2440, 59]"," 2438 |     }
+ 2439 | 
+ 2440 |     const { status, ctx } = this._processInputParams(input);
       |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 1236 | ",get_help_option_names,self,Command.get_help_option_names," 1207 |     def get_help_option_names(self, ctx: Context) -> list[str]:
- 1208 |         """"""Returns the names for the help option.
- 1209 | 
- 1210 |         Drops duplicates and names already reserved by another parameter. Order of
- 1211 |         :attr:`Context.help_option_names` is preserved, so the result is stable.
- 1212 | 
- 1213 |         .. versionchanged:: 8.5.0
- 1214 |             Names keep their declaration order.
- 1215 |         """"""
- 1216 |         all_names = dict.fromkeys(ctx.help_option_names)",,
-dc61f9293ffa,requests,tests/test_testserver.py,Server.basic_response_server(),"[146, 17, 146, 47]","  144 |     def test_server_finishes_on_error(self):
-  145 |         """"""the server thread exits even if an exception exits the context manager""""""
-  146 |         server = Server.basic_response_server()
-      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  147 |         with pytest.raises(Exception):",basic_response_server,Server,Server.basic_response_server,"   61 |     @classmethod
-   62 |     def basic_response_server(cls, **kwargs):
-   63 |         return cls.text_response_server(
-   64 |             ""HTTP/1.1 200 OK\r\n"" + ""Content-Length: 0\r\n\r\n"", **kwargs
-   65 |         )",,
-181f2b76cbed,requests,tests/test_requests.py,"BadFileObj(""the data"")","[2093, 15, 2093, 37]"," 2091 |                 return
- 2092 | 
- 2093 |         data = BadFileObj(""the data"")
-      |                ^^^^^^^^^^^^^^^^^^^^^^
- 2094 |         prep = requests.Request(""GET"", ""http://example.com"", data=data).prepare()",BadFileObj,,TestRequests.test_rewind_body_failed_tell.BadFileObj," 2083 |         class BadFileObj:
- 2084 |             def __init__(self, data):
- 2085 |                 self.data = data
- 2086 | 
- 2087 |             def tell(self):
- 2088 |                 raise OSError()
- 2089 | 
- 2090 |             def __iter__(self):
- 2091 |                 return",,
-b64e9f288b04,requests,tests/test_utils.py,BoomFile(),"[83, 25, 83, 35]","   81 |                 raise error()
-   82 | 
-   83 |         assert super_len(BoomFile()) == 0
-      |                          ^^^^^^^^^^
-   84 | ",BoomFile,,TestSuperLen.test_super_len_handles_files_raising_weird_errors_in_tell.BoomFile,"   76 |         class BoomFile:
-   77 |             def __len__(self):
-   78 |                 return 5
-   79 | 
-   80 |             def tell(self):
-   81 |                 raise error()",,
-a1684c6c5f8c,click,src/click/_termui_impl.py,"_nullpager(stdout, color)","[486, 15, 486, 40]","  484 |     if resolved is None:
-  485 |         # Page through stdout, which _nullpager leaves open for its owner.
-  486 |         return _nullpager(stdout, color)
-      |                ^^^^^^^^^^^^^^^^^^^^^^^^^
-  487 | ",_nullpager,,_nullpager,"  670 | @contextlib.contextmanager
-  671 | def _nullpager(
-  672 |     stream: t.TextIO, color: bool | None = None
-  673 | ) -> t.Iterator[tuple[t.TextIO, bool | None]]:
-  674 |     """"""Simply print unformatted text. This is the ultimate fallback.
-  675 | 
-  676 |     The stream comes from elsewhere (typically ``sys.stdout``), so its lifecycle
-  677 |     is left untouched: :class:`_PagerWriter` never closes what it wraps, and it
-  678 |     is the only thing :func:`get_pager_file` hands to the caller.
-  679 |     """"""",,
-629d98b4c998,click,tests/test_utils/test_prompt.py,DoublingType(),"[29, 50, 29, 64]","   27 | 
-   28 |     monkeypatch.setattr(sys, ""stdin"", StringIO(""\n""))
-   29 |     value = click.prompt(""value"", default=5, type=DoublingType())
-      |                                                   ^^^^^^^^^^^^^^
-   30 |     capfd.readouterr()",DoublingType,,test_prompt_default_round_trips_through_type.DoublingType,"   22 |     class DoublingType(click.ParamType[int]):
-   23 |         name = ""doubling""
-   24 | 
-   25 |         def convert(self, value, param, ctx):
-   26 |             return int(value) * 2",,
-7a98abc776c1,click,src/click/core.py,formatter.write_text(text),"[1323, 16, 1323, 42]"," 1321 | 
- 1322 |             with formatter.indentation():
- 1323 |                 formatter.write_text(text)
-      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
- 1324 | ",write_text,formatter,HelpFormatter.write_text,"  213 |     def write_text(self, text: str) -> None:
-  214 |         """"""Writes re-indented text into the buffer.  This rewraps and
-  215 |         preserves paragraphs.
-  216 |         """"""
-  217 |         indent = "" "" * self.current_indent
-  218 |         self.write(
-  219 |             wrap_text(
-  220 |                 text,
-  221 |                 self.width,
-  222 |                 initial_indent=indent,",,
+ 2441 | ",_processInputParams,this,ZodType._processInputParams,"  206 |   _processInputParams(input: ParseInput): {
+  207 |     status: ParseStatus;
+  208 |     ctx: ParseContext;
+  209 |   } {
+  210 |     return {
+  211 |       status: new ParseStatus(),
+  212 |       ctx: {
+  213 |         common: input.parent.common,
+  214 |         data: input.data,
+  215 | ",,
+7f362d9fce6b,click,src/click/types.py,"self.get_invalid_choice_message(value=value, ctx=ctx)","[473, 16, 473, 69]","  471 |         except StopIteration:
+  472 |             self.fail(
+  473 |                 self.get_invalid_choice_message(value=value, ctx=ctx),
+      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  474 |                 param=param,",get_invalid_choice_message,self,Choice.get_invalid_choice_message,"  478 |     def get_invalid_choice_message(self, value: t.Any, ctx: Context | None) -> str:
+  479 |         """"""Get the error message when the given choice is invalid.
+  480 | 
+  481 |         :param value: The invalid value.
+  482 | 
+  483 |         .. versionadded:: 8.2
+  484 |         """"""
+  485 |         choices_str = "", "".join(map(repr, self._normalized_mapping(ctx=ctx).values()))
+  486 |         return ngettext(
+  487 |             ""{value!r} is not {choice}."",",,
+650b027df7eb,zod,src/types.ts,"OK(
+      promisified.then((data: any) => {
+        return this._def.type.parseAsync(data, {
+          path: ctx.path,
+          errorMap: ctx.common.contextualErrorMap,
+        });
+      })
+    )","[4393, 11, 4400, 5]"," 4391 |         : Promise.resolve(ctx.data);
+ 4392 | 
+ 4393 |     return OK(
+      |            ^^^
+ 4394 |       promisified.then((data: any) => {
+ 4395 |         return this._def.type.parseAsync(data, {
+ 4396 |           path: ctx.path,
+ 4397 |           errorMap: ctx.common.contextualErrorMap,
+ 4398 |         });
+ 4399 |       })
+ 4400 |     );
+ 4401 |   }",OK,,OK,"  175 | export const OK = <T>(value: T): OK<T> => ({ status: ""valid"", value });",,
+501c303dc681,zod,src/types.ts,OK(input.data),"[1981, 11, 1981, 25]"," 1979 |       return INVALID;
+ 1980 |     }
+ 1981 |     return OK(input.data);
+      |            ^^^^^^^^^^^^^^
+ 1982 |   }",OK,,OK,"  175 | export const OK = <T>(value: T): OK<T> => ({ status: ""valid"", value });",,
+8999fdedc45e,click,src/click/core.py,_outside_click_stacklevel(),"[2566, 23, 2566, 50]"," 2564 |             "" TypeError in Click 9.0."",
+ 2565 |             DeprecationWarning,
+ 2566 |             stacklevel=_outside_click_stacklevel(),
+      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 2567 |         )",_outside_click_stacklevel,,_outside_click_stacklevel,"  108 | def _outside_click_stacklevel(skip: cabc.Container[str] = ()) -> int:
+  109 |     """"""Depth of the first stack frame outside Click.
+  110 | 
+  111 |     :param skip: Other module names to walk past. ``abc`` is one: it sits
+  112 |         between ``__init_subclass__`` and the ``class`` statement that the
+  113 |         warning must point at.
+  114 | 
+  115 |     .. versionadded:: 8.6.0
+  116 |     """"""
+  117 |     frame: FrameType | None = sys._getframe(1)",,
 926af11b104e,requests,src/requests/utils.py,"should_bypass_proxies(url, no_proxy=no_proxy)","[932, 25, 932, 70]","  930 |     new_proxies = proxies.copy()
   931 | 
   932 |     if trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):
@@ -256,123 +232,123 @@ a1684c6c5f8c,click,src/click/_termui_impl.py,"_nullpager(stdout, color)","[486, 
   817 |     # Prioritize lowercase environment variables over uppercase
   818 |     # to keep a consistent behaviour with other http projects (curl, wget).
   819 |     def get_proxy(key: str) -> str | None:",,
-0702de6bce0f,click,src/click/core.py,_format_deprecated_label(self.deprecated),"[1284, 32, 1284, 73]"," 1282 | 
- 1283 |         if self.deprecated:
- 1284 |             text = f""{_(text)} {_format_deprecated_label(self.deprecated)}""
-      |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 1285 | ",_format_deprecated_label,,_format_deprecated_label,"  132 | def _format_deprecated_label(deprecated: bool | str) -> str:
-  133 |     """"""Return the parenthesized deprecation label shown in help text.""""""
-  134 |     label = _(""deprecated"").upper()
-  135 |     if isinstance(deprecated, str):
-  136 |         return f""({label}: {deprecated})""
-  137 |     return f""({label})""",,
-eff7b58d2a54,requests,src/requests/cookies.py,new_cj.update(self),"[471, 8, 471, 27]","  469 |         new_cj = RequestsCookieJar()
-  470 |         new_cj.set_policy(self.get_policy())
-  471 |         new_cj.update(self)
-      |         ^^^^^^^^^^^^^^^^^^^
-  472 |         return new_cj",update,new_cj,RequestsCookieJar.update,"  391 |     def update(  # type: ignore[override]
-  392 |         self, other: CookieJar | SupportsKeysAndGetItem[str, str]
-  393 |     ) -> None:
-  394 |         """"""Updates this jar with cookies from another CookieJar or dict-like""""""
-  395 |         if isinstance(other, cookielib.CookieJar):
-  396 |             for cookie in other:
-  397 |                 self.set_cookie(copy.copy(cookie))
-  398 |         else:
-  399 |             super().update(other)",,
-4cba26e4dca1,requests,tests/test_requests.py,"MyBytes(b""myheader"")","[1882, 59, 1882, 79]"," 1880 | 
- 1881 |         r_mixed = requests.get(
- 1882 |             httpbin(""get""), headers={MyString(""x-custom""): MyBytes(b""myheader"")}
-      |                                                            ^^^^^^^^^^^^^^^^^^^^
- 1883 |         )",MyBytes,,TestRequests.test_header_with_subclass_types.MyBytes," 1870 |         class MyBytes(bytes):
- 1871 |             pass",,
-fecb16d7bb1c,requests,src/requests/sessions.py,"self.send(
-                    req,
-                    stream=stream,
-                    timeout=timeout,
-                    verify=verify,
-                    cert=cert,
-                    proxies=proxies,
-                    allow_redirects=False,
-                    **adapter_kwargs,
-                )","[292, 23, 301, 17]","  290 |                 yield req  # type: ignore[misc]  # Internal use only, returns PreparedRequest
-  291 |             else:
-  292 |                 resp = self.send(
-      |                        ^^^^^^^^^^
-  293 |                     req,
-  294 |                     stream=stream,
-  295 |                     timeout=timeout,
-  296 |                     verify=verify,
-  297 |                     cert=cert,
-  298 |                     proxies=proxies,
-  299 |                     allow_redirects=False,
-  300 |                     **adapter_kwargs,
-  301 |                 )
-  302 | ",send,self,BaseAdapter.send,"  128 |     def send(
-  129 |         self,
-  130 |         request: PreparedRequest,
-  131 |         stream: bool = False,
-  132 |         timeout: _t.TimeoutType = None,
-  133 |         verify: _t.VerifyType = True,
-  134 |         cert: _t.CertType = None,
-  135 |         proxies: dict[str, str] | None = None,
-  136 |     ) -> Response:
-  137 |         """"""Sends PreparedRequest object. Returns Response object.",,
-24a1bcda4dd6,requests,src/requests/api.py,"request(""delete"", url, **kwargs)","[180, 11, 180, 43]","  178 |     """"""
-  179 | 
-  180 |     return request(""delete"", url, **kwargs)
-      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",request,,request,"   24 | def request(
-   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]
-   26 | ) -> Response:
-   27 |     """"""Constructs and sends a :class:`Request <Request>`.
-   28 | 
-   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.
-   30 |     :param url: URL for the new :class:`Request` object.
-   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send
-   32 |         in the query string for the :class:`Request`.
-   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like",,
-f1f9fb0bec58,requests,tests/test_testserver.py,Server.basic_response_server(requests_to_handle=2),"[98, 17, 98, 67]","   96 |         """"""can check the requests content""""""
-   97 |         # TODO: figure out why this sometimes fails when using pytest-xdist.
-   98 |         server = Server.basic_response_server(requests_to_handle=2)
-      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   99 |         first_request = b""put your hands up in the air""",basic_response_server,Server,Server.basic_response_server,"   61 |     @classmethod
+d2f424786f88,requests,tests/test_structures.py,self.case_insensitive_dict.copy(),"[38, 15, 38, 48]","   36 | 
+   37 |     def test_copy(self):
+   38 |         copy = self.case_insensitive_dict.copy()
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   39 |         assert copy is not self.case_insensitive_dict",copy,self.case_insensitive_dict,CaseInsensitiveDict.copy,"   89 |     def copy(self) -> CaseInsensitiveDict[_VT]:
+   90 |         return CaseInsensitiveDict(self._store.values())",,
+f0e307bf825a,zod,src/types.ts,this.safeParse(undefined),"[515, 11, 515, 36]","  513 | 
+  514 |   isOptional(): boolean {
+  515 |     return this.safeParse(undefined).success;
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  516 |   }",safeParse,this,ZodType.safeParse,"  244 |   safeParse(
+  245 |     data: unknown,
+  246 |     params?: Partial<ParseParams>
+  247 |   ): SafeParseReturnType<Input, Output> {
+  248 |     const ctx: ParseContext = {
+  249 |       common: {
+  250 |         issues: [],
+  251 |         async: params?.async ?? false,
+  252 |         contextualErrorMap: params?.errorMap,
+  253 |       },",,
+a9f498aa7e91,requests,src/requests/cookies.py,"self.set(name, value)","[374, 8, 374, 29]","  372 |         case, use the more explicit set() method instead.
+  373 |         """"""
+  374 |         self.set(name, value)
+      |         ^^^^^^^^^^^^^^^^^^^^^
+  375 | ",set,self,RequestsCookieJar.set,"  229 |     def set(
+  230 |         self, name: str, value: str | Morsel[dict[str, str]] | None, **kwargs: Any
+  231 |     ) -> Cookie | None:
+  232 |         """"""Dict-like set() that also supports optional domain and path args in
+  233 |         order to resolve naming collisions from using one cookie jar over
+  234 |         multiple domains.
+  235 |         """"""
+  236 |         # support client code that unsets cookies by assignment of a None value:
+  237 |         if value is None:
+  238 |             remove_cookie_by_name(",,
+3dfbc98fc871,requests,src/requests/sessions.py,prepared_request.prepare_auth(new_auth),"[332, 12, 332, 51]","  330 |         new_auth = get_netrc_auth(url) if self.trust_env else None
+  331 |         if new_auth is not None:
+  332 |             prepared_request.prepare_auth(new_auth)
+      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  333 | ",prepare_auth,prepared_request,PreparedRequest.prepare_auth,"  670 |     def prepare_auth(
+  671 |         self,
+  672 |         auth: _t.AuthType,
+  673 |         url: _t.UriType = """",
+  674 |     ) -> None:
+  675 |         """"""Prepares the given HTTP auth data.""""""
+  676 | 
+  677 |         # If no Auth is explicitly provided, extract it from the URL first.
+  678 |         if auth is None:
+  679 |             url_auth = get_auth_from_url(cast(str, self.url))",,
+66c624af583d,click,src/click/testing.py,self._echo(self._input.readline(n)),"[58, 15, 58, 50]","   56 | 
+   57 |     def readline(self, n: int = -1) -> bytes:
+   58 |         return self._echo(self._input.readline(n))
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   59 | ",_echo,self,EchoingStdin._echo,"   45 |     def _echo(self, rv: bytes) -> bytes:
+   46 |         if not self._paused:
+   47 |             self._output.write(rv)
+   48 | 
+   49 |         return rv",,
+0170256e3025,requests,tests/test_lowlevel.py,Server.basic_response_server(wait_to_close_event=close_server),"[27, 13, 27, 75]","   25 |     """"""can safely send generators""""""
+   26 |     close_server = threading.Event()
+   27 |     server = Server.basic_response_server(wait_to_close_event=close_server)
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   28 |     data = iter([b""a"", b""b"", b""c""])",basic_response_server,Server,Server.basic_response_server,"   61 |     @classmethod
    62 |     def basic_response_server(cls, **kwargs):
    63 |         return cls.text_response_server(
    64 |             ""HTTP/1.1 200 OK\r\n"" + ""Content-Length: 0\r\n\r\n"", **kwargs
    65 |         )",,
-34698146b00a,click,tests/test_testing.py,runner.invoke(cli),"[187, 13, 187, 31]","  185 |     CustomError = SystemExit
-  186 | 
-  187 |     result = runner.invoke(cli)
-      |              ^^^^^^^^^^^^^^^^^^
-  188 |     assert result.exit_code == 1",invoke,runner,Command.invoke," 1432 |     def invoke(self, ctx: Context) -> t.Any:
- 1433 |         """"""Given a context, this invokes the attached callback (if it exists)
- 1434 |         in the right way.
- 1435 |         """"""
- 1436 |         if self.deprecated:
- 1437 |             message = _(
- 1438 |                 ""DeprecationWarning: The command {name!r} is deprecated.{extra_message}""
- 1439 |             ).format(
- 1440 |                 name=self.name,
- 1441 |                 extra_message=_format_deprecated_suffix(self.deprecated),",,
-16268f7a5da0,requests,tests/test_requests.py,"prep.prepare(method=""GET"", url=url)","[2682, 4, 2682, 39]"," 2680 |     session = requests.Session()
- 2681 |     prep = PreparedRequest()
- 2682 |     prep.prepare(method=""GET"", url=url)
-      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 2683 | ",prepare,prep,Request.prepare,"  360 |     def prepare(self) -> PreparedRequest:
-  361 |         """"""Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.""""""
-  362 |         p = PreparedRequest()
-  363 |         p.prepare(
-  364 |             method=self.method,
-  365 |             url=self.url,
-  366 |             headers=self.headers,
-  367 |             files=self.files,
-  368 |             data=self.data,
-  369 |             json=self.json,",,
-2e1c2f3aa913,click,src/click/parser.py,"_normalize_opt(f""{prefix}{ch}"", self.ctx)","[397, 18, 397, 59]","  395 | 
-  396 |         for ch in arg[1:]:
-  397 |             opt = _normalize_opt(f""{prefix}{ch}"", self.ctx)
-      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  398 |             option = self._short_opt.get(opt)",_normalize_opt,,_normalize_opt,"  120 | def _normalize_opt(opt: str, ctx: Context | None) -> str:
-  121 |     if ctx is None or ctx.token_normalize_func is None:
-  122 |         return opt
-  123 |     prefix, opt = _split_opt(opt)
-  124 |     return f""{prefix}{ctx.token_normalize_func(opt)}""",,
+e81b1944bf6d,click,src/click/_compat.py,"is_ascii_encoding(getattr(stream, ""encoding"", None) or ""ascii"")","[218, 11, 218, 74]","  216 |     # environments.  It's not quite clear what the correct behavior is
+  217 |     # but this at least will force Click to recover somehow.
+  218 |     return is_ascii_encoding(getattr(stream, ""encoding"", None) or ""ascii"")
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  219 | ",is_ascii_encoding,,is_ascii_encoding,"   43 | def is_ascii_encoding(encoding: str) -> bool:
+   44 |     """"""Checks if a given encoding is ascii.""""""
+   45 |     try:
+   46 |         return codecs.lookup(encoding).name == ""ascii""
+   47 |     except LookupError:
+   48 |         return False",,
+74103d804acd,requests,src/requests/cookies.py,r.get_new_headers(),"[161, 11, 161, 30]","  159 |     r = MockRequest(request)
+  160 |     jar.add_cookie_header(r)  # type: ignore[arg-type]
+  161 |     return r.get_new_headers().get(""Cookie"")
+      |            ^^^^^^^^^^^^^^^^^^^
+  162 | ",get_new_headers,r,MockRequest.get_new_headers,"   98 |     def get_new_headers(self) -> dict[str, str]:
+   99 |         return self._new_headers",,
+3d063f8b13d4,zod,src/types.ts,getParsedType(input.data),"[216, 20, 216, 45]","  214 |         data: input.data,
+  215 | 
+  216 |         parsedType: getParsedType(input.data),
+      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  217 | ",getParsedType,,getParsedType,"  166 | export const getParsedType = (data: any): ZodParsedType => {
+  167 |   const t = typeof data;
+  168 | 
+  169 |   switch (t) {
+  170 |     case ""undefined"":
+  171 |       return ZodParsedType.undefined;
+  172 | 
+  173 |     case ""string"":
+  174 |       return ZodParsedType.string;
+  175 | ",,
+ff69c0717254,zod,src/types.ts,ZodUnknown.create(),"[3991, 40, 3991, 59]"," 3989 |     return new ZodFunction({
+ 3990 |       ...this._def,
+ 3991 |       args: ZodTuple.create(items).rest(ZodUnknown.create()) as any,
+      |                                         ^^^^^^^^^^^^^^^^^^^
+ 3992 |     });",create,ZodUnknown,ZodUnknown.create," 2069 |   static create = (params?: RawCreateParams): ZodUnknown => {
+ 2070 |     return new ZodUnknown({
+ 2071 |       typeName: ZodFirstPartyTypeKind.ZodUnknown,
+ 2072 |       ...processCreateParams(params),
+ 2073 |     });
+ 2074 |   };",,
+05b158018009,click,src/click/_termui_impl.py,self.make_step(self._completed_intervals),"[340, 12, 340, 53]","  338 | 
+  339 |         if self._completed_intervals >= self.update_min_steps:
+  340 |             self.make_step(self._completed_intervals)
+      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  341 |             self.render_progress()",make_step,self,ProgressBar.make_step,"  296 |     def make_step(self, n_steps: int) -> None:
+  297 |         self.pos += n_steps
+  298 |         if self.length is not None and self.pos >= self.length:
+  299 |             self.finished = True
+  300 | 
+  301 |         if (time.time() - self.last_eta) < 1.0:
+  302 |             return
+  303 | 
+  304 |         self.last_eta = time.time()
+  305 | ",,

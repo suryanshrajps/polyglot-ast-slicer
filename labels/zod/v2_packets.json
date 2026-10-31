@@ -1,0 +1,2417 @@
+[
+  {
+    "edge_id": "c4fb89c4b3bb",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseStatus()",
+    "call_range": [
+      1566,
+      19,
+      1566,
+      36
+    ],
+    "call_context": " 1564 | \n 1565 |     let ctx: undefined | ParseContext = undefined;\n 1566 |     const status = new ParseStatus();\n      |                    ^^^^^^^^^^^^^^^^^\n 1567 | ",
+    "callee": "ParseStatus",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseStatus",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "95-160",
+      "definition": "   95 | export class ParseStatus {\n   96 |   value: \"aborted\" | \"dirty\" | \"valid\" = \"valid\";\n   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }\n  100 |   abort() {\n  101 |     if (this.value !== \"aborted\") this.value = \"aborted\";\n  102 |   }\n  103 | \n  104 |   static mergeArray("
+    }
+  },
+  {
+    "edge_id": "2a7856ee8892",
+    "repo": "zod",
+    "file": "src/helpers/parseUtil.ts",
+    "call_text": "status.dirty()",
+    "call_range": [
+      148,
+      36,
+      148,
+      50
+    ],
+    "call_context": "  146 |       if (value.status === \"aborted\") return INVALID;\n  147 |       if (key.status === \"dirty\") status.dirty();\n  148 |       if (value.status === \"dirty\") status.dirty();\n      |                                     ^^^^^^^^^^^^^^\n  149 | ",
+    "callee": "dirty",
+    "receiver": "status",
+    "target": {
+      "qualified_name": "ParseStatus.dirty",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "97-99",
+      "definition": "   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }"
+    }
+  },
+  {
+    "edge_id": "fcfed5d48a00",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodPipeline.create(this, target)",
+    "call_range": [
+      508,
+      11,
+      508,
+      43
+    ],
+    "call_context": "  506 | \n  507 |   pipe<T extends ZodTypeAny>(target: T): ZodPipeline<this, T> {\n  508 |     return ZodPipeline.create(this, target);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  509 |   }",
+    "callee": "create",
+    "receiver": "ZodPipeline",
+    "target": {
+      "qualified_name": "ZodPipeline.create",
+      "file": "src/types.ts",
+      "lines": "4991-5000",
+      "definition": " 4991 |   static create<A extends ZodTypeAny, B extends ZodTypeAny>(\n 4992 |     a: A,\n 4993 |     b: B\n 4994 |   ): ZodPipeline<A, B> {\n 4995 |     return new ZodPipeline({\n 4996 |       in: a,\n 4997 |       out: b,\n 4998 |       typeName: ZodFirstPartyTypeKind.ZodPipeline,\n 4999 |     });\n 5000 |   }"
+    }
+  },
+  {
+    "edge_id": "048f3ff40336",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "getParsedType(input.data)",
+    "call_range": [
+      197,
+      20,
+      197,
+      45
+    ],
+    "call_context": "  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^\n  198 | ",
+    "callee": "getParsedType",
+    "receiver": null,
+    "target": {
+      "qualified_name": "getParsedType",
+      "file": "src/helpers/util.ts",
+      "lines": "166-220",
+      "definition": "  166 | export const getParsedType = (data: any): ZodParsedType => {\n  167 |   const t = typeof data;\n  168 | \n  169 |   switch (t) {\n  170 |     case \"undefined\":\n  171 |       return ZodParsedType.undefined;\n  172 | \n  173 |     case \"string\":\n  174 |       return ZodParsedType.string;\n  175 | "
+    }
+  },
+  {
+    "edge_id": "eff1e6f59bef",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodUnknown.create()",
+    "call_range": [
+      4043,
+      26,
+      4043,
+      45
+    ],
+    "call_context": " 4041 |         ? args\n 4042 |         : ZodTuple.create([]).rest(ZodUnknown.create())) as any,\n 4043 |       returns: returns || ZodUnknown.create(),\n      |                           ^^^^^^^^^^^^^^^^^^^\n 4044 |       typeName: ZodFirstPartyTypeKind.ZodFunction,",
+    "callee": "create",
+    "receiver": "ZodUnknown",
+    "target": {
+      "qualified_name": "ZodTuple.create",
+      "file": "src/types.ts",
+      "lines": "3493-3506",
+      "definition": " 3493 |   static create = <T extends [ZodTypeAny, ...ZodTypeAny[]] | []>(\n 3494 |     schemas: T,\n 3495 |     params?: RawCreateParams\n 3496 |   ): ZodTuple<T, null> => {\n 3497 |     if (!Array.isArray(schemas)) {\n 3498 |       throw new Error(\"You must pass an array of schemas to z.tuple([ ... ])\");\n 3499 |     }\n 3500 |     return new ZodTuple({\n 3501 |       items: schemas,\n 3502 |       typeName: ZodFirstPartyTypeKind.ZodTuple,"
+    }
+  },
+  {
+    "edge_id": "2dadf8542b64",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodString.create()",
+    "call_range": [
+      3612,
+      15,
+      3612,
+      33
+    ],
+    "call_context": " 3610 | \n 3611 |     return new ZodRecord({\n 3612 |       keyType: ZodString.create(),\n      |                ^^^^^^^^^^^^^^^^^^\n 3613 |       valueType: first,",
+    "callee": "create",
+    "receiver": "ZodString",
+    "target": {
+      "qualified_name": "ZodString.create",
+      "file": "src/types.ts",
+      "lines": "1224-1231",
+      "definition": " 1224 |   static create = (params?: RawCreateParams & { coerce?: true }): ZodString => {\n 1225 |     return new ZodString({\n 1226 |       checks: [],\n 1227 |       typeName: ZodFirstPartyTypeKind.ZodString,\n 1228 |       coerce: params?.coerce ?? false,\n 1229 |       ...processCreateParams(params),\n 1230 |     });\n 1231 |   };"
+    }
+  },
+  {
+    "edge_id": "b7ff3fab05ba",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this.min(1, message)",
+    "call_range": [
+      3831,
+      11,
+      3831,
+      31
+    ],
+    "call_context": " 3829 | \n 3830 |   nonempty(message?: errorUtil.ErrMessage): ZodSet<Value> {\n 3831 |     return this.min(1, message) as any;\n      |            ^^^^^^^^^^^^^^^^^^^^\n 3832 |   }",
+    "callee": "min",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodDate.min",
+      "file": "src/types.ts",
+      "lines": "1869-1875",
+      "definition": " 1869 |   min(minDate: Date, message?: errorUtil.ErrMessage) {\n 1870 |     return this._addCheck({\n 1871 |       kind: \"min\",\n 1872 |       value: minDate.getTime(),\n 1873 |       message: errorUtil.toString(message),\n 1874 |     });\n 1875 |   }"
+    }
+  },
+  {
+    "edge_id": "d45556697a44",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._getOrReturnCtx(input)",
+    "call_range": [
+      4870,
+      18,
+      4870,
+      45
+    ],
+    "call_context": " 4868 |     const parsedType = this._getType(input);\n 4869 |     if (parsedType !== ZodParsedType.nan) {\n 4870 |       const ctx = this._getOrReturnCtx(input);\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4871 |       addIssueToContext(ctx, {",
+    "callee": "_getOrReturnCtx",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._getOrReturnCtx",
+      "file": "src/types.ts",
+      "lines": "188-204",
+      "definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),"
+    }
+  },
+  {
+    "edge_id": "d71a1feb79b9",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodTuple.create(\n      schema.items.map((item: any) => deepPartialify(item))\n    )",
+    "call_range": [
+      2404,
+      11,
+      2406,
+      5
+    ],
+    "call_context": " 2402 |     return ZodNullable.create(deepPartialify(schema.unwrap()));\n 2403 |   } else if (schema instanceof ZodTuple) {\n 2404 |     return ZodTuple.create(\n      |            ^^^^^^^^^^^^^^^^\n 2405 |       schema.items.map((item: any) => deepPartialify(item))\n 2406 |     );\n 2407 |   } else {",
+    "callee": "create",
+    "receiver": "ZodTuple",
+    "target": {
+      "qualified_name": "ZodOptional.create",
+      "file": "src/types.ts",
+      "lines": "4654-4663",
+      "definition": " 4654 |   static create = <T extends ZodTypeAny>(\n 4655 |     type: T,\n 4656 |     params?: RawCreateParams\n 4657 |   ): ZodOptional<T> => {\n 4658 |     return new ZodOptional({\n 4659 |       innerType: type,\n 4660 |       typeName: ZodFirstPartyTypeKind.ZodOptional,\n 4661 |       ...processCreateParams(params),\n 4662 |     }) as any;\n 4663 |   };"
+    }
+  },
+  {
+    "edge_id": "5895f56669d3",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._getOrReturnCtx(input)",
+    "call_range": [
+      1934,
+      18,
+      1934,
+      45
+    ],
+    "call_context": " 1932 |     const parsedType = this._getType(input);\n 1933 |     if (parsedType !== ZodParsedType.symbol) {\n 1934 |       const ctx = this._getOrReturnCtx(input);\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1935 |       addIssueToContext(ctx, {",
+    "callee": "_getOrReturnCtx",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._getOrReturnCtx",
+      "file": "src/types.ts",
+      "lines": "188-204",
+      "definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),"
+    }
+  },
+  {
+    "edge_id": "ae069bae2e39",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodNever.create()",
+    "call_range": [
+      2876,
+      16,
+      2876,
+      33
+    ],
+    "call_context": " 2874 |       shape: () => shape,\n 2875 |       unknownKeys: \"strip\",\n 2876 |       catchall: ZodNever.create(),\n      |                 ^^^^^^^^^^^^^^^^^\n 2877 |       typeName: ZodFirstPartyTypeKind.ZodObject,",
+    "callee": "create",
+    "receiver": "ZodNever",
+    "target": {
+      "qualified_name": "ZodNever.create",
+      "file": "src/types.ts",
+      "lines": "2098-2103",
+      "definition": " 2098 |   static create = (params?: RawCreateParams): ZodNever => {\n 2099 |     return new ZodNever({\n 2100 |       typeName: ZodFirstPartyTypeKind.ZodNever,\n 2101 |       ...processCreateParams(params),\n 2102 |     });\n 2103 |   };"
+    }
+  },
+  {
+    "edge_id": "5e7305ffca18",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      4469,
+      28,
+      4469,
+      59
+    ],
+    "call_context": " 4467 | \n 4468 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4469 |     const { status, ctx } = this._processInputParams(input);\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4470 | ",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "src/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "8d904c0c50a7",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._getType(input)",
+    "call_range": [
+      1971,
+      23,
+      1971,
+      43
+    ],
+    "call_context": " 1969 | > {\n 1970 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 1971 |     const parsedType = this._getType(input);\n      |                        ^^^^^^^^^^^^^^^^^^^^\n 1972 |     if (parsedType !== ZodParsedType.undefined) {",
+    "callee": "_getType",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._getType",
+      "file": "src/types.ts",
+      "lines": "184-186",
+      "definition": "  184 |   _getType(input: ParseInput): string {\n  185 |     return getParsedType(input.data);\n  186 |   }"
+    }
+  },
+  {
+    "edge_id": "3b8f1dcac967",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n        code: ZodIssueCode.invalid_type,\n        expected: ZodParsedType.symbol,\n        received: ctx.parsedType,\n      })",
+    "call_range": [
+      1935,
+      6,
+      1939,
+      8
+    ],
+    "call_context": " 1933 |     if (parsedType !== ZodParsedType.symbol) {\n 1934 |       const ctx = this._getOrReturnCtx(input);\n 1935 |       addIssueToContext(ctx, {\n      |       ^^^^^^^^^^^^^^^^^^^^^^^^\n 1936 |         code: ZodIssueCode.invalid_type,\n 1937 |         expected: ZodParsedType.symbol,\n 1938 |         received: ctx.parsedType,\n 1939 |       });\n 1940 |       return INVALID;",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "8c60d8a1a739",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseInputLazyPath(ctx, value, ctx.path, [index, \"value\"])",
+    "call_range": [
+      3671,
+      12,
+      3671,
+      74
+    ],
+    "call_context": " 3669 |           ),\n 3670 |           value: valueType._parse(\n 3671 |             new ParseInputLazyPath(ctx, value, ctx.path, [index, \"value\"])\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3672 |           ),",
+    "callee": "ParseInputLazyPath",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseInputLazyPath",
+      "file": "src/types.ts",
+      "lines": "61-89",
+      "definition": "   61 | class ParseInputLazyPath implements ParseInput {\n   62 |   parent: ParseContext;\n   63 |   data: any;\n   64 |   _path: ParsePath;\n   65 |   _key: string | number | (string | number)[];\n   66 |   _cachedPath: ParsePath = [];\n   67 |   constructor(\n   68 |     parent: ParseContext,\n   69 |     value: any,\n   70 |     path: ParsePath,"
+    }
+  },
+  {
+    "edge_id": "b447dbb1c0d2",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "getParsedType(data)",
+    "call_range": [
+      258,
+      18,
+      258,
+      37
+    ],
+    "call_context": "  256 |       parent: null,\n  257 |       data,\n  258 |       parsedType: getParsedType(data),\n      |                   ^^^^^^^^^^^^^^^^^^^\n  259 |     };",
+    "callee": "getParsedType",
+    "receiver": null,
+    "target": {
+      "qualified_name": "getParsedType",
+      "file": "src/helpers/util.ts",
+      "lines": "166-220",
+      "definition": "  166 | export const getParsedType = (data: any): ZodParsedType => {\n  167 |   const t = typeof data;\n  168 | \n  169 |   switch (t) {\n  170 |     case \"undefined\":\n  171 |       return ZodParsedType.undefined;\n  172 | \n  173 |     case \"string\":\n  174 |       return ZodParsedType.string;\n  175 | "
+    }
+  },
+  {
+    "edge_id": "61e67068be2f",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this.setLimit(\"min\", value, true, errorUtil.toString(message))",
+    "call_range": [
+      1366,
+      11,
+      1366,
+      73
+    ],
+    "call_context": " 1364 | \n 1365 |   gte(value: number, message?: errorUtil.ErrMessage) {\n 1366 |     return this.setLimit(\"min\", value, true, errorUtil.toString(message));\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1367 |   }",
+    "callee": "setLimit",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodNumber.setLimit",
+      "file": "src/types.ts",
+      "lines": "1383-1401",
+      "definition": " 1383 |   protected setLimit(\n 1384 |     kind: \"min\" | \"max\",\n 1385 |     value: number,\n 1386 |     inclusive: boolean,\n 1387 |     message?: string\n 1388 |   ) {\n 1389 |     return new ZodNumber({\n 1390 |       ...this._def,\n 1391 |       checks: [\n 1392 |         ...this._def.checks,"
+    }
+  },
+  {
+    "edge_id": "6729d63bb988",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this.setLimit(\"max\", value, false, errorUtil.toString(message))",
+    "call_range": [
+      1380,
+      11,
+      1380,
+      74
+    ],
+    "call_context": " 1378 | \n 1379 |   lt(value: number, message?: errorUtil.ErrMessage) {\n 1380 |     return this.setLimit(\"max\", value, false, errorUtil.toString(message));\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1381 |   }",
+    "callee": "setLimit",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodNumber.setLimit",
+      "file": "src/types.ts",
+      "lines": "1383-1401",
+      "definition": " 1383 |   protected setLimit(\n 1384 |     kind: \"min\" | \"max\",\n 1385 |     value: number,\n 1386 |     inclusive: boolean,\n 1387 |     message?: string\n 1388 |   ) {\n 1389 |     return new ZodNumber({\n 1390 |       ...this._def,\n 1391 |       checks: [\n 1392 |         ...this._def.checks,"
+    }
+  },
+  {
+    "edge_id": "5188ea930e2c",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodTuple.create(\n      schema.items.map((item: any) => deepPartialify(item))\n    )",
+    "call_range": [
+      2404,
+      11,
+      2406,
+      5
+    ],
+    "call_context": " 2402 |     return ZodNullable.create(deepPartialify(schema.unwrap()));\n 2403 |   } else if (schema instanceof ZodTuple) {\n 2404 |     return ZodTuple.create(\n      |            ^^^^^^^^^^^^^^^^\n 2405 |       schema.items.map((item: any) => deepPartialify(item))\n 2406 |     );\n 2407 |   } else {",
+    "callee": "create",
+    "receiver": "ZodTuple",
+    "target": {
+      "qualified_name": "ZodTuple.create",
+      "file": "src/types.ts",
+      "lines": "3493-3506",
+      "definition": " 3493 |   static create = <T extends [ZodTypeAny, ...ZodTypeAny[]] | []>(\n 3494 |     schemas: T,\n 3495 |     params?: RawCreateParams\n 3496 |   ): ZodTuple<T, null> => {\n 3497 |     if (!Array.isArray(schemas)) {\n 3498 |       throw new Error(\"You must pass an array of schemas to z.tuple([ ... ])\");\n 3499 |     }\n 3500 |     return new ZodTuple({\n 3501 |       items: schemas,\n 3502 |       typeName: ZodFirstPartyTypeKind.ZodTuple,"
+    }
+  },
+  {
+    "edge_id": "df1471963324",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(params)",
+    "call_range": [
+      1361,
+      9,
+      1361,
+      36
+    ],
+    "call_context": " 1359 |       typeName: ZodFirstPartyTypeKind.ZodNumber,\n 1360 |       coerce: params?.coerce || false,\n 1361 |       ...processCreateParams(params),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1362 |     });",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "f04a595b8936",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodTuple.create(\n      schema.items.map((item: any) => deepPartialify(item))\n    )",
+    "call_range": [
+      2404,
+      11,
+      2406,
+      5
+    ],
+    "call_context": " 2402 |     return ZodNullable.create(deepPartialify(schema.unwrap()));\n 2403 |   } else if (schema instanceof ZodTuple) {\n 2404 |     return ZodTuple.create(\n      |            ^^^^^^^^^^^^^^^^\n 2405 |       schema.items.map((item: any) => deepPartialify(item))\n 2406 |     );\n 2407 |   } else {",
+    "callee": "create",
+    "receiver": "ZodTuple",
+    "target": {
+      "qualified_name": "ZodNullable.create",
+      "file": "src/types.ts",
+      "lines": "4698-4707",
+      "definition": " 4698 |   static create = <T extends ZodTypeAny>(\n 4699 |     type: T,\n 4700 |     params?: RawCreateParams\n 4701 |   ): ZodNullable<T> => {\n 4702 |     return new ZodNullable({\n 4703 |       innerType: type,\n 4704 |       typeName: ZodFirstPartyTypeKind.ZodNullable,\n 4705 |       ...processCreateParams(params),\n 4706 |     }) as any;\n 4707 |   };"
+    }
+  },
+  {
+    "edge_id": "1f7369534668",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodIntersection({\n      left: left,\n      right: right,\n      typeName: ZodFirstPartyTypeKind.ZodIntersection,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      3368,
+      11,
+      3373,
+      6
+    ],
+    "call_context": " 3366 |     params?: RawCreateParams\n 3367 |   ): ZodIntersection<T, U> => {\n 3368 |     return new ZodIntersection({\n      |            ^^^^^^^^^^^^^^^^^^^^^\n 3369 |       left: left,\n 3370 |       right: right,\n 3371 |       typeName: ZodFirstPartyTypeKind.ZodIntersection,\n 3372 |       ...processCreateParams(params),\n 3373 |     });\n 3374 |   };",
+    "callee": "ZodIntersection",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodIntersection",
+      "file": "src/types.ts",
+      "lines": "3300-3375",
+      "definition": " 3300 | export class ZodIntersection<\n 3301 |   T extends ZodTypeAny,\n 3302 |   U extends ZodTypeAny\n 3303 | > extends ZodType<\n 3304 |   T[\"_output\"] & U[\"_output\"],\n 3305 |   ZodIntersectionDef<T, U>,\n 3306 |   T[\"_input\"] & U[\"_input\"]\n 3307 | > {\n 3308 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3309 |     const { status, ctx } = this._processInputParams(input);"
+    }
+  },
+  {
+    "edge_id": "fd4627c6fdd0",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      1943,
+      11,
+      1943,
+      25
+    ],
+    "call_context": " 1941 |     }\n 1942 | \n 1943 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 1944 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "1a0150edaba5",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({\n      kind: \"max\",\n      value: BigInt(0),\n      inclusive: false,\n      message: errorUtil.toString(message),\n    })",
+    "call_range": [
+      1683,
+      11,
+      1688,
+      6
+    ],
+    "call_context": " 1681 | \n 1682 |   negative(message?: errorUtil.ErrMessage) {\n 1683 |     return this._addCheck({\n      |            ^^^^^^^^^^^^^^^^\n 1684 |       kind: \"max\",\n 1685 |       value: BigInt(0),\n 1686 |       inclusive: false,\n 1687 |       message: errorUtil.toString(message),\n 1688 |     });\n 1689 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodBigInt._addCheck",
+      "file": "src/types.ts",
+      "lines": "1666-1671",
+      "definition": " 1666 |   _addCheck(check: ZodBigIntCheck) {\n 1667 |     return new ZodBigInt({\n 1668 |       ...this._def,\n 1669 |       checks: [...this._def.checks, check],\n 1670 |     });\n 1671 |   }"
+    }
+  },
+  {
+    "edge_id": "c84f475056e7",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      2016,
+      11,
+      2016,
+      25
+    ],
+    "call_context": " 2014 |       return INVALID;\n 2015 |     }\n 2016 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 2017 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "65efb65f1db7",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseInputLazyPath(ctx, item, ctx.path, i)",
+    "call_range": [
+      3802,
+      23,
+      3802,
+      69
+    ],
+    "call_context": " 3800 | \n 3801 |     const elements = [...(ctx.data as Set<unknown>).values()].map((item, i) =>\n 3802 |       valueType._parse(new ParseInputLazyPath(ctx, item, ctx.path, i))\n      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3803 |     );",
+    "callee": "ParseInputLazyPath",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseInputLazyPath",
+      "file": "src/types.ts",
+      "lines": "61-89",
+      "definition": "   61 | class ParseInputLazyPath implements ParseInput {\n   62 |   parent: ParseContext;\n   63 |   data: any;\n   64 |   _path: ParsePath;\n   65 |   _key: string | number | (string | number)[];\n   66 |   _cachedPath: ParsePath = [];\n   67 |   constructor(\n   68 |     parent: ParseContext,\n   69 |     value: any,\n   70 |     path: ParsePath,"
+    }
+  },
+  {
+    "edge_id": "a3b8563018a9",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({\n      kind: \"max\",\n      value: maxDate.getTime(),\n      message: errorUtil.toString(message),\n    })",
+    "call_range": [
+      1878,
+      11,
+      1882,
+      6
+    ],
+    "call_context": " 1876 | \n 1877 |   max(maxDate: Date, message?: errorUtil.ErrMessage) {\n 1878 |     return this._addCheck({\n      |            ^^^^^^^^^^^^^^^^\n 1879 |       kind: \"max\",\n 1880 |       value: maxDate.getTime(),\n 1881 |       message: errorUtil.toString(message),\n 1882 |     });\n 1883 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodDate._addCheck",
+      "file": "src/types.ts",
+      "lines": "1862-1867",
+      "definition": " 1862 |   _addCheck(check: ZodDateCheck) {\n 1863 |     return new ZodDate({\n 1864 |       ...this._def,\n 1865 |       checks: [...this._def.checks, check],\n 1866 |     });\n 1867 |   }"
+    }
+  },
+  {
+    "edge_id": "6758c72173b4",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      4730,
+      20,
+      4730,
+      51
+    ],
+    "call_context": " 4728 | > {\n 4729 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4730 |     const { ctx } = this._processInputParams(input);\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4731 |     let data = ctx.data;",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "deno/lib/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "30287d8bad9b",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodLiteral({\n      value: value,\n      typeName: ZodFirstPartyTypeKind.ZodLiteral,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      4124,
+      11,
+      4128,
+      6
+    ],
+    "call_context": " 4122 |     params?: RawCreateParams\n 4123 |   ): ZodLiteral<T> => {\n 4124 |     return new ZodLiteral({\n      |            ^^^^^^^^^^^^^^^^\n 4125 |       value: value,\n 4126 |       typeName: ZodFirstPartyTypeKind.ZodLiteral,\n 4127 |       ...processCreateParams(params),\n 4128 |     });\n 4129 |   };",
+    "callee": "ZodLiteral",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodLiteral",
+      "file": "src/types.ts",
+      "lines": "4102-4130",
+      "definition": " 4102 | export class ZodLiteral<T> extends ZodType<T, ZodLiteralDef<T>, T> {\n 4103 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4104 |     if (input.data !== this._def.value) {\n 4105 |       const ctx = this._getOrReturnCtx(input);\n 4106 |       addIssueToContext(ctx, {\n 4107 |         received: ctx.data,\n 4108 |         code: ZodIssueCode.invalid_literal,\n 4109 |         expected: this._def.value,\n 4110 |       });\n 4111 |       return INVALID;"
+    }
+  },
+  {
+    "edge_id": "468ac8c4ce74",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodCatch({\n      ...processCreateParams(this._def),\n      innerType: this,\n      catchValue: catchValueFunc,\n      typeName: ZodFirstPartyTypeKind.ZodCatch,\n    })",
+    "call_range": [
+      491,
+      11,
+      496,
+      6
+    ],
+    "call_context": "  489 |     const catchValueFunc = typeof def === \"function\" ? def : () => def;\n  490 | \n  491 |     return new ZodCatch({\n      |            ^^^^^^^^^^^^^^\n  492 |       ...processCreateParams(this._def),\n  493 |       innerType: this,\n  494 |       catchValue: catchValueFunc,\n  495 |       typeName: ZodFirstPartyTypeKind.ZodCatch,\n  496 |     }) as any;\n  497 |   }",
+    "callee": "ZodCatch",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodCatch",
+      "file": "src/types.ts",
+      "lines": "4778-4852",
+      "definition": " 4778 | export class ZodCatch<T extends ZodTypeAny> extends ZodType<\n 4779 |   T[\"_output\"],\n 4780 |   ZodCatchDef<T>,\n 4781 |   unknown // any input will pass validation // T[\"_input\"]\n 4782 | > {\n 4783 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4784 |     const { ctx } = this._processInputParams(input);\n 4785 | \n 4786 |     // newCtx is used to not collect issues from inner types in ctx\n 4787 |     const newCtx: ParseContext = {"
+    }
+  },
+  {
+    "edge_id": "501c303dc681",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      1981,
+      11,
+      1981,
+      25
+    ],
+    "call_context": " 1979 |       return INVALID;\n 1980 |     }\n 1981 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 1982 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "2ac437931ce5",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodDiscriminatedUnion<\n      Discriminator,\n      // DiscriminatorValue,\n      Types\n    >({\n      typeName: ZodFirstPartyTypeKind.ZodDiscriminatedUnion,\n      discriminator,\n      options,\n      optionsMap,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      3215,
+      11,
+      3225,
+      6
+    ],
+    "call_context": " 3213 |     }\n 3214 | \n 3215 |     return new ZodDiscriminatedUnion<\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3216 |       Discriminator,\n 3217 |       // DiscriminatorValue,\n 3218 |       Types\n 3219 |     >({\n 3220 |       typeName: ZodFirstPartyTypeKind.ZodDiscriminatedUnion,\n 3221 |       discriminator,\n 3222 |       options,\n 3223 |       optionsMap,\n 3224 |       ...processCreateParams(params),\n 3225 |     });\n 3226 |   }",
+    "callee": "ZodDiscriminatedUnion",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodDiscriminatedUnion",
+      "file": "src/types.ts",
+      "lines": "3110-3227",
+      "definition": " 3110 | export class ZodDiscriminatedUnion<\n 3111 |   Discriminator extends string,\n 3112 |   Options extends ZodDiscriminatedUnionOption<Discriminator>[]\n 3113 | > extends ZodType<\n 3114 |   output<Options[number]>,\n 3115 |   ZodDiscriminatedUnionDef<Discriminator, Options>,\n 3116 |   input<Options[number]>\n 3117 | > {\n 3118 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3119 |     const { ctx } = this._processInputParams(input);"
+    }
+  },
+  {
+    "edge_id": "e1bdf2a94272",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseStatus()",
+    "call_range": [
+      1281,
+      19,
+      1281,
+      36
+    ],
+    "call_context": " 1279 | \n 1280 |     let ctx: undefined | ParseContext = undefined;\n 1281 |     const status = new ParseStatus();\n      |                    ^^^^^^^^^^^^^^^^^\n 1282 | ",
+    "callee": "ParseStatus",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseStatus",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "95-160",
+      "definition": "   95 | export class ParseStatus {\n   96 |   value: \"aborted\" | \"dirty\" | \"valid\" = \"valid\";\n   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }\n  100 |   abort() {\n  101 |     if (this.value !== \"aborted\") this.value = \"aborted\";\n  102 |   }\n  103 | \n  104 |   static mergeArray("
+    }
+  },
+  {
+    "edge_id": "22ed40913c68",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      3552,
+      28,
+      3552,
+      59
+    ],
+    "call_context": " 3550 |   }\n 3551 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3552 |     const { status, ctx } = this._processInputParams(input);\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3553 |     if (ctx.parsedType !== ZodParsedType.object) {",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "deno/lib/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "9a084b73a45a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodCatch({\n      innerType: type,\n      typeName: ZodFirstPartyTypeKind.ZodCatch,\n      catchValue:\n        typeof params.catch === \"function\" ? params.catch : () => params.catch,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      4844,
+      11,
+      4850,
+      6
+    ],
+    "call_context": " 4842 |     }\n 4843 |   ): ZodCatch<T> => {\n 4844 |     return new ZodCatch({\n      |            ^^^^^^^^^^^^^^\n 4845 |       innerType: type,\n 4846 |       typeName: ZodFirstPartyTypeKind.ZodCatch,\n 4847 |       catchValue:\n 4848 |         typeof params.catch === \"function\" ? params.catch : () => params.catch,\n 4849 |       ...processCreateParams(params),\n 4850 |     });\n 4851 |   };",
+    "callee": "ZodCatch",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodCatch",
+      "file": "src/types.ts",
+      "lines": "4778-4852",
+      "definition": " 4778 | export class ZodCatch<T extends ZodTypeAny> extends ZodType<\n 4779 |   T[\"_output\"],\n 4780 |   ZodCatchDef<T>,\n 4781 |   unknown // any input will pass validation // T[\"_input\"]\n 4782 | > {\n 4783 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4784 |     const { ctx } = this._processInputParams(input);\n 4785 | \n 4786 |     // newCtx is used to not collect issues from inner types in ctx\n 4787 |     const newCtx: ParseContext = {"
+    }
+  },
+  {
+    "edge_id": "6e948978707c",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "floatSafeRemainder(input.data, check.value)",
+    "call_range": [
+      1328,
+      12,
+      1328,
+      55
+    ],
+    "call_context": " 1326 |         }\n 1327 |       } else if (check.kind === \"multipleOf\") {\n 1328 |         if (floatSafeRemainder(input.data, check.value) !== 0) {\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1329 |           ctx = this._getOrReturnCtx(input, ctx);",
+    "callee": "floatSafeRemainder",
+    "receiver": null,
+    "target": {
+      "qualified_name": "floatSafeRemainder",
+      "file": "src/types.ts",
+      "lines": "1249-1256",
+      "definition": " 1249 | function floatSafeRemainder(val: number, step: number) {\n 1250 |   const valDecCount = (val.toString().split(\".\")[1] || \"\").length;\n 1251 |   const stepDecCount = (step.toString().split(\".\")[1] || \"\").length;\n 1252 |   const decCount = valDecCount > stepDecCount ? valDecCount : stepDecCount;\n 1253 |   const valInt = parseInt(val.toFixed(decCount).replace(\".\", \"\"));\n 1254 |   const stepInt = parseInt(step.toFixed(decCount).replace(\".\", \"\"));\n 1255 |   return (valInt % stepInt) / Math.pow(10, decCount);\n 1256 | }"
+    }
+  },
+  {
+    "edge_id": "1c0b950a6422",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(null)",
+    "call_range": [
+      4689,
+      13,
+      4689,
+      21
+    ],
+    "call_context": " 4687 |     const parsedType = this._getType(input);\n 4688 |     if (parsedType === ZodParsedType.null) {\n 4689 |       return OK(null);\n      |              ^^^^^^^^\n 4690 |     }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "01ff6fef35fb",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodEnum({\n    values,\n    typeName: ZodFirstPartyTypeKind.ZodEnum,\n    ...processCreateParams(params),\n  })",
+    "call_range": [
+      4178,
+      9,
+      4182,
+      4
+    ],
+    "call_context": " 4176 |   params?: RawCreateParams\n 4177 | ) {\n 4178 |   return new ZodEnum({\n      |          ^^^^^^^^^^^^^\n 4179 |     values,\n 4180 |     typeName: ZodFirstPartyTypeKind.ZodEnum,\n 4181 |     ...processCreateParams(params),\n 4182 |   });\n 4183 | }",
+    "callee": "ZodEnum",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodEnum",
+      "file": "src/types.ts",
+      "lines": "4185-4279",
+      "definition": " 4185 | export class ZodEnum<T extends [string, ...string[]]> extends ZodType<\n 4186 |   T[number],\n 4187 |   ZodEnumDef<T>,\n 4188 |   T[number]\n 4189 | > {\n 4190 |   #cache: Set<T[number]> | undefined;\n 4191 | \n 4192 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4193 |     if (typeof input.data !== \"string\") {\n 4194 |       const ctx = this._getOrReturnCtx(input);"
+    }
+  },
+  {
+    "edge_id": "be3f5959088a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodUnion({\n      options: types,\n      typeName: ZodFirstPartyTypeKind.ZodUnion,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      3044,
+      11,
+      3048,
+      6
+    ],
+    "call_context": " 3042 |     params?: RawCreateParams\n 3043 |   ): ZodUnion<T> => {\n 3044 |     return new ZodUnion({\n      |            ^^^^^^^^^^^^^^\n 3045 |       options: types,\n 3046 |       typeName: ZodFirstPartyTypeKind.ZodUnion,\n 3047 |       ...processCreateParams(params),\n 3048 |     });\n 3049 |   };",
+    "callee": "ZodUnion",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodUnion",
+      "file": "src/types.ts",
+      "lines": "2928-3050",
+      "definition": " 2928 | export class ZodUnion<T extends ZodUnionOptions> extends ZodType<\n 2929 |   T[number][\"_output\"],\n 2930 |   ZodUnionDef<T>,\n 2931 |   T[number][\"_input\"]\n 2932 | > {\n 2933 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2934 |     const { ctx } = this._processInputParams(input);\n 2935 |     const options = this._def.options;\n 2936 | \n 2937 |     function handleResults("
+    }
+  },
+  {
+    "edge_id": "c3ddc6ff8d75",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this.nullable()",
+    "call_range": [
+      434,
+      11,
+      434,
+      26
+    ],
+    "call_context": "  432 |   }\n  433 |   nullish(): ZodOptional<ZodNullable<this>> {\n  434 |     return this.nullable().optional();\n      |            ^^^^^^^^^^^^^^^\n  435 |   }",
+    "callee": "nullable",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType.nullable",
+      "file": "src/types.ts",
+      "lines": "430-432",
+      "definition": "  430 |   nullable(): ZodNullable<this> {\n  431 |     return ZodNullable.create(this, this._def) as any;\n  432 |   }"
+    }
+  },
+  {
+    "edge_id": "114657999585",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n        received: ctx.data,\n        code: ZodIssueCode.invalid_literal,\n        expected: this._def.value,\n      })",
+    "call_range": [
+      4106,
+      6,
+      4110,
+      8
+    ],
+    "call_context": " 4104 |     if (input.data !== this._def.value) {\n 4105 |       const ctx = this._getOrReturnCtx(input);\n 4106 |       addIssueToContext(ctx, {\n      |       ^^^^^^^^^^^^^^^^^^^^^^^^\n 4107 |         received: ctx.data,\n 4108 |         code: ZodIssueCode.invalid_literal,\n 4109 |         expected: this._def.value,\n 4110 |       });\n 4111 |       return INVALID;",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "e419ea5ea5fe",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ParseStatus.mergeArray(status, items as SyncParseReturnType[])",
+    "call_range": [
+      3478,
+      13,
+      3478,
+      75
+    ],
+    "call_context": " 3476 |       });\n 3477 |     } else {\n 3478 |       return ParseStatus.mergeArray(status, items as SyncParseReturnType[]);\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3479 |     }",
+    "callee": "mergeArray",
+    "receiver": "ParseStatus",
+    "target": {
+      "qualified_name": "ParseStatus.mergeArray",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "104-116",
+      "definition": "  104 |   static mergeArray(\n  105 |     status: ParseStatus,\n  106 |     results: SyncParseReturnType<any>[]\n  107 |   ): SyncParseReturnType {\n  108 |     const arrayValue: any[] = [];\n  109 |     for (const s of results) {\n  110 |       if (s.status === \"aborted\") return INVALID;\n  111 |       if (s.status === \"dirty\") status.dirty();\n  112 |       arrayValue.push(s.value);\n  113 |     }"
+    }
+  },
+  {
+    "edge_id": "698e712a9adc",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({\n      kind: \"max\",\n      value: maxDate.getTime(),\n      message: errorUtil.toString(message),\n    })",
+    "call_range": [
+      1878,
+      11,
+      1882,
+      6
+    ],
+    "call_context": " 1876 | \n 1877 |   max(maxDate: Date, message?: errorUtil.ErrMessage) {\n 1878 |     return this._addCheck({\n      |            ^^^^^^^^^^^^^^^^\n 1879 |       kind: \"max\",\n 1880 |       value: maxDate.getTime(),\n 1881 |       message: errorUtil.toString(message),\n 1882 |     });\n 1883 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodString._addCheck",
+      "file": "src/types.ts",
+      "lines": "964-969",
+      "definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+    }
+  },
+  {
+    "edge_id": "b1d176ea5e60",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseStatus()",
+    "call_range": [
+      689,
+      19,
+      689,
+      36
+    ],
+    "call_context": "  687 |     }\n  688 | \n  689 |     const status = new ParseStatus();\n      |                    ^^^^^^^^^^^^^^^^^\n  690 |     let ctx: undefined | ParseContext = undefined;",
+    "callee": "ParseStatus",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseStatus",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "95-160",
+      "definition": "   95 | export class ParseStatus {\n   96 |   value: \"aborted\" | \"dirty\" | \"valid\" = \"valid\";\n   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }\n  100 |   abort() {\n  101 |     if (this.value !== \"aborted\") this.value = \"aborted\";\n  102 |   }\n  103 | \n  104 |   static mergeArray("
+    }
+  },
+  {
+    "edge_id": "f0e307bf825a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this.safeParse(undefined)",
+    "call_range": [
+      515,
+      11,
+      515,
+      36
+    ],
+    "call_context": "  513 | \n  514 |   isOptional(): boolean {\n  515 |     return this.safeParse(undefined).success;\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^\n  516 |   }",
+    "callee": "safeParse",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType.safeParse",
+      "file": "src/types.ts",
+      "lines": "244-263",
+      "definition": "  244 |   safeParse(\n  245 |     data: unknown,\n  246 |     params?: Partial<ParseParams>\n  247 |   ): SafeParseReturnType<Input, Output> {\n  248 |     const ctx: ParseContext = {\n  249 |       common: {\n  250 |         issues: [],\n  251 |         async: params?.async ?? false,\n  252 |         contextualErrorMap: params?.errorMap,\n  253 |       },"
+    }
+  },
+  {
+    "edge_id": "ee6b7f3b989c",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      3552,
+      28,
+      3552,
+      59
+    ],
+    "call_context": " 3550 |   }\n 3551 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3552 |     const { status, ctx } = this._processInputParams(input);\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3553 |     if (ctx.parsedType !== ZodParsedType.object) {",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "src/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "a41c119e3dca",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodNumber({\n      ...this._def,\n      checks: [...this._def.checks, check],\n    })",
+    "call_range": [
+      1404,
+      11,
+      1407,
+      6
+    ],
+    "call_context": " 1402 | \n 1403 |   _addCheck(check: ZodNumberCheck) {\n 1404 |     return new ZodNumber({\n      |            ^^^^^^^^^^^^^^^\n 1405 |       ...this._def,\n 1406 |       checks: [...this._def.checks, check],\n 1407 |     });\n 1408 |   }",
+    "callee": "ZodNumber",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodNumber",
+      "file": "src/types.ts",
+      "lines": "1264-1529",
+      "definition": " 1264 | export class ZodNumber extends ZodType<number, ZodNumberDef, number> {\n 1265 |   _parse(input: ParseInput): ParseReturnType<number> {\n 1266 |     if (this._def.coerce) {\n 1267 |       input.data = Number(input.data);\n 1268 |     }\n 1269 |     const parsedType = this._getType(input);\n 1270 |     if (parsedType !== ZodParsedType.number) {\n 1271 |       const ctx = this._getOrReturnCtx(input);\n 1272 |       addIssueToContext(ctx, {\n 1273 |         code: ZodIssueCode.invalid_type,"
+    }
+  },
+  {
+    "edge_id": "574249f0f3e1",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodNullable.create(this, this._def)",
+    "call_range": [
+      431,
+      11,
+      431,
+      46
+    ],
+    "call_context": "  429 |   }\n  430 |   nullable(): ZodNullable<this> {\n  431 |     return ZodNullable.create(this, this._def) as any;\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  432 |   }",
+    "callee": "create",
+    "receiver": "ZodNullable",
+    "target": {
+      "qualified_name": "ZodNullable.create",
+      "file": "src/types.ts",
+      "lines": "4698-4707",
+      "definition": " 4698 |   static create = <T extends ZodTypeAny>(\n 4699 |     type: T,\n 4700 |     params?: RawCreateParams\n 4701 |   ): ZodNullable<T> => {\n 4702 |     return new ZodNullable({\n 4703 |       innerType: type,\n 4704 |       typeName: ZodFirstPartyTypeKind.ZodNullable,\n 4705 |       ...processCreateParams(params),\n 4706 |     }) as any;\n 4707 |   };"
+    }
+  },
+  {
+    "edge_id": "0c59f0219e52",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      1766,
+      11,
+      1766,
+      25
+    ],
+    "call_context": " 1764 |       return INVALID;\n 1765 |     }\n 1766 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 1767 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "80beb3c5af52",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ParseStatus.mergeObjectSync(status, pairs as any)",
+    "call_range": [
+      2532,
+      13,
+      2532,
+      62
+    ],
+    "call_context": " 2530 |         });\n 2531 |     } else {\n 2532 |       return ParseStatus.mergeObjectSync(status, pairs as any);\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2533 |     }",
+    "callee": "mergeObjectSync",
+    "receiver": "ParseStatus",
+    "target": {
+      "qualified_name": "ParseStatus.mergeObjectSync",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "134-159",
+      "definition": "  134 |   static mergeObjectSync(\n  135 |     status: ParseStatus,\n  136 |     pairs: {\n  137 |       key: SyncParseReturnType<any>;\n  138 |       value: SyncParseReturnType<any>;\n  139 |       alwaysSet?: boolean;\n  140 |     }[]\n  141 |   ): SyncParseReturnType {\n  142 |     const finalObject: any = {};\n  143 |     for (const pair of pairs) {"
+    }
+  },
+  {
+    "edge_id": "7b193b77829a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "isAborted(parsedRight)",
+    "call_range": [
+      3314,
+      35,
+      3314,
+      57
+    ],
+    "call_context": " 3312 |       parsedRight: SyncParseReturnType\n 3313 |     ): SyncParseReturnType<T & U> => {\n 3314 |       if (isAborted(parsedLeft) || isAborted(parsedRight)) {\n      |                                    ^^^^^^^^^^^^^^^^^^^^^^\n 3315 |         return INVALID;",
+    "callee": "isAborted",
+    "receiver": null,
+    "target": {
+      "qualified_name": "isAborted",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "183-184",
+      "definition": "  183 | export const isAborted = (x: ParseReturnType<any>): x is INVALID =>\n  184 |   (x as any).status === \"aborted\";"
+    }
+  },
+  {
+    "edge_id": "6e50e3c6f505",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodOptional.create(this, this._def)",
+    "call_range": [
+      428,
+      11,
+      428,
+      46
+    ],
+    "call_context": "  426 | \n  427 |   optional(): ZodOptional<this> {\n  428 |     return ZodOptional.create(this, this._def) as any;\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  429 |   }",
+    "callee": "create",
+    "receiver": "ZodOptional",
+    "target": {
+      "qualified_name": "ZodIntersection.create",
+      "file": "src/types.ts",
+      "lines": "3363-3374",
+      "definition": " 3363 |   static create = <T extends ZodTypeAny, U extends ZodTypeAny>(\n 3364 |     left: T,\n 3365 |     right: U,\n 3366 |     params?: RawCreateParams\n 3367 |   ): ZodIntersection<T, U> => {\n 3368 |     return new ZodIntersection({\n 3369 |       left: left,\n 3370 |       right: right,\n 3371 |       typeName: ZodFirstPartyTypeKind.ZodIntersection,\n 3372 |       ...processCreateParams(params),"
+    }
+  },
+  {
+    "edge_id": "e4b6dc2938c8",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({\n      kind: \"max\",\n      value: BigInt(0),\n      inclusive: true,\n      message: errorUtil.toString(message),\n    })",
+    "call_range": [
+      1692,
+      11,
+      1697,
+      6
+    ],
+    "call_context": " 1690 | \n 1691 |   nonpositive(message?: errorUtil.ErrMessage) {\n 1692 |     return this._addCheck({\n      |            ^^^^^^^^^^^^^^^^\n 1693 |       kind: \"max\",\n 1694 |       value: BigInt(0),\n 1695 |       inclusive: true,\n 1696 |       message: errorUtil.toString(message),\n 1697 |     });\n 1698 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodBigInt._addCheck",
+      "file": "src/types.ts",
+      "lines": "1666-1671",
+      "definition": " 1666 |   _addCheck(check: ZodBigIntCheck) {\n 1667 |     return new ZodBigInt({\n 1668 |       ...this._def,\n 1669 |       checks: [...this._def.checks, check],\n 1670 |     });\n 1671 |   }"
+    }
+  },
+  {
+    "edge_id": "ee2ae4e58547",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodObject({\n      ...this._def,\n      shape: () => newShape,\n    })",
+    "call_range": [
+      2813,
+      11,
+      2816,
+      6
+    ],
+    "call_context": " 2811 |     });\n 2812 | \n 2813 |     return new ZodObject({\n      |            ^^^^^^^^^^^^^^^\n 2814 |       ...this._def,\n 2815 |       shape: () => newShape,\n 2816 |     }) as any;\n 2817 |   }",
+    "callee": "ZodObject",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodObject",
+      "file": "src/types.ts",
+      "lines": "2412-2907",
+      "definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {"
+    }
+  },
+  {
+    "edge_id": "d3baa11767d4",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this.min(1, message)",
+    "call_range": [
+      3831,
+      11,
+      3831,
+      31
+    ],
+    "call_context": " 3829 | \n 3830 |   nonempty(message?: errorUtil.ErrMessage): ZodSet<Value> {\n 3831 |     return this.min(1, message) as any;\n      |            ^^^^^^^^^^^^^^^^^^^^\n 3832 |   }",
+    "callee": "min",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodSet.min",
+      "file": "src/types.ts",
+      "lines": "3812-3817",
+      "definition": " 3812 |   min(minSize: number, message?: errorUtil.ErrMessage): this {\n 3813 |     return new ZodSet({\n 3814 |       ...this._def,\n 3815 |       minSize: { value: minSize, message: errorUtil.toString(message) },\n 3816 |     }) as any;\n 3817 |   }"
+    }
+  },
+  {
+    "edge_id": "f5cfce67a577",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodIntersection.create(this, incoming, this._def)",
+    "call_range": [
+      448,
+      11,
+      448,
+      60
+    ],
+    "call_context": "  446 | \n  447 |   and<T extends ZodTypeAny>(incoming: T): ZodIntersection<this, T> {\n  448 |     return ZodIntersection.create(this, incoming, this._def);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  449 |   }",
+    "callee": "create",
+    "receiver": "ZodIntersection",
+    "target": {
+      "qualified_name": "ZodDate.create",
+      "file": "src/types.ts",
+      "lines": "1907-1916",
+      "definition": " 1907 |   static create = (\n 1908 |     params?: RawCreateParams & { coerce?: boolean }\n 1909 |   ): ZodDate => {\n 1910 |     return new ZodDate({\n 1911 |       checks: [],\n 1912 |       coerce: params?.coerce || false,\n 1913 |       typeName: ZodFirstPartyTypeKind.ZodDate,\n 1914 |       ...processCreateParams(params),\n 1915 |     });\n 1916 |   };"
+    }
+  },
+  {
+    "edge_id": "8de85977d375",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._getType(input)",
+    "call_range": [
+      2119,
+      23,
+      2119,
+      43
+    ],
+    "call_context": " 2117 | export class ZodVoid extends ZodType<void, ZodVoidDef, void> {\n 2118 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2119 |     const parsedType = this._getType(input);\n      |                        ^^^^^^^^^^^^^^^^^^^^\n 2120 |     if (parsedType !== ZodParsedType.undefined) {",
+    "callee": "_getType",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._getType",
+      "file": "src/types.ts",
+      "lines": "184-186",
+      "definition": "  184 |   _getType(input: ParseInput): string {\n  185 |     return getParsedType(input.data);\n  186 |   }"
+    }
+  },
+  {
+    "edge_id": "9ff0e3d60688",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodOptional.create(this, this._def)",
+    "call_range": [
+      428,
+      11,
+      428,
+      46
+    ],
+    "call_context": "  426 | \n  427 |   optional(): ZodOptional<this> {\n  428 |     return ZodOptional.create(this, this._def) as any;\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  429 |   }",
+    "callee": "create",
+    "receiver": "ZodOptional",
+    "target": {
+      "qualified_name": "ZodOptional.create",
+      "file": "src/types.ts",
+      "lines": "4654-4663",
+      "definition": " 4654 |   static create = <T extends ZodTypeAny>(\n 4655 |     type: T,\n 4656 |     params?: RawCreateParams\n 4657 |   ): ZodOptional<T> => {\n 4658 |     return new ZodOptional({\n 4659 |       innerType: type,\n 4660 |       typeName: ZodFirstPartyTypeKind.ZodOptional,\n 4661 |       ...processCreateParams(params),\n 4662 |     }) as any;\n 4663 |   };"
+    }
+  },
+  {
+    "edge_id": "a3f5721b1f7e",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodArray.create(this, this._def)",
+    "call_range": [
+      437,
+      11,
+      437,
+      43
+    ],
+    "call_context": "  435 |   }\n  436 |   array(): ZodArray<this> {\n  437 |     return ZodArray.create(this, this._def);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  438 |   }",
+    "callee": "create",
+    "receiver": "ZodArray",
+    "target": {
+      "qualified_name": "ZodArray.create",
+      "file": "src/types.ts",
+      "lines": "2283-2295",
+      "definition": " 2283 |   static create = <T extends ZodTypeAny>(\n 2284 |     schema: T,\n 2285 |     params?: RawCreateParams\n 2286 |   ): ZodArray<T> => {\n 2287 |     return new ZodArray({\n 2288 |       type: schema,\n 2289 |       minLength: null,\n 2290 |       maxLength: null,\n 2291 |       exactLength: null,\n 2292 |       typeName: ZodFirstPartyTypeKind.ZodArray,"
+    }
+  },
+  {
+    "edge_id": "df8081c2e42f",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodEffects({\n      schema,\n      typeName: ZodFirstPartyTypeKind.ZodEffects,\n      effect,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      4598,
+      11,
+      4603,
+      6
+    ],
+    "call_context": " 4596 |     params?: RawCreateParams\n 4597 |   ): ZodEffects<I, I[\"_output\"]> => {\n 4598 |     return new ZodEffects({\n      |            ^^^^^^^^^^^^^^^^\n 4599 |       schema,\n 4600 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n 4601 |       effect,\n 4602 |       ...processCreateParams(params),\n 4603 |     });\n 4604 |   };",
+    "callee": "ZodEffects",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodEffects",
+      "file": "src/types.ts",
+      "lines": "4453-4618",
+      "definition": " 4453 | export class ZodEffects<\n 4454 |   T extends ZodTypeAny,\n 4455 |   Output = output<T>,\n 4456 |   Input = input<T>\n 4457 | > extends ZodType<Output, ZodEffectsDef<T>, Input> {\n 4458 |   innerType() {\n 4459 |     return this._def.schema;\n 4460 |   }\n 4461 | \n 4462 |   sourceType(): T {"
+    }
+  },
+  {
+    "edge_id": "2b4d017fafbc",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(params)",
+    "call_range": [
+      4759,
+      9,
+      4759,
+      36
+    ],
+    "call_context": " 4757 |           ? params.default\n 4758 |           : () => params.default as any,\n 4759 |       ...processCreateParams(params),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4760 |     }) as any;",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "9e08cfdf14c6",
+    "repo": "zod",
+    "file": "src/helpers/parseUtil.ts",
+    "call_text": "status.dirty()",
+    "call_range": [
+      111,
+      32,
+      111,
+      46
+    ],
+    "call_context": "  109 |     for (const s of results) {\n  110 |       if (s.status === \"aborted\") return INVALID;\n  111 |       if (s.status === \"dirty\") status.dirty();\n      |                                 ^^^^^^^^^^^^^^\n  112 |       arrayValue.push(s.value);",
+    "callee": "dirty",
+    "receiver": "status",
+    "target": {
+      "qualified_name": "ParseStatus.dirty",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "97-99",
+      "definition": "   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }"
+    }
+  },
+  {
+    "edge_id": "34b6bd750db8",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "isAsync(result)",
+    "call_range": [
+      227,
+      8,
+      227,
+      23
+    ],
+    "call_context": "  225 |   _parseSync(input: ParseInput): SyncParseReturnType<Output> {\n  226 |     const result = this._parse(input);\n  227 |     if (isAsync(result)) {\n      |         ^^^^^^^^^^^^^^^\n  228 |       throw new Error(\"Synchronous parse encountered promise.\");",
+    "callee": "isAsync",
+    "receiver": null,
+    "target": {
+      "qualified_name": "isAsync",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "189-192",
+      "definition": "  189 | export const isAsync = <T>(\n  190 |   x: ParseReturnType<T>\n  191 | ): x is AsyncParseReturnType<T> =>\n  192 |   typeof Promise !== \"undefined\" && x instanceof Promise;"
+    }
+  },
+  {
+    "edge_id": "d9460c68c4ab",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      2066,
+      11,
+      2066,
+      25
+    ],
+    "call_context": " 2064 |   _unknown = true as const;\n 2065 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2066 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 2067 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "8ad7c615e3b7",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "datetimeRegex(check)",
+    "call_range": [
+      879,
+      22,
+      879,
+      42
+    ],
+    "call_context": "  877 |         }\n  878 |       } else if (check.kind === \"datetime\") {\n  879 |         const regex = datetimeRegex(check);\n      |                       ^^^^^^^^^^^^^^^^^^^^\n  880 | ",
+    "callee": "datetimeRegex",
+    "receiver": null,
+    "target": {
+      "qualified_name": "datetimeRegex",
+      "file": "src/types.ts",
+      "lines": "647-659",
+      "definition": "  647 | export function datetimeRegex(args: {\n  648 |   precision?: number | null;\n  649 |   offset?: boolean;\n  650 |   local?: boolean;\n  651 | }) {\n  652 |   let regex = `${dateRegexSource}T${timeRegexSource(args)}`;\n  653 | \n  654 |   const opts: string[] = [];\n  655 |   opts.push(args.local ? `Z?` : `Z`);\n  656 |   if (args.offset) opts.push(`([+-]\\\\d{2}:?\\\\d{2})`);"
+    }
+  },
+  {
+    "edge_id": "68a59d1f5c3e",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodIntersection.create(this, incoming, this._def)",
+    "call_range": [
+      448,
+      11,
+      448,
+      60
+    ],
+    "call_context": "  446 | \n  447 |   and<T extends ZodTypeAny>(incoming: T): ZodIntersection<this, T> {\n  448 |     return ZodIntersection.create(this, incoming, this._def);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  449 |   }",
+    "callee": "create",
+    "receiver": "ZodIntersection",
+    "target": {
+      "qualified_name": "ZodIntersection.create",
+      "file": "src/types.ts",
+      "lines": "3363-3374",
+      "definition": " 3363 |   static create = <T extends ZodTypeAny, U extends ZodTypeAny>(\n 3364 |     left: T,\n 3365 |     right: U,\n 3366 |     params?: RawCreateParams\n 3367 |   ): ZodIntersection<T, U> => {\n 3368 |     return new ZodIntersection({\n 3369 |       left: left,\n 3370 |       right: right,\n 3371 |       typeName: ZodFirstPartyTypeKind.ZodIntersection,\n 3372 |       ...processCreateParams(params),"
+    }
+  },
+  {
+    "edge_id": "339f571ee74a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "getParsedType(b)",
+    "call_range": [
+      3250,
+      16,
+      3250,
+      32
+    ],
+    "call_context": " 3248 | ): { valid: true; data: any } | { valid: false } {\n 3249 |   const aType = getParsedType(a);\n 3250 |   const bType = getParsedType(b);\n      |                 ^^^^^^^^^^^^^^^^\n 3251 | ",
+    "callee": "getParsedType",
+    "receiver": null,
+    "target": {
+      "qualified_name": "getParsedType",
+      "file": "src/helpers/util.ts",
+      "lines": "166-220",
+      "definition": "  166 | export const getParsedType = (data: any): ZodParsedType => {\n  167 |   const t = typeof data;\n  168 | \n  169 |   switch (t) {\n  170 |     case \"undefined\":\n  171 |       return ZodParsedType.undefined;\n  172 | \n  173 |     case \"string\":\n  174 |       return ZodParsedType.string;\n  175 | "
+    }
+  },
+  {
+    "edge_id": "c128100b9a91",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n        code: ZodIssueCode.invalid_type,\n        expected: ZodParsedType.void,\n        received: ctx.parsedType,\n      })",
+    "call_range": [
+      2122,
+      6,
+      2126,
+      8
+    ],
+    "call_context": " 2120 |     if (parsedType !== ZodParsedType.undefined) {\n 2121 |       const ctx = this._getOrReturnCtx(input);\n 2122 |       addIssueToContext(ctx, {\n      |       ^^^^^^^^^^^^^^^^^^^^^^^^\n 2123 |         code: ZodIssueCode.invalid_type,\n 2124 |         expected: ZodParsedType.void,\n 2125 |         received: ctx.parsedType,\n 2126 |       });\n 2127 |       return INVALID;",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "59f6deb0c939",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ParseStatus.mergeArray(status, result)",
+    "call_range": [
+      2251,
+      11,
+      2251,
+      49
+    ],
+    "call_context": " 2249 |     });\n 2250 | \n 2251 |     return ParseStatus.mergeArray(status, result);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2252 |   }",
+    "callee": "mergeArray",
+    "receiver": "ParseStatus",
+    "target": {
+      "qualified_name": "ParseStatus.mergeArray",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "104-116",
+      "definition": "  104 |   static mergeArray(\n  105 |     status: ParseStatus,\n  106 |     results: SyncParseReturnType<any>[]\n  107 |   ): SyncParseReturnType {\n  108 |     const arrayValue: any[] = [];\n  109 |     for (const s of results) {\n  110 |       if (s.status === \"aborted\") return INVALID;\n  111 |       if (s.status === \"dirty\") status.dirty();\n  112 |       arrayValue.push(s.value);\n  113 |     }"
+    }
+  },
+  {
+    "edge_id": "ab60b7f5db2c",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(params)",
+    "call_range": [
+      3224,
+      9,
+      3224,
+      36
+    ],
+    "call_context": " 3222 |       options,\n 3223 |       optionsMap,\n 3224 |       ...processCreateParams(params),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3225 |     });",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "02f09af7e564",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({\n      kind: \"max\",\n      value: 0,\n      inclusive: false,\n      message: errorUtil.toString(message),\n    })",
+    "call_range": [
+      1427,
+      11,
+      1432,
+      6
+    ],
+    "call_context": " 1425 | \n 1426 |   negative(message?: errorUtil.ErrMessage) {\n 1427 |     return this._addCheck({\n      |            ^^^^^^^^^^^^^^^^\n 1428 |       kind: \"max\",\n 1429 |       value: 0,\n 1430 |       inclusive: false,\n 1431 |       message: errorUtil.toString(message),\n 1432 |     });\n 1433 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodNumber._addCheck",
+      "file": "src/types.ts",
+      "lines": "1403-1408",
+      "definition": " 1403 |   _addCheck(check: ZodNumberCheck) {\n 1404 |     return new ZodNumber({\n 1405 |       ...this._def,\n 1406 |       checks: [...this._def.checks, check],\n 1407 |     });\n 1408 |   }"
+    }
+  },
+  {
+    "edge_id": "872b61a42c8d",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      4469,
+      28,
+      4469,
+      59
+    ],
+    "call_context": " 4467 | \n 4468 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4469 |     const { status, ctx } = this._processInputParams(input);\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4470 | ",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "deno/lib/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "8ca1ce0df06d",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._getOrReturnCtx(input, ctx)",
+    "call_range": [
+      1601,
+      16,
+      1601,
+      48
+    ],
+    "call_context": " 1599 |       } else if (check.kind === \"multipleOf\") {\n 1600 |         if (input.data % check.value !== BigInt(0)) {\n 1601 |           ctx = this._getOrReturnCtx(input, ctx);\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 1602 |           addIssueToContext(ctx, {",
+    "callee": "_getOrReturnCtx",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._getOrReturnCtx",
+      "file": "src/types.ts",
+      "lines": "188-204",
+      "definition": "  188 |   _getOrReturnCtx(\n  189 |     input: ParseInput,\n  190 |     ctx?: ParseContext | undefined\n  191 |   ): ParseContext {\n  192 |     return (\n  193 |       ctx || {\n  194 |         common: input.parent.common,\n  195 |         data: input.data,\n  196 | \n  197 |         parsedType: getParsedType(input.data),"
+    }
+  },
+  {
+    "edge_id": "7bc26542924a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n          code: ZodIssueCode.too_big,\n          maximum: def.maxLength.value,\n          type: \"array\",\n          inclusive: true,\n          exact: false,\n          message: def.maxLength.message,\n        })",
+    "call_range": [
+      2221,
+      8,
+      2228,
+      10
+    ],
+    "call_context": " 2219 |     if (def.maxLength !== null) {\n 2220 |       if (ctx.data.length > def.maxLength.value) {\n 2221 |         addIssueToContext(ctx, {\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^\n 2222 |           code: ZodIssueCode.too_big,\n 2223 |           maximum: def.maxLength.value,\n 2224 |           type: \"array\",\n 2225 |           inclusive: true,\n 2226 |           exact: false,\n 2227 |           message: def.maxLength.message,\n 2228 |         });\n 2229 |         status.dirty();",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "71968f3cfd51",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      4784,
+      20,
+      4784,
+      51
+    ],
+    "call_context": " 4782 | > {\n 4783 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4784 |     const { ctx } = this._processInputParams(input);\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4785 | ",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "src/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "c0ecd97c268f",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n            code: ZodIssueCode.not_multiple_of,\n            multipleOf: check.value,\n            message: check.message,\n          })",
+    "call_range": [
+      1602,
+      10,
+      1606,
+      12
+    ],
+    "call_context": " 1600 |         if (input.data % check.value !== BigInt(0)) {\n 1601 |           ctx = this._getOrReturnCtx(input, ctx);\n 1602 |           addIssueToContext(ctx, {\n      |           ^^^^^^^^^^^^^^^^^^^^^^^^\n 1603 |             code: ZodIssueCode.not_multiple_of,\n 1604 |             multipleOf: check.value,\n 1605 |             message: check.message,\n 1606 |           });\n 1607 |           status.dirty();",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "512c9d7c8140",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ParseStatus.mergeObjectSync(status, pairs as any)",
+    "call_range": [
+      3584,
+      13,
+      3584,
+      62
+    ],
+    "call_context": " 3582 |       return ParseStatus.mergeObjectAsync(status, pairs);\n 3583 |     } else {\n 3584 |       return ParseStatus.mergeObjectSync(status, pairs as any);\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3585 |     }",
+    "callee": "mergeObjectSync",
+    "receiver": "ParseStatus",
+    "target": {
+      "qualified_name": "ParseStatus.mergeObjectSync",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "134-159",
+      "definition": "  134 |   static mergeObjectSync(\n  135 |     status: ParseStatus,\n  136 |     pairs: {\n  137 |       key: SyncParseReturnType<any>;\n  138 |       value: SyncParseReturnType<any>;\n  139 |       alwaysSet?: boolean;\n  140 |     }[]\n  141 |   ): SyncParseReturnType {\n  142 |     const finalObject: any = {};\n  143 |     for (const pair of pairs) {"
+    }
+  },
+  {
+    "edge_id": "ff69c0717254",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodUnknown.create()",
+    "call_range": [
+      3991,
+      40,
+      3991,
+      59
+    ],
+    "call_context": " 3989 |     return new ZodFunction({\n 3990 |       ...this._def,\n 3991 |       args: ZodTuple.create(items).rest(ZodUnknown.create()) as any,\n      |                                         ^^^^^^^^^^^^^^^^^^^\n 3992 |     });",
+    "callee": "create",
+    "receiver": "ZodUnknown",
+    "target": {
+      "qualified_name": "ZodUnknown.create",
+      "file": "src/types.ts",
+      "lines": "2069-2074",
+      "definition": " 2069 |   static create = (params?: RawCreateParams): ZodUnknown => {\n 2070 |     return new ZodUnknown({\n 2071 |       typeName: ZodFirstPartyTypeKind.ZodUnknown,\n 2072 |       ...processCreateParams(params),\n 2073 |     });\n 2074 |   };"
+    }
+  },
+  {
+    "edge_id": "c35febb8a679",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      4219,
+      11,
+      4219,
+      25
+    ],
+    "call_context": " 4217 |       return INVALID;\n 4218 |     }\n 4219 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 4220 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "49ec493c8d0a",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ParseStatus.mergeObjectAsync(status, pairs)",
+    "call_range": [
+      3582,
+      13,
+      3582,
+      56
+    ],
+    "call_context": " 3580 | \n 3581 |     if (ctx.common.async) {\n 3582 |       return ParseStatus.mergeObjectAsync(status, pairs);\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3583 |     } else {",
+    "callee": "mergeObjectAsync",
+    "receiver": "ParseStatus",
+    "target": {
+      "qualified_name": "ParseStatus.mergeObjectAsync",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "118-132",
+      "definition": "  118 |   static async mergeObjectAsync(\n  119 |     status: ParseStatus,\n  120 |     pairs: { key: ParseReturnType<any>; value: ParseReturnType<any> }[]\n  121 |   ): Promise<SyncParseReturnType<any>> {\n  122 |     const syncPairs: ObjectPair[] = [];\n  123 |     for (const pair of pairs) {\n  124 |       const key = await pair.key;\n  125 |       const value = await pair.value;\n  126 |       syncPairs.push({\n  127 |         key,"
+    }
+  },
+  {
+    "edge_id": "3d063f8b13d4",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "getParsedType(input.data)",
+    "call_range": [
+      216,
+      20,
+      216,
+      45
+    ],
+    "call_context": "  214 |         data: input.data,\n  215 | \n  216 |         parsedType: getParsedType(input.data),\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^\n  217 | ",
+    "callee": "getParsedType",
+    "receiver": null,
+    "target": {
+      "qualified_name": "getParsedType",
+      "file": "src/helpers/util.ts",
+      "lines": "166-220",
+      "definition": "  166 | export const getParsedType = (data: any): ZodParsedType => {\n  167 |   const t = typeof data;\n  168 | \n  169 |   switch (t) {\n  170 |     case \"undefined\":\n  171 |       return ZodParsedType.undefined;\n  172 | \n  173 |     case \"string\":\n  174 |       return ZodParsedType.string;\n  175 | "
+    }
+  },
+  {
+    "edge_id": "e321c2482abe",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodUnknown.create()",
+    "call_range": [
+      4043,
+      26,
+      4043,
+      45
+    ],
+    "call_context": " 4041 |         ? args\n 4042 |         : ZodTuple.create([]).rest(ZodUnknown.create())) as any,\n 4043 |       returns: returns || ZodUnknown.create(),\n      |                           ^^^^^^^^^^^^^^^^^^^\n 4044 |       typeName: ZodFirstPartyTypeKind.ZodFunction,",
+    "callee": "create",
+    "receiver": "ZodUnknown",
+    "target": {
+      "qualified_name": "ZodUnknown.create",
+      "file": "src/types.ts",
+      "lines": "2069-2074",
+      "definition": " 2069 |   static create = (params?: RawCreateParams): ZodUnknown => {\n 2070 |     return new ZodUnknown({\n 2071 |       typeName: ZodFirstPartyTypeKind.ZodUnknown,\n 2072 |       ...processCreateParams(params),\n 2073 |     });\n 2074 |   };"
+    }
+  },
+  {
+    "edge_id": "fa5b0901745c",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodUnknown.create()",
+    "call_range": [
+      3991,
+      40,
+      3991,
+      59
+    ],
+    "call_context": " 3989 |     return new ZodFunction({\n 3990 |       ...this._def,\n 3991 |       args: ZodTuple.create(items).rest(ZodUnknown.create()) as any,\n      |                                         ^^^^^^^^^^^^^^^^^^^\n 3992 |     });",
+    "callee": "create",
+    "receiver": "ZodUnknown",
+    "target": {
+      "qualified_name": "ZodEffects.create",
+      "file": "src/types.ts",
+      "lines": "4593-4604",
+      "definition": " 4593 |   static create = <I extends ZodTypeAny>(\n 4594 |     schema: I,\n 4595 |     effect: Effect<I[\"_output\"]>,\n 4596 |     params?: RawCreateParams\n 4597 |   ): ZodEffects<I, I[\"_output\"]> => {\n 4598 |     return new ZodEffects({\n 4599 |       schema,\n 4600 |       typeName: ZodFirstPartyTypeKind.ZodEffects,\n 4601 |       effect,\n 4602 |       ...processCreateParams(params),"
+    }
+  },
+  {
+    "edge_id": "63dacfb56736",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodTuple.create(\n      schema.items.map((item: any) => deepPartialify(item))\n    )",
+    "call_range": [
+      2404,
+      11,
+      2406,
+      5
+    ],
+    "call_context": " 2402 |     return ZodNullable.create(deepPartialify(schema.unwrap()));\n 2403 |   } else if (schema instanceof ZodTuple) {\n 2404 |     return ZodTuple.create(\n      |            ^^^^^^^^^^^^^^^^\n 2405 |       schema.items.map((item: any) => deepPartialify(item))\n 2406 |     );\n 2407 |   } else {",
+    "callee": "create",
+    "receiver": "ZodTuple",
+    "target": {
+      "qualified_name": "ZodNaN.create",
+      "file": "src/types.ts",
+      "lines": "4882-4887",
+      "definition": " 4882 |   static create = (params?: RawCreateParams): ZodNaN => {\n 4883 |     return new ZodNaN({\n 4884 |       typeName: ZodFirstPartyTypeKind.ZodNaN,\n 4885 |       ...processCreateParams(params),\n 4886 |     });\n 4887 |   };"
+    }
+  },
+  {
+    "edge_id": "ea1b498178b6",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(input.data)",
+    "call_range": [
+      2041,
+      11,
+      2041,
+      25
+    ],
+    "call_context": " 2039 |   _any = true as const;\n 2040 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 2041 |     return OK(input.data);\n      |            ^^^^^^^^^^^^^^\n 2042 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  },
+  {
+    "edge_id": "26f59ae718c4",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodAny.create()",
+    "call_range": [
+      5108,
+      9,
+      5108,
+      24
+    ],
+    "call_context": " 5106 |       }\n 5107 |     });\n 5108 |   return ZodAny.create();\n      |          ^^^^^^^^^^^^^^^\n 5109 | }",
+    "callee": "create",
+    "receiver": "ZodAny",
+    "target": {
+      "qualified_name": "ZodAny.create",
+      "file": "src/types.ts",
+      "lines": "2043-2048",
+      "definition": " 2043 |   static create = (params?: RawCreateParams): ZodAny => {\n 2044 |     return new ZodAny({\n 2045 |       typeName: ZodFirstPartyTypeKind.ZodAny,\n 2046 |       ...processCreateParams(params),\n 2047 |     });\n 2048 |   };"
+    }
+  },
+  {
+    "edge_id": "267798eb1722",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodPipeline.create(this, target)",
+    "call_range": [
+      508,
+      11,
+      508,
+      43
+    ],
+    "call_context": "  506 | \n  507 |   pipe<T extends ZodTypeAny>(target: T): ZodPipeline<this, T> {\n  508 |     return ZodPipeline.create(this, target);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  509 |   }",
+    "callee": "create",
+    "receiver": "ZodPipeline",
+    "target": {
+      "qualified_name": "ZodAny.create",
+      "file": "src/types.ts",
+      "lines": "2043-2048",
+      "definition": " 2043 |   static create = (params?: RawCreateParams): ZodAny => {\n 2044 |     return new ZodAny({\n 2045 |       typeName: ZodFirstPartyTypeKind.ZodAny,\n 2046 |       ...processCreateParams(params),\n 2047 |     });\n 2048 |   };"
+    }
+  },
+  {
+    "edge_id": "14e176066848",
+    "repo": "zod",
+    "file": "src/__tests__/Mocker.ts",
+    "call_text": "this.pick(this.boolean, this.null)",
+    "call_range": [
+      52,
+      11,
+      52,
+      45
+    ],
+    "call_context": "   50 |   }\n   51 |   get booleanNullable() {\n   52 |     return this.pick(this.boolean, this.null);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   53 |   }",
+    "callee": "pick",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "Mocker.pick",
+      "file": "src/__tests__/Mocker.ts",
+      "lines": "8-10",
+      "definition": "    8 |   pick = (...args: any[]) => {\n    9 |     return args[getRandomInt(args.length)];\n   10 |   };"
+    }
+  },
+  {
+    "edge_id": "d1a21c5430fb",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(params)",
+    "call_range": [
+      4885,
+      9,
+      4885,
+      36
+    ],
+    "call_context": " 4883 |     return new ZodNaN({\n 4884 |       typeName: ZodFirstPartyTypeKind.ZodNaN,\n 4885 |       ...processCreateParams(params),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4886 |     });",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "905aafd96365",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(params)",
+    "call_range": [
+      4127,
+      9,
+      4127,
+      36
+    ],
+    "call_context": " 4125 |       value: value,\n 4126 |       typeName: ZodFirstPartyTypeKind.ZodLiteral,\n 4127 |       ...processCreateParams(params),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4128 |     });",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "35457f2d75df",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodTuple({\n      ...this._def,\n      rest,\n    })",
+    "call_range": [
+      3487,
+      11,
+      3490,
+      6
+    ],
+    "call_context": " 3485 | \n 3486 |   rest<Rest extends ZodTypeAny>(rest: Rest): ZodTuple<T, Rest> {\n 3487 |     return new ZodTuple({\n      |            ^^^^^^^^^^^^^^\n 3488 |       ...this._def,\n 3489 |       rest,\n 3490 |     });\n 3491 |   }",
+    "callee": "ZodTuple",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodTuple",
+      "file": "src/types.ts",
+      "lines": "3419-3507",
+      "definition": " 3419 | export class ZodTuple<\n 3420 |   T extends [ZodTypeAny, ...ZodTypeAny[]] | [] = [ZodTypeAny, ...ZodTypeAny[]],\n 3421 |   Rest extends ZodTypeAny | null = null\n 3422 | > extends ZodType<\n 3423 |   OutputTypeOfTupleWithRest<T, Rest>,\n 3424 |   ZodTupleDef<T, Rest>,\n 3425 |   InputTypeOfTupleWithRest<T, Rest>\n 3426 | > {\n 3427 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 3428 |     const { status, ctx } = this._processInputParams(input);"
+    }
+  },
+  {
+    "edge_id": "7f37c6b30ba2",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "isValid(base)",
+    "call_range": [
+      4581,
+      17,
+      4581,
+      30
+    ],
+    "call_context": " 4579 |           ._parseAsync({ data: ctx.data, path: ctx.path, parent: ctx })\n 4580 |           .then((base) => {\n 4581 |             if (!isValid(base)) return base;\n      |                  ^^^^^^^^^^^^^\n 4582 | ",
+    "callee": "isValid",
+    "receiver": null,
+    "target": {
+      "qualified_name": "isValid",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "187-188",
+      "definition": "  187 | export const isValid = <T>(x: ParseReturnType<T>): x is OK<T> =>\n  188 |   (x as any).status === \"valid\";"
+    }
+  },
+  {
+    "edge_id": "a704b1cbc2ff",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodUnknown.create()",
+    "call_range": [
+      3991,
+      40,
+      3991,
+      59
+    ],
+    "call_context": " 3989 |     return new ZodFunction({\n 3990 |       ...this._def,\n 3991 |       args: ZodTuple.create(items).rest(ZodUnknown.create()) as any,\n      |                                         ^^^^^^^^^^^^^^^^^^^\n 3992 |     });",
+    "callee": "create",
+    "receiver": "ZodUnknown",
+    "target": {
+      "qualified_name": "ZodTuple.create",
+      "file": "src/types.ts",
+      "lines": "3493-3506",
+      "definition": " 3493 |   static create = <T extends [ZodTypeAny, ...ZodTypeAny[]] | []>(\n 3494 |     schemas: T,\n 3495 |     params?: RawCreateParams\n 3496 |   ): ZodTuple<T, null> => {\n 3497 |     if (!Array.isArray(schemas)) {\n 3498 |       throw new Error(\"You must pass an array of schemas to z.tuple([ ... ])\");\n 3499 |     }\n 3500 |     return new ZodTuple({\n 3501 |       items: schemas,\n 3502 |       typeName: ZodFirstPartyTypeKind.ZodTuple,"
+    }
+  },
+  {
+    "edge_id": "d2c734834cd2",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodObject({\n      ...schema._def,\n      shape: () => newShape,\n    })",
+    "call_range": [
+      2390,
+      11,
+      2393,
+      6
+    ],
+    "call_context": " 2388 |       newShape[key] = ZodOptional.create(deepPartialify(fieldSchema));\n 2389 |     }\n 2390 |     return new ZodObject({\n      |            ^^^^^^^^^^^^^^^\n 2391 |       ...schema._def,\n 2392 |       shape: () => newShape,\n 2393 |     }) as any;\n 2394 |   } else if (schema instanceof ZodArray) {",
+    "callee": "ZodObject",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodObject",
+      "file": "src/types.ts",
+      "lines": "2412-2907",
+      "definition": " 2412 | export class ZodObject<\n 2413 |   T extends ZodRawShape,\n 2414 |   UnknownKeys extends UnknownKeysParam = UnknownKeysParam,\n 2415 |   Catchall extends ZodTypeAny = ZodTypeAny,\n 2416 |   Output = objectOutputType<T, Catchall, UnknownKeys>,\n 2417 |   Input = objectInputType<T, Catchall, UnknownKeys>\n 2418 | > extends ZodType<Output, ZodObjectDef<T, UnknownKeys, Catchall>, Input> {\n 2419 |   private _cached: { shape: T; keys: string[] } | null = null;\n 2420 | \n 2421 |   _getCached(): { shape: T; keys: string[] } {"
+    }
+  },
+  {
+    "edge_id": "02f462b11165",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseStatus()",
+    "call_range": [
+      1821,
+      19,
+      1821,
+      36
+    ],
+    "call_context": " 1819 |     }\n 1820 | \n 1821 |     const status = new ParseStatus();\n      |                    ^^^^^^^^^^^^^^^^^\n 1822 |     let ctx: undefined | ParseContext = undefined;",
+    "callee": "ParseStatus",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseStatus",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "95-160",
+      "definition": "   95 | export class ParseStatus {\n   96 |   value: \"aborted\" | \"dirty\" | \"valid\" = \"valid\";\n   97 |   dirty() {\n   98 |     if (this.value === \"valid\") this.value = \"dirty\";\n   99 |   }\n  100 |   abort() {\n  101 |     if (this.value !== \"aborted\") this.value = \"aborted\";\n  102 |   }\n  103 | \n  104 |   static mergeArray("
+    }
+  },
+  {
+    "edge_id": "9845d82e07d1",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n        received: ctx.data,\n        code: ZodIssueCode.invalid_enum_value,\n        options: expectedValues,\n      })",
+    "call_range": [
+      4212,
+      6,
+      4216,
+      8
+    ],
+    "call_context": " 4210 |       const expectedValues = this._def.values;\n 4211 | \n 4212 |       addIssueToContext(ctx, {\n      |       ^^^^^^^^^^^^^^^^^^^^^^^^\n 4213 |         received: ctx.data,\n 4214 |         code: ZodIssueCode.invalid_enum_value,\n 4215 |         options: expectedValues,\n 4216 |       });\n 4217 |       return INVALID;",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "e05e34b9aab0",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ParseInputLazyPath(ctx, ctx.data[key], ctx.path, key)",
+    "call_range": [
+      3575,
+      10,
+      3575,
+      67
+    ],
+    "call_context": " 3573 |         key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, key)),\n 3574 |         value: valueType._parse(\n 3575 |           new ParseInputLazyPath(ctx, ctx.data[key], ctx.path, key)\n      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 3576 |         ),",
+    "callee": "ParseInputLazyPath",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ParseInputLazyPath",
+      "file": "src/types.ts",
+      "lines": "61-89",
+      "definition": "   61 | class ParseInputLazyPath implements ParseInput {\n   62 |   parent: ParseContext;\n   63 |   data: any;\n   64 |   _path: ParsePath;\n   65 |   _key: string | number | (string | number)[];\n   66 |   _cachedPath: ParsePath = [];\n   67 |   constructor(\n   68 |     parent: ParseContext,\n   69 |     value: any,\n   70 |     path: ParsePath,"
+    }
+  },
+  {
+    "edge_id": "3bf9cab462c0",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({ kind: \"cuid2\", ...errorUtil.errToObj(message) })",
+    "call_range": [
+      994,
+      11,
+      994,
+      76
+    ],
+    "call_context": "  992 | \n  993 |   cuid2(message?: errorUtil.ErrMessage) {\n  994 |     return this._addCheck({ kind: \"cuid2\", ...errorUtil.errToObj(message) });\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  995 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodString._addCheck",
+      "file": "src/types.ts",
+      "lines": "964-969",
+      "definition": "  964 |   _addCheck(check: ZodStringCheck) {\n  965 |     return new ZodString({\n  966 |       ...this._def,\n  967 |       checks: [...this._def.checks, check],\n  968 |     });\n  969 |   }"
+    }
+  },
+  {
+    "edge_id": "5ffcab78b41b",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      4730,
+      20,
+      4730,
+      51
+    ],
+    "call_context": " 4728 | > {\n 4729 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4730 |     const { ctx } = this._processInputParams(input);\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 4731 |     let data = ctx.data;",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "src/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "9331dc6728b1",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(this._def)",
+    "call_range": [
+      455,
+      9,
+      455,
+      39
+    ],
+    "call_context": "  453 |   ): ZodEffects<this, NewOut> {\n  454 |     return new ZodEffects({\n  455 |       ...processCreateParams(this._def),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  456 |       schema: this,",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "87e9a8f7fd36",
+    "repo": "zod",
+    "file": "src/__tests__/Mocker.ts",
+    "call_text": "getRandomInt(args.length)",
+    "call_range": [
+      9,
+      16,
+      9,
+      41
+    ],
+    "call_context": "    7 | export class Mocker {\n    8 |   pick = (...args: any[]) => {\n    9 |     return args[getRandomInt(args.length)];\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^\n   10 |   };",
+    "callee": "getRandomInt",
+    "receiver": null,
+    "target": {
+      "qualified_name": "getRandomInt",
+      "file": "src/__tests__/Mocker.ts",
+      "lines": "1-3",
+      "definition": "    1 | function getRandomInt(max: number) {\n    2 |   return Math.floor(Math.random() * Math.floor(max));\n    3 | }"
+    }
+  },
+  {
+    "edge_id": "1605d5f63881",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "isAsync(maybeAsyncResult)",
+    "call_range": [
+      292,
+      26,
+      292,
+      51
+    ],
+    "call_context": "  290 | \n  291 |     const maybeAsyncResult = this._parse({ data, path: ctx.path, parent: ctx });\n  292 |     const result = await (isAsync(maybeAsyncResult)\n      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^\n  293 |       ? maybeAsyncResult",
+    "callee": "isAsync",
+    "receiver": null,
+    "target": {
+      "qualified_name": "isAsync",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "189-192",
+      "definition": "  189 | export const isAsync = <T>(\n  190 |   x: ParseReturnType<T>\n  191 | ): x is AsyncParseReturnType<T> =>\n  192 |   typeof Promise !== \"undefined\" && x instanceof Promise;"
+    }
+  },
+  {
+    "edge_id": "9a7c4a9eec8e",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "custom<InstanceType<T>>((data) => data instanceof cls, params)",
+    "call_range": [
+      5203,
+      5,
+      5203,
+      67
+    ],
+    "call_context": " 5201 |     message: `Input not instance of ${cls.name}`,\n 5202 |   }\n 5203 | ) => custom<InstanceType<T>>((data) => data instanceof cls, params);\n      |      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 5204 | ",
+    "callee": "custom",
+    "receiver": null,
+    "target": {
+      "qualified_name": "custom",
+      "file": "src/types.ts",
+      "lines": "5079-5109",
+      "definition": " 5079 | export function custom<T>(\n 5080 |   check?: (data: any) => any,\n 5081 |   params: string | CustomParams | ((input: any) => CustomParams) = {},\n 5082 |   /**\n 5083 |    * @deprecated\n 5084 |    *\n 5085 |    * Pass `fatal` into the params object instead:\n 5086 |    *\n 5087 |    * ```ts\n 5088 |    * z.string().custom((val) => val.length > 5, { fatal: false })"
+    }
+  },
+  {
+    "edge_id": "4fc0e3ae62a1",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodTuple.create(\n      schema.items.map((item: any) => deepPartialify(item))\n    )",
+    "call_range": [
+      2404,
+      11,
+      2406,
+      5
+    ],
+    "call_context": " 2402 |     return ZodNullable.create(deepPartialify(schema.unwrap()));\n 2403 |   } else if (schema instanceof ZodTuple) {\n 2404 |     return ZodTuple.create(\n      |            ^^^^^^^^^^^^^^^^\n 2405 |       schema.items.map((item: any) => deepPartialify(item))\n 2406 |     );\n 2407 |   } else {",
+    "callee": "create",
+    "receiver": "ZodTuple",
+    "target": {
+      "qualified_name": "ZodRecord.create",
+      "file": "src/types.ts",
+      "lines": "3601-3617",
+      "definition": " 3601 |   static create(first: any, second?: any, third?: any): ZodRecord<any, any> {\n 3602 |     if (second instanceof ZodType) {\n 3603 |       return new ZodRecord({\n 3604 |         keyType: first,\n 3605 |         valueType: second,\n 3606 |         typeName: ZodFirstPartyTypeKind.ZodRecord,\n 3607 |         ...processCreateParams(third),\n 3608 |       });\n 3609 |     }\n 3610 | "
+    }
+  },
+  {
+    "edge_id": "7cf424cdac11",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._processInputParams(input)",
+    "call_range": [
+      2440,
+      28,
+      2440,
+      59
+    ],
+    "call_context": " 2438 |     }\n 2439 | \n 2440 |     const { status, ctx } = this._processInputParams(input);\n      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2441 | ",
+    "callee": "_processInputParams",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodType._processInputParams",
+      "file": "src/types.ts",
+      "lines": "206-223",
+      "definition": "  206 |   _processInputParams(input: ParseInput): {\n  207 |     status: ParseStatus;\n  208 |     ctx: ParseContext;\n  209 |   } {\n  210 |     return {\n  211 |       status: new ParseStatus(),\n  212 |       ctx: {\n  213 |         common: input.parent.common,\n  214 |         data: input.data,\n  215 | "
+    }
+  },
+  {
+    "edge_id": "cbd9985de44d",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "new ZodDefault({\n      innerType: type,\n      typeName: ZodFirstPartyTypeKind.ZodDefault,\n      defaultValue:\n        typeof params.default === \"function\"\n          ? params.default\n          : () => params.default as any,\n      ...processCreateParams(params),\n    })",
+    "call_range": [
+      4752,
+      11,
+      4760,
+      6
+    ],
+    "call_context": " 4750 |     }\n 4751 |   ): ZodDefault<T> => {\n 4752 |     return new ZodDefault({\n      |            ^^^^^^^^^^^^^^^^\n 4753 |       innerType: type,\n 4754 |       typeName: ZodFirstPartyTypeKind.ZodDefault,\n 4755 |       defaultValue:\n 4756 |         typeof params.default === \"function\"\n 4757 |           ? params.default\n 4758 |           : () => params.default as any,\n 4759 |       ...processCreateParams(params),\n 4760 |     }) as any;\n 4761 |   };",
+    "callee": "ZodDefault",
+    "receiver": null,
+    "target": {
+      "qualified_name": "ZodDefault",
+      "file": "src/types.ts",
+      "lines": "4724-4762",
+      "definition": " 4724 | export class ZodDefault<T extends ZodTypeAny> extends ZodType<\n 4725 |   util.noUndefined<T[\"_output\"]>,\n 4726 |   ZodDefaultDef<T>,\n 4727 |   T[\"_input\"] | undefined\n 4728 | > {\n 4729 |   _parse(input: ParseInput): ParseReturnType<this[\"_output\"]> {\n 4730 |     const { ctx } = this._processInputParams(input);\n 4731 |     let data = ctx.data;\n 4732 |     if (ctx.parsedType === ZodParsedType.undefined) {\n 4733 |       data = this._def.defaultValue();"
+    }
+  },
+  {
+    "edge_id": "d94dbea55724",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n        code: ZodIssueCode.invalid_type,\n        expected: ZodParsedType.object,\n        received: ctx.parsedType,\n      })",
+    "call_range": [
+      3554,
+      6,
+      3558,
+      8
+    ],
+    "call_context": " 3552 |     const { status, ctx } = this._processInputParams(input);\n 3553 |     if (ctx.parsedType !== ZodParsedType.object) {\n 3554 |       addIssueToContext(ctx, {\n      |       ^^^^^^^^^^^^^^^^^^^^^^^^\n 3555 |         code: ZodIssueCode.invalid_type,\n 3556 |         expected: ZodParsedType.object,\n 3557 |         received: ctx.parsedType,\n 3558 |       });\n 3559 |       return INVALID;",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "7c1fa5c49f51",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodNullable.create(this, this._def)",
+    "call_range": [
+      431,
+      11,
+      431,
+      46
+    ],
+    "call_context": "  429 |   }\n  430 |   nullable(): ZodNullable<this> {\n  431 |     return ZodNullable.create(this, this._def) as any;\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  432 |   }",
+    "callee": "create",
+    "receiver": "ZodNullable",
+    "target": {
+      "qualified_name": "ZodNaN.create",
+      "file": "src/types.ts",
+      "lines": "4882-4887",
+      "definition": " 4882 |   static create = (params?: RawCreateParams): ZodNaN => {\n 4883 |     return new ZodNaN({\n 4884 |       typeName: ZodFirstPartyTypeKind.ZodNaN,\n 4885 |       ...processCreateParams(params),\n 4886 |     });\n 4887 |   };"
+    }
+  },
+  {
+    "edge_id": "23ba2aa311bb",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodNever.create()",
+    "call_range": [
+      2876,
+      16,
+      2876,
+      33
+    ],
+    "call_context": " 2874 |       shape: () => shape,\n 2875 |       unknownKeys: \"strip\",\n 2876 |       catchall: ZodNever.create(),\n      |                 ^^^^^^^^^^^^^^^^^\n 2877 |       typeName: ZodFirstPartyTypeKind.ZodObject,",
+    "callee": "create",
+    "receiver": "ZodNever",
+    "target": {
+      "qualified_name": "ZodIntersection.create",
+      "file": "src/types.ts",
+      "lines": "3363-3374",
+      "definition": " 3363 |   static create = <T extends ZodTypeAny, U extends ZodTypeAny>(\n 3364 |     left: T,\n 3365 |     right: U,\n 3366 |     params?: RawCreateParams\n 3367 |   ): ZodIntersection<T, U> => {\n 3368 |     return new ZodIntersection({\n 3369 |       left: left,\n 3370 |       right: right,\n 3371 |       typeName: ZodFirstPartyTypeKind.ZodIntersection,\n 3372 |       ...processCreateParams(params),"
+    }
+  },
+  {
+    "edge_id": "7bca779d8fc1",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "processCreateParams(this._def)",
+    "call_range": [
+      492,
+      9,
+      492,
+      39
+    ],
+    "call_context": "  490 | \n  491 |     return new ZodCatch({\n  492 |       ...processCreateParams(this._def),\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  493 |       innerType: this,",
+    "callee": "processCreateParams",
+    "receiver": null,
+    "target": {
+      "qualified_name": "processCreateParams",
+      "file": "src/types.ts",
+      "lines": "129-151",
+      "definition": "  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {\n  130 |   if (!params) return {};\n  131 |   const { errorMap, invalid_type_error, required_error, description } = params;\n  132 |   if (errorMap && (invalid_type_error || required_error)) {\n  133 |     throw new Error(\n  134 |       `Can't use \"invalid_type_error\" or \"required_error\" in conjunction with custom error map.`\n  135 |     );\n  136 |   }\n  137 |   if (errorMap) return { errorMap: errorMap, description };\n  138 |   const customMap: ZodErrorMap = (iss, ctx) => {"
+    }
+  },
+  {
+    "edge_id": "c64d92eb12e4",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodAny.create()",
+    "call_range": [
+      5108,
+      9,
+      5108,
+      24
+    ],
+    "call_context": " 5106 |       }\n 5107 |     });\n 5108 |   return ZodAny.create();\n      |          ^^^^^^^^^^^^^^^\n 5109 | }",
+    "callee": "create",
+    "receiver": "ZodAny",
+    "target": {
+      "qualified_name": "ZodMap.create",
+      "file": "src/types.ts",
+      "lines": "3711-3725",
+      "definition": " 3711 |   static create = <\n 3712 |     Key extends ZodTypeAny = ZodTypeAny,\n 3713 |     Value extends ZodTypeAny = ZodTypeAny\n 3714 |   >(\n 3715 |     keyType: Key,\n 3716 |     valueType: Value,\n 3717 |     params?: RawCreateParams\n 3718 |   ): ZodMap<Key, Value> => {\n 3719 |     return new ZodMap({\n 3720 |       valueType,"
+    }
+  },
+  {
+    "edge_id": "c46c83cc4ed3",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "ZodReadonly.create(this)",
+    "call_range": [
+      511,
+      11,
+      511,
+      35
+    ],
+    "call_context": "  509 |   }\n  510 |   readonly(): ZodReadonly<this> {\n  511 |     return ZodReadonly.create(this);\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^\n  512 |   }",
+    "callee": "create",
+    "receiver": "ZodReadonly",
+    "target": {
+      "qualified_name": "ZodReadonly.create",
+      "file": "src/types.ts",
+      "lines": "5055-5064",
+      "definition": " 5055 |   static create = <T extends ZodTypeAny>(\n 5056 |     type: T,\n 5057 |     params?: RawCreateParams\n 5058 |   ): ZodReadonly<T> => {\n 5059 |     return new ZodReadonly({\n 5060 |       innerType: type,\n 5061 |       typeName: ZodFirstPartyTypeKind.ZodReadonly,\n 5062 |       ...processCreateParams(params),\n 5063 |     }) as any;\n 5064 |   };"
+    }
+  },
+  {
+    "edge_id": "2a6999077a94",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "this._addCheck({ kind: \"cuid2\", ...errorUtil.errToObj(message) })",
+    "call_range": [
+      994,
+      11,
+      994,
+      76
+    ],
+    "call_context": "  992 | \n  993 |   cuid2(message?: errorUtil.ErrMessage) {\n  994 |     return this._addCheck({ kind: \"cuid2\", ...errorUtil.errToObj(message) });\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  995 |   }",
+    "callee": "_addCheck",
+    "receiver": "this",
+    "target": {
+      "qualified_name": "ZodBigInt._addCheck",
+      "file": "src/types.ts",
+      "lines": "1666-1671",
+      "definition": " 1666 |   _addCheck(check: ZodBigIntCheck) {\n 1667 |     return new ZodBigInt({\n 1668 |       ...this._def,\n 1669 |       checks: [...this._def.checks, check],\n 1670 |     });\n 1671 |   }"
+    }
+  },
+  {
+    "edge_id": "7a29b9328b88",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "addIssueToContext(ctx, {\n        received: ctx.data,\n        code: ZodIssueCode.invalid_enum_value,\n        options: expectedValues,\n      })",
+    "call_range": [
+      4326,
+      6,
+      4330,
+      8
+    ],
+    "call_context": " 4324 |       const expectedValues = util.objectValues(nativeEnumValues);\n 4325 | \n 4326 |       addIssueToContext(ctx, {\n      |       ^^^^^^^^^^^^^^^^^^^^^^^^\n 4327 |         received: ctx.data,\n 4328 |         code: ZodIssueCode.invalid_enum_value,\n 4329 |         options: expectedValues,\n 4330 |       });\n 4331 |       return INVALID;",
+    "callee": "addIssueToContext",
+    "receiver": null,
+    "target": {
+      "qualified_name": "addIssueToContext",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "72-89",
+      "definition": "   72 | export function addIssueToContext(\n   73 |   ctx: ParseContext,\n   74 |   issueData: IssueData\n   75 | ): void {\n   76 |   const overrideMap = getErrorMap();\n   77 |   const issue = makeIssue({\n   78 |     issueData: issueData,\n   79 |     data: ctx.data,\n   80 |     path: ctx.path,\n   81 |     errorMaps: ["
+    }
+  },
+  {
+    "edge_id": "650b027df7eb",
+    "repo": "zod",
+    "file": "src/types.ts",
+    "call_text": "OK(\n      promisified.then((data: any) => {\n        return this._def.type.parseAsync(data, {\n          path: ctx.path,\n          errorMap: ctx.common.contextualErrorMap,\n        });\n      })\n    )",
+    "call_range": [
+      4393,
+      11,
+      4400,
+      5
+    ],
+    "call_context": " 4391 |         : Promise.resolve(ctx.data);\n 4392 | \n 4393 |     return OK(\n      |            ^^^\n 4394 |       promisified.then((data: any) => {\n 4395 |         return this._def.type.parseAsync(data, {\n 4396 |           path: ctx.path,\n 4397 |           errorMap: ctx.common.contextualErrorMap,\n 4398 |         });\n 4399 |       })\n 4400 |     );\n 4401 |   }",
+    "callee": "OK",
+    "receiver": null,
+    "target": {
+      "qualified_name": "OK",
+      "file": "src/helpers/parseUtil.ts",
+      "lines": "175-175",
+      "definition": "  175 | export const OK = <T>(value: T): OK<T> => ({ status: \"valid\", value });"
+    }
+  }
+]

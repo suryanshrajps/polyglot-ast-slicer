@@ -9,7 +9,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-REPOS = ("requests_hard", "click_hard")
+REPOS = ("requests_hard", "click_hard", "zod")
 
 INSTRUCTIONS = """# Blind labeling instructions
 
@@ -38,7 +38,11 @@ def main() -> None:
         bundle.mkdir(parents=True, exist_ok=True)
         (bundle / "LABELING.md").write_text(INSTRUCTIONS, encoding="utf-8")
         (bundle / "packets_v2.json").write_text(json.dumps(packets, indent=2), encoding="utf-8")
-        repo = "requests" if name.startswith("requests") else "click"
+        repo = (
+            "requests" if name.startswith("requests")
+            else "click" if name.startswith("click")
+            else "zod"
+        )
         sha = subprocess.run(
             ["git", "-C", f"/tmp/{repo}", "rev-parse", "HEAD"],
             capture_output=True, text=True, check=False,

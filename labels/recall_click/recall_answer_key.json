@@ -1,0 +1,824 @@
+{
+  "fb6b5d55b7ef": {
+    "form": "aliased_import",
+    "source": "test_echo_writing_to_standard_error",
+    "call_site": "tests/test_utils/test_echo.py:130",
+    "tool_edge": [
+      "prompt"
+    ],
+    "tool_outcome": "found"
+  },
+  "de1e466e8179": {
+    "form": "aliased_import",
+    "source": "test_command_to_info_dict_multiple_arguments",
+    "call_site": "tests/test_info_dict.py:335",
+    "tool_edge": [
+      "command"
+    ],
+    "tool_outcome": "found"
+  },
+  "83e491d9d62b": {
+    "form": "aliased_import",
+    "source": "test_echo_with_capsys",
+    "call_site": "tests/test_utils/test_echo.py:56",
+    "tool_edge": [
+      "echo"
+    ],
+    "tool_outcome": "found"
+  },
+  "765ffc1f902f": {
+    "form": "aliased_import",
+    "source": "test_command_to_info_dict_multiple_arguments",
+    "call_site": "tests/test_info_dict.py:337",
+    "tool_edge": [
+      "argument"
+    ],
+    "tool_outcome": "found"
+  },
+  "7748636c6eb8": {
+    "form": "aliased_import",
+    "source": "test_echo",
+    "call_site": "tests/test_utils/test_echo.py:32",
+    "tool_edge": [
+      "echo"
+    ],
+    "tool_outcome": "found"
+  },
+  "aacfa185cc79": {
+    "form": "aliased_import",
+    "source": "test_echo_no_streams",
+    "call_site": "tests/test_utils/test_echo.py:52",
+    "tool_edge": [
+      "echo"
+    ],
+    "tool_outcome": "found"
+  },
+  "8d9be5c10668": {
+    "form": "aliased_import",
+    "source": "test_echo_color_flag",
+    "call_site": "tests/test_utils/test_echo.py:86",
+    "tool_edge": [
+      "echo"
+    ],
+    "tool_outcome": "found"
+  },
+  "4004fda7d60e": {
+    "form": "aliased_import",
+    "source": "test_echo_writing_to_standard_error",
+    "call_site": "tests/test_utils/test_echo.py:156",
+    "tool_edge": [
+      "confirm"
+    ],
+    "tool_outcome": "found"
+  },
+  "2889d635ac9c": {
+    "form": "aliased_import",
+    "source": "test_files_closed",
+    "call_site": "tests/test_shell_completion.py:584",
+    "tool_edge": [
+      "option"
+    ],
+    "tool_outcome": "found"
+  },
+  "ca072b72fd42": {
+    "form": "aliased_import",
+    "source": "test_echo_custom_file",
+    "call_site": "tests/test_utils/test_echo.py:42",
+    "tool_edge": [
+      "echo"
+    ],
+    "tool_outcome": "found"
+  },
+  "b0a136e24730": {
+    "form": "aliased_import",
+    "source": "test_echo_writing_to_standard_error",
+    "call_site": "tests/test_utils/test_echo.py:169",
+    "tool_edge": [
+      "pause"
+    ],
+    "tool_outcome": "found"
+  },
+  "accca5443f55": {
+    "form": "aliased_import",
+    "source": "test_echo",
+    "call_site": "tests/test_utils/test_echo.py:23",
+    "tool_edge": [
+      "command"
+    ],
+    "tool_outcome": "found"
+  },
+  "5399a8e470e9": {
+    "form": "aliased_import",
+    "source": "test_context",
+    "call_site": "tests/test_info_dict.py:260",
+    "tool_edge": [
+      "Context"
+    ],
+    "tool_outcome": "found"
+  },
+  "e8c90c59d067": {
+    "form": "aliased_import",
+    "source": "test_echo.cli",
+    "call_site": "tests/test_utils/test_echo.py:25",
+    "tool_edge": [
+      "echo"
+    ],
+    "tool_outcome": "found"
+  },
+  "d99a6ced4ef0": {
+    "form": "aliased_import",
+    "source": "test_argument_to_info_dict_nargs",
+    "call_site": "tests/test_info_dict.py:328",
+    "tool_edge": [
+      "Argument"
+    ],
+    "tool_outcome": "found"
+  },
+  "bdc63536bb00": {
+    "form": "aliased_import",
+    "source": "test_echo_color_flag",
+    "call_site": "tests/test_utils/test_echo.py:66",
+    "tool_edge": [
+      "style"
+    ],
+    "tool_outcome": "found"
+  },
+  "83414d412525": {
+    "form": "bare",
+    "source": "CliRunner.isolation",
+    "call_site": "src/click/testing.py:447",
+    "tool_edge": [
+      "EchoingStdin"
+    ],
+    "tool_outcome": "found"
+  },
+  "8f01f896d98c": {
+    "form": "bare",
+    "source": "test_term_len",
+    "call_site": "tests/test_compat.py:239",
+    "tool_edge": [
+      "term_len"
+    ],
+    "tool_outcome": "found"
+  },
+  "d50971cb2bdf": {
+    "form": "bare",
+    "source": "test_choice_case_sensitive",
+    "call_site": "tests/test_shell_completion.py:500",
+    "tool_edge": [
+      "Choice"
+    ],
+    "tool_outcome": "found"
+  },
+  "63954985489e": {
+    "form": "bare",
+    "source": "CliRunner.invoke",
+    "call_site": "src/click/testing.py:659",
+    "tool_edge": [
+      "_FDCapture"
+    ],
+    "tool_outcome": "found"
+  },
+  "3041f07ea7ac": {
+    "form": "bare",
+    "source": "test_argument_nargs",
+    "call_site": "tests/test_shell_completion.py:281",
+    "tool_edge": [
+      "Option"
+    ],
+    "tool_outcome": "found"
+  },
+  "45ff300d7649": {
+    "form": "bare",
+    "source": "test_mixed_output_order_preserved",
+    "call_site": "tests/test_stream_lifecycle.py:415",
+    "tool_edge": [
+      "CliRunner"
+    ],
+    "tool_outcome": "found"
+  },
+  "89538a58d193": {
+    "form": "bare",
+    "source": "_resolve_incomplete",
+    "call_site": "src/click/shell_completion.py:790",
+    "tool_edge": [
+      "_is_incomplete_option"
+    ],
+    "tool_outcome": "found"
+  },
+  "1d25bf9b0f34": {
+    "form": "bare",
+    "source": "test_interrupt_while_reporting_error.cli",
+    "call_site": "tests/test_abort_interrupt.py:128",
+    "tool_edge": [
+      "test_interrupt_while_reporting_error.InterruptedReport"
+    ],
+    "tool_outcome": "found"
+  },
+  "289334c95046": {
+    "form": "bare",
+    "source": "_Argument.process",
+    "call_site": "src/click/parser.py:202",
+    "tool_edge": [
+      "BadArgumentUsage"
+    ],
+    "tool_outcome": "found"
+  },
+  "59b4dc41d7b4": {
+    "form": "bare",
+    "source": "Command.main",
+    "call_site": "src/click/core.py:1639",
+    "tool_edge": [
+      "_PacifyFlushWrapper"
+    ],
+    "tool_outcome": "found"
+  },
+  "2e54ce2f6ad2": {
+    "form": "bare",
+    "source": "test_dual_options_custom_type_sentinel_flag_value",
+    "call_site": "tests/test_options.py:2436",
+    "tool_edge": [
+      "test_dual_options_custom_type_sentinel_flag_value.ConfigParamType"
+    ],
+    "tool_outcome": "found"
+  },
+  "c7fdcfb548ee": {
+    "form": "bare",
+    "source": "test_capture_fd_stale_reference",
+    "call_site": "tests/test_testing.py:665",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "33bf48f0557b": {
+    "form": "bare",
+    "source": "test_strip_ansi_removes_full_sequence",
+    "call_site": "tests/test_compat.py:129",
+    "tool_edge": [
+      "term_len"
+    ],
+    "tool_outcome": "found"
+  },
+  "689c09b92f7c": {
+    "form": "bare",
+    "source": "test_group_group_class_self",
+    "call_site": "tests/test_custom_classes.py:110",
+    "tool_edge": [
+      "test_group_group_class_self.CustomGroup"
+    ],
+    "tool_outcome": "found"
+  },
+  "db874f73b312": {
+    "form": "bare",
+    "source": "test_group_chaining.l1b",
+    "call_site": "tests/test_chain.py:241",
+    "tool_edge": [
+      "debug"
+    ],
+    "tool_outcome": "found"
+  },
+  "2c56dffbf100": {
+    "form": "bare",
+    "source": "test_pipepager_less_raw_mode_detection.fake_popen",
+    "call_site": "tests/test_termui.py:908",
+    "tool_edge": [
+      "_FakePagerProcess"
+    ],
+    "tool_outcome": "found"
+  },
+  "4ebdefe0026c": {
+    "form": "chained_attribute",
+    "source": "test_custom_parser.OptParseCommand.get_usage",
+    "call_site": "tests/test_commands.py:166",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "8cca47f6571b": {
+    "form": "chained_attribute",
+    "source": "MissingParameter.format_message",
+    "call_site": "src/click/exceptions.py:201",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "f64a71e64bd9": {
+    "form": "chained_attribute",
+    "source": "Parameter.shell_complete",
+    "call_site": "src/click/core.py:3054",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "d089452c3929": {
+    "form": "chained_attribute",
+    "source": "_LazyFile.close",
+    "call_site": "src/click/utils.py:174",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "10c9e4447cd8": {
+    "form": "chained_attribute",
+    "source": "Context.get_help",
+    "call_site": "src/click/core.py:869",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "a1f06c67f0d4": {
+    "form": "chained_attribute",
+    "source": "test_capture_sys_fileno_raises.cli",
+    "call_site": "tests/test_testing.py:749",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "8b9cdcb99076": {
+    "form": "chained_attribute",
+    "source": "Parameter.consume_value",
+    "call_site": "src/click/core.py:2718",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "1e4c685f6ca2": {
+    "form": "chained_attribute",
+    "source": "pop_context",
+    "call_site": "src/click/globals.py:51",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "43afc6e708e5": {
+    "form": "chained_attribute",
+    "source": "test_make_default_short_help",
+    "call_site": "tests/test_utils/test_make_default_short_help.py:62",
+    "tool_edge": [
+      "_make_default_short_help"
+    ],
+    "tool_outcome": "found"
+  },
+  "9c033156b2e9": {
+    "form": "chained_attribute",
+    "source": "test_wrap_text_visible_width",
+    "call_site": "tests/test_formatting.py:498",
+    "tool_edge": [
+      "wrap_text"
+    ],
+    "tool_outcome": "found"
+  },
+  "e4486a815f5b": {
+    "form": "chained_attribute",
+    "source": "test_should_strip_ansi",
+    "call_site": "tests/test_compat.py:121",
+    "tool_edge": [
+      "should_strip_ansi"
+    ],
+    "tool_outcome": "found"
+  },
+  "2eca1568324c": {
+    "form": "chained_attribute",
+    "source": "BytesIOCopy.write",
+    "call_site": "src/click/testing.py:134",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "4a241dbd4897": {
+    "form": "chained_attribute",
+    "source": "test_parser_collects_prefixes",
+    "call_site": "tests/test_parser.py:31",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "0d8dd999000b": {
+    "form": "chained_attribute",
+    "source": "test_dual_options_custom_type_sentinel_flag_value.ConfigParamType.convert",
+    "call_site": "tests/test_options.py:2430",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "667a41fda023": {
+    "form": "chained_attribute",
+    "source": "Parameter.make_metavar",
+    "call_site": "src/click/core.py:2624",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "5263b9841c5f": {
+    "form": "chained_attribute",
+    "source": "ProgressBar.render_finish",
+    "call_site": "src/click/_termui_impl.py:154",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "62a946df96ab": {
+    "form": "module_attr",
+    "source": "test_help_formatter_write_text",
+    "call_site": "tests/test_formatting.py:431",
+    "tool_edge": [
+      "HelpFormatter"
+    ],
+    "tool_outcome": "found"
+  },
+  "5ef727617771": {
+    "form": "module_attr",
+    "source": "test_param_named_help",
+    "call_site": "tests/test_basic.py:60",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "9f4f81d0b2b6": {
+    "form": "module_attr",
+    "source": "test_show_true_default_boolean_flag_value",
+    "call_site": "tests/test_options.py:1617",
+    "tool_edge": [
+      "Option.get_help_extra"
+    ],
+    "tool_outcome": "found"
+  },
+  "3ccf38fea2d7": {
+    "form": "module_attr",
+    "source": "test_full_source",
+    "call_site": "tests/test_shell_completion.py:353",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "9aec472b5b9a": {
+    "form": "module_attr",
+    "source": "test_other_command_invoke_with_defaults",
+    "call_site": "tests/test_commands.py:269",
+    "tool_edge": [
+      "option"
+    ],
+    "tool_outcome": "found"
+  },
+  "0cd07c2dcec8": {
+    "form": "module_attr",
+    "source": "test_auto_shorthelp",
+    "call_site": "tests/test_commands.py:79",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "0b5d3242db6b": {
+    "form": "module_attr",
+    "source": "test_hide_input_confirmation_prompt_mismatch_unaffected",
+    "call_site": "tests/test_termui.py:1957",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "873d10592557": {
+    "form": "module_attr",
+    "source": "test_deprecated_required",
+    "call_site": "tests/test_options.py:154",
+    "tool_edge": [
+      "Option"
+    ],
+    "tool_outcome": "found"
+  },
+  "8cb6c07908e5": {
+    "form": "module_attr",
+    "source": "test_capture_fd_stderr_separation.cli",
+    "call_site": "tests/test_testing.py:769",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "832add627ead": {
+    "form": "module_attr",
+    "source": "test_setting_prog_name_in_extra",
+    "call_site": "tests/test_testing.py:414",
+    "tool_edge": [
+      "CliRunner.invoke"
+    ],
+    "tool_outcome": "found"
+  },
+  "e26b98c58f5b": {
+    "form": "module_attr",
+    "source": "test_bool_flag_group_parameter_source",
+    "call_site": "tests/test_options.py:3362",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "333e8717a270": {
+    "form": "module_attr",
+    "source": "test_pipepager_less_detection_case_insensitive_on_windows",
+    "call_site": "tests/test_termui.py:815",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "09aca1c30269": {
+    "form": "module_attr",
+    "source": "test_params_argument",
+    "call_site": "tests/test_command_decorators.py:72",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "7e1e405087f9": {
+    "form": "module_attr",
+    "source": "test_argument_names",
+    "call_site": "tests/test_arguments.py:99",
+    "tool_edge": [
+      "command"
+    ],
+    "tool_outcome": "found"
+  },
+  "eff2996b1614": {
+    "form": "module_attr",
+    "source": "test_open_file_pathlib_dash",
+    "call_site": "tests/test_utils/test_open_file.py:34",
+    "tool_edge": [
+      "argument"
+    ],
+    "tool_outcome": "found"
+  },
+  "459e794a9d35": {
+    "form": "module_attr",
+    "source": "test_get_pager_file_nullpager_keeps_stringio_stream",
+    "call_site": "tests/test_termui.py:1099",
+    "tool_edge": [
+      "get_pager_file"
+    ],
+    "tool_outcome": "found"
+  },
+  "fca46bf998ff": {
+    "form": "module_attr",
+    "source": "test_subcommand_help",
+    "call_site": "tests/test_arguments.py:1117",
+    "tool_edge": [
+      "argument"
+    ],
+    "tool_outcome": "found"
+  },
+  "4872771c8cfa": {
+    "form": "module_attr",
+    "source": "test_datetime_argument_optional_metavar",
+    "call_site": "tests/test_basic.py:682",
+    "tool_edge": [
+      "argument"
+    ],
+    "tool_outcome": "found"
+  },
+  "380363db4a7f": {
+    "form": "module_attr",
+    "source": "test_dynamic_default_help_text",
+    "call_site": "tests/test_options.py:773",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "ed4357192c8a": {
+    "form": "module_attr",
+    "source": "test_confirmation_prompt",
+    "call_site": "tests/test_termui.py:1378",
+    "tool_edge": [
+      "command"
+    ],
+    "tool_outcome": "found"
+  },
+  "dc2de89471ff": {
+    "form": "self_method",
+    "source": "Option.__init__",
+    "call_site": "src/click/core.py:3204",
+    "tool_edge": [
+      "Option._pick_type"
+    ],
+    "tool_outcome": "found"
+  },
+  "84a7044247b7": {
+    "form": "self_method",
+    "source": "_WindowsConsoleWriter.write",
+    "call_site": "src/click/_winconsole.py:186",
+    "tool_edge": [
+      "_WindowsConsoleWriter._get_error_message"
+    ],
+    "tool_outcome": "found"
+  },
+  "cb58c75fdd74": {
+    "form": "self_method",
+    "source": "Command.format_arguments",
+    "call_site": "src/click/core.py:1344",
+    "tool_edge": [
+      "Command.get_params"
+    ],
+    "tool_outcome": "found"
+  },
+  "0f9e51439874": {
+    "form": "self_method",
+    "source": "ParamType.__call__",
+    "call_site": "src/click/types.py:166",
+    "tool_edge": [
+      "ParamType.convert"
+    ],
+    "tool_outcome": "found"
+  },
+  "a55c3bbe207e": {
+    "form": "self_method",
+    "source": "HelpFormatter.section",
+    "call_site": "src/click/formatting.py:280",
+    "tool_edge": [
+      "HelpFormatter.write_paragraph"
+    ],
+    "tool_outcome": "found"
+  },
+  "0d9528d758c9": {
+    "form": "self_method",
+    "source": "BoolParamType.convert",
+    "call_site": "src/click/types.py:873",
+    "tool_edge": [
+      "BoolParamType.str_to_bool"
+    ],
+    "tool_outcome": "found"
+  },
+  "1fde478b7243": {
+    "form": "self_method",
+    "source": "Option._parse_decls",
+    "call_site": "src/click/core.py:3512",
+    "tool_edge": [
+      "Parameter._check_name_is_usable"
+    ],
+    "tool_outcome": "found"
+  },
+  "4a3298f815a3": {
+    "form": "self_method",
+    "source": "Group.to_info_dict",
+    "call_site": "src/click/core.py:1822",
+    "tool_edge": [
+      "Group.get_command"
+    ],
+    "tool_outcome": "found"
+  },
+  "3dab91fa9bd6": {
+    "form": "self_method",
+    "source": "Option.prompt_for_value",
+    "call_site": "src/click/core.py:3739",
+    "tool_edge": [
+      "Parameter._hide_unset"
+    ],
+    "tool_outcome": "found"
+  },
+  "7043b1284d71": {
+    "form": "self_method",
+    "source": "Option.get_default",
+    "call_site": "src/click/core.py:3413",
+    "tool_edge": [
+      "Option._resolve_lazy_default"
+    ],
+    "tool_outcome": "found"
+  },
+  "306c1fc3fc4d": {
+    "form": "self_method",
+    "source": "Command.format_help",
+    "call_site": "src/click/core.py:1305",
+    "tool_edge": [
+      "Command.format_epilog"
+    ],
+    "tool_outcome": "found"
+  },
+  "57bde4e80c69": {
+    "form": "self_method",
+    "source": "_AtomicFile.__exit__",
+    "call_site": "src/click/_compat.py:485",
+    "tool_edge": [
+      "_AtomicFile.close"
+    ],
+    "tool_outcome": "found"
+  },
+  "0434b470d5fc": {
+    "form": "self_method",
+    "source": "ProgressBar.generator",
+    "call_site": "src/click/_termui_impl.py:379",
+    "tool_edge": [
+      "ProgressBar.finish"
+    ],
+    "tool_outcome": "found"
+  },
+  "3d2a1c1699d0": {
+    "form": "self_method",
+    "source": "Context.__exit__",
+    "call_site": "src/click/core.py:593",
+    "tool_edge": [
+      "Context._close_with_exception_info"
+    ],
+    "tool_outcome": "found"
+  },
+  "d42a1d9f0c54": {
+    "form": "self_method",
+    "source": "_OptionParser._process_args_for_options",
+    "call_site": "src/click/parser.py:336",
+    "tool_edge": [
+      "_OptionParser._process_opts"
+    ],
+    "tool_outcome": "found"
+  },
+  "fe9c7212b8e9": {
+    "form": "self_method",
+    "source": "ClickException.show",
+    "call_site": "src/click/exceptions.py:62",
+    "tool_edge": [
+      "ClickException.format_message"
+    ],
+    "tool_outcome": "found"
+  },
+  "ea315e0fb2b4": {
+    "form": "super",
+    "source": "_NamedTextIOWrapper.fileno",
+    "call_site": "src/click/testing.py:200",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "df31b24fe8f0": {
+    "form": "super",
+    "source": "Group.collect_usage_pieces",
+    "call_site": "src/click/core.py:2002",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "2704aa1c79d8": {
+    "form": "super",
+    "source": "Group.to_info_dict",
+    "call_site": "src/click/core.py:1818",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "d08ae323e842": {
+    "form": "super",
+    "source": "Option.process_value",
+    "call_site": "src/click/core.py:3891",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "d1a82dcbdb8a": {
+    "form": "super",
+    "source": "Parameter.__init_subclass__",
+    "call_site": "src/click/core.py:2393",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "a212b90cf710": {
+    "form": "super",
+    "source": "FileError.__init__",
+    "call_site": "src/click/exceptions.py:352",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "6494fdb8c83b": {
+    "form": "super",
+    "source": "Group.__init__",
+    "call_site": "src/click/core.py:1775",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "36f973b5df2a": {
+    "form": "super",
+    "source": "BadParameter.__init__",
+    "call_site": "src/click/exceptions.py:142",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "5fc53b896d6a": {
+    "form": "super",
+    "source": "BashComplete.source",
+    "call_site": "src/click/shell_completion.py:430",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "0c8aa7c3fe33": {
+    "form": "super",
+    "source": "_NumberRangeBase.convert",
+    "call_site": "src/click/types.py:671",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "62a4d747bbde": {
+    "form": "super",
+    "source": "CommandCollection.__init__",
+    "call_site": "src/click/core.py:2197",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "a0017280fde8": {
+    "form": "super",
+    "source": "test_context_formatter_class.CustomFormatter.write_heading",
+    "call_site": "tests/test_custom_classes.py:55",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "49f108db511c": {
+    "form": "super",
+    "source": "Argument.__init__",
+    "call_site": "src/click/core.py:3929",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "8d7a1f5db91b": {
+    "form": "super",
+    "source": "Group.invoke",
+    "call_site": "src/click/core.py:2095",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "f047a7f2678c": {
+    "form": "super",
+    "source": "Choice.to_info_dict",
+    "call_site": "src/click/types.py:385",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  },
+  "1a35369c0c8c": {
+    "form": "super",
+    "source": "test_aliased_command_canonical_name.AliasedGroup.resolve_command",
+    "call_site": "tests/test_commands.py:335",
+    "tool_edge": [],
+    "tool_outcome": "no_edge"
+  }
+}

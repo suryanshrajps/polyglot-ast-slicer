@@ -45,7 +45,7 @@ packages = ["polyglot_ast_slicer"]
 
 [tool.pytest.ini_options]
 minversion = "8.0"
-testpaths = ["tests"]
+testpaths = ["tests", "benchmarks/edge_eval"]
 addopts = "-q"
 
 [tool.ruff]

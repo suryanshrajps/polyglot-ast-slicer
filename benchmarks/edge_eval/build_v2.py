@@ -100,6 +100,8 @@ def main() -> None:
     parser.add_argument("repo")
     parser.add_argument("--name", required=True)
     parser.add_argument("--mode", choices=("hard", "all"), default="hard")
+    parser.add_argument("--include-prefix", default=None)
+    parser.add_argument("--total", type=int, default=None)
     parser.add_argument("--per-kind", type=int, default=30)
     parser.add_argument("--wrong-ratio", type=float, default=0.15)
     parser.add_argument("--seed", type=int, default=42)
@@ -118,6 +120,12 @@ def main() -> None:
         kind = str(data.get("resolution", "?")).split(":")[0]
         if args.mode == "hard" and kind in SKIP_KINDS:
             continue
+        if args.include_prefix:
+            source_rel = str(Path(engine._symbols[source_id].file_path).relative_to(root))
+            target_rel = str(Path(engine._symbols[target_id].file_path).relative_to(root))
+            if not (source_rel.startswith(args.include_prefix)
+                    and target_rel.startswith(args.include_prefix)):
+                continue
         site = next(
             (
                 call for call in engine._symbols[source_id].calls
@@ -134,6 +142,8 @@ def main() -> None:
         pool = sorted(groups[kind], key=lambda item: (item[0], item[1]))
         rng.shuffle(pool)
         selected.extend((kind, *item) for item in pool[: args.per_kind])
+    if args.total is not None and len(selected) > args.total:
+        selected = rng.sample(selected, args.total)
 
     packets, key = [], {}
     for kind, source_id, target_id, _data, site in selected:
@@ -160,6 +170,7 @@ def main() -> None:
         alternatives = [
             symbol for symbol in by_name.get(target.name, [])
             if symbol.symbol_id != target.symbol_id
+            and _plausible(engine, engine._symbols[source_id], symbol)
         ]
         if alternatives:
             eligible.append((item, alternatives))
@@ -179,6 +190,7 @@ def main() -> None:
         key[packet["edge_id"]] = {
             "seeded": True,
             "kind": kind,
+            "source": source.qualified_name,
             "real_target": target.qualified_name,
             "fake_target": fake.qualified_name,
         }
@@ -190,6 +202,27 @@ def main() -> None:
     (out / "v2_packets.json").write_text(json.dumps(mixed, indent=2), encoding="utf-8")
     (out / "v2_answer_key.json").write_text(json.dumps(key, indent=2), encoding="utf-8")
     print(f"{args.name}: {len(packets)} real + {len(canaries)} canaries = {len(mixed)}")
+
+
+def _plausible(engine, source, fake) -> bool:
+    """The alternative must be in the call site's file, imports, or base classes."""
+    if fake.file_path == source.file_path:
+        return True
+    if fake.file_path in engine._import_targets.get(source.file_path, set()):  # noqa: SLF001
+        return True
+    owner = fake.qualified_name.rsplit(".", 1)[0] if "." in fake.qualified_name else ""
+    if not owner:
+        return False
+    for enclosing in engine._enclosing_classes(source):  # noqa: SLF001
+        for base in enclosing.bases:
+            for base_id, _, _ in engine._resolve_type_candidates(base, enclosing):  # noqa: SLF001
+                if engine._symbols[base_id].qualified_name == owner:  # noqa: SLF001
+                    return True
+                if fake.qualified_name.startswith(
+                    engine._symbols[base_id].qualified_name + "."  # noqa: SLF001
+                ):
+                    return True
+    return False
 
 
 if __name__ == "__main__":

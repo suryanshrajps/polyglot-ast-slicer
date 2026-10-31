@@ -218,6 +218,43 @@ def render(data: dict[str, object]) -> str:
         )
     lines += [
         "",
+        "## Hard-kind precision (v2 packets)",
+        "",
+        "| Repo | Kind | n | Correct | Unsure | Precision (unsure=incorrect) |",
+        "|---|---|---:|---:|---:|---|",
+    ]
+    sys.path.insert(0, str(ROOT / "benchmarks" / "edge_eval"))
+    from score_labels import load_labels, score  # noqa: E402
+
+    label_dirs = {"requests": "requests_hard", "click": "click_hard", "zod": "zod"}
+    for repo, directory in label_dirs.items():
+        label_path = ROOT / "labels" / directory / "hard_labels.csv"
+        key_path = ROOT / "labels" / directory / "v2_answer_key.json"
+        if not label_path.exists() or not key_path.exists():
+            lines.append(f"| `{repo}` | all | — | — | — | UNMEASURED |")
+            continue
+        labels = load_labels(label_path)
+        if not labels:
+            lines.append(f"| `{repo}` | all | — | — | — | UNMEASURED |")
+            continue
+        key = json.loads(key_path.read_text(encoding="utf-8"))
+        result = score(labels, key)
+        for kind, entry in result["per_kind"].items():
+            low, high = entry["precision_ci95_inclusive"]
+            lines.append(
+                f"| `{repo}` | `{kind}` | {entry['n']} | {entry['correct']} | "
+                f"{entry['unsure']} | {fmt(entry['precision_unsure_incorrect'])} "
+                f"(95% CI {fmt(low)}–{fmt(high)}) |"
+            )
+        hard = result["hard_edges"]
+        low, high = hard["precision_ci95_inclusive"]
+        lines.append(
+            f"| `{repo}` | **hard edges** | {hard['n']} | {hard['correct']} | "
+            f"{hard['unsure']} | {fmt(hard['precision_unsure_incorrect'])} "
+            f"(95% CI {fmt(low)}–{fmt(high)}) |"
+        )
+    lines += [
+        "",
         "## Edge agreement with Jedi (100 random call edges, seed 42)",
         "",
         "| Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |",
