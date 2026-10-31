@@ -1,0 +1,787 @@
+{
+  "total_tests": 2262,
+  "rows": [
+    {
+      "stratum": "low",
+      "function": "make_pass_decorator.decorator",
+      "recall": 1.0,
+      "precision": 1.0,
+      "selection": 0.0022104332449160036,
+      "selection_90": 0.0022104332449160036,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.09725906277630415
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {},
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [],
+        "other": []
+      }
+    },
+    {
+      "stratum": "low",
+      "function": "Parameter.human_readable_name",
+      "recall": 0.0,
+      "precision": null,
+      "selection": 0.0,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.005747126436781609
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "parametrization": 2
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_deprecations.py::test_parameter_human_readable_name_deprecated[argument]",
+          "tests/test_deprecations.py::test_parameter_human_readable_name_deprecated[option]"
+        ],
+        "other": []
+      }
+    },
+    {
+      "stratum": "low",
+      "function": "_FixupStream.__init__",
+      "recall": 0.0,
+      "precision": null,
+      "selection": 0.0,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.14721485411140584
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "other": 1
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [],
+        "other": [
+          "tests/test_utils/test_open_file.py::test_open_file_ignore_errors_stdin"
+        ]
+      }
+    },
+    {
+      "stratum": "low",
+      "function": "CompletionItem.__init__",
+      "recall": 0.0625,
+      "precision": 1.0,
+      "selection": 0.001326259946949602,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.14721485411140584
+      ],
+      "same_file": [
+        0.5416666666666666,
+        0.016799292661361626
+      ],
+      "classes": {
+        "other": 23,
+        "parametrization": 22
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+          "tests/test_shell_completion.py::test_choice_case_sensitive[True-expect1]",
+          "tests/test_shell_completion.py::test_full_complete[bash-env0-plain,a\\nplain,b\\n]",
+          "tests/test_shell_completion.py::test_full_complete[bash-env1-plain,b\\n]",
+          "tests/test_shell_completion.py::test_full_complete[fish-env4-plain,a\\nplain,b\\tbee\\n]"
+        ],
+        "other": [
+          "tests/test_shell_completion.py::test_absolute_path",
+          "tests/test_shell_completion.py::test_add_different_name",
+          "tests/test_shell_completion.py::test_argument_default",
+          "tests/test_shell_completion.py::test_argument_nargs",
+          "tests/test_shell_completion.py::test_argument_order"
+        ]
+      }
+    },
+    {
+      "stratum": "low",
+      "function": "Choice.shell_complete",
+      "recall": 0.8571428571428571,
+      "precision": 0.42857142857142855,
+      "selection": 0.01237842617152962,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.8571428571428571,
+        0.016799292661361626
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "parametrization": 2
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+          "tests/test_shell_completion.py::test_choice_case_sensitive[True-expect1]"
+        ],
+        "other": []
+      }
+    },
+    {
+      "stratum": "low",
+      "function": "Command.get_help",
+      "recall": 0.043478260869565216,
+      "precision": 0.075,
+      "selection": 0.03536693191865606,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.06,
+        0.015473032714412025
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "other": 26,
+        "parametrization": 20,
+        "unresolved_call": 2
+      },
+      "examples": {
+        "unresolved_call": [
+          "tests/test_commands.py::test_aliased_command_canonical_name",
+          "tests/test_commands.py::test_auto_shorthelp"
+        ],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "HelpFormatter.indent",
+      "recall": 0.0,
+      "precision": 0.0,
+      "selection": 0.0017683465959328027,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.010167992926613616
+      ],
+      "same_file": [
+        0.0,
+        0.010167992926613616
+      ],
+      "classes": {
+        "other": 30,
+        "parametrization": 20
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "Argument.get_help_spec",
+      "recall": 0.012195121951219513,
+      "precision": 0.04,
+      "selection": 0.011052166224580018,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.2,
+        0.08045977011494253
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "parametrization": 40,
+        "unresolved_call": 10
+      },
+      "examples": {
+        "unresolved_call": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_get_help_record_never_none[None]",
+          "tests/test_arguments.py::test_argument_get_help_record_never_none[documented]",
+          "tests/test_arguments.py::test_argument_get_help_record_never_none[empty]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]"
+        ],
+        "other": []
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "Argument.make_metavar",
+      "recall": 0.011494252873563218,
+      "precision": 0.04,
+      "selection": 0.011052166224580018,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.0
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "parametrization": 40,
+        "other": 10
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_get_help_record_never_none[None]",
+          "tests/test_arguments.py::test_argument_get_help_record_never_none[documented]",
+          "tests/test_arguments.py::test_argument_get_help_record_never_none[empty]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "HelpFormatter.write_dl",
+      "recall": 0.0,
+      "precision": 0.0,
+      "selection": 0.0017683465959328027,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.0
+      ],
+      "same_file": [
+        0.0,
+        0.010167992926613616
+      ],
+      "classes": {
+        "other": 30,
+        "parametrization": 20
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "Context._close_with_exception_info",
+      "recall": 0.009395973154362415,
+      "precision": 0.16666666666666666,
+      "selection": 0.01856763925729443,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.0
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "other": 19,
+        "parametrization": 31
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-1]",
+          "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-2]",
+          "tests/test_abort_interrupt.py::test_interrupt_while_reporting_abort[body-None]",
+          "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs0-pass_argv0]",
+          "tests/test_arguments.py::test_argument_custom_class_can_override_type_cast_value_and_never_sees_unset[argument_kwargs1-pass_argv1]"
+        ],
+        "other": [
+          "tests/test_abort_interrupt.py::test_interrupt_while_exiting_after_success",
+          "tests/test_abort_interrupt.py::test_interrupt_while_reporting_error",
+          "tests/test_abort_interrupt.py::test_late_interrupt_with_disabled_standalone_mode",
+          "tests/test_arguments.py::test_argument_has_no_auto_envvar",
+          "tests/test_arguments.py::test_argument_help"
+        ]
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "HelpFormatter.write_usage",
+      "recall": 0.008264462809917356,
+      "precision": 0.5,
+      "selection": 0.0017683465959328027,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.010167992926613616
+      ],
+      "same_file": [
+        0.0,
+        0.010167992926613616
+      ],
+      "classes": {
+        "other": 17,
+        "parametrization": 33
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "medium",
+      "function": "Context.get_help",
+      "recall": 0.007246376811594203,
+      "precision": 0.024390243902439025,
+      "selection": 0.018125552608311227,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.06,
+        0.015473032714412025
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "other": 27,
+        "parametrization": 20,
+        "unresolved_call": 3
+      },
+      "examples": {
+        "unresolved_call": [
+          "tests/test_commands.py::test_aliased_command_canonical_name",
+          "tests/test_commands.py::test_auto_shorthelp",
+          "tests/test_commands.py::test_command_no_args_is_help"
+        ],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "high",
+      "function": "Option.get_help_record",
+      "recall": 0.05649717514124294,
+      "precision": 0.14492753623188406,
+      "selection": 0.03050397877984085,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.24,
+        0.08045977011494253
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "unresolved_call": 12,
+        "parametrization": 20,
+        "other": 17
+      },
+      "examples": {
+        "unresolved_call": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_basic.py::test_basic_functionality",
+          "tests/test_basic.py::test_basic_group",
+          "tests/test_basic.py::test_choice_argument",
+          "tests/test_basic.py::test_choice_argument_custom_type",
+          "tests/test_basic.py::test_choice_argument_enum"
+        ]
+      }
+    },
+    {
+      "stratum": "high",
+      "function": "open_file",
+      "recall": 0.3,
+      "precision": 0.375,
+      "selection": 0.0035366931918656055,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.6,
+        0.0035366931918656055
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "unresolved_call": 3,
+        "parametrization": 4
+      },
+      "examples": {
+        "unresolved_call": [
+          "tests/test_utils/test_open_file.py::test_open_file",
+          "tests/test_utils/test_open_file.py::test_open_file_atomic_permissions_new_file",
+          "tests/test_utils/test_open_file.py::test_open_file_ignore_errors_stdin"
+        ],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_utils/test_open_file.py::test_open_file_atomic_permissions_existing_file[256]",
+          "tests/test_utils/test_open_file.py::test_open_file_atomic_permissions_existing_file[292]",
+          "tests/test_utils/test_open_file.py::test_open_file_atomic_permissions_existing_file[384]",
+          "tests/test_utils/test_open_file.py::test_open_file_atomic_permissions_existing_file[420]"
+        ],
+        "other": []
+      }
+    },
+    {
+      "stratum": "high",
+      "function": "Option.get_help_extra",
+      "recall": 0.057803468208092484,
+      "precision": 0.14492753623188406,
+      "selection": 0.03050397877984085,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.0,
+        0.05349248452696728
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "other": 29,
+        "parametrization": 20
+      },
+      "examples": {
+        "unresolved_call": [],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs0-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs1-FOO]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs2-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs3-[FOO]]",
+          "tests/test_arguments.py::test_argument_metavar_marks_optional[kwargs4-[FOO]...]"
+        ],
+        "other": [
+          "tests/test_arguments.py::test_argument_help",
+          "tests/test_arguments.py::test_argument_help_deprecated_without_help_lists_all",
+          "tests/test_arguments.py::test_argument_help_empty_string_lists_all",
+          "tests/test_arguments.py::test_argument_help_lists_undocumented_arguments",
+          "tests/test_arguments.py::test_argument_help_optional_metavar"
+        ]
+      }
+    },
+    {
+      "stratum": "high",
+      "function": "group",
+      "recall": 0.5645161290322581,
+      "precision": 0.8333333333333334,
+      "selection": 0.01856763925729443,
+      "selection_90": null,
+      "all_tests": [
+        1.0,
+        1.0
+      ],
+      "mention": [
+        0.62,
+        0.16887709991158267
+      ],
+      "same_file": [
+        0.0,
+        0.0
+      ],
+      "classes": {
+        "parametrization": 19,
+        "unresolved_call": 3
+      },
+      "examples": {
+        "unresolved_call": [
+          "tests/test_command_decorators.py::test_group_no_parens",
+          "tests/test_custom_classes.py::test_group_group_class",
+          "tests/test_custom_classes.py::test_group_group_class_self"
+        ],
+        "dynamic_dispatch": [],
+        "fixture_or_conftest": [],
+        "parametrization": [
+          "tests/test_chain.py::test_chaining_help[args0-COMMAND1",
+          "tests/test_chain.py::test_chaining_help[args1-ROOT",
+          "tests/test_chain.py::test_chaining_help[args2-SDIST",
+          "tests/test_chain.py::test_chaining_help[args3-BDIST",
+          "tests/test_chain.py::test_chaining_help[args4-SDIST"
+        ],
+        "other": []
+      }
+    }
+  ],
+  "classes": {
+    "parametrization": 313,
+    "other": 229,
+    "unresolved_call": 33
+  },
+  "low": {
+    "n": 6,
+    "recall": [
+      0.0,
+      0.062,
+      1.0
+    ],
+    "precision": [
+      0.075,
+      1.0,
+      1.0
+    ],
+    "selection": [
+      0.0,
+      0.002,
+      0.035
+    ],
+    "selection_90": [
+      0.002,
+      0.002,
+      0.002
+    ],
+    "mention_recall_p50": 0.0,
+    "mention_selection_p50": 0.097,
+    "same_file_recall_p50": 0.0,
+    "same_file_selection_p50": 0.0
+  },
+  "medium": {
+    "n": 7,
+    "recall": [
+      0.0,
+      0.008,
+      0.012
+    ],
+    "precision": [
+      0.0,
+      0.04,
+      0.5
+    ],
+    "selection": [
+      0.002,
+      0.011,
+      0.019
+    ],
+    "selection_90": [
+      null,
+      null,
+      null
+    ],
+    "mention_recall_p50": 0.0,
+    "mention_selection_p50": 0.01,
+    "same_file_recall_p50": 0.0,
+    "same_file_selection_p50": 0.0
+  },
+  "high": {
+    "n": 4,
+    "recall": [
+      0.056,
+      0.3,
+      0.565
+    ],
+    "precision": [
+      0.145,
+      0.375,
+      0.833
+    ],
+    "selection": [
+      0.004,
+      0.031,
+      0.031
+    ],
+    "selection_90": [
+      null,
+      null,
+      null
+    ],
+    "mention_recall_p50": 0.6,
+    "mention_selection_p50": 0.08,
+    "same_file_recall_p50": 0.0,
+    "same_file_selection_p50": 0.0
+  }
+}
