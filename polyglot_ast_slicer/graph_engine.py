@@ -1753,7 +1753,7 @@ class GraphEngine:
         diff: str | None = None,
         max_depth: int = 3,
     ) -> dict[str, Any]:
-        """Maps a git diff to changed symbols, impacted symbols and impacted tests."""
+        """Maps a git diff to changed symbols and impacted symbols."""
         with self.lock:
             if not self._symbols:
                 self.index_repository()
@@ -1783,12 +1783,6 @@ class GraphEngine:
                         continue
                     impacted[caller_id] = min(hop, impacted.get(caller_id, hop))
 
-            impacted_tests = [
-                self._symbol_meta(self._symbols[symbol_id], include_doc=False)
-                for symbol_id in sorted(impacted)
-                if self._looks_like_test(self._symbols[symbol_id])
-            ]
-
             return {
                 "source": source,
                 "base": base,
@@ -1806,10 +1800,8 @@ class GraphEngine:
                         impacted.items(), key=lambda item: (item[1], item[0])
                     )
                 ],
-                "impacted_tests": impacted_tests,
                 "total_changed_symbols": len(changed_symbols),
                 "total_impacted_symbols": len(impacted),
-                "total_impacted_tests": len(impacted_tests),
                 "risk_level": self._risk_level(len(impacted)),
                 "note": "Impact is upstream call-graph reachability over calls/constructs.",
             }
@@ -1865,18 +1857,6 @@ class GraphEngine:
                 found[caller] = depth + 1
                 queue.append((caller, depth + 1))
         return found
-
-    @staticmethod
-    def _looks_like_test(symbol: SymbolNode) -> bool:
-        parts = {part.lower() for part in Path(symbol.file_path).parts}
-        name = symbol.qualified_name.lower()
-        return (
-            "tests" in parts
-            or "test" in parts
-            or name.startswith("test_")
-            or ".test." in name
-            or "_test." in name
-        )
 
     def get_index_stats(self) -> dict[str, Any]:
         with self.lock:

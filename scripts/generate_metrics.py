@@ -301,36 +301,6 @@ def render(data: dict[str, object]) -> str:
     else:
         lines += ["UNMEASURED", ""]
     lines += [
-        "## Fault injection (click, 20 functions, stratified by in-degree)",
-        "",
-    ]
-    fault_path = ROOT / "benchmarks" / "fault" / "analysis.json"
-    if fault_path.exists():
-        fault = json.loads(fault_path.read_text(encoding="utf-8"))
-        lines += [
-            f"Usable functions: {fault.get('usable', 'n/a')}; total tests: "
-            f"{fault['total_tests']}.",
-            "",
-            "| Stratum | n | Recall p50 | Precision p50 | Selection p50 |",
-            "|---|---:|---:|---:|---:|",
-        ]
-        for stratum in ("low", "medium", "high"):
-            entry = fault[stratum]
-            lines.append(
-                f"| {stratum} | {entry['n']} | {entry['recall'][1]} | "
-                f"{entry['precision'][1]} | {entry['selection'][1]} |"
-            )
-        lines += [
-            "",
-            "Miss classes: "
-            + ", ".join(f"{k}={v}" for k, v in fault["classes"].items())
-            + ". Classification is heuristic; examples are in "
-            "`benchmarks/fault/analysis.json`.",
-            "",
-        ]
-    else:
-        lines += ["UNMEASURED", ""]
-    lines += [
         "## Edge agreement with Jedi (100 random call edges, seed 42)",
         "",
         "| Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |",

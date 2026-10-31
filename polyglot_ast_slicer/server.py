@@ -198,7 +198,7 @@ def impact_of_diff(
     diff: str | None = None,
     max_depth: int = 3,
 ) -> dict[str, Any]:
-    """Map a git diff to changed symbols, impacted callers and impacted tests."""
+    """Map a git diff to changed symbols and impacted caller symbols."""
     try:
         return _get_engine(repo_path).impact_of_diff(
             base=base, head=head, diff=diff, max_depth=max_depth
@@ -333,9 +333,6 @@ def _cmd_impact(args: argparse.Namespace) -> int:
     print(f"Impacted symbols: {result['total_impacted_symbols']} ({result['risk_level']})")
     for item in result["impacted_symbols"]:
         print(f"  <- {item['qualified_name']} hop {item['hop_distance']}")
-    print(f"Impacted tests: {result['total_impacted_tests']}")
-    for item in result["impacted_tests"]:
-        print(f"  * {item['qualified_name']} ({item['file_path']})")
     return 0
 
 
