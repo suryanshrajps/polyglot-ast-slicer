@@ -1,194 +1,268 @@
-<div align="center">
+# Polyglot AST Call-Graph Slicer
 
-# 🔪 Polyglot AST Call-Graph Slicer
-### *Stop feeding your LLM the entire haystack when it only needs the needle.*
+**Stop pasting files into your AI. Give it the 3% of the repo that matters.**
 
-[![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![FastMCP](https://img.shields.io/badge/MCP-FastMCP_2.1-00ADD8?style=for-the-badge)](https://github.com/jlowin/fastmcp)
-[![Tree-sitter](https://img.shields.io/badge/AST-Tree--Sitter-6E4C13?style=for-the-badge)](https://tree-sitter.github.io/)
-[![NetworkX](https://img.shields.io/badge/Graph-NetworkX-FF6F00?style=for-the-badge)](https://networkx.org/)
-[![uv](https://img.shields.io/badge/Packaging-uv-DE5FE9?style=for-the-badge)](https://github.com/astral-sh/uv)
-[![License: MIT](https://img.shields.io/badge/License-MIT-2EA44F?style=for-the-badge)](LICENSE)
+A local, deterministic context compiler for AI coding agents. It parses your Python and
+TypeScript/JavaScript with tree-sitter, builds a directed call graph, and serves *surgical*
+N-hop source slices over the Model Context Protocol — exact byte ranges, no vector search, no
+cloud, no API keys.
 
-<br />
-
-<img src="https://api.memegen.link/images/drake/Dumping_15,000_tokens_of_unrelated_files_into_Cursor/Surgical_300--token_N--hop_AST_Call--Graph_Slice.png?width=650" alt="AST Slicer Meme" width="600" />
-
-</div>
+[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)](pyproject.toml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ---
 
-## 🧠 Why Does This Exist? (The "Lost in the Middle" Problem)
+## The problem
 
-When you ask an AI coding assistant (**Cursor**, **Claude Code**, or **Copilot**) to refactor a function or trace a bug, one of two bad things usually happens:
+AI coding agents are bad at context, in two specific ways:
 
-1. 🗑️ **Naive RAG / Vector Search:** Chops functions in half based on arbitrary chunk sizes and completely misses cross-file callers or imported data schemas.
-2. 💸 **Full-File Context Dumping:** Dumps 4,000+ lines of legacy boilerplate into the prompt window, burning your token budget and causing the LLM to hallucinate signatures.
+1. **RAG breaks code.** A chunker cuts a function in half, the agent sees half a signature, and it
+   hallucinates the rest. Callers three directories away are simply never retrieved.
+2. **Dumping files wastes the window.** A 40-file service is ~120k tokens. Pasted whole, most of
+   it is irrelevant — and models measurably lose accuracy on information buried in the middle.
 
-**`polyglot-ast-slicer`** fixes this by acting as a **deterministic, local AST context compiler**. Instead of sending whole files, it parses your codebase with **Tree-sitter**, wires an import-aware **NetworkX** directed call graph, and extracts a surgical **Breadth-First Search (BFS) $N$-hop slice** containing *only* the exact byte ranges the LLM needs:
+Neither approach knows that `process_invoice` calls `calculate_tax` in a different module.
 
-* ⬆️ **Upstream Callers:** Every function/method across the repository that invokes your target symbol.
-* ⬇️ **Downstream Callees:** Every internal helper function or class your target symbol calls.
-* 🧬 **Data Schemas & Types:** The exact `@dataclass`, `Pydantic`, or TypeScript `interface` definitions consumed or returned by the slice.
+## The fix
 
----
+Ask for a symbol. Get back the target, its callers, its callees, and the types it touches —
+nothing else.
 
-## ⚡ System Architecture
+```
+$ polyglot-ast-slicer slice --symbol process_payment --hops 2
+### backend/service.py:8-12 [process_payment] (target)
+def process_payment(req: PaymentRequest) -> PaymentReceipt:
+    if not validate_fraud_rules(req):
+        raise ValueError("fraud check failed")
+    fee = compute_platform_fee(req.amount_cents)
+    return persist_ledger_entry(req, fee)
 
-GitHub natively renders the Mermaid pipeline below—showing how a single saved file updates the graph in **under 15ms**:
-
-```mermaid
-flowchart LR
-    subgraph Repo["📂 Polyglot Codebase"]
-        PY["🐍 Python (.py)"]
-        TS["📘 TypeScript (.ts/.tsx)"]
-    end
-
-    subgraph Engine["⚙️ Polyglot AST Slicer Engine"]
-        CACHE[("⚡ SQLite WAL Cache\nmtime_ns + SHA-256")]
-        TSIT["🌳 Tree-sitter Parser\nByte Offsets + Imports"]
-        NX["🕸️ NetworkX DiGraph\n3-Tier Import Resolution"]
-    end
-
-    subgraph Consumers["🤖 Local AI Agents (stdio)"]
-        MCP["🔌 FastMCP Server\n& CLI"]
-        IDE["✨ Cursor / Claude\n80%+ Token Savings"]
-    end
-
-    PY & TS --> CACHE
-    CACHE -- "Cache Miss (<15ms splice)" --> TSIT
-    CACHE -- "Cache Hit (<0.2ms)" --> NX
-    TSIT --> NX
-    NX -- "N-Hop BFS / Tarjan SCC" --> MCP
-    MCP --> IDE
+### backend/ledger.py:3-8 [validate_fraud_rules, compute_platform_fee] (downstream_callee)
+...
 ```
 
----
+Every snippet is an exact byte range from disk. The graph is built from imports and call sites,
+so a function 40 files away is found *because it is actually called*, not because it is
+semantically similar.
 
-## 🔥 Core Engineering Highlights
+## Measured results
 
-| Feature | How It Works Under the Hood | Performance / Impact |
-| :--- | :--- | :--- |
-| 🌍 **Polyglot AST Parsing** | Uses `tree-sitter-language-pack` to extract functions, classes, methods, arrow functions, and TS interfaces by exact `[start_byte, end_byte]` offsets. | Zero code execution or compiler setup required |
-| 🎯 **3-Tier Import Resolution** | Resolves ambiguous function calls (`calculate_tax()`) by checking: **1)** Same File $\rightarrow$ **2)** Explicitly Imported Module $\rightarrow$ **3)** Repo-wide fallback. | Eliminates false-positive cross-file call edges |
-| ⚡ **Two-Tier SQLite WAL Cache** | Checks `st_mtime_ns` before hashing file bytes. If modified, re-parses only the changed file and splices its edges into `networkx.DiGraph`. | **~2.1 ms** incremental single-file splice latency |
-| 🧩 **Byte-Span Deduplication** | Automatically detects if both an enclosing class and its nested method are in the slice and deduplicates overlapping byte intervals. | Zero duplicate lines in compiled LLM context |
-| 🔄 **Tarjan's SCC Cycle Detector** | Runs Tarjan's Strongly Connected Components algorithm across both symbol graphs and file graphs to catch mutual recursion & circular imports. | $O(V + E)$ linear-time cycle detection |
+Synthetic polyglot corpus (4 files, 252 symbols, 12k tokens), `--hops 2`:
 
----
+| Target | Whole touched files | Whole repo | AST slice | Saved vs files | Saved vs repo |
+|---|---:|---:|---:|---:|---:|
+| `process_payment` | 10,540 | 12,214 | 439 | **95.8%** | **96.4%** |
+| `handle_checkout_webhook` | 10,540 | 12,214 | 441 | **95.8%** | **96.4%** |
+| `submitOrderCheckout` | 1,674 | 12,214 | 168 | **90.0%** | **98.6%** |
 
-## 📊 Real Benchmark Results (`tiktoken` `cl100k_base`)
+Indexing: **30.6 ms** cold, **4.6 ms** warm for the same corpus. Single-file incremental
+re-parse + edge splice: **4.6 ms p50** (SLA: 15 ms).
 
-Run `uv run python benchmarks/token_bench.py` on your machine to reproduce:
+These are honest numbers on a small synthetic repo, not a claim about your codebase — run
+`benchmarks/token_bench.py --repo <yours>` to get yours. Savings shrink on tiny files (a
+2-line helper is not worth slicing) and grow with file size and repo breadth.
 
-```text
-====================================================================================
-POLYGLOT AST CALL-GRAPH SLICER - BENCHMARK REPORT
-====================================================================================
-Files Indexed   : 4 | Symbols: 102 | Call/Type Edges: 10 | Cold Index: 18.42 ms
-Incremental Splice Latency (1 modified file): 2.14 ms (Target SLA: under 15.0 ms)
-------------------------------------------------------------------------------------
-Target Symbol                |   Full Files |   Full Repo |  1-Hop Slice | Saved vs Files
-------------------------------------------------------------------------------------
-process_checkout_payment     |      4612 tk |     5580 tk |       342 tk |         92.58%
-submitOrderCheckout          |       968 tk |     5580 tk |       164 tk |         83.06%
-------------------------------------------------------------------------------------
-Circular Dependency SCCs Detected: 1
-  Cycle #1: reconcile_node_alpha <-> reconcile_node_beta
-====================================================================================
-```
+**Real-repo check (v0.3.0).** 100 random call edges per repo, each resolved independently
+with Jedi 0.20.1 and canonicalized through re-export sites:
 
-> 💡 **Result:** **92.58% fewer tokens** sent to the LLM while preserving 100% of upstream callers, downstream helpers, and payment data schemas across files.
+| Repo | Edges sampled | Supported | Precision | Recall* |
+|---|---:|---:|---:|---:|
+| `psf/requests` @ `3c7baaa` | 100 | 99 | **99%** | 70.3% |
+| `pallets/click` @ `2247b35` | 100 | 100 | **100%** | 85.3% |
 
----
+\* Recall is conditional on Jedi resolving the call site to a project symbol; sites it cannot
+resolve (untyped fixtures, dynamic receivers) are excluded. Removing the old name-only
+fallback cost recall and bought precision — a deliberate trade.
 
-## 🚀 Quickstart (2 Minutes with `uv`)
+Default payloads are capped at 6,000 tokens **on the exact JSON returned**. The worst real hub
+found, `src/click/decorators.py::command`, now returns 5,493 tokens and reports 321 omitted
+upstream entries instead of the 89,698-token payload measured in v0.2.0.
 
-### 1. Clone & Install Dependencies
+## Install
+
 ```bash
-git clone [https://github.com/suryanshrajps/polyglot-ast-slicer.git](https://github.com/suryanshrajps/polyglot-ast-slicer.git)
+git clone https://github.com/suryanshraj/polyglot-ast-slicer.git
 cd polyglot-ast-slicer
-
-# Create Python 3.12 virtualenv and lock dependencies
-uv venv --python 3.12
-uv sync --dev
+uv tool install .        # or: pip install .
 ```
 
-### 2. Run the Automated Pytest Suite
-```bash
-uv run pytest -v
-```
+Requires Python 3.12+. No accounts, no network calls at query time.
 
-### 3. Try the CLI Directly in Your Terminal
-```bash
-# 1. Index a repository into the local SQLite WAL cache
-uv run polyglot-ast-slicer index --repo .
+## Connect it to your agent
 
-# 2. Extract a surgical 1-hop AST call slice around any symbol
-uv run polyglot-ast-slicer slice --repo . --symbol get_ast_call_slice --hops 1
+The server speaks MCP over stdio and starts automatically when invoked with no arguments.
 
-# 3. Check the upstream blast radius before changing a function signature
-uv run polyglot-ast-slicer blast --repo . --symbol _resolve_targets
-
-# 4. Detect circular dependencies & recursion loops via Tarjan's SCC
-uv run polyglot-ast-slicer cycles --repo .
-```
-
----
-
-## 🔌 Connect to Cursor IDE / Claude Desktop (MCP)
-
-Expose all 4 AST graph tools directly to your AI coding agent over local `stdio` with **zero cloud dependencies or API keys**.
-
-1. Find your absolute path to `uv` (`which uv`) and your repo (`pwd`).
-2. Add the server to **`~/.cursor/mcp.json`** (or `.cursor/mcp.json` in your workspace):
+**Cursor** — `~/.cursor/mcp.json`:
 
 ```json
 {
   "mcpServers": {
     "polyglot-ast-slicer": {
-      "command": "/Users/YOUR_USERNAME/.local/bin/uv",
-      "args": [
-        "--directory",
-        "/ABSOLUTE/PATH/TO/polyglot-ast-slicer",
-        "run",
-        "polyglot-ast-slicer"
-      ]
+      "command": "polyglot-ast-slicer",
+      "args": ["serve", "--repo", "/absolute/path/to/your/repo"]
     }
   }
 }
 ```
 
-3. Open **Cursor Settings $\rightarrow$ MCP**, verify the **green status dot**, and switch your Cursor chat mode to **Agent**.
+**Claude Desktop** — `claude_desktop_config.json`:
 
-### 🛠️ Exposed MCP Tools
-
-* 🗂️ **`index_codebase(repo_path, force_rebuild=False)`** — Indexes `.py`, `.ts`, `.tsx`, and `.js` files into the SQLite cache and builds the in-memory `NetworkX` call graph.
-* 🔪 **`get_ast_call_slice(repo_path, symbol_name, hops=2, include_types=True)`** — Returns exact byte-range source snippets for the target, upstream callers, downstream callees, and data schemas, plus `tiktoken` reduction metrics.
-* 💥 **`get_blast_radius(repo_path, symbol_name, max_depth=5)`** — Computes a transitive upstream impact report (`LOW` / `MODERATE` / `HIGH` / `CRITICAL`) grouped by hop distance.
-* ♻️ **`find_circular_dependencies(repo_path)`** — Uses Tarjan's SCC algorithm to uncover symbol-level mutual recursion and file-level circular imports.
-
----
-
-## 🗂️ Repository Layout
-
-```text
-polyglot-ast-slicer/
-├── pyproject.toml           # uv package config & dependencies
-├── src/
-│   ├── __init__.py
-│   ├── parser.py            # Tree-sitter polyglot AST & import extractor
-│   ├── cache.py             # Two-tier SQLite WAL cache (mtime_ns + SHA-256)
-│   ├── graph_engine.py      # NetworkX DiGraph, BFS slicer, blast radius & Tarjan SCC
-│   └── server.py            # FastMCP stdio server + live watchfiles daemon + CLI
-├── benchmarks/
-│   └── token_bench.py       # Synthetic & real-repo tiktoken benchmark runner
-└── tests/
-    └── test_slicer.py       # Pytest suite verifying resolution, caching & deduplication
+```json
+{
+  "mcpServers": {
+    "polyglot-ast-slicer": {
+      "command": "polyglot-ast-slicer",
+      "args": ["serve", "--repo", "/absolute/path/to/your/repo"]
+    }
+  }
+}
 ```
 
----
+Options that apply to every tool call:
 
-<div align="center">
-  <b>Built with ⚡ Python 3.12, Tree-sitter, NetworkX, SQLite WAL, and FastMCP by <a href="https://github.com/suryanshrajps">Suryansh Raj Pratap Singh</a></b>
-</div>
+| Env var | Default | Meaning |
+|---|---|---|
+| `POLYGLOT_AST_REPO` | `.` | Default repo when `repo_path` is omitted |
+| `POLYGLOT_AST_WATCH` | `1` | Set `0` to disable the background file watcher |
+
+## MCP tools
+
+| Tool | What it answers |
+|---|---|
+| `index_codebase` | Build/refresh the graph. Incremental via SHA-256 cache. |
+| `get_ast_call_slice` | "Give me exactly the context for this symbol." 6k payload cap by default. |
+| `explain_edge` | "Why does this edge exist?" Call-site line, confidence, resolution path. |
+| `get_blast_radius` | "What breaks if I change this signature?" Grouped by hop. |
+| `find_circular_dependencies` | Tarjan SCC over both the call graph and the import graph. |
+| `search_symbols` | "What is this thing actually called?" |
+| `get_index_stats` | Files, symbols, edges, language mix, cache health, skipped files. |
+
+`get_ast_call_slice` returns `compiled_context`, token metrics and omission diagnostics by
+default. Caller/callee/type metadata and region byte ranges require
+`include_metadata=True`; they roughly doubled the payload in v0.2.0.
+
+### Hard token budgets
+
+```python
+get_ast_call_slice(symbol_name="process_payment", hops=3, max_tokens=6000)  # default
+```
+
+The cap applies to the exact JSON payload. Fan-out is capped per hop (10) and in total (40);
+symbols above 150 degree are treated as hubs and omitted. `diagnostics.omitted` reports what
+was dropped and `diagnostics.expand_hint` says how to get it back.
+
+## How names are resolved (the part that matters)
+
+A call graph is only as good as its edges. Most tools match bare names repo-wide, which
+silently links `calculate_tax` in `tax_us.py` to the one in `tax_eu.py`. This engine assigns
+an explicit confidence per edge and refuses to guess below a threshold:
+
+| Confidence | Evidence |
+|---:|---|
+| 0.98 | Same-file definition of the bare name |
+| 0.95 | Imported binding (`from pkg.tax import calculate_tax`) |
+| 0.95 | `self`/`this`/`cls` member exists on the enclosing class |
+| 0.90 | Receiver type known from annotation or `x = Foo()` |
+| 0.90 | Receiver is a module alias (`import tax as t` → `t.compute`) |
+| 0.85 | Member inherited from a resolved base class |
+| 0.90 | Nested/local symbol within the caller's lexical scope |
+| — | Anything weaker → **no edge at all** (no name-only fallback) |
+
+Ambiguous queries are refused rather than guessed: `get_ast_call_slice("get")` returns
+`code: "ambiguous_symbol"` with every candidate, and you re-query with
+`pkg/billing.py::BillingEngine.process_invoice`. Direct recursion is kept as a self-edge and
+reported separately under `self_recursive`.
+
+## CLI
+
+```bash
+polyglot-ast-slicer index  --repo . --json          # build/refresh index
+polyglot-ast-slicer slice  --symbol process_payment # print the compiled context
+polyglot-ast-slicer blast  --symbol process_payment # downstream impact
+polyglot-ast-slicer cycles                          # circular imports + recursion
+polyglot-ast-slicer search invoice                  # find symbols
+polyglot-ast-slicer stats                           # index/cache health
+polyglot-ast-slicer serve                           # MCP over stdio (default)
+```
+
+`--json` on any subcommand emits the full structured payload. Human output goes to stdout,
+diagnostics to stderr, so `slice ... > context.md` does the obvious thing.
+
+## How it works
+
+```
+discover files (honours .gitignore, size caps)
+      │
+      ▼
+tree-sitter parse ──► symbols, byte spans, call sites, imports, type hints
+      │
+      ▼
+SQLite cache (SHA-256 + mtime/size; zlib payloads; schema-versioned)
+      │
+      ▼
+NetworkX DiGraph ──► import-aware resolution with confidence
+      │
+      ├─► BFS N hops  ──► merged byte-range regions ──► compiled_context
+      ├─► reverse BFS ──► blast radius / risk level
+      └─► Tarjan SCC  ──► symbol cycles + import cycles
+```
+
+Design notes:
+
+- **No execution.** Nothing is imported, evaluated, or run. Parsing is purely syntactic.
+- **Deterministic.** Sorted traversal everywhere; two independent indexes of the same tree
+  produce byte-identical slice payloads (there is a test for exactly this).
+- **Incremental.** Editing one file re-parses one file. If `mtime` and size are unchanged the
+  AST is reused without reading the file; a touch without content change falls back to SHA-256.
+- **Overlap merging.** A class span and its method spans collapse into one region, so code is
+  never emitted twice and token counts are not inflated.
+- **Re-export chains are followed.** `from .generic import *` in a package `__init__.py` still
+  links `import pkg; pkg.fn()` to the module that defines `fn` (up to 6 hops, cycle-safe).
+- **Degrades gracefully.** A missing grammar (e.g. `.tsx` when the grammar cannot be fetched),
+  a binary file, an oversized file, or a symlink escaping the repository is reported in
+  `skipped_files` instead of aborting the index.
+- **Never writes into your repo.** The SQLite index lives in the OS cache directory
+  (`~/Library/Caches/polyglot-ast-slicer` or `$XDG_CACHE_HOME`), keyed by repository path.
+  Read-only checkouts index normally.
+- **Path allowlist.** Set `POLYGLOT_AST_ALLOWED_ROOTS` (path-separator separated) to refuse
+  indexing anything outside those roots.
+
+## What it does not do
+
+Being precise about this is part of being trustworthy:
+
+- **Dynamic dispatch is not resolved.** `getattr(obj, name)()`, dependency injection, and
+  `*args` forwarding produce no edges. Measured recall is 70–85% on the sites Jedi can resolve;
+  end-to-end recall on untyped code is lower and not measured here.
+- **`tsconfig` path aliases** (`@app/*`) are not followed yet; relative imports are.
+- **Monorepo package boundaries** are inferred from the repo root, `src/`, and `lib/`.
+- **Decorators and metaclasses** that rewrite functions are not interpreted.
+- **No cross-language edges** — Python calling into TypeScript is not linked.
+- Only Python and TypeScript/JavaScript are parsed.
+
+## Development
+
+```bash
+uv sync --all-extras
+uv run pytest              # 70 tests
+uv run python benchmarks/token_bench.py
+uv run ruff check .
+uv run mypy polyglot_ast_slicer
+```
+
+Layout:
+
+```
+polyglot_ast_slicer/
+  parser.py        tree-sitter → symbols, call sites, imports, type hints
+  cache.py         versioned SQLite cache (SHA-256 + mtime/size, zlib)
+  graph_engine.py  resolution, BFS slices, blast radius, Tarjan SCC
+  server.py        FastMCP tools + CLI
+  __main__.py      python -m polyglot_ast_slicer
+tests/             70 tests across parser, cache, engine, server, safety, differential
+benchmarks/        token-reduction + latency benchmark
+```
+
+## License
+
+MIT — see [LICENSE](LICENSE).

@@ -1,0 +1,363 @@
+"""Regression tests for the v0.3.0 correctness and safety contract."""
+
+from __future__ import annotations
+
+import json
+import random
+import textwrap
+from pathlib import Path
+
+import pytest
+
+from polyglot_ast_slicer.graph_engine import GraphEngine
+
+
+def _repo(root: Path, files: dict[str, str]) -> Path:
+    for relative, content in files.items():
+        target = root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(textwrap.dedent(content).strip() + "\n", encoding="utf-8")
+    return root
+
+
+def test_no_name_only_edges(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": "def caller() -> int:\n    return helper()\n",
+            "b.py": "def helper() -> int:\n    return 1\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    slice_data = engine.get_ast_call_slice("caller", hops=1, include_metadata=True)
+    assert slice_data["downstream_callees"] == []
+    assert engine.graph.number_of_edges() == 0
+    engine.close()
+
+
+def test_self_recursion_is_an_edge_and_a_reported_cycle(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {"r.py": "def fact(n: int) -> int:\n    return n * fact(n - 1)\n"},
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    symbol = engine.resolve_strict("fact")[0]
+    assert symbol is not None
+    assert engine.graph.has_edge(symbol.symbol_id, symbol.symbol_id)
+
+    cycles = engine.find_circular_dependencies()
+    assert cycles["self_recursive_count"] == 1
+    assert cycles["self_recursive"][0]["qualified_name"] == "fact"
+    assert cycles["symbol_cycle_count"] == 0
+    engine.close()
+
+
+def test_default_budget_and_hub_fanout_caps(tmp_path: Path) -> None:
+    repo = tmp_path / "r"
+    repo.mkdir()
+    lines = ["def hub() -> int:", "    return 1", ""]
+    for index in range(120):
+        lines += [f"def caller_{index}() -> int:", "    return hub()", ""]
+    (repo / "hub.py").write_text("\n".join(lines), encoding="utf-8")
+
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    result = engine.get_ast_call_slice("hub", hops=1, include_metadata=True)
+
+    assert result["token_metrics"]["payload_tokens"] <= 6000
+    assert result["token_metrics"]["budget_tokens"] == 6000
+    assert result["diagnostics"]["omitted"]["upstream"] > 0
+    assert result["token_metrics"]["slice_tokens"] <= 6000
+    engine.close()
+
+
+def test_payload_tokens_match_exact_json(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": "from b import helper\n\ndef caller() -> int:\n    return helper()\n",
+            "b.py": "def helper() -> int:\n    return 1\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    payload = engine.get_ast_call_slice("caller", hops=1, include_metadata=True)
+    text = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    assert payload["token_metrics"]["payload_tokens"] == engine.count_tokens(text)
+    engine.close()
+
+
+def test_slim_payload_is_default(tmp_path: Path) -> None:
+    repo = _repo(tmp_path / "r", {"a.py": "def f() -> int:\n    return 1\n"})
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    slim = engine.get_ast_call_slice("f", hops=1)
+    assert set(slim) == {"compiled_context", "token_metrics", "diagnostics"}
+    full = engine.get_ast_call_slice("f", hops=1, include_metadata=True)
+    assert "target" in full and "regions" in full
+    engine.close()
+
+
+def test_incremental_graph_equals_from_scratch_after_random_edits(tmp_path: Path) -> None:
+    repo = tmp_path / "r"
+    (repo / "pkg").mkdir(parents=True)
+    (repo / "pkg" / "__init__.py").write_text("")
+    (repo / "pkg" / "a.py").write_text(
+        "from pkg.b import helper\n\ndef use() -> int:\n    return helper()\n"
+    )
+    (repo / "pkg" / "b.py").write_text("def helper() -> int:\n    return 1\n")
+
+    incremental = GraphEngine(repo)
+    incremental.index_repository(force_rebuild=True)
+
+    def edges(engine: GraphEngine) -> set[tuple[str, str, str, float]]:
+        return {
+            (u, v, data["relation"], data["confidence"])
+            for u, v, data in engine.graph.edges(data=True)
+        }
+
+    # 1) new module that an existing file already imports (the historical drift case)
+    (repo / "pkg" / "c.py").write_text("def thing() -> int:\n    return 2\n")
+    (repo / "pkg" / "a.py").write_text(
+        "from pkg.b import helper\nfrom pkg.c import thing\n\n"
+        "def use() -> int:\n    return helper() + thing()\n"
+    )
+    incremental.refresh_file(repo / "pkg" / "c.py")
+    incremental.refresh_file(repo / "pkg" / "a.py")
+
+    # 2) rename a callee and add a new caller by random-ish sequence
+    (repo / "pkg" / "b.py").write_text("def helper_renamed() -> int:\n    return 1\n")
+    incremental.refresh_file(repo / "pkg" / "b.py")
+    (repo / "pkg" / "a.py").write_text(
+        "from pkg.b import helper_renamed\n\n"
+        "def use() -> int:\n    return helper_renamed()\n\n"
+        "def use_twice() -> int:\n    return use() + use()\n"
+    )
+    incremental.refresh_file(repo / "pkg" / "a.py")
+
+    fresh = GraphEngine(repo)
+    fresh.index_repository(force_rebuild=True)
+    assert edges(incremental) == edges(fresh)
+
+    incremental.close()
+    fresh.close()
+
+
+def test_symlink_escape_is_skipped_not_crashing(tmp_path: Path) -> None:
+    inside = tmp_path / "repo"
+    (inside / "pkg").mkdir(parents=True)
+    (inside / "pkg" / "app.py").write_text("def public() -> int:\n    return 1\n")
+    outside = tmp_path / "outside.py"
+    outside.write_text("def secret() -> str:\n    return 'TOPSECRET'\n")
+    (inside / "pkg" / "leak.py").symlink_to(outside)
+
+    engine = GraphEngine(inside)
+    stats = engine.index_repository(force_rebuild=True)
+    assert stats["files_indexed"] == 1
+    assert engine.resolve_strict("secret")[0] is None
+    assert any("symlink escapes" in reason for reason in stats["skipped_files"].values())
+    engine.close()
+
+
+def test_cache_lives_outside_repo_and_read_only_checkouts_work(tmp_path: Path) -> None:
+    repo = _repo(tmp_path / "r", {"a.py": "def f() -> int:\n    return 1\n"})
+    cache_dir = tmp_path / "cache"
+    engine = GraphEngine(repo, cache_dir=cache_dir)
+    engine.index_repository(force_rebuild=True)
+    assert cache_dir in engine.cache.db_path.parents
+    assert not any(p.name.startswith(".ast_slicer_cache") for p in repo.iterdir())
+    engine.close()
+
+    for path in repo.rglob("*"):
+        path.chmod(0o555)
+    repo.chmod(0o555)
+    try:
+        readonly = GraphEngine(repo, cache_dir=cache_dir)
+        assert readonly.index_repository(force_rebuild=False)["files_indexed"] == 1
+        readonly.close()
+    finally:
+        repo.chmod(0o755)
+        for path in repo.rglob("*"):
+            path.chmod(0o644)
+
+
+def test_allowed_roots_reject_outside_repos(tmp_path: Path) -> None:
+    allowed = tmp_path / "allowed"
+    allowed.mkdir()
+    repo = _repo(tmp_path / "outside", {"a.py": "def f() -> int:\n    return 1\n"})
+    with pytest.raises(PermissionError):
+        GraphEngine(repo, allowed_roots=[allowed])
+
+
+def test_binary_and_oversized_files_are_reported(tmp_path: Path) -> None:
+    repo = tmp_path / "r"
+    repo.mkdir()
+    (repo / "ok.py").write_text("def ok() -> int:\n    return 1\n")
+    (repo / "bin.py").write_bytes(b"def bin():\x00\n    return 1\n")
+    (repo / "big.py").write_text("def big() -> int:\n    return 1\n" + "# pad\n" * 200)
+
+    engine = GraphEngine(repo, max_file_bytes=300)
+    stats = engine.index_repository(force_rebuild=True)
+    reasons = " ".join(stats["skipped_files"].values())
+    assert stats["files_indexed"] == 1
+    assert "too large" in reasons
+    assert "binary" in reasons
+    engine.close()
+
+
+def test_explain_edge_reports_provenance(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": "from b import helper\n\ndef caller() -> int:\n    return helper()\n",
+            "b.py": "def helper() -> int:\n    return 1\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    explained = engine.explain_edge("a.py::caller", "b.py::helper")
+    assert explained["exists"] is True
+    assert explained["relation"] == "calls"
+    assert explained["resolution"].startswith("import:")
+    assert explained["call_site"]["line"] == 4
+    assert "helper()" in explained["call_site"]["text"]
+    engine.close()
+
+
+def test_ambiguous_query_returns_all_candidates(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": "class A:\n    def run(self) -> int:\n        return 1\n",
+            "b.py": "class B:\n    def run(self) -> int:\n        return 2\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    result = engine.get_ast_call_slice("run", hops=1)
+    assert result["code"] == "ambiguous_symbol"
+    assert {c["qualified_name"] for c in result["candidates"]} == {"A.run", "B.run"}
+
+    qualified = engine.get_ast_call_slice("a.py::A.run", hops=1)
+    assert "error" not in qualified
+    engine.close()
+
+
+def test_cache_dir_env_override(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    cache_dir = tmp_path / "env-cache"
+    monkeypatch.setenv("POLYGLOT_AST_CACHE_DIR", str(cache_dir))
+    repo = _repo(tmp_path / "r", {"a.py": "def f() -> int:\n    return 1\n"})
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    assert engine.cache.db_path.exists()
+    assert engine.cache.db_path.parent == cache_dir.resolve()
+    engine.close()
+
+
+def test_incremental_equals_rebuild_after_each_random_edit(tmp_path: Path) -> None:
+    """Hypothesis-style differential test: random add/remove/rename sequences."""
+    repo = tmp_path / "r"
+    repo.mkdir()
+    rng = random.Random(20261031)
+    b_funcs: set[str] = {"alpha"}
+    c_funcs: set[str] = {"beta"}
+
+    def render(module: str, funcs: set[str]) -> str:
+        return "\n\n".join(
+            f"def {name}() -> int:\n    return {index}"
+            for index, name in enumerate(sorted(funcs))
+        )
+
+    def write_project() -> list[Path]:
+        changed = []
+        for name, funcs in (("b", b_funcs), ("c", c_funcs)):
+            path = repo / f"{name}.py"
+            path.write_text(render(name, funcs) + "\n")
+            changed.append(path)
+        calls = " + ".join(sorted(b_funcs | c_funcs)) or "0"
+        imports = []
+        if b_funcs:
+            imports.append(f"from b import {', '.join(sorted(b_funcs))}")
+        if c_funcs:
+            imports.append(f"from c import {', '.join(sorted(c_funcs))}")
+        use = repo / "a.py"
+        use.write_text("\n".join(imports) + "\n\ndef use() -> int:\n    return " + calls + "\n")
+        changed.append(use)
+        return changed
+
+    incremental = GraphEngine(repo)
+    incremental.index_repository(force_rebuild=True)
+
+    def edges(engine: GraphEngine) -> set[tuple[str, str, str]]:
+        return {(u, v, data["relation"]) for u, v, data in engine.graph.edges(data=True)}
+
+    for _ in range(10):
+        operation = rng.choice(["add", "remove", "rename"])
+        pool = b_funcs if rng.random() < 0.5 else c_funcs
+        if operation == "add" or not pool:
+            pool.add(f"fn_{rng.randrange(1000)}")
+        elif operation == "remove":
+            pool.discard(sorted(pool)[rng.randrange(len(pool))])
+        else:
+            old = sorted(pool)[rng.randrange(len(pool))]
+            pool.discard(old)
+            pool.add(f"{old}_v{rng.randrange(100)}")
+
+        for path in write_project():
+            incremental.refresh_file(path)
+
+        fresh = GraphEngine(repo)
+        fresh.index_repository(force_rebuild=True)
+        assert edges(incremental) == edges(fresh), f"diverged after {operation}: {sorted(pool)}"
+        fresh.close()
+
+    incremental.close()
+
+
+def test_bare_call_never_binds_to_enclosing_method(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": (
+                "class A:\n"
+                "    def open(self) -> str:\n"
+                "        return 'method'\n\n"
+                "    def use(self) -> str:\n"
+                "        return open('x')\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    use = engine.resolve_strict("a.py::A.use")[0]
+    assert use is not None
+    assert not list(engine.graph.successors(use.symbol_id))
+    engine.close()
+
+
+def test_nested_symbol_resolves_within_its_scope(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "t.py": (
+                "def test_case() -> int:\n"
+                "    class LocalError(Exception):\n"
+                "        pass\n\n"
+                "    def helper() -> int:\n"
+                "        return 1\n\n"
+                "    raise LocalError('boom')\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    caller = engine.resolve_strict("t.py::test_case")[0]
+    assert caller is not None
+    targets = {engine._symbols[v].qualified_name for v in engine.graph.successors(caller.symbol_id)}
+    assert "test_case.LocalError" in targets
+    engine.close()

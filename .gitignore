@@ -9,6 +9,9 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+*.whl
+.coverage
+htmlcov/
 
 # Local SQLite AST cache files
 .ast_slicer_cache.db
@@ -18,3 +21,4 @@ build/
 # OS & Editor files
 .DS_Store
 .idea/
+.vscode/
