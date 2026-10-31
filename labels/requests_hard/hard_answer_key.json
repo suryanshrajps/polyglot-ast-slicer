@@ -1,0 +1,758 @@
+{
+  "bf23594a982f": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_requests_after_timeout_are_not_received",
+    "target": "Server.basic_response_server"
+  },
+  "1f6f1347b436": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_request_recovery",
+    "target": "Server.basic_response_server"
+  },
+  "a613fa7ab1ef": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_basic_response",
+    "target": "Server.basic_response_server"
+  },
+  "bc0fbf8c619e": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_server_closes",
+    "target": "Server.basic_response_server"
+  },
+  "afc44ee4f98b": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_server_finishes_on_error",
+    "target": "Server.basic_response_server"
+  },
+  "84521e3e2cca": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_request_recovery_with_bigger_timeout",
+    "target": "Server.basic_response_server"
+  },
+  "a080fba20c8c": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_text_response",
+    "target": "Server.text_response_server"
+  },
+  "d11bc641da1a": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_basic_waiting_server",
+    "target": "Server.basic_response_server"
+  },
+  "9ddc12a24cf2": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_multiple_requests",
+    "target": "Server.basic_response_server"
+  },
+  "16e089df81b8": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "JSONDecodeError.__init__",
+    "target": "RequestException.__init__"
+  },
+  "61fc2ff5cdc9": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "test_chunked_upload",
+    "target": "Server.basic_response_server"
+  },
+  "8669a3a2f73e": {
+    "seeded": false,
+    "kind": "class_receiver",
+    "source": "TestTestServer.test_server_finishes_when_no_connections",
+    "target": "Server.basic_response_server"
+  },
+  "98e8d88f842e": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.request",
+    "target": "Session.send"
+  },
+  "9c4d3e7a748f": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "HTTPAdapter.send",
+    "target": "HTTPAdapter.request_url"
+  },
+  "0baef1bf7334": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Response.__exit__",
+    "target": "Response.close"
+  },
+  "d9b9a592af8a": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "HTTPAdapter.__setstate__",
+    "target": "HTTPAdapter.init_poolmanager"
+  },
+  "ec13c879d37d": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Server.__exit__",
+    "target": "Server._close_server_sock_ignore_errors"
+  },
+  "44802d4affcb": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "SessionRedirectMixin.resolve_redirects",
+    "target": "SessionRedirectMixin.send"
+  },
+  "a90617b14674": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "MockRequest.host",
+    "target": "MockRequest.get_host"
+  },
+  "f2d6963fd305": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "RequestsCookieJar.values",
+    "target": "RequestsCookieJar.itervalues"
+  },
+  "be9227263aaf": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "PreparedRequest.prepare_url",
+    "target": "RequestEncodingMixin._encode_params"
+  },
+  "8b0ef952814e": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "PreparedRequest.prepare",
+    "target": "PreparedRequest.prepare_method"
+  },
+  "3ccfd5ce9814": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Response.iter_lines",
+    "target": "Response.iter_content"
+  },
+  "14d0c773232d": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.__exit__",
+    "target": "Session.close"
+  },
+  "a2a9f619ee02": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "CaseInsensitiveDict.__eq__",
+    "target": "CaseInsensitiveDict.lower_items"
+  },
+  "16a45cc46dc6": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "RequestsCookieJar.__setitem__",
+    "target": "RequestsCookieJar.set"
+  },
+  "1e052e13d582": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.send",
+    "target": "Session.get_adapter"
+  },
+  "9fc2938a095d": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.put",
+    "target": "Session.request"
+  },
+  "dc0bc45d8181": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "SessionRedirectMixin.resolve_redirects",
+    "target": "SessionRedirectMixin.get_redirect_target"
+  },
+  "3f5264d81ff2": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "RedirectSession.send",
+    "target": "RedirectSession.build_response"
+  },
+  "f4df90b87e47": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.head",
+    "target": "Session.request"
+  },
+  "aacb48ec5db9": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.request",
+    "target": "Session.merge_environment_settings"
+  },
+  "4be752d8c2b0": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Session.delete",
+    "target": "Session.request"
+  },
+  "d17cb2e02609": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "PreparedRequest.prepare",
+    "target": "PreparedRequest.prepare_hooks"
+  },
+  "f2f1eddcb5a1": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Server.run",
+    "target": "Server._close_server_sock_ignore_errors"
+  },
+  "d5c4505ab77b": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "SessionRedirectMixin.resolve_redirects",
+    "target": "SessionRedirectMixin.rebuild_auth"
+  },
+  "6db53e8acac9": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "PreparedRequest.prepare",
+    "target": "PreparedRequest.prepare_url"
+  },
+  "4dfb73448b03": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "HTTPAdapter.send",
+    "target": "HTTPAdapter.cert_verify"
+  },
+  "c964a909af64": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "PreparedRequest.prepare_body",
+    "target": "RequestEncodingMixin._encode_params"
+  },
+  "3505ca1e6d32": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "TestRequests.test_redirect_with_wrong_gzipped_header",
+    "target": "TestRequests._patch_adapter_gzipped_redirect"
+  },
+  "781449ad97e9": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "PreparedRequest.prepare",
+    "target": "PreparedRequest.prepare_headers"
+  },
+  "909dfd397c67": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Response.__iter__",
+    "target": "Response.iter_content"
+  },
+  "96b2c5f43554": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "info",
+    "target": "_implementation"
+  },
+  "fd37ebc18b88": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "extract_cookies_to_jar",
+    "target": "MockResponse"
+  },
+  "0ffbf7ca27ce": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "RequestsCookieJar.__delitem__",
+    "target": "remove_cookie_by_name"
+  },
+  "542f0c407262": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "RequestsCookieJar.set",
+    "target": "remove_cookie_by_name"
+  },
+  "00f0fe35a258": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Server.text_response_server.text_response_handler",
+    "target": "consume_socket_content"
+  },
+  "f46f688e4e0e": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get_cookie_header",
+    "target": "MockRequest"
+  },
+  "674785849cf5": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "post",
+    "target": "request"
+  },
+  "f0e8a21b890e": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "default_headers",
+    "target": "default_user_agent"
+  },
+  "f2a2cec5268f": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "main",
+    "target": "info"
+  },
+  "7ae6bb253dbd": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "HTTPAdapter.build_connection_pool_key_attributes",
+    "target": "_urllib3_request_context"
+  },
+  "21427c488584": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Session.prepare_request",
+    "target": "merge_setting"
+  },
+  "2f79b24ce6fd": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "morsel_to_cookie",
+    "target": "create_cookie"
+  },
+  "a8a6e71ade74": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "httpbin_secure",
+    "target": "prepare_url"
+  },
+  "2c9198f4185c": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "resolve_proxies",
+    "target": "should_bypass_proxies"
+  },
+  "53b5ede7b31d": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "resolve_proxies",
+    "target": "get_environ_proxies"
+  },
+  "bfc7ccadfad8": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get_environ_proxies",
+    "target": "should_bypass_proxies"
+  },
+  "16a8959e80eb": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "RequestsCookieJar.set",
+    "target": "create_cookie"
+  },
+  "c2dd5452fb81": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "should_bypass_proxies",
+    "target": "is_valid_cidr"
+  },
+  "edcf31e9e1f1": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "should_bypass_proxies",
+    "target": "proxy_bypass"
+  },
+  "e423bcd00a2a": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "patch",
+    "target": "request"
+  },
+  "02b03952cb5a": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "should_bypass_proxies",
+    "target": "set_environ"
+  },
+  "56d275efb245": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "address_in_network",
+    "target": "dotted_netmask"
+  },
+  "5072826ccd00": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "head",
+    "target": "request"
+  },
+  "1d925f681909": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "delete",
+    "target": "request"
+  },
+  "eda1409d7ccf": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Session.merge_environment_settings",
+    "target": "merge_setting"
+  },
+  "da2ccc14bd2b": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get",
+    "target": "request"
+  },
+  "e99dacf0288d": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "parse_list_header",
+    "target": "unquote_header_value"
+  },
+  "d08f1640a286": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get_unicode_from_response",
+    "target": "get_encoding_from_headers"
+  },
+  "cfaeb47044f5": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_requests_are_updated_each_time",
+    "target": "RedirectSession"
+  },
+  "57505fb05f73": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "put",
+    "target": "request"
+  },
+  "b68d0733b3d5": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_post_with_custom_mapping",
+    "target": "TestRequests.test_post_with_custom_mapping.CustomMapping"
+  },
+  "fab2df2f2193": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestSuperLen.test_super_len_tell_ioerror",
+    "target": "TestSuperLen.test_super_len_tell_ioerror.NoLenBoomFile"
+  },
+  "bc67c73aa111": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_header_with_subclass_types",
+    "target": "TestRequests.test_header_with_subclass_types.MyBytes"
+  },
+  "c3b0071745b5": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_should_bypass_proxies_win_registry",
+    "target": "test_should_bypass_proxies_win_registry.RegHandle"
+  },
+  "df50b8fd8deb": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_rewind_body_failed_seek",
+    "target": "TestRequests.test_rewind_body_failed_seek.BadFileObj"
+  },
+  "79b963b9f01e": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_rewind_body_no_seek",
+    "target": "TestRequests.test_rewind_body_no_seek.BadFileObj"
+  },
+  "f2e44d7cbb1c": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_header_with_subclass_types",
+    "target": "TestRequests.test_header_with_subclass_types.MyString"
+  },
+  "47f2f788e591": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_POSTBIN_SEEKED_OBJECT_WITH_NO_ITER",
+    "target": "TestRequests.test_POSTBIN_SEEKED_OBJECT_WITH_NO_ITER.TestStream"
+  },
+  "ece5b34d6d63": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_cookie_policy_copy",
+    "target": "TestRequests.test_cookie_policy_copy.MyCookiePolicy"
+  },
+  "6b0a8b01f7cd": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_should_bypass_proxies_win_registry_ProxyOverride_value",
+    "target": "test_should_bypass_proxies_win_registry_ProxyOverride_value.RegHandle"
+  },
+  "b88255dbcfba": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_rewind_body_failed_tell",
+    "target": "TestRequests.test_rewind_body_failed_tell.BadFileObj"
+  },
+  "7579959238b0": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_custom_redirect_mixin",
+    "target": "TestRequests.test_custom_redirect_mixin.CustomRedirectSession"
+  },
+  "0c43a17cbe36": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_prepared_from_session",
+    "target": "TestRequests.test_prepared_from_session.DummyAuth"
+  },
+  "105acfd9f7a5": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "should_bypass_proxies",
+    "target": "should_bypass_proxies.get_proxy"
+  },
+  "76c0146cb0a6": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestSuperLen.test_super_len_with_no__len__",
+    "target": "TestSuperLen.test_super_len_with_no__len__.LenFile"
+  },
+  "4dc560ccad05": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_should_bypass_proxies_win_registry_bad_values",
+    "target": "test_should_bypass_proxies_win_registry_bad_values.RegHandle"
+  },
+  "3e2a4de7acf1": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_post_getattr_proxy_read_only",
+    "target": "TestRequests.test_post_getattr_proxy_read_only.ReadProxy"
+  },
+  "7b71ae50c9dd": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "_init",
+    "target": "_init.doc"
+  },
+  "0128481d140d": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestSuperLen.test_super_len_handles_files_raising_weird_errors_in_tell",
+    "target": "TestSuperLen.test_super_len_handles_files_raising_weird_errors_in_tell.BoomFile"
+  },
+  "12a1bd431db7": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "TestRequests.test_getattr_proxy_stream_follows_redirect",
+    "target": "TestRequests.test_getattr_proxy_stream_follows_redirect.AttrProxy"
+  },
+  "4e3adcc0cd3e": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestCaseInsensitiveDict.test_lower_items",
+    "target": "CaseInsensitiveDict.lower_items"
+  },
+  "5b9af402a40c": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestCaseInsensitiveDict.test_lower_items",
+    "target": "CaseInsensitiveDict.lower_items"
+  },
+  "d182bfdc96e3": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "Request.prepare",
+    "target": "PreparedRequest.prepare"
+  },
+  "973ecf7cc72c": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "SessionRedirectMixin.rebuild_auth",
+    "target": "PreparedRequest.prepare_auth"
+  },
+  "fc8cc9b81c16": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestCaseInsensitiveDict.test_copy",
+    "target": "CaseInsensitiveDict.copy"
+  },
+  "2d07953af92a": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "Session.prepare_request",
+    "target": "PreparedRequest.prepare"
+  },
+  "7f8d90d3710d": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_data_argument_accepts_tuples",
+    "target": "PreparedRequest.prepare"
+  },
+  "698ee6fe9c63": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "get_cookie_header",
+    "target": "MockRequest.get_new_headers"
+  },
+  "2e5794221bdd": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "SessionRedirectMixin.resolve_redirects",
+    "target": "Response.close"
+  },
+  "c6edaae5acc9": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_requests_are_updated_each_time",
+    "target": "RedirectSession.send"
+  },
+  "6a453b65c0ce": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestLookupDict.test_get",
+    "target": "LookupDict.get"
+  },
+  "5156140ae010": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestRequests.test_proxy_auth_empty_pass",
+    "target": "HTTPAdapter.proxy_headers"
+  },
+  "a69ad627241b": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_prepared_copy",
+    "target": "PreparedRequest.prepare"
+  },
+  "c4e84498bd58": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_requests_are_updated_each_time",
+    "target": "SessionRedirectMixin.resolve_redirects"
+  },
+  "68d57789c432": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_json_encodes_as_bytes",
+    "target": "PreparedRequest.prepare"
+  },
+  "ff02dc43d819": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_proxy_env_vars_override_default",
+    "target": "PreparedRequest.prepare"
+  },
+  "48b39b57f4fa": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "cookiejar_from_dict",
+    "target": "RequestsCookieJar.set_cookie"
+  },
+  "771b48f86100": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "SessionRedirectMixin.resolve_redirects",
+    "target": "PreparedRequest.copy"
+  },
+  "27d7a8f886c5": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestCaseInsensitiveDict.test_copy",
+    "target": "CaseInsensitiveDict.copy"
+  },
+  "221f9298a47f": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "TestRequests.test_proxy_auth",
+    "target": "HTTPAdapter.proxy_headers"
+  },
+  "2bfb30c4f20d": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "PreparedRequest.copy",
+    "target": "CaseInsensitiveDict.copy"
+  },
+  "42b2ea6b657b": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "RequestsCookieJar.copy",
+    "target": "RequestsCookieJar.update"
+  },
+  "37233e9026fb": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_prepared_copy",
+    "target": "PreparedRequest.copy"
+  },
+  "1ba492da42ce": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "Session.request",
+    "fake_target": "request"
+  },
+  "3cb8349053be": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CaseInsensitiveDict.copy",
+    "fake_target": "RequestsCookieJar.copy"
+  },
+  "55d7604f5cae": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CaseInsensitiveDict.lower_items",
+    "fake_target": "CaseInsensitiveDict.__delitem__"
+  },
+  "96fcc9526c2b": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "RequestsCookieJar.set",
+    "fake_target": "RequestsCookieJar.__contains__"
+  },
+  "07a822b86fb6": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "TestRequests._patch_adapter_gzipped_redirect",
+    "fake_target": "TestRequests.test_BASICAUTH_TUPLE_HTTP_200_OK_GET"
+  },
+  "b65a132ee352": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "should_bypass_proxies.get_proxy",
+    "fake_target": "should_bypass_proxies"
+  },
+  "3437dd404dde": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "HTTPAdapter.init_poolmanager",
+    "fake_target": "HTTPAdapter.__getstate__"
+  },
+  "6b6f6a8dafb7": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "Session.merge_environment_settings",
+    "fake_target": "Session.__enter__"
+  },
+  "598aa9c8dc3c": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "SessionRedirectMixin.get_redirect_target",
+    "fake_target": "SessionRedirectMixin.rebuild_auth"
+  },
+  "110e1d8d8b71": {
+    "seeded": true,
+    "kind": "class_receiver",
+    "real_target": "Server.basic_response_server",
+    "fake_target": "Server.__enter__"
+  },
+  "e729a42b8733": {
+    "seeded": true,
+    "kind": "class_receiver",
+    "real_target": "Server.basic_response_server",
+    "fake_target": "Server.__enter__"
+  }
+}
