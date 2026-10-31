@@ -25,5 +25,7 @@ jobs:
         run: uv run mypy polyglot_ast_slicer
       - name: Test
         run: uv run pytest
+      - name: Verify generated metrics
+        run: uv run python scripts/generate_metrics.py --check
       - name: Build wheel
         run: uv build --wheel

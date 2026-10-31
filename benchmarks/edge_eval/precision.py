@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
+import json
 import random
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 import jedi
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
+from stats import interval_text, wilson  # noqa: E402
 
 from polyglot_ast_slicer.graph_engine import GraphEngine  # noqa: E402
 
@@ -18,9 +22,14 @@ def positions(line: str, name: str) -> list[int]:
     return [m.start() for m in re.finditer(rf"(?<![\w$]){re.escape(name)}(?![\w$])", line)]
 
 
+jedi.settings.cache_directory = tempfile.mkdtemp(prefix="jedi-cache-")
+
+
 def main() -> None:
-    repo = str(Path(sys.argv[1]).resolve())
-    sample_size = int(sys.argv[2]) if len(sys.argv) > 2 else 100
+    arguments = [item for item in sys.argv[1:] if item != "--json"]
+    json_mode = "--json" in sys.argv
+    repo = str(Path(arguments[0]).resolve())
+    sample_size = int(arguments[1]) if len(arguments) > 1 else 100
     engine = GraphEngine(repo)
     engine.index_repository(force_rebuild=True)
     project = jedi.Project(
@@ -109,14 +118,35 @@ def main() -> None:
             failures.append((target.name, source.qualified_name, tier))
 
     total = len(sample)
-    print(f"REPO {repo}")
-    print(f"  edges sampled={total} strict={strict} canonical={canonical} "
-          f"({canonical / total * 100:.1f}%)")
-    for tier, bucket in sorted(by_tier.items(), reverse=True):
-        n = bucket["n"]
-        print(f"  tier {tier}: n={n} strict={bucket['strict']} "
-              f"canonical={bucket['canonical']} ({bucket['canonical'] / n * 100:.0f}%)")
-    print(f"  failures: {failures[:8]}")
+    low, high = wilson(canonical, total)
+    summary = {
+        "repo": repo,
+        "sampled": total,
+        "strict": strict,
+        "canonical": canonical,
+        "precision": canonical / total if total else 0.0,
+        "precision_ci95": [low, high],
+        "by_tier": {
+            str(tier): {
+                "n": bucket["n"],
+                "strict": bucket["strict"],
+                "canonical": bucket["canonical"],
+            }
+            for tier, bucket in sorted(by_tier.items(), reverse=True)
+        },
+        "failures": failures[:8],
+    }
+    if json_mode:
+        print(json.dumps(summary))
+    else:
+        print(f"REPO {repo}")
+        print(f"  edges sampled={total} strict={strict} canonical={canonical} "
+              f"{interval_text(canonical, total)}")
+        for tier, bucket in sorted(by_tier.items(), reverse=True):
+            n = bucket["n"]
+            print(f"  tier {tier}: n={n} strict={bucket['strict']} "
+                  f"canonical={bucket['canonical']} ({bucket['canonical'] / n * 100:.0f}%)")
+        print(f"  failures: {failures[:8]}")
     engine.close()
 
 
