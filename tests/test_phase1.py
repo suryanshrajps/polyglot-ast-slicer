@@ -470,3 +470,29 @@ def test_tsx_and_js_grammars_when_available(tmp_path: Path) -> None:
     assert engine.resolve_strict("Widget")[0] is not None
     assert engine.resolve_strict("oldSchool")[0] is not None
     engine.close()
+
+
+def test_tsconfig_extends_relative_and_package(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "configs/base.json": (
+                '{"compilerOptions": {"paths": {"@lib/*": ["src/lib/*"]}}}'
+            ),
+            "node_modules/@org/tsconfig/tsconfig.json": (
+                '{"compilerOptions": {"baseUrl": "../../../"}}'
+            ),
+            "tsconfig.json": (
+                '{"extends": ["./configs/base.json", "@org/tsconfig/tsconfig"],'
+                ' "compilerOptions": {"strict": true}}'
+            ),
+            "src/lib/util.ts": "export function helper(x: number): number { return x; }\n",
+            "src/app.ts": 'import { helper } from "@lib/util";\n'
+            "export function run(): number { return helper(1); }\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    result = engine.get_ast_call_slice("src/app.ts::run", hops=1, include_metadata=True)
+    assert "helper" in {item["qualified_name"] for item in result["downstream_callees"]}
+    engine.close()

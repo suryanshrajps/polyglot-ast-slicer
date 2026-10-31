@@ -680,29 +680,68 @@ class GraphEngine:
         path = self.repo_path / "tsconfig.json"
         if not path.is_file():
             return None, {}
-        text = path.read_text(encoding="utf-8", errors="replace")
+        return self._load_tsconfig_file(path)
+
+    def _load_tsconfig_file(
+        self, path: Path, depth: int = 0
+    ) -> tuple[Path | None, dict[str, list[str]]]:
+        """Loads a tsconfig, following ``extends`` (relative, package, chained)."""
+        if depth > 6 or not path.is_file():
+            return None, {}
         try:
-            data = json.loads(_strip_jsonc(text))
-        except json.JSONDecodeError:
+            data = json.loads(_strip_jsonc(path.read_text(encoding="utf-8", errors="replace")))
+        except (OSError, json.JSONDecodeError):
             return None, {}
         if not isinstance(data, dict):
             return None, {}
+
+        base: Path | None = None
+        patterns: dict[str, list[str]] = {}
+        parents = data.get("extends")
+        if isinstance(parents, str):
+            parents = [parents]
+        if isinstance(parents, list):
+            for spec in parents:
+                if not isinstance(spec, str):
+                    continue
+                parent_path = self._resolve_extends(spec, path.parent)
+                if parent_path is None:
+                    continue
+                parent_base, parent_patterns = self._load_tsconfig_file(parent_path, depth + 1)
+                if parent_base is not None:
+                    base = parent_base
+                patterns.update(parent_patterns)
+
         options = data.get("compilerOptions", {})
         if not isinstance(options, dict):
             options = {}
         base_url = options.get("baseUrl")
-        base = (
-            (path.parent / base_url).resolve()
-            if isinstance(base_url, str)
-            else path.parent.resolve()
-        )
-        raw_paths = options.get("paths", {})
-        patterns: dict[str, list[str]] = {}
+        if isinstance(base_url, str):
+            base = (path.parent / base_url).resolve()
+        raw_paths = options.get("paths")
         if isinstance(raw_paths, dict):
-            for alias, targets in raw_paths.items():
-                if isinstance(targets, list) and all(isinstance(item, str) for item in targets):
-                    patterns[str(alias)] = targets
+            patterns = {
+                str(alias): [str(item) for item in targets if isinstance(item, str)]
+                for alias, targets in raw_paths.items()
+                if isinstance(targets, list)
+            }
         return base, patterns
+
+    def _resolve_extends(self, spec: str, config_dir: Path) -> Path | None:
+        candidates: list[Path] = []
+        if spec.startswith(".") or spec.startswith("/"):
+            raw = (config_dir / spec).resolve()
+            candidates.append(raw if raw.suffix == ".json" else raw.with_suffix(".json"))
+        else:
+            for root in (config_dir, self.repo_path):
+                package = root / "node_modules" / spec
+                candidates.extend(
+                    [package, package.with_suffix(".json"), package / "tsconfig.json"]
+                )
+        for candidate in candidates:
+            if candidate.is_file():
+                return candidate
+        return None
 
     # -- edges ----------------------------------------------------------
 
