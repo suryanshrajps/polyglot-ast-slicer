@@ -49,31 +49,31 @@ ab5ce4070648,correct,tests/test_requests.py:1248 constructs requests.Session; sr
 37dfbfbddf19,correct,tests/test_requests.py:2800 constructs requests.Request; src/requests/models.py:284 defines Request.
 716f850b7f7b,correct,tests/test_requests.py:285 calls requests.head; src/requests/api.py:102 defines head.
 dbdad1f4c522,correct,tests/test_requests.py:1137 constructs requests.Request; src/requests/models.py:284 defines Request.
-16d47c3468f7,,
-457f60051197,,
-76e6003124f1,,
-a8c139b16a42,,
-d777883bf735,,
-ed4d86f297de,,
-59da8a5a6d76,,
-b68d0733b3d5,,
-c6edaae5acc9,,
-e0799b061cf7,,
-3d8bdb5ef5a7,,
-eddee4ab8b95,,
-e325617a9477,,
-f3782f102ff0,,
-22e476b4d02e,,
-5cf5cc5f53a0,,
-5678840b513b,,
-703866ab76ba,,
-230e80242409,,
-9a8a6034694e,,
-a61d3dfd66f5,,
-7b0c51d02a1a,,
-a6b8ffbbfab0,,
-81f53160ecdd,,
-5a9c4df07a5b,,
+16d47c3468f7,correct,tests/test_requests.py:805 calls requests.session; src/requests/sessions.py:908 defines session.
+457f60051197,correct,tests/test_requests.py:1737 constructs requests.Session; src/requests/sessions.py:395 defines Session.
+76e6003124f1,correct,tests/test_requests.py:385 calls requests.session; src/requests/sessions.py:908 defines session.
+a8c139b16a42,correct,tests/test_requests.py:2897 calls requests.post; src/requests/api.py:117 defines post.
+d777883bf735,correct,tests/test_requests.py:1797 calls requests.get; src/requests/api.py:74 defines get.
+ed4d86f297de,correct,tests/test_requests.py:1305 constructs requests.cookies.RequestsCookieJar; src/requests/cookies.py:191 defines it.
+59da8a5a6d76,correct,tests/test_requests.py:528 calls requests.get; src/requests/api.py:74 defines get.
+b68d0733b3d5,correct,tests/test_requests.py:918 constructs nested CustomMapping; tests/test_requests.py:900 defines it.
+c6edaae5acc9,correct,tests/test_requests.py:2652 calls session.send on RedirectSession; tests/test_requests.py:2616 defines send.
+e0799b061cf7,correct,src/requests/cookies.py:247 calls self.set_cookie; src/requests/cookies.py:382 defines set_cookie.
+3d8bdb5ef5a7,correct,src/requests/sessions.py:366 calls _basic_auth_str; src/requests/auth.py:34 defines it.
+eddee4ab8b95,correct,src/requests/adapters.py:735 raises ProxyError; src/requests/exceptions.py:74 defines it.
+e325617a9477,correct,src/requests/adapters.py:395 calls extract_cookies_to_jar; src/requests/cookies.py:135 defines it.
+f3782f102ff0,correct,tests/test_requests.py:2681 constructs PreparedRequest; src/requests/models.py:378 defines it.
+22e476b4d02e,correct,tests/test_utils.py:726 calls to_native_string; src/requests/_internal_utils.py:26 defines it.
+5cf5cc5f53a0,correct,tests/test_utils.py:844 calls should_bypass_proxies; src/requests/utils.py:810 defines it.
+5678840b513b,correct,tests/test_utils.py:242 calls get_environ_proxies; src/requests/utils.py:873 defines it.
+703866ab76ba,correct,src/requests/sessions.py:763 calls resolve_proxies; src/requests/utils.py:911 defines it.
+230e80242409,correct,tests/test_requests.py:3005 constructs TLSServer; tests/testserver/server.py:138 defines it.
+9a8a6034694e,correct,tests/test_lowlevel.py:264 constructs Server; tests/testserver/server.py:25 defines it.
+a61d3dfd66f5,correct,src/requests/sessions.py:284 calls rewind_body; src/requests/utils.py:1139 defines it.
+7b0c51d02a1a,correct,tests/test_utils.py:953 calls should_bypass_proxies; src/requests/utils.py:810 defines it.
+a6b8ffbbfab0,correct,tests/test_requests.py:785 constructs HTTPDigestAuth; src/requests/auth.py:124 defines it.
+81f53160ecdd,correct,src/requests/sessions.py:848 calls get_environ_proxies; src/requests/utils.py:873 defines it.
+5a9c4df07a5b,correct,tests/test_requests.py:2630 constructs CaseInsensitiveDict; src/requests/structures.py:20 defines it.
 7a7f97215931,,
 227e51fad0c6,,
 865e388ee7e8,,
