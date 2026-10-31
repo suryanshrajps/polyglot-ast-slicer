@@ -1,0 +1,60 @@
+{
+  "n": 30,
+  "ok": 29,
+  "co_change": {
+    "p10": 0.0,
+    "p50": 0.0,
+    "p90": 1.0,
+    "min": 0.0,
+    "max": 1.0
+  },
+  "test_recall": {
+    "p10": 0.0,
+    "p50": 0.0,
+    "p90": 0.0,
+    "min": 0.0,
+    "max": 0.0
+  },
+  "payload": {
+    "p10": 481,
+    "p50": 2759,
+    "p90": 5544,
+    "min": 215,
+    "max": 5784
+  },
+  "touched": {
+    "p10": 2463,
+    "p50": 15087,
+    "p90": 37349,
+    "min": 282,
+    "max": 43705
+  },
+  "grep": {
+    "p10": 1228,
+    "p50": 5921,
+    "p90": 102862,
+    "min": 799,
+    "max": 970678
+  },
+  "map": {
+    "p10": 12292,
+    "p50": 25978,
+    "p90": 31278,
+    "min": 12269,
+    "max": 32063
+  },
+  "baselines": {
+    "payload_beats_grep": 22,
+    "payload_beats_map": 29,
+    "payload_beats_touched": 27,
+    "grep_wins": 7,
+    "map_wins": 0
+  },
+  "failures": [
+    {
+      "repo": "sb_flask",
+      "sha": "d086db856be187255b8ec61ef409357393020f32",
+      "status": "no_changed_function"
+    }
+  ]
+}

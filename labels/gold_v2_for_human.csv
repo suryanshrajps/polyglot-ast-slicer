@@ -1,257 +1,65 @@
 edge_id,repo,file,call_text,call_range,call_context,callee,receiver,claimed_target,target_definition,verdict,justification
-62e53487ee95,requests,tests/testserver/server.py,self._close_server_sock_ignore_errors(),"[79, 12, 79, 51]","   77 |         finally:
-   78 |             self.ready_event.set()  # just in case of exception
-   79 |             self._close_server_sock_ignore_errors()
-      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   80 |             self.stop_event.set()",_close_server_sock_ignore_errors,self,Server._close_server_sock_ignore_errors,"   88 |     def _close_server_sock_ignore_errors(self):
-   89 |         try:
-   90 |             self.server_sock.close()
-   91 |         except OSError:
-   92 |             pass",,
-8c5ff20fd25f,click,tests/test_context.py,ctx.scope(),"[531, 9, 531, 20]","  529 |     ctx = click.Context(click.Command(""test""))
-  530 | 
-  531 |     with ctx.scope():
-      |          ^^^^^^^^^^^
-  532 |         rv = ctx.with_resource(manager())",scope,ctx,Context.scope,"  598 |     @contextmanager
-  599 |     def scope(self, cleanup: bool = True) -> cabc.Generator[Context]:
-  600 |         """"""This helper method can be used with the context object to promote
-  601 |         it to the current thread local (see :func:`get_current_context`).
-  602 |         The default behavior of this is to invoke the cleanup functions which
-  603 |         can be disabled by setting `cleanup` to `False`.  The cleanup
-  604 |         functions are typically used for things such as closing file handles.
-  605 | 
-  606 |         If the cleanup is intended the context object can also be directly
-  607 |         used as a context manager.",,
-611e523e531b,click,src/click/core.py,"self.format_usage(ctx, formatter)","[1129, 8, 1129, 41]"," 1127 |         """"""
- 1128 |         formatter = ctx.make_formatter()
- 1129 |         self.format_usage(ctx, formatter)
-      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 1130 |         return formatter.getvalue().rstrip(""\n"")",format_usage,self,Command.format_usage," 1188 |     def format_usage(self, ctx: Context, formatter: HelpFormatter) -> None:
- 1189 |         """"""Writes the usage line into the formatter.
- 1190 | 
- 1191 |         This is a low-level method called by :meth:`get_usage`.
- 1192 |         """"""
- 1193 |         pieces = self.collect_usage_pieces(ctx)
- 1194 |         formatter.write_usage(ctx.command_path, "" "".join(pieces))",,
-603bc3e4b5c3,click,tests/test_shell_completion.py,"_get_words(cli, [""-c"", ""f""], ""-"")","[265, 23, 265, 56]","  263 |     assert _get_words(cli, [""-m"", ""a"", ""-m""], """") == [""a"", ""b""]
-  264 |     # used single options aren't suggested again
-  265 |     assert ""-c"" not in _get_words(cli, [""-c"", ""f""], ""-"")
-      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  266 | ",_get_words,,_get_words,"   29 | def _get_words(cli, args, incomplete):
-   30 |     return [c.value for c in _get_completions(cli, args, incomplete)]",,
-9e08cfdf14c6,zod,src/helpers/parseUtil.ts,status.dirty(),"[111, 32, 111, 46]","  109 |     for (const s of results) {
-  110 |       if (s.status === ""aborted"") return INVALID;
-  111 |       if (s.status === ""dirty"") status.dirty();
-      |                                 ^^^^^^^^^^^^^^
-  112 |       arrayValue.push(s.value);",dirty,status,ParseStatus.dirty,"   97 |   dirty() {
-   98 |     if (this.value === ""valid"") this.value = ""dirty"";
-   99 |   }",,
-35895043c66f,requests,src/requests/sessions.py,"self.request(""DELETE"", url, **kwargs)","[750, 15, 750, 52]","  748 |         """"""
-  749 | 
-  750 |         return self.request(""DELETE"", url, **kwargs)
-      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  751 | ",request,self,Session.request,"  557 |     def request(
-  558 |         self,
-  559 |         method: str,
-  560 |         url: _t.UriType,
-  561 |         params: _t.ParamsType = None,
-  562 |         data: _t.DataType = None,
-  563 |         headers: _t.HeadersType = None,
-  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,
-  565 |         files: _t.FilesType = None,
-  566 |         auth: _t.AuthType = None,",,
-000d01a901df,requests,tests/test_utils.py,LenFile(),"[137, 25, 137, 34]","  135 |                 self.len = 5
-  136 | 
-  137 |         assert super_len(LenFile()) == 5
-      |                          ^^^^^^^^^
-  138 | ",LenFile,,TestSuperLen.test_super_len_with_no__len__.LenFile,"  133 |         class LenFile:
-  134 |             def __init__(self):
-  135 |                 self.len = 5",,
-01ff6fef35fb,zod,src/types.ts,"new ZodEnum({
-    values,
-    typeName: ZodFirstPartyTypeKind.ZodEnum,
-    ...processCreateParams(params),
-  })","[4178, 9, 4182, 4]"," 4176 |   params?: RawCreateParams
- 4177 | ) {
- 4178 |   return new ZodEnum({
-      |          ^^^^^^^^^^^^^
- 4179 |     values,
- 4180 |     typeName: ZodFirstPartyTypeKind.ZodEnum,
- 4181 |     ...processCreateParams(params),
- 4182 |   });
- 4183 | }",ZodEnum,,ZodEnum," 4185 | export class ZodEnum<T extends [string, ...string[]]> extends ZodType<
- 4186 |   T[number],
- 4187 |   ZodEnumDef<T>,
- 4188 |   T[number]
- 4189 | > {
- 4190 |   #cache: Set<T[number]> | undefined;
- 4191 | 
- 4192 |   _parse(input: ParseInput): ParseReturnType<this[""_output""]> {
- 4193 |     if (typeof input.data !== ""string"") {
- 4194 |       const ctx = this._getOrReturnCtx(input);",,
-0c59f0219e52,zod,src/types.ts,OK(input.data),"[1766, 11, 1766, 25]"," 1764 |       return INVALID;
- 1765 |     }
- 1766 |     return OK(input.data);
-      |            ^^^^^^^^^^^^^^
- 1767 |   }",OK,,OK,"  175 | export const OK = <T>(value: T): OK<T> => ({ status: ""valid"", value });",,
-8c60d8a1a739,zod,src/types.ts,"new ParseInputLazyPath(ctx, value, ctx.path, [index, ""value""])","[3671, 12, 3671, 74]"," 3669 |           ),
- 3670 |           value: valueType._parse(
- 3671 |             new ParseInputLazyPath(ctx, value, ctx.path, [index, ""value""])
-      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 3672 |           ),",ParseInputLazyPath,,ParseInputLazyPath,"   61 | class ParseInputLazyPath implements ParseInput {
-   62 |   parent: ParseContext;
-   63 |   data: any;
-   64 |   _path: ParsePath;
-   65 |   _key: string | number | (string | number)[];
-   66 |   _cachedPath: ParsePath = [];
-   67 |   constructor(
-   68 |     parent: ParseContext,
-   69 |     value: any,
-   70 |     path: ParsePath,",,
-21b16481fd96,click,src/click/core.py,"self.format_arguments(ctx, formatter)","[1303, 8, 1303, 45]"," 1301 |         self.format_usage(ctx, formatter)
- 1302 |         self.format_help_text(ctx, formatter)
- 1303 |         self.format_arguments(ctx, formatter)
-      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 1304 |         self.format_options(ctx, formatter)",format_arguments,self,Command.format_arguments," 1337 |     def format_arguments(self, ctx: Context, formatter: HelpFormatter) -> None:
- 1338 |         """"""Writes all arguments into the formatter, if at least one is documented.
- 1339 | 
- 1340 |         An argument with no help gets an empty description, the same way an option
- 1341 |         with no help does. That keeps the section an exhaustive list of the
- 1342 |         positional arguments, matching the usage line.
- 1343 |         """"""
- 1344 |         args = [param for param in self.get_params(ctx) if isinstance(param, Argument)]
- 1345 | 
- 1346 |         if any(arg.help is not None for arg in args):",,
-1a0150edaba5,zod,src/types.ts,"this._addCheck({
-      kind: ""max"",
-      value: BigInt(0),
-      inclusive: false,
-      message: errorUtil.toString(message),
-    })","[1683, 11, 1688, 6]"," 1681 | 
- 1682 |   negative(message?: errorUtil.ErrMessage) {
- 1683 |     return this._addCheck({
-      |            ^^^^^^^^^^^^^^^^
- 1684 |       kind: ""max"",
- 1685 |       value: BigInt(0),
- 1686 |       inclusive: false,
- 1687 |       message: errorUtil.toString(message),
- 1688 |     });
- 1689 |   }",_addCheck,this,ZodBigInt._addCheck," 1666 |   _addCheck(check: ZodBigIntCheck) {
- 1667 |     return new ZodBigInt({
- 1668 |       ...this._def,
- 1669 |       checks: [...this._def.checks, check],
- 1670 |     });
- 1671 |   }",,
-ae069bae2e39,zod,src/types.ts,ZodNever.create(),"[2876, 16, 2876, 33]"," 2874 |       shape: () => shape,
- 2875 |       unknownKeys: ""strip"",
- 2876 |       catchall: ZodNever.create(),
-      |                 ^^^^^^^^^^^^^^^^^
- 2877 |       typeName: ZodFirstPartyTypeKind.ZodObject,",create,ZodNever,ZodNever.create," 2098 |   static create = (params?: RawCreateParams): ZodNever => {
- 2099 |     return new ZodNever({
- 2100 |       typeName: ZodFirstPartyTypeKind.ZodNever,
- 2101 |       ...processCreateParams(params),
- 2102 |     });
- 2103 |   };",,
-7cf424cdac11,zod,src/types.ts,this._processInputParams(input),"[2440, 28, 2440, 59]"," 2438 |     }
- 2439 | 
- 2440 |     const { status, ctx } = this._processInputParams(input);
-      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 2441 | ",_processInputParams,this,ZodType._processInputParams,"  206 |   _processInputParams(input: ParseInput): {
-  207 |     status: ParseStatus;
-  208 |     ctx: ParseContext;
-  209 |   } {
-  210 |     return {
-  211 |       status: new ParseStatus(),
-  212 |       ctx: {
-  213 |         common: input.parent.common,
-  214 |         data: input.data,
-  215 | ",,
-7f362d9fce6b,click,src/click/types.py,"self.get_invalid_choice_message(value=value, ctx=ctx)","[473, 16, 473, 69]","  471 |         except StopIteration:
-  472 |             self.fail(
-  473 |                 self.get_invalid_choice_message(value=value, ctx=ctx),
-      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  474 |                 param=param,",get_invalid_choice_message,self,Choice.get_invalid_choice_message,"  478 |     def get_invalid_choice_message(self, value: t.Any, ctx: Context | None) -> str:
-  479 |         """"""Get the error message when the given choice is invalid.
-  480 | 
-  481 |         :param value: The invalid value.
-  482 | 
-  483 |         .. versionadded:: 8.2
-  484 |         """"""
-  485 |         choices_str = "", "".join(map(repr, self._normalized_mapping(ctx=ctx).values()))
-  486 |         return ngettext(
-  487 |             ""{value!r} is not {choice}."",",,
-650b027df7eb,zod,src/types.ts,"OK(
-      promisified.then((data: any) => {
-        return this._def.type.parseAsync(data, {
-          path: ctx.path,
-          errorMap: ctx.common.contextualErrorMap,
-        });
-      })
-    )","[4393, 11, 4400, 5]"," 4391 |         : Promise.resolve(ctx.data);
- 4392 | 
- 4393 |     return OK(
-      |            ^^^
- 4394 |       promisified.then((data: any) => {
- 4395 |         return this._def.type.parseAsync(data, {
- 4396 |           path: ctx.path,
- 4397 |           errorMap: ctx.common.contextualErrorMap,
- 4398 |         });
- 4399 |       })
- 4400 |     );
- 4401 |   }",OK,,OK,"  175 | export const OK = <T>(value: T): OK<T> => ({ status: ""valid"", value });",,
-501c303dc681,zod,src/types.ts,OK(input.data),"[1981, 11, 1981, 25]"," 1979 |       return INVALID;
- 1980 |     }
- 1981 |     return OK(input.data);
-      |            ^^^^^^^^^^^^^^
- 1982 |   }",OK,,OK,"  175 | export const OK = <T>(value: T): OK<T> => ({ status: ""valid"", value });",,
-8999fdedc45e,click,src/click/core.py,_outside_click_stacklevel(),"[2566, 23, 2566, 50]"," 2564 |             "" TypeError in Click 9.0."",
- 2565 |             DeprecationWarning,
- 2566 |             stacklevel=_outside_click_stacklevel(),
-      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 2567 |         )",_outside_click_stacklevel,,_outside_click_stacklevel,"  108 | def _outside_click_stacklevel(skip: cabc.Container[str] = ()) -> int:
-  109 |     """"""Depth of the first stack frame outside Click.
-  110 | 
-  111 |     :param skip: Other module names to walk past. ``abc`` is one: it sits
-  112 |         between ``__init_subclass__`` and the ``class`` statement that the
-  113 |         warning must point at.
-  114 | 
-  115 |     .. versionadded:: 8.6.0
-  116 |     """"""
-  117 |     frame: FrameType | None = sys._getframe(1)",,
-926af11b104e,requests,src/requests/utils.py,"should_bypass_proxies(url, no_proxy=no_proxy)","[932, 25, 932, 70]","  930 |     new_proxies = proxies.copy()
-  931 | 
-  932 |     if trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):
-      |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  933 |         environ_proxies = get_environ_proxies(url, no_proxy=no_proxy)",should_bypass_proxies,,should_bypass_proxies,"  810 | def should_bypass_proxies(url: str, no_proxy: str | None) -> bool:
-  811 |     """"""
-  812 |     Returns whether we should bypass proxies or not.
-  813 | 
-  814 |     :rtype: bool
-  815 |     """"""
-  816 | 
-  817 |     # Prioritize lowercase environment variables over uppercase
-  818 |     # to keep a consistent behaviour with other http projects (curl, wget).
-  819 |     def get_proxy(key: str) -> str | None:",,
-d2f424786f88,requests,tests/test_structures.py,self.case_insensitive_dict.copy(),"[38, 15, 38, 48]","   36 | 
-   37 |     def test_copy(self):
-   38 |         copy = self.case_insensitive_dict.copy()
-      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   39 |         assert copy is not self.case_insensitive_dict",copy,self.case_insensitive_dict,CaseInsensitiveDict.copy,"   89 |     def copy(self) -> CaseInsensitiveDict[_VT]:
-   90 |         return CaseInsensitiveDict(self._store.values())",,
-f0e307bf825a,zod,src/types.ts,this.safeParse(undefined),"[515, 11, 515, 36]","  513 | 
-  514 |   isOptional(): boolean {
-  515 |     return this.safeParse(undefined).success;
-      |            ^^^^^^^^^^^^^^^^^^^^^^^^^
-  516 |   }",safeParse,this,ZodType.safeParse,"  244 |   safeParse(
-  245 |     data: unknown,
-  246 |     params?: Partial<ParseParams>
-  247 |   ): SafeParseReturnType<Input, Output> {
-  248 |     const ctx: ParseContext = {
-  249 |       common: {
-  250 |         issues: [],
-  251 |         async: params?.async ?? false,
-  252 |         contextualErrorMap: params?.errorMap,
-  253 |       },",,
+15a9fd576a53,requests,tests/conftest.py,prepare_url(httpbin_secure),"[41, 11, 41, 38]","   39 | @pytest.fixture
+   40 | def httpbin_secure(httpbin_secure):
+   41 |     return prepare_url(httpbin_secure)
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   42 | ",prepare_url,,prepare_url,"   15 | def prepare_url(value):
+   16 |     # Issue #1483: Make sure the URL always has a trailing slash
+   17 |     httpbin_url = value.url.rstrip(""/"") + ""/""
+   18 | 
+   19 |     def inner(*suffix):
+   20 |         return urljoin(httpbin_url, ""/"".join(suffix))
+   21 | 
+   22 |     return inner",,
+1bc825309326,click,src/click/utils.py,"_LazyFile(filename, mode, encoding, errors, atomic=atomic)","[419, 27, 419, 85]","  417 |     if lazy:
+  418 |         return t.cast(
+  419 |             ""t.IO[t.Any]"", _LazyFile(filename, mode, encoding, errors, atomic=atomic)
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  420 |         )",_LazyFile,,_LazyFile,"  103 | class _LazyFile:
+  104 |     """"""A lazy file works like a regular file but it does not fully open
+  105 |     the file but it does perform some basic checks early to see if the
+  106 |     filename parameter does make sense.  This is useful for safely opening
+  107 |     files for writing.
+  108 | 
+  109 |     :meta private:
+  110 |     """"""
+  111 | 
+  112 |     name: str",,
+1c4bac103e76,click,tests/test_context.py,Foo(),"[72, 18, 72, 23]","   70 |     @click.pass_context
+   71 |     def cli(ctx):
+   72 |         ctx.obj = Foo()
+      |                   ^^^^^
+   73 |         ctx.obj.title = ""test""",Foo,,test_make_pass_decorator_args.Foo,"  669 |     class Foo:
+  670 |         title = ""foocmd""",,
+04945793a4d3,click,examples/imagepipe/imagepipe.py,"copy_filename(image.filter(ImageFilter.EMBOSS), image)","[247, 14, 247, 68]","  245 |     for image in images:
+  246 |         click.echo(f""Embossing '{image.filename}'"")
+  247 |         yield copy_filename(image.filter(ImageFilter.EMBOSS), image)
+      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  248 | ",copy_filename,,copy_filename,"   69 | def copy_filename(new, old):
+   70 |     new.filename = old.filename
+   71 |     return new",,
+9845d82e07d1,zod,src/types.ts,"addIssueToContext(ctx, {
+        received: ctx.data,
+        code: ZodIssueCode.invalid_enum_value,
+        options: expectedValues,
+      })","[4212, 6, 4216, 8]"," 4210 |       const expectedValues = this._def.values;
+ 4211 | 
+ 4212 |       addIssueToContext(ctx, {
+      |       ^^^^^^^^^^^^^^^^^^^^^^^^
+ 4213 |         received: ctx.data,
+ 4214 |         code: ZodIssueCode.invalid_enum_value,
+ 4215 |         options: expectedValues,
+ 4216 |       });
+ 4217 |       return INVALID;",addIssueToContext,,addIssueToContext,"   72 | export function addIssueToContext(
+   73 |   ctx: ParseContext,
+   74 |   issueData: IssueData
+   75 | ): void {
+   76 |   const overrideMap = getErrorMap();
+   77 |   const issue = makeIssue({
+   78 |     issueData: issueData,
+   79 |     data: ctx.data,
+   80 |     path: ctx.path,
+   81 |     errorMaps: [",,
 a9f498aa7e91,requests,src/requests/cookies.py,"self.set(name, value)","[374, 8, 374, 29]","  372 |         case, use the more explicit set() method instead.
   373 |         """"""
   374 |         self.set(name, value)
@@ -266,89 +74,334 @@ a9f498aa7e91,requests,src/requests/cookies.py,"self.set(name, value)","[374, 8, 
   236 |         # support client code that unsets cookies by assignment of a None value:
   237 |         if value is None:
   238 |             remove_cookie_by_name(",,
-3dfbc98fc871,requests,src/requests/sessions.py,prepared_request.prepare_auth(new_auth),"[332, 12, 332, 51]","  330 |         new_auth = get_netrc_auth(url) if self.trust_env else None
-  331 |         if new_auth is not None:
-  332 |             prepared_request.prepare_auth(new_auth)
-      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  333 | ",prepare_auth,prepared_request,PreparedRequest.prepare_auth,"  670 |     def prepare_auth(
-  671 |         self,
-  672 |         auth: _t.AuthType,
-  673 |         url: _t.UriType = """",
-  674 |     ) -> None:
-  675 |         """"""Prepares the given HTTP auth data.""""""
-  676 | 
-  677 |         # If no Auth is explicitly provided, extract it from the URL first.
-  678 |         if auth is None:
-  679 |             url_auth = get_auth_from_url(cast(str, self.url))",,
-66c624af583d,click,src/click/testing.py,self._echo(self._input.readline(n)),"[58, 15, 58, 50]","   56 | 
-   57 |     def readline(self, n: int = -1) -> bytes:
-   58 |         return self._echo(self._input.readline(n))
-      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   59 | ",_echo,self,EchoingStdin._echo,"   45 |     def _echo(self, rv: bytes) -> bytes:
-   46 |         if not self._paused:
-   47 |             self._output.write(rv)
-   48 | 
-   49 |         return rv",,
-0170256e3025,requests,tests/test_lowlevel.py,Server.basic_response_server(wait_to_close_event=close_server),"[27, 13, 27, 75]","   25 |     """"""can safely send generators""""""
-   26 |     close_server = threading.Event()
-   27 |     server = Server.basic_response_server(wait_to_close_event=close_server)
-      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   28 |     data = iter([b""a"", b""b"", b""c""])",basic_response_server,Server,Server.basic_response_server,"   61 |     @classmethod
-   62 |     def basic_response_server(cls, **kwargs):
-   63 |         return cls.text_response_server(
-   64 |             ""HTTP/1.1 200 OK\r\n"" + ""Content-Length: 0\r\n\r\n"", **kwargs
-   65 |         )",,
-e81b1944bf6d,click,src/click/_compat.py,"is_ascii_encoding(getattr(stream, ""encoding"", None) or ""ascii"")","[218, 11, 218, 74]","  216 |     # environments.  It's not quite clear what the correct behavior is
-  217 |     # but this at least will force Click to recover somehow.
-  218 |     return is_ascii_encoding(getattr(stream, ""encoding"", None) or ""ascii"")
-      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  219 | ",is_ascii_encoding,,is_ascii_encoding,"   43 | def is_ascii_encoding(encoding: str) -> bool:
-   44 |     """"""Checks if a given encoding is ascii.""""""
-   45 |     try:
-   46 |         return codecs.lookup(encoding).name == ""ascii""
-   47 |     except LookupError:
-   48 |         return False",,
-74103d804acd,requests,src/requests/cookies.py,r.get_new_headers(),"[161, 11, 161, 30]","  159 |     r = MockRequest(request)
-  160 |     jar.add_cookie_header(r)  # type: ignore[arg-type]
-  161 |     return r.get_new_headers().get(""Cookie"")
-      |            ^^^^^^^^^^^^^^^^^^^
-  162 | ",get_new_headers,r,MockRequest.get_new_headers,"   98 |     def get_new_headers(self) -> dict[str, str]:
-   99 |         return self._new_headers",,
-3d063f8b13d4,zod,src/types.ts,getParsedType(input.data),"[216, 20, 216, 45]","  214 |         data: input.data,
-  215 | 
-  216 |         parsedType: getParsedType(input.data),
-      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  217 | ",getParsedType,,getParsedType,"  166 | export const getParsedType = (data: any): ZodParsedType => {
-  167 |   const t = typeof data;
-  168 | 
-  169 |   switch (t) {
-  170 |     case ""undefined"":
-  171 |       return ZodParsedType.undefined;
-  172 | 
-  173 |     case ""string"":
-  174 |       return ZodParsedType.string;
-  175 | ",,
-ff69c0717254,zod,src/types.ts,ZodUnknown.create(),"[3991, 40, 3991, 59]"," 3989 |     return new ZodFunction({
- 3990 |       ...this._def,
- 3991 |       args: ZodTuple.create(items).rest(ZodUnknown.create()) as any,
-      |                                         ^^^^^^^^^^^^^^^^^^^
- 3992 |     });",create,ZodUnknown,ZodUnknown.create," 2069 |   static create = (params?: RawCreateParams): ZodUnknown => {
- 2070 |     return new ZodUnknown({
- 2071 |       typeName: ZodFirstPartyTypeKind.ZodUnknown,
- 2072 |       ...processCreateParams(params),
- 2073 |     });
- 2074 |   };",,
-05b158018009,click,src/click/_termui_impl.py,self.make_step(self._completed_intervals),"[340, 12, 340, 53]","  338 | 
-  339 |         if self._completed_intervals >= self.update_min_steps:
-  340 |             self.make_step(self._completed_intervals)
-      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  341 |             self.render_progress()",make_step,self,ProgressBar.make_step,"  296 |     def make_step(self, n_steps: int) -> None:
-  297 |         self.pos += n_steps
-  298 |         if self.length is not None and self.pos >= self.length:
-  299 |             self.finished = True
-  300 | 
-  301 |         if (time.time() - self.last_eta) < 1.0:
-  302 |             return
-  303 | 
-  304 |         self.last_eta = time.time()
-  305 | ",,
+c27055ac5ecb,requests,src/requests/sessions.py,"p.prepare(
+            method=method.upper(),
+            url=url,
+            files=request.files,
+            data=request.data,
+            json=request.json,
+            headers=merge_setting(
+                request.headers, self.headers, dict_class=CaseInsensitiveDict
+            ),
+            params=merge_setting(request.params, self.params),
+            auth=merge_setting(auth, self.auth),
+            cookies=merged_cookies,
+            hooks=merge_hooks(request.hooks, self.hooks),
+        )","[541, 8, 554, 9]","  539 | 
+  540 |         p = PreparedRequest()
+  541 |         p.prepare(
+      |         ^^^^^^^^^^
+  542 |             method=method.upper(),
+  543 |             url=url,
+  544 |             files=request.files,
+  545 |             data=request.data,
+  546 |             json=request.json,
+  547 |             headers=merge_setting(
+  548 |                 request.headers, self.headers, dict_class=CaseInsensitiveDict
+  549 |             ),
+  550 |             params=merge_setting(request.params, self.params),
+  551 |             auth=merge_setting(auth, self.auth),
+  552 |             cookies=merged_cookies,
+  553 |             hooks=merge_hooks(request.hooks, self.hooks),
+  554 |         )
+  555 |         return p",prepare,p,PreparedRequest.prepare,"  424 |     def prepare(
+  425 |         self,
+  426 |         method: str | None = None,
+  427 |         url: _t.UriType | None = None,
+  428 |         headers: Mapping[str, str | bytes] | None = None,
+  429 |         files: _t.FilesType = None,
+  430 |         data: _t.DataType = None,
+  431 |         params: _t.ParamsType = None,
+  432 |         auth: _t.AuthType = None,
+  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,",,
+e05e34b9aab0,zod,src/types.ts,"new ParseInputLazyPath(ctx, ctx.data[key], ctx.path, key)","[3575, 10, 3575, 67]"," 3573 |         key: keyType._parse(new ParseInputLazyPath(ctx, key, ctx.path, key)),
+ 3574 |         value: valueType._parse(
+ 3575 |           new ParseInputLazyPath(ctx, ctx.data[key], ctx.path, key)
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 3576 |         ),",ParseInputLazyPath,,ParseInputLazyPath,"   61 | class ParseInputLazyPath implements ParseInput {
+   62 |   parent: ParseContext;
+   63 |   data: any;
+   64 |   _path: ParsePath;
+   65 |   _key: string | number | (string | number)[];
+   66 |   _cachedPath: ParsePath = [];
+   67 |   constructor(
+   68 |     parent: ParseContext,
+   69 |     value: any,
+   70 |     path: ParsePath,",,
+1605d5f63881,zod,src/types.ts,isAsync(maybeAsyncResult),"[292, 26, 292, 51]","  290 | 
+  291 |     const maybeAsyncResult = this._parse({ data, path: ctx.path, parent: ctx });
+  292 |     const result = await (isAsync(maybeAsyncResult)
+      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  293 |       ? maybeAsyncResult",isAsync,,isAsync,"  189 | export const isAsync = <T>(
+  190 |   x: ParseReturnType<T>
+  191 | ): x is AsyncParseReturnType<T> =>
+  192 |   typeof Promise !== ""undefined"" && x instanceof Promise;",,
+512c9d7c8140,zod,src/types.ts,"ParseStatus.mergeObjectSync(status, pairs as any)","[3584, 13, 3584, 62]"," 3582 |       return ParseStatus.mergeObjectAsync(status, pairs);
+ 3583 |     } else {
+ 3584 |       return ParseStatus.mergeObjectSync(status, pairs as any);
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 3585 |     }",mergeObjectSync,ParseStatus,ParseStatus.mergeObjectSync,"  134 |   static mergeObjectSync(
+  135 |     status: ParseStatus,
+  136 |     pairs: {
+  137 |       key: SyncParseReturnType<any>;
+  138 |       value: SyncParseReturnType<any>;
+  139 |       alwaysSet?: boolean;
+  140 |     }[]
+  141 |   ): SyncParseReturnType {
+  142 |     const finalObject: any = {};
+  143 |     for (const pair of pairs) {",,
+19c2ed648404,click,src/click/core.py,self.resolve_envvar_value(ctx),"[3785, 13, 3785, 43]"," 3783 |         :meta private:
+ 3784 |         """"""
+ 3785 |         rv = self.resolve_envvar_value(ctx)
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 3786 | ",resolve_envvar_value,self,Option.resolve_envvar_value," 3748 |     def resolve_envvar_value(self, ctx: Context) -> str | None:
+ 3749 |         """""":class:`Option` resolves its environment variable the same way as
+ 3750 |         :func:`Parameter.resolve_envvar_value`, but it also supports
+ 3751 |         :attr:`Context.auto_envvar_prefix`. If we could not find an environment from
+ 3752 |         the :attr:`envvar` property, we fallback on :attr:`Context.auto_envvar_prefix`
+ 3753 |         to build dynamiccaly the environment variable name using the
+ 3754 |         :python:`{ctx.auto_envvar_prefix}_{self.name.upper()}` template.
+ 3755 | 
+ 3756 |         :meta private:
+ 3757 |         """"""",,
+7cf424cdac11,zod,src/types.ts,this._processInputParams(input),"[2440, 28, 2440, 59]"," 2438 |     }
+ 2439 | 
+ 2440 |     const { status, ctx } = this._processInputParams(input);
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 2441 | ",_processInputParams,this,ZodType._processInputParams,"  206 |   _processInputParams(input: ParseInput): {
+  207 |     status: ParseStatus;
+  208 |     ctx: ParseContext;
+  209 |   } {
+  210 |     return {
+  211 |       status: new ParseStatus(),
+  212 |       ctx: {
+  213 |         common: input.parent.common,
+  214 |         data: input.data,
+  215 | ",,
+65efb65f1db7,zod,src/types.ts,"new ParseInputLazyPath(ctx, item, ctx.path, i)","[3802, 23, 3802, 69]"," 3800 | 
+ 3801 |     const elements = [...(ctx.data as Set<unknown>).values()].map((item, i) =>
+ 3802 |       valueType._parse(new ParseInputLazyPath(ctx, item, ctx.path, i))
+      |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 3803 |     );",ParseInputLazyPath,,ParseInputLazyPath,"   61 | class ParseInputLazyPath implements ParseInput {
+   62 |   parent: ParseContext;
+   63 |   data: any;
+   64 |   _path: ParsePath;
+   65 |   _key: string | number | (string | number)[];
+   66 |   _cachedPath: ParsePath = [];
+   67 |   constructor(
+   68 |     parent: ParseContext,
+   69 |     value: any,
+   70 |     path: ParsePath,",,
+2b4d017fafbc,zod,src/types.ts,processCreateParams(params),"[4759, 9, 4759, 36]"," 4757 |           ? params.default
+ 4758 |           : () => params.default as any,
+ 4759 |       ...processCreateParams(params),
+      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 4760 |     }) as any;",processCreateParams,,processCreateParams,"  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
+  130 |   if (!params) return {};
+  131 |   const { errorMap, invalid_type_error, required_error, description } = params;
+  132 |   if (errorMap && (invalid_type_error || required_error)) {
+  133 |     throw new Error(
+  134 |       `Can't use ""invalid_type_error"" or ""required_error"" in conjunction with custom error map.`
+  135 |     );
+  136 |   }
+  137 |   if (errorMap) return { errorMap: errorMap, description };
+  138 |   const customMap: ZodErrorMap = (iss, ctx) => {",,
+5a75e356d0bd,click,tests/test_testing.py,runner.invoke(cli_no_error),"[336, 13, 336, 40]","  334 |     assert result.output == ""hello world\n1.0\n""
+  335 | 
+  336 |     result = runner.invoke(cli_no_error)
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  337 |     assert result.exit_code == 0",invoke,runner,CliRunner.invoke,"  596 |     def invoke(
+  597 |         self,
+  598 |         cli: Command,
+  599 |         args: str | cabc.Sequence[str] | None = None,
+  600 |         input: str | bytes | t.IO[t.Any] | None = None,
+  601 |         env: cabc.Mapping[str, str | None] | None = None,
+  602 |         catch_exceptions: bool | None = None,
+  603 |         color: bool = False,
+  604 |         **extra: t.Any,
+  605 |     ) -> Result:",,
+698e712a9adc,zod,src/types.ts,"this._addCheck({
+      kind: ""max"",
+      value: maxDate.getTime(),
+      message: errorUtil.toString(message),
+    })","[1878, 11, 1882, 6]"," 1876 | 
+ 1877 |   max(maxDate: Date, message?: errorUtil.ErrMessage) {
+ 1878 |     return this._addCheck({
+      |            ^^^^^^^^^^^^^^^^
+ 1879 |       kind: ""max"",
+ 1880 |       value: maxDate.getTime(),
+ 1881 |       message: errorUtil.toString(message),
+ 1882 |     });
+ 1883 |   }",_addCheck,this,ZodString._addCheck,"  964 |   _addCheck(check: ZodStringCheck) {
+  965 |     return new ZodString({
+  966 |       ...this._def,
+  967 |       checks: [...this._def.checks, check],
+  968 |     });
+  969 |   }",,
+a1684c6c5f8c,click,src/click/_termui_impl.py,"_nullpager(stdout, color)","[486, 15, 486, 40]","  484 |     if resolved is None:
+  485 |         # Page through stdout, which _nullpager leaves open for its owner.
+  486 |         return _nullpager(stdout, color)
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  487 | ",_nullpager,,_nullpager,"  670 | @contextlib.contextmanager
+  671 | def _nullpager(
+  672 |     stream: t.TextIO, color: bool | None = None
+  673 | ) -> t.Iterator[tuple[t.TextIO, bool | None]]:
+  674 |     """"""Simply print unformatted text. This is the ultimate fallback.
+  675 | 
+  676 |     The stream comes from elsewhere (typically ``sys.stdout``), so its lifecycle
+  677 |     is left untouched: :class:`_PagerWriter` never closes what it wraps, and it
+  678 |     is the only thing :func:`get_pager_file` hands to the caller.
+  679 |     """"""",,
+09516e2382c7,requests,src/requests/models.py,self.headers.copy(),"[460, 20, 460, 39]","  458 |         p.method = self.method
+  459 |         p.url = self.url
+  460 |         p.headers = self.headers.copy() if self.headers is not None else None  # type: ignore[assignment]
+      |                     ^^^^^^^^^^^^^^^^^^^
+  461 |         p._cookies = _copy_cookie_jar(self._cookies)",copy,self.headers,CaseInsensitiveDict.copy,"   89 |     def copy(self) -> CaseInsensitiveDict[_VT]:
+   90 |         return CaseInsensitiveDict(self._store.values())",,
+799653c0e23d,requests,src/requests/sessions.py,self.get_redirect_target(resp),"[306, 22, 306, 52]","  304 | 
+  305 |                 # extract redirect url, if any, for the next loop
+  306 |                 url = self.get_redirect_target(resp)
+      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  307 |                 yield resp",get_redirect_target,self,SessionRedirectMixin.get_redirect_target,"  134 |     def get_redirect_target(self, resp: Response) -> str | None:
+  135 |         """"""Receives a Response. Returns a redirect URI or ``None``""""""
+  136 |         # Due to the nature of how requests processes redirects this method will
+  137 |         # be called at least once upon the original response and at least twice
+  138 |         # on each subsequent redirect response (if any).
+  139 |         # If a custom mixin is used to handle this logic, it may be advantageous
+  140 |         # to cache the redirect location onto the response object as a private
+  141 |         # attribute.
+  142 |         if resp.is_redirect:
+  143 |             location = resp.headers[""location""]",,
+02f462b11165,zod,src/types.ts,new ParseStatus(),"[1821, 19, 1821, 36]"," 1819 |     }
+ 1820 | 
+ 1821 |     const status = new ParseStatus();
+      |                    ^^^^^^^^^^^^^^^^^
+ 1822 |     let ctx: undefined | ParseContext = undefined;",ParseStatus,,ParseStatus,"   95 | export class ParseStatus {
+   96 |   value: ""aborted"" | ""dirty"" | ""valid"" = ""valid"";
+   97 |   dirty() {
+   98 |     if (this.value === ""valid"") this.value = ""dirty"";
+   99 |   }
+  100 |   abort() {
+  101 |     if (this.value !== ""aborted"") this.value = ""aborted"";
+  102 |   }
+  103 | 
+  104 |   static mergeArray(",,
+33df3526ba6e,requests,src/requests/cookies.py,MockResponse(response._original_response.msg),"[149, 10, 149, 55]","  147 |     req = MockRequest(request)
+  148 |     # pull out the HTTPMessage with the headers and put it in the mock:
+  149 |     res = MockResponse(response._original_response.msg)
+      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  150 |     jar.extract_cookies(res, req)  # type: ignore[arg-type]",MockResponse,,MockResponse,"  114 | class MockResponse:
+  115 |     """"""Wraps a `httplib.HTTPMessage` to mimic a `urllib.addinfourl`.
+  116 | 
+  117 |     ...what? Basically, expose the parsed HTTP headers from the server response
+  118 |     the way `http.cookiejar` expects to see them.
+  119 |     """"""
+  120 | 
+  121 |     def __init__(self, headers: Any) -> None:
+  122 |         """"""Make a MockResponse for `cookiejar` to read.
+  123 | ",,
+9498f74ade69,requests,src/requests/sessions.py,"self.send(prep, **send_kwargs)","[651, 15, 651, 45]","  649 |         }
+  650 |         send_kwargs.update(settings)
+  651 |         resp = self.send(prep, **send_kwargs)
+      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  652 | ",send,self,Session.send,"  752 |     def send(self, request: PreparedRequest, **kwargs: Any) -> Response:
+  753 |         """"""Send a given PreparedRequest.
+  754 | 
+  755 |         :rtype: requests.Response
+  756 |         """"""
+  757 |         # Set defaults that the hooks can utilize to ensure they always have
+  758 |         # the correct parameters to reproduce the previous request.
+  759 |         kwargs.setdefault(""stream"", self.stream)
+  760 |         kwargs.setdefault(""verify"", self.verify)
+  761 |         kwargs.setdefault(""cert"", self.cert)",,
+ff5fa2f5585e,click,src/click/core.py,_format_deprecated_suffix(self.deprecated),"[2971, 34, 2971, 76]"," 2969 |                     param_type=self.param_type_name,
+ 2970 |                     name=self.spec,
+ 2971 |                     extra_message=_format_deprecated_suffix(self.deprecated),
+      |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 2972 |                 )",_format_deprecated_suffix,,_format_deprecated_suffix,"  140 | def _format_deprecated_suffix(deprecated: bool | str) -> str:
+  141 |     """"""Return the trailing reason for a ``DeprecationWarning`` message,
+  142 |     prefixed with a space, or an empty string when no reason was given.
+  143 |     """"""
+  144 |     if isinstance(deprecated, str):
+  145 |         return f"" {deprecated}""
+  146 |     return """"",,
+1ddf8e5140f8,requests,src/requests/api.py,"request(""get"", url, params=params, **kwargs)","[87, 11, 87, 55]","   85 |     """"""
+   86 | 
+   87 |     return request(""get"", url, params=params, **kwargs)
+      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   88 | ",request,,Session.request,"  557 |     def request(
+  558 |         self,
+  559 |         method: str,
+  560 |         url: _t.UriType,
+  561 |         params: _t.ParamsType = None,
+  562 |         data: _t.DataType = None,
+  563 |         headers: _t.HeadersType = None,
+  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,
+  565 |         files: _t.FilesType = None,
+  566 |         auth: _t.AuthType = None,",,
+611e523e531b,click,src/click/core.py,"self.format_usage(ctx, formatter)","[1129, 8, 1129, 41]"," 1127 |         """"""
+ 1128 |         formatter = ctx.make_formatter()
+ 1129 |         self.format_usage(ctx, formatter)
+      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 1130 |         return formatter.getvalue().rstrip(""\n"")",format_usage,self,Command.format_usage," 1188 |     def format_usage(self, ctx: Context, formatter: HelpFormatter) -> None:
+ 1189 |         """"""Writes the usage line into the formatter.
+ 1190 | 
+ 1191 |         This is a low-level method called by :meth:`get_usage`.
+ 1192 |         """"""
+ 1193 |         pieces = self.collect_usage_pieces(ctx)
+ 1194 |         formatter.write_usage(ctx.command_path, "" "".join(pieces))",,
+1389bff64f33,requests,src/requests/sessions.py,self.get_adapter(url=request.url),"[778, 18, 778, 51]","  776 | 
+  777 |         # Get the appropriate adapter to use
+  778 |         adapter = self.get_adapter(url=request.url)
+      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  779 | ",get_adapter,self,Session.get_adapter,"  870 |     def get_adapter(self, url: str) -> BaseAdapter:
+  871 |         """"""
+  872 |         Returns the appropriate connection adapter for the given URL.
+  873 | 
+  874 |         :rtype: requests.adapters.BaseAdapter
+  875 |         """"""
+  876 |         for prefix, adapter in self.adapters.items():
+  877 |             if url.lower().startswith(prefix.lower()):
+  878 |                 return adapter
+  879 | ",,
+d3baa11767d4,zod,src/types.ts,"this.min(1, message)","[3831, 11, 3831, 31]"," 3829 | 
+ 3830 |   nonempty(message?: errorUtil.ErrMessage): ZodSet<Value> {
+ 3831 |     return this.min(1, message) as any;
+      |            ^^^^^^^^^^^^^^^^^^^^
+ 3832 |   }",min,this,ZodSet.min," 3812 |   min(minSize: number, message?: errorUtil.ErrMessage): this {
+ 3813 |     return new ZodSet({
+ 3814 |       ...this._def,
+ 3815 |       minSize: { value: minSize, message: errorUtil.toString(message) },
+ 3816 |     }) as any;
+ 3817 |   }",,
+34b6bd750db8,zod,src/types.ts,isAsync(result),"[227, 8, 227, 23]","  225 |   _parseSync(input: ParseInput): SyncParseReturnType<Output> {
+  226 |     const result = this._parse(input);
+  227 |     if (isAsync(result)) {
+      |         ^^^^^^^^^^^^^^^
+  228 |       throw new Error(""Synchronous parse encountered promise."");",isAsync,,isAsync,"  189 | export const isAsync = <T>(
+  190 |   x: ParseReturnType<T>
+  191 | ): x is AsyncParseReturnType<T> =>
+  192 |   typeof Promise !== ""undefined"" && x instanceof Promise;",,
+df1471963324,zod,src/types.ts,processCreateParams(params),"[1361, 9, 1361, 36]"," 1359 |       typeName: ZodFirstPartyTypeKind.ZodNumber,
+ 1360 |       coerce: params?.coerce || false,
+ 1361 |       ...processCreateParams(params),
+      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 1362 |     });",processCreateParams,,processCreateParams,"  129 | function processCreateParams(params: RawCreateParams): ProcessedCreateParams {
+  130 |   if (!params) return {};
+  131 |   const { errorMap, invalid_type_error, required_error, description } = params;
+  132 |   if (errorMap && (invalid_type_error || required_error)) {
+  133 |     throw new Error(
+  134 |       `Can't use ""invalid_type_error"" or ""required_error"" in conjunction with custom error map.`
+  135 |     );
+  136 |   }
+  137 |   if (errorMap) return { errorMap: errorMap, description };
+  138 |   const customMap: ZodErrorMap = (iss, ctx) => {",,
+629d98b4c998,click,tests/test_utils/test_prompt.py,DoublingType(),"[29, 50, 29, 64]","   27 | 
+   28 |     monkeypatch.setattr(sys, ""stdin"", StringIO(""\n""))
+   29 |     value = click.prompt(""value"", default=5, type=DoublingType())
+      |                                                   ^^^^^^^^^^^^^^
+   30 |     capfd.readouterr()",DoublingType,,test_prompt_default_round_trips_through_type.DoublingType,"   22 |     class DoublingType(click.ParamType[int]):
+   23 |         name = ""doubling""
+   24 | 
+   25 |         def convert(self, value, param, ctx):
+   26 |             return int(value) * 2",,

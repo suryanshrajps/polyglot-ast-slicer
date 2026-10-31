@@ -359,252 +359,40 @@
     "source": "ZodType.nullable",
     "target": "ZodNullable.create"
   },
-  "5ffcab78b41b": {
-    "seeded": false,
-    "kind": "enclosing_member",
-    "source": "ZodDefault._parse",
-    "target": "ZodType._processInputParams"
-  },
-  "d45556697a44": {
-    "seeded": false,
-    "kind": "enclosing_member",
-    "source": "ZodNaN._parse",
-    "target": "ZodType._getOrReturnCtx"
-  },
-  "8d904c0c50a7": {
-    "seeded": false,
-    "kind": "enclosing_member",
-    "source": "ZodUndefined._parse",
-    "target": "ZodType._getType"
-  },
-  "eff1e6f59bef": {
-    "seeded": false,
+  "f08430488be6": {
+    "seeded": true,
     "kind": "class_receiver",
-    "source": "ZodFunction.create",
-    "target": "ZodTuple.create"
+    "source": "ZodType.nullable",
+    "real_target": "ZodNullable.create",
+    "fake_target": "ZodEffects.create"
   },
-  "e1bdf2a94272": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodNumber._parse",
-    "target": "ParseStatus"
-  },
-  "e321c2482abe": {
-    "seeded": false,
+  "0e4fb9395155": {
+    "seeded": true,
     "kind": "class_receiver",
-    "source": "ZodFunction.create",
-    "target": "ZodUnknown.create"
+    "source": "custom",
+    "real_target": "ZodAny.create",
+    "fake_target": "ZodNull.create"
   },
-  "3b8f1dcac967": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodSymbol._parse",
-    "target": "addIssueToContext"
-  },
-  "c84f475056e7": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodNull._parse",
-    "target": "OK"
-  },
-  "49ec493c8d0a": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "ZodRecord._parse",
-    "target": "ParseStatus.mergeObjectAsync"
-  },
-  "501c303dc681": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodUndefined._parse",
-    "target": "OK"
-  },
-  "c128100b9a91": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodVoid._parse",
-    "target": "addIssueToContext"
-  },
-  "61e67068be2f": {
-    "seeded": false,
-    "kind": "enclosing_member",
-    "source": "ZodNumber.gte",
-    "target": "ZodNumber.setLimit"
-  },
-  "a41c119e3dca": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "ZodNumber._addCheck",
-    "target": "ZodNumber"
-  },
-  "9ff0e3d60688": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "ZodType.optional",
-    "target": "ZodOptional.create"
-  },
-  "d71a1feb79b9": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "deepPartialify",
-    "target": "ZodOptional.create"
-  },
-  "7bc26542924a": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodArray._parse",
-    "target": "addIssueToContext"
-  },
-  "68a59d1f5c3e": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "ZodType.and",
-    "target": "ZodIntersection.create"
-  },
-  "ae069bae2e39": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "ZodObject.create",
-    "target": "ZodNever.create"
-  },
-  "7b193b77829a": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodIntersection._parse",
-    "target": "isAborted"
-  },
-  "be3f5959088a": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "ZodUnion.create",
-    "target": "ZodUnion"
-  },
-  "8de85977d375": {
-    "seeded": false,
-    "kind": "enclosing_member",
-    "source": "ZodVoid._parse",
-    "target": "ZodType._getType"
-  },
-  "339f571ee74a": {
-    "seeded": false,
-    "kind": "import",
-    "source": "mergeValues",
-    "target": "getParsedType"
-  },
-  "ab60b7f5db2c": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "ZodDiscriminatedUnion.create",
-    "target": "processCreateParams"
-  },
-  "5188ea930e2c": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "deepPartialify",
-    "target": "ZodTuple.create"
-  },
-  "905aafd96365": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "ZodLiteral.create",
-    "target": "processCreateParams"
-  },
-  "7bca779d8fc1": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "ZodType.catch",
-    "target": "processCreateParams"
-  },
-  "c35febb8a679": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodEnum._parse",
-    "target": "OK"
-  },
-  "3d063f8b13d4": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodType._processInputParams",
-    "target": "getParsedType"
-  },
-  "d9460c68c4ab": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodUnknown._parse",
-    "target": "OK"
-  },
-  "9a7c4a9eec8e": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "instanceOfType",
-    "target": "custom"
-  },
-  "ff69c0717254": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "ZodFunction.args",
-    "target": "ZodUnknown.create"
-  },
-  "fcfed5d48a00": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "ZodType.pipe",
-    "target": "ZodPipeline.create"
-  },
-  "fd4627c6fdd0": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodSymbol._parse",
-    "target": "OK"
-  },
-  "b1d176ea5e60": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodString._parse",
-    "target": "ParseStatus"
-  },
-  "650b027df7eb": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodPromise._parse",
-    "target": "OK"
-  },
-  "f04a595b8936": {
-    "seeded": false,
-    "kind": "class_receiver",
-    "source": "deepPartialify",
-    "target": "ZodNullable.create"
-  },
-  "6e948978707c": {
-    "seeded": false,
-    "kind": "same_file",
-    "source": "ZodNumber._parse",
-    "target": "floatSafeRemainder"
-  },
-  "7f37c6b30ba2": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodEffects._parse",
-    "target": "isValid"
-  },
-  "1c0b950a6422": {
-    "seeded": false,
-    "kind": "import",
-    "source": "ZodNullable._parse",
-    "target": "OK"
-  },
-  "8ca1ce0df06d": {
-    "seeded": false,
-    "kind": "enclosing_member",
-    "source": "ZodBigInt._parse",
-    "target": "ZodType._getOrReturnCtx"
-  },
-  "2a6999077a94": {
+  "c62169927a51": {
     "seeded": true,
     "kind": "enclosing_member",
-    "source": "ZodString.cuid2",
-    "real_target": "ZodString._addCheck",
-    "fake_target": "ZodBigInt._addCheck"
+    "source": "ZodBigInt.negative",
+    "real_target": "ZodBigInt._addCheck",
+    "fake_target": "ZodNumber._addCheck"
+  },
+  "3663a0bdb49f": {
+    "seeded": true,
+    "kind": "class_receiver",
+    "source": "ZodType.readonly",
+    "real_target": "ZodReadonly.create",
+    "fake_target": "ZodLiteral.create"
+  },
+  "425c9b369ade": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "source": "ZodNumber.lt",
+    "real_target": "ZodNumber.setLimit",
+    "fake_target": "ZodBigInt.setLimit"
   },
   "872b61a42c8d": {
     "seeded": true,
@@ -613,20 +401,6 @@
     "real_target": "ZodType._processInputParams",
     "fake_target": "ZodType._processInputParams"
   },
-  "c64d92eb12e4": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "custom",
-    "real_target": "ZodAny.create",
-    "fake_target": "ZodMap.create"
-  },
-  "7c1fa5c49f51": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "ZodType.nullable",
-    "real_target": "ZodNullable.create",
-    "fake_target": "ZodNaN.create"
-  },
   "698e712a9adc": {
     "seeded": true,
     "kind": "enclosing_member",
@@ -634,74 +408,18 @@
     "real_target": "ZodDate._addCheck",
     "fake_target": "ZodString._addCheck"
   },
-  "f5cfce67a577": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "ZodType.and",
-    "real_target": "ZodIntersection.create",
-    "fake_target": "ZodDate.create"
-  },
-  "b7ff3fab05ba": {
+  "88d3ec1eaa02": {
     "seeded": true,
     "kind": "enclosing_member",
     "source": "ZodSet.nonempty",
     "real_target": "ZodSet.min",
-    "fake_target": "ZodDate.min"
+    "fake_target": "ZodString.min"
   },
-  "6758c72173b4": {
-    "seeded": true,
-    "kind": "enclosing_member",
-    "source": "ZodDefault._parse",
-    "real_target": "ZodType._processInputParams",
-    "fake_target": "ZodType._processInputParams"
-  },
-  "fa5b0901745c": {
+  "e914eeb0a58f": {
     "seeded": true,
     "kind": "class_receiver",
     "source": "ZodFunction.args",
-    "real_target": "ZodUnknown.create",
-    "fake_target": "ZodEffects.create"
-  },
-  "63dacfb56736": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "deepPartialify",
-    "real_target": "ZodNullable.create",
-    "fake_target": "ZodNaN.create"
-  },
-  "22ed40913c68": {
-    "seeded": true,
-    "kind": "enclosing_member",
-    "source": "ZodRecord._parse",
-    "real_target": "ZodType._processInputParams",
-    "fake_target": "ZodType._processInputParams"
-  },
-  "6e50e3c6f505": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "ZodType.optional",
-    "real_target": "ZodOptional.create",
-    "fake_target": "ZodIntersection.create"
-  },
-  "4fc0e3ae62a1": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "deepPartialify",
     "real_target": "ZodTuple.create",
-    "fake_target": "ZodRecord.create"
-  },
-  "267798eb1722": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "ZodType.pipe",
-    "real_target": "ZodPipeline.create",
-    "fake_target": "ZodAny.create"
-  },
-  "23ba2aa311bb": {
-    "seeded": true,
-    "kind": "class_receiver",
-    "source": "ZodObject.create",
-    "real_target": "ZodNever.create",
-    "fake_target": "ZodIntersection.create"
+    "fake_target": "ZodNativeEnum.create"
   }
 }

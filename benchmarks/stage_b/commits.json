@@ -1,0 +1,253 @@
+[
+  {
+    "repo": "requests",
+    "sha": "6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6",
+    "subject": "Fix `_encode_files` detection for `__getattr__`-based file wrappers (#7502)",
+    "non_test_files": [
+      "src/requests/models.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "e50e5945294f79ee9ab4ec69de24d14f9b26a7ae",
+    "subject": "Improve static typing of 3rd party imports  (#7496)",
+    "non_test_files": [
+      "src/requests/__init__.py",
+      "src/requests/compat.py",
+      "src/requests/help.py",
+      "src/requests/models.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "e511bc72777a94c45d004e010c597925092e1efe",
+    "subject": "Fix mutability issues with headers input types (#7431)",
+    "non_test_files": [
+      "src/requests/_types.py",
+      "src/requests/models.py",
+      "src/requests/sessions.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "6404f345e562d962abe6700a1c357ec1e7e18232",
+    "subject": "Fix `prepare_body` stream detection for `__getattr__`-based file wrappers (#7433)",
+    "non_test_files": [
+      "src/requests/models.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "b684dcb9bbf3aa557d1238e72062c4a29737dd1c",
+    "subject": "sessions: fix hooks type (#7425)",
+    "non_test_files": [
+      "src/requests/_types.py",
+      "src/requests/sessions.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "27e0981962d355b9532256f4dcb3d42f64b04d9c",
+    "subject": "Fix remaining typos (#7395)",
+    "non_test_files": [
+      "src/requests/adapters.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3",
+    "subject": "Fix malformed value parsing for Content-Type (#7309)",
+    "non_test_files": [
+      "src/requests/utils.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "bc7dd0fc4d56e808bcdd85ac2d797b3107c89259",
+    "subject": "Fix cosmetic header validity parsing regex (#7308)",
+    "non_test_files": [
+      "src/requests/_internal_utils.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "47914226c2968802f2cdee3f6f0f6e06e4472f64",
+    "subject": "Fix empty netrc entry usage (#7205)",
+    "non_test_files": [
+      "src/requests/utils.py"
+    ]
+  },
+  {
+    "repo": "requests",
+    "sha": "3f07f990ac74f1e1691ba17ef8c14007f05846ab",
+    "subject": "Fix typo in documentation for verify",
+    "non_test_files": [
+      "src/requests/adapters.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "f67c2bb6c2f055c1c7a57cd46c3697fc26a7742e",
+    "subject": "Fix short help abbreviation",
+    "non_test_files": [
+      "src/click/utils.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "fc518e41218b447e875fe27244ae692c269bcb77",
+    "subject": "Fix race condition on `KeyboardInterrupt` arriving in `Command.main()`",
+    "non_test_files": [
+      "src/click/core.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "f58ca3e81424a35626c8a475eb59ab95589008ce",
+    "subject": "Fix `copy`, `deepcopy` and `pickle` of `Sentinel` members",
+    "non_test_files": [
+      "src/click/_utils.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "a6256bfb5971d5e58585fe7b6c656134e1ade5a4",
+    "subject": "Forwards all user's parameters set in `PAGER`",
+    "non_test_files": [
+      "src/click/_termui_impl.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "0f4738df88e3ea47c40a4a442103596a61cfee79",
+    "subject": "Fix docs and changelog",
+    "non_test_files": [
+      "src/click/_compat.py",
+      "src/click/core.py",
+      "src/click/shell_completion.py",
+      "src/click/termui.py",
+      "src/click/utils.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "3495fba163dd61dea837cd557095df6c21515ac8",
+    "subject": "Warn when an argument name collide with other parameters",
+    "non_test_files": [
+      "src/click/core.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "07c909f23f0f83b5ca137c167b9a134d66201f67",
+    "subject": "Validate style() color arguments, fix explicit black color argument",
+    "non_test_files": [
+      "src/click/termui.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "bec59289d8cf9b9b4010642b2fee483e5f8eeefc",
+    "subject": "Fix `package_name` resolution when top-level module differs from distribution name",
+    "non_test_files": [
+      "src/click/decorators.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "762c97eef7c1b3779678992f26a553a2a8c80793",
+    "subject": "Fix double-bracketing of choices in synopsis",
+    "non_test_files": [
+      "src/click/core.py"
+    ]
+  },
+  {
+    "repo": "click",
+    "sha": "051bb0f30b545cf7426deef819811815297c2798",
+    "subject": "Do not let the GC close a borrowed `stdout`",
+    "non_test_files": [
+      "src/click/_termui_impl.py",
+      "src/click/utils.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "d086db856be187255b8ec61ef409357393020f32",
+    "subject": "fix typing",
+    "non_test_files": [
+      "src/flask/sansio/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "329c32b916938d33fec41f40eb7ed854bf0b3e2b",
+    "subject": "fix dev",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "d73fa1cdcbd8b1465c151db8924ba58b1dd14e35",
+    "subject": "fix docs ref",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "7203feabf723edae0286ae5dc64fec8ac4c91735",
+    "subject": "Fix IPv6 server name parsing",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "81798b406f97ffe4795d2c9fc18db7db744a96dc",
+    "subject": "fix typos",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "7b0088693ece1bd3a9238a6fdf56ed8df7a4d43b",
+    "subject": "fix typing",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "e82db2ca3a22c9614c1987392c9cfaa8c6ce99ad",
+    "subject": "fix provide_automatic_options override",
+    "non_test_files": [
+      "src/flask/sansio/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "fb54159861708558b5f5658ebdc14709d984361c",
+    "subject": "secret key rotation: fix key list ordering",
+    "non_test_files": [
+      "src/flask/sessions.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "4995a775df21a206b529403bc30d71795a994fd4",
+    "subject": "fix subdomain_matching=False behavior",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  },
+  {
+    "repo": "flask",
+    "sha": "98ae71897600a3162f529b1b30c70b8abdf0961b",
+    "subject": "fix mypy finding",
+    "non_test_files": [
+      "src/flask/app.py"
+    ]
+  }
+]

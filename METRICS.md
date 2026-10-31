@@ -41,6 +41,21 @@ Pinned inputs: requests `3c7baaa`, click `2247b35`. Intervals are 95% Wilson sco
 | `click` | all | — | — | — | UNMEASURED |
 | `zod` | all | — | — | — | UNMEASURED |
 
+## Stage B (offline outcome study)
+
+Commits: 30, usable: 29.
+
+| Metric | p50 | p90 |
+|---|---:|---:|
+| co-change recall | 0.0 | 1.0 |
+| test recall | 0.0 | 0.0 |
+| payload tokens | 2759 | 5544 |
+| touched files | 15087 | 37349 |
+| grep -C20 | 5921 | 102862 |
+| repo map | 25978 | 31278 |
+
+Payload beats grep 22/29, map 29/29, touched files 27/29. Grep wins 7, map wins 0.
+
 ## Edge agreement with Jedi (100 random call edges, seed 42)
 
 | Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |
