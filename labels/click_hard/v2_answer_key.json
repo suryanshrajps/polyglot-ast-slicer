@@ -1,0 +1,830 @@
+{
+  "702c487d7189": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Choice._normalized_mapping",
+    "target": "Choice.normalize_choice"
+  },
+  "9731a85e9acf": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Command.collect_usage_pieces",
+    "target": "Command.get_params"
+  },
+  "f6a1ed4dc2d9": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Command.get_help_option",
+    "target": "Command.get_help_option_names"
+  },
+  "3fbb48fb6932": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "EchoingStdin.read",
+    "target": "EchoingStdin._echo"
+  },
+  "05b158018009": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "ProgressBar.update",
+    "target": "ProgressBar.make_step"
+  },
+  "66c624af583d": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "EchoingStdin.readline",
+    "target": "EchoingStdin._echo"
+  },
+  "7f362d9fce6b": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Choice.convert",
+    "target": "Choice.get_invalid_choice_message"
+  },
+  "d3b318858f09": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "BashComplete.source",
+    "target": "BashComplete._check_version"
+  },
+  "c3469c835f3c": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Group.invoke",
+    "target": "Group.resolve_command"
+  },
+  "21b16481fd96": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Command.format_help",
+    "target": "Command.format_arguments"
+  },
+  "48916e1b110b": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Parameter.consume_value",
+    "target": "Parameter.get_default"
+  },
+  "c8e8e1d7f6af": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "EchoingStdin.__iter__",
+    "target": "EchoingStdin._echo"
+  },
+  "ee4ac01464e8": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "HelpFormatter.write_heading",
+    "target": "HelpFormatter.write"
+  },
+  "067227ab9689": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "ParamType.__call__",
+    "target": "ParamType.convert"
+  },
+  "3470a0cbaade": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Command.format_usage",
+    "target": "Command.collect_usage_pieces"
+  },
+  "b1244e58a686": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "HelpFormatter.section",
+    "target": "HelpFormatter.write_heading"
+  },
+  "89863e9d0f8c": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "_NumberRangeBase.convert",
+    "target": "_NumberRangeBase._describe_range"
+  },
+  "052c682d9b9e": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Option.prompt_for_value",
+    "target": "Parameter._hide_unset"
+  },
+  "ec215b67b9c1": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Option.consume_value",
+    "target": "Option.prompt_for_value"
+  },
+  "4df6e2899d9e": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Option.get_help_record",
+    "target": "Option.get_help_spec"
+  },
+  "b9110dff43f8": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Parameter.consume_value",
+    "target": "Parameter.value_from_envvar"
+  },
+  "8cdde648d549": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Option.get_help_extra",
+    "target": "Option.get_default"
+  },
+  "611e523e531b": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Command.get_usage",
+    "target": "Command.format_usage"
+  },
+  "3c7441b880e0": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Group.to_info_dict",
+    "target": "Group.get_command"
+  },
+  "8339b05994cb": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "_AtomicFile.__exit__",
+    "target": "_AtomicFile.close"
+  },
+  "c8e8f67bfd77": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Parameter.handle_parse_result",
+    "target": "Parameter.process_value"
+  },
+  "49bbdc73dbac": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Choice.convert",
+    "target": "Choice.normalize_choice"
+  },
+  "19c2ed648404": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Option.value_from_envvar",
+    "target": "Option.resolve_envvar_value"
+  },
+  "eea8c3cc7668": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Group.format_commands",
+    "target": "Group.get_command"
+  },
+  "4cfce8ed2af7": {
+    "seeded": false,
+    "kind": "enclosing_member",
+    "source": "Choice.get_metavar",
+    "target": "Choice._normalized_mapping"
+  },
+  "1bc825309326": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "open_file",
+    "target": "_LazyFile"
+  },
+  "fca8e3e78323": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Parameter.__init_subclass__",
+    "target": "_outside_click_stacklevel"
+  },
+  "2bcea86a74ec": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_generic_on_iterable",
+    "target": "it"
+  },
+  "8999fdedc45e": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Parameter._check_name_is_usable",
+    "target": "_outside_click_stacklevel"
+  },
+  "2e1c2f3aa913": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_OptionParser._match_short_opt",
+    "target": "_normalize_opt"
+  },
+  "fb357587fcda": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "password_option",
+    "target": "option"
+  },
+  "a1684c6c5f8c": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_pager_contextmanager",
+    "target": "_nullpager"
+  },
+  "603bc3e4b5c3": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_option_multiple",
+    "target": "_get_words"
+  },
+  "562312102536": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_progressbar_format_progress_line",
+    "target": "_create_progress"
+  },
+  "c44c1d469a9c": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_group_chaining.l2b",
+    "target": "debug"
+  },
+  "bd186c9661ce": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_chained",
+    "target": "_get_words"
+  },
+  "f61b62aedc15": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_flag_option_with_nargs_option",
+    "target": "_get_words"
+  },
+  "ae209fb53ba5": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get_binary_stdin",
+    "target": "_find_binary_reader"
+  },
+  "65f6cea7b41b": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_path_types",
+    "target": "_get_completions"
+  },
+  "cf9381963bdc": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_option_custom",
+    "target": "_get_words"
+  },
+  "66939e0818bd": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_OptionParser._process_opts",
+    "target": "_normalize_opt"
+  },
+  "0702de6bce0f": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Command.get_short_help_str",
+    "target": "_format_deprecated_label"
+  },
+  "313586b3d5de": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get_text_stdout",
+    "target": "_force_correct_text_writer"
+  },
+  "f01eb02cfecc": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_progressbar_hidden_manual.cli",
+    "target": "_create_progress"
+  },
+  "72c6f3376fa2": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "get_text_stdin",
+    "target": "_force_correct_text_reader"
+  },
+  "a57878edf923": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_OptionParser.add_argument",
+    "target": "_Argument"
+  },
+  "9597295167d6": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_Option.__init__",
+    "target": "_split_opt"
+  },
+  "39ca1714549e": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "group",
+    "target": "command"
+  },
+  "adad94a6a1bb": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_get_text_stdin",
+    "target": "ConsoleStream"
+  },
+  "709e63cd7691": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_progressbar_no_tty.cli",
+    "target": "_create_progress"
+  },
+  "ff5fa2f5585e": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "Parameter.handle_parse_result",
+    "target": "_format_deprecated_suffix"
+  },
+  "87fd77de3a7e": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_option_optional",
+    "target": "_get_words"
+  },
+  "e81b1944bf6d": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "_stream_is_misconfigured",
+    "target": "is_ascii_encoding"
+  },
+  "04945793a4d3": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "emboss_cmd",
+    "target": "copy_filename"
+  },
+  "0bbd9aee8b42": {
+    "seeded": false,
+    "kind": "same_file",
+    "source": "test_args_and_chain.c",
+    "target": "debug"
+  },
+  "0c997e8ea1d5": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_get_context_objects_no_ensuring.cli",
+    "target": "test_get_context_objects_no_ensuring.Foo"
+  },
+  "27dc1e143a53": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_group_command_class",
+    "target": "test_group_command_class.CustomGroup"
+  },
+  "77ebe6a7d8d6": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_with_resource_exception",
+    "target": "test_with_resource_exception.TestContext"
+  },
+  "488419be92d1": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_catch_exceptions_cli_runner.cli",
+    "target": "test_catch_exceptions_cli_runner.CustomError"
+  },
+  "1c9ff88445f8": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_custom_parser",
+    "target": "test_custom_parser.OptParseCommand"
+  },
+  "c256f2215adc": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_parameter_source_during_paramtype_convert",
+    "target": "test_parameter_source_during_paramtype_convert.Source"
+  },
+  "ff58983a716d": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_with_resource_nested_exception",
+    "target": "test_with_resource_nested_exception.TestContext"
+  },
+  "841a478cd653": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_context_meta.cli",
+    "target": "test_context_meta.get_language"
+  },
+  "fa945fb36d7d": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_get_pager_file_flushes_stream_on_exception",
+    "target": "test_get_pager_file_flushes_stream_on_exception.FlushableTextStream"
+  },
+  "4b0d0ef21a7a": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_param_type_subclass_omitting_input_parameter",
+    "target": "test_param_type_subclass_omitting_input_parameter.DoublingType"
+  },
+  "a055d6a5dbf6": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_group_group_class_self",
+    "target": "test_group_group_class_self.CustomGroup"
+  },
+  "a1ad75243c45": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "progress",
+    "target": "progress.process_slowly"
+  },
+  "4c5714157fc6": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_catch_exceptions.cli",
+    "target": "test_catch_exceptions.CustomError"
+  },
+  "a8fd3dda4d25": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_echo_writing_to_standard_error",
+    "target": "test_echo_writing_to_standard_error.emulate_input"
+  },
+  "63ada0830734": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_context_formatter_class",
+    "target": "test_context_formatter_class.CustomContext"
+  },
+  "6521ecf46c77": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "command",
+    "target": "command.decorator"
+  },
+  "7d04f2eee69f": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_with_resource_nested_exception",
+    "target": "test_with_resource_nested_exception.TestException"
+  },
+  "e65e0dd563c3": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_dynamic_default_help_special_method",
+    "target": "test_dynamic_default_help_special_method.Value"
+  },
+  "629d98b4c998": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_prompt_default_round_trips_through_type",
+    "target": "test_prompt_default_round_trips_through_type.DoublingType"
+  },
+  "0d5d6beb0f1a": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_echo_via_pager_streams_each_write",
+    "target": "test_echo_via_pager_streams_each_write.RecordingStream"
+  },
+  "40583a600db9": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_with_resource_exception",
+    "target": "test_with_resource_exception.TestException"
+  },
+  "dff9570c82f6": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_group_group_class",
+    "target": "test_group_group_class.CustomGroup"
+  },
+  "5bd2c8a6a693": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_with_resource",
+    "target": "test_with_resource.manager"
+  },
+  "fa81d2b61288": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_get_context_objects.cli",
+    "target": "test_get_context_objects.Foo"
+  },
+  "31571e9cb45e": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "_unpack_args",
+    "target": "_unpack_args._fetch"
+  },
+  "902a71161bb9": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_aliased_command_canonical_name",
+    "target": "test_aliased_command_canonical_name.AliasedGroup"
+  },
+  "f97b213b354b": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_is_jupyter_kernel_output",
+    "target": "test_is_jupyter_kernel_output.JupyterKernelFakeStream"
+  },
+  "40fd2e22cd3d": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_interrupt_while_reporting_error.cli",
+    "target": "test_interrupt_while_reporting_error.InterruptedReport"
+  },
+  "bbe5df6f1e4a": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "test_dual_options_custom_type_sentinel_flag_value",
+    "target": "test_dual_options_custom_type_sentinel_flag_value.ConfigParamType"
+  },
+  "53bbe94b3ba5": {
+    "seeded": false,
+    "kind": "same_file_scope",
+    "source": "open_url",
+    "target": "open_url._unquote_file"
+  },
+  "fb065bec4664": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_capture_sys_fileno_raises",
+    "target": "CliRunner.invoke"
+  },
+  "e78f90ab8aa7": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_stderr_isolation_across_invokes",
+    "target": "CliRunner.invoke"
+  },
+  "b89397ad2a5a": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_stderr",
+    "target": "CliRunner.invoke"
+  },
+  "c7c1b5dd22ef": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_hide_false_default_boolean_flag_value",
+    "target": "Option.get_help_record"
+  },
+  "d8d9ea92612d": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_isolation_flushes_unflushed_stderr",
+    "target": "CliRunner.isolation"
+  },
+  "ec173cf3cbb7": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_intrange_default_help_text",
+    "target": "Option.get_help_record"
+  },
+  "f8996f808818": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_capture_fd_nesting.outer_cli",
+    "target": "CliRunner.invoke"
+  },
+  "abb483590e9c": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "_resolve_context",
+    "target": "Command.make_context"
+  },
+  "6024f2e8546b": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_catch_exceptions",
+    "target": "CliRunner.invoke"
+  },
+  "028f297e0c0d": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_show_default_string",
+    "target": "Option.get_help_record"
+  },
+  "5a75e356d0bd": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_exit_code_and_output_from_sys_exit",
+    "target": "CliRunner.invoke"
+  },
+  "f01d2cc816e8": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_invoke_with_logger_and_prompt",
+    "target": "CliRunner.invoke"
+  },
+  "a85ba1907b87": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_sequential_invokes_with_logging",
+    "target": "CliRunner.invoke"
+  },
+  "239de675b694": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_multiple_default_composite_type",
+    "target": "Parameter.type_cast_value"
+  },
+  "0b9d91502b31": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "Command.parse_args",
+    "target": "Context.fail"
+  },
+  "3d263f9b6a5b": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_do_not_show_default_empty_multiple",
+    "target": "Option.get_help_record"
+  },
+  "39da25a855fe": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "Command.format_options",
+    "target": "HelpFormatter.write_dl"
+  },
+  "8c5ff20fd25f": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_with_resource",
+    "target": "Context.scope"
+  },
+  "32c3365f156b": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "_get_completions",
+    "target": "ShellComplete.get_completions"
+  },
+  "df3e75d94ff1": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_flag_value_on_option_with_zero_or_one_args",
+    "target": "CliRunner.invoke"
+  },
+  "d1a3b92f7aed": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_logging_with_cli_log_level",
+    "target": "CliRunner.invoke"
+  },
+  "d4f11de58355": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_echo_stdin_prompts",
+    "target": "CliRunner.invoke"
+  },
+  "9b4f450b00af": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_fish_format_completion_escapes_help",
+    "target": "FishComplete.format_completion"
+  },
+  "6f3987b5e171": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_prompts",
+    "target": "CliRunner.invoke"
+  },
+  "5e16e8feb8ed": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_capture_fd_logging_handler",
+    "target": "CliRunner.invoke"
+  },
+  "8f2a2756db3f": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_context_pushing",
+    "target": "Context.scope"
+  },
+  "a63572730102": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_with_color_errors",
+    "target": "CliRunner.invoke"
+  },
+  "7a98abc776c1": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "Command.format_help_text",
+    "target": "HelpFormatter.write_text"
+  },
+  "ee0e4486da33": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_multiple_default_type",
+    "target": "Option.get_default"
+  },
+  "87d316e27f45": {
+    "seeded": false,
+    "kind": "typed_receiver",
+    "source": "test_args",
+    "target": "CliRunner.invoke"
+  },
+  "eed47a2ec0cd": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "Parameter.type_cast_value",
+    "fake_target": "test_option_custom_class_can_override_type_cast_value_and_never_sees_unset.CustomOption.type_cast_value"
+  },
+  "bf9e4be80dc5": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "command.decorator",
+    "fake_target": "argument.decorator"
+  },
+  "626ec064545b": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "Context.fail",
+    "fake_target": "ParamType.fail"
+  },
+  "89f892f06975": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CliRunner.invoke",
+    "fake_target": "test_custom_parser.OptParseCommand.invoke"
+  },
+  "ecc639ffaf1f": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "Parameter.process_value",
+    "fake_target": "Option.process_value"
+  },
+  "62aa869a6c29": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CliRunner.invoke",
+    "fake_target": "Command.invoke"
+  },
+  "c096512e8f8a": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CliRunner.invoke",
+    "fake_target": "Group.invoke"
+  },
+  "3ca206d306f1": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "test_with_resource_nested_exception.TestContext",
+    "fake_target": "test_with_resource_exception.TestContext"
+  },
+  "c7e78ce2ce98": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "test_with_resource_nested_exception.TestException",
+    "fake_target": "test_with_resource_exception.TestException"
+  },
+  "983c1b5dd206": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "Option.get_help_record",
+    "fake_target": "Parameter.get_help_record"
+  },
+  "11b5eeeb807e": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "Group.resolve_command",
+    "fake_target": "AliasedGroup.resolve_command"
+  },
+  "1af0a3d65bdd": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CliRunner.invoke",
+    "fake_target": "Group.invoke"
+  },
+  "e01f48861dbc": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "test_catch_exceptions_cli_runner.CustomError",
+    "fake_target": "test_catch_exceptions.CustomError"
+  },
+  "54ed5dae2578": {
+    "seeded": true,
+    "kind": "enclosing_member",
+    "real_target": "Group.get_command",
+    "fake_target": "ComplexCLI.get_command"
+  },
+  "bad472bb0cd0": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "test_with_resource_exception.TestException",
+    "fake_target": "test_with_resource_nested_exception.TestException"
+  },
+  "34698146b00a": {
+    "seeded": true,
+    "kind": "typed_receiver",
+    "real_target": "CliRunner.invoke",
+    "fake_target": "Command.invoke"
+  },
+  "70e95f397256": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "test_param_type_subclass_omitting_input_parameter.DoublingType",
+    "fake_target": "test_prompt_default_round_trips_through_type.DoublingType"
+  },
+  "d2f3bf98fcca": {
+    "seeded": true,
+    "kind": "same_file_scope",
+    "real_target": "test_get_context_objects.Foo",
+    "fake_target": "test_get_context_objects_missing.Foo"
+  }
+}

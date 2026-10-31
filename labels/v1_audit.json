@@ -1,0 +1,14 @@
+{
+  "requests": {
+    "labelled": 100,
+    "multi_call_lines": 0,
+    "missing_target_name": 0,
+    "examples": []
+  },
+  "click": {
+    "labelled": 100,
+    "multi_call_lines": 0,
+    "missing_target_name": 0,
+    "examples": []
+  }
+}

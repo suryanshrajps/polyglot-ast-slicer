@@ -1,0 +1,2774 @@
+[
+  {
+    "edge_id": "7ab222c89c85",
+    "repo": "requests",
+    "file": "src/requests/help.py",
+    "call_text": "_implementation()",
+    "call_range": [
+      80,
+      26,
+      80,
+      43
+    ],
+    "call_context": "   78 |         }\n   79 | \n   80 |     implementation_info = _implementation()\n      |                           ^^^^^^^^^^^^^^^^^\n   81 |     urllib3_info = {\"version\": urllib3.__version__}",
+    "callee": "_implementation",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_implementation",
+      "file": "src/requests/help.py",
+      "lines": "35-64",
+      "definition": "   35 | def _implementation():\n   36 |     \"\"\"Return a dict with the Python implementation and version.\n   37 | \n   38 |     Provide both the name and the version of the Python implementation\n   39 |     currently running. For example, on CPython 3.10.3 it will return\n   40 |     {'name': 'CPython', 'version': '3.10.3'}.\n   41 | \n   42 |     This function works best on CPython and PyPy: in particular, it probably\n   43 |     doesn't work for Jython or IronPython. Future investigation should be done\n   44 |     to work out the correct shape of the code for those platforms."
+    }
+  },
+  {
+    "edge_id": "5d3a5d25ed30",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "self.build_response()",
+    "call_range": [
+      2618,
+      15,
+      2618,
+      36
+    ],
+    "call_context": " 2616 |     def send(self, *args, **kwargs):\n 2617 |         self.calls.append(SendCall(args, kwargs))\n 2618 |         return self.build_response()\n      |                ^^^^^^^^^^^^^^^^^^^^^\n 2619 | ",
+    "callee": "build_response",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "HTTPAdapter.build_response",
+      "file": "src/requests/adapters.py",
+      "lines": "365-401",
+      "definition": "  365 |     def build_response(self, req: PreparedRequest, resp: Any) -> Response:\n  366 |         \"\"\"Builds a :class:`Response <requests.Response>` object from a urllib3\n  367 |         response. This should not be called from user code, and is only exposed\n  368 |         for use when subclassing the\n  369 |         :class:`HTTPAdapter <requests.adapters.HTTPAdapter>`\n  370 | \n  371 |         :param req: The :class:`PreparedRequest <PreparedRequest>` used to generate the response.\n  372 |         :param resp: The urllib3 response object.\n  373 |         :rtype: requests.Response\n  374 |         \"\"\""
+    }
+  },
+  {
+    "edge_id": "b64e9f288b04",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "BoomFile()",
+    "call_range": [
+      83,
+      25,
+      83,
+      35
+    ],
+    "call_context": "   81 |                 raise error()\n   82 | \n   83 |         assert super_len(BoomFile()) == 0\n      |                          ^^^^^^^^^^\n   84 | ",
+    "callee": "BoomFile",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestSuperLen.test_super_len_handles_files_raising_weird_errors_in_tell.BoomFile",
+      "file": "tests/test_utils.py",
+      "lines": "76-81",
+      "definition": "   76 |         class BoomFile:\n   77 |             def __len__(self):\n   78 |                 return 5\n   79 | \n   80 |             def tell(self):\n   81 |                 raise error()"
+    }
+  },
+  {
+    "edge_id": "799653c0e23d",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.get_redirect_target(resp)",
+    "call_range": [
+      306,
+      22,
+      306,
+      52
+    ],
+    "call_context": "  304 | \n  305 |                 # extract redirect url, if any, for the next loop\n  306 |                 url = self.get_redirect_target(resp)\n      |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  307 |                 yield resp",
+    "callee": "get_redirect_target",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "SessionRedirectMixin.get_redirect_target",
+      "file": "src/requests/sessions.py",
+      "lines": "134-152",
+      "definition": "  134 |     def get_redirect_target(self, resp: Response) -> str | None:\n  135 |         \"\"\"Receives a Response. Returns a redirect URI or ``None``\"\"\"\n  136 |         # Due to the nature of how requests processes redirects this method will\n  137 |         # be called at least once upon the original response and at least twice\n  138 |         # on each subsequent redirect response (if any).\n  139 |         # If a custom mixin is used to handle this logic, it may be advantageous\n  140 |         # to cache the redirect location onto the response object as a private\n  141 |         # attribute.\n  142 |         if resp.is_redirect:\n  143 |             location = resp.headers[\"location\"]"
+    }
+  },
+  {
+    "edge_id": "6d172c1bd57c",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.prepare(\n        method=\"GET\", url=\"http://www.example.com\", data=data, hooks=default_hooks()\n    )",
+    "call_range": [
+      2705,
+      4,
+      2707,
+      5
+    ],
+    "call_context": " 2703 |     \"\"\"\n 2704 |     p = PreparedRequest()\n 2705 |     p.prepare(\n      |     ^^^^^^^^^^\n 2706 |         method=\"GET\", url=\"http://www.example.com\", data=data, hooks=default_hooks()\n 2707 |     )\n 2708 |     assert p.body == urlencode(data)",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare",
+      "file": "src/requests/models.py",
+      "lines": "424-451",
+      "definition": "  424 |     def prepare(\n  425 |         self,\n  426 |         method: str | None = None,\n  427 |         url: _t.UriType | None = None,\n  428 |         headers: Mapping[str, str | bytes] | None = None,\n  429 |         files: _t.FilesType = None,\n  430 |         data: _t.DataType = None,\n  431 |         params: _t.ParamsType = None,\n  432 |         auth: _t.AuthType = None,\n  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,"
+    }
+  },
+  {
+    "edge_id": "1ddf8e5140f8",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"get\", url, params=params, **kwargs)",
+    "call_range": [
+      87,
+      11,
+      87,
+      55
+    ],
+    "call_context": "   85 |     \"\"\"\n   86 | \n   87 |     return request(\"get\", url, params=params, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   88 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "Session.request",
+      "file": "src/requests/sessions.py",
+      "lines": "557-653",
+      "definition": "  557 |     def request(\n  558 |         self,\n  559 |         method: str,\n  560 |         url: _t.UriType,\n  561 |         params: _t.ParamsType = None,\n  562 |         data: _t.DataType = None,\n  563 |         headers: _t.HeadersType = None,\n  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,\n  565 |         files: _t.FilesType = None,\n  566 |         auth: _t.AuthType = None,"
+    }
+  },
+  {
+    "edge_id": "3589a8d0aff0",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.iter_content(\n            chunk_size=chunk_size, decode_unicode=decode_unicode\n        )",
+    "call_range": [
+      1012,
+      21,
+      1014,
+      9
+    ],
+    "call_context": " 1010 |         pending: str | bytes | None = None\n 1011 | \n 1012 |         for chunk in self.iter_content(\n      |                      ^^^^^^^^^^^^^^^^^^\n 1013 |             chunk_size=chunk_size, decode_unicode=decode_unicode\n 1014 |         ):\n 1015 |             if pending is not None:",
+    "callee": "iter_content",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Response.iter_content",
+      "file": "src/requests/models.py",
+      "lines": "914-977",
+      "definition": "  914 |     def iter_content(\n  915 |         self, chunk_size: int | None = 1, decode_unicode: bool = False\n  916 |     ) -> Iterator[str | bytes]:\n  917 |         \"\"\"Iterates over the response data.  When stream=True is set on the\n  918 |         request, this avoids reading the content at once into memory for\n  919 |         large responses.  The chunk size is the number of bytes it should\n  920 |         read into memory.  This is not necessarily the length of each item\n  921 |         returned as decoding can take place.\n  922 | \n  923 |         chunk_size must be of type int or None. A value of None will"
+    }
+  },
+  {
+    "edge_id": "5bc5453ff431",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "create_cookie(\n        comment=morsel[\"comment\"],\n        comment_url=bool(morsel[\"comment\"]),\n        discard=False,\n        domain=morsel[\"domain\"],\n        expires=expires,\n        name=morsel.key,\n        path=morsel[\"path\"],\n        port=None,\n        rest={\"HttpOnly\": morsel[\"httponly\"]},\n        rfc2109=False,\n        secure=bool(morsel[\"secure\"]),\n        value=morsel.value,\n        version=morsel[\"version\"] or 0,\n    )",
+    "call_range": [
+      543,
+      11,
+      557,
+      5
+    ],
+    "call_context": "  541 |         time_template = \"%a, %d-%b-%Y %H:%M:%S GMT\"\n  542 |         expires = calendar.timegm(time.strptime(morsel[\"expires\"], time_template))\n  543 |     return create_cookie(\n      |            ^^^^^^^^^^^^^^\n  544 |         comment=morsel[\"comment\"],\n  545 |         comment_url=bool(morsel[\"comment\"]),\n  546 |         discard=False,\n  547 |         domain=morsel[\"domain\"],\n  548 |         expires=expires,\n  549 |         name=morsel.key,\n  550 |         path=morsel[\"path\"],\n  551 |         port=None,\n  552 |         rest={\"HttpOnly\": morsel[\"httponly\"]},\n  553 |         rfc2109=False,\n  554 |         secure=bool(morsel[\"secure\"]),\n  555 |         value=morsel.value,\n  556 |         version=morsel[\"version\"] or 0,\n  557 |     )\n  558 | ",
+    "callee": "create_cookie",
+    "receiver": null,
+    "target": {
+      "qualified_name": "create_cookie",
+      "file": "src/requests/cookies.py",
+      "lines": "494-528",
+      "definition": "  494 | def create_cookie(name: str, value: str, **kwargs: Any) -> Cookie:\n  495 |     \"\"\"Make a cookie from underspecified parameters.\n  496 | \n  497 |     By default, the pair of `name` and `value` will be set for the domain ''\n  498 |     and sent on every request (this is sometimes called a \"supercookie\").\n  499 |     \"\"\"\n  500 |     result: dict[str, Any] = {\n  501 |         \"version\": 0,\n  502 |         \"name\": name,\n  503 |         \"value\": value,"
+    }
+  },
+  {
+    "edge_id": "d91056a4be4e",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "RegHandle()",
+    "call_range": [
+      995,
+      18,
+      995,
+      29
+    ],
+    "call_context": "  993 |             pass\n  994 | \n  995 |     ie_settings = RegHandle()\n      |                   ^^^^^^^^^^^\n  996 | ",
+    "callee": "RegHandle",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_should_bypass_proxies_win_registry_ProxyOverride_value.RegHandle",
+      "file": "tests/test_utils.py",
+      "lines": "991-993",
+      "definition": "  991 |     class RegHandle:\n  992 |         def Close(self):\n  993 |             pass"
+    }
+  },
+  {
+    "edge_id": "d17ca166b54a",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "req.copy()",
+    "call_range": [
+      205,
+      31,
+      205,
+      41
+    ],
+    "call_context": "  203 |         previous_fragment = urlparse(req.url).fragment\n  204 |         while url:\n  205 |             prepared_request = req.copy()\n      |                                ^^^^^^^^^^\n  206 | ",
+    "callee": "copy",
+    "receiver": "req",
+    "target": {
+      "qualified_name": "PreparedRequest.copy",
+      "file": "src/requests/models.py",
+      "lines": "456-465",
+      "definition": "  456 |     def copy(self) -> PreparedRequest:\n  457 |         p = PreparedRequest()\n  458 |         p.method = self.method\n  459 |         p.url = self.url\n  460 |         p.headers = self.headers.copy() if self.headers is not None else None  # type: ignore[assignment]\n  461 |         p._cookies = _copy_cookie_jar(self._cookies)\n  462 |         p.body = self.body\n  463 |         p.hooks = self.hooks\n  464 |         p._body_position = self._body_position\n  465 |         return p"
+    }
+  },
+  {
+    "edge_id": "6ccc41a44e5e",
+    "repo": "requests",
+    "file": "src/requests/status_codes.py",
+    "call_text": "doc(code)",
+    "call_range": [
+      122,
+      35,
+      122,
+      44
+    ],
+    "call_context": "  120 |     global __doc__\n  121 |     __doc__ = (\n  122 |         __doc__ + \"\\n\" + \"\\n\".join(doc(code) for code in sorted(_codes))\n      |                                    ^^^^^^^^^\n  123 |         if __doc__ is not None",
+    "callee": "doc",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_init.doc",
+      "file": "src/requests/status_codes.py",
+      "lines": "116-118",
+      "definition": "  116 |     def doc(code: int) -> str:\n  117 |         names = \", \".join(f\"``{n}``\" for n in _codes[code])\n  118 |         return \"* %d: %s\" % (code, names)"
+    }
+  },
+  {
+    "edge_id": "5f2624b68983",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "dotted_netmask(int(bits))",
+    "call_range": [
+      736,
+      51,
+      736,
+      76
+    ],
+    "call_context": "  734 |     ipaddr = struct.unpack(\"=L\", socket.inet_aton(ip))[0]\n  735 |     netaddr, bits = net.split(\"/\")\n  736 |     netmask = struct.unpack(\"=L\", socket.inet_aton(dotted_netmask(int(bits))))[0]\n      |                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^\n  737 |     network = struct.unpack(\"=L\", socket.inet_aton(netaddr))[0] & netmask",
+    "callee": "dotted_netmask",
+    "receiver": null,
+    "target": {
+      "qualified_name": "dotted_netmask",
+      "file": "src/requests/utils.py",
+      "lines": "741-749",
+      "definition": "  741 | def dotted_netmask(mask: int) -> str:\n  742 |     \"\"\"Converts mask from /xx format to xxx.xxx.xxx.xxx\n  743 | \n  744 |     Example: if mask is 24 function returns 255.255.255.0\n  745 | \n  746 |     :rtype: str\n  747 |     \"\"\"\n  748 |     bits = 0xFFFFFFFF ^ (1 << 32 - mask) - 1\n  749 |     return socket.inet_ntoa(struct.pack(\">I\", bits))"
+    }
+  },
+  {
+    "edge_id": "74103d804acd",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "r.get_new_headers()",
+    "call_range": [
+      161,
+      11,
+      161,
+      30
+    ],
+    "call_context": "  159 |     r = MockRequest(request)\n  160 |     jar.add_cookie_header(r)  # type: ignore[arg-type]\n  161 |     return r.get_new_headers().get(\"Cookie\")\n      |            ^^^^^^^^^^^^^^^^^^^\n  162 | ",
+    "callee": "get_new_headers",
+    "receiver": "r",
+    "target": {
+      "qualified_name": "MockRequest.get_new_headers",
+      "file": "src/requests/cookies.py",
+      "lines": "98-99",
+      "definition": "   98 |     def get_new_headers(self) -> dict[str, str]:\n   99 |         return self._new_headers"
+    }
+  },
+  {
+    "edge_id": "32bf9d3a2536",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "merge_setting(cert, self.cert)",
+    "call_range": [
+      866,
+      15,
+      866,
+      45
+    ],
+    "call_context": "  864 |         stream = merge_setting(stream, self.stream)\n  865 |         verify = merge_setting(verify, self.verify)\n  866 |         cert = merge_setting(cert, self.cert)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  867 | ",
+    "callee": "merge_setting",
+    "receiver": null,
+    "target": {
+      "qualified_name": "merge_setting",
+      "file": "src/requests/sessions.py",
+      "lines": "76-105",
+      "definition": "   76 | def merge_setting(\n   77 |     request_setting: Any, session_setting: Any, dict_class: type = OrderedDict\n   78 | ) -> Any:\n   79 |     \"\"\"Determines appropriate setting for a given request, taking into account\n   80 |     the explicit setting on that request, and the setting in the session. If a\n   81 |     setting is a dictionary, they will be merged together using `dict_class`\n   82 |     \"\"\"\n   83 | \n   84 |     if session_setting is None:\n   85 |         return request_setting"
+    }
+  },
+  {
+    "edge_id": "777d62176adf",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "self.build_response()",
+    "call_range": [
+      2618,
+      15,
+      2618,
+      36
+    ],
+    "call_context": " 2616 |     def send(self, *args, **kwargs):\n 2617 |         self.calls.append(SendCall(args, kwargs))\n 2618 |         return self.build_response()\n      |                ^^^^^^^^^^^^^^^^^^^^^\n 2619 | ",
+    "callee": "build_response",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "RedirectSession.build_response",
+      "file": "tests/test_requests.py",
+      "lines": "2620-2633",
+      "definition": " 2620 |     def build_response(self):\n 2621 |         request = self.calls[-1].args[0]\n 2622 |         r = requests.Response()\n 2623 |         r.url = request.url\n 2624 | \n 2625 |         try:\n 2626 |             r.status_code = int(self.redirects.pop(0))\n 2627 |         except IndexError:\n 2628 |             r.status_code = 200\n 2629 | "
+    }
+  },
+  {
+    "edge_id": "c6d4bcd4be80",
+    "repo": "requests",
+    "file": "tests/test_structures.py",
+    "call_text": "self.case_insensitive_dict.lower_items()",
+    "call_range": [
+      30,
+      20,
+      30,
+      60
+    ],
+    "call_context": "   28 | \n   29 |     def test_lower_items(self):\n   30 |         assert list(self.case_insensitive_dict.lower_items()) == [\n      |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   31 |             (\"accept\", \"application/json\")",
+    "callee": "lower_items",
+    "receiver": "self.case_insensitive_dict",
+    "target": {
+      "qualified_name": "CaseInsensitiveDict.lower_items",
+      "file": "src/requests/structures.py",
+      "lines": "76-78",
+      "definition": "   76 |     def lower_items(self) -> Iterator[tuple[str, _VT]]:\n   77 |         \"\"\"Like iteritems(), but with all lowercase keys.\"\"\"\n   78 |         return ((lowerkey, keyval[1]) for (lowerkey, keyval) in self._store.items())"
+    }
+  },
+  {
+    "edge_id": "673ac516b542",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.iter_content(128)",
+    "call_range": [
+      859,
+      15,
+      859,
+      37
+    ],
+    "call_context": "  857 |     def __iter__(self) -> Iterator[bytes]:\n  858 |         \"\"\"Allows you to use a response as an iterator.\"\"\"\n  859 |         return self.iter_content(128)\n      |                ^^^^^^^^^^^^^^^^^^^^^^\n  860 | ",
+    "callee": "iter_content",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Response.iter_content",
+      "file": "src/requests/models.py",
+      "lines": "914-977",
+      "definition": "  914 |     def iter_content(\n  915 |         self, chunk_size: int | None = 1, decode_unicode: bool = False\n  916 |     ) -> Iterator[str | bytes]:\n  917 |         \"\"\"Iterates over the response data.  When stream=True is set on the\n  918 |         request, this avoids reading the content at once into memory for\n  919 |         large responses.  The chunk size is the number of bytes it should\n  920 |         read into memory.  This is not necessarily the length of each item\n  921 |         returned as decoding can take place.\n  922 | \n  923 |         chunk_size must be of type int or None. A value of None will"
+    }
+  },
+  {
+    "edge_id": "12910fa7cf7d",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "adapter.proxy_headers(\"http://user:@httpbin.org\")",
+    "call_range": [
+      2227,
+      18,
+      2227,
+      67
+    ],
+    "call_context": " 2225 |     def test_proxy_auth_empty_pass(self):\n 2226 |         adapter = HTTPAdapter()\n 2227 |         headers = adapter.proxy_headers(\"http://user:@httpbin.org\")\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2228 |         assert headers == {\"Proxy-Authorization\": \"Basic dXNlcjo=\"}",
+    "callee": "proxy_headers",
+    "receiver": "adapter",
+    "target": {
+      "qualified_name": "HTTPAdapter.proxy_headers",
+      "file": "src/requests/adapters.py",
+      "lines": "613-632",
+      "definition": "  613 |     def proxy_headers(self, proxy: str) -> dict[str, str]:\n  614 |         \"\"\"Returns a dictionary of the headers to add to any request sent\n  615 |         through a proxy. This works with urllib3 magic to ensure that they are\n  616 |         correctly sent to the proxy, rather than in a tunnelled request if\n  617 |         CONNECT is being used.\n  618 | \n  619 |         This should not be called from user code, and is only exposed for use\n  620 |         when subclassing the\n  621 |         :class:`HTTPAdapter <requests.adapters.HTTPAdapter>`.\n  622 | "
+    }
+  },
+  {
+    "edge_id": "d6a8a8d4286a",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "self.get_host()",
+    "call_range": [
+      111,
+      15,
+      111,
+      30
+    ],
+    "call_context": "  109 |     @property\n  110 |     def host(self) -> str:\n  111 |         return self.get_host()\n      |                ^^^^^^^^^^^^^^^\n  112 | ",
+    "callee": "get_host",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "MockRequest.get_host",
+      "file": "src/requests/cookies.py",
+      "lines": "54-55",
+      "definition": "   54 |     def get_host(self) -> str:\n   55 |         return urlparse(self._r.url).netloc"
+    }
+  },
+  {
+    "edge_id": "01c8eb645772",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "resp.close()",
+    "call_range": [
+      222,
+      12,
+      222,
+      24
+    ],
+    "call_context": "  220 | \n  221 |             # Release the connection back into the pool.\n  222 |             resp.close()\n      |             ^^^^^^^^^^^^\n  223 | ",
+    "callee": "close",
+    "receiver": "resp",
+    "target": {
+      "qualified_name": "Response.close",
+      "file": "src/requests/models.py",
+      "lines": "1173-1184",
+      "definition": " 1173 |     def close(self) -> None:\n 1174 |         \"\"\"Releases the connection back to the pool. Once this method has been\n 1175 |         called the underlying ``raw`` object must not be accessed again.\n 1176 | \n 1177 |         *Note: Should not normally need to be called explicitly.*\n 1178 |         \"\"\"\n 1179 |         if not self._content_consumed:\n 1180 |             self.raw.close()\n 1181 | \n 1182 |         release_conn = getattr(self.raw, \"release_conn\", None)"
+    }
+  },
+  {
+    "edge_id": "0480cc6dcdb4",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "BadFileObj(\"the data\")",
+    "call_range": [
+      2050,
+      15,
+      2050,
+      37
+    ],
+    "call_context": " 2048 |                 return\n 2049 | \n 2050 |         data = BadFileObj(\"the data\")\n      |                ^^^^^^^^^^^^^^^^^^^^^^\n 2051 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
+    "callee": "BadFileObj",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_rewind_body_no_seek.BadFileObj",
+      "file": "tests/test_requests.py",
+      "lines": "2040-2048",
+      "definition": " 2040 |         class BadFileObj:\n 2041 |             def __init__(self, data):\n 2042 |                 self.data = data\n 2043 | \n 2044 |             def tell(self):\n 2045 |                 return 0\n 2046 | \n 2047 |             def __iter__(self):\n 2048 |                 return"
+    }
+  },
+  {
+    "edge_id": "2e293adcde83",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "self._patch_adapter_gzipped_redirect(s, url)",
+    "call_range": [
+      2134,
+      8,
+      2134,
+      52
+    ],
+    "call_context": " 2132 |         s = requests.Session()\n 2133 |         url = httpbin(\"redirect/1\")\n 2134 |         self._patch_adapter_gzipped_redirect(s, url)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2135 |         s.get(url)",
+    "callee": "_patch_adapter_gzipped_redirect",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "TestRequests._patch_adapter_gzipped_redirect",
+      "file": "tests/test_requests.py",
+      "lines": "2117-2129",
+      "definition": " 2117 |     def _patch_adapter_gzipped_redirect(self, session, url):\n 2118 |         adapter = session.get_adapter(url=url)\n 2119 |         org_build_response = adapter.build_response\n 2120 |         self._patched_response = False\n 2121 | \n 2122 |         def build_response(*args, **kwargs):\n 2123 |             resp = org_build_response(*args, **kwargs)\n 2124 |             if not self._patched_response:\n 2125 |                 resp.raw.headers[\"content-encoding\"] = \"gzip\"\n 2126 |                 self._patched_response = True"
+    }
+  },
+  {
+    "edge_id": "28d39744967c",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "resp.close()",
+    "call_range": [
+      222,
+      12,
+      222,
+      24
+    ],
+    "call_context": "  220 | \n  221 |             # Release the connection back into the pool.\n  222 |             resp.close()\n      |             ^^^^^^^^^^^^\n  223 | ",
+    "callee": "close",
+    "receiver": "resp",
+    "target": {
+      "qualified_name": "HTTPAdapter.close",
+      "file": "src/requests/adapters.py",
+      "lines": "555-563",
+      "definition": "  555 |     def close(self) -> None:\n  556 |         \"\"\"Disposes of any internal state.\n  557 | \n  558 |         Currently, this closes the PoolManager and any active ProxyManager,\n  559 |         which closes any pooled connections.\n  560 |         \"\"\"\n  561 |         self.poolmanager.clear()\n  562 |         for proxy in self.proxy_manager.values():\n  563 |             proxy.clear()"
+    }
+  },
+  {
+    "edge_id": "dce899d0c330",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.close()",
+    "call_range": [
+      816,
+      8,
+      816,
+      20
+    ],
+    "call_context": "  814 | \n  815 |     def __exit__(self, *args: Any) -> None:\n  816 |         self.close()\n      |         ^^^^^^^^^^^^\n  817 | ",
+    "callee": "close",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Response.close",
+      "file": "src/requests/models.py",
+      "lines": "1173-1184",
+      "definition": " 1173 |     def close(self) -> None:\n 1174 |         \"\"\"Releases the connection back to the pool. Once this method has been\n 1175 |         called the underlying ``raw`` object must not be accessed again.\n 1176 | \n 1177 |         *Note: Should not normally need to be called explicitly.*\n 1178 |         \"\"\"\n 1179 |         if not self._content_consumed:\n 1180 |             self.raw.close()\n 1181 | \n 1182 |         release_conn = getattr(self.raw, \"release_conn\", None)"
+    }
+  },
+  {
+    "edge_id": "d2f424786f88",
+    "repo": "requests",
+    "file": "tests/test_structures.py",
+    "call_text": "self.case_insensitive_dict.copy()",
+    "call_range": [
+      38,
+      15,
+      38,
+      48
+    ],
+    "call_context": "   36 | \n   37 |     def test_copy(self):\n   38 |         copy = self.case_insensitive_dict.copy()\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   39 |         assert copy is not self.case_insensitive_dict",
+    "callee": "copy",
+    "receiver": "self.case_insensitive_dict",
+    "target": {
+      "qualified_name": "CaseInsensitiveDict.copy",
+      "file": "src/requests/structures.py",
+      "lines": "89-90",
+      "definition": "   89 |     def copy(self) -> CaseInsensitiveDict[_VT]:\n   90 |         return CaseInsensitiveDict(self._store.values())"
+    }
+  },
+  {
+    "edge_id": "c27055ac5ecb",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "p.prepare(\n            method=method.upper(),\n            url=url,\n            files=request.files,\n            data=request.data,\n            json=request.json,\n            headers=merge_setting(\n                request.headers, self.headers, dict_class=CaseInsensitiveDict\n            ),\n            params=merge_setting(request.params, self.params),\n            auth=merge_setting(auth, self.auth),\n            cookies=merged_cookies,\n            hooks=merge_hooks(request.hooks, self.hooks),\n        )",
+    "call_range": [
+      541,
+      8,
+      554,
+      9
+    ],
+    "call_context": "  539 | \n  540 |         p = PreparedRequest()\n  541 |         p.prepare(\n      |         ^^^^^^^^^^\n  542 |             method=method.upper(),\n  543 |             url=url,\n  544 |             files=request.files,\n  545 |             data=request.data,\n  546 |             json=request.json,\n  547 |             headers=merge_setting(\n  548 |                 request.headers, self.headers, dict_class=CaseInsensitiveDict\n  549 |             ),\n  550 |             params=merge_setting(request.params, self.params),\n  551 |             auth=merge_setting(auth, self.auth),\n  552 |             cookies=merged_cookies,\n  553 |             hooks=merge_hooks(request.hooks, self.hooks),\n  554 |         )\n  555 |         return p",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare",
+      "file": "src/requests/models.py",
+      "lines": "424-451",
+      "definition": "  424 |     def prepare(\n  425 |         self,\n  426 |         method: str | None = None,\n  427 |         url: _t.UriType | None = None,\n  428 |         headers: Mapping[str, str | bytes] | None = None,\n  429 |         files: _t.FilesType = None,\n  430 |         data: _t.DataType = None,\n  431 |         params: _t.ParamsType = None,\n  432 |         auth: _t.AuthType = None,\n  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,"
+    }
+  },
+  {
+    "edge_id": "bfdf83890279",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "TestStream(\"test\")",
+    "call_range": [
+      876,
+      15,
+      876,
+      33
+    ],
+    "call_context": "  874 |         assert post1.json()[\"data\"] == \"test\"\n  875 | \n  876 |         test = TestStream(\"test\")\n      |                ^^^^^^^^^^^^^^^^^^\n  877 |         test.seek(2)",
+    "callee": "TestStream",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_POSTBIN_SEEKED_OBJECT_WITH_NO_ITER.TestStream",
+      "file": "tests/test_requests.py",
+      "lines": "842-869",
+      "definition": "  842 |         class TestStream:\n  843 |             def __init__(self, data):\n  844 |                 self.data = data.encode()\n  845 |                 self.length = len(self.data)\n  846 |                 self.index = 0\n  847 | \n  848 |             def __len__(self):\n  849 |                 return self.length\n  850 | \n  851 |             def read(self, size=None):"
+    }
+  },
+  {
+    "edge_id": "562894a3dcdc",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "MyString(\"x-custom\")",
+    "call_range": [
+      1882,
+      37,
+      1882,
+      57
+    ],
+    "call_context": " 1880 | \n 1881 |         r_mixed = requests.get(\n 1882 |             httpbin(\"get\"), headers={MyString(\"x-custom\"): MyBytes(b\"myheader\")}\n      |                                      ^^^^^^^^^^^^^^^^^^^^\n 1883 |         )",
+    "callee": "MyString",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_header_with_subclass_types.MyString",
+      "file": "tests/test_requests.py",
+      "lines": "1867-1868",
+      "definition": " 1867 |         class MyString(str):\n 1868 |             pass"
+    }
+  },
+  {
+    "edge_id": "62e04df0be90",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "adapter.proxy_headers(\"http://user:pass@httpbin.org\")",
+    "call_range": [
+      2222,
+      18,
+      2222,
+      71
+    ],
+    "call_context": " 2220 |     def test_proxy_auth(self):\n 2221 |         adapter = HTTPAdapter()\n 2222 |         headers = adapter.proxy_headers(\"http://user:pass@httpbin.org\")\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2223 |         assert headers == {\"Proxy-Authorization\": \"Basic dXNlcjpwYXNz\"}",
+    "callee": "proxy_headers",
+    "receiver": "adapter",
+    "target": {
+      "qualified_name": "HTTPAdapter.proxy_headers",
+      "file": "src/requests/adapters.py",
+      "lines": "613-632",
+      "definition": "  613 |     def proxy_headers(self, proxy: str) -> dict[str, str]:\n  614 |         \"\"\"Returns a dictionary of the headers to add to any request sent\n  615 |         through a proxy. This works with urllib3 magic to ensure that they are\n  616 |         correctly sent to the proxy, rather than in a tunnelled request if\n  617 |         CONNECT is being used.\n  618 | \n  619 |         This should not be called from user code, and is only exposed for use\n  620 |         when subclassing the\n  621 |         :class:`HTTPAdapter <requests.adapters.HTTPAdapter>`.\n  622 | "
+    }
+  },
+  {
+    "edge_id": "24793ed1a44b",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server(requests_to_handle=requests_to_handle)",
+    "call_range": [
+      82,
+      17,
+      82,
+      84
+    ],
+    "call_context": "   80 |         requests_to_handle = 5\n   81 | \n   82 |         server = Server.basic_response_server(requests_to_handle=requests_to_handle)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   83 | ",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "45114b291014",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "remove_cookie_by_name(self, name)",
+    "call_range": [
+      380,
+      8,
+      380,
+      41
+    ],
+    "call_context": "  378 |         ``remove_cookie_by_name()``.\n  379 |         \"\"\"\n  380 |         remove_cookie_by_name(self, name)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  381 | ",
+    "callee": "remove_cookie_by_name",
+    "receiver": null,
+    "target": {
+      "qualified_name": "remove_cookie_by_name",
+      "file": "src/requests/cookies.py",
+      "lines": "164-182",
+      "definition": "  164 | def remove_cookie_by_name(\n  165 |     cookiejar: CookieJar, name: str, domain: str | None = None, path: str | None = None\n  166 | ) -> None:\n  167 |     \"\"\"Unsets a cookie by name, by default over all domains and paths.\n  168 | \n  169 |     Wraps CookieJar.clear(), is O(n).\n  170 |     \"\"\"\n  171 |     clearables: list[tuple[str, str, str]] = []\n  172 |     for cookie in cookiejar:\n  173 |         if cookie.name != name:"
+    }
+  },
+  {
+    "edge_id": "62e53487ee95",
+    "repo": "requests",
+    "file": "tests/testserver/server.py",
+    "call_text": "self._close_server_sock_ignore_errors()",
+    "call_range": [
+      79,
+      12,
+      79,
+      51
+    ],
+    "call_context": "   77 |         finally:\n   78 |             self.ready_event.set()  # just in case of exception\n   79 |             self._close_server_sock_ignore_errors()\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   80 |             self.stop_event.set()",
+    "callee": "_close_server_sock_ignore_errors",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Server._close_server_sock_ignore_errors",
+      "file": "tests/testserver/server.py",
+      "lines": "88-92",
+      "definition": "   88 |     def _close_server_sock_ignore_errors(self):\n   89 |         try:\n   90 |             self.server_sock.close()\n   91 |         except OSError:\n   92 |             pass"
+    }
+  },
+  {
+    "edge_id": "2192654c49ed",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "cookiejar.set_cookie(create_cookie(name, cookie_dict[name]))",
+    "call_range": [
+      599,
+      16,
+      599,
+      76
+    ],
+    "call_context": "  597 |         for name in cookie_dict:\n  598 |             if overwrite or (name not in names_from_jar):\n  599 |                 cookiejar.set_cookie(create_cookie(name, cookie_dict[name]))\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  600 | ",
+    "callee": "set_cookie",
+    "receiver": "cookiejar",
+    "target": {
+      "qualified_name": "RequestsCookieJar.set_cookie",
+      "file": "src/requests/cookies.py",
+      "lines": "382-389",
+      "definition": "  382 |     def set_cookie(self, cookie: Cookie, *args: Any, **kwargs: Any) -> None:\n  383 |         if (\n  384 |             (value := cookie.value) is not None\n  385 |             and value.startswith('\"')\n  386 |             and value.endswith('\"')\n  387 |         ):\n  388 |             cookie.value = value.replace('\\\\\"', \"\")\n  389 |         return super().set_cookie(cookie, *args, **kwargs)"
+    }
+  },
+  {
+    "edge_id": "5e77c764bffe",
+    "repo": "requests",
+    "file": "tests/testserver/server.py",
+    "call_text": "self._close_server_sock_ignore_errors()",
+    "call_range": [
+      133,
+      8,
+      133,
+      47
+    ],
+    "call_context": "  131 | \n  132 |         # ensure server thread doesn't get stuck waiting for connections\n  133 |         self._close_server_sock_ignore_errors()\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  134 |         self.join()",
+    "callee": "_close_server_sock_ignore_errors",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Server._close_server_sock_ignore_errors",
+      "file": "tests/testserver/server.py",
+      "lines": "88-92",
+      "definition": "   88 |     def _close_server_sock_ignore_errors(self):\n   89 |         try:\n   90 |             self.server_sock.close()\n   91 |         except OSError:\n   92 |             pass"
+    }
+  },
+  {
+    "edge_id": "9f85efe7eb80",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self._encode_params(params)",
+    "call_range": [
+      552,
+      25,
+      552,
+      52
+    ],
+    "call_context": "  550 | \n  551 |         if params is not None:\n  552 |             enc_params = self._encode_params(params)\n      |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  553 |         else:",
+    "callee": "_encode_params",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "RequestEncodingMixin._encode_params",
+      "file": "src/requests/models.py",
+      "lines": "150-180",
+      "definition": "  150 |     @staticmethod\n  151 |     def _encode_params(\n  152 |         data: _t.EncodableDataType,\n  153 |     ) -> str | bytes | _t.SupportsRead[str | bytes]:\n  154 |         \"\"\"Encode parameters in a piece of data.\n  155 | \n  156 |         Will successfully encode parameters when passed as a dict or a list of\n  157 |         2-tuples. Order is retained if data is a list of 2-tuples but arbitrary\n  158 |         if parameters are supplied as a dict.\n  159 |         \"\"\""
+    }
+  },
+  {
+    "edge_id": "3dfbc98fc871",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "prepared_request.prepare_auth(new_auth)",
+    "call_range": [
+      332,
+      12,
+      332,
+      51
+    ],
+    "call_context": "  330 |         new_auth = get_netrc_auth(url) if self.trust_env else None\n  331 |         if new_auth is not None:\n  332 |             prepared_request.prepare_auth(new_auth)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  333 | ",
+    "callee": "prepare_auth",
+    "receiver": "prepared_request",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare_auth",
+      "file": "src/requests/models.py",
+      "lines": "670-697",
+      "definition": "  670 |     def prepare_auth(\n  671 |         self,\n  672 |         auth: _t.AuthType,\n  673 |         url: _t.UriType = \"\",\n  674 |     ) -> None:\n  675 |         \"\"\"Prepares the given HTTP auth data.\"\"\"\n  676 | \n  677 |         # If no Auth is explicitly provided, extract it from the URL first.\n  678 |         if auth is None:\n  679 |             url_auth = get_auth_from_url(cast(str, self.url))"
+    }
+  },
+  {
+    "edge_id": "12ab9117edc2",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "MockRequest(request)",
+    "call_range": [
+      159,
+      8,
+      159,
+      28
+    ],
+    "call_context": "  157 |     :rtype: str\n  158 |     \"\"\"\n  159 |     r = MockRequest(request)\n      |         ^^^^^^^^^^^^^^^^^^^^\n  160 |     jar.add_cookie_header(r)  # type: ignore[arg-type]",
+    "callee": "MockRequest",
+    "receiver": null,
+    "target": {
+      "qualified_name": "MockRequest",
+      "file": "src/requests/cookies.py",
+      "lines": "31-111",
+      "definition": "   31 | class MockRequest:\n   32 |     \"\"\"Wraps a `requests.PreparedRequest` to mimic a `urllib2.Request`.\n   33 | \n   34 |     The code in `http.cookiejar.CookieJar` expects this interface in order to correctly\n   35 |     manage cookie policies, i.e., determine whether a cookie can be set, given the\n   36 |     domains of the request and the cookie.\n   37 | \n   38 |     The original request object is read-only. The client is responsible for collecting\n   39 |     the new headers via `get_new_headers()` and interpreting them appropriately. You\n   40 |     probably want `get_cookie_header`, defined below."
+    }
+  },
+  {
+    "edge_id": "1389bff64f33",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.get_adapter(url=request.url)",
+    "call_range": [
+      778,
+      18,
+      778,
+      51
+    ],
+    "call_context": "  776 | \n  777 |         # Get the appropriate adapter to use\n  778 |         adapter = self.get_adapter(url=request.url)\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  779 | ",
+    "callee": "get_adapter",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.get_adapter",
+      "file": "src/requests/sessions.py",
+      "lines": "870-881",
+      "definition": "  870 |     def get_adapter(self, url: str) -> BaseAdapter:\n  871 |         \"\"\"\n  872 |         Returns the appropriate connection adapter for the given URL.\n  873 | \n  874 |         :rtype: requests.adapters.BaseAdapter\n  875 |         \"\"\"\n  876 |         for prefix, adapter in self.adapters.items():\n  877 |             if url.lower().startswith(prefix.lower()):\n  878 |                 return adapter\n  879 | "
+    }
+  },
+  {
+    "edge_id": "dc3d3b5a2570",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "get_proxy(\"no_proxy\")",
+    "call_range": [
+      826,
+      19,
+      826,
+      40
+    ],
+    "call_context": "  824 |     no_proxy_arg = no_proxy\n  825 |     if no_proxy is None:\n  826 |         no_proxy = get_proxy(\"no_proxy\")\n      |                    ^^^^^^^^^^^^^^^^^^^^^\n  827 |     parsed = urlparse(url)",
+    "callee": "get_proxy",
+    "receiver": null,
+    "target": {
+      "qualified_name": "should_bypass_proxies.get_proxy",
+      "file": "src/requests/utils.py",
+      "lines": "819-820",
+      "definition": "  819 |     def get_proxy(key: str) -> str | None:\n  820 |         return os.environ.get(key) or os.environ.get(key.upper())"
+    }
+  },
+  {
+    "edge_id": "2c6000cb6bcb",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server()",
+    "call_range": [
+      57,
+      13,
+      57,
+      43
+    ],
+    "call_context": "   55 |     def test_basic_response(self):\n   56 |         \"\"\"the basic response server returns an empty http response\"\"\"\n   57 |         with Server.basic_response_server() as (host, port):\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   58 |             r = requests.get(f\"http://{host}:{port}\")",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "5f7189880ed1",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "BadFileObj(\"the data\")",
+    "call_range": [
+      2073,
+      15,
+      2073,
+      37
+    ],
+    "call_context": " 2071 |                 return\n 2072 | \n 2073 |         data = BadFileObj(\"the data\")\n      |                ^^^^^^^^^^^^^^^^^^^^^^\n 2074 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
+    "callee": "BadFileObj",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_rewind_body_failed_seek.BadFileObj",
+      "file": "tests/test_requests.py",
+      "lines": "2060-2071",
+      "definition": " 2060 |         class BadFileObj:\n 2061 |             def __init__(self, data):\n 2062 |                 self.data = data\n 2063 | \n 2064 |             def tell(self):\n 2065 |                 return 0\n 2066 | \n 2067 |             def seek(self, pos, whence=0):\n 2068 |                 raise OSError()\n 2069 | "
+    }
+  },
+  {
+    "edge_id": "a9b0d67f5550",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "proxy_bypass(hostname)",
+    "call_range": [
+      863,
+      21,
+      863,
+      43
+    ],
+    "call_context": "  861 |     with set_environ(\"no_proxy\", no_proxy_arg):\n  862 |         try:\n  863 |             bypass = proxy_bypass(hostname)\n      |                      ^^^^^^^^^^^^^^^^^^^^^^\n  864 |         except (TypeError, socket.gaierror):",
+    "callee": "proxy_bypass",
+    "receiver": null,
+    "target": {
+      "qualified_name": "proxy_bypass",
+      "file": "src/requests/utils.py",
+      "lines": "137-146",
+      "definition": "  137 |     def proxy_bypass(host: str) -> bool:  # noqa\n  138 |         \"\"\"Return True, if the host should be bypassed.\n  139 | \n  140 |         Checks proxy settings gathered from the environment, if specified,\n  141 |         or the registry.\n  142 |         \"\"\"\n  143 |         if getproxies_environment():\n  144 |             return proxy_bypass_environment(host)\n  145 |         else:\n  146 |             return proxy_bypass_registry(host)"
+    }
+  },
+  {
+    "edge_id": "76b1c133ac22",
+    "repo": "requests",
+    "file": "tests/testserver/server.py",
+    "call_text": "Server(text_response_handler, **kwargs)",
+    "call_range": [
+      59,
+      15,
+      59,
+      54
+    ],
+    "call_context": "   57 |             return request_content\n   58 | \n   59 |         return Server(text_response_handler, **kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   60 | ",
+    "callee": "Server",
+    "receiver": null,
+    "target": {
+      "qualified_name": "Server",
+      "file": "tests/testserver/server.py",
+      "lines": "25-135",
+      "definition": "   25 | class Server(threading.Thread):\n   26 |     \"\"\"Dummy server using for unit testing\"\"\"\n   27 | \n   28 |     WAIT_EVENT_TIMEOUT = 5\n   29 | \n   30 |     def __init__(\n   31 |         self,\n   32 |         handler=None,\n   33 |         host=\"localhost\",\n   34 |         port=0,"
+    }
+  },
+  {
+    "edge_id": "423260d349cd",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "NoLenBoomFile()",
+    "call_range": [
+      96,
+      25,
+      96,
+      40
+    ],
+    "call_context": "   94 |                 pass\n   95 | \n   96 |         assert super_len(NoLenBoomFile()) == 0\n      |                          ^^^^^^^^^^^^^^^\n   97 | ",
+    "callee": "NoLenBoomFile",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestSuperLen.test_super_len_tell_ioerror.NoLenBoomFile",
+      "file": "tests/test_utils.py",
+      "lines": "89-94",
+      "definition": "   89 |         class NoLenBoomFile:\n   90 |             def tell(self):\n   91 |                 raise error()\n   92 | \n   93 |             def seek(self, offset, whence):\n   94 |                 pass"
+    }
+  },
+  {
+    "edge_id": "0801d8bd7f2c",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"head\", url, **kwargs)",
+    "call_range": [
+      114,
+      11,
+      114,
+      41
+    ],
+    "call_context": "  112 | \n  113 |     kwargs.setdefault(\"allow_redirects\", False)\n  114 |     return request(\"head\", url, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  115 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "request",
+      "file": "src/requests/api.py",
+      "lines": "24-71",
+      "definition": "   24 | def request(\n   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]\n   26 | ) -> Response:\n   27 |     \"\"\"Constructs and sends a :class:`Request <Request>`.\n   28 | \n   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.\n   30 |     :param url: URL for the new :class:`Request` object.\n   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   32 |         in the query string for the :class:`Request`.\n   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like"
+    }
+  },
+  {
+    "edge_id": "a9f498aa7e91",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "self.set(name, value)",
+    "call_range": [
+      374,
+      8,
+      374,
+      29
+    ],
+    "call_context": "  372 |         case, use the more explicit set() method instead.\n  373 |         \"\"\"\n  374 |         self.set(name, value)\n      |         ^^^^^^^^^^^^^^^^^^^^^\n  375 | ",
+    "callee": "set",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "RequestsCookieJar.set",
+      "file": "src/requests/cookies.py",
+      "lines": "229-248",
+      "definition": "  229 |     def set(\n  230 |         self, name: str, value: str | Morsel[dict[str, str]] | None, **kwargs: Any\n  231 |     ) -> Cookie | None:\n  232 |         \"\"\"Dict-like set() that also supports optional domain and path args in\n  233 |         order to resolve naming collisions from using one cookie jar over\n  234 |         multiple domains.\n  235 |         \"\"\"\n  236 |         # support client code that unsets cookies by assignment of a None value:\n  237 |         if value is None:\n  238 |             remove_cookie_by_name("
+    }
+  },
+  {
+    "edge_id": "d51a61e10c2a",
+    "repo": "requests",
+    "file": "src/requests/adapters.py",
+    "call_text": "self.init_poolmanager(\n            self._pool_connections, self._pool_maxsize, block=self._pool_block\n        )",
+    "call_range": [
+      235,
+      8,
+      237,
+      9
+    ],
+    "call_context": "  233 |             setattr(self, attr, value)\n  234 | \n  235 |         self.init_poolmanager(\n      |         ^^^^^^^^^^^^^^^^^^^^^^\n  236 |             self._pool_connections, self._pool_maxsize, block=self._pool_block\n  237 |         )\n  238 | ",
+    "callee": "init_poolmanager",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "HTTPAdapter.init_poolmanager",
+      "file": "src/requests/adapters.py",
+      "lines": "239-267",
+      "definition": "  239 |     def init_poolmanager(\n  240 |         self,\n  241 |         connections: int,\n  242 |         maxsize: int,\n  243 |         block: bool = DEFAULT_POOLBLOCK,\n  244 |         **pool_kwargs: Any,\n  245 |     ) -> None:\n  246 |         \"\"\"Initializes a urllib3 PoolManager.\n  247 | \n  248 |         This method should not be called from user code, and is only"
+    }
+  },
+  {
+    "edge_id": "ad4e2c807043",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "BadFileObj(\"the data\")",
+    "call_range": [
+      2093,
+      15,
+      2093,
+      37
+    ],
+    "call_context": " 2091 |                 return\n 2092 | \n 2093 |         data = BadFileObj(\"the data\")\n      |                ^^^^^^^^^^^^^^^^^^^^^^\n 2094 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
+    "callee": "BadFileObj",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_rewind_body_failed_seek.BadFileObj",
+      "file": "tests/test_requests.py",
+      "lines": "2060-2071",
+      "definition": " 2060 |         class BadFileObj:\n 2061 |             def __init__(self, data):\n 2062 |                 self.data = data\n 2063 | \n 2064 |             def tell(self):\n 2065 |                 return 0\n 2066 | \n 2067 |             def seek(self, pos, whence=0):\n 2068 |                 raise OSError()\n 2069 | "
+    }
+  },
+  {
+    "edge_id": "2c7ca6bbca4c",
+    "repo": "requests",
+    "file": "src/requests/help.py",
+    "call_text": "info()",
+    "call_range": [
+      128,
+      21,
+      128,
+      27
+    ],
+    "call_context": "  126 | def main():\n  127 |     \"\"\"Pretty-print the bug information as JSON.\"\"\"\n  128 |     print(json.dumps(info(), sort_keys=True, indent=2))\n      |                      ^^^^^^\n  129 | ",
+    "callee": "info",
+    "receiver": null,
+    "target": {
+      "qualified_name": "info",
+      "file": "src/requests/help.py",
+      "lines": "67-123",
+      "definition": "   67 | def info() -> dict[str, Any]:\n   68 |     \"\"\"Generate information for a bug report.\"\"\"\n   69 |     try:\n   70 |         platform_info = {\n   71 |             \"system\": platform.system(),\n   72 |             \"release\": platform.release(),\n   73 |         }\n   74 |     except OSError:\n   75 |         platform_info = {\n   76 |             \"system\": \"Unknown\","
+    }
+  },
+  {
+    "edge_id": "6aba30b01c8b",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self._encode_params(raw_data)",
+    "call_range": [
+      640,
+      27,
+      640,
+      56
+    ],
+    "call_context": "  638 |             else:\n  639 |                 if raw_data:\n  640 |                     body = self._encode_params(raw_data)\n      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  641 |                     if isinstance(data, basestring) or _t.has_read(data):",
+    "callee": "_encode_params",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "RequestEncodingMixin._encode_params",
+      "file": "src/requests/models.py",
+      "lines": "150-180",
+      "definition": "  150 |     @staticmethod\n  151 |     def _encode_params(\n  152 |         data: _t.EncodableDataType,\n  153 |     ) -> str | bytes | _t.SupportsRead[str | bytes]:\n  154 |         \"\"\"Encode parameters in a piece of data.\n  155 | \n  156 |         Will successfully encode parameters when passed as a dict or a list of\n  157 |         2-tuples. Order is retained if data is a list of 2-tuples but arbitrary\n  158 |         if parameters are supplied as a dict.\n  159 |         \"\"\""
+    }
+  },
+  {
+    "edge_id": "dc61f9293ffa",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server()",
+    "call_range": [
+      146,
+      17,
+      146,
+      47
+    ],
+    "call_context": "  144 |     def test_server_finishes_on_error(self):\n  145 |         \"\"\"the server thread exits even if an exception exits the context manager\"\"\"\n  146 |         server = Server.basic_response_server()\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  147 |         with pytest.raises(Exception):",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "1456839ff2b9",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "ReadProxy()",
+    "call_range": [
+      1112,
+      48,
+      1112,
+      59
+    ],
+    "call_context": " 1110 |                 return getattr(self._file, name)\n 1111 | \n 1112 |         r = requests.post(httpbin(\"post\"), data=ReadProxy())\n      |                                                 ^^^^^^^^^^^\n 1113 |         assert r.status_code == 200",
+    "callee": "ReadProxy",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_post_getattr_proxy_read_only.ReadProxy",
+      "file": "tests/test_requests.py",
+      "lines": "1103-1110",
+      "definition": " 1103 |         class ReadProxy:\n 1104 |             def __init__(self):\n 1105 |                 self._file = io.BytesIO(b\"streamed body\")\n 1106 | \n 1107 |             def __getattr__(self, name):\n 1108 |                 if name == \"__iter__\":\n 1109 |                     raise AttributeError(name)\n 1110 |                 return getattr(self._file, name)"
+    }
+  },
+  {
+    "edge_id": "75b6b31d0088",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server(request_timeout=3)",
+    "call_range": [
+      132,
+      17,
+      132,
+      64
+    ],
+    "call_context": "  130 |     def test_request_recovery_with_bigger_timeout(self):\n  131 |         \"\"\"a biggest timeout can be specified\"\"\"\n  132 |         server = Server.basic_response_server(request_timeout=3)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  133 |         data = b\"bananadine\"",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "4cba26e4dca1",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "MyBytes(b\"myheader\")",
+    "call_range": [
+      1882,
+      59,
+      1882,
+      79
+    ],
+    "call_context": " 1880 | \n 1881 |         r_mixed = requests.get(\n 1882 |             httpbin(\"get\"), headers={MyString(\"x-custom\"): MyBytes(b\"myheader\")}\n      |                                                            ^^^^^^^^^^^^^^^^^^^^\n 1883 |         )",
+    "callee": "MyBytes",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_header_with_subclass_types.MyBytes",
+      "file": "tests/test_requests.py",
+      "lines": "1870-1871",
+      "definition": " 1870 |         class MyBytes(bytes):\n 1871 |             pass"
+    }
+  },
+  {
+    "edge_id": "36fe3a8720c2",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "AttrProxy()",
+    "call_range": [
+      2113,
+      67,
+      2113,
+      78
+    ],
+    "call_context": " 2111 | \n 2112 |         r = requests.post(\n 2113 |             httpbin(\"redirect-to?url=/post&status_code=307\"), data=AttrProxy()\n      |                                                                    ^^^^^^^^^^^\n 2114 |         )",
+    "callee": "AttrProxy",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_getattr_proxy_stream_follows_redirect.AttrProxy",
+      "file": "tests/test_requests.py",
+      "lines": "2105-2110",
+      "definition": " 2105 |         class AttrProxy:\n 2106 |             def __init__(self):\n 2107 |                 self._file = io.BytesIO(b\"data\")\n 2108 | \n 2109 |             def __getattr__(self, name):\n 2110 |                 return getattr(self._file, name)"
+    }
+  },
+  {
+    "edge_id": "0170256e3025",
+    "repo": "requests",
+    "file": "tests/test_lowlevel.py",
+    "call_text": "Server.basic_response_server(wait_to_close_event=close_server)",
+    "call_range": [
+      27,
+      13,
+      27,
+      75
+    ],
+    "call_context": "   25 |     \"\"\"can safely send generators\"\"\"\n   26 |     close_server = threading.Event()\n   27 |     server = Server.basic_response_server(wait_to_close_event=close_server)\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   28 |     data = iter([b\"a\", b\"b\", b\"c\"])",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "e4f10f225dd9",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "RegHandle()",
+    "call_range": [
+      898,
+      18,
+      898,
+      29
+    ],
+    "call_context": "  896 |             pass\n  897 | \n  898 |     ie_settings = RegHandle()\n      |                   ^^^^^^^^^^^\n  899 |     proxyEnableValues = deque([1, \"1\"])",
+    "callee": "RegHandle",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_should_bypass_proxies_win_registry.RegHandle",
+      "file": "tests/test_utils.py",
+      "lines": "894-896",
+      "definition": "  894 |     class RegHandle:\n  895 |         def Close(self):\n  896 |             pass"
+    }
+  },
+  {
+    "edge_id": "3058b1e846a3",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "CustomMapping({\"some\": \"data\"})",
+    "call_range": [
+      919,
+      15,
+      919,
+      46
+    ],
+    "call_context": "  917 |                 return len(self.data)\n  918 | \n  919 |         data = CustomMapping({\"some\": \"data\"})\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  920 |         url = httpbin(\"post\")",
+    "callee": "CustomMapping",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_post_with_custom_mapping.CustomMapping",
+      "file": "tests/test_requests.py",
+      "lines": "900-917",
+      "definition": "  900 |         class CustomMapping(MutableMapping):\n  901 |             def __init__(self, *args, **kwargs):\n  902 |                 self.data = dict(*args, **kwargs)\n  903 | \n  904 |             def __delitem__(self, key):\n  905 |                 del self.data[key]\n  906 | \n  907 |             def __getitem__(self, key):\n  908 |                 return self.data[key]\n  909 | "
+    }
+  },
+  {
+    "edge_id": "35895043c66f",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.request(\"DELETE\", url, **kwargs)",
+    "call_range": [
+      750,
+      15,
+      750,
+      52
+    ],
+    "call_context": "  748 |         \"\"\"\n  749 | \n  750 |         return self.request(\"DELETE\", url, **kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  751 | ",
+    "callee": "request",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.request",
+      "file": "src/requests/sessions.py",
+      "lines": "557-653",
+      "definition": "  557 |     def request(\n  558 |         self,\n  559 |         method: str,\n  560 |         url: _t.UriType,\n  561 |         params: _t.ParamsType = None,\n  562 |         data: _t.DataType = None,\n  563 |         headers: _t.HeadersType = None,\n  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,\n  565 |         files: _t.FilesType = None,\n  566 |         auth: _t.AuthType = None,"
+    }
+  },
+  {
+    "edge_id": "243165cc4e56",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "RegHandle()",
+    "call_range": [
+      934,
+      18,
+      934,
+      29
+    ],
+    "call_context": "  932 |             pass\n  933 | \n  934 |     ie_settings = RegHandle()\n      |                   ^^^^^^^^^^^\n  935 | ",
+    "callee": "RegHandle",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_should_bypass_proxies_win_registry_bad_values.RegHandle",
+      "file": "tests/test_utils.py",
+      "lines": "930-932",
+      "definition": "  930 |     class RegHandle:\n  931 |         def Close(self):\n  932 |             pass"
+    }
+  },
+  {
+    "edge_id": "68fe86e4a4b9",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"get\", url, params=params, **kwargs)",
+    "call_range": [
+      87,
+      11,
+      87,
+      55
+    ],
+    "call_context": "   85 |     \"\"\"\n   86 | \n   87 |     return request(\"get\", url, params=params, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   88 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "request",
+      "file": "src/requests/api.py",
+      "lines": "24-71",
+      "definition": "   24 | def request(\n   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]\n   26 | ) -> Response:\n   27 |     \"\"\"Constructs and sends a :class:`Request <Request>`.\n   28 | \n   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.\n   30 |     :param url: URL for the new :class:`Request` object.\n   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   32 |         in the query string for the :class:`Request`.\n   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like"
+    }
+  },
+  {
+    "edge_id": "31509391c3e7",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "p.prepare(\n            method=self.method,\n            url=self.url,\n            headers=self.headers,\n            files=self.files,\n            data=self.data,\n            json=self.json,\n            params=self.params,\n            auth=self.auth,\n            cookies=self.cookies,\n            hooks=self.hooks,\n        )",
+    "call_range": [
+      363,
+      8,
+      374,
+      9
+    ],
+    "call_context": "  361 |         \"\"\"Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.\"\"\"\n  362 |         p = PreparedRequest()\n  363 |         p.prepare(\n      |         ^^^^^^^^^^\n  364 |             method=self.method,\n  365 |             url=self.url,\n  366 |             headers=self.headers,\n  367 |             files=self.files,\n  368 |             data=self.data,\n  369 |             json=self.json,\n  370 |             params=self.params,\n  371 |             auth=self.auth,\n  372 |             cookies=self.cookies,\n  373 |             hooks=self.hooks,\n  374 |         )\n  375 |         return p",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare",
+      "file": "src/requests/models.py",
+      "lines": "424-451",
+      "definition": "  424 |     def prepare(\n  425 |         self,\n  426 |         method: str | None = None,\n  427 |         url: _t.UriType | None = None,\n  428 |         headers: Mapping[str, str | bytes] | None = None,\n  429 |         files: _t.FilesType = None,\n  430 |         data: _t.DataType = None,\n  431 |         params: _t.ParamsType = None,\n  432 |         auth: _t.AuthType = None,\n  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,"
+    }
+  },
+  {
+    "edge_id": "e13a36733cd2",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server()",
+    "call_range": [
+      32,
+      13,
+      32,
+      43
+    ],
+    "call_context": "   30 |     def test_server_closes(self):\n   31 |         \"\"\"the server closes when leaving the context manager\"\"\"\n   32 |         with Server.basic_response_server() as (host, port):\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   33 |             sock = socket.socket()",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "8aebe9afba21",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.prepare_headers(headers)",
+    "call_range": [
+      442,
+      8,
+      442,
+      37
+    ],
+    "call_context": "  440 |         self.prepare_method(method)\n  441 |         self.prepare_url(url, params)\n  442 |         self.prepare_headers(headers)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  443 |         self.prepare_cookies(cookies)",
+    "callee": "prepare_headers",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare_headers",
+      "file": "src/requests/models.py",
+      "lines": "565-574",
+      "definition": "  565 |     def prepare_headers(self, headers: Mapping[str, str | bytes] | None) -> None:\n  566 |         \"\"\"Prepares the given HTTP headers.\"\"\"\n  567 | \n  568 |         self.headers = CaseInsensitiveDict()\n  569 |         if headers:\n  570 |             for header in headers.items():\n  571 |                 # Raise exception on invalid header value.\n  572 |                 check_header_validity(header)\n  573 |                 name, value = header\n  574 |                 self.headers[to_native_string(name)] = value"
+    }
+  },
+  {
+    "edge_id": "24a1bcda4dd6",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"delete\", url, **kwargs)",
+    "call_range": [
+      180,
+      11,
+      180,
+      43
+    ],
+    "call_context": "  178 |     \"\"\"\n  179 | \n  180 |     return request(\"delete\", url, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "request",
+      "file": "src/requests/api.py",
+      "lines": "24-71",
+      "definition": "   24 | def request(\n   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]\n   26 | ) -> Response:\n   27 |     \"\"\"Constructs and sends a :class:`Request <Request>`.\n   28 | \n   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.\n   30 |     :param url: URL for the new :class:`Request` object.\n   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   32 |         in the query string for the :class:`Request`.\n   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like"
+    }
+  },
+  {
+    "edge_id": "457f6a0a9c3e",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "MyCookiePolicy()",
+    "call_range": [
+      1440,
+      23,
+      1440,
+      39
+    ],
+    "call_context": " 1438 | \n 1439 |         jar = requests.cookies.RequestsCookieJar()\n 1440 |         jar.set_policy(MyCookiePolicy())\n      |                        ^^^^^^^^^^^^^^^^\n 1441 |         assert isinstance(jar.copy().get_policy(), MyCookiePolicy)",
+    "callee": "MyCookiePolicy",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_cookie_policy_copy.MyCookiePolicy",
+      "file": "tests/test_requests.py",
+      "lines": "1436-1437",
+      "definition": " 1436 |         class MyCookiePolicy(cookielib.DefaultCookiePolicy):\n 1437 |             pass"
+    }
+  },
+  {
+    "edge_id": "a7e5db99af40",
+    "repo": "requests",
+    "file": "tests/conftest.py",
+    "call_text": "prepare_url(httpbin_secure)",
+    "call_range": [
+      41,
+      11,
+      41,
+      38
+    ],
+    "call_context": "   39 | @pytest.fixture\n   40 | def httpbin_secure(httpbin_secure):\n   41 |     return prepare_url(httpbin_secure)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   42 | ",
+    "callee": "prepare_url",
+    "receiver": null,
+    "target": {
+      "qualified_name": "PreparedRequest.prepare_url",
+      "file": "src/requests/models.py",
+      "lines": "483-563",
+      "definition": "  483 |     def prepare_url(\n  484 |         self,\n  485 |         url: _t.UriType,\n  486 |         params: _t.ParamsType,\n  487 |     ) -> None:\n  488 |         \"\"\"Prepares the given HTTP URL.\"\"\"\n  489 |         #: Accept objects that have string representations.\n  490 |         #: We're unable to blindly call unicode/str functions\n  491 |         #: as this will include the bytestring indicator (b'')\n  492 |         #: on python 3.x."
+    }
+  },
+  {
+    "edge_id": "2b6b5bcd9976",
+    "repo": "requests",
+    "file": "src/requests/adapters.py",
+    "call_text": "self.cert_verify(conn, request.url, verify, cert)",
+    "call_range": [
+      668,
+      8,
+      668,
+      57
+    ],
+    "call_context": "  666 |             raise InvalidURL(e, request=request)\n  667 | \n  668 |         self.cert_verify(conn, request.url, verify, cert)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  669 |         url = self.request_url(request, proxies)",
+    "callee": "cert_verify",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "HTTPAdapter.cert_verify",
+      "file": "src/requests/adapters.py",
+      "lines": "307-363",
+      "definition": "  307 |     def cert_verify(\n  308 |         self, conn: Any, url: str, verify: _t.VerifyType, cert: _t.CertType\n  309 |     ) -> None:\n  310 |         \"\"\"Verify a SSL certificate. This method should not be called from user\n  311 |         code, and is only exposed for use when subclassing the\n  312 |         :class:`HTTPAdapter <requests.adapters.HTTPAdapter>`.\n  313 | \n  314 |         :param conn: The urllib3 connection object associated with the cert.\n  315 |         :param url: The requested URL.\n  316 |         :param verify: Either a boolean, in which case it controls whether we verify"
+    }
+  },
+  {
+    "edge_id": "102b498e232d",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "session.resolve_redirects(r0, prep)",
+    "call_range": [
+      2655,
+      25,
+      2655,
+      60
+    ],
+    "call_context": " 2653 |     assert r0.request.method == \"POST\"\n 2654 |     assert session.calls[-1] == SendCall((r0.request,), {})\n 2655 |     redirect_generator = session.resolve_redirects(r0, prep)\n      |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2656 |     default_keyword_args = {",
+    "callee": "resolve_redirects",
+    "receiver": "session",
+    "target": {
+      "qualified_name": "SessionRedirectMixin.resolve_redirects",
+      "file": "src/requests/sessions.py",
+      "lines": "186-307",
+      "definition": "  186 |     def resolve_redirects(\n  187 |         self,\n  188 |         resp: Response,\n  189 |         req: PreparedRequest,\n  190 |         stream: bool = False,\n  191 |         timeout: _t.TimeoutType = None,\n  192 |         verify: _t.VerifyType = True,\n  193 |         cert: _t.CertType = None,\n  194 |         proxies: dict[str, str] | None = None,\n  195 |         yield_requests: bool = False,"
+    }
+  },
+  {
+    "edge_id": "81782644c6c8",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "self.itervalues()",
+    "call_range": [
+      282,
+      20,
+      282,
+      37
+    ],
+    "call_context": "  280 |         .. seealso:: keys() and items().\n  281 |         \"\"\"\n  282 |         return list(self.itervalues())\n      |                     ^^^^^^^^^^^^^^^^^\n  283 | ",
+    "callee": "itervalues",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "RequestsCookieJar.itervalues",
+      "file": "src/requests/cookies.py",
+      "lines": "267-274",
+      "definition": "  267 |     def itervalues(self) -> Iterator[str | None]:\n  268 |         \"\"\"Dict-like itervalues() that returns an iterator of values of cookies\n  269 |         from the jar.\n  270 | \n  271 |         .. seealso:: iterkeys() and iteritems().\n  272 |         \"\"\"\n  273 |         for cookie in iter(self):\n  274 |             yield cookie.value"
+    }
+  },
+  {
+    "edge_id": "a225de7bfe6f",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.close()",
+    "call_range": [
+      816,
+      8,
+      816,
+      20
+    ],
+    "call_context": "  814 | \n  815 |     def __exit__(self, *args: Any) -> None:\n  816 |         self.close()\n      |         ^^^^^^^^^^^^\n  817 | ",
+    "callee": "close",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.close",
+      "file": "src/requests/sessions.py",
+      "lines": "883-886",
+      "definition": "  883 |     def close(self) -> None:\n  884 |         \"\"\"Closes all adapters and as such the session\"\"\"\n  885 |         for v in self.adapters.values():\n  886 |             v.close()"
+    }
+  },
+  {
+    "edge_id": "7a709e5f689b",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"put\", url, data=data, **kwargs)",
+    "call_range": [
+      151,
+      11,
+      151,
+      51
+    ],
+    "call_context": "  149 |     \"\"\"\n  150 | \n  151 |     return request(\"put\", url, data=data, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  152 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "request",
+      "file": "src/requests/api.py",
+      "lines": "24-71",
+      "definition": "   24 | def request(\n   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]\n   26 | ) -> Response:\n   27 |     \"\"\"Constructs and sends a :class:`Request <Request>`.\n   28 | \n   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.\n   30 |     :param url: URL for the new :class:`Request` object.\n   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   32 |         in the query string for the :class:`Request`.\n   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like"
+    }
+  },
+  {
+    "edge_id": "7a44cad38f8d",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "session.send(prep)",
+    "call_range": [
+      2652,
+      9,
+      2652,
+      27
+    ],
+    "call_context": " 2650 |     session = RedirectSession([303, 307])\n 2651 |     prep = requests.Request(\"POST\", httpbin(\"post\")).prepare()\n 2652 |     r0 = session.send(prep)\n      |          ^^^^^^^^^^^^^^^^^^\n 2653 |     assert r0.request.method == \"POST\"",
+    "callee": "send",
+    "receiver": "session",
+    "target": {
+      "qualified_name": "RedirectSession.send",
+      "file": "tests/test_requests.py",
+      "lines": "2616-2618",
+      "definition": " 2616 |     def send(self, *args, **kwargs):\n 2617 |         self.calls.append(SendCall(args, kwargs))\n 2618 |         return self.build_response()"
+    }
+  },
+  {
+    "edge_id": "998215de741e",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.prepare_url(url, params)",
+    "call_range": [
+      441,
+      8,
+      441,
+      37
+    ],
+    "call_context": "  439 |         url = cast(\"_t.UriType\", url)\n  440 |         self.prepare_method(method)\n  441 |         self.prepare_url(url, params)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  442 |         self.prepare_headers(headers)",
+    "callee": "prepare_url",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare_url",
+      "file": "src/requests/models.py",
+      "lines": "483-563",
+      "definition": "  483 |     def prepare_url(\n  484 |         self,\n  485 |         url: _t.UriType,\n  486 |         params: _t.ParamsType,\n  487 |     ) -> None:\n  488 |         \"\"\"Prepares the given HTTP URL.\"\"\"\n  489 |         #: Accept objects that have string representations.\n  490 |         #: We're unable to blindly call unicode/str functions\n  491 |         #: as this will include the bytestring indicator (b'')\n  492 |         #: on python 3.x."
+    }
+  },
+  {
+    "edge_id": "6cb5ce2fabaf",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "create_cookie(name, value, **kwargs)",
+    "call_range": [
+      246,
+      16,
+      246,
+      52
+    ],
+    "call_context": "  244 |             c = morsel_to_cookie(value)\n  245 |         else:\n  246 |             c = create_cookie(name, value, **kwargs)\n      |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  247 |         self.set_cookie(c)",
+    "callee": "create_cookie",
+    "receiver": null,
+    "target": {
+      "qualified_name": "create_cookie",
+      "file": "src/requests/cookies.py",
+      "lines": "494-528",
+      "definition": "  494 | def create_cookie(name: str, value: str, **kwargs: Any) -> Cookie:\n  495 |     \"\"\"Make a cookie from underspecified parameters.\n  496 | \n  497 |     By default, the pair of `name` and `value` will be set for the domain ''\n  498 |     and sent on every request (this is sometimes called a \"supercookie\").\n  499 |     \"\"\"\n  500 |     result: dict[str, Any] = {\n  501 |         \"version\": 0,\n  502 |         \"name\": name,\n  503 |         \"value\": value,"
+    }
+  },
+  {
+    "edge_id": "a6d516dcdab9",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.prepare_hooks(hooks)",
+    "call_range": [
+      451,
+      8,
+      451,
+      33
+    ],
+    "call_context": "  449 | \n  450 |         # This MUST go after prepare_auth. Authenticators could add a hook\n  451 |         self.prepare_hooks(hooks)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^\n  452 | ",
+    "callee": "prepare_hooks",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare_hooks",
+      "file": "src/requests/models.py",
+      "lines": "722-729",
+      "definition": "  722 |     def prepare_hooks(self, hooks: _t.HooksInputType | None) -> None:\n  723 |         \"\"\"Prepares the given hooks.\"\"\"\n  724 |         # hooks can be passed as None to the prepare method and to this\n  725 |         # method. To prevent iterating over None, simply use an empty list\n  726 |         # if hooks is False-y\n  727 |         hooks = hooks or {}\n  728 |         for event in hooks:\n  729 |             self.register_hook(event, hooks[event])"
+    }
+  },
+  {
+    "edge_id": "f46710a63013",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "default_user_agent()",
+    "call_range": [
+      957,
+      26,
+      957,
+      46
+    ],
+    "call_context": "  955 |     return CaseInsensitiveDict(\n  956 |         {\n  957 |             \"User-Agent\": default_user_agent(),\n      |                           ^^^^^^^^^^^^^^^^^^^^\n  958 |             \"Accept-Encoding\": DEFAULT_ACCEPT_ENCODING,",
+    "callee": "default_user_agent",
+    "receiver": null,
+    "target": {
+      "qualified_name": "default_user_agent",
+      "file": "src/requests/utils.py",
+      "lines": "942-948",
+      "definition": "  942 | def default_user_agent(name: str = \"python-requests\") -> str:\n  943 |     \"\"\"\n  944 |     Return a string representing the default user agent.\n  945 | \n  946 |     :rtype: str\n  947 |     \"\"\"\n  948 |     return f\"{name}/{__version__}\""
+    }
+  },
+  {
+    "edge_id": "e155916a1682",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server(request_timeout=1)",
+    "call_range": [
+      119,
+      17,
+      119,
+      64
+    ],
+    "call_context": "  117 |     def test_requests_after_timeout_are_not_received(self):\n  118 |         \"\"\"the basic response handler times out when receiving requests\"\"\"\n  119 |         server = Server.basic_response_server(request_timeout=1)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  120 | ",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "3eabd133e32f",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"put\", url, data=data, **kwargs)",
+    "call_range": [
+      151,
+      11,
+      151,
+      51
+    ],
+    "call_context": "  149 |     \"\"\"\n  150 | \n  151 |     return request(\"put\", url, data=data, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  152 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "Session.request",
+      "file": "src/requests/sessions.py",
+      "lines": "557-653",
+      "definition": "  557 |     def request(\n  558 |         self,\n  559 |         method: str,\n  560 |         url: _t.UriType,\n  561 |         params: _t.ParamsType = None,\n  562 |         data: _t.DataType = None,\n  563 |         headers: _t.HeadersType = None,\n  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,\n  565 |         files: _t.FilesType = None,\n  566 |         auth: _t.AuthType = None,"
+    }
+  },
+  {
+    "edge_id": "72952d85692f",
+    "repo": "requests",
+    "file": "src/requests/help.py",
+    "call_text": "info()",
+    "call_range": [
+      128,
+      21,
+      128,
+      27
+    ],
+    "call_context": "  126 | def main():\n  127 |     \"\"\"Pretty-print the bug information as JSON.\"\"\"\n  128 |     print(json.dumps(info(), sort_keys=True, indent=2))\n      |                      ^^^^^^\n  129 | ",
+    "callee": "info",
+    "receiver": null,
+    "target": {
+      "qualified_name": "MockResponse.info",
+      "file": "src/requests/cookies.py",
+      "lines": "128-129",
+      "definition": "  128 |     def info(self) -> Any:\n  129 |         return self._headers"
+    }
+  },
+  {
+    "edge_id": "eff7b58d2a54",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "new_cj.update(self)",
+    "call_range": [
+      471,
+      8,
+      471,
+      27
+    ],
+    "call_context": "  469 |         new_cj = RequestsCookieJar()\n  470 |         new_cj.set_policy(self.get_policy())\n  471 |         new_cj.update(self)\n      |         ^^^^^^^^^^^^^^^^^^^\n  472 |         return new_cj",
+    "callee": "update",
+    "receiver": "new_cj",
+    "target": {
+      "qualified_name": "RequestsCookieJar.update",
+      "file": "src/requests/cookies.py",
+      "lines": "391-399",
+      "definition": "  391 |     def update(  # type: ignore[override]\n  392 |         self, other: CookieJar | SupportsKeysAndGetItem[str, str]\n  393 |     ) -> None:\n  394 |         \"\"\"Updates this jar with cookies from another CookieJar or dict-like\"\"\"\n  395 |         if isinstance(other, cookielib.CookieJar):\n  396 |             for cookie in other:\n  397 |                 self.set_cookie(copy.copy(cookie))\n  398 |         else:\n  399 |             super().update(other)"
+    }
+  },
+  {
+    "edge_id": "09516e2382c7",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.headers.copy()",
+    "call_range": [
+      460,
+      20,
+      460,
+      39
+    ],
+    "call_context": "  458 |         p.method = self.method\n  459 |         p.url = self.url\n  460 |         p.headers = self.headers.copy() if self.headers is not None else None  # type: ignore[assignment]\n      |                     ^^^^^^^^^^^^^^^^^^^\n  461 |         p._cookies = _copy_cookie_jar(self._cookies)",
+    "callee": "copy",
+    "receiver": "self.headers",
+    "target": {
+      "qualified_name": "CaseInsensitiveDict.copy",
+      "file": "src/requests/structures.py",
+      "lines": "89-90",
+      "definition": "   89 |     def copy(self) -> CaseInsensitiveDict[_VT]:\n   90 |         return CaseInsensitiveDict(self._store.values())"
+    }
+  },
+  {
+    "edge_id": "ac1b270f4b86",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.request(\"PUT\", url, data=data, **kwargs)",
+    "call_range": [
+      726,
+      15,
+      726,
+      60
+    ],
+    "call_context": "  724 |         \"\"\"\n  725 | \n  726 |         return self.request(\"PUT\", url, data=data, **kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  727 | ",
+    "callee": "request",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.request",
+      "file": "src/requests/sessions.py",
+      "lines": "557-653",
+      "definition": "  557 |     def request(\n  558 |         self,\n  559 |         method: str,\n  560 |         url: _t.UriType,\n  561 |         params: _t.ParamsType = None,\n  562 |         data: _t.DataType = None,\n  563 |         headers: _t.HeadersType = None,\n  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,\n  565 |         files: _t.FilesType = None,\n  566 |         auth: _t.AuthType = None,"
+    }
+  },
+  {
+    "edge_id": "1fc6e6a15f69",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"patch\", url, data=data, **kwargs)",
+    "call_range": [
+      168,
+      11,
+      168,
+      53
+    ],
+    "call_context": "  166 |     \"\"\"\n  167 | \n  168 |     return request(\"patch\", url, data=data, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  169 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "request",
+      "file": "src/requests/api.py",
+      "lines": "24-71",
+      "definition": "   24 | def request(\n   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]\n   26 | ) -> Response:\n   27 |     \"\"\"Constructs and sends a :class:`Request <Request>`.\n   28 | \n   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.\n   30 |     :param url: URL for the new :class:`Request` object.\n   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   32 |         in the query string for the :class:`Request`.\n   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like"
+    }
+  },
+  {
+    "edge_id": "495e5af60342",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "set_environ(\"no_proxy\", no_proxy_arg)",
+    "call_range": [
+      861,
+      9,
+      861,
+      46
+    ],
+    "call_context": "  859 |                     return True\n  860 | \n  861 |     with set_environ(\"no_proxy\", no_proxy_arg):\n      |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  862 |         try:",
+    "callee": "set_environ",
+    "receiver": null,
+    "target": {
+      "qualified_name": "set_environ",
+      "file": "src/requests/utils.py",
+      "lines": "787-807",
+      "definition": "  787 | @contextlib.contextmanager\n  788 | def set_environ(env_name: str, value: str | None) -> Generator[None, None, None]:\n  789 |     \"\"\"Set the environment variable 'env_name' to 'value'\n  790 | \n  791 |     Save previous value, yield, and then restore the previous value stored in\n  792 |     the environment variable 'env_name'.\n  793 | \n  794 |     If 'value' is None, do nothing\"\"\"\n  795 |     value_changed = value is not None\n  796 |     old_value: str | None = None"
+    }
+  },
+  {
+    "edge_id": "6a264617cea7",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.prepare(**kwargs)",
+    "call_range": [
+      2734,
+      8,
+      2734,
+      27
+    ],
+    "call_context": " 2732 |     p = PreparedRequest()\n 2733 |     if kwargs:\n 2734 |         p.prepare(**kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^\n 2735 |     copy = p.copy()",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "Request.prepare",
+      "file": "src/requests/models.py",
+      "lines": "360-375",
+      "definition": "  360 |     def prepare(self) -> PreparedRequest:\n  361 |         \"\"\"Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.\"\"\"\n  362 |         p = PreparedRequest()\n  363 |         p.prepare(\n  364 |             method=self.method,\n  365 |             url=self.url,\n  366 |             headers=self.headers,\n  367 |             files=self.files,\n  368 |             data=self.data,\n  369 |             json=self.json,"
+    }
+  },
+  {
+    "edge_id": "830ce42a73b4",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.prepare_method(method)",
+    "call_range": [
+      440,
+      8,
+      440,
+      35
+    ],
+    "call_context": "  438 | \n  439 |         url = cast(\"_t.UriType\", url)\n  440 |         self.prepare_method(method)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  441 |         self.prepare_url(url, params)",
+    "callee": "prepare_method",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare_method",
+      "file": "src/requests/models.py",
+      "lines": "467-471",
+      "definition": "  467 |     def prepare_method(self, method: str | None) -> None:\n  468 |         \"\"\"Prepares the given HTTP method.\"\"\"\n  469 |         self.method = method\n  470 |         if self.method is not None:\n  471 |             self.method = to_native_string(self.method.upper())"
+    }
+  },
+  {
+    "edge_id": "8773d15f9b46",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.request(\"HEAD\", url, **kwargs)",
+    "call_range": [
+      693,
+      15,
+      693,
+      50
+    ],
+    "call_context": "  691 | \n  692 |         kwargs.setdefault(\"allow_redirects\", False)\n  693 |         return self.request(\"HEAD\", url, **kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  694 | ",
+    "callee": "request",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.request",
+      "file": "src/requests/sessions.py",
+      "lines": "557-653",
+      "definition": "  557 |     def request(\n  558 |         self,\n  559 |         method: str,\n  560 |         url: _t.UriType,\n  561 |         params: _t.ParamsType = None,\n  562 |         data: _t.DataType = None,\n  563 |         headers: _t.HeadersType = None,\n  564 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,\n  565 |         files: _t.FilesType = None,\n  566 |         auth: _t.AuthType = None,"
+    }
+  },
+  {
+    "edge_id": "c46445d2876d",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server()",
+    "call_range": [
+      158,
+      17,
+      158,
+      47
+    ],
+    "call_context": "  156 |     def test_server_finishes_when_no_connections(self):\n  157 |         \"\"\"the server thread exits even if there are no connections\"\"\"\n  158 |         server = Server.basic_response_server()\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  159 |         with server:",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "f1f9fb0bec58",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server(requests_to_handle=2)",
+    "call_range": [
+      98,
+      17,
+      98,
+      67
+    ],
+    "call_context": "   96 |         \"\"\"can check the requests content\"\"\"\n   97 |         # TODO: figure out why this sometimes fails when using pytest-xdist.\n   98 |         server = Server.basic_response_server(requests_to_handle=2)\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   99 |         first_request = b\"put your hands up in the air\"",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "80f070b44a6f",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "get_encoding_from_headers(r.headers)",
+    "call_range": [
+      659,
+      15,
+      659,
+      51
+    ],
+    "call_context": "  657 | \n  658 |     # Try charset from content-type\n  659 |     encoding = get_encoding_from_headers(r.headers)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  660 | ",
+    "callee": "get_encoding_from_headers",
+    "receiver": null,
+    "target": {
+      "qualified_name": "get_encoding_from_headers",
+      "file": "src/requests/utils.py",
+      "lines": "569-591",
+      "definition": "  569 | def get_encoding_from_headers(headers: CaseInsensitiveDict[str]) -> str | None:\n  570 |     \"\"\"Returns encodings from given HTTP Header Dict.\n  571 | \n  572 |     :param headers: dictionary to extract encoding from.\n  573 |     :rtype: str\n  574 |     \"\"\"\n  575 | \n  576 |     content_type = headers.get(\"content-type\")\n  577 | \n  578 |     if not content_type:"
+    }
+  },
+  {
+    "edge_id": "16268f7a5da0",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "prep.prepare(method=\"GET\", url=url)",
+    "call_range": [
+      2682,
+      4,
+      2682,
+      39
+    ],
+    "call_context": " 2680 |     session = requests.Session()\n 2681 |     prep = PreparedRequest()\n 2682 |     prep.prepare(method=\"GET\", url=url)\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2683 | ",
+    "callee": "prepare",
+    "receiver": "prep",
+    "target": {
+      "qualified_name": "Request.prepare",
+      "file": "src/requests/models.py",
+      "lines": "360-375",
+      "definition": "  360 |     def prepare(self) -> PreparedRequest:\n  361 |         \"\"\"Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.\"\"\"\n  362 |         p = PreparedRequest()\n  363 |         p.prepare(\n  364 |             method=self.method,\n  365 |             url=self.url,\n  366 |             headers=self.headers,\n  367 |             files=self.files,\n  368 |             data=self.data,\n  369 |             json=self.json,"
+    }
+  },
+  {
+    "edge_id": "07f87ba2aa3a",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "RegHandle()",
+    "call_range": [
+      898,
+      18,
+      898,
+      29
+    ],
+    "call_context": "  896 |             pass\n  897 | \n  898 |     ie_settings = RegHandle()\n      |                   ^^^^^^^^^^^\n  899 |     proxyEnableValues = deque([1, \"1\"])",
+    "callee": "RegHandle",
+    "receiver": null,
+    "target": {
+      "qualified_name": "test_should_bypass_proxies_win_registry_ProxyOverride_value.RegHandle",
+      "file": "tests/test_utils.py",
+      "lines": "991-993",
+      "definition": "  991 |     class RegHandle:\n  992 |         def Close(self):\n  993 |             pass"
+    }
+  },
+  {
+    "edge_id": "dc3c8e9515f8",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.copy()",
+    "call_range": [
+      2735,
+      11,
+      2735,
+      19
+    ],
+    "call_context": " 2733 |     if kwargs:\n 2734 |         p.prepare(**kwargs)\n 2735 |     copy = p.copy()\n      |            ^^^^^^^^\n 2736 |     for attr in (\"method\", \"url\", \"headers\", \"_cookies\", \"body\", \"hooks\"):",
+    "callee": "copy",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "PreparedRequest.copy",
+      "file": "src/requests/models.py",
+      "lines": "456-465",
+      "definition": "  456 |     def copy(self) -> PreparedRequest:\n  457 |         p = PreparedRequest()\n  458 |         p.method = self.method\n  459 |         p.url = self.url\n  460 |         p.headers = self.headers.copy() if self.headers is not None else None  # type: ignore[assignment]\n  461 |         p._cookies = _copy_cookie_jar(self._cookies)\n  462 |         p.body = self.body\n  463 |         p.hooks = self.hooks\n  464 |         p._body_position = self._body_position\n  465 |         return p"
+    }
+  },
+  {
+    "edge_id": "b1c25cb59179",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "RedirectSession([303, 307])",
+    "call_range": [
+      2650,
+      14,
+      2650,
+      41
+    ],
+    "call_context": " 2648 | \n 2649 | def test_requests_are_updated_each_time(httpbin):\n 2650 |     session = RedirectSession([303, 307])\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2651 |     prep = requests.Request(\"POST\", httpbin(\"post\")).prepare()",
+    "callee": "RedirectSession",
+    "receiver": null,
+    "target": {
+      "qualified_name": "RedirectSession",
+      "file": "tests/test_requests.py",
+      "lines": "2608-2638",
+      "definition": " 2608 | class RedirectSession(SessionRedirectMixin):\n 2609 |     def __init__(self, order_of_redirects):\n 2610 |         self.redirects = order_of_redirects\n 2611 |         self.calls = []\n 2612 |         self.max_redirects = 30\n 2613 |         self.cookies = {}\n 2614 |         self.trust_env = False\n 2615 | \n 2616 |     def send(self, *args, **kwargs):\n 2617 |         self.calls.append(SendCall(args, kwargs))"
+    }
+  },
+  {
+    "edge_id": "67deed36d5ae",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "get_environ_proxies(url, no_proxy=no_proxy)",
+    "call_range": [
+      933,
+      26,
+      933,
+      69
+    ],
+    "call_context": "  931 | \n  932 |     if trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):\n  933 |         environ_proxies = get_environ_proxies(url, no_proxy=no_proxy)\n      |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  934 | ",
+    "callee": "get_environ_proxies",
+    "receiver": null,
+    "target": {
+      "qualified_name": "get_environ_proxies",
+      "file": "src/requests/utils.py",
+      "lines": "873-882",
+      "definition": "  873 | def get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]:\n  874 |     \"\"\"\n  875 |     Return a dict of environment proxies.\n  876 | \n  877 |     :rtype: dict\n  878 |     \"\"\"\n  879 |     if should_bypass_proxies(url, no_proxy=no_proxy):\n  880 |         return {}\n  881 |     else:\n  882 |         return getproxies()"
+    }
+  },
+  {
+    "edge_id": "67fdfbc11fb0",
+    "repo": "requests",
+    "file": "src/requests/exceptions.py",
+    "call_text": "InvalidJSONError.__init__(self, *self.args, **kwargs)",
+    "call_range": [
+      53,
+      8,
+      53,
+      61
+    ],
+    "call_context": "   51 |         \"\"\"\n   52 |         CompatJSONDecodeError.__init__(self, *args)\n   53 |         InvalidJSONError.__init__(self, *self.args, **kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   54 | ",
+    "callee": "__init__",
+    "receiver": "InvalidJSONError",
+    "target": {
+      "qualified_name": "RequestException.__init__",
+      "file": "src/requests/exceptions.py",
+      "lines": "28-35",
+      "definition": "   28 |     def __init__(self, *args: Any, **kwargs: Any) -> None:\n   29 |         \"\"\"Initialize RequestException with `request` and `response` objects.\"\"\"\n   30 |         response: Response | None = kwargs.pop(\"response\", None)\n   31 |         self.response = response\n   32 |         self.request = kwargs.pop(\"request\", None)\n   33 |         if response is not None and not self.request and hasattr(response, \"request\"):\n   34 |             self.request = response.request\n   35 |         super().__init__(*args, **kwargs)"
+    }
+  },
+  {
+    "edge_id": "48cd6ebb2a25",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "prep.prepare(method=\"GET\", url=url)",
+    "call_range": [
+      2682,
+      4,
+      2682,
+      39
+    ],
+    "call_context": " 2680 |     session = requests.Session()\n 2681 |     prep = PreparedRequest()\n 2682 |     prep.prepare(method=\"GET\", url=url)\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2683 | ",
+    "callee": "prepare",
+    "receiver": "prep",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare",
+      "file": "src/requests/models.py",
+      "lines": "424-451",
+      "definition": "  424 |     def prepare(\n  425 |         self,\n  426 |         method: str | None = None,\n  427 |         url: _t.UriType | None = None,\n  428 |         headers: Mapping[str, str | bytes] | None = None,\n  429 |         files: _t.FilesType = None,\n  430 |         data: _t.DataType = None,\n  431 |         params: _t.ParamsType = None,\n  432 |         auth: _t.AuthType = None,\n  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,"
+    }
+  },
+  {
+    "edge_id": "ec3d821cd959",
+    "repo": "requests",
+    "file": "tests/test_structures.py",
+    "call_text": "self.lookup_dict.get(key)",
+    "call_range": [
+      78,
+      15,
+      78,
+      40
+    ],
+    "call_context": "   76 |     @get_item_parameters\n   77 |     def test_get(self, key, value):\n   78 |         assert self.lookup_dict.get(key) == value\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^\n   79 | ",
+    "callee": "get",
+    "receiver": "self.lookup_dict",
+    "target": {
+      "qualified_name": "get",
+      "file": "src/requests/api.py",
+      "lines": "74-87",
+      "definition": "   74 | def get(\n   75 |     url: _t.UriType, params: _t.ParamsType = None, **kwargs: Unpack[_t.GetKwargs]\n   76 | ) -> Response:\n   77 |     r\"\"\"Sends a GET request.\n   78 | \n   79 |     :param url: URL for the new :class:`Request` object.\n   80 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   81 |         in the query string for the :class:`Request`.\n   82 |     :param \\*\\*kwargs: Optional arguments that ``request`` takes.\n   83 |     :return: :class:`Response <Response>` object"
+    }
+  },
+  {
+    "edge_id": "d2442bf59773",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.rebuild_auth(prepared_request, resp)",
+    "call_range": [
+      273,
+      12,
+      273,
+      53
+    ],
+    "call_context": "  271 |             # Rebuild auth and proxy information.\n  272 |             proxies = self.rebuild_proxies(prepared_request, proxies)\n  273 |             self.rebuild_auth(prepared_request, resp)\n      |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  274 | ",
+    "callee": "rebuild_auth",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "SessionRedirectMixin.rebuild_auth",
+      "file": "src/requests/sessions.py",
+      "lines": "309-332",
+      "definition": "  309 |     def rebuild_auth(\n  310 |         self, prepared_request: PreparedRequest, response: Response\n  311 |     ) -> None:\n  312 |         \"\"\"When being redirected we may want to strip authentication from the\n  313 |         request to avoid leaking credentials. This method intelligently removes\n  314 |         and reapplies authentication where possible to avoid credential loss.\n  315 |         \"\"\"\n  316 |         original_request = response.request\n  317 |         assert _is_prepared(original_request)\n  318 |         assert _is_prepared(prepared_request)"
+    }
+  },
+  {
+    "edge_id": "e8941eb775b5",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.close()",
+    "call_range": [
+      509,
+      8,
+      509,
+      20
+    ],
+    "call_context": "  507 | \n  508 |     def __exit__(self, *args: Any) -> None:\n  509 |         self.close()\n      |         ^^^^^^^^^^^^\n  510 | ",
+    "callee": "close",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.close",
+      "file": "src/requests/sessions.py",
+      "lines": "883-886",
+      "definition": "  883 |     def close(self) -> None:\n  884 |         \"\"\"Closes all adapters and as such the session\"\"\"\n  885 |         for v in self.adapters.values():\n  886 |             v.close()"
+    }
+  },
+  {
+    "edge_id": "fecb16d7bb1c",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.send(\n                    req,\n                    stream=stream,\n                    timeout=timeout,\n                    verify=verify,\n                    cert=cert,\n                    proxies=proxies,\n                    allow_redirects=False,\n                    **adapter_kwargs,\n                )",
+    "call_range": [
+      292,
+      23,
+      301,
+      17
+    ],
+    "call_context": "  290 |                 yield req  # type: ignore[misc]  # Internal use only, returns PreparedRequest\n  291 |             else:\n  292 |                 resp = self.send(\n      |                        ^^^^^^^^^^\n  293 |                     req,\n  294 |                     stream=stream,\n  295 |                     timeout=timeout,\n  296 |                     verify=verify,\n  297 |                     cert=cert,\n  298 |                     proxies=proxies,\n  299 |                     allow_redirects=False,\n  300 |                     **adapter_kwargs,\n  301 |                 )\n  302 | ",
+    "callee": "send",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "BaseAdapter.send",
+      "file": "src/requests/adapters.py",
+      "lines": "128-151",
+      "definition": "  128 |     def send(\n  129 |         self,\n  130 |         request: PreparedRequest,\n  131 |         stream: bool = False,\n  132 |         timeout: _t.TimeoutType = None,\n  133 |         verify: _t.VerifyType = True,\n  134 |         cert: _t.CertType = None,\n  135 |         proxies: dict[str, str] | None = None,\n  136 |     ) -> Response:\n  137 |         \"\"\"Sends PreparedRequest object. Returns Response object."
+    }
+  },
+  {
+    "edge_id": "d2b24a595ae7",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.send(\n                    req,\n                    stream=stream,\n                    timeout=timeout,\n                    verify=verify,\n                    cert=cert,\n                    proxies=proxies,\n                    allow_redirects=False,\n                    **adapter_kwargs,\n                )",
+    "call_range": [
+      292,
+      23,
+      301,
+      17
+    ],
+    "call_context": "  290 |                 yield req  # type: ignore[misc]  # Internal use only, returns PreparedRequest\n  291 |             else:\n  292 |                 resp = self.send(\n      |                        ^^^^^^^^^^\n  293 |                     req,\n  294 |                     stream=stream,\n  295 |                     timeout=timeout,\n  296 |                     verify=verify,\n  297 |                     cert=cert,\n  298 |                     proxies=proxies,\n  299 |                     allow_redirects=False,\n  300 |                     **adapter_kwargs,\n  301 |                 )\n  302 | ",
+    "callee": "send",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "SessionRedirectMixin.send",
+      "file": "src/requests/sessions.py",
+      "lines": "132-132",
+      "definition": "  132 |     def send(self, request: PreparedRequest, **kwargs: Any) -> Response: ..."
+    }
+  },
+  {
+    "edge_id": "d2e88ff69b23",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "should_bypass_proxies(url, no_proxy=no_proxy)",
+    "call_range": [
+      879,
+      7,
+      879,
+      52
+    ],
+    "call_context": "  877 |     :rtype: dict\n  878 |     \"\"\"\n  879 |     if should_bypass_proxies(url, no_proxy=no_proxy):\n      |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  880 |         return {}",
+    "callee": "should_bypass_proxies",
+    "receiver": null,
+    "target": {
+      "qualified_name": "should_bypass_proxies",
+      "file": "src/requests/utils.py",
+      "lines": "810-870",
+      "definition": "  810 | def should_bypass_proxies(url: str, no_proxy: str | None) -> bool:\n  811 |     \"\"\"\n  812 |     Returns whether we should bypass proxies or not.\n  813 | \n  814 |     :rtype: bool\n  815 |     \"\"\"\n  816 | \n  817 |     # Prioritize lowercase environment variables over uppercase\n  818 |     # to keep a consistent behaviour with other http projects (curl, wget).\n  819 |     def get_proxy(key: str) -> str | None:"
+    }
+  },
+  {
+    "edge_id": "39bff2569573",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "unquote_header_value(item[1:-1])",
+    "call_range": [
+      434,
+      19,
+      434,
+      51
+    ],
+    "call_context": "  432 |     for item in _parse_list_header(value):\n  433 |         if item[:1] == item[-1:] == '\"':\n  434 |             item = unquote_header_value(item[1:-1])\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  435 |         result.append(item)",
+    "callee": "unquote_header_value",
+    "receiver": null,
+    "target": {
+      "qualified_name": "unquote_header_value",
+      "file": "src/requests/utils.py",
+      "lines": "475-497",
+      "definition": "  475 | def unquote_header_value(value: str, is_filename: bool = False) -> str:\n  476 |     r\"\"\"Unquotes a header value.  (Reversal of :func:`quote_header_value`).\n  477 |     This does not use the real unquoting but what browsers are actually\n  478 |     using for quoting.\n  479 | \n  480 |     :param value: the header value to unquote.\n  481 |     :rtype: str\n  482 |     \"\"\"\n  483 |     if value and value[0] == value[-1] == '\"':\n  484 |         # this is not the real unquoting, but fixing this so that the"
+    }
+  },
+  {
+    "edge_id": "1f92d13e686d",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.prepare(method=\"GET\", url=\"https://www.example.com/\", json=body)",
+    "call_range": [
+      2645,
+      4,
+      2645,
+      70
+    ],
+    "call_context": " 2643 |     body = {\"key\": \"value\"}\n 2644 |     p = PreparedRequest()\n 2645 |     p.prepare(method=\"GET\", url=\"https://www.example.com/\", json=body)\n      |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n 2646 |     assert isinstance(p.body, bytes)",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare",
+      "file": "src/requests/models.py",
+      "lines": "424-451",
+      "definition": "  424 |     def prepare(\n  425 |         self,\n  426 |         method: str | None = None,\n  427 |         url: _t.UriType | None = None,\n  428 |         headers: Mapping[str, str | bytes] | None = None,\n  429 |         files: _t.FilesType = None,\n  430 |         data: _t.DataType = None,\n  431 |         params: _t.ParamsType = None,\n  432 |         auth: _t.AuthType = None,\n  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,"
+    }
+  },
+  {
+    "edge_id": "04babbd76494",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "self.prepare_url(url, params)",
+    "call_range": [
+      441,
+      8,
+      441,
+      37
+    ],
+    "call_context": "  439 |         url = cast(\"_t.UriType\", url)\n  440 |         self.prepare_method(method)\n  441 |         self.prepare_url(url, params)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  442 |         self.prepare_headers(headers)",
+    "callee": "prepare_url",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "prepare_url",
+      "file": "tests/conftest.py",
+      "lines": "15-22",
+      "definition": "   15 | def prepare_url(value):\n   16 |     # Issue #1483: Make sure the URL always has a trailing slash\n   17 |     httpbin_url = value.url.rstrip(\"/\") + \"/\"\n   18 | \n   19 |     def inner(*suffix):\n   20 |         return urljoin(httpbin_url, \"/\".join(suffix))\n   21 | \n   22 |     return inner"
+    }
+  },
+  {
+    "edge_id": "e55e204c9d9f",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.merge_environment_settings(\n            prep.url, proxies, stream, verify, cert\n        )",
+    "call_range": [
+      641,
+      19,
+      643,
+      9
+    ],
+    "call_context": "  639 |         proxies = proxies or {}\n  640 | \n  641 |         settings = self.merge_environment_settings(\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  642 |             prep.url, proxies, stream, verify, cert\n  643 |         )\n  644 | ",
+    "callee": "merge_environment_settings",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.merge_environment_settings",
+      "file": "src/requests/sessions.py",
+      "lines": "831-868",
+      "definition": "  831 |     def merge_environment_settings(\n  832 |         self,\n  833 |         url: str,\n  834 |         proxies: dict[str, str] | None,\n  835 |         stream: bool | None,\n  836 |         verify: _t.VerifyType | None,\n  837 |         cert: _t.CertType,\n  838 |     ) -> dict[str, Any]:\n  839 |         \"\"\"\n  840 |         Check the environment and merge it with some settings."
+    }
+  },
+  {
+    "edge_id": "a6ae73a82828",
+    "repo": "requests",
+    "file": "src/requests/adapters.py",
+    "call_text": "self.request_url(request, proxies)",
+    "call_range": [
+      669,
+      14,
+      669,
+      48
+    ],
+    "call_context": "  667 | \n  668 |         self.cert_verify(conn, request.url, verify, cert)\n  669 |         url = self.request_url(request, proxies)\n      |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  670 |         self.add_headers(",
+    "callee": "request_url",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "HTTPAdapter.request_url",
+      "file": "src/requests/adapters.py",
+      "lines": "565-597",
+      "definition": "  565 |     def request_url(\n  566 |         self, request: PreparedRequest, proxies: dict[str, str] | None\n  567 |     ) -> str:\n  568 |         \"\"\"Obtain the url to use when making the final request.\n  569 | \n  570 |         If the message is being sent through a HTTP proxy, the full URL has to\n  571 |         be used. Otherwise, we should only use the path portion of the URL.\n  572 | \n  573 |         This should not be called from user code, and is only exposed for use\n  574 |         when subclassing the"
+    }
+  },
+  {
+    "edge_id": "e60275cc0719",
+    "repo": "requests",
+    "file": "tests/test_structures.py",
+    "call_text": "self.lookup_dict.get(key)",
+    "call_range": [
+      78,
+      15,
+      78,
+      40
+    ],
+    "call_context": "   76 |     @get_item_parameters\n   77 |     def test_get(self, key, value):\n   78 |         assert self.lookup_dict.get(key) == value\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^\n   79 | ",
+    "callee": "get",
+    "receiver": "self.lookup_dict",
+    "target": {
+      "qualified_name": "LookupDict.get",
+      "file": "src/requests/structures.py",
+      "lines": "129-130",
+      "definition": "  129 |     def get(self, key: str, default: _D | None = None) -> _VT | _D | None:\n  130 |         return self.__dict__.get(key, default)"
+    }
+  },
+  {
+    "edge_id": "33df3526ba6e",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "MockResponse(response._original_response.msg)",
+    "call_range": [
+      149,
+      10,
+      149,
+      55
+    ],
+    "call_context": "  147 |     req = MockRequest(request)\n  148 |     # pull out the HTTPMessage with the headers and put it in the mock:\n  149 |     res = MockResponse(response._original_response.msg)\n      |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  150 |     jar.extract_cookies(res, req)  # type: ignore[arg-type]",
+    "callee": "MockResponse",
+    "receiver": null,
+    "target": {
+      "qualified_name": "MockResponse",
+      "file": "src/requests/cookies.py",
+      "lines": "114-132",
+      "definition": "  114 | class MockResponse:\n  115 |     \"\"\"Wraps a `httplib.HTTPMessage` to mimic a `urllib.addinfourl`.\n  116 | \n  117 |     ...what? Basically, expose the parsed HTTP headers from the server response\n  118 |     the way `http.cookiejar` expects to see them.\n  119 |     \"\"\"\n  120 | \n  121 |     def __init__(self, headers: Any) -> None:\n  122 |         \"\"\"Make a MockResponse for `cookiejar` to read.\n  123 | "
+    }
+  },
+  {
+    "edge_id": "844a5ec19c50",
+    "repo": "requests",
+    "file": "src/requests/models.py",
+    "call_text": "p.prepare(\n            method=self.method,\n            url=self.url,\n            headers=self.headers,\n            files=self.files,\n            data=self.data,\n            json=self.json,\n            params=self.params,\n            auth=self.auth,\n            cookies=self.cookies,\n            hooks=self.hooks,\n        )",
+    "call_range": [
+      363,
+      8,
+      374,
+      9
+    ],
+    "call_context": "  361 |         \"\"\"Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.\"\"\"\n  362 |         p = PreparedRequest()\n  363 |         p.prepare(\n      |         ^^^^^^^^^^\n  364 |             method=self.method,\n  365 |             url=self.url,\n  366 |             headers=self.headers,\n  367 |             files=self.files,\n  368 |             data=self.data,\n  369 |             json=self.json,\n  370 |             params=self.params,\n  371 |             auth=self.auth,\n  372 |             cookies=self.cookies,\n  373 |             hooks=self.hooks,\n  374 |         )\n  375 |         return p",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "Request.prepare",
+      "file": "src/requests/models.py",
+      "lines": "360-375",
+      "definition": "  360 |     def prepare(self) -> PreparedRequest:\n  361 |         \"\"\"Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.\"\"\"\n  362 |         p = PreparedRequest()\n  363 |         p.prepare(\n  364 |             method=self.method,\n  365 |             url=self.url,\n  366 |             headers=self.headers,\n  367 |             files=self.files,\n  368 |             data=self.data,\n  369 |             json=self.json,"
+    }
+  },
+  {
+    "edge_id": "99351b877f9d",
+    "repo": "requests",
+    "file": "src/requests/adapters.py",
+    "call_text": "_urllib3_request_context(request, verify, cert, self.poolmanager)",
+    "call_range": [
+      453,
+      15,
+      453,
+      80
+    ],
+    "call_context": "  451 |             second is a dictionary of SSLContext related parameters.\n  452 |         \"\"\"\n  453 |         return _urllib3_request_context(request, verify, cert, self.poolmanager)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  454 | ",
+    "callee": "_urllib3_request_context",
+    "receiver": null,
+    "target": {
+      "qualified_name": "_urllib3_request_context",
+      "file": "src/requests/adapters.py",
+      "lines": "85-119",
+      "definition": "   85 | def _urllib3_request_context(\n   86 |     request: PreparedRequest,\n   87 |     verify: bool | str | None,\n   88 |     client_cert: tuple[str, str] | str | None,\n   89 |     poolmanager: PoolManager,\n   90 | ) -> tuple[dict[str, Any], dict[str, Any]]:\n   91 |     host_params: dict[str, Any] = {}\n   92 |     pool_kwargs: dict[str, Any] = {}\n   93 |     parsed_request_url = urlparse(request.url)\n   94 |     scheme = parsed_request_url.scheme.lower()"
+    }
+  },
+  {
+    "edge_id": "c6e20dff6406",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.basic_response_server(wait_to_close_event=block_server)",
+    "call_range": [
+      67,
+      13,
+      67,
+      75
+    ],
+    "call_context": "   65 |         block_server = threading.Event()\n   66 | \n   67 |         with Server.basic_response_server(wait_to_close_event=block_server) as (\n      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   68 |             host,",
+    "callee": "basic_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.basic_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "61-65",
+      "definition": "   61 |     @classmethod\n   62 |     def basic_response_server(cls, **kwargs):\n   63 |         return cls.text_response_server(\n   64 |             \"HTTP/1.1 200 OK\\r\\n\" + \"Content-Length: 0\\r\\n\\r\\n\", **kwargs\n   65 |         )"
+    }
+  },
+  {
+    "edge_id": "9498f74ade69",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "self.send(prep, **send_kwargs)",
+    "call_range": [
+      651,
+      15,
+      651,
+      45
+    ],
+    "call_context": "  649 |         }\n  650 |         send_kwargs.update(settings)\n  651 |         resp = self.send(prep, **send_kwargs)\n      |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  652 | ",
+    "callee": "send",
+    "receiver": "self",
+    "target": {
+      "qualified_name": "Session.send",
+      "file": "src/requests/sessions.py",
+      "lines": "752-829",
+      "definition": "  752 |     def send(self, request: PreparedRequest, **kwargs: Any) -> Response:\n  753 |         \"\"\"Send a given PreparedRequest.\n  754 | \n  755 |         :rtype: requests.Response\n  756 |         \"\"\"\n  757 |         # Set defaults that the hooks can utilize to ensure they always have\n  758 |         # the correct parameters to reproduce the previous request.\n  759 |         kwargs.setdefault(\"stream\", self.stream)\n  760 |         kwargs.setdefault(\"verify\", self.verify)\n  761 |         kwargs.setdefault(\"cert\", self.cert)"
+    }
+  },
+  {
+    "edge_id": "181f2b76cbed",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "BadFileObj(\"the data\")",
+    "call_range": [
+      2093,
+      15,
+      2093,
+      37
+    ],
+    "call_context": " 2091 |                 return\n 2092 | \n 2093 |         data = BadFileObj(\"the data\")\n      |                ^^^^^^^^^^^^^^^^^^^^^^\n 2094 |         prep = requests.Request(\"GET\", \"http://example.com\", data=data).prepare()",
+    "callee": "BadFileObj",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_rewind_body_failed_tell.BadFileObj",
+      "file": "tests/test_requests.py",
+      "lines": "2083-2091",
+      "definition": " 2083 |         class BadFileObj:\n 2084 |             def __init__(self, data):\n 2085 |                 self.data = data\n 2086 | \n 2087 |             def tell(self):\n 2088 |                 raise OSError()\n 2089 | \n 2090 |             def __iter__(self):\n 2091 |                 return"
+    }
+  },
+  {
+    "edge_id": "6979fe8e02a7",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "CustomRedirectSession()",
+    "call_range": [
+      2320,
+      18,
+      2320,
+      41
+    ],
+    "call_context": " 2318 |                 return None\n 2319 | \n 2320 |         session = CustomRedirectSession()\n      |                   ^^^^^^^^^^^^^^^^^^^^^^^\n 2321 |         r = session.get(urls_test[0])",
+    "callee": "CustomRedirectSession",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_custom_redirect_mixin.CustomRedirectSession",
+      "file": "tests/test_requests.py",
+      "lines": "2309-2318",
+      "definition": " 2309 |         class CustomRedirectSession(requests.Session):\n 2310 |             def get_redirect_target(self, resp):\n 2311 |                 # default behavior\n 2312 |                 if resp.is_redirect:\n 2313 |                     return resp.headers[\"location\"]\n 2314 |                 # edge case - check to see if 'location' is in headers anyways\n 2315 |                 location = resp.headers.get(\"location\")\n 2316 |                 if location and (location != resp.url):\n 2317 |                     return location\n 2318 |                 return None"
+    }
+  },
+  {
+    "edge_id": "000d01a901df",
+    "repo": "requests",
+    "file": "tests/test_utils.py",
+    "call_text": "LenFile()",
+    "call_range": [
+      137,
+      25,
+      137,
+      34
+    ],
+    "call_context": "  135 |                 self.len = 5\n  136 | \n  137 |         assert super_len(LenFile()) == 5\n      |                          ^^^^^^^^^\n  138 | ",
+    "callee": "LenFile",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestSuperLen.test_super_len_with_no__len__.LenFile",
+      "file": "tests/test_utils.py",
+      "lines": "133-135",
+      "definition": "  133 |         class LenFile:\n  134 |             def __init__(self):\n  135 |                 self.len = 5"
+    }
+  },
+  {
+    "edge_id": "9b10ef0f99f6",
+    "repo": "requests",
+    "file": "tests/test_testserver.py",
+    "call_text": "Server.text_response_server(\n            \"HTTP/1.1 200 OK\\r\\nContent-Length: 6\\r\\n\\r\\nroflol\"\n        )",
+    "call_range": [
+      44,
+      17,
+      46,
+      9
+    ],
+    "call_context": "   42 |     def test_text_response(self):\n   43 |         \"\"\"the text_response_server sends the given text\"\"\"\n   44 |         server = Server.text_response_server(\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   45 |             \"HTTP/1.1 200 OK\\r\\nContent-Length: 6\\r\\n\\r\\nroflol\"\n   46 |         )\n   47 | ",
+    "callee": "text_response_server",
+    "receiver": "Server",
+    "target": {
+      "qualified_name": "Server.text_response_server",
+      "file": "tests/testserver/server.py",
+      "lines": "51-59",
+      "definition": "   51 |     @classmethod\n   52 |     def text_response_server(cls, text, request_timeout=0.5, **kwargs):\n   53 |         def text_response_handler(sock):\n   54 |             request_content = consume_socket_content(sock, timeout=request_timeout)\n   55 |             sock.send(text.encode(\"utf-8\"))\n   56 | \n   57 |             return request_content\n   58 | \n   59 |         return Server(text_response_handler, **kwargs)"
+    }
+  },
+  {
+    "edge_id": "1e6ffc4e0942",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "cid.lower_items()",
+    "call_range": [
+      2439,
+      55,
+      2439,
+      72
+    ],
+    "call_context": " 2437 |             }\n 2438 |         )\n 2439 |         keyset = frozenset(lowerkey for lowerkey, v in cid.lower_items())\n      |                                                        ^^^^^^^^^^^^^^^^^\n 2440 |         lowerkeyset = frozenset([\"accept\", \"user-agent\"])",
+    "callee": "lower_items",
+    "receiver": "cid",
+    "target": {
+      "qualified_name": "CaseInsensitiveDict.lower_items",
+      "file": "src/requests/structures.py",
+      "lines": "76-78",
+      "definition": "   76 |     def lower_items(self) -> Iterator[tuple[str, _VT]]:\n   77 |         \"\"\"Like iteritems(), but with all lowercase keys.\"\"\"\n   78 |         return ((lowerkey, keyval[1]) for (lowerkey, keyval) in self._store.items())"
+    }
+  },
+  {
+    "edge_id": "364b86854391",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "cid.copy()",
+    "call_range": [
+      2476,
+      19,
+      2476,
+      29
+    ],
+    "call_context": " 2474 |             }\n 2475 |         )\n 2476 |         cid_copy = cid.copy()\n      |                    ^^^^^^^^^^\n 2477 |         assert cid == cid_copy",
+    "callee": "copy",
+    "receiver": "cid",
+    "target": {
+      "qualified_name": "CaseInsensitiveDict.copy",
+      "file": "src/requests/structures.py",
+      "lines": "89-90",
+      "definition": "   89 |     def copy(self) -> CaseInsensitiveDict[_VT]:\n   90 |         return CaseInsensitiveDict(self._store.values())"
+    }
+  },
+  {
+    "edge_id": "27dfda22a2ee",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "is_valid_cidr(proxy_ip)",
+    "call_range": [
+      841,
+      19,
+      841,
+      42
+    ],
+    "call_context": "  839 |         if is_ipv4_address(hostname):\n  840 |             for proxy_ip in no_proxy_hosts:\n  841 |                 if is_valid_cidr(proxy_ip):\n      |                    ^^^^^^^^^^^^^^^^^^^^^^^\n  842 |                     if address_in_network(hostname, proxy_ip):",
+    "callee": "is_valid_cidr",
+    "receiver": null,
+    "target": {
+      "qualified_name": "is_valid_cidr",
+      "file": "src/requests/utils.py",
+      "lines": "763-784",
+      "definition": "  763 | def is_valid_cidr(string_network: str) -> bool:\n  764 |     \"\"\"\n  765 |     Very simple check of the cidr format in no_proxy variable.\n  766 | \n  767 |     :rtype: bool\n  768 |     \"\"\"\n  769 |     if string_network.count(\"/\") == 1:\n  770 |         try:\n  771 |             mask = int(string_network.split(\"/\")[1])\n  772 |         except ValueError:"
+    }
+  },
+  {
+    "edge_id": "631573091b5c",
+    "repo": "requests",
+    "file": "src/requests/sessions.py",
+    "call_text": "merge_setting(auth, self.auth)",
+    "call_range": [
+      551,
+      17,
+      551,
+      47
+    ],
+    "call_context": "  549 |             ),\n  550 |             params=merge_setting(request.params, self.params),\n  551 |             auth=merge_setting(auth, self.auth),\n      |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  552 |             cookies=merged_cookies,",
+    "callee": "merge_setting",
+    "receiver": null,
+    "target": {
+      "qualified_name": "merge_setting",
+      "file": "src/requests/sessions.py",
+      "lines": "76-105",
+      "definition": "   76 | def merge_setting(\n   77 |     request_setting: Any, session_setting: Any, dict_class: type = OrderedDict\n   78 | ) -> Any:\n   79 |     \"\"\"Determines appropriate setting for a given request, taking into account\n   80 |     the explicit setting on that request, and the setting in the session. If a\n   81 |     setting is a dictionary, they will be merged together using `dict_class`\n   82 |     \"\"\"\n   83 | \n   84 |     if session_setting is None:\n   85 |         return request_setting"
+    }
+  },
+  {
+    "edge_id": "15a9fd576a53",
+    "repo": "requests",
+    "file": "tests/conftest.py",
+    "call_text": "prepare_url(httpbin_secure)",
+    "call_range": [
+      41,
+      11,
+      41,
+      38
+    ],
+    "call_context": "   39 | @pytest.fixture\n   40 | def httpbin_secure(httpbin_secure):\n   41 |     return prepare_url(httpbin_secure)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   42 | ",
+    "callee": "prepare_url",
+    "receiver": null,
+    "target": {
+      "qualified_name": "prepare_url",
+      "file": "tests/conftest.py",
+      "lines": "15-22",
+      "definition": "   15 | def prepare_url(value):\n   16 |     # Issue #1483: Make sure the URL always has a trailing slash\n   17 |     httpbin_url = value.url.rstrip(\"/\") + \"/\"\n   18 | \n   19 |     def inner(*suffix):\n   20 |         return urljoin(httpbin_url, \"/\".join(suffix))\n   21 | \n   22 |     return inner"
+    }
+  },
+  {
+    "edge_id": "8e3e173239e5",
+    "repo": "requests",
+    "file": "src/requests/cookies.py",
+    "call_text": "remove_cookie_by_name(\n                self, name, domain=kwargs.get(\"domain\"), path=kwargs.get(\"path\")\n            )",
+    "call_range": [
+      238,
+      12,
+      240,
+      13
+    ],
+    "call_context": "  236 |         # support client code that unsets cookies by assignment of a None value:\n  237 |         if value is None:\n  238 |             remove_cookie_by_name(\n      |             ^^^^^^^^^^^^^^^^^^^^^^\n  239 |                 self, name, domain=kwargs.get(\"domain\"), path=kwargs.get(\"path\")\n  240 |             )\n  241 |             return",
+    "callee": "remove_cookie_by_name",
+    "receiver": null,
+    "target": {
+      "qualified_name": "remove_cookie_by_name",
+      "file": "src/requests/cookies.py",
+      "lines": "164-182",
+      "definition": "  164 | def remove_cookie_by_name(\n  165 |     cookiejar: CookieJar, name: str, domain: str | None = None, path: str | None = None\n  166 | ) -> None:\n  167 |     \"\"\"Unsets a cookie by name, by default over all domains and paths.\n  168 | \n  169 |     Wraps CookieJar.clear(), is O(n).\n  170 |     \"\"\"\n  171 |     clearables: list[tuple[str, str, str]] = []\n  172 |     for cookie in cookiejar:\n  173 |         if cookie.name != name:"
+    }
+  },
+  {
+    "edge_id": "926af11b104e",
+    "repo": "requests",
+    "file": "src/requests/utils.py",
+    "call_text": "should_bypass_proxies(url, no_proxy=no_proxy)",
+    "call_range": [
+      932,
+      25,
+      932,
+      70
+    ],
+    "call_context": "  930 |     new_proxies = proxies.copy()\n  931 | \n  932 |     if trust_env and not should_bypass_proxies(url, no_proxy=no_proxy):\n      |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  933 |         environ_proxies = get_environ_proxies(url, no_proxy=no_proxy)",
+    "callee": "should_bypass_proxies",
+    "receiver": null,
+    "target": {
+      "qualified_name": "should_bypass_proxies",
+      "file": "src/requests/utils.py",
+      "lines": "810-870",
+      "definition": "  810 | def should_bypass_proxies(url: str, no_proxy: str | None) -> bool:\n  811 |     \"\"\"\n  812 |     Returns whether we should bypass proxies or not.\n  813 | \n  814 |     :rtype: bool\n  815 |     \"\"\"\n  816 | \n  817 |     # Prioritize lowercase environment variables over uppercase\n  818 |     # to keep a consistent behaviour with other http projects (curl, wget).\n  819 |     def get_proxy(key: str) -> str | None:"
+    }
+  },
+  {
+    "edge_id": "329e3119d509",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "DummyAuth()",
+    "call_range": [
+      1249,
+      17,
+      1249,
+      28
+    ],
+    "call_context": " 1247 | \n 1248 |         s = requests.Session()\n 1249 |         s.auth = DummyAuth()\n      |                  ^^^^^^^^^^^\n 1250 | ",
+    "callee": "DummyAuth",
+    "receiver": null,
+    "target": {
+      "qualified_name": "TestRequests.test_prepared_from_session.DummyAuth",
+      "file": "tests/test_requests.py",
+      "lines": "1240-1243",
+      "definition": " 1240 |         class DummyAuth(requests.auth.AuthBase):\n 1241 |             def __call__(self, r):\n 1242 |                 r.headers[\"Dummy-Auth-Test\"] = \"dummy-auth-test-ok\"\n 1243 |                 return r"
+    }
+  },
+  {
+    "edge_id": "7c4fc6738fd9",
+    "repo": "requests",
+    "file": "src/requests/exceptions.py",
+    "call_text": "InvalidJSONError.__init__(self, *self.args, **kwargs)",
+    "call_range": [
+      53,
+      8,
+      53,
+      61
+    ],
+    "call_context": "   51 |         \"\"\"\n   52 |         CompatJSONDecodeError.__init__(self, *args)\n   53 |         InvalidJSONError.__init__(self, *self.args, **kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   54 | ",
+    "callee": "__init__",
+    "receiver": "InvalidJSONError",
+    "target": {
+      "qualified_name": "JSONDecodeError.__init__",
+      "file": "src/requests/exceptions.py",
+      "lines": "45-53",
+      "definition": "   45 |     def __init__(self, *args: Any, **kwargs: Any) -> None:\n   46 |         \"\"\"\n   47 |         Construct the JSONDecodeError instance first with all\n   48 |         args. Then use it's args to construct the IOError so that\n   49 |         the json specific args aren't used as IOError specific args\n   50 |         and the error message from JSONDecodeError is preserved.\n   51 |         \"\"\"\n   52 |         CompatJSONDecodeError.__init__(self, *args)\n   53 |         InvalidJSONError.__init__(self, *self.args, **kwargs)"
+    }
+  },
+  {
+    "edge_id": "c216fca549b7",
+    "repo": "requests",
+    "file": "src/requests/structures.py",
+    "call_text": "other_dict.lower_items()",
+    "call_range": [
+      86,
+      48,
+      86,
+      72
+    ],
+    "call_context": "   84 |             return NotImplemented\n   85 |         # Compare insensitively\n   86 |         return dict(self.lower_items()) == dict(other_dict.lower_items())\n      |                                                 ^^^^^^^^^^^^^^^^^^^^^^^^\n   87 | ",
+    "callee": "lower_items",
+    "receiver": "other_dict",
+    "target": {
+      "qualified_name": "CaseInsensitiveDict.lower_items",
+      "file": "src/requests/structures.py",
+      "lines": "76-78",
+      "definition": "   76 |     def lower_items(self) -> Iterator[tuple[str, _VT]]:\n   77 |         \"\"\"Like iteritems(), but with all lowercase keys.\"\"\"\n   78 |         return ((lowerkey, keyval[1]) for (lowerkey, keyval) in self._store.items())"
+    }
+  },
+  {
+    "edge_id": "3d0676f03d8c",
+    "repo": "requests",
+    "file": "src/requests/api.py",
+    "call_text": "request(\"post\", url, data=data, json=json, **kwargs)",
+    "call_range": [
+      134,
+      11,
+      134,
+      63
+    ],
+    "call_context": "  132 |     \"\"\"\n  133 | \n  134 |     return request(\"post\", url, data=data, json=json, **kwargs)\n      |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  135 | ",
+    "callee": "request",
+    "receiver": null,
+    "target": {
+      "qualified_name": "request",
+      "file": "src/requests/api.py",
+      "lines": "24-71",
+      "definition": "   24 | def request(\n   25 |     method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs]\n   26 | ) -> Response:\n   27 |     \"\"\"Constructs and sends a :class:`Request <Request>`.\n   28 | \n   29 |     :param method: method for the new :class:`Request` object: ``GET``, ``OPTIONS``, ``HEAD``, ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.\n   30 |     :param url: URL for the new :class:`Request` object.\n   31 |     :param params: (optional) Dictionary, list of tuples or bytes to send\n   32 |         in the query string for the :class:`Request`.\n   33 |     :param data: (optional) Dictionary, list of tuples, bytes, or file-like"
+    }
+  },
+  {
+    "edge_id": "71e19811ac7b",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.prepare(**kwargs)",
+    "call_range": [
+      2734,
+      8,
+      2734,
+      27
+    ],
+    "call_context": " 2732 |     p = PreparedRequest()\n 2733 |     if kwargs:\n 2734 |         p.prepare(**kwargs)\n      |         ^^^^^^^^^^^^^^^^^^^\n 2735 |     copy = p.copy()",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "PreparedRequest.prepare",
+      "file": "src/requests/models.py",
+      "lines": "424-451",
+      "definition": "  424 |     def prepare(\n  425 |         self,\n  426 |         method: str | None = None,\n  427 |         url: _t.UriType | None = None,\n  428 |         headers: Mapping[str, str | bytes] | None = None,\n  429 |         files: _t.FilesType = None,\n  430 |         data: _t.DataType = None,\n  431 |         params: _t.ParamsType = None,\n  432 |         auth: _t.AuthType = None,\n  433 |         cookies: RequestsCookieJar | CookieJar | dict[str, str] | None = None,"
+    }
+  },
+  {
+    "edge_id": "0413af9213f7",
+    "repo": "requests",
+    "file": "tests/test_requests.py",
+    "call_text": "p.prepare(\n        method=\"GET\", url=\"http://www.example.com\", data=data, hooks=default_hooks()\n    )",
+    "call_range": [
+      2705,
+      4,
+      2707,
+      5
+    ],
+    "call_context": " 2703 |     \"\"\"\n 2704 |     p = PreparedRequest()\n 2705 |     p.prepare(\n      |     ^^^^^^^^^^\n 2706 |         method=\"GET\", url=\"http://www.example.com\", data=data, hooks=default_hooks()\n 2707 |     )\n 2708 |     assert p.body == urlencode(data)",
+    "callee": "prepare",
+    "receiver": "p",
+    "target": {
+      "qualified_name": "Request.prepare",
+      "file": "src/requests/models.py",
+      "lines": "360-375",
+      "definition": "  360 |     def prepare(self) -> PreparedRequest:\n  361 |         \"\"\"Constructs a :class:`PreparedRequest <PreparedRequest>` for transmission and returns it.\"\"\"\n  362 |         p = PreparedRequest()\n  363 |         p.prepare(\n  364 |             method=self.method,\n  365 |             url=self.url,\n  366 |             headers=self.headers,\n  367 |             files=self.files,\n  368 |             data=self.data,\n  369 |             json=self.json,"
+    }
+  }
+]
