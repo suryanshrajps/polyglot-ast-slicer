@@ -1166,3 +1166,24 @@ def test_js_property_assigned_functions_are_symbols(tmp_path: Path) -> None:
     assert ("app.set", "helper") in edges, sorted(edges)
     assert ("Widget.prototype.render", "helper") in edges, sorted(edges)
     engine.close()
+
+
+def test_js_bare_calls_do_not_bind_to_property_methods(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "lib.js": (
+                "var send = require('send');\n"
+                "var resolve = path.resolve;\n"
+                "function Res() {}\n"
+                "Res.prototype.send = function send(value) { return value; };\n"
+                "Res.prototype.resolve = function resolve(value) { return value; };\n"
+                "function use(req) { send(req); resolve('/'); }\n"
+                "module.exports = { use: use };\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    assert not _call_edges(engine), sorted(_call_edges(engine))
+    engine.close()

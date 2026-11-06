@@ -1006,6 +1006,10 @@ class GraphEngine:
                         found = self._symbol_in_file(target_file, "default")
                     if found is not None:
                         return [(found, 0.95, f"import:{self._rel(target_file)}")]
+                elif symbol.language != "python":
+                    # The name is imported/required from outside the repo; it cannot also
+                    # be a same-file nested definition. Python keeps its old fallback.
+                    return []
 
             scoped = self._same_file_scoped(symbol, name)
             if scoped is not None:

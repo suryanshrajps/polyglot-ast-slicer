@@ -996,7 +996,7 @@ class PolyglotASTParser:
                                 self._make_symbol(
                                     name=prop,
                                     qualified=lhs,
-                                    kind="function",
+                                    kind="method",
                                     span=child,
                                     source=source,
                                     file_path=file_path,
