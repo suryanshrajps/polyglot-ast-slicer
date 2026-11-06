@@ -1,11 +1,11 @@
-fresh clone: /tmp/pas-release
-commit: 803a94d
-command: HOME=/tmp/tshome POLYGLOT_AST_CACHE_DIR=/tmp/pas-release-cache UV_CACHE_DIR=/tmp/uvcache npm_config_cache=/tmp/npm-cache make gate
+fresh clone: /tmp/pas-final
+commit: 398ecf45787f1fe96a05325e22faf7de964b0004
+command: HOME=/tmp/tshome POLYGLOT_AST_CACHE_DIR=/tmp/pas-final-cache UV_CACHE_DIR=/tmp/uvcache npm_config_cache=/tmp/npm-cache make gate
 
 == build ==
-total 1304
--rw-r--r--@ 1 suryanshraj  staff   46950 Nov  6 19:44 polyglot_ast_slicer-1.0.0-py3-none-any.whl
--rw-r--r--@ 1 suryanshraj  staff  616895 Nov  6 19:44 polyglot_ast_slicer-1.0.0.tar.gz
+total 1312
+-rw-r--r--@ 1 suryanshraj  staff   47338 Nov  6 19:52 polyglot_ast_slicer-1.0.0-py3-none-any.whl
+-rw-r--r--@ 1 suryanshraj  staff  618708 Nov  6 19:52 polyglot_ast_slicer-1.0.0.tar.gz
 
 == clean venv ==
 polyglot-ast-slicer 1.0.0

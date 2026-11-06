@@ -221,3 +221,11 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
 - One-file refresh p95 before -> after: 5k 541.59 -> 26.17 ms; 20k 2609.09 -> 1.98 ms;
   50k 5477.02 -> 1.51 ms; requests 43.34 -> 38.28 ms; zod 20.28 -> 2.50 ms. Target
   (<50 ms at 20k) met. Test count now 104.
+
+## Tag move after refresh fix — 2026-11-06
+- Fresh clone of `398ecf4` at `/tmp/pas-final`: `make gate` exited 0 (ruff, mypy, 104
+  tests, lock, offline METRICS+README drift). Raw output replaced in
+  `verify/release_gate.txt`.
+- Rebuilt 1.0.0 wheel/sdist from the fixed commit and re-ran the clean-venv Python/TS
+  smoke; PyPI name still HTTP 404.
+- Tag `v1.0.0` moved to the gated commit (local only).
