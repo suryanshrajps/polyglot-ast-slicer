@@ -1,0 +1,63 @@
+py-a_self_request                PASS       expected: Client.send -> Client.request; no Client.send -> request
+                                            actual:   edges=[('Client.send', 'calls', 'Client.request')]
+py-b_super_no_cycle              PASS       expected: symbol_cycle_count=0 and no self-recursive symbol
+                                            actual:   symbol_cycles=0 self=[]
+py-c_no_false_recursion          PASS       expected: B.run is not a self-edge
+                                            actual:   edges=[('B.run', 'constructs', 'A')] (note: A().run() has no A.run edge)
+py-d_real_recursion              PASS       expected: fact -> fact self edge and fact reported self-recursive
+                                            actual:   edges=[('fact', 'calls', 'fact')] self=['fact']
+py-e_main_guard_call             FAIL       expected: work has at least one caller from the __main__ block
+                                            actual:   edges=[]
+py-f_ambiguous_candidates        PASS       expected: code=ambiguous_symbol and candidates={A.dup,dup}
+                                            actual:   code=ambiguous_symbol candidates=['A.dup', 'dup']
+py-g_builtin_names               PASS       expected: caller -> parse, log, open, error
+                                            actual:   caller targets=['error', 'log', 'open', 'parse']
+py-h_call_and_type_edges         FAIL       expected: make -> Foo keeps both constructs and uses_type
+                                            actual:   make->Foo relations=['uses_type']
+py-i_relative_alias_reexport     PASS       expected: use_rel -> x and use_init -> x
+                                            actual:   edges=[('use_init', 'calls', 'x'), ('use_rel', 'calls', 'x')]
+py-j_property_decorators         FAIL       expected: getter and setter both represented; static/class methods present
+                                            actual:   parsed_value_defs=[(3, '@property'), (7, '@value.setter')] graph_value_lines=(7, 9) decorated_present=True
+py-k_dynamic_no_edge             PASS       expected: dynamic and computed have no outgoing edges
+                                            actual:   outgoing=[]
+py-l_incremental_new_module      FAIL       expected: refresh(a.py) edge set equals full rebuild
+                                            actual:   incremental=[] rebuild=[('use', 'calls', 'thing')]
+ts-paths_alias                   PASS       expected: run -> helper through @/ alias
+                                            actual:   edges=[('run', 'calls', 'helper')]
+ts-barrel                        PASS       expected: run -> helper through export * barrel
+                                            actual:   edges=[('run', 'calls', 'helper')]
+ts-default_import                FAIL       expected: run -> main through default import
+                                            actual:   edges=[]
+ts-named_import                  PASS       expected: run -> helper through named import
+                                            actual:   edges=[('run', 'calls', 'helper')]
+ts-namespace_import              PASS       expected: run -> helper through namespace import
+                                            actual:   edges=[('run', 'calls', 'helper')]
+tsx-jsx                          PASS       expected: App -> Button through <Button />
+                                            actual:   edges=[('App', 'calls', 'Button')]
+js-require_destructure           PASS       expected: legacy -> helper through require destructuring
+                                            actual:   edges=[('legacy', 'calls', 'helper')]
+js-commonjs_exports              PASS       expected: other -> legacy and both symbols exported
+                                            actual:   edges=[('legacy', 'calls', 'helper'), ('other', 'calls', 'legacy')]
+mjs-import                       FAIL       expected: esm -> helper through .mjs import
+                                            actual:   edges=[]
+cjs-require                      PASS       expected: cjs -> helper through .cjs require
+                                            actual:   edges=[('cjs', 'calls', 'helper')]
+ts-super_this                    FAIL       expected: Child.hi -> Child.greet and Child.greet -> Base.greet; no false self edge
+                                            actual:   edges=[('Child', 'inherits', 'Base'), ('Child.greet', 'calls', 'Child.greet'), ('Child.hi', 'calls', 'Child.greet')] self=['Child.greet']
+safe-symlink_escape              PASS       expected: escaping symlink is skipped, no crash, escaped symbol absent
+                                            actual:   skipped={'/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/pas-verify-3appwvlp/outside.py': 'symlink escapes repository'} symbols=['ok']
+safe-readonly_checkout           PASS       expected: read-only checkout indexes
+                                            actual:   files=1 symbols=1
+safe-cache_outside_repo          PASS       expected: default cache database is outside the repo and repo has no db file
+                                            actual:   db=/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/pas-verify-3appwvlp/home/Library/Caches/polyglot-ast-slicer/2deaa57f0d669a00.db stray=[]
+safe-allowed_roots               PASS       expected: repo outside allowed roots raises PermissionError
+                                            actual:   Repository /private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/pas-verify-3appwvlp/safe-denied is outside the allowed roots ['/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/pas-verify-3appwvlp/allowed']
+safe-weird_files                 PASS       expected: empty/broken/latin1 index; binary and 5MB skipped; no crash
+                                            actual:   files=3 skipped={'big.py': 'file too large (5242878 bytes > 1500000)', 'binary.py': 'BinaryFileError: binary content (NUL byte) in /private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/pas-verify-3appwvlp/safe-weird/binary.py'} parse_errors=['broken.py']
+payload-default_keys             PASS       expected: default keys are compiled_context, diagnostics, token_metrics
+                                            actual:   keys=['compiled_context', 'diagnostics', 'token_metrics']
+payload-snippet_once             PASS       expected: target snippet body appears once in returned JSON
+                                            actual:   occurrences=1
+payload-tokens                   PASS       expected: tiktoken count of exact JSON equals token_metrics.payload_tokens
+                                            actual:   tiktoken=226 payload_tokens=226
+SUMMARY PASS=24 FAIL=7 BLOCKED=0 UNVERIFIED=0 TOTAL=31
