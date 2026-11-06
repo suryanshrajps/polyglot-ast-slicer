@@ -682,9 +682,23 @@ class GraphEngine:
 
     def _first_ts_file(self, base: str) -> str | None:
         extensions = (".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".cts")
-        candidates: list[str] = [base] if Path(base).suffix else []
-        candidates += [base + extension for extension in extensions]
-        candidates += [os.path.join(base, f"index{ext}") for ext in (".ts", ".tsx", ".js", ".jsx")]
+        # TypeScript resolves an emitted ``.js``/``.mjs``/``.cjs``/``.jsx`` specifier back to
+        # its source extension (``./u.js`` -> ``u.ts``/``u.tsx``).
+        rewritten = {
+            ".js": (".ts", ".tsx"),
+            ".jsx": (".tsx",),
+            ".mjs": (".mts",),
+            ".cjs": (".cts",),
+        }
+        suffix = Path(base).suffix.lower()
+        candidates: list[str] = []
+        if suffix:
+            stem = base[: -len(suffix)]
+            candidates += [stem + extension for extension in rewritten.get(suffix, ())]
+            candidates.append(base)
+        else:
+            candidates += [base + extension for extension in extensions]
+            candidates += [os.path.join(base, f"index{ext}") for ext in extensions]
         for candidate in candidates:
             normalised = os.path.normpath(candidate)
             if normalised in self._by_file:

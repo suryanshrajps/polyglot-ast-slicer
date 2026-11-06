@@ -905,3 +905,58 @@ def test_ts_default_imports_resolve(tmp_path: Path) -> None:
         edges = _call_edges(engine)
         assert expected in edges, (name, sorted(edges))
         engine.close()
+
+
+def test_ts_specifier_extension_mapping(tmp_path: Path) -> None:
+    cases = {
+        "js_to_ts": {
+            "u.ts": "export function helper(): number { return 1; }\n",
+            "e.mjs": (
+                'import { helper } from "./u.js";\n'
+                "export function esm() { return helper(); }\n"
+            ),
+        },
+        "js_to_tsx": {
+            "u.tsx": "export function helper(): number { return 1; }\n",
+            "e.mjs": (
+                'import { helper } from "./u.js";\n'
+                "export function esm() { return helper(); }\n"
+            ),
+        },
+        "mjs_to_mts": {
+            "u.mts": "export function helper(): number { return 1; }\n",
+            "e.mjs": (
+                'import { helper } from "./u.mjs";\n'
+                "export function esm() { return helper(); }\n"
+            ),
+        },
+        "cjs_to_cts": {
+            "u.cts": "export function helper(): number { return 1; }\n",
+            "e.cjs": (
+                'const { helper } = require("./u.cjs");\n'
+                "module.exports.run = function run() { return helper(); };\n"
+            ),
+        },
+        "jsx_to_tsx": {
+            "u.tsx": "export function helper(): number { return 1; }\n",
+            "e.jsx": (
+                'import { helper } from "./u.jsx";\n'
+                "export function run() { return helper(); }\n"
+            ),
+        },
+        "directory_index": {
+            "lib/index.ts": "export function helper(): number { return 1; }\n",
+            "e.ts": (
+                'import { helper } from "./lib";\n'
+                "export function run(): number { return helper(); }\n"
+            ),
+        },
+    }
+    for name, files in cases.items():
+        repo = _repo(tmp_path / name, files)
+        engine = GraphEngine(repo)
+        engine.index_repository(force_rebuild=True)
+        edges = _call_edges(engine)
+        source = "run" if name in ("cjs_to_cts", "jsx_to_tsx", "directory_index") else "esm"
+        assert (source, "helper") in edges, (name, sorted(edges))
+        engine.close()
