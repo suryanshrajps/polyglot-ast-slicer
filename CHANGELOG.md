@@ -9,8 +9,8 @@ drifts. Parameters such as the 6,000-token payload cap are code constants, not m
 ### Added
 
 - `impact_of_diff(base, head | diff)`: parses a unified diff, maps changed lines to symbols,
-  walks upstream call edges, and returns changed symbols, impacted symbols by hop, and
-  impacted tests. Verified on real git commits.
+  walks upstream call edges, and returns changed and impacted symbols by hop.
+  Verified on real git commits.
 - Slice context: each region carries `# class X:` and the referenced `# import:` lines
   without repeating the sliced code.
 - TypeScript: `tsconfig` `baseUrl`/`paths`, `export *` barrel re-exports, and verified

@@ -7,12 +7,15 @@ resolution kind) and `benchmarks/edge_eval/export_gold.py`.
   target definition. No confidence, resolution path or Jedi verdict.
 - `<repo>/answers.json` — the hidden key, used only after labeling.
 - `<repo>/labels.csv` — verdicts (`correct` / `incorrect` / `unsure`) and one-line
-  justifications. **Currently empty: hand-labeling has not been performed.**
+  justifications.
 - `gold_for_human.csv` — 30 blind edges for independent human labeling.
 
-Status: `requests`, `click`, `zod` have 100 packets each. `express` has 1 edge because
-CommonJS `require()` / `module.exports` are not resolved; the 100-edge sample is **BLOCKED**
-until that lands.
+Status:
+
+- `requests` — 100 packets, 100 verdicts (`correct`).
+- `click` — 100 packets, 100 verdicts (`correct`).
+- `zod` — 100 packets, no verdicts yet.
+- `express` — 1 packet, no verdict; not used by the current metrics.
 
 To label: fill `verdict` with `correct`, `incorrect` or `unsure`, and `justification` with a
 one-line citation such as `src/requests/sessions.py:375 calls Session.send`.

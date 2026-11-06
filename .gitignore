@@ -22,5 +22,3 @@ htmlcov/
 .DS_Store
 .idea/
 .vscode/
-# Local agent instructions (personal workflow, not part of the project)
-AGENTS.md

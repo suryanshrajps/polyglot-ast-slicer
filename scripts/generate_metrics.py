@@ -13,6 +13,7 @@ import csv
 import difflib
 import json
 import math
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -154,6 +155,22 @@ def ensure_repo(
     return target
 
 
+def collected_test_count() -> int:
+    completed = subprocess.run(
+        [sys.executable, "-m", "pytest", "--collect-only", "-o", "addopts="],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise SystemExit(f"pytest collection failed:\n{completed.stderr[-2000:]}")
+    match = re.search(r"(\d+) tests? collected", completed.stdout)
+    if match is None:
+        raise SystemExit("could not parse pytest collection output")
+    return int(match.group(1))
+
+
 def collect_ts_ground_truth(repos_dir: Path) -> dict[str, object]:
     repos: dict[str, dict] = {}
     for name, config in TS_GROUND_TRUTH.items():
@@ -286,6 +303,7 @@ def collect(repos_dir: Path) -> dict[str, object]:
         "scale": {},
         "ground_truth": {},
         "ts_ground_truth": {},
+        "tests": {},
     }
     for name in PINNED:
         repo = ensure_repo(name, repos_dir)
@@ -381,6 +399,7 @@ def collect(repos_dir: Path) -> dict[str, object]:
         "hand_audit": existing_audit,
     }
     data["ts_ground_truth"] = collect_ts_ground_truth(repos_dir)
+    data["tests"] = {"count": collected_test_count()}
     return data
 
 
@@ -392,6 +411,7 @@ def load_artifacts() -> dict[str, object]:
         "scale": {},
         "ground_truth": {},
         "ts_ground_truth": {},
+        "tests": {},
     }
     for name in PINNED:
         data["precision"][name] = json.loads(  # type: ignore[index]
@@ -408,6 +428,7 @@ def load_artifacts() -> dict[str, object]:
     data["ts_ground_truth"] = json.loads(
         (METRICS_DIR / "ts_ground_truth.json").read_text(encoding="utf-8")
     )
+    data["tests"] = json.loads((METRICS_DIR / "tests.json").read_text(encoding="utf-8"))
     return data
 
 
@@ -430,6 +451,7 @@ def render(data: dict[str, object]) -> str:
         "Pinned inputs: "
         + ", ".join(f"{name} `{sha[:7]}`" for name, (_, sha) in PINNED.items())
         + ". Intervals are 95% Wilson score intervals.",
+        f"Test suite (generated): {data['tests']['count']} tests collected.",
         "",
         "## Definitions",
         "",
@@ -438,12 +460,9 @@ def render(data: dict[str, object]) -> str:
         "- **Not contradicted by Jedi (canonical)** — strict, or Jedi lands on a file that",
         "  re-exports the claimed symbol. This is not precision and is not the headline.",
         "- **Hand-labeled precision (headline)** — human verdict on the blind 100-edge packet.",
-        "  **UNMEASURED**: no labels have been committed.",
+        "  requests and click are labeled; zod is still unlabeled.",
         "- **Conditional recall** — found edges divided by call sites Jedi resolves to a project",
         "  symbol. **Unconditional recall is UNMEASURED.**",
-        "- CommonJS JavaScript edges are not measured: `require()`/`module.exports` are not",
-        "  resolved, so an express sample cannot reach 100 edges.",
-        "",
         "## Hand-labeled precision (headline)",
         "",
         "| Repo | Labeled | Correct | Unsure | Precision (unsure=incorrect) | "
@@ -534,53 +553,6 @@ def render(data: dict[str, object]) -> str:
             f"{hard['unsure']} | {fmt(hard['precision_unsure_incorrect'])} "
             f"(95% CI {fmt(low)}–{fmt(high)}) |"
         )
-    lines += [
-        "",
-        "## Stage B v2 (non-test entry points, budgeted co-change recall)",
-        "",
-    ]
-    stage_path = ROOT / "benchmarks" / "stage_b" / "summary_v2.json"
-    if stage_path.exists():
-        stage = json.loads(stage_path.read_text(encoding="utf-8"))
-        lines += [
-            f"Entries: {stage['entries']}; commits dropped (fewer than 2 changed non-test "
-            f"symbols): {stage['dropped_commits']}.",
-            "",
-            "| Budget | Co-change recall (median) |",
-            "|---|---:|",
-        ]
-        for budget, value in stage["recall"].items():
-            label = "unlimited" if budget == "1000000000" else budget
-            lines.append(f"| {label} | {value} |")
-        lines += [
-            "",
-            f"2-hop reachable (upper bound): {stage['reachable2_median']}; "
-            f"grep -C20 recall: {stage['grep_recall_median']}; "
-            f"touched-file recall: {stage['touched_recall_median']}.",
-            "",
-            "Miss classes: " + ", ".join(f"{k}={v}" for k, v in stage["classes"].items()) + ".",
-            "",
-            "",
-        ]
-        baseline_path = ROOT / "benchmarks" / "stage_b" / "baselines.json"
-        if baseline_path.exists():
-            base = json.loads(baseline_path.read_text(encoding="utf-8"))["summary"]
-            lines += [
-                "| Baseline | Recall (median) | Tokens (median) |",
-                "|---|---:|---:|",
-                f"| slice | {stage['recall']['6000']} | {stage['payload_median']} |",
-                f"| entry file only | {base['entry_file_recall_p50']} | "
-                f"{base['entry_file_tokens_p50']} |",
-                f"| grep -C20 entry name | {base['grep_recall_p50']} | "
-                f"{base['grep_tokens_p50']} |",
-                "| touched files (upper bound, not a competitor) | 1.0 | n/a |",
-                "",
-                "Grep recall is inflated by name collisions (e.g. `request` matching "
-                "`pyproject.toml`), not by finding the co-changed definition.",
-                "",
-            ]
-    else:
-        lines += ["UNMEASURED", ""]
     lines += [
         "## Edge agreement with Jedi (100 random call edges, seed 42)",
         "",
@@ -826,6 +798,9 @@ def write_artifacts(data: dict[str, object]) -> None:
     )
     (METRICS_DIR / "ts_ground_truth.json").write_text(
         json.dumps(data["ts_ground_truth"], indent=2) + "\n", encoding="utf-8"
+    )
+    (METRICS_DIR / "tests.json").write_text(
+        json.dumps(data["tests"], indent=2) + "\n", encoding="utf-8"
     )
 
 

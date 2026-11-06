@@ -390,7 +390,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_search.add_argument("--limit", type=int, default=20)
     p_search.set_defaults(handler=_cmd_search)
 
-    p_impact = sub.add_parser("impact", parents=[common], help="Diff to impacted symbols/tests")
+    p_impact = sub.add_parser(
+        "impact", parents=[common], help="Diff to changed and impacted symbols"
+    )
     p_impact.add_argument("--base", default="HEAD~1", help="Base git revision")
     p_impact.add_argument("--head", default="HEAD", help="Head git revision")
     p_impact.add_argument("--depth", type=int, default=3, help="Upstream hop depth")

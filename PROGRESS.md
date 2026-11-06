@@ -120,3 +120,14 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
 - moment: 794 sites, 507 correct, 0 wrong, 287 missed; precision 100.0%
   (95% CI 99.25-100.0), high-confidence 100% (507/507), recall 63.85%
   (95% CI 60.45-67.12). No fixes were made after these runs.
+
+## Stale items — 2026-11-06
+- Deleted `benchmarks/stage_b/run.py` and `benchmarks/fault/run_click.py`; removed the
+  Stage B v2 section from METRICS rendering. No `impacted_tests` reads remain.
+- Test count is generated: `scripts/generate_metrics.py` collects pytest and writes
+  `metrics/tests.json` (currently 99); METRICS renders it. README no longer hardcodes a number.
+- Fixed `impact_of_diff` wording (README, CHANGELOG, CLI help); `tsconfig extends` and the
+  ambiguity cap (20 candidates; `search_symbols` with higher `limit` lists the rest) wording;
+  CI wording no longer claims `--check` before CI does.
+- Updated `labels/README.md` (requests/click 100 correct each; zod unlabeled; express unused).
+- `AGENTS.md` is now tracked (removed from `.gitignore`).
