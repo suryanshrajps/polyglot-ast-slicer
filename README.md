@@ -128,11 +128,11 @@ Synthetic corpora use seed 42. Latency is machine-dependent.
 
 | Corpus | Files | Cold ms | Warm ms | Incremental p95 ms | Query ms | Peak RSS MB |
 |---|---:|---:|---:|---:|---:|---:|
-| synthetic-5000 | 5000 | 1918.6 | 1307.0 | 541.59 | 4.1 | 130.2 |
-| synthetic-20000 | 20000 | 9761.3 | 5624.2 | 2609.09 | 42.7 | 243.9 |
-| synthetic-50000 | 50000 | 23531.6 | 14054.9 | 5477.02 | 16.9 | 448.0 |
-| python-requests | 37 | 240.9 | 72.0 | 43.34 | 2.4 | 103.0 |
-| ts-zod | 169 | 390.8 | 59.8 | 20.28 | 0.9 | 105.7 |
+| synthetic-5000 | 5000 | 2036.2 | 1389.4 | 26.17 | 1.9 | 126.9 |
+| synthetic-20000 | 20000 | 9690.2 | 5679.1 | 1.98 | 4.8 | 228.1 |
+| synthetic-50000 | 50000 | 23951.2 | 14564.7 | 1.51 | 12.5 | 441.4 |
+| python-requests | 37 | 211.8 | 70.0 | 38.28 | 2.0 | 101.8 |
+| ts-zod | 169 | 450.4 | 61.0 | 2.5 | 0.9 | 108.4 |
 
 ## Slice size comparison
 
@@ -189,7 +189,7 @@ tool is for exact call-context retrieval.
 
 ```bash
 uv sync --all-extras
-uv run pytest                       # 103 tests collected
+uv run pytest                       # 104 tests collected
 uv run python scripts/generate_metrics.py --check
 uv run ruff check .
 uv run mypy polyglot_ast_slicer

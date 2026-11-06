@@ -1214,3 +1214,46 @@ def test_crlf_sources_index_and_keep_byte_ranges(tmp_path: Path) -> None:
     context = engine.get_ast_call_slice("caller", hops=1)["compiled_context"]
     assert "\r\n" in context
     engine.close()
+
+
+def test_refresh_does_not_walk_whole_repository(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": "from b import thing\n\n\ndef use() -> int:\n    return thing()\n",
+            "b.py": "def thing() -> int:\n    return 1\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    def boom() -> list[Path]:
+        raise AssertionError("refresh_file walked the whole repository")
+
+    monkeypatch.setattr(engine, "discover_source_files", boom)
+
+    # Adding an imported module must be resolved without a repository walk.
+    (repo / "c.py").write_text("def other() -> int:\n    return 2\n", encoding="utf-8")
+    (repo / "a.py").write_text(
+        "from c import other\n\n\ndef use() -> int:\n    return other()\n", encoding="utf-8"
+    )
+    engine.refresh_file(repo / "a.py")
+    assert ("use", "other") in _call_edges(engine)
+
+    # Rename and delete the imported module.
+    (repo / "c.py").rename(repo / "d.py")
+    (repo / "a.py").write_text(
+        "from d import other\n\n\ndef use() -> int:\n    return other()\n", encoding="utf-8"
+    )
+    engine.refresh_file(repo / "a.py")
+    assert ("use", "other") in _call_edges(engine)
+
+    (repo / "d.py").unlink()
+    (repo / "a.py").write_text(
+        "from b import thing\n\n\ndef use() -> int:\n    return thing()\n", encoding="utf-8"
+    )
+    engine.refresh_file(repo / "a.py")
+    assert all(target != "other" for _, target in _call_edges(engine))
+    engine.close()

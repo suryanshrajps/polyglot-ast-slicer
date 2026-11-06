@@ -4,66 +4,66 @@
       "files": 5000,
       "symbols": 5000,
       "edges": 5000,
-      "cold_ms": 1918.6,
-      "warm_ms": 1307.0,
+      "cold_ms": 2036.2,
+      "warm_ms": 1389.4,
       "warm_cache_hits": 5000,
-      "incremental_p95_ms": 541.59,
-      "query_ms": 4.1,
+      "incremental_p95_ms": 26.17,
+      "query_ms": 1.9,
       "query_symbol": "fn_0",
       "query_ok": true,
-      "peak_rss_mb": 130.2
+      "peak_rss_mb": 126.9
     },
     "synthetic-20000": {
       "files": 20000,
       "symbols": 20000,
       "edges": 20000,
-      "cold_ms": 9761.3,
-      "warm_ms": 5624.2,
+      "cold_ms": 9690.2,
+      "warm_ms": 5679.1,
       "warm_cache_hits": 20000,
-      "incremental_p95_ms": 2609.09,
-      "query_ms": 42.7,
+      "incremental_p95_ms": 1.98,
+      "query_ms": 4.8,
       "query_symbol": "fn_0",
       "query_ok": true,
-      "peak_rss_mb": 243.9
+      "peak_rss_mb": 228.1
     },
     "synthetic-50000": {
       "files": 50000,
       "symbols": 50000,
       "edges": 50000,
-      "cold_ms": 23531.6,
-      "warm_ms": 14054.9,
+      "cold_ms": 23951.2,
+      "warm_ms": 14564.7,
       "warm_cache_hits": 50000,
-      "incremental_p95_ms": 5477.02,
-      "query_ms": 16.9,
+      "incremental_p95_ms": 1.51,
+      "query_ms": 12.5,
       "query_symbol": "fn_0",
       "query_ok": true,
-      "peak_rss_mb": 448.0
+      "peak_rss_mb": 441.4
     },
     "python-requests": {
       "files": 37,
       "symbols": 801,
       "edges": 854,
-      "cold_ms": 240.9,
-      "warm_ms": 72.0,
+      "cold_ms": 211.8,
+      "warm_ms": 70.0,
       "warm_cache_hits": 37,
-      "incremental_p95_ms": 43.34,
-      "query_ms": 2.4,
+      "incremental_p95_ms": 38.28,
+      "query_ms": 2.0,
       "query_symbol": "_check_cryptography",
       "query_ok": true,
-      "peak_rss_mb": 103.0
+      "peak_rss_mb": 101.8
     },
     "ts-zod": {
       "files": 169,
       "symbols": 1044,
       "edges": 1126,
-      "cold_ms": 390.8,
-      "warm_ms": 59.8,
+      "cold_ms": 450.4,
+      "warm_ms": 61.0,
       "warm_cache_hits": 169,
-      "incremental_p95_ms": 20.28,
+      "incremental_p95_ms": 2.5,
       "query_ms": 0.9,
       "query_symbol": "join",
       "query_ok": true,
-      "peak_rss_mb": 105.7
+      "peak_rss_mb": 108.4
     }
   }
 }

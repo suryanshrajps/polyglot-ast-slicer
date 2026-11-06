@@ -391,12 +391,10 @@ class GraphEngine:
         with self.lock:
             started = time.perf_counter()
             resolved = str(Path(file_path).resolve())
-            # A single-file refresh is only sound if the set of modules is unchanged:
-            # imports resolve through ``_module_to_file``, so a module added, deleted or
-            # renamed since the last index must be reconciled before relinking.
-            current_files = {str(path) for path in self.discover_source_files()}
-            if current_files != set(self._by_file):
-                self.index_repository(force_rebuild=False)
+            # A refresh only needs the modules this file can reach. The previous version
+            # walked the whole repository on every save (2.6 s at 20k files) just to detect
+            # added/deleted/renamed modules; reconcile the old and new import targets instead.
+            old_import_targets = set(self._import_targets.get(resolved, set()))
             if resolved not in self._by_file and not Path(resolved).exists():
                 self.cache.remove_file(resolved)
                 return {"file_path": resolved, "status": "deleted", "elapsed_ms": 0.0}
@@ -409,6 +407,9 @@ class GraphEngine:
                     affected.update(self.graph.predecessors(old.symbol_id))
 
             self._remove_file(resolved)
+            for stale_target in old_import_targets:
+                if not Path(stale_target).exists():
+                    self._remove_file(stale_target)
 
             if not Path(resolved).exists():
                 relink = affected | self._pending_callers(changed_names)
@@ -432,7 +433,10 @@ class GraphEngine:
                 }
             self._skipped.pop(resolved, None)
             self._register_file(result.parsed, result.raw_tokens)
-            self._rebuild_bindings_for({resolved, *self._imported_by.get(resolved, set())})
+            discovered = self._reconcile_imports(result.parsed, {resolved})
+            self._rebuild_bindings_for(
+                {resolved, *discovered, *self._imported_by.get(resolved, set())}
+            )
 
             changed_names |= {symbol.name for symbol in result.parsed.symbols}
             relink = (
@@ -608,18 +612,43 @@ class GraphEngine:
             self._imported_by.setdefault(target, set()).add(parsed.file_path)
         self._import_targets[parsed.file_path] = targets
 
+    def _reconcile_imports(self, parsed: ParsedFile, seen: set[str]) -> set[str]:
+        """Registers import targets that exist on disk but are not in the index yet."""
+        discovered: set[str] = set()
+        for ref in parsed.imports:
+            target = self._resolve_import_module(ref.module, parsed, discover=True)
+            if target is None or target in seen:
+                continue
+            seen.add(target)
+            if not Path(target).exists():
+                self._remove_file(target)
+                continue
+            if target not in self._by_file:
+                try:
+                    result = self.cache.get_or_parse_file(target, self.parser)
+                except (GrammarUnavailable, OSError, BinaryFileError):
+                    continue
+                self._register_file(result.parsed, result.raw_tokens)
+                discovered.add(target)
+                discovered |= self._reconcile_imports(result.parsed, seen)
+        return discovered
+
     def _module_name_of(self, file_path: str | None) -> str | None:
         if file_path is None:
             return None
         modules = self._file_modules.get(file_path, set())
         return min(modules, key=len) if modules else None
 
-    def _resolve_import_module(self, module: str, parsed: ParsedFile) -> str | None:
+    def _resolve_import_module(
+        self, module: str, parsed: ParsedFile, *, discover: bool = False
+    ) -> str | None:
         if parsed.language == "python":
-            return self._resolve_python_module(module, parsed.file_path)
-        return self._resolve_ts_module(module, parsed.file_path)
+            return self._resolve_python_module(module, parsed.file_path, discover=discover)
+        return self._resolve_ts_module(module, parsed.file_path, discover=discover)
 
-    def _resolve_python_module(self, module: str, caller_file: str) -> str | None:
+    def _resolve_python_module(
+        self, module: str, caller_file: str, *, discover: bool = False
+    ) -> str | None:
         if not module:
             return None
         if module.startswith("."):
@@ -632,16 +661,33 @@ class GraphEngine:
             target = ".".join([*base, rest]) if rest else ".".join(base)
         else:
             target = module
-        file_path = self._module_to_file.get(target)
-        if file_path is not None:
-            return file_path
-        # ``from a.b import c`` where ``a.b`` is a package: accept the package directory.
+        targets = [target]
         while "." in target:
             target = target.rsplit(".", 1)[0]
-            file_path = self._module_to_file.get(target)
+            targets.append(target)
+        for candidate_module in targets:
+            file_path = self._module_to_file.get(candidate_module)
             if file_path is not None:
                 return file_path
+        if discover:
+            for candidate_module in targets:
+                for candidate in self._python_module_paths(candidate_module):
+                    if candidate.is_file():
+                        return str(candidate.resolve())
         return None
+
+    def _python_module_paths(self, module: str) -> list[Path]:
+        relative = Path(*module.split("."))
+        bases = [self.repo_path, self.repo_path / "src", self.repo_path / "lib"]
+        paths: list[Path] = []
+        for base in bases:
+            paths += [
+                base / relative.with_suffix(".py"),
+                base / relative.with_suffix(".pyi"),
+                base / relative / "__init__.py",
+                base / relative / "__init__.pyi",
+            ]
+        return paths
 
     def _package_parts(self, caller_file: str) -> list[str]:
         relative = Path(caller_file).relative_to(self.repo_path)
@@ -650,10 +696,13 @@ class GraphEngine:
             return parts[:-1]
         return parts[:-1]
 
-    def _resolve_ts_module(self, spec: str, caller_file: str) -> str | None:
+    def _resolve_ts_module(
+        self, spec: str, caller_file: str, *, discover: bool = False
+    ) -> str | None:
+        finder = self._first_ts_file_on_disk if discover else self._first_ts_file
         if spec.startswith("."):
             base = os.path.normpath(os.path.join(os.path.dirname(caller_file), spec))
-            return self._first_ts_file(base)
+            return finder(base)
 
         for pattern, targets in self._tsconfig_paths.items():
             if "*" in pattern:
@@ -662,25 +711,37 @@ class GraphEngine:
                     continue
                 middle = spec[len(prefix) : len(spec) - len(suffix) if suffix else None]
                 for target in targets:
-                    found = self._first_ts_file(
+                    found = finder(
                         os.path.join(self._tsconfig_root(), target.replace("*", middle))
                     )
                     if found is not None:
                         return found
             elif spec == pattern:
                 for target in targets:
-                    found = self._first_ts_file(os.path.join(self._tsconfig_root(), target))
+                    found = finder(os.path.join(self._tsconfig_root(), target))
                     if found is not None:
                         return found
 
         if self._tsconfig_base is not None:
-            return self._first_ts_file(os.path.join(str(self._tsconfig_base), spec))
+            return finder(os.path.join(str(self._tsconfig_base), spec))
         return None
 
     def _tsconfig_root(self) -> str:
         return str(self._tsconfig_base or self.repo_path)
 
     def _first_ts_file(self, base: str) -> str | None:
+        for candidate in self._ts_file_candidates(base):
+            if candidate in self._by_file:
+                return candidate
+        return None
+
+    def _first_ts_file_on_disk(self, base: str) -> str | None:
+        for candidate in self._ts_file_candidates(base):
+            if os.path.isfile(candidate):
+                return candidate
+        return None
+
+    def _ts_file_candidates(self, base: str) -> list[str]:
         extensions = (".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".cts")
         # TypeScript resolves an emitted ``.js``/``.mjs``/``.cjs``/``.jsx`` specifier back to
         # its source extension (``./u.js`` -> ``u.ts``/``u.tsx``).
@@ -703,11 +764,7 @@ class GraphEngine:
             # extension; without this branch those imports never try ``.ts``.
             candidates += [base + extension for extension in extensions]
             candidates += [os.path.join(base, f"index{ext}") for ext in extensions]
-        for candidate in candidates:
-            normalised = os.path.normpath(candidate)
-            if normalised in self._by_file:
-                return normalised
-        return None
+        return [os.path.normpath(candidate) for candidate in candidates]
 
     def _load_tsconfig(self) -> tuple[Path | None, dict[str, list[str]]]:
         path = self.repo_path / "tsconfig.json"

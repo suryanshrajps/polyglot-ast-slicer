@@ -207,3 +207,17 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
   (name free). Evidence: `verify/release_artifacts.txt`.
 - Not uploaded. Publish commands: `uv publish --token <token> dist/*` (or
   `twine upload dist/*`). Tag `v1.0.0` created only after this gate.
+
+## Refresh performance — 2026-11-06
+- cProfile on the 20k corpus, one refresh: total 5.388 s; `discover_source_files`
+  5.375 s (99.8%), `_rel` 2.588 s, `Path.resolve` 2.048 s, `pathlib.__getitem__` 1.440 s,
+  `posixpath._joinrealpath` 1.352 s.
+- Cause: `refresh_file` walked and statted the entire repository on every save solely to
+  detect added/deleted/renamed modules.
+- Fix: reconcile only the refreshed file's old/new import targets, resolve new modules on
+  disk, and remove vanished targets. Regression test
+  `test_refresh_does_not_walk_whole_repository`; the add/delete/rename differential test
+  still passes.
+- One-file refresh p95 before -> after: 5k 541.59 -> 26.17 ms; 20k 2609.09 -> 1.98 ms;
+  50k 5477.02 -> 1.51 ms; requests 43.34 -> 38.28 ms; zod 20.28 -> 2.50 ms. Target
+  (<50 ms at 20k) met. Test count now 104.
