@@ -154,7 +154,10 @@ def test_symlink_escape_is_skipped_not_crashing(tmp_path: Path) -> None:
     (inside / "pkg" / "app.py").write_text("def public() -> int:\n    return 1\n")
     outside = tmp_path / "outside.py"
     outside.write_text("def secret() -> str:\n    return 'TOPSECRET'\n")
-    (inside / "pkg" / "leak.py").symlink_to(outside)
+    try:
+        (inside / "pkg" / "leak.py").symlink_to(outside)
+    except OSError:
+        pytest.skip("symlink creation requires privileges on this platform")
 
     engine = GraphEngine(inside)
     stats = engine.index_repository(force_rebuild=True)

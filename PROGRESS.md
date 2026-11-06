@@ -141,3 +141,12 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
 - Added a case-insensitive-filesystem repo-path test (runs on APFS/NTFS, skips on
   case-sensitive Linux) and a CRLF test for Python and TS indexing plus byte-range slicing.
 - Test count regenerated to 103.
+
+## CI matrix — 2026-11-06
+- `.github/workflows/ci.yml`: ubuntu/macos/windows x Python 3.12/3.13; ruff, mypy,
+  pytest, offline `generate_metrics.py --check`, `uv build --wheel`, then install the
+  wheel into a clean venv and run `verify/ci_smoke.py` on Python and TS fixtures.
+- Added `verify/fixtures/smoke/{python,typescript}` and `verify/ci_smoke.py`.
+- Symlink test skips when the platform cannot create symlinks (Windows CI).
+- CI has NOT been executed. Push commands: `git push origin main` (triggers the push
+  workflow) or `gh workflow run ci.yml`.

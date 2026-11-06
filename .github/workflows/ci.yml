@@ -7,10 +7,11 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
@@ -25,9 +26,16 @@ jobs:
         run: uv run mypy polyglot_ast_slicer
       - name: Test
         run: uv run pytest
-      - name: Regenerate metrics from pinned repos
-        run: uv run python scripts/generate_metrics.py
-      - name: Verify metrics artifacts are committed
-        run: git diff --exit-code -- METRICS.md metrics/
+      - name: Metrics drift check (offline)
+        run: uv run python scripts/generate_metrics.py --check
       - name: Build wheel
         run: uv build --wheel
+      - name: Install wheel in a clean venv and smoke test
+        shell: bash
+        run: |
+          uv venv .smoke-venv
+          PYTHON=.smoke-venv/bin/python
+          if [ -f .smoke-venv/Scripts/python.exe ]; then PYTHON=.smoke-venv/Scripts/python.exe; fi
+          uv pip install --python "$PYTHON" dist/*.whl
+          "$PYTHON" -m polyglot_ast_slicer --version
+          "$PYTHON" verify/ci_smoke.py
