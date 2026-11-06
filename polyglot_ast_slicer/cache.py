@@ -19,7 +19,7 @@ import sys
 import tempfile
 import time
 import zlib
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Mapping
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
@@ -35,20 +35,32 @@ class BinaryFileError(ValueError):
     """Raised when a source file contains NUL bytes and is not text."""
 
 
-def default_cache_dir() -> Path:
-    """OS cache directory for index databases, never inside the user's repository."""
-    override = os.environ.get("POLYGLOT_AST_CACHE_DIR")
+def _cache_candidates(
+    platform: str, env: Mapping[str, str], home: Path
+) -> list[Path]:
+    """Ordered cache locations for a platform, without touching the filesystem."""
+    override = env.get("POLYGLOT_AST_CACHE_DIR")
     candidates: list[Path] = []
     if override:
         candidates.append(Path(override).expanduser())
-    elif sys.platform == "darwin":
-        candidates.append(Path.home() / "Library" / "Caches" / "polyglot-ast-slicer")
-    elif os.environ.get("XDG_CACHE_HOME"):
-        candidates.append(Path(os.environ["XDG_CACHE_HOME"]) / "polyglot-ast-slicer")
+    elif platform == "win32":
+        local = env.get("LOCALAPPDATA")
+        base = Path(local) if local else home / "AppData" / "Local"
+        candidates.append(base / "polyglot-ast-slicer")
+    elif platform == "darwin":
+        candidates.append(home / "Library" / "Caches" / "polyglot-ast-slicer")
+    elif env.get("XDG_CACHE_HOME"):
+        candidates.append(Path(env["XDG_CACHE_HOME"]) / "polyglot-ast-slicer")
     else:
-        candidates.append(Path.home() / ".cache" / "polyglot-ast-slicer")
-    candidates.append(Path(tempfile.gettempdir()) / f"polyglot-ast-slicer-{os.getuid()}")
-    for candidate in candidates:
+        candidates.append(home / ".cache" / "polyglot-ast-slicer")
+    uid = getattr(os, "getuid", lambda: 0)()
+    candidates.append(Path(tempfile.gettempdir()) / f"polyglot-ast-slicer-{uid}")
+    return candidates
+
+
+def default_cache_dir() -> Path:
+    """OS cache directory for index databases, never inside the user's repository."""
+    for candidate in _cache_candidates(sys.platform, os.environ, Path.home()):
         try:
             candidate.mkdir(parents=True, exist_ok=True)
             return candidate

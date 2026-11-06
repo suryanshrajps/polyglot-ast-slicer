@@ -1187,3 +1187,27 @@ def test_js_bare_calls_do_not_bind_to_property_methods(tmp_path: Path) -> None:
     engine.index_repository(force_rebuild=True)
     assert not _call_edges(engine), sorted(_call_edges(engine))
     engine.close()
+
+
+def test_crlf_sources_index_and_keep_byte_ranges(tmp_path: Path) -> None:
+    repo = tmp_path / "r"
+    repo.mkdir()
+    (repo / "m.py").write_bytes(
+        b"def caller(x: int) -> int:\r\n    return helper(x)\r\n\r\n"
+        b"def helper(x: int) -> int:\r\n    return x + 1\r\n"
+    )
+    (repo / "m.ts").write_bytes(
+        b"export function helper(): number { return 1; }\r\n"
+        b"export function run(): number { return helper(); }\r\n"
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    edges = _call_edges(engine)
+    assert ("caller", "helper") in edges
+    assert ("run", "helper") in edges
+    caller = engine.resolve_strict("caller")[0]
+    assert caller is not None
+    assert caller.start_line == 1 and caller.end_line == 2
+    context = engine.get_ast_call_slice("caller", hops=1)["compiled_context"]
+    assert "\r\n" in context
+    engine.close()

@@ -131,3 +131,13 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
   CI wording no longer claims `--check` before CI does.
 - Updated `labels/README.md` (requests/click 100 correct each; zod unlabeled; express unused).
 - `AGENTS.md` is now tracked (removed from `.gitignore`).
+
+## Cross-platform paths — 2026-11-06
+- `default_cache_dir()` now takes `LOCALAPPDATA` on Windows (falling back to
+  `%USERPROFILE%\AppData\Local`) and avoids `os.getuid` on platforms without it.
+- Candidate selection moved to `_cache_candidates(platform, env, home)`; tests cover
+  simulated Windows (drive letter + backslashes), macOS (`~/Library/Caches`) and Linux
+  (`XDG_CACHE_HOME` / `~/.cache`).
+- Added a case-insensitive-filesystem repo-path test (runs on APFS/NTFS, skips on
+  case-sensitive Linux) and a CRLF test for Python and TS indexing plus byte-range slicing.
+- Test count regenerated to 103.
