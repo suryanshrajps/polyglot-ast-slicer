@@ -645,3 +645,59 @@ def test_cycle_detection_counts_each_pair_once_with_two_relations(tmp_path: Path
         "pong",
     ]
     engine.close()
+
+
+def test_module_scope_calls_are_attributed_to_a_module_symbol(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "script.py": (
+                "def work() -> int:\n"
+                "    return 1\n\n\n"
+                "if __name__ == \"__main__\":\n"
+                "    work()\n"
+            ),
+            "only_defs.py": "def idle() -> int:\n    return 2\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    module = engine.resolve_strict("script.py::<module>")[0]
+    assert module is not None
+    assert module.kind == "module"
+    assert module.start_line == 5
+    assert module.end_line == 6
+
+    work = engine.resolve_strict("work")[0]
+    assert work is not None
+    assert engine.graph.has_edge(module.symbol_id, work.symbol_id)
+
+    blast = engine.get_blast_radius("work")
+    assert "<module>" in [item["qualified_name"] for item in blast["dependents_by_hop"][1]]
+
+    sliced = engine.get_ast_call_slice("work", hops=1, include_metadata=True)
+    assert "if __name__" in sliced["compiled_context"]
+    assert "<module>" in [
+        item["qualified_name"] for item in sliced["upstream_callers"]
+    ]
+
+    cycles = engine.find_circular_dependencies()
+    assert cycles["symbol_cycle_count"] == 0
+    assert cycles["self_recursive_count"] == 0
+    assert engine.resolve_strict("only_defs.py::<module>")[0] is None
+    engine.close()
+
+
+def test_module_scope_call_outside_main_guard_is_attributed(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {"app.py": "def work() -> int:\n    return 1\n\n\nwork()\n"},
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    module = engine.resolve_strict("app.py::<module>")[0]
+    work = engine.resolve_strict("work")[0]
+    assert module is not None and work is not None
+    assert engine.graph.has_edge(module.symbol_id, work.symbol_id)
+    engine.close()

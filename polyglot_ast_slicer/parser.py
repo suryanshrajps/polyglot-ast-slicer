@@ -20,7 +20,7 @@ from tree_sitter import Node
 from tree_sitter_language_pack import get_parser
 
 SupportedLanguage = Literal["python", "typescript", "tsx", "javascript"]
-SymbolKind = Literal["function", "method", "class", "interface", "type_alias"]
+SymbolKind = Literal["function", "method", "class", "interface", "type_alias", "module"]
 
 EXTENSION_TO_LANGUAGE: Final[dict[str, SupportedLanguage]] = {
     ".py": "python",
@@ -472,6 +472,9 @@ class PolyglotASTParser:
         symbols: list[SymbolNode] = []
         if language == "python":
             self._walk_python(root, source_bytes, resolved, language, [], None, symbols)
+            module_symbol = self._python_module_symbol(root, source_bytes, resolved, language)
+            if module_symbol is not None:
+                symbols.append(module_symbol)
         else:
             self._walk_ts(root, source_bytes, resolved, language, [], None, False, symbols)
 
@@ -485,6 +488,59 @@ class PolyglotASTParser:
         )
 
     # ------------------------------------------------------------------ python
+
+    def _python_module_symbol(
+        self,
+        root: Node,
+        source: bytes,
+        file_path: str,
+        language: SupportedLanguage,
+    ) -> SymbolNode | None:
+        """A per-file ``<module>`` symbol for calls made outside any definition.
+
+        Top-level calls (including those under ``if __name__ == "__main__":``) have no
+        enclosing function or class, so without this node they have no caller and never
+        appear in blast radius. The span covers only the executable top-level statements
+        that actually contain calls or type references, not the whole file.
+        """
+        calls, type_refs, local_types = self._analyze_body(root, source, language)
+        if not calls and not type_refs:
+            return None
+
+        spans: list[Node] = []
+        for child in root.children:
+            if child.type in (
+                "import_statement",
+                "import_from_statement",
+                "function_definition",
+                "class_definition",
+                "decorated_definition",
+                "comment",
+            ):
+                continue
+            spans.append(child)
+        if not spans:
+            return None
+
+        start = min(node.start_byte for node in spans)
+        end = max(node.end_byte for node in spans)
+        return SymbolNode(
+            symbol_id=f"{file_path}::<module>",
+            name="<module>",
+            qualified_name="<module>",
+            kind="module",
+            file_path=file_path,
+            language=language,
+            start_line=min(node.start_point[0] for node in spans) + 1,
+            end_line=max(node.end_point[0] for node in spans) + 1,
+            start_byte=start,
+            end_byte=end,
+            signature="<module>",
+            calls=calls,
+            type_refs=type_refs,
+            local_types=local_types,
+            exported=False,
+        )
 
     def _walk_python(
         self,
