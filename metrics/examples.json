@@ -1,0 +1,30 @@
+{
+  "python": {
+    "symbol": "process_payment",
+    "compiled_context": "### backend/service.py:1-7 [Ledger, Ledger.record] (data_schema, downstream_callee)\nclass Ledger:\n    def __init__(self) -> None:\n        self.entries: list[int] = []\n\n    def record(self, amount: int) -> int:\n        self.entries.append(amount)\n        return sum(self.entries)\n\n### backend/service.py:10-12 [process_payment] (target)\ndef process_payment(amount: int, ledger: Ledger) -> int:\n    fee = amount // 10\n    return ledger.record(amount - fee)",
+    "token_metrics": {
+      "slice_tokens": 114,
+      "payload_tokens": 262,
+      "budget_tokens": 6000,
+      "touched_files_tokens": 229,
+      "full_repo_tokens": 229,
+      "reduction_vs_touched_files_pct": 50.22,
+      "reduction_vs_full_repo_pct": 50.22,
+      "files_in_slice": 1
+    }
+  },
+  "typescript": {
+    "symbol": "processPayment",
+    "compiled_context": "### src/service.ts:1-8 [Ledger, Ledger.record] (data_schema, downstream_callee)\nexport class Ledger {\n  private entries: number[] = [];\n\n  record(amount: number): number {\n    this.entries.push(amount);\n    return this.entries.reduce((total, value) => total + value, 0);\n  }\n}\n\n### src/service.ts:10-13 [processPayment] (target)\nexport function processPayment(amount: number, ledger: Ledger): number {\n  const fee = Math.floor(amount / 10);\n  return ledger.record(amount - fee);\n}",
+    "token_metrics": {
+      "slice_tokens": 119,
+      "payload_tokens": 272,
+      "budget_tokens": 6000,
+      "touched_files_tokens": 275,
+      "full_repo_tokens": 275,
+      "reduction_vs_touched_files_pct": 56.73,
+      "reduction_vs_full_repo_pct": 56.73,
+      "files_in_slice": 1
+    }
+  }
+}

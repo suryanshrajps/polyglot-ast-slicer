@@ -76,6 +76,7 @@ def run_json(*args: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repos-dir", type=Path, default=Path("/tmp/heldout"))
+    parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
 
     results: dict[str, dict] = {}
@@ -131,6 +132,9 @@ def main() -> None:
         "results": results,
     }
     METRICS.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    if args.json:
+        print(json.dumps(payload))
+        return
     for name, row in results.items():
         print(
             f"{name}: sites={row['sites']} correct={row['correct']} wrong={row['wrong']} "

@@ -13,13 +13,17 @@ import csv
 import difflib
 import json
 import math
+import os
 import re
 import subprocess
 import sys
 from pathlib import Path
 
+from polyglot_ast_slicer.parser import EXTENSION_TO_LANGUAGE
+
 ROOT = Path(__file__).resolve().parents[1]
 METRICS_DIR = ROOT / "metrics"
+
 PINNED = {
     "requests": ("https://github.com/psf/requests.git", "3c7baaa05ab4aa49cc819ce3a819d260de19c157"),
     "click": ("https://github.com/pallets/click.git", "2247b35ea1c47c727d7a06e51fa280e12a863ff6"),
@@ -304,6 +308,9 @@ def collect(repos_dir: Path) -> dict[str, object]:
         "ground_truth": {},
         "ts_ground_truth": {},
         "size_comparison": {},
+        "heldout": {},
+        "examples": {},
+        "performance": {},
         "tests": {},
     }
     for name in PINNED:
@@ -403,6 +410,23 @@ def collect(repos_dir: Path) -> dict[str, object]:
     data["size_comparison"] = run_json(
         "benchmarks/size_compare.py", "--json", "--repos-dir", str(repos_dir)
     )
+    heldout_dir = Path(os.environ.get("POLYGLOT_AST_HELDOUT_DIR", "/tmp/heldout"))
+    data["heldout"] = run_json(
+        "benchmarks/ground_truth/heldout_eval.py",
+        "--json",
+        "--repos-dir",
+        str(heldout_dir),
+    )
+    subprocess.run(
+        [sys.executable, "benchmarks/readme_examples.py"],
+        cwd=ROOT,
+        capture_output=True,
+        check=True,
+    )
+    data["examples"] = json.loads((METRICS_DIR / "examples.json").read_text(encoding="utf-8"))
+    data["performance"] = json.loads(
+        (ROOT / "verify" / "results" / "scale.json").read_text(encoding="utf-8")
+    )
     data["tests"] = {"count": collected_test_count()}
     return data
 
@@ -416,6 +440,9 @@ def load_artifacts() -> dict[str, object]:
         "ground_truth": {},
         "ts_ground_truth": {},
         "size_comparison": {},
+        "heldout": {},
+        "examples": {},
+        "performance": {},
         "tests": {},
     }
     for name in PINNED:
@@ -435,6 +462,13 @@ def load_artifacts() -> dict[str, object]:
     )
     data["size_comparison"] = json.loads(
         (METRICS_DIR / "size_comparison.json").read_text(encoding="utf-8")
+    )
+    data["heldout"] = json.loads(
+        (METRICS_DIR / "heldout_ground_truth.json").read_text(encoding="utf-8")
+    )
+    data["examples"] = json.loads((METRICS_DIR / "examples.json").read_text(encoding="utf-8"))
+    data["performance"] = json.loads(
+        (ROOT / "verify" / "results" / "scale.json").read_text(encoding="utf-8")
     )
     data["tests"] = json.loads((METRICS_DIR / "tests.json").read_text(encoding="utf-8"))
     return data
@@ -831,9 +865,168 @@ def write_artifacts(data: dict[str, object]) -> None:
     (METRICS_DIR / "size_comparison.json").write_text(
         json.dumps(data["size_comparison"], indent=2) + "\n", encoding="utf-8"
     )
+    (METRICS_DIR / "heldout_ground_truth.json").write_text(
+        json.dumps(data["heldout"], indent=2) + "\n", encoding="utf-8"
+    )
+    (METRICS_DIR / "examples.json").write_text(
+        json.dumps(data["examples"], indent=2) + "\n", encoding="utf-8"
+    )
     (METRICS_DIR / "tests.json").write_text(
         json.dumps(data["tests"], indent=2) + "\n", encoding="utf-8"
     )
+
+
+
+def render_readme(data: dict[str, object]) -> str:
+    python = data["ground_truth"]  # type: ignore[assignment]
+    ts = data["ts_ground_truth"]  # type: ignore[assignment]
+    heldout = data["heldout"]  # type: ignore[assignment]
+    sizes = data["size_comparison"]  # type: ignore[assignment]
+    performance = data["performance"]  # type: ignore[assignment]
+
+    records: list[dict[str, object]] = []
+    for name, entry in python["repos"].items():
+        records.append(
+            {
+                "name": name,
+                "language": "Python",
+                "sha": entry.get("sha", python["pinned"].get(name, "")),
+                "entry": entry,
+                "source": "main",
+            }
+        )
+    for name, entry in heldout["results"].items():
+        if entry["language"] != "python":
+            continue
+        records.append(
+            {
+                "name": name,
+                "language": "Python",
+                "sha": entry["sha"],
+                "entry": entry,
+                "source": "held-out",
+            }
+        )
+    for name, entry in ts["repos"].items():
+        group = "ts" if entry["groups"]["ts"]["project_sites"] else "js"
+        label = "TypeScript" if group == "ts" else "JavaScript"
+        records.append(
+            {
+                "name": name,
+                "language": label,
+                "sha": entry.get("sha", ""),
+                "entry": entry["groups"][group],
+                "source": "main",
+            }
+        )
+    for name, entry in heldout["results"].items():
+        if entry["language"] == "python":
+            continue
+        label = "TypeScript" if entry["language"] == "typescript" else "JavaScript"
+        records.append(
+            {
+                "name": name,
+                "language": label,
+                "sha": entry["sha"],
+                "entry": entry,
+                "source": "held-out",
+            }
+        )
+
+    result_lines = [
+        "| Repo | Language | Pinned SHA | Sites | Precision (95% CI) | High-conf | "
+        "Recall (95% CI) | Source |",
+        "|---|---|---|---:|---|---:|---|---|",
+    ]
+    aggregate: dict[str, dict[str, int]] = {}
+    for record in records:
+        entry = record["entry"]  # type: ignore[assignment]
+        sites = int(entry.get("project_sites", entry.get("sites", 0)))
+        correct = int(entry["correct"])
+        wrong = int(entry["wrong"])
+        high = entry["high_confidence"]
+        p_low, p_high = entry["precision_ci95"]
+        r_low, r_high = entry["recall_ci95"]
+        result_lines.append(
+            f"| `{record['name']}` | {record['language']} | "
+            f"`{str(record['sha'])[:7]}` | {sites} | "
+            f"{fmt(entry['precision'])} (95% CI {fmt(p_low)}–{fmt(p_high)}) | "
+            f"{high['correct']}/{high['claims']} | "
+            f"{fmt(entry['recall'])} (95% CI {fmt(r_low)}–{fmt(r_high)}) | "
+            f"{record['source']} |"
+        )
+        bucket = aggregate.setdefault(
+            str(record["language"]),
+            {"sites": 0, "correct": 0, "wrong": 0, "hc_claims": 0, "hc_correct": 0},
+        )
+        bucket["sites"] += sites
+        bucket["correct"] += correct
+        bucket["wrong"] += wrong
+        bucket["hc_claims"] += int(high["claims"])
+        bucket["hc_correct"] += int(high["correct"])
+    for language, bucket in aggregate.items():
+        total = bucket["correct"] + bucket["wrong"]
+        low, high = wilson(bucket["correct"], total)
+        r_low, r_high = wilson(bucket["correct"], bucket["sites"])
+        precision = bucket["correct"] / total if total else 0.0
+        high_precision = (
+            bucket["hc_correct"] / bucket["hc_claims"] if bucket["hc_claims"] else 0.0
+        )
+        recall = bucket["correct"] / bucket["sites"] if bucket["sites"] else 0.0
+        result_lines.append(
+            f"| **{language} (all)** | | | {bucket['sites']} | {fmt(precision)} "
+            f"(95% CI {fmt(low)}–{fmt(high)}) | "
+            f"{bucket['hc_correct']}/{bucket['hc_claims']} ({fmt(high_precision)}) | "
+            f"{fmt(recall)} (95% CI {fmt(r_low)}–{fmt(r_high)}) | |"
+        )
+
+    performance_lines = [
+        "| Corpus | Files | Cold ms | Warm ms | Incremental p95 ms | Query ms | Peak RSS MB |",
+        "|---|---:|---:|---:|---:|---:|---:|",
+    ]
+    for name, row in performance["results"].items():
+        performance_lines.append(
+            f"| {name} | {row['files']} | {row['cold_ms']} | {row['warm_ms']} | "
+            f"{row['incremental_p95_ms']} | {row['query_ms']} | {row['peak_rss_mb']} |"
+        )
+
+    size_lines = [
+        "| Language | Symbols | Payload tokens p10 / median / p90 | "
+        "Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |",
+        "|---|---:|---|---|---|",
+    ]
+    for language, entry in sizes["per_language"].items():
+        cells = []
+        for key in ("payload_tokens", "entry_file_tokens", "caller_callee_files_tokens"):
+            quantile = entry[key]
+            cells.append(
+                f"{quantile['p10']:.0f} / {quantile['median']:.0f} / {quantile['p90']:.0f}"
+            )
+        size_lines.append(
+            f"| {language} | {entry['symbols']} | {cells[0]} | {cells[1]} | {cells[2]} |"
+        )
+
+    language_lines = [
+        "| Extension | Language | Tree-sitter grammar |",
+        "|---|---|---|",
+    ]
+    for extension, language in sorted(EXTENSION_TO_LANGUAGE.items()):
+        language_lines.append(f"| `{extension}` | {language} | `{language}` |")
+
+    examples = data["examples"]  # type: ignore[assignment]
+    replacements = {
+        "python_example": examples["python"]["compiled_context"].strip(),
+        "typescript_example": examples["typescript"]["compiled_context"].strip(),
+        "results_table": "\n".join(result_lines),
+        "performance_table": "\n".join(performance_lines),
+        "size_table": "\n".join(size_lines),
+        "language_table": "\n".join(language_lines),
+        "test_count": str(data["tests"]["count"]),  # type: ignore[index]
+    }
+    template = (ROOT / "README.template.md").read_text(encoding="utf-8")
+    for key, value in replacements.items():
+        template = template.replace("{{" + key + "}}", value)
+    return template
 
 
 def main() -> None:
@@ -844,26 +1037,33 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.render:
-        (ROOT / "METRICS.md").write_text(render(load_artifacts()), encoding="utf-8")
-        print("rewrote METRICS.md from artifacts and labels")
+        data = load_artifacts()
+        (ROOT / "METRICS.md").write_text(render(data), encoding="utf-8")
+        (ROOT / "README.md").write_text(render_readme(data), encoding="utf-8")
+        print("rewrote METRICS.md and README.md from artifacts and labels")
         return
 
     if args.check:
-        rendered = render(load_artifacts())
-        current = (ROOT / "METRICS.md").read_text(encoding="utf-8")
-        if current != rendered:
-            diff = difflib.unified_diff(
-                current.splitlines(), rendered.splitlines(), fromfile="METRICS.md", lineterm=""
-            )
-            print("\n".join(list(diff)[:200]))
-            raise SystemExit("METRICS.md does not match committed artifacts")
-        print("METRICS.md matches committed artifacts")
+        data = load_artifacts()
+        for name, rendered in (
+            ("METRICS.md", render(data)),
+            ("README.md", render_readme(data)),
+        ):
+            current = (ROOT / name).read_text(encoding="utf-8")
+            if current != rendered:
+                diff = difflib.unified_diff(
+                    current.splitlines(), rendered.splitlines(), fromfile=name, lineterm=""
+                )
+                print("\n".join(list(diff)[:200]))
+                raise SystemExit(f"{name} does not match committed artifacts")
+        print("METRICS.md and README.md match committed artifacts")
         return
 
     data = collect(args.repos_dir)
     write_artifacts(data)
     (ROOT / "METRICS.md").write_text(render(data), encoding="utf-8")
-    print("wrote METRICS.md and metrics/*.json")
+    (ROOT / "README.md").write_text(render_readme(data), encoding="utf-8")
+    print("wrote README.md, METRICS.md and metrics/*.json")
 
 
 if __name__ == "__main__":

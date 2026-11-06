@@ -113,7 +113,7 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
   `metrics/heldout_ground_truth.json`.
 - werkzeug: 1426 sites, 1080 correct, 1 wrong, 345 missed, 14 ambiguous (12
   reported); precision 99.91% (95% CI 99.48-99.98), high-confidence 99.89%
-  (946/947), recall 75.74% (95% CI 73.44-77.89).
+  (945/946), recall 75.74% (95% CI 73.44-77.89).
 - zustand: 43 sites, 38 correct, 0 wrong, 5 missed; precision 100.0%
   (95% CI 90.82-100.0), high-confidence 100% (38/38), recall 88.37%
   (95% CI 75.52-94.93).
@@ -180,3 +180,15 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
 - TypeScript (zod): payload 234 / 1977 / 4938; entry file 1195 / 39169 / 39169
   (types.ts dominates the median); caller+callee files 1195 / 39169 / 40544.
 - Artifact `metrics/size_comparison.json`; rendered as sizes only, no sufficiency claim.
+
+## README rewrite — 2026-11-06
+- README.md is now generated from `README.template.md` by
+  `scripts/generate_metrics.py`; `--check` verifies both METRICS.md and README.md, so CI
+  catches drift offline.
+- Contents: 3-line description, `uvx` install, MCP config for Cursor/Claude Desktop/Claude
+  Code, one worked Python and TypeScript example with real compiled output
+  (`metrics/examples.json`), a per-repo results table (main + held-out, SHAs, Wilson
+  intervals, per-repo recall, language totals), performance, size comparison, a language
+  table generated from the parser extension map, limitations and tool-fit guidance.
+- Held-out rows: werkzeug 99.9% precision / 75.7% recall; zustand 100% / 88.4%; moment
+  100% / 63.9%. Production-source-only scope and Jedi/tsc ground truth are stated.
