@@ -1,45 +1,29 @@
 {
   "sites_sampled": 150,
-  "jedi_project_targets": 75,
-  "tool_edges_present": 64,
-  "recall": 0.8533333333333334,
+  "jedi_project_targets": 77,
+  "tool_edges_present": 73,
+  "recall": 0.948051948051948,
   "recall_ci95": [
-    0.7561523214068765,
-    0.9160828299052742
+    0.8739071685752308,
+    0.9796152814963542
   ],
-  "unresolved_by_jedi": 75,
+  "unresolved_by_jedi": 73,
   "misses": [
     [
-      "Command.to_info_dict",
-      "to_info_dict"
+      "test_wrapping_long_command_name",
+      "command"
     ],
     [
-      "CommandCollection.list_commands",
-      "list_commands"
+      "Group.format_commands",
+      "get_short_help_str"
     ],
     [
-      "_StaticMessageType.convert",
-      "fail"
+      "FloatRange.__init__",
+      "__init__"
     ],
     [
-      "test_lookup_default_callable_in_default_map",
-      "lookup_default"
-    ],
-    [
-      "test_func_param_type_uses_value_error_message",
-      "convert"
-    ],
-    [
-      "test_progressbar_update.cli",
-      "advance_time"
-    ],
-    [
-      "Context.command_path",
-      "get_usage_pieces"
-    ],
-    [
-      "Group.invoke",
-      "_process_result"
+      "test_invoked_subcommand",
+      "command"
     ]
   ]
 }

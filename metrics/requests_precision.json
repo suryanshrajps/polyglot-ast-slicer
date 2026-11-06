@@ -1,34 +1,28 @@
 {
   "sampled": 100,
-  "strict": 35,
-  "canonical": 99,
-  "precision": 0.99,
+  "strict": 39,
+  "canonical": 100,
+  "precision": 1.0,
   "precision_ci95": [
-    0.9455138038212946,
-    0.9982325679358593
+    0.9630065017930143,
+    1.0
   ],
   "by_tier": {
     "0.98": {
-      "n": 12,
-      "strict": 12,
-      "canonical": 12
+      "n": 17,
+      "strict": 17,
+      "canonical": 17
     },
     "0.95": {
-      "n": 47,
-      "strict": 9,
-      "canonical": 46
+      "n": 48,
+      "strict": 11,
+      "canonical": 48
     },
     "0.9": {
-      "n": 41,
-      "strict": 14,
-      "canonical": 41
+      "n": 35,
+      "strict": 11,
+      "canonical": 35
     }
   },
-  "failures": [
-    [
-      "is_prepared",
-      "SessionRedirectMixin.rebuild_auth",
-      0.95
-    ]
-  ]
+  "failures": []
 }

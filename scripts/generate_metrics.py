@@ -23,6 +23,10 @@ PINNED = {
     "requests": ("https://github.com/psf/requests.git", "3c7baaa05ab4aa49cc819ce3a819d260de19c157"),
     "click": ("https://github.com/pallets/click.git", "2247b35ea1c47c727d7a06e51fa280e12a863ff6"),
 }
+GROUND_TRUTH_PINNED = {
+    **PINNED,
+    "flask": ("https://github.com/pallets/flask.git", "49943b5a94413a530761350f04e896f76e8d620e"),
+}
 SCALE_FILES = 5000
 LABEL_REPOS = ("requests", "click", "zod")
 
@@ -65,9 +69,13 @@ def run_json(*args: str) -> dict:
     return json.loads(completed.stdout)
 
 
-def ensure_repo(name: str, repos_dir: Path) -> Path:
+def ensure_repo(
+    name: str,
+    repos_dir: Path,
+    pinned: dict[str, tuple[str, str]] | None = None,
+) -> Path:
     target = repos_dir / name
-    url, sha = PINNED[name]
+    url, sha = (pinned or PINNED)[name]
     if not target.exists():
         repos_dir.mkdir(parents=True, exist_ok=True)
         subprocess.run(["git", "clone", "-q", url, str(target)], check=True)
@@ -86,7 +94,13 @@ def ensure_repo(name: str, repos_dir: Path) -> Path:
 
 
 def collect(repos_dir: Path) -> dict[str, object]:
-    data: dict[str, object] = {"precision": {}, "recall": {}, "synthetic": {}, "scale": {}}
+    data: dict[str, object] = {
+        "precision": {},
+        "recall": {},
+        "synthetic": {},
+        "scale": {},
+        "ground_truth": {},
+    }
     for name in PINNED:
         repo = ensure_repo(name, repos_dir)
         precision = run_json("benchmarks/edge_eval/precision.py", str(repo), "100", "--json")
@@ -114,11 +128,83 @@ def collect(repos_dir: Path) -> dict[str, object]:
     }
     scale = run_json("benchmarks/scale/scale_bench.py", "--files", str(SCALE_FILES), "--json")
     data["scale"] = {key: scale[key] for key in ("files", "symbols", "edges")}  # type: ignore[assignment]
+
+    repos: dict[str, dict] = {}
+    for name in GROUND_TRUTH_PINNED:
+        repo = ensure_repo(name, repos_dir, GROUND_TRUTH_PINNED)
+        summary = run_json(
+            "benchmarks/ground_truth/python_eval.py",
+            str(repo),
+            "--json",
+            "--unjudged",
+            "10",
+        )
+        summary.pop("unjudged_sample", None)
+        summary.pop("repo", None)
+        repos[name] = summary
+    sites = sum(int(item["project_sites"]) for item in repos.values())
+    correct = sum(int(item["correct"]) for item in repos.values())
+    wrong = sum(int(item["wrong"]) for item in repos.values())
+    hc_claims = sum(int(item["high_confidence"]["claims"]) for item in repos.values())
+    hc_correct = sum(int(item["high_confidence"]["correct"]) for item in repos.values())
+    hc_wrong = sum(int(item["high_confidence"]["wrong"]) for item in repos.values())
+    forms: dict[str, dict[str, int]] = {}
+    for item in repos.values():
+        for form, row in item["by_form"].items():
+            aggregate = forms.setdefault(
+                form,
+                {
+                    "sites": 0,
+                    "correct": 0,
+                    "wrong": 0,
+                    "missed": 0,
+                    "ambiguous_but_reported": 0,
+                },
+            )
+            for key in aggregate:
+                aggregate[key] += int(row[key])
+    existing_audit: dict = {}
+    artifact = METRICS_DIR / "python_ground_truth.json"
+    if artifact.exists():
+        existing_audit = json.loads(artifact.read_text(encoding="utf-8")).get("hand_audit", {})
+    data["ground_truth"] = {  # type: ignore[assignment]
+        "pinned": {name: pinned[1] for name, pinned in GROUND_TRUTH_PINNED.items()},
+        "repos": repos,
+        "combined": {
+            "project_sites": sites,
+            "correct": correct,
+            "wrong": wrong,
+            "missed": sites - correct - wrong,
+            "ambiguous": sum(int(item["ambiguous"]) for item in repos.values()),
+            "ambiguous_but_reported": sum(
+                int(item["ambiguous_but_reported"]) for item in repos.values()
+            ),
+            "precision": correct / (correct + wrong) if correct + wrong else 0.0,
+            "recall": correct / sites if sites else 0.0,
+            "high_confidence": {
+                "threshold": 0.95,
+                "claims": hc_claims,
+                "correct": hc_correct,
+                "wrong": hc_wrong,
+                "precision": hc_correct / (hc_correct + hc_wrong)
+                if hc_correct + hc_wrong
+                else 0.0,
+            },
+            "by_form": forms,
+        },
+        "hand_audit": existing_audit,
+    }
     return data
 
 
 def load_artifacts() -> dict[str, object]:
-    data: dict[str, object] = {"precision": {}, "recall": {}, "synthetic": {}, "scale": {}}
+    data: dict[str, object] = {
+        "precision": {},
+        "recall": {},
+        "synthetic": {},
+        "scale": {},
+        "ground_truth": {},
+    }
     for name in PINNED:
         data["precision"][name] = json.loads(  # type: ignore[index]
             (METRICS_DIR / f"{name}_precision.json").read_text(encoding="utf-8")
@@ -128,6 +214,9 @@ def load_artifacts() -> dict[str, object]:
         )
     data["synthetic"] = json.loads((METRICS_DIR / "synthetic_benchmark.json").read_text())
     data["scale"] = json.loads((METRICS_DIR / "scale_5000.json").read_text())
+    data["ground_truth"] = json.loads(
+        (METRICS_DIR / "python_ground_truth.json").read_text(encoding="utf-8")
+    )
     return data
 
 
@@ -140,6 +229,7 @@ def render(data: dict[str, object]) -> str:
     recall = data["recall"]  # type: ignore[assignment]
     synthetic = data["synthetic"]  # type: ignore[assignment]
     scale = data["scale"]  # type: ignore[assignment]
+    ground_truth = data["ground_truth"]  # type: ignore[assignment]
 
     lines: list[str] = [
         "# Generated metrics",
@@ -333,6 +423,63 @@ def render(data: dict[str, object]) -> str:
         "",
         "Unconditional recall (hand-labelled true targets) is UNMEASURED.",
         "",
+        "## Python call-site ground truth (Jedi, `src/` only)",
+        "",
+        "Pinned: "
+        + ", ".join(
+            f"{name} `{sha[:7]}`" for name, sha in ground_truth["pinned"].items()
+        )
+        + ". Every raw tree-sitter call site is resolved with Jedi (`follow_imports=True`).",
+        "Precision = correct/(correct+wrong); recall = correct/project sites. High-confidence",
+        "means the tool's reported edge confidence is at least 0.95.",
+        "",
+        "| Repo | Sites | Correct | Wrong | Missed | Ambiguous (reported) | Precision | "
+        "High-conf precision | Recall |",
+        "|---|---:|---:|---:|---:|---:|---|---|---|",
+    ]
+    for name, entry in ground_truth["repos"].items():
+        high = entry["high_confidence"]
+        p_low, p_high = entry["precision_ci95"]
+        r_low, r_high = entry["recall_ci95"]
+        lines.append(
+            f"| `{name}` | {entry['project_sites']} | {entry['correct']} | "
+            f"{entry['wrong']} | {entry['missed']} | "
+            f"{entry['ambiguous']} ({entry['ambiguous_but_reported']}) | "
+            f"{fmt(entry['precision'])} (95% CI {fmt(p_low)}–{fmt(p_high)}) | "
+            f"{fmt(high['precision'])} ({high['correct']}/{high['claims']}) | "
+            f"{fmt(entry['recall'])} (95% CI {fmt(r_low)}–{fmt(r_high)}) |"
+        )
+    combined = ground_truth["combined"]
+    high = combined["high_confidence"]
+    lines += [
+        "",
+        f"Combined: {combined['correct']} correct, {combined['wrong']} wrong, "
+        f"{combined['missed']} missed of {combined['project_sites']} project sites; "
+        f"precision {fmt(combined['precision'])}, recall {fmt(combined['recall'])}, "
+        f"high-confidence precision {fmt(high['precision'])} "
+        f"({high['correct']}/{high['claims']}).",
+        "",
+        "| Form | Sites | Correct | Wrong | Missed | Ambiguous reported | Precision | Recall |",
+        "|---|---:|---:|---:|---:|---:|---|---|",
+    ]
+    for form, row in combined["by_form"].items():
+        if not row["sites"]:
+            continue
+        precision = row["correct"] / (row["correct"] + row["wrong"]) if (
+            row["correct"] + row["wrong"]
+        ) else 0.0
+        lines.append(
+            f"| `{form}` | {row['sites']} | {row['correct']} | {row['wrong']} | "
+            f"{row['missed']} | {row['ambiguous_but_reported']} | {fmt(precision)} | "
+            f"{fmt(row['correct'] / row['sites'])} |"
+        )
+    audit = ground_truth.get("hand_audit") or {}
+    lines += [
+        "",
+        f"Independent hand audit: {audit.get('correct', 0)}/{audit.get('sample', 0)} sampled "
+        "unjudged edges correct, with file:line citations in "
+        "`metrics/python_ground_truth.json`.",
+        "",
         "## Synthetic token benchmark (hops=2)",
         "",
         "| Target | Touched files | Repo | Slice | Saved vs files |",
@@ -378,6 +525,9 @@ def write_artifacts(data: dict[str, object]) -> None:
     )
     (METRICS_DIR / "scale_5000.json").write_text(
         json.dumps(data["scale"], indent=2) + "\n", encoding="utf-8"
+    )
+    (METRICS_DIR / "python_ground_truth.json").write_text(
+        json.dumps(data["ground_truth"], indent=2) + "\n", encoding="utf-8"
     )
 
 

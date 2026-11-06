@@ -70,8 +70,8 @@ Grep recall is inflated by name collisions (e.g. `request` matching `pyproject.t
 
 | Repo | Sampled | Confirmed (strict) | Not contradicted (canonical) |
 |---|---:|---:|---:|
-| `requests` | 100 | 35/100 | 99/100 (99.0%; 95% CI 94.6%–99.8%) |
-| `click` | 100 | 30/100 | 100/100 (100.0%; 95% CI 96.3%–100.0%) |
+| `requests` | 100 | 39/100 | 100/100 (100.0%; 95% CI 96.3%–100.0%) |
+| `click` | 100 | 33/100 | 100/100 (100.0%; 95% CI 96.3%–100.0%) |
 
 The canonical column also accepts re-export hops; it is not hand-labeled precision.
 
@@ -79,16 +79,44 @@ The canonical column also accepts re-export hops; it is not hand-labeled precisi
 
 | Repo | Found / resolvable | Recall | Unresolved by Jedi |
 |---|---:|---:|---:|
-| `requests` | 46/64 | 71.9% (95% CI 59.9%–81.4%) | 86 |
-| `click` | 64/75 | 85.3% (95% CI 75.6%–91.6%) | 75 |
+| `requests` | 45/58 | 77.6% (95% CI 65.3%–86.4%) | 92 |
+| `click` | 73/77 | 94.8% (95% CI 87.4%–98.0%) | 73 |
 
 Unconditional recall (hand-labelled true targets) is UNMEASURED.
+
+## Python call-site ground truth (Jedi, `src/` only)
+
+Pinned: requests `3c7baaa`, click `2247b35`, flask `49943b5`. Every raw tree-sitter call site is resolved with Jedi (`follow_imports=True`).
+Precision = correct/(correct+wrong); recall = correct/project sites. High-confidence
+means the tool's reported edge confidence is at least 0.95.
+
+| Repo | Sites | Correct | Wrong | Missed | Ambiguous (reported) | Precision | High-conf precision | Recall |
+|---|---:|---:|---:|---:|---:|---|---|---|
+| `requests` | 307 | 276 | 0 | 31 | 0 (0) | 100.0% (95% CI 98.6%–100.0%) | 100.0% (257/257) | 89.9% (95% CI 86.0%–92.8%) |
+| `click` | 740 | 552 | 1 | 187 | 8 (4) | 99.8% (95% CI 99.0%–100.0%) | 99.8% (460/461) | 74.6% (95% CI 71.3%–77.6%) |
+| `flask` | 348 | 210 | 0 | 138 | 2 (0) | 100.0% (95% CI 98.2%–100.0%) | 100.0% (193/193) | 60.3% (95% CI 55.1%–65.3%) |
+
+Combined: 1038 correct, 1 wrong, 356 missed of 1395 project sites; precision 99.9%, recall 74.4%, high-confidence precision 99.9% (910/911).
+
+| Form | Sites | Correct | Wrong | Missed | Ambiguous reported | Precision | Recall |
+|---|---:|---:|---:|---:|---:|---|---|
+| `bare` | 517 | 398 | 1 | 118 | 4 | 99.7% | 77.0% |
+| `module_attr` | 6 | 6 | 0 | 0 | 0 | 100.0% | 100.0% |
+| `self_cls` | 442 | 366 | 0 | 76 | 0 | 100.0% | 82.8% |
+| `super` | 43 | 34 | 0 | 9 | 0 | 100.0% | 79.1% |
+| `constructor` | 175 | 158 | 0 | 17 | 0 | 100.0% | 90.3% |
+| `aliased_import` | 13 | 13 | 0 | 0 | 0 | 100.0% | 100.0% |
+| `chained` | 1 | 0 | 0 | 1 | 0 | 0.0% | 0.0% |
+| `callback` | 13 | 0 | 0 | 13 | 0 | 0.0% | 0.0% |
+| `other` | 185 | 63 | 0 | 122 | 0 | 100.0% | 34.1% |
+
+Independent hand audit: 30/30 sampled unjudged edges correct, with file:line citations in `metrics/python_ground_truth.json`.
 
 ## Synthetic token benchmark (hops=2)
 
 | Target | Touched files | Repo | Slice | Saved vs files |
 |---|---:|---:|---:|---:|
-| `process_payment` | 10540 | 12214 | 537 | 94.91% |
+| `process_payment` | 10540 | 12214 | 539 | 94.89% |
 | `handle_checkout_webhook` | 10540 | 12214 | 539 | 94.89% |
 | `submitOrderCheckout` | 1674 | 12214 | 168 | 89.96% |
 

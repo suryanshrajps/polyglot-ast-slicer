@@ -1,6 +1,6 @@
 {
   "sampled": 100,
-  "strict": 30,
+  "strict": 33,
   "canonical": 100,
   "precision": 1.0,
   "precision_ci95": [
@@ -9,19 +9,24 @@
   ],
   "by_tier": {
     "0.98": {
-      "n": 15,
-      "strict": 15,
-      "canonical": 15
+      "n": 6,
+      "strict": 6,
+      "canonical": 6
     },
     "0.95": {
-      "n": 26,
-      "strict": 9,
-      "canonical": 26
+      "n": 21,
+      "strict": 11,
+      "canonical": 21
     },
     "0.9": {
-      "n": 59,
-      "strict": 6,
-      "canonical": 59
+      "n": 71,
+      "strict": 14,
+      "canonical": 71
+    },
+    "0.85": {
+      "n": 2,
+      "strict": 2,
+      "canonical": 2
     }
   },
   "failures": []

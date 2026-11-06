@@ -1,45 +1,45 @@
 {
   "sites_sampled": 150,
-  "jedi_project_targets": 64,
-  "tool_edges_present": 46,
-  "recall": 0.71875,
+  "jedi_project_targets": 58,
+  "tool_edges_present": 45,
+  "recall": 0.7758620689655172,
   "recall_ci95": [
-    0.5986606971779259,
-    0.8140662766627217
+    0.653388823610813,
+    0.8640633938859026
   ],
-  "unresolved_by_jedi": 86,
+  "unresolved_by_jedi": 92,
   "misses": [
     [
-      "TestRequests.test_prepared_request_hook",
-      "send"
-    ],
-    [
-      "TestRequests.test_session_get_adapter_prefix_without_trailing_slash",
-      "get_adapter"
-    ],
-    [
-      "RequestsCookieJar.update",
-      "copy"
-    ],
-    [
-      "_copy_cookie_jar",
-      "copy"
-    ],
-    [
-      "TestRequests.test_response_iter_lines",
-      "iter_lines"
-    ],
-    [
-      "TestRequests.test_unicode_multipart_post_fieldnames",
-      "prepare"
+      "TestRequests.test_custom_redirect_mixin",
+      "get"
     ],
     [
       "TestRequests.test_session_get_adapter_prefix_matching",
-      "get_adapter"
+      "mount"
     ],
     [
-      "super_len",
-      "seek"
+      "TestPreparingURLs.test_url_mutation",
+      "prepare"
+    ],
+    [
+      "TestRequests.test_DIGESTAUTH_WRONG_HTTP_401_GET",
+      "get"
+    ],
+    [
+      "TestRequests.test_cookie_as_dict_keys",
+      "keys"
+    ],
+    [
+      "TestRequests.test_cookie_as_dict_keeps_items",
+      "items"
+    ],
+    [
+      "TestRequests.test_cookie_duplicate_names_different_domains",
+      "set"
+    ],
+    [
+      "TestRequests.test_cookie_removed_on_expire",
+      "get"
     ]
   ]
 }

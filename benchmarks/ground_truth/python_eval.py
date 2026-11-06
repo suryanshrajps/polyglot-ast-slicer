@@ -61,6 +61,7 @@ class Site:
     truth_names: set[str] = field(default_factory=set)
     ambiguous: bool = False
     reported: set[str] = field(default_factory=set)
+    confidence: float = 0.0
     verdict: str = "unjudged"
 
     def key(self) -> tuple[str | None, str, str | None]:
@@ -335,7 +336,7 @@ def evaluate(
             site.form = _classify(callee, receiver, site.truth, engine, aliased, modules, params)
             sites.append(site)
 
-    reported: dict[tuple[str | None, str, str | None], set[str]] = {}
+    reported: dict[tuple[str | None, str, str | None], dict[str, float]] = {}
     edges: list[tuple[str, str, dict[str, object]]] = []
     for source_id, target_id, data in engine.graph.edges(data=True):
         if data.get("relation") not in ("calls", "constructs"):
@@ -344,21 +345,26 @@ def evaluate(
             continue
         edges.append((source_id, target_id, data))
         key = (source_id, str(data.get("name")), data.get("receiver"))
-        reported.setdefault(key, set()).add(target_id)
+        bucket = reported.setdefault(key, {})
+        bucket[target_id] = max(
+            bucket.get(target_id, 0.0), float(data.get("confidence", 0.0))
+        )
 
     for site in sites:
-        ids = reported.get(site.key(), set())
-        site.reported = ids
+        claims = reported.get(site.key(), {})
+        site.reported = set(claims)
         if site.ambiguous:
             site.verdict = "ambiguous"
         elif not site.truth:
             site.verdict = "unjudged"
-        elif not ids:
+        elif not claims:
             site.verdict = "missed"
-        elif next(iter(site.truth)) in ids:
+        elif next(iter(site.truth)) in claims:
             site.verdict = "correct"
+            site.confidence = claims[next(iter(site.truth))]
         else:
             site.verdict = "wrong"
+            site.confidence = max(claims.values())
 
     project_sites = [site for site in sites if site.truth and not site.ambiguous]
     ambiguous_sites = [site for site in sites if site.ambiguous]
@@ -378,11 +384,20 @@ def evaluate(
         if not group and form == "other":
             continue
         low, high = wilson(hit, len(group))
+        form_wrong = sum(1 for site in group if site.verdict == "wrong")
+        form_low, form_high = wilson(hit, hit + form_wrong)
         by_form[form] = {
             "sites": len(group),
             "correct": hit,
-            "wrong": sum(1 for site in group if site.verdict == "wrong"),
-            "missed": len(group) - hit - sum(1 for site in group if site.verdict == "wrong"),
+            "wrong": form_wrong,
+            "missed": len(group) - hit - form_wrong,
+            "ambiguous_but_reported": sum(
+                1
+                for site in ambiguous_sites
+                if site.form == form and site.reported
+            ),
+            "precision": hit / (hit + form_wrong) if hit + form_wrong else 0.0,
+            "precision_ci95": [form_low, form_high],
             "recall": hit / len(group) if group else 0.0,
             "recall_ci95": [low, high],
         }
@@ -447,6 +462,19 @@ def evaluate(
                 }
             )
 
+    high_confidence_threshold = 0.95
+    hc_correct = sum(
+        1
+        for site in project_sites
+        if site.verdict == "correct" and site.confidence >= high_confidence_threshold
+    )
+    hc_wrong = sum(
+        1
+        for site in project_sites
+        if site.verdict == "wrong" and site.confidence >= high_confidence_threshold
+    )
+    hc_low, hc_high = wilson(hc_correct, hc_correct + hc_wrong)
+
     sha = subprocess.run(
         ["git", "-C", str(repo), "rev-parse", "HEAD"], capture_output=True, text=True
     ).stdout.strip()
@@ -465,6 +493,14 @@ def evaluate(
         "missed": missed,
         "precision": correct / (correct + wrong) if correct + wrong else 0.0,
         "precision_ci95": [precision_low, precision_high],
+        "high_confidence": {
+            "threshold": high_confidence_threshold,
+            "claims": hc_correct + hc_wrong,
+            "correct": hc_correct,
+            "wrong": hc_wrong,
+            "precision": hc_correct / (hc_correct + hc_wrong) if hc_correct + hc_wrong else 0.0,
+            "precision_ci95": [hc_low, hc_high],
+        },
         "recall": correct / total_sites if total_sites else 0.0,
         "recall_ci95": [recall_low, recall_high],
         "by_form": by_form,
@@ -484,9 +520,15 @@ def print_summary(summary: dict[str, object]) -> None:
         f"unresolved={summary['unresolved_by_jedi']}"
     )
     correct, wrong = int(summary["correct"]), int(summary["wrong"])  # type: ignore[arg-type]
+    high = summary["high_confidence"]  # type: ignore[assignment]
     print(
         f"  precision={interval_text(correct, correct + wrong)} "
         f"recall={interval_text(correct, int(summary['project_sites']))}"  # type: ignore[arg-type]
+    )
+    print(
+        f"  high-confidence(>={high['threshold']}): claims={high['claims']} "
+        f"correct={high['correct']} wrong={high['wrong']} "
+        f"precision={high['precision']:.3f}"
     )
     for form, row in summary["by_form"].items():  # type: ignore[union-attr]
         print(

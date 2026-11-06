@@ -1,0 +1,965 @@
+{
+  "pinned": {
+    "requests": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+    "click": "2247b35ea1c47c727d7a06e51fa280e12a863ff6",
+    "flask": "49943b5a94413a530761350f04e896f76e8d620e"
+  },
+  "repos": {
+    "requests": {
+      "sha": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+      "call_sites": 986,
+      "unsupported_callees": 0,
+      "unresolved_by_jedi": 679,
+      "project_sites": 307,
+      "ambiguous": 0,
+      "ambiguous_but_reported": 0,
+      "module_level_sites": 1,
+      "correct": 276,
+      "wrong": 0,
+      "missed": 31,
+      "precision": 1.0,
+      "precision_ci95": [
+        0.9862727315785058,
+        0.9999999999999998
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 257,
+        "correct": 257,
+        "wrong": 0,
+        "precision": 1.0,
+        "precision_ci95": [
+          0.9852728211302685,
+          1.0
+        ]
+      },
+      "recall": 0.8990228013029316,
+      "recall_ci95": [
+        0.8602358579832725,
+        0.9279472914894811
+      ],
+      "by_form": {
+        "bare": {
+          "sites": 141,
+          "correct": 119,
+          "wrong": 0,
+          "missed": 22,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9687283197580606,
+            1.0
+          ],
+          "recall": 0.8439716312056738,
+          "recall_ci95": [
+            0.7750516298960687,
+            0.8946461264630464
+          ]
+        },
+        "module_attr": {
+          "sites": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "self_cls": {
+          "sites": 72,
+          "correct": 72,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9493488274035422,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.9493488274035422,
+            1.0
+          ]
+        },
+        "super": {
+          "sites": 1,
+          "correct": 1,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "constructor": {
+          "sites": 61,
+          "correct": 60,
+          "wrong": 0,
+          "missed": 1,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.93982814785791,
+            0.9999999999999998
+          ],
+          "recall": 0.9836065573770492,
+          "recall_ci95": [
+            0.9128113995535841,
+            0.9971002692007002
+          ]
+        },
+        "aliased_import": {
+          "sites": 13,
+          "correct": 13,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.7719046276458016,
+            0.9999999999999999
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.7719046276458016,
+            0.9999999999999999
+          ]
+        },
+        "chained": {
+          "sites": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "callback": {
+          "sites": 1,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 1,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "other": {
+          "sites": 18,
+          "correct": 11,
+          "wrong": 0,
+          "missed": 7,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.7411670330319684,
+            1.0
+          ],
+          "recall": 0.6111111111111112,
+          "recall_ci95": [
+            0.3861904160223791,
+            0.7969475342783638
+          ]
+        }
+      }
+    },
+    "click": {
+      "sha": "2247b35ea1c47c727d7a06e51fa280e12a863ff6",
+      "call_sites": 2054,
+      "unsupported_callees": 0,
+      "unresolved_by_jedi": 1306,
+      "project_sites": 740,
+      "ambiguous": 8,
+      "ambiguous_but_reported": 4,
+      "module_level_sites": 0,
+      "correct": 552,
+      "wrong": 1,
+      "missed": 187,
+      "precision": 0.9981916817359855,
+      "precision_ci95": [
+        0.989828939274807,
+        0.999680716071141
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 461,
+        "correct": 460,
+        "wrong": 1,
+        "precision": 0.9978308026030369,
+        "precision_ci95": [
+          0.9878164576996523,
+          0.9996169807128467
+        ]
+      },
+      "recall": 0.745945945945946,
+      "recall_ci95": [
+        0.7133658503438949,
+        0.775985738873914
+      ],
+      "by_form": {
+        "bare": {
+          "sites": 304,
+          "correct": 233,
+          "wrong": 1,
+          "missed": 70,
+          "ambiguous_but_reported": 4,
+          "precision": 0.9957264957264957,
+          "precision_ci95": [
+            0.9761944719723077,
+            0.9992452228157322
+          ],
+          "recall": 0.7664473684210527,
+          "recall_ci95": [
+            0.7157429925324593,
+            0.810501914896851
+          ]
+        },
+        "module_attr": {
+          "sites": 4,
+          "correct": 4,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.5101091635454027,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "self_cls": {
+          "sites": 215,
+          "correct": 171,
+          "wrong": 0,
+          "missed": 44,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9780289020315618,
+            1.0
+          ],
+          "recall": 0.7953488372093023,
+          "recall_ci95": [
+            0.7364609152186579,
+            0.8438678793542951
+          ]
+        },
+        "super": {
+          "sites": 38,
+          "correct": 29,
+          "wrong": 0,
+          "missed": 9,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.8830302015002593,
+            1.0
+          ],
+          "recall": 0.7631578947368421,
+          "recall_ci95": [
+            0.607931876367602,
+            0.8700629298294591
+          ]
+        },
+        "constructor": {
+          "sites": 74,
+          "correct": 70,
+          "wrong": 0,
+          "missed": 4,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9479769375897331,
+            1.0
+          ],
+          "recall": 0.9459459459459459,
+          "recall_ci95": [
+            0.8690962359544764,
+            0.9787809878271253
+          ]
+        },
+        "aliased_import": {
+          "sites": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "chained": {
+          "sites": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "callback": {
+          "sites": 7,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 7,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            5.551115123125783e-17,
+            0.35433043506668743
+          ]
+        },
+        "other": {
+          "sites": 98,
+          "correct": 45,
+          "wrong": 0,
+          "missed": 53,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9213484012671117,
+            1.0
+          ],
+          "recall": 0.45918367346938777,
+          "recall_ci95": [
+            0.36392694572948114,
+            0.5575195840763703
+          ]
+        }
+      }
+    },
+    "flask": {
+      "sha": "49943b5a94413a530761350f04e896f76e8d620e",
+      "call_sites": 1223,
+      "unsupported_callees": 0,
+      "unresolved_by_jedi": 873,
+      "project_sites": 348,
+      "ambiguous": 2,
+      "ambiguous_but_reported": 0,
+      "module_level_sites": 0,
+      "correct": 210,
+      "wrong": 0,
+      "missed": 138,
+      "precision": 1.0,
+      "precision_ci95": [
+        0.9820359492407167,
+        1.0
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 193,
+        "correct": 193,
+        "wrong": 0,
+        "precision": 1.0,
+        "precision_ci95": [
+          0.9804845033982735,
+          0.9999999999999999
+        ]
+      },
+      "recall": 0.603448275862069,
+      "recall_ci95": [
+        0.5511917857991642,
+        0.6534458377524501
+      ],
+      "by_form": {
+        "bare": {
+          "sites": 72,
+          "correct": 46,
+          "wrong": 0,
+          "missed": 26,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9229264369144198,
+            1.0
+          ],
+          "recall": 0.6388888888888888,
+          "recall_ci95": [
+            0.5235248046738358,
+            0.7401832029382592
+          ]
+        },
+        "module_attr": {
+          "sites": 2,
+          "correct": 2,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.34238022750665303,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "self_cls": {
+          "sites": 155,
+          "correct": 123,
+          "wrong": 0,
+          "missed": 32,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9697144856546903,
+            0.9999999999999999
+          ],
+          "recall": 0.7935483870967742,
+          "recall_ci95": [
+            0.7231049557811239,
+            0.8497933333407611
+          ]
+        },
+        "super": {
+          "sites": 4,
+          "correct": 4,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.5101091635454027,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "constructor": {
+          "sites": 40,
+          "correct": 28,
+          "wrong": 0,
+          "missed": 12,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.8793566952341543,
+            0.9999999999999998
+          ],
+          "recall": 0.7,
+          "recall_ci95": [
+            0.5456998118185507,
+            0.8192515477025347
+          ]
+        },
+        "aliased_import": {
+          "sites": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "chained": {
+          "sites": 1,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 1,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "callback": {
+          "sites": 5,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 5,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.43448246478317476
+          ]
+        },
+        "other": {
+          "sites": 69,
+          "correct": 7,
+          "wrong": 0,
+          "missed": 62,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.6456695649333126,
+            1.0
+          ],
+          "recall": 0.10144927536231885,
+          "recall_ci95": [
+            0.050016638108459924,
+            0.19491885754947985
+          ]
+        }
+      }
+    }
+  },
+  "combined": {
+    "project_sites": 1395,
+    "correct": 1038,
+    "wrong": 1,
+    "missed": 356,
+    "ambiguous": 10,
+    "ambiguous_but_reported": 4,
+    "precision": 0.9990375360923965,
+    "recall": 0.7440860215053764,
+    "high_confidence": {
+      "threshold": 0.95,
+      "claims": 911,
+      "correct": 910,
+      "wrong": 1,
+      "precision": 0.9989023051591658
+    },
+    "by_form": {
+      "bare": {
+        "sites": 517,
+        "correct": 398,
+        "wrong": 1,
+        "missed": 118,
+        "ambiguous_but_reported": 4
+      },
+      "module_attr": {
+        "sites": 6,
+        "correct": 6,
+        "wrong": 0,
+        "missed": 0,
+        "ambiguous_but_reported": 0
+      },
+      "self_cls": {
+        "sites": 442,
+        "correct": 366,
+        "wrong": 0,
+        "missed": 76,
+        "ambiguous_but_reported": 0
+      },
+      "super": {
+        "sites": 43,
+        "correct": 34,
+        "wrong": 0,
+        "missed": 9,
+        "ambiguous_but_reported": 0
+      },
+      "constructor": {
+        "sites": 175,
+        "correct": 158,
+        "wrong": 0,
+        "missed": 17,
+        "ambiguous_but_reported": 0
+      },
+      "aliased_import": {
+        "sites": 13,
+        "correct": 13,
+        "wrong": 0,
+        "missed": 0,
+        "ambiguous_but_reported": 0
+      },
+      "chained": {
+        "sites": 1,
+        "correct": 0,
+        "wrong": 0,
+        "missed": 1,
+        "ambiguous_but_reported": 0
+      },
+      "callback": {
+        "sites": 13,
+        "correct": 0,
+        "wrong": 0,
+        "missed": 13,
+        "ambiguous_but_reported": 0
+      },
+      "other": {
+        "sites": 185,
+        "correct": 63,
+        "wrong": 0,
+        "missed": 122,
+        "ambiguous_but_reported": 0
+      }
+    }
+  },
+  "hand_audit": {
+    "sample": 30,
+    "correct": 30,
+    "incorrect": 0,
+    "cases": [
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 2505,
+        "call": "morsel_to_cookie(morsel)",
+        "target": "morsel_to_cookie@src/requests/cookies.py:531",
+        "resolution": "import:src/requests/cookies.py",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 164,
+        "call": "request = requests.Request(\"GET\", url, params={\"a\": \"b\"}).prepare()",
+        "target": "Request@src/requests/models.py:284",
+        "resolution": "module:src/requests/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_lowlevel.py",
+        "line": 27,
+        "call": "server = Server.basic_response_server(wait_to_close_event=close_server)",
+        "target": "Server.basic_response_server@tests/testserver/server.py:61",
+        "resolution": "class_receiver:Server",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 2996,
+        "call": "consume_socket_content(sock, timeout=0.5)",
+        "target": "consume_socket_content@tests/testserver/server.py:7",
+        "resolution": "import:tests/testserver/server.py",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 772,
+        "call": "r = requests.get(url, auth=auth)",
+        "target": "get@src/requests/api.py:74",
+        "resolution": "module:src/requests/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 635,
+        "call": "session = requests.Session()",
+        "target": "Session@src/requests/sessions.py:395",
+        "resolution": "module:src/requests/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 577,
+        "call": "r = requests.Request(\"GET\", \"http://localhost\", auth=auth)",
+        "target": "Request@src/requests/models.py:284",
+        "resolution": "module:src/requests/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 253,
+        "call": "requests.get(httpbin(\"relative-redirect\", \"50\"))",
+        "target": "get@src/requests/api.py:74",
+        "resolution": "module:src/requests/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 3005,
+        "call": "server = TLSServer(",
+        "target": "TLSServer@tests/testserver/server.py:138",
+        "resolution": "import:tests/testserver/server.py",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "requests",
+        "file": "tests/test_requests.py",
+        "line": 126,
+        "call": "req = requests.Request(method, httpbin(method.lower())).prepare()",
+        "target": "Request@src/requests/models.py:284",
+        "resolution": "module:src/requests/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_stream_lifecycle.py",
+        "line": 377,
+        "call": "@click.command()",
+        "target": "command@src/click/decorators.py:137",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_arguments.py",
+        "line": 938,
+        "call": "@click.option(\"-f\")",
+        "target": "option@src/click/decorators.py:352",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "examples/naval/naval.py",
+        "line": 43,
+        "call": "click.echo(f\"Ship {ship} fires to {x},{y}\")",
+        "target": "echo@src/click/utils.py:240",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_testing.py",
+        "line": 225,
+        "call": "assert result.output == f\"{click.style('hello world', fg='blue')}\\n\"",
+        "target": "style@src/click/termui.py:641",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_context.py",
+        "line": 415,
+        "call": "super().__init__(*args, **kwargs)",
+        "target": "Option.__init__@src/click/core.py:3149",
+        "resolution": "super:Option",
+        "confidence": 0.85,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_compat.py",
+        "line": 139,
+        "call": "assert strip_ansi(f\"a{seq}b\") == \"ab\"",
+        "target": "strip_ansi@src/click/_compat.py:491",
+        "resolution": "import:src/click/_compat.py",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_commands.py",
+        "line": 214,
+        "call": "@click.option(\"--debug/--no-debug\", default=False)",
+        "target": "option@src/click/decorators.py:352",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_basic.py",
+        "line": 186,
+        "call": "cli = click.Group(commands=[sub])",
+        "target": "Group@src/click/core.py:1703",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_testing.py",
+        "line": 154,
+        "call": "click.echo(click.getchar(echo=True))",
+        "target": "echo@src/click/utils.py:240",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "click",
+        "file": "tests/test_arguments.py",
+        "line": 840,
+        "call": "@click.command()",
+        "target": "command@src/click/decorators.py:137",
+        "resolution": "module:src/click/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_helpers.py",
+        "line": 281,
+        "call": "return flask.Response(flask.stream_with_context(Wrapper(generate())))",
+        "target": "Response@src/flask/wrappers.py:222",
+        "resolution": "module:src/flask/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "src/flask/testing.py",
+        "line": 86,
+        "call": "super().__init__(path, base_url, *args, **kwargs)",
+        "target": "EnvironBuilder.__init__@src/flask/testing.py:49",
+        "resolution": "super:EnvironBuilder",
+        "confidence": 0.85,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "examples/tutorial/flaskr/__init__.py",
+        "line": 40,
+        "call": "app.register_blueprint(blog.bp)",
+        "target": "App.register_blueprint@src/flask/sansio/app.py:570",
+        "resolution": "typed_receiver:app->Flask",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_json_tag.py",
+        "line": 85,
+        "call": "s.register(Tag2, index=None)",
+        "target": "TaggedJSONSerializer.register@src/flask/json/tag.py:256",
+        "resolution": "typed_receiver:s->TaggedJSONSerializer",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_basic.py",
+        "line": 1499,
+        "call": "rv = flask.url_for(\"static\", filename=\"index.html\", _external=True)",
+        "target": "url_for@src/flask/helpers.py:200",
+        "resolution": "module:src/flask/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_basic.py",
+        "line": 1342,
+        "call": "rv = flask.make_response(flask.jsonify(msg), 200)",
+        "target": "jsonify@src/flask/json/__init__.py:138",
+        "resolution": "module:src/flask/__init__.py",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_basic.py",
+        "line": 1007,
+        "call": "raise ForbiddenSubclass()",
+        "target": "test_http_error_subclass_handling.ForbiddenSubclass@tests/test_basic.py:991",
+        "resolution": "same_file_scope",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_apps/blueprintapp/apps/frontend/__init__.py",
+        "line": 14,
+        "call": "return render_template(\"missing_template.html\")",
+        "target": "render_template@src/flask/templating.py:136",
+        "resolution": "import:src/flask/__init__.py",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "tests/test_json_tag.py",
+        "line": 59,
+        "call": "return Foo(value)",
+        "target": "test_custom_tag.Foo@tests/test_json_tag.py:44",
+        "resolution": "same_file_scope",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "flask",
+        "file": "examples/tutorial/flaskr/db.py",
+        "line": 35,
+        "call": "db = get_db()",
+        "target": "get_db@examples/tutorial/flaskr/db.py:9",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      }
+    ]
+  }
+}
