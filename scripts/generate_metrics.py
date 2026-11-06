@@ -27,6 +27,54 @@ GROUND_TRUTH_PINNED = {
     **PINNED,
     "flask": ("https://github.com/pallets/flask.git", "49943b5a94413a530761350f04e896f76e8d620e"),
 }
+TS_GROUND_TRUTH = {
+    "zod": {
+        "url": "https://github.com/colinhacks/zod.git",
+        "sha": "ca42965df46b2f7e2747db29c40a26bcb32a51d5",
+        "path": ".",
+        "root": "src",
+        "exclude": "__tests__,benchmarks",
+    },
+    "nest": {
+        "url": "https://github.com/nestjs/nest.git",
+        "sha": "416830c3924b37ec354d4e15c14119519e389afc",
+        "path": ".",
+        "root": "packages",
+        "exclude": "test,.spec.ts,.e2e-spec.ts",
+    },
+    "bulletproof-react": {
+        "url": "https://github.com/alan2207/bulletproof-react.git",
+        "sha": "9506629ed003a561c6627735480cce4994244bb4",
+        "path": "apps/react-vite",
+        "root": "src",
+        "exclude": "__tests__,test,testing,.test.ts,.test.tsx,.stories.ts,.stories.tsx",
+    },
+    "node-fetch": {
+        "url": "https://github.com/node-fetch/node-fetch.git",
+        "sha": "8b3320d2a7c07bce4afc6b2bf6c3bbddda85b01f",
+        "path": ".",
+        "root": "src",
+    },
+    "express": {
+        "url": "https://github.com/expressjs/express.git",
+        "sha": "1faf228935aa0a13111f92c28ee795be64ce3f0f",
+        "path": ".",
+        "root": "lib",
+    },
+}
+TS_FORMS = (
+    "bare",
+    "module_attr",
+    "self_cls",
+    "super",
+    "constructor",
+    "default_import",
+    "aliased_import",
+    "chained",
+    "callback",
+    "jsx",
+    "other",
+)
 SCALE_FILES = 5000
 LABEL_REPOS = ("requests", "click", "zod")
 
@@ -69,6 +117,19 @@ def run_json(*args: str) -> dict:
     return json.loads(completed.stdout)
 
 
+def run_node_json(*args: str) -> dict:
+    completed = subprocess.run(
+        ["node", *args, "--python", sys.executable],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if completed.returncode != 0:
+        raise SystemExit(f"command failed: {' '.join(args)}\n{completed.stderr[-2000:]}")
+    return json.loads(completed.stdout)
+
+
 def ensure_repo(
     name: str,
     repos_dir: Path,
@@ -93,6 +154,130 @@ def ensure_repo(
     return target
 
 
+def collect_ts_ground_truth(repos_dir: Path) -> dict[str, object]:
+    repos: dict[str, dict] = {}
+    for name, config in TS_GROUND_TRUTH.items():
+        repo = ensure_repo(name, repos_dir, {name: (config["url"], config["sha"])})
+        args = [
+            "benchmarks/ground_truth/ts_eval.mjs",
+            str(repo / str(config["path"])),
+            "--name",
+            name,
+            "--root",
+            str(config["root"]),
+        ]
+        if config.get("exclude"):
+            args += ["--exclude", str(config["exclude"])]
+        summary = run_node_json(*args)
+        summary.pop("unjudged_sample", None)
+        summary.pop("repo", None)
+        repos[name] = summary
+
+    groups: dict[str, dict] = {}
+    for group in ("ts", "js"):
+        totals = {
+            "sites": 0,
+            "project_sites": 0,
+            "correct": 0,
+            "wrong": 0,
+            "missed": 0,
+            "ambiguous": 0,
+            "ambiguous_but_reported": 0,
+            "hc_claims": 0,
+            "hc_correct": 0,
+            "hc_wrong": 0,
+            "by_form": {},
+        }
+        for entry in repos.values():
+            source = entry["groups"][group]
+            if int(source["project_sites"]) == 0:
+                continue
+            for key in (
+                "sites",
+                "project_sites",
+                "correct",
+                "wrong",
+                "missed",
+                "ambiguous",
+                "ambiguous_but_reported",
+            ):
+                totals[key] += int(source[key])
+            totals["hc_claims"] += int(source["high_confidence"]["claims"])
+            totals["hc_correct"] += int(source["high_confidence"]["correct"])
+            totals["hc_wrong"] += int(source["high_confidence"]["wrong"])
+            for form in TS_FORMS:
+                frow = source["by_form"].get(form)
+                if not frow or not frow["sites"]:
+                    continue
+                fagg = totals["by_form"].setdefault(
+                    form,
+                    {
+                        "sites": 0,
+                        "correct": 0,
+                        "wrong": 0,
+                        "missed": 0,
+                        "ambiguous_but_reported": 0,
+                    },
+                )
+                for key in fagg:
+                    fagg[key] += int(frow[key])
+        if totals["project_sites"] == 0:
+            continue
+        correct, wrong = totals["correct"], totals["wrong"]
+        hc_correct, hc_wrong = totals["hc_correct"], totals["hc_wrong"]
+        by_form = {}
+        for form, frow in totals["by_form"].items():
+            form_wrong = frow["wrong"]
+            form_hit = frow["correct"]
+            by_form[form] = {
+                **frow,
+                "precision": form_hit / (form_hit + form_wrong) if form_hit + form_wrong else 0.0,
+                "precision_ci95": wilson(form_hit, form_hit + form_wrong),
+                "recall": form_hit / frow["sites"] if frow["sites"] else 0.0,
+                "recall_ci95": wilson(form_hit, frow["sites"]),
+            }
+        groups[group] = {
+            "sites": totals["sites"],
+            "project_sites": totals["project_sites"],
+            "correct": correct,
+            "wrong": wrong,
+            "missed": totals["missed"],
+            "ambiguous": totals["ambiguous"],
+            "ambiguous_but_reported": totals["ambiguous_but_reported"],
+            "precision": correct / (correct + wrong) if correct + wrong else 0.0,
+            "precision_ci95": wilson(correct, correct + wrong),
+            "high_confidence": {
+                "threshold": 0.95,
+                "claims": totals["hc_claims"],
+                "correct": hc_correct,
+                "wrong": hc_wrong,
+                "precision": hc_correct / (hc_correct + hc_wrong)
+                if hc_correct + hc_wrong
+                else 0.0,
+                "precision_ci95": wilson(hc_correct, hc_correct + hc_wrong),
+            },
+            "recall": correct / totals["project_sites"] if totals["project_sites"] else 0.0,
+            "recall_ci95": wilson(correct, totals["project_sites"]),
+            "by_form": by_form,
+        }
+
+    existing_audit: dict = {}
+    artifact = METRICS_DIR / "ts_ground_truth.json"
+    if artifact.exists():
+        existing_audit = json.loads(artifact.read_text(encoding="utf-8")).get("hand_audit", {})
+    return {
+        "pinned": {name: config["sha"] for name, config in TS_GROUND_TRUTH.items()},
+        "scope": {
+            name: {"root": config["root"], "exclude": config.get("exclude", "")}
+            for name, config in TS_GROUND_TRUTH.items()
+        },
+        "typescript": next(iter(repos.values()))["typescript"] if repos else "",
+        "repos": repos,
+        "groups": groups,
+        "hand_audit": existing_audit,
+    }
+
+
 def collect(repos_dir: Path) -> dict[str, object]:
     data: dict[str, object] = {
         "precision": {},
@@ -100,6 +285,7 @@ def collect(repos_dir: Path) -> dict[str, object]:
         "synthetic": {},
         "scale": {},
         "ground_truth": {},
+        "ts_ground_truth": {},
     }
     for name in PINNED:
         repo = ensure_repo(name, repos_dir)
@@ -194,6 +380,7 @@ def collect(repos_dir: Path) -> dict[str, object]:
         },
         "hand_audit": existing_audit,
     }
+    data["ts_ground_truth"] = collect_ts_ground_truth(repos_dir)
     return data
 
 
@@ -204,6 +391,7 @@ def load_artifacts() -> dict[str, object]:
         "synthetic": {},
         "scale": {},
         "ground_truth": {},
+        "ts_ground_truth": {},
     }
     for name in PINNED:
         data["precision"][name] = json.loads(  # type: ignore[index]
@@ -216,6 +404,9 @@ def load_artifacts() -> dict[str, object]:
     data["scale"] = json.loads((METRICS_DIR / "scale_5000.json").read_text())
     data["ground_truth"] = json.loads(
         (METRICS_DIR / "python_ground_truth.json").read_text(encoding="utf-8")
+    )
+    data["ts_ground_truth"] = json.loads(
+        (METRICS_DIR / "ts_ground_truth.json").read_text(encoding="utf-8")
     )
     return data
 
@@ -480,6 +671,110 @@ def render(data: dict[str, object]) -> str:
         "unjudged edges correct, with file:line citations in "
         "`metrics/python_ground_truth.json`.",
         "",
+    ]
+    ts_gt = data["ts_ground_truth"]  # type: ignore[assignment]
+    if not ts_gt.get("repos"):
+        lines += ["## TypeScript/JavaScript call-site ground truth", "", "UNMEASURED", ""]
+    else:
+        scope_bits = []
+        for name, scope in ts_gt["scope"].items():
+            bit = f"{name} `{ts_gt['pinned'][name][:7]}` ({scope['root']}"
+            if scope.get("exclude"):
+                bit += f"; excludes {scope['exclude']}"
+            scope_bits.append(bit + ")")
+        lines += [
+            "## TypeScript/JavaScript call-site ground truth (TypeScript compiler)",
+            "",
+            "Pinned: " + ", ".join(scope_bits) + ".",
+            "Every call, `new`, and JSX tag in production source is resolved with "
+            "`checker.getSymbolAtLocation` (aliases followed); test and story files are "
+            "excluded per repo.",
+            "Precision = correct/(correct+wrong); recall = correct/project sites. "
+            "High-confidence means the tool's reported confidence is at least 0.95.",
+            "",
+            "| Repo | Group | Sites | Correct | Wrong | Missed | Ambiguous (reported) | "
+            "Precision | High-conf precision | Recall |",
+            "|---|---|---:|---:|---:|---:|---:|---|---|---|",
+        ]
+        for name, entry in ts_gt["repos"].items():
+            for group, label in (("ts", "TS+TSX"), ("js", "JS+JSX")):
+                row = entry["groups"][group]
+                if not row["project_sites"]:
+                    continue
+                high = row["high_confidence"]
+                p_low, p_high = row["precision_ci95"]
+                r_low, r_high = row["recall_ci95"]
+                lines.append(
+                    f"| `{name}` | {label} | {row['project_sites']} | {row['correct']} | "
+                    f"{row['wrong']} | {row['missed']} | {row['ambiguous']} "
+                    f"({row['ambiguous_but_reported']}) | "
+                    f"{fmt(row['precision'])} (95% CI {fmt(p_low)}–{fmt(p_high)}) | "
+                    f"{fmt(high['precision'])} ({high['correct']}/{high['claims']}) | "
+                    f"{fmt(row['recall'])} (95% CI {fmt(r_low)}–{fmt(r_high)}) |"
+                )
+        lines += [
+            "",
+            "| Group | Sites | Correct | Wrong | Missed | Ambiguous (reported) | "
+            "Precision | High-conf precision | Recall |",
+            "|---|---:|---:|---:|---:|---:|---|---|---|",
+        ]
+        for group, label in (("ts", "TS+TSX"), ("js", "JS+JSX")):
+            row = ts_gt["groups"].get(group)
+            if not row:
+                continue
+            high = row["high_confidence"]
+            p_low, p_high = row["precision_ci95"]
+            r_low, r_high = row["recall_ci95"]
+            lines.append(
+                f"| **{label}** | {row['project_sites']} | {row['correct']} | "
+                f"{row['wrong']} | {row['missed']} | {row['ambiguous']} "
+                f"({row['ambiguous_but_reported']}) | "
+                f"{fmt(row['precision'])} (95% CI {fmt(p_low)}–{fmt(p_high)}) | "
+                f"{fmt(high['precision'])} ({high['correct']}/{high['claims']}) | "
+                f"{fmt(row['recall'])} (95% CI {fmt(r_low)}–{fmt(r_high)}) |"
+            )
+        lines += [
+            "",
+            "| Group | Form | Sites | Correct | Wrong | Missed | Ambiguous reported | "
+            "Precision | Recall |",
+            "|---|---|---:|---:|---:|---:|---:|---|---|",
+        ]
+        for group, label in (("ts", "TS+TSX"), ("js", "JS+JSX")):
+            row = ts_gt["groups"].get(group)
+            if not row:
+                continue
+            for form, frow in row["by_form"].items():
+                lines.append(
+                    f"| {label} | `{form}` | {frow['sites']} | {frow['correct']} | "
+                    f"{frow['wrong']} | {frow['missed']} | "
+                    f"{frow['ambiguous_but_reported']} | {fmt(frow['precision'])} | "
+                    f"{fmt(frow['recall'])} |"
+                )
+        gate_bits = []
+        for group, label in (("ts", "TS+TSX"), ("js", "JS+JSX")):
+            row = ts_gt["groups"].get(group)
+            if not row:
+                continue
+            passed = (
+                row["high_confidence"]["precision"] >= 0.95
+                and row["precision"] >= 0.90
+                and row["recall"] >= 0.50
+            )
+            gate_bits.append(f"{label} {'PASS' if passed else 'FAIL'}")
+        lines += [
+            "",
+            "Gate (high-confidence precision >= 95%, overall precision >= 90%, "
+            "recall >= 50%): " + "; ".join(gate_bits) + ".",
+        ]
+        audit = ts_gt.get("hand_audit") or {}
+        lines += [
+            "",
+            f"Independent hand audit: {audit.get('correct', 0)}/{audit.get('sample', 0)} "
+            "sampled edges the compiler cannot judge were correct, with file:line citations "
+            "in `metrics/ts_ground_truth.json`.",
+            "",
+        ]
+    lines += [
         "## Synthetic token benchmark (hops=2)",
         "",
         "| Target | Touched files | Repo | Slice | Saved vs files |",
@@ -528,6 +823,9 @@ def write_artifacts(data: dict[str, object]) -> None:
     )
     (METRICS_DIR / "python_ground_truth.json").write_text(
         json.dumps(data["ground_truth"], indent=2) + "\n", encoding="utf-8"
+    )
+    (METRICS_DIR / "ts_ground_truth.json").write_text(
+        json.dumps(data["ts_ground_truth"], indent=2) + "\n", encoding="utf-8"
     )
 
 

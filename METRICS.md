@@ -112,6 +112,44 @@ Combined: 1038 correct, 1 wrong, 356 missed of 1395 project sites; precision 99.
 
 Independent hand audit: 30/30 sampled unjudged edges correct, with file:line citations in `metrics/python_ground_truth.json`.
 
+## TypeScript/JavaScript call-site ground truth (TypeScript compiler)
+
+Pinned: zod `ca42965` (src; excludes __tests__,benchmarks), nest `416830c` (packages; excludes test,.spec.ts,.e2e-spec.ts), bulletproof-react `9506629` (src; excludes __tests__,test,testing,.test.ts,.test.tsx,.stories.ts,.stories.tsx), node-fetch `8b3320d` (src), express `1faf228` (lib).
+Every call, `new`, and JSX tag in production source is resolved with `checker.getSymbolAtLocation` (aliases followed); test and story files are excluded per repo.
+Precision = correct/(correct+wrong); recall = correct/project sites. High-confidence means the tool's reported confidence is at least 0.95.
+
+| Repo | Group | Sites | Correct | Wrong | Missed | Ambiguous (reported) | Precision | High-conf precision | Recall |
+|---|---|---:|---:|---:|---:|---:|---|---|---|
+| `zod` | TS+TSX | 557 | 452 | 0 | 105 | 0 (0) | 100.0% (95% CI 99.2%–100.0%) | 100.0% (417/417) | 81.1% (95% CI 77.7%–84.2%) |
+| `nest` | TS+TSX | 1998 | 1783 | 0 | 215 | 0 (0) | 100.0% (95% CI 99.8%–100.0%) | 100.0% (1442/1442) | 89.2% (95% CI 87.8%–90.5%) |
+| `bulletproof-react` | TS+TSX | 213 | 159 | 0 | 54 | 0 (0) | 100.0% (95% CI 97.6%–100.0%) | 100.0% (159/159) | 74.6% (95% CI 68.4%–80.0%) |
+| `node-fetch` | JS+JSX | 89 | 84 | 0 | 5 | 0 (0) | 100.0% (95% CI 95.6%–100.0%) | 100.0% (84/84) | 94.4% (95% CI 87.5%–97.6%) |
+| `express` | JS+JSX | 67 | 21 | 0 | 46 | 0 (0) | 100.0% (95% CI 84.5%–100.0%) | 100.0% (20/20) | 31.3% (95% CI 21.5%–43.2%) |
+
+| Group | Sites | Correct | Wrong | Missed | Ambiguous (reported) | Precision | High-conf precision | Recall |
+|---|---:|---:|---:|---:|---:|---|---|---|
+| **TS+TSX** | 2768 | 2394 | 0 | 374 | 0 (0) | 100.0% (95% CI 99.8%–100.0%) | 100.0% (2018/2018) | 86.5% (95% CI 85.2%–87.7%) |
+| **JS+JSX** | 156 | 105 | 0 | 51 | 0 (0) | 100.0% (95% CI 96.5%–100.0%) | 100.0% (104/104) | 67.3% (95% CI 59.6%–74.2%) |
+
+| Group | Form | Sites | Correct | Wrong | Missed | Ambiguous reported | Precision | Recall |
+|---|---|---:|---:|---:|---:|---:|---|---|
+| TS+TSX | `bare` | 581 | 480 | 0 | 101 | 0 | 100.0% | 82.6% |
+| TS+TSX | `self_cls` | 1431 | 1321 | 0 | 110 | 0 | 100.0% | 92.3% |
+| TS+TSX | `constructor` | 333 | 326 | 0 | 7 | 0 | 100.0% | 97.9% |
+| TS+TSX | `chained` | 7 | 0 | 0 | 7 | 0 | 0.0% | 0.0% |
+| TS+TSX | `other` | 313 | 171 | 0 | 142 | 0 | 100.0% | 54.6% |
+| TS+TSX | `super` | 7 | 7 | 0 | 0 | 0 | 100.0% | 100.0% |
+| TS+TSX | `jsx` | 96 | 89 | 0 | 7 | 0 | 100.0% | 92.7% |
+| JS+JSX | `bare` | 86 | 61 | 0 | 25 | 0 | 100.0% | 70.9% |
+| JS+JSX | `self_cls` | 25 | 7 | 0 | 18 | 0 | 100.0% | 28.0% |
+| JS+JSX | `constructor` | 36 | 36 | 0 | 0 | 0 | 100.0% | 100.0% |
+| JS+JSX | `other` | 8 | 0 | 0 | 8 | 0 | 0.0% | 0.0% |
+| JS+JSX | `module_attr` | 1 | 1 | 0 | 0 | 0 | 100.0% | 100.0% |
+
+Gate (high-confidence precision >= 95%, overall precision >= 90%, recall >= 50%): TS+TSX PASS; JS+JSX PASS.
+
+Independent hand audit: 30/30 sampled edges the compiler cannot judge were correct, with file:line citations in `metrics/ts_ground_truth.json`.
+
 ## Synthetic token benchmark (hops=2)
 
 | Target | Touched files | Repo | Slice | Saved vs files |

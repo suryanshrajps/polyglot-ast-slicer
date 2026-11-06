@@ -1,0 +1,2992 @@
+{
+  "pinned": {
+    "zod": "ca42965df46b2f7e2747db29c40a26bcb32a51d5",
+    "nest": "416830c3924b37ec354d4e15c14119519e389afc",
+    "bulletproof-react": "9506629ed003a561c6627735480cce4994244bb4",
+    "node-fetch": "8b3320d2a7c07bce4afc6b2bf6c3bbddda85b01f",
+    "express": "1faf228935aa0a13111f92c28ee795be64ce3f0f"
+  },
+  "scope": {
+    "zod": {
+      "root": "src",
+      "exclude": "__tests__,benchmarks"
+    },
+    "nest": {
+      "root": "packages",
+      "exclude": "test,.spec.ts,.e2e-spec.ts"
+    },
+    "bulletproof-react": {
+      "root": "src",
+      "exclude": "__tests__,test,testing,.test.ts,.test.tsx,.stories.ts,.stories.tsx"
+    },
+    "node-fetch": {
+      "root": "src",
+      "exclude": ""
+    },
+    "express": {
+      "root": "lib",
+      "exclude": ""
+    }
+  },
+  "typescript": "5.9.3",
+  "repos": {
+    "zod": {
+      "sha": "ca42965df46b2f7e2747db29c40a26bcb32a51d5",
+      "root": "src",
+      "typescript": "5.9.3",
+      "tsconfig": "tsconfig.json",
+      "call_sites": 958,
+      "unsupported_callees": 1,
+      "unresolved": 400,
+      "groups": {
+        "ts": {
+          "sites": 957,
+          "project_sites": 557,
+          "unjudged": 400,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 452,
+          "wrong": 0,
+          "missed": 105,
+          "precision": 1,
+          "precision_ci95": [
+            0.9915728182543282,
+            1
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 417,
+            "correct": 417,
+            "wrong": 0,
+            "precision": 1,
+            "precision_ci95": [
+              0.9908719572651922,
+              0.9999999999999999
+            ]
+          },
+          "recall": 0.8114901256732495,
+          "recall_ci95": [
+            0.77691679785843,
+            0.8417963777503278
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 185,
+              "correct": 181,
+              "wrong": 0,
+              "missed": 4,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.979217547593473,
+                1
+              ],
+              "recall": 0.9783783783783784,
+              "recall_ci95": [
+                0.9457337660182488,
+                0.9915604124177608
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 160,
+              "correct": 142,
+              "wrong": 0,
+              "missed": 18,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9736600356869919,
+                0.9999999999999999
+              ],
+              "recall": 0.8875,
+              "recall_ci95": [
+                0.8291855372862971,
+                0.9276436614557864
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 97,
+              "correct": 94,
+              "wrong": 0,
+              "missed": 3,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9607379237084551,
+                0.9999999999999999
+              ],
+              "recall": 0.9690721649484536,
+              "recall_ci95": [
+                0.9129799648468901,
+                0.9894266550514474
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 6,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 6,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                2.7755575615628914e-17,
+                0.3903342879021653
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 109,
+              "correct": 35,
+              "wrong": 0,
+              "missed": 74,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9010990076755959,
+                0.9999999999999999
+              ],
+              "recall": 0.3211009174311927,
+              "recall_ci95": [
+                0.24082976316647986,
+                0.41355258523995764
+              ]
+            }
+          }
+        },
+        "js": {
+          "sites": 0,
+          "project_sites": 0,
+          "unjudged": 0,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "precision": 0,
+          "precision_ci95": [
+            0,
+            0
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 0,
+            "correct": 0,
+            "wrong": 0,
+            "precision": 0,
+            "precision_ci95": [
+              0,
+              0
+            ]
+          },
+          "recall": 0,
+          "recall_ci95": [
+            0,
+            0
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            }
+          }
+        }
+      },
+      "combined": {
+        "sites": 957,
+        "project_sites": 557,
+        "correct": 452,
+        "wrong": 0,
+        "missed": 105,
+        "ambiguous": 0,
+        "ambiguous_but_reported": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.9915728182543282,
+          1
+        ],
+        "recall": 0.8114901256732495,
+        "recall_ci95": [
+          0.77691679785843,
+          0.8417963777503278
+        ]
+      }
+    },
+    "nest": {
+      "sha": "416830c3924b37ec354d4e15c14119519e389afc",
+      "root": "packages",
+      "typescript": "5.9.3",
+      "tsconfig": "packages/tsconfig.json",
+      "call_sites": 5512,
+      "unsupported_callees": 159,
+      "unresolved": 3355,
+      "groups": {
+        "ts": {
+          "sites": 5353,
+          "project_sites": 1998,
+          "unjudged": 3355,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 1783,
+          "wrong": 0,
+          "missed": 215,
+          "precision": 1,
+          "precision_ci95": [
+            0.9978501400884052,
+            1
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 1442,
+            "correct": 1442,
+            "wrong": 0,
+            "precision": 1,
+            "precision_ci95": [
+              0.9973430981680196,
+              1
+            ]
+          },
+          "recall": 0.8923923923923924,
+          "recall_ci95": [
+            0.878043762317939,
+            0.9052350498432026
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 279,
+              "correct": 229,
+              "wrong": 0,
+              "missed": 50,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9835018263493515,
+                0.9999999999999999
+              ],
+              "recall": 0.8207885304659498,
+              "recall_ci95": [
+                0.7715231830846476,
+                0.8613401911404024
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 1271,
+              "correct": 1179,
+              "wrong": 0,
+              "missed": 92,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9967523468237882,
+                1
+              ],
+              "recall": 0.9276160503540519,
+              "recall_ci95": [
+                0.9120451634229638,
+                0.9406098804485628
+              ]
+            },
+            "super": {
+              "sites": 7,
+              "correct": 7,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.6456695649333126,
+                1
+              ],
+              "recall": 1,
+              "recall_ci95": [
+                0.6456695649333126,
+                1
+              ]
+            },
+            "constructor": {
+              "sites": 236,
+              "correct": 232,
+              "wrong": 0,
+              "missed": 4,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9837116898788577,
+                1
+              ],
+              "recall": 0.9830508474576272,
+              "recall_ci95": [
+                0.9572384055106566,
+                0.9933895681561196
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 1,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 1,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0.7934506856227626
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 204,
+              "correct": 136,
+              "wrong": 0,
+              "missed": 68,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9725299002664176,
+                1
+              ],
+              "recall": 0.6666666666666666,
+              "recall_ci95": [
+                0.599424381329084,
+                0.7277480720680216
+              ]
+            }
+          }
+        },
+        "js": {
+          "sites": 0,
+          "project_sites": 0,
+          "unjudged": 0,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "precision": 0,
+          "precision_ci95": [
+            0,
+            0
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 0,
+            "correct": 0,
+            "wrong": 0,
+            "precision": 0,
+            "precision_ci95": [
+              0,
+              0
+            ]
+          },
+          "recall": 0,
+          "recall_ci95": [
+            0,
+            0
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            }
+          }
+        }
+      },
+      "combined": {
+        "sites": 5353,
+        "project_sites": 1998,
+        "correct": 1783,
+        "wrong": 0,
+        "missed": 215,
+        "ambiguous": 0,
+        "ambiguous_but_reported": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.9978501400884052,
+          1
+        ],
+        "recall": 0.8923923923923924,
+        "recall_ci95": [
+          0.878043762317939,
+          0.9052350498432026
+        ]
+      }
+    },
+    "bulletproof-react": {
+      "sha": "9506629ed003a561c6627735480cce4994244bb4",
+      "root": "src",
+      "typescript": "5.9.3",
+      "tsconfig": "tsconfig.json",
+      "call_sites": 950,
+      "unsupported_callees": 10,
+      "unresolved": 727,
+      "groups": {
+        "ts": {
+          "sites": 940,
+          "project_sites": 213,
+          "unjudged": 727,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 159,
+          "wrong": 0,
+          "missed": 54,
+          "precision": 1,
+          "precision_ci95": [
+            0.9764098230971759,
+            1
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 159,
+            "correct": 159,
+            "wrong": 0,
+            "precision": 1,
+            "precision_ci95": [
+              0.9764098230971759,
+              1
+            ]
+          },
+          "recall": 0.7464788732394366,
+          "recall_ci95": [
+            0.684046068332772,
+            0.8001786761927865
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 117,
+              "correct": 70,
+              "wrong": 0,
+              "missed": 47,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9479769375897331,
+                1
+              ],
+              "recall": 0.5982905982905983,
+              "recall_ci95": [
+                0.507701980493569,
+                0.6826300481368339
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 96,
+              "correct": 89,
+              "wrong": 0,
+              "missed": 7,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9586234547637477,
+                1
+              ],
+              "recall": 0.9270833333333334,
+              "recall_ci95": [
+                0.8570696833485983,
+                0.9642324186896375
+              ]
+            },
+            "other": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "js": {
+          "sites": 0,
+          "project_sites": 0,
+          "unjudged": 0,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "precision": 0,
+          "precision_ci95": [
+            0,
+            0
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 0,
+            "correct": 0,
+            "wrong": 0,
+            "precision": 0,
+            "precision_ci95": [
+              0,
+              0
+            ]
+          },
+          "recall": 0,
+          "recall_ci95": [
+            0,
+            0
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            }
+          }
+        }
+      },
+      "combined": {
+        "sites": 940,
+        "project_sites": 213,
+        "correct": 159,
+        "wrong": 0,
+        "missed": 54,
+        "ambiguous": 0,
+        "ambiguous_but_reported": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.9764098230971759,
+          1
+        ],
+        "recall": 0.7464788732394366,
+        "recall_ci95": [
+          0.684046068332772,
+          0.8001786761927865
+        ]
+      }
+    },
+    "node-fetch": {
+      "sha": "8b3320d2a7c07bce4afc6b2bf6c3bbddda85b01f",
+      "root": "src",
+      "typescript": "5.9.3",
+      "tsconfig": null,
+      "call_sites": 439,
+      "unsupported_callees": 9,
+      "unresolved": 341,
+      "groups": {
+        "ts": {
+          "sites": 0,
+          "project_sites": 0,
+          "unjudged": 0,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "precision": 0,
+          "precision_ci95": [
+            0,
+            0
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 0,
+            "correct": 0,
+            "wrong": 0,
+            "precision": 0,
+            "precision_ci95": [
+              0,
+              0
+            ]
+          },
+          "recall": 0,
+          "recall_ci95": [
+            0,
+            0
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "js": {
+          "sites": 430,
+          "project_sites": 89,
+          "unjudged": 341,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 84,
+          "wrong": 0,
+          "missed": 5,
+          "precision": 1,
+          "precision_ci95": [
+            0.95626827158534,
+            0.9999999999999999
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 84,
+            "correct": 84,
+            "wrong": 0,
+            "precision": 1,
+            "precision_ci95": [
+              0.95626827158534,
+              0.9999999999999999
+            ]
+          },
+          "recall": 0.9438202247191011,
+          "recall_ci95": [
+            0.8751458326492151,
+            0.9757671215792799
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 45,
+              "correct": 45,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.9213484012671117,
+                1
+              ],
+              "recall": 1,
+              "recall_ci95": [
+                0.9213484012671117,
+                1
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 7,
+              "correct": 7,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.6456695649333126,
+                1
+              ],
+              "recall": 1,
+              "recall_ci95": [
+                0.6456695649333126,
+                1
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 32,
+              "correct": 32,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.8928208017449293,
+                1
+              ],
+              "recall": 1,
+              "recall_ci95": [
+                0.8928208017449293,
+                1
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 5,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 5,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0.43448246478317476
+              ]
+            }
+          }
+        }
+      },
+      "combined": {
+        "sites": 430,
+        "project_sites": 89,
+        "correct": 84,
+        "wrong": 0,
+        "missed": 5,
+        "ambiguous": 0,
+        "ambiguous_but_reported": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.95626827158534,
+          0.9999999999999999
+        ],
+        "recall": 0.9438202247191011,
+        "recall_ci95": [
+          0.8751458326492151,
+          0.9757671215792799
+        ]
+      }
+    },
+    "express": {
+      "sha": "1faf228935aa0a13111f92c28ee795be64ce3f0f",
+      "root": "lib",
+      "typescript": "5.9.3",
+      "tsconfig": null,
+      "call_sites": 670,
+      "unsupported_callees": 12,
+      "unresolved": 591,
+      "groups": {
+        "ts": {
+          "sites": 0,
+          "project_sites": 0,
+          "unjudged": 0,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 0,
+          "precision": 0,
+          "precision_ci95": [
+            0,
+            0
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 0,
+            "correct": 0,
+            "wrong": 0,
+            "precision": 0,
+            "precision_ci95": [
+              0,
+              0
+            ]
+          },
+          "recall": 0,
+          "recall_ci95": [
+            0,
+            0
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "module_attr": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "self_cls": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "js": {
+          "sites": 658,
+          "project_sites": 67,
+          "unjudged": 591,
+          "ambiguous": 0,
+          "ambiguous_but_reported": 0,
+          "correct": 21,
+          "wrong": 0,
+          "missed": 46,
+          "precision": 1,
+          "precision_ci95": [
+            0.8453609810751531,
+            1
+          ],
+          "high_confidence": {
+            "threshold": 0.95,
+            "claims": 20,
+            "correct": 20,
+            "wrong": 0,
+            "precision": 1,
+            "precision_ci95": [
+              0.8388748419471806,
+              1
+            ]
+          },
+          "recall": 0.31343283582089554,
+          "recall_ci95": [
+            0.21505348258237716,
+            0.4320458231606458
+          ],
+          "by_form": {
+            "bare": {
+              "sites": 41,
+              "correct": 16,
+              "wrong": 0,
+              "missed": 25,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.8063923194655637,
+                1
+              ],
+              "recall": 0.3902439024390244,
+              "recall_ci95": [
+                0.2565614506012352,
+                0.5427314306587621
+              ]
+            },
+            "module_attr": {
+              "sites": 1,
+              "correct": 1,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.20654931437723745,
+                1
+              ],
+              "recall": 1,
+              "recall_ci95": [
+                0.20654931437723745,
+                1
+              ]
+            },
+            "self_cls": {
+              "sites": 18,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 18,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0.17587922364665765
+              ]
+            },
+            "super": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "constructor": {
+              "sites": 4,
+              "correct": 4,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 1,
+              "precision_ci95": [
+                0.5101091635454027,
+                1
+              ],
+              "recall": 1,
+              "recall_ci95": [
+                0.5101091635454027,
+                1
+              ]
+            },
+            "default_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "aliased_import": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "chained": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "callback": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "jsx": {
+              "sites": 0,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 0,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                0,
+                0
+              ]
+            },
+            "other": {
+              "sites": 3,
+              "correct": 0,
+              "wrong": 0,
+              "missed": 3,
+              "ambiguous_but_reported": 0,
+              "precision": 0,
+              "precision_ci95": [
+                0,
+                0
+              ],
+              "recall": 0,
+              "recall_ci95": [
+                5.551115123125783e-17,
+                0.5614970317550454
+              ]
+            }
+          }
+        }
+      },
+      "combined": {
+        "sites": 658,
+        "project_sites": 67,
+        "correct": 21,
+        "wrong": 0,
+        "missed": 46,
+        "ambiguous": 0,
+        "ambiguous_but_reported": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.8453609810751531,
+          1
+        ],
+        "recall": 0.31343283582089554,
+        "recall_ci95": [
+          0.21505348258237716,
+          0.4320458231606458
+        ]
+      }
+    }
+  },
+  "groups": {
+    "ts": {
+      "sites": 7250,
+      "project_sites": 2768,
+      "correct": 2394,
+      "wrong": 0,
+      "missed": 374,
+      "ambiguous": 0,
+      "ambiguous_but_reported": 0,
+      "precision": 1.0,
+      "precision_ci95": [
+        0.9983979512879956,
+        0.9999999999999999
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 2018,
+        "correct": 2018,
+        "wrong": 0,
+        "precision": 1.0,
+        "precision_ci95": [
+          0.9981000197597417,
+          0.9999999999999999
+        ]
+      },
+      "recall": 0.8648843930635838,
+      "recall_ci95": [
+        0.8516425510311536,
+        0.8771148580810644
+      ],
+      "by_form": {
+        "bare": {
+          "sites": 581,
+          "correct": 480,
+          "wrong": 0,
+          "missed": 101,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9920605009127221,
+            1.0
+          ],
+          "recall": 0.8261617900172117,
+          "recall_ci95": [
+            0.7932309655129064,
+            0.8548079077301705
+          ]
+        },
+        "self_cls": {
+          "sites": 1431,
+          "correct": 1321,
+          "wrong": 0,
+          "missed": 110,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9971004388524244,
+            1.0
+          ],
+          "recall": 0.923130677847659,
+          "recall_ci95": [
+            0.9081680346606387,
+            0.9358276504064273
+          ]
+        },
+        "constructor": {
+          "sites": 333,
+          "correct": 326,
+          "wrong": 0,
+          "missed": 7,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.988353620450174,
+            1.0
+          ],
+          "recall": 0.978978978978979,
+          "recall_ci95": [
+            0.9572521538295772,
+            0.9897809136462666
+          ]
+        },
+        "chained": {
+          "sites": 7,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 7,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            5.551115123125783e-17,
+            0.35433043506668743
+          ]
+        },
+        "other": {
+          "sites": 313,
+          "correct": 171,
+          "wrong": 0,
+          "missed": 142,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9780289020315618,
+            1.0
+          ],
+          "recall": 0.5463258785942492,
+          "recall_ci95": [
+            0.4909431094256275,
+            0.6005853165194492
+          ]
+        },
+        "super": {
+          "sites": 7,
+          "correct": 7,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.6456695649333126,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.6456695649333126,
+            1.0
+          ]
+        },
+        "jsx": {
+          "sites": 96,
+          "correct": 89,
+          "wrong": 0,
+          "missed": 7,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9586234547637477,
+            1.0
+          ],
+          "recall": 0.9270833333333334,
+          "recall_ci95": [
+            0.8570696833485983,
+            0.9642324186896375
+          ]
+        }
+      }
+    },
+    "js": {
+      "sites": 1088,
+      "project_sites": 156,
+      "correct": 105,
+      "wrong": 0,
+      "missed": 51,
+      "ambiguous": 0,
+      "ambiguous_but_reported": 0,
+      "precision": 1.0,
+      "precision_ci95": [
+        0.9647059230708901,
+        1.0
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 104,
+        "correct": 104,
+        "wrong": 0,
+        "precision": 1.0,
+        "precision_ci95": [
+          0.9643786456275479,
+          0.9999999999999999
+        ]
+      },
+      "recall": 0.6730769230769231,
+      "recall_ci95": [
+        0.5960777363410698,
+        0.7417570181613636
+      ],
+      "by_form": {
+        "bare": {
+          "sites": 86,
+          "correct": 61,
+          "wrong": 0,
+          "missed": 25,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9407561321018871,
+            1.0
+          ],
+          "recall": 0.7093023255813954,
+          "recall_ci95": [
+            0.6060316083912257,
+            0.7946742625124171
+          ]
+        },
+        "self_cls": {
+          "sites": 25,
+          "correct": 7,
+          "wrong": 0,
+          "missed": 18,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.6456695649333126,
+            1.0
+          ],
+          "recall": 0.28,
+          "recall_ci95": [
+            0.14283853850956563,
+            0.47576605190361576
+          ]
+        },
+        "constructor": {
+          "sites": 36,
+          "correct": 36,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.9035813714055363,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.9035813714055363,
+            1.0
+          ]
+        },
+        "other": {
+          "sites": 8,
+          "correct": 0,
+          "wrong": 0,
+          "missed": 8,
+          "ambiguous_but_reported": 0,
+          "precision": 0.0,
+          "precision_ci95": [
+            0.0,
+            0.0
+          ],
+          "recall": 0.0,
+          "recall_ci95": [
+            0.0,
+            0.32440756488388023
+          ]
+        },
+        "module_attr": {
+          "sites": 1,
+          "correct": 1,
+          "wrong": 0,
+          "missed": 0,
+          "ambiguous_but_reported": 0,
+          "precision": 1.0,
+          "precision_ci95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "recall": 1.0,
+          "recall_ci95": [
+            0.20654931437723745,
+            1.0
+          ]
+        }
+      }
+    }
+  },
+  "hand_audit": {
+    "sample": 30,
+    "correct": 30,
+    "incorrect": 0,
+    "unsure": 0,
+    "cases": [
+      {
+        "repo": "bulletproof-react",
+        "source": "TestDialog",
+        "file": "src/components/ui/dialog/__tests__/dialog.test.tsx",
+        "line": 39,
+        "call": "<DialogHeader>",
+        "target": "DialogHeader@src/components/ui/dialog/dialog.tsx:54",
+        "resolution": "import:src/components/ui/dialog/dialog.tsx",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "InvalidMiddlewareException.constructor",
+        "file": "packages/core/errors/exceptions/invalid-middleware.exception.ts",
+        "line": 6,
+        "call": "super(INVALID_MIDDLEWARE_MESSAGE`${name}`);",
+        "target": "INVALID_MIDDLEWARE_MESSAGE@packages/core/errors/messages.ts:112",
+        "resolution": "import:packages/core/errors/messages.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "zod",
+        "source": "Mocker.stringOptional",
+        "file": "src/__tests__/Mocker.ts",
+        "line": 37,
+        "call": "return this.pick(this.string, this.undefined);",
+        "target": "Mocker.pick@src/__tests__/Mocker.ts:8",
+        "resolution": "enclosing_member:Mocker",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "createUser",
+        "file": "src/testing/test-utils.tsx",
+        "line": 21,
+        "call": "await db.user.create({ ...user, password: hash(user.password) });",
+        "target": "hash@src/testing/mocks/utils.ts:22",
+        "resolution": "import:src/testing/mocks/utils.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "ServerRMQ.handleMessage",
+        "file": "packages/microservices/server/server-rmq.ts",
+        "line": 194,
+        "call": "this.logger.warn(RQM_NO_MESSAGE_HANDLER`${pattern}`);",
+        "target": "RQM_NO_MESSAGE_HANDLER@packages/microservices/constants.ts:48",
+        "resolution": "import:packages/microservices/constants.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "GuardCompositeDecorator",
+        "file": "packages/common/test/decorators/apply-decorators.spec.ts",
+        "line": 69,
+        "call": "return applyDecorators(UseGuards(Guard));",
+        "target": "UseGuards@packages/common/decorators/core/use-guards.decorator.ts:28",
+        "resolution": "import:packages/common/decorators/index.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "createClient",
+        "file": "packages/microservices/test/json-socket/helpers.ts",
+        "line": 41,
+        "call": "clientSocket.connect(port, ip);",
+        "target": "TcpSocket.connect@packages/microservices/helpers/tcp-socket.ts:27",
+        "resolution": "typed_receiver:clientSocket->JsonSocket",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "equalTest",
+        "file": "packages/microservices/test/utils/transform-pattern.utils.spec.ts",
+        "line": 7,
+        "call": "const testData = transformPatternToRoute(testPattern);",
+        "target": "transformPatternToRoute@packages/microservices/utils/transform-pattern.utils.ts:20",
+        "resolution": "import:packages/microservices/utils/transform-pattern.utils.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "DemoDialog",
+        "file": "src/components/ui/dialog/dialog.stories.tsx",
+        "line": 42,
+        "call": "<DialogFooter>",
+        "target": "DialogFooter@src/components/ui/dialog/dialog.tsx:68",
+        "resolution": "import:src/components/ui/dialog/dialog.tsx",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "zod",
+        "source": "Mocker.numberNullable",
+        "file": "src/__tests__/Mocker.ts",
+        "line": 46,
+        "call": "return this.pick(this.number, this.null);",
+        "target": "Mocker.pick@src/__tests__/Mocker.ts:8",
+        "resolution": "enclosing_member:Mocker",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "createTeam",
+        "file": "src/testing/data-generators.ts",
+        "line": 40,
+        "call": "return { ...generateTeam(), ...overrides };",
+        "target": "generateTeam@src/testing/data-generators.ts:30",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "DemoDrawer",
+        "file": "src/components/ui/drawer/drawer.stories.tsx",
+        "line": 52,
+        "call": "<DrawerFooter>",
+        "target": "DrawerFooter@src/components/ui/drawer/drawer.tsx:90",
+        "resolution": "import:src/components/ui/drawer/drawer.tsx",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "DemoDialog",
+        "file": "src/components/ui/dialog/dialog.stories.tsx",
+        "line": 36,
+        "call": "<DialogHeader>",
+        "target": "DialogHeader@src/components/ui/dialog/dialog.tsx:54",
+        "resolution": "import:src/components/ui/dialog/dialog.tsx",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "zod",
+        "source": "Mocker.stringNullable",
+        "file": "src/__tests__/Mocker.ts",
+        "line": 40,
+        "call": "return this.pick(this.string, this.null);",
+        "target": "Mocker.pick@src/__tests__/Mocker.ts:8",
+        "resolution": "enclosing_member:Mocker",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "initializeUser",
+        "file": "src/testing/test-utils.tsx",
+        "line": 51,
+        "call": "return loginAsUser(user);",
+        "target": "loginAsUser@src/testing/test-utils.tsx:31",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "createServerAndClient",
+        "file": "packages/microservices/test/json-socket/helpers.ts",
+        "line": 61,
+        "call": "createServer((serverErr, server) => {",
+        "target": "createServer@packages/microservices/test/json-socket/helpers.ts:12",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "zod",
+        "source": "Mocker.pick",
+        "file": "src/__tests__/Mocker.ts",
+        "line": 9,
+        "call": "return args[getRandomInt(args.length)];",
+        "target": "getRandomInt@src/__tests__/Mocker.ts:1",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "DemoDrawer",
+        "file": "src/components/ui/drawer/drawer.stories.tsx",
+        "line": 26,
+        "call": "const { close, open, isOpen } = useDisclosure();",
+        "target": "useDisclosure@src/hooks/use-disclosure.ts:3",
+        "resolution": "import:src/hooks/use-disclosure.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "persistDb",
+        "file": "src/testing/mocks/db.ts",
+        "line": 82,
+        "call": "const data = await loadDb();",
+        "target": "loadDb@src/testing/mocks/db.ts:45",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "ServerKafka.handleEvent",
+        "file": "packages/microservices/server/server-kafka.ts",
+        "line": 307,
+        "call": "return this.logger.error(NO_EVENT_HANDLER`${pattern}`);",
+        "target": "NO_EVENT_HANDLER@packages/microservices/constants.ts:55",
+        "resolution": "import:packages/microservices/constants.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "requireAuth",
+        "file": "src/testing/mocks/utils.ts",
+        "line": 100,
+        "call": "return { user: sanitizeUser(user) };",
+        "target": "sanitizeUser@src/testing/mocks/utils.ts:50",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "TestDrawer",
+        "file": "src/components/ui/drawer/__tests__/drawer.test.tsx",
+        "line": 27,
+        "call": "<DrawerHeader>",
+        "target": "DrawerHeader@src/components/ui/drawer/drawer.tsx:76",
+        "resolution": "import:src/components/ui/drawer/drawer.tsx",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "renderDiscussion",
+        "file": "src/app/routes/app/discussions/__tests__/discussion.test.tsx",
+        "line": 17,
+        "call": "const utils = await renderApp(<DiscussionRoute />, {",
+        "target": "DiscussionRoute@src/app/routes/app/discussions/discussion.tsx:38",
+        "resolution": "import:src/app/routes/app/discussions/discussion.tsx",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "authenticate",
+        "file": "src/testing/mocks/utils.ts",
+        "line": 68,
+        "call": "if (user?.password === hash(password)) {",
+        "target": "hash@src/testing/mocks/utils.ts:22",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "requireAuth",
+        "file": "src/testing/mocks/utils.ts",
+        "line": 86,
+        "call": "const decodedToken = decode(encodedToken) as { id: string };",
+        "target": "decode@src/testing/mocks/utils.ts:14",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "createClient",
+        "file": "packages/microservices/test/json-socket/helpers.ts",
+        "line": 43,
+        "call": "clientSocket.on(ERROR_EVENT, (err: any) => {",
+        "target": "TcpSocket.on@packages/microservices/helpers/tcp-socket.ts:32",
+        "resolution": "typed_receiver:clientSocket->JsonSocket",
+        "confidence": 0.9,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "createDiscussion",
+        "file": "src/testing/test-utils.tsx",
+        "line": 26,
+        "call": "const discussion = generateDiscussion(discussionProperties);",
+        "target": "createDiscussion@src/testing/data-generators.ts:50",
+        "resolution": "import:src/testing/data-generators.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "MessagePayloadTest.test",
+        "file": "packages/websockets/test/decorators/message-body.decorator.spec.ts",
+        "line": 8,
+        "call": "public test(@MessageBody(ValidationPipe) payload: any) {}",
+        "target": "MessageBody@packages/websockets/decorators/message-body.decorator.ts:54",
+        "resolution": "import:packages/websockets/decorators/index.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      },
+      {
+        "repo": "bulletproof-react",
+        "source": "renderApp",
+        "file": "src/testing/test-utils.tsx",
+        "line": 91,
+        "call": "await waitForLoadingToFinish();",
+        "target": "waitForLoadingToFinish@src/testing/test-utils.tsx:37",
+        "resolution": "same_file",
+        "confidence": 0.98,
+        "verdict": "correct"
+      },
+      {
+        "repo": "nest",
+        "source": "ServerRMQ.handleEvent",
+        "file": "packages/microservices/server/server-rmq.ts",
+        "line": 227,
+        "call": "return this.logger.warn(RQM_NO_EVENT_HANDLER`${pattern}`);",
+        "target": "RQM_NO_EVENT_HANDLER@packages/microservices/constants.ts:43",
+        "resolution": "import:packages/microservices/constants.ts",
+        "confidence": 0.95,
+        "verdict": "correct"
+      }
+    ]
+  }
+}
