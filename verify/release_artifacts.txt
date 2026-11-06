@@ -1,0 +1,16 @@
+fresh clone: /tmp/pas-release
+commit: 803a94d
+command: HOME=/tmp/tshome POLYGLOT_AST_CACHE_DIR=/tmp/pas-release-cache UV_CACHE_DIR=/tmp/uvcache npm_config_cache=/tmp/npm-cache make gate
+
+== build ==
+total 1304
+-rw-r--r--@ 1 suryanshraj  staff   46950 Nov  6 19:44 polyglot_ast_slicer-1.0.0-py3-none-any.whl
+-rw-r--r--@ 1 suryanshraj  staff  616895 Nov  6 19:44 polyglot_ast_slicer-1.0.0.tar.gz
+
+== clean venv ==
+polyglot-ast-slicer 1.0.0
+python: 2 symbols, 1 edges, OK
+typescript: 2 symbols, 1 edges, OK
+
+== pypi name ==
+HTTP 404 {"message": "Not Found"}

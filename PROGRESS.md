@@ -192,3 +192,18 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
   table generated from the parser extension map, limitations and tool-fit guidance.
 - Held-out rows: werkzeug 99.9% precision / 75.7% recall; zustand 100% / 88.4%; moment
   100% / 63.9%. Production-source-only scope and Jedi/tsc ground truth are stated.
+
+## Release 1.0.0 — 2026-11-06
+- Version bumped in `pyproject.toml`, `polyglot_ast_slicer/__init__.py` and `uv.lock`;
+  CHANGELOG has the 1.0.0 section. No measured numbers are stored in CHANGELOG.
+- Fresh clone of commit `803a94d` at `/tmp/pas-release`: `uv sync --all-extras` then
+  `make gate` exited 0 (ruff, mypy, 103 tests, lock, offline METRICS+README drift). Raw
+  output: `verify/release_gate.txt`.
+- `uv build` produced `polyglot_ast_slicer-1.0.0-py3-none-any.whl` (46 KB) and
+  `polyglot_ast_slicer-1.0.0.tar.gz` (602 KB). Clean venv install reports 1.0.0 and passes
+  the Python/TS index+slice smoke.
+- MCP e2e through `uv tool run --from` the 1.0.0 wheel: 7/7 checks pass.
+- PyPI name check: `https://pypi.org/pypi/polyglot-ast-slicer/json` returned HTTP 404
+  (name free). Evidence: `verify/release_artifacts.txt`.
+- Not uploaded. Publish commands: `uv publish --token <token> dist/*` (or
+  `twine upload dist/*`). Tag `v1.0.0` created only after this gate.
