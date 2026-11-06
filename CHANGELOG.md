@@ -4,6 +4,49 @@ Measured numbers are not stored here. They live in `METRICS.md`, which is genera
 `python scripts/generate_metrics.py` from the committed evaluation scripts, and CI fails if it
 drifts. Parameters such as the 6,000-token payload cap are code constants, not measurements.
 
+## 1.0.0 — 2026-11-06
+
+### Added
+
+- Exhaustive call-site ground truth: Jedi for Python (requests, click, flask; held-out
+  werkzeug) and the TypeScript compiler API for TS/JS (zod, nest, bulletproof-react,
+  node-fetch, express; held-out zustand, moment). Per-repo, per-group and per-form
+  precision/recall with 95% Wilson intervals, wired into `METRICS.md`.
+- `verify/` evidence suite: 5k/20k/50k scale, incremental differential after random edits,
+  watcher end-to-end, network-blocked queries, MCP through the built wheel, robustness
+  inputs, dogfood slices.
+- Slice size comparison (`benchmarks/size_compare.py`) and README worked examples generated
+  from real engine output.
+- CI matrix: ubuntu/macos/windows with Python 3.12 and 3.13, offline metrics/README drift
+  check, wheel build and clean-venv Python/TS smoke test.
+- Windows `LOCALAPPDATA` cache path and simulated Windows/macOS/Linux path tests, plus
+  case-insensitive path and CRLF coverage.
+
+### Fixed
+
+- TypeScript/JavaScript: default imports; emitted specifier mapping (`.js` to `.ts`/`.tsx`,
+  `.mjs`/`.cjs`/`.jsx`); specifiers whose basename contains a dot; `super.m()` against base
+  classes; property-assigned function bodies; bare calls binding to property methods.
+- Python: incremental module reconciliation, call+type relations on one pair, nested
+  `TYPE_CHECKING`/try imports, module-scope symbols, getter/setter and overload spans,
+  `super()` and constructed receivers.
+- Removed stale test-selection references from README, CHANGELOG, CLI help and benchmarks.
+
+### Changed
+
+- `impact_of_diff` returns changed and impacted symbols only; no test selection.
+- `METRICS.md` and `README.md` are generated; `scripts/generate_metrics.py --check` verifies
+  both offline.
+
+### Removed
+
+- `benchmarks/stage_b/run.py`, `benchmarks/fault/run_click.py` and the Stage B METRICS
+  section.
+
+### Measured
+
+See `METRICS.md`.
+
 ## 0.4.0 — 2026-10-31
 
 ### Added
