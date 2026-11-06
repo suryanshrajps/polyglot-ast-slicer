@@ -983,6 +983,9 @@ class GraphEngine:
                 target_file, original = binding
                 if target_file is not None:
                     found = self._symbol_in_file(target_file, original or name)
+                    if found is None and original is None:
+                        # ``const x = require("./m"); x()`` calls the CommonJS default export.
+                        found = self._symbol_in_file(target_file, "default")
                     if found is not None:
                         return [(found, 0.95, f"import:{self._rel(target_file)}")]
 
@@ -1078,6 +1081,10 @@ class GraphEngine:
         exact = f"{file_path}::{name}"
         if exact in self._symbols:
             return exact
+        if name == "default":
+            for symbol_id in sorted(self._by_file.get(file_path, set())):
+                if self._symbols[symbol_id].is_default:
+                    return symbol_id
         if depth >= 6 or file_path not in self._by_file:
             return None
 

@@ -845,3 +845,63 @@ def test_imports_inside_functions_do_not_become_module_bindings(tmp_path: Path) 
     assert use is not None
     assert not list(engine.graph.successors(use.symbol_id))
     engine.close()
+
+
+def _call_edges(engine: GraphEngine) -> set[tuple[str, str]]:
+    return {
+        (engine._symbols[source].qualified_name, engine._symbols[target].qualified_name)
+        for source, target, data in engine.graph.edges(data=True)
+        if data["relation"] in ("calls", "constructs")
+    }
+
+
+def test_ts_default_imports_resolve(tmp_path: Path) -> None:
+    cases = {
+        "function": (
+            {
+                "u.ts": "export default function main(): number { return 1; }\n",
+                "i.ts": (
+                    'import main from "./u";\n'
+                    "export function run(): number { return main(); }\n"
+                ),
+            },
+            ("run", "main"),
+        ),
+        "class": (
+            {
+                "u.ts": "export default class Widget { render(): number { return 1; } }\n",
+                "i.ts": (
+                    'import Widget from "./u";\n'
+                    "export function run(): number {\n"
+                    "  const widget = new Widget();\n"
+                    "  return widget.render();\n"
+                    "}\n"
+                ),
+            },
+            ("run", "Widget"),
+        ),
+        "expression": (
+            {
+                "u.ts": "const handler = (): number => 1;\nexport default handler;\n",
+                "i.ts": (
+                    'import handler from "./u";\n'
+                    "export function run(): number { return handler(); }\n"
+                ),
+            },
+            ("run", "handler"),
+        ),
+        "module_exports": (
+            {
+                "u.js": "module.exports = function main() { return 1; };\n",
+                "i.js": 'const main = require("./u");\nfunction run() { return main(); }\n',
+            },
+            ("run", "main"),
+        ),
+    }
+    for name, (files, expected) in cases.items():
+        repo = _repo(tmp_path / name, files)
+        engine = GraphEngine(repo)
+        engine.index_repository(force_rebuild=True)
+        edges = _call_edges(engine)
+        assert expected in edges, (name, sorted(edges))
+        engine.close()

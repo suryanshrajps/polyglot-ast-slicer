@@ -155,6 +155,7 @@ class SymbolNode:
     local_types: dict[str, str] = field(default_factory=dict)
     attribute_types: dict[str, str] = field(default_factory=dict)
     exported: bool = False
+    is_default: bool = False
 
     @property
     def is_type(self) -> bool:
@@ -180,6 +181,7 @@ class SymbolNode:
             "local_types": dict(self.local_types),
             "attribute_types": dict(self.attribute_types),
             "exported": self.exported,
+            "is_default": self.is_default,
         }
 
     @classmethod
@@ -203,6 +205,7 @@ class SymbolNode:
             local_types=dict(data.get("local_types", {})),
             attribute_types=dict(data.get("attribute_types", {})),
             exported=bool(data.get("exported", False)),
+            is_default=bool(data.get("is_default", False)),
         )
 
 
@@ -508,6 +511,7 @@ class PolyglotASTParser:
             symbols = self._merge_duplicate_python_symbols(symbols)
         else:
             self._walk_ts(root, source_bytes, resolved, language, [], None, False, symbols)
+            self._mark_ts_default_exports(root, source_bytes, language, resolved, symbols)
 
         return ParsedFile(
             file_path=resolved,
@@ -937,11 +941,142 @@ class PolyglotASTParser:
                                     exported=True,
                                 )
                             )
+                    elif (
+                        left_text == "module.exports"
+                        and right is not None
+                        and right.type
+                        in ("function_expression", "generator_function", "arrow_function", "class")
+                    ):
+                        name_node = right.child_by_field_name("name")
+                        name = self._text(name_node, source) or "default"
+                        kind = "class" if right.type == "class" else "function"
+                        calls, type_refs, local_types = self._analyze_body(
+                            right, source, language
+                        )
+                        out.append(
+                            self._make_symbol(
+                                name=name,
+                                qualified=".".join([*scope, name]),
+                                kind=kind,
+                                span=child,
+                                source=source,
+                                file_path=file_path,
+                                language=language,
+                                calls=calls,
+                                type_refs=type_refs,
+                                local_types=local_types,
+                                bases=self._ts_bases(right, source) if kind == "class" else None,
+                                attribute_types=(
+                                    self._ts_attribute_types(right, source)
+                                    if kind == "class"
+                                    else None
+                                ),
+                                doc=self._leading_comment_doc(span, source),
+                                exported=True,
+                                is_default=True,
+                            )
+                        )
 
             elif child.type == "statement_block":
                 self._walk_ts(
                     child, source, file_path, language, scope, enclosing_class, is_export, out
                 )
+
+    def _mark_ts_default_exports(
+        self,
+        root: Node,
+        source: bytes,
+        language: SupportedLanguage,
+        file_path: str,
+        symbols: list[SymbolNode],
+    ) -> None:
+        """Marks ``export default`` targets, creating a ``default`` symbol when nameless.
+
+        ``import x from "./u"`` binds ``x`` to the name ``default``; without an identity for
+        the default export, every such call site is silently dropped.
+        """
+        for child in root.children:
+            if child.type != "export_statement":
+                continue
+            if not any(part.type == "default" for part in child.children):
+                continue
+            declaration = child.child_by_field_name("declaration")
+            if declaration is not None:
+                name_node = declaration.child_by_field_name("name")
+                name = self._text(name_node, source)
+                matched = next(
+                    (
+                        symbol
+                        for symbol in symbols
+                        if name
+                        and symbol.name == name
+                        and child.start_byte <= symbol.start_byte
+                        and symbol.end_byte <= child.end_byte
+                    ),
+                    None,
+                )
+                if matched is not None:
+                    matched.is_default = True
+                elif declaration.type in (
+                    "function_declaration",
+                    "generator_function_declaration",
+                    "class_declaration",
+                    "abstract_class_declaration",
+                ):
+                    self._append_default_symbol(
+                        child, declaration, source, language, file_path, symbols
+                    )
+                continue
+
+            value = child.child_by_field_name("value")
+            if value is None:
+                continue
+            if value.type == "identifier":
+                name = self._text(value, source)
+                for symbol in symbols:
+                    if symbol.name == name and "." not in symbol.qualified_name:
+                        symbol.is_default = True
+                        break
+            elif value.type in (
+                "function_expression",
+                "generator_function",
+                "arrow_function",
+                "class",
+            ):
+                self._append_default_symbol(child, value, source, language, file_path, symbols)
+
+    def _append_default_symbol(
+        self,
+        span: Node,
+        value: Node,
+        source: bytes,
+        language: SupportedLanguage,
+        file_path: str,
+        symbols: list[SymbolNode],
+    ) -> None:
+        kind: SymbolKind = "class" if value.type == "class" else "function"
+        calls, type_refs, local_types = self._analyze_body(value, source, language)
+        symbols.append(
+            self._make_symbol(
+                name="default",
+                qualified="default",
+                kind=kind,
+                span=span,
+                source=source,
+                file_path=file_path,
+                language=language,
+                calls=calls,
+                type_refs=type_refs,
+                local_types=local_types,
+                bases=self._ts_bases(value, source) if kind == "class" else None,
+                attribute_types=(
+                    self._ts_attribute_types(value, source) if kind == "class" else None
+                ),
+                doc=self._leading_comment_doc(span, source),
+                exported=True,
+                is_default=True,
+            )
+        )
 
     def _ts_bases(self, node: Node, source: bytes) -> list[str]:
         heritage = next((c for c in node.named_children if c.type == "class_heritage"), None)
@@ -1169,6 +1304,7 @@ class PolyglotASTParser:
         bases: list[str] | None = None,
         local_types: dict[str, str] | None = None,
         attribute_types: dict[str, str] | None = None,
+        is_default: bool = False,
     ) -> SymbolNode:
         return SymbolNode(
             symbol_id=f"{file_path}::{qualified}",
@@ -1189,6 +1325,7 @@ class PolyglotASTParser:
             local_types=local_types or {},
             attribute_types=attribute_types or {},
             exported=exported,
+            is_default=is_default,
         )
 
 
