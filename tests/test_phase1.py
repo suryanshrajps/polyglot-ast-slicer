@@ -796,3 +796,52 @@ def test_super_init_and_constructed_receiver_calls_resolve(tmp_path: Path) -> No
     assert explained["exists"] is True
     assert explained["call_site"]["line"] == 11
     engine.close()
+
+
+def test_imports_under_type_checking_resolve_annotated_receivers(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": (
+                "from typing import TYPE_CHECKING\n\n"
+                "if TYPE_CHECKING:\n"
+                "    from b import Client\n\n\n"
+                "def use(client: Client) -> int:\n"
+                "    return client.run()\n"
+            ),
+            "b.py": (
+                "class Client:\n"
+                "    def run(self) -> int:\n"
+                "        return 1\n"
+            ),
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    use = engine.resolve_strict("use")[0]
+    run = engine.resolve_strict("Client.run")[0]
+    assert use is not None and run is not None
+    edge = engine.graph.get_edge_data(use.symbol_id, run.symbol_id)
+    assert edge is not None
+    assert edge["resolution"].startswith("typed_receiver:client->Client")
+    engine.close()
+
+
+def test_imports_inside_functions_do_not_become_module_bindings(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": (
+                "def use() -> int:\n"
+                "    from b import helper\n\n"
+                "    return helper()\n"
+            ),
+            "b.py": "def helper() -> int:\n    return 1\n",
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    use = engine.resolve_strict("use")[0]
+    assert use is not None
+    assert not list(engine.graph.successors(use.symbol_id))
+    engine.close()

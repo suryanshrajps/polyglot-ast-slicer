@@ -316,41 +316,71 @@ class PolyglotASTParser:
 
     def _python_imports(self, root: Node, source: bytes) -> list[ImportRef]:
         imports: list[ImportRef] = []
-        for child in root.children:
-            if child.type == "import_statement":
-                for item in child.children:
-                    if item.type == "dotted_name":
-                        module = self._text(item, source)
-                        imports.append(
-                            ImportRef(module=module, is_module=True, alias=module.split(".")[0])
-                        )
-                    elif item.type == "aliased_import":
-                        module = self._text(item.child_by_field_name("name"), source)
-                        alias = self._text(item.child_by_field_name("alias"), source)
-                        imports.append(
-                            ImportRef(module=module, is_module=True, alias=alias or module)
-                        )
-            elif child.type == "import_from_statement":
-                module_node = child.child_by_field_name("module_name")
-                module = self._text(module_node, source)
-                names: list[tuple[str, str]] = []
-                wildcard = False
-                module_span = (
-                    (module_node.start_byte, module_node.end_byte) if module_node else (-1, -1)
-                )
-                for item in child.named_children:
-                    if (item.start_byte, item.end_byte) == module_span:
-                        continue
-                    if item.type == "dotted_name":
-                        name = self._text(item, source)
-                        names.append((name, name))
-                    elif item.type == "aliased_import":
-                        original = self._text(item.child_by_field_name("name"), source)
-                        alias = self._text(item.child_by_field_name("alias"), source)
-                        names.append((alias or original, original))
-                    elif item.type == "wildcard_import":
-                        wildcard = True
-                imports.append(ImportRef(module=module, names=tuple(names), wildcard=wildcard))
+
+        def visit(node: Node) -> None:
+            for child in node.children:
+                if child.type == "import_statement":
+                    for item in child.children:
+                        if item.type == "dotted_name":
+                            module = self._text(item, source)
+                            imports.append(
+                                ImportRef(
+                                    module=module,
+                                    is_module=True,
+                                    alias=module.split(".")[0],
+                                )
+                            )
+                        elif item.type == "aliased_import":
+                            module = self._text(item.child_by_field_name("name"), source)
+                            alias = self._text(item.child_by_field_name("alias"), source)
+                            imports.append(
+                                ImportRef(
+                                    module=module,
+                                    is_module=True,
+                                    alias=alias or module,
+                                )
+                            )
+                elif child.type == "import_from_statement":
+                    module_node = child.child_by_field_name("module_name")
+                    module = self._text(module_node, source)
+                    names: list[tuple[str, str]] = []
+                    wildcard = False
+                    module_span = (
+                        (module_node.start_byte, module_node.end_byte)
+                        if module_node
+                        else (-1, -1)
+                    )
+                    for item in child.named_children:
+                        if (item.start_byte, item.end_byte) == module_span:
+                            continue
+                        if item.type == "dotted_name":
+                            name = self._text(item, source)
+                            names.append((name, name))
+                        elif item.type == "aliased_import":
+                            original = self._text(item.child_by_field_name("name"), source)
+                            alias = self._text(item.child_by_field_name("alias"), source)
+                            names.append((alias or original, original))
+                        elif item.type == "wildcard_import":
+                            wildcard = True
+                    imports.append(
+                        ImportRef(module=module, names=tuple(names), wildcard=wildcard)
+                    )
+                elif child.type in (
+                    "if_statement",
+                    "try_statement",
+                    "with_statement",
+                    "block",
+                    "else_clause",
+                    "elif_clause",
+                    "except_clause",
+                    "finally_clause",
+                ):
+                    # ``if TYPE_CHECKING:`` and try/except import fallbacks still bind
+                    # names at module scope. Function/class bodies are deliberately not
+                    # visited: their imports are local.
+                    visit(child)
+
+        visit(root)
         return imports
 
     def _ts_imports(self, root: Node, source: bytes) -> list[ImportRef]:
