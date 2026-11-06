@@ -992,3 +992,104 @@ def test_ts_super_resolves_against_base_before_enclosing_class(tmp_path: Path) -
     cycles = engine.find_circular_dependencies()
     assert cycles["self_recursive_count"] == 0, cycles["self_recursive"]
     engine.close()
+
+
+def test_ts_call_forms_and_nested_imports_resolve(tmp_path: Path) -> None:
+    cases = {
+        "this_method": (
+            {
+                "c.ts": (
+                    "export class C {\n"
+                    "  m(): number { return 1; }\n"
+                    "  n(): number { return this.m(); }\n"
+                    "}\n"
+                )
+            },
+            ("C.n", "C.m"),
+        ),
+        "this_field_method": (
+            {
+                "u.ts": "export class U { go(): number { return 1; } }\n",
+                "c.ts": (
+                    'import { U } from "./u";\n'
+                    "export class C {\n"
+                    "  u: U;\n"
+                    "  n(): number { return this.u.go(); }\n"
+                    "}\n"
+                ),
+            },
+            ("C.n", "U.go"),
+        ),
+        "export_alias_reexport": (
+            {
+                "u.ts": "export function a(): number { return 1; }\n",
+                "i.ts": 'export { a as b } from "./u";\n',
+                "j.ts": (
+                    'import { b } from "./i";\n'
+                    "export function run(): number { return b(); }\n"
+                ),
+            },
+            ("run", "a"),
+        ),
+        "import_type": (
+            {
+                "u.ts": "export class U { go(): number { return 1; } }\n",
+                "c.ts": (
+                    'import type { U } from "./u";\n'
+                    "export class C {\n"
+                    "  u: U;\n"
+                    "  n(): number { return this.u.go(); }\n"
+                    "}\n"
+                ),
+            },
+            ("C.n", "U.go"),
+        ),
+        "optional_chain": (
+            {
+                "u.ts": "export class U { go(): number { return 1; } }\n",
+                "c.ts": (
+                    'import { U } from "./u";\n'
+                    "export function run(u?: U): number { return u?.go() ?? 0; }\n"
+                ),
+            },
+            ("run", "U.go"),
+        ),
+        "require_in_try": (
+            {
+                "u.ts": "export function helper(): number { return 1; }\n",
+                "i.ts": (
+                    "export function run(): number {\n"
+                    "  try {\n"
+                    '    const { helper } = require("./u");\n'
+                    "    return helper();\n"
+                    "  } catch {\n"
+                    "    return 0;\n"
+                    "  }\n"
+                    "}\n"
+                ),
+            },
+            ("run", "helper"),
+        ),
+        "require_in_conditional": (
+            {
+                "u.ts": "export function helper(): number { return 1; }\n",
+                "i.ts": (
+                    "export function run(flag: boolean): number {\n"
+                    "  if (flag) {\n"
+                    '    const { helper } = require("./u");\n'
+                    "    return helper();\n"
+                    "  }\n"
+                    "  return 0;\n"
+                    "}\n"
+                ),
+            },
+            ("run", "helper"),
+        ),
+    }
+    for name, (files, expected) in cases.items():
+        repo = _repo(tmp_path / name, files)
+        engine = GraphEngine(repo)
+        engine.index_repository(force_rebuild=True)
+        edges = _call_edges(engine)
+        assert expected in edges, (name, sorted(edges))
+        engine.close()
