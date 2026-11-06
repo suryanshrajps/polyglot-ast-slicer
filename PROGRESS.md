@@ -104,3 +104,19 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
   `metrics/python_ground_truth.json` has no diff.
 - Artifact `metrics/ts_ground_truth.json`; rendered into `METRICS.md`;
   `scripts/generate_metrics.py --check` passes.
+
+## Held-out ground truth — 2026-11-06
+- New pinned repos, never used for tuning: werkzeug `6604c3b` (Python, `src/`),
+  zustand `9fed2eb` (TS, `src/`, tests excluded), moment `485d9a7` (JS, `src/`,
+  test excluded). Production source only.
+- Runner: `benchmarks/ground_truth/heldout_eval.py`; artifact
+  `metrics/heldout_ground_truth.json`.
+- werkzeug: 1426 sites, 1080 correct, 1 wrong, 345 missed, 14 ambiguous (12
+  reported); precision 99.91% (95% CI 99.48-99.98), high-confidence 99.89%
+  (946/947), recall 75.74% (95% CI 73.44-77.89).
+- zustand: 43 sites, 38 correct, 0 wrong, 5 missed; precision 100.0%
+  (95% CI 90.82-100.0), high-confidence 100% (38/38), recall 88.37%
+  (95% CI 75.52-94.93).
+- moment: 794 sites, 507 correct, 0 wrong, 287 missed; precision 100.0%
+  (95% CI 99.25-100.0), high-confidence 100% (507/507), recall 63.85%
+  (95% CI 60.45-67.12). No fixes were made after these runs.

@@ -1,0 +1,116 @@
+{
+  "pinned": {
+    "werkzeug": "6604c3b8784ecc7cf5ac0b7412d916989b4c7d45",
+    "zustand": "9fed2eb2f3af672da9f7bf694b996df3831fc207",
+    "moment": "485d9a7d709bd5f3869a7ad24630cf0746d072dc"
+  },
+  "scope": {
+    "werkzeug": {
+      "root": "src",
+      "exclude": ""
+    },
+    "zustand": {
+      "root": "src",
+      "exclude": "__tests__,tests"
+    },
+    "moment": {
+      "root": "src",
+      "exclude": "test"
+    }
+  },
+  "results": {
+    "werkzeug": {
+      "language": "python",
+      "sha": "6604c3b8784ecc7cf5ac0b7412d916989b4c7d45",
+      "sites": 1426,
+      "correct": 1080,
+      "wrong": 1,
+      "missed": 345,
+      "ambiguous": 14,
+      "ambiguous_but_reported": 12,
+      "precision": 0.9990749306197965,
+      "precision_ci95": [
+        0.9947786963091511,
+        0.999836683870876
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 946,
+        "correct": 945,
+        "wrong": 1,
+        "precision": 0.9989429175475687,
+        "precision_ci95": [
+          0.9940366950314666,
+          0.9998133746128438
+        ]
+      },
+      "recall": 0.7573632538569425,
+      "recall_ci95": [
+        0.7344415438769784,
+        0.7789020827691459
+      ]
+    },
+    "zustand": {
+      "language": "typescript",
+      "sha": "9fed2eb2f3af672da9f7bf694b996df3831fc207",
+      "sites": 43,
+      "correct": 38,
+      "wrong": 0,
+      "missed": 5,
+      "ambiguous": 0,
+      "ambiguous_but_reported": 0,
+      "precision": 1,
+      "precision_ci95": [
+        0.908190131774416,
+        0.9999999999999999
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 38,
+        "correct": 38,
+        "wrong": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.908190131774416,
+          0.9999999999999999
+        ]
+      },
+      "recall": 0.8837209302325582,
+      "recall_ci95": [
+        0.7552083818991787,
+        0.9492957226019584
+      ]
+    },
+    "moment": {
+      "language": "javascript",
+      "sha": "485d9a7d709bd5f3869a7ad24630cf0746d072dc",
+      "sites": 794,
+      "correct": 507,
+      "wrong": 0,
+      "missed": 287,
+      "ambiguous": 0,
+      "ambiguous_but_reported": 0,
+      "precision": 1,
+      "precision_ci95": [
+        0.9924801349726735,
+        0.9999999999999998
+      ],
+      "high_confidence": {
+        "threshold": 0.95,
+        "claims": 507,
+        "correct": 507,
+        "wrong": 0,
+        "precision": 1,
+        "precision_ci95": [
+          0.9924801349726735,
+          0.9999999999999998
+        ]
+      },
+      "recall": 0.6385390428211587,
+      "recall_ci95": [
+        0.6045292741096782,
+        0.6712147318801667
+      ]
+    }
+  }
+}
