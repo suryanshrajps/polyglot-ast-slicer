@@ -303,6 +303,7 @@ def collect(repos_dir: Path) -> dict[str, object]:
         "scale": {},
         "ground_truth": {},
         "ts_ground_truth": {},
+        "size_comparison": {},
         "tests": {},
     }
     for name in PINNED:
@@ -399,6 +400,9 @@ def collect(repos_dir: Path) -> dict[str, object]:
         "hand_audit": existing_audit,
     }
     data["ts_ground_truth"] = collect_ts_ground_truth(repos_dir)
+    data["size_comparison"] = run_json(
+        "benchmarks/size_compare.py", "--json", "--repos-dir", str(repos_dir)
+    )
     data["tests"] = {"count": collected_test_count()}
     return data
 
@@ -411,6 +415,7 @@ def load_artifacts() -> dict[str, object]:
         "scale": {},
         "ground_truth": {},
         "ts_ground_truth": {},
+        "size_comparison": {},
         "tests": {},
     }
     for name in PINNED:
@@ -427,6 +432,9 @@ def load_artifacts() -> dict[str, object]:
     )
     data["ts_ground_truth"] = json.loads(
         (METRICS_DIR / "ts_ground_truth.json").read_text(encoding="utf-8")
+    )
+    data["size_comparison"] = json.loads(
+        (METRICS_DIR / "size_comparison.json").read_text(encoding="utf-8")
     )
     data["tests"] = json.loads((METRICS_DIR / "tests.json").read_text(encoding="utf-8"))
     return data
@@ -746,6 +754,27 @@ def render(data: dict[str, object]) -> str:
             "in `metrics/ts_ground_truth.json`.",
             "",
         ]
+    sizes = data["size_comparison"]  # type: ignore[assignment]
+    if sizes.get("per_language"):
+        lines += [
+            "## Slice size comparison (30 random symbols per language, seed 42)",
+            "",
+            "Default slice payload tokens vs the entry symbol's whole file vs every unique "
+            "file containing its callers and callees. Sizes only; no sufficiency claim.",
+            "",
+            "| Language | Symbols | Payload tokens p10 / median / p90 | "
+            "Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |",
+            "|---|---:|---|---|---|",
+        ]
+        for language, entry in sizes["per_language"].items():
+            rows = []
+            for key in ("payload_tokens", "entry_file_tokens", "caller_callee_files_tokens"):
+                q = entry[key]
+                rows.append(f"{q['p10']:.0f} / {q['median']:.0f} / {q['p90']:.0f}")
+            lines.append(
+                f"| {language} | {entry['symbols']} | {rows[0]} | {rows[1]} | {rows[2]} |"
+            )
+        lines += [""]
     lines += [
         "## Synthetic token benchmark (hops=2)",
         "",
@@ -798,6 +827,9 @@ def write_artifacts(data: dict[str, object]) -> None:
     )
     (METRICS_DIR / "ts_ground_truth.json").write_text(
         json.dumps(data["ts_ground_truth"], indent=2) + "\n", encoding="utf-8"
+    )
+    (METRICS_DIR / "size_comparison.json").write_text(
+        json.dumps(data["size_comparison"], indent=2) + "\n", encoding="utf-8"
     )
     (METRICS_DIR / "tests.json").write_text(
         json.dumps(data["tests"], indent=2) + "\n", encoding="utf-8"

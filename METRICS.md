@@ -122,6 +122,15 @@ Gate (high-confidence precision >= 95%, overall precision >= 90%, recall >= 50%)
 
 Independent hand audit: 30/30 sampled edges the compiler cannot judge were correct, with file:line citations in `metrics/ts_ground_truth.json`.
 
+## Slice size comparison (30 random symbols per language, seed 42)
+
+Default slice payload tokens vs the entry symbol's whole file vs every unique file containing its callers and callees. Sizes only; no sufficiency claim.
+
+| Language | Symbols | Payload tokens p10 / median / p90 | Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |
+|---|---:|---|---|---|
+| python | 30 | 242 / 3473 / 5934 | 1466 / 5953 / 9114 | 2846 / 8694 / 31961 |
+| typescript | 30 | 234 / 1977 / 4938 | 1195 / 39169 / 39169 | 1195 / 39169 / 40544 |
+
 ## Synthetic token benchmark (hops=2)
 
 | Target | Touched files | Repo | Slice | Saved vs files |

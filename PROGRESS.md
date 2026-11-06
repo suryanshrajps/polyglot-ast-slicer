@@ -170,3 +170,13 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
   binary and 5 MB skipped, symlink loop tolerated, read-only checkout indexes. PASS.
 - Dogfood (`dogfood_probe.py`): self-index 56 files / 532 symbols / 988 edges; five own
   functions sliced. PASS.
+
+## Size comparison — 2026-11-06
+- `benchmarks/size_compare.py`: 30 random function/method symbols per language (seed 42),
+  default slice payload tokens measured with tiktoken on the exact JSON, versus the entry
+  symbol's whole file and all unique files containing call callers/callees.
+- Python (requests): payload p10/median/p90 242 / 3473 / 5934 tokens; entry file
+  1466 / 5953 / 9114; caller+callee files 2846 / 8693.5 / 31961.
+- TypeScript (zod): payload 234 / 1977 / 4938; entry file 1195 / 39169 / 39169
+  (types.ts dominates the median); caller+callee files 1195 / 39169 / 40544.
+- Artifact `metrics/size_comparison.json`; rendered as sizes only, no sufficiency claim.

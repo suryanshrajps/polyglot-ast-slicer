@@ -1,0 +1,529 @@
+{
+  "seed": 42,
+  "per_language": {
+    "python": {
+      "repo": "requests",
+      "sha": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+      "symbols": 30,
+      "payload_tokens": {
+        "median": 3473.0,
+        "p10": 242.0,
+        "p90": 5934.0
+      },
+      "entry_file_tokens": {
+        "median": 5953.0,
+        "p10": 1466.0,
+        "p90": 9114.0
+      },
+      "caller_callee_files_tokens": {
+        "median": 8693.5,
+        "p10": 2846.0,
+        "p90": 31961.0
+      },
+      "rows": [
+        {
+          "symbol": "Session.get_adapter",
+          "file": "src/requests/sessions.py",
+          "line": 870,
+          "payload_tokens": 5802,
+          "entry_file_tokens": 7336,
+          "caller_callee_files_tokens": 8273
+        },
+        {
+          "symbol": "get",
+          "file": "src/requests/api.py",
+          "line": 74,
+          "payload_tokens": 4869,
+          "entry_file_tokens": 1837,
+          "caller_callee_files_tokens": 31961
+        },
+        {
+          "symbol": "has_read",
+          "file": "src/requests/_types.py",
+          "line": 32,
+          "payload_tokens": 3940,
+          "entry_file_tokens": 1466,
+          "caller_callee_files_tokens": 10580
+        },
+        {
+          "symbol": "CaseInsensitiveDict.__init__",
+          "file": "src/requests/structures.py",
+          "line": 49,
+          "payload_tokens": 311,
+          "entry_file_tokens": 1025,
+          "caller_callee_files_tokens": 1025
+        },
+        {
+          "symbol": "RequestsCookieJar.__contains__",
+          "file": "src/requests/cookies.py",
+          "line": 352,
+          "payload_tokens": 267,
+          "entry_file_tokens": 4906,
+          "caller_callee_files_tokens": 4906
+        },
+        {
+          "symbol": "MockRequest.has_header",
+          "file": "src/requests/cookies.py",
+          "line": 83,
+          "payload_tokens": 238,
+          "entry_file_tokens": 4906,
+          "caller_callee_files_tokens": 4906
+        },
+        {
+          "symbol": "MockRequest.get_header",
+          "file": "src/requests/cookies.py",
+          "line": 86,
+          "payload_tokens": 259,
+          "entry_file_tokens": 4906,
+          "caller_callee_files_tokens": 4906
+        },
+        {
+          "symbol": "AuthBase.__call__",
+          "file": "src/requests/auth.py",
+          "line": 81,
+          "payload_tokens": 3670,
+          "entry_file_tokens": 2846,
+          "caller_callee_files_tokens": 2846
+        },
+        {
+          "symbol": "CaseInsensitiveDict.__getitem__",
+          "file": "src/requests/structures.py",
+          "line": 64,
+          "payload_tokens": 237,
+          "entry_file_tokens": 1025,
+          "caller_callee_files_tokens": 1025
+        },
+        {
+          "symbol": "_urllib3_request_context",
+          "file": "src/requests/adapters.py",
+          "line": 85,
+          "payload_tokens": 5422,
+          "entry_file_tokens": 5953,
+          "caller_callee_files_tokens": 5953
+        },
+        {
+          "symbol": "Session.send",
+          "file": "src/requests/sessions.py",
+          "line": 752,
+          "payload_tokens": 5934,
+          "entry_file_tokens": 7336,
+          "caller_callee_files_tokens": 22604
+        },
+        {
+          "symbol": "to_key_val_list",
+          "file": "src/requests/utils.py",
+          "line": 370,
+          "payload_tokens": 5935,
+          "entry_file_tokens": 8618,
+          "caller_callee_files_tokens": 33011
+        },
+        {
+          "symbol": "prepend_scheme_if_needed",
+          "file": "src/requests/utils.py",
+          "line": 1040,
+          "payload_tokens": 3361,
+          "entry_file_tokens": 8618,
+          "caller_callee_files_tokens": 22514
+        },
+        {
+          "symbol": "Response.__repr__",
+          "file": "src/requests/models.py",
+          "line": 834,
+          "payload_tokens": 230,
+          "entry_file_tokens": 9114,
+          "caller_callee_files_tokens": 9114
+        },
+        {
+          "symbol": "HTTPAdapter.proxy_headers",
+          "file": "src/requests/adapters.py",
+          "line": 613,
+          "payload_tokens": 3263,
+          "entry_file_tokens": 5953,
+          "caller_callee_files_tokens": 42691
+        },
+        {
+          "symbol": "Response.next",
+          "file": "src/requests/models.py",
+          "line": 891,
+          "payload_tokens": 3666,
+          "entry_file_tokens": 9114,
+          "caller_callee_files_tokens": 9114
+        },
+        {
+          "symbol": "main",
+          "file": "src/requests/help.py",
+          "line": 126,
+          "payload_tokens": 1337,
+          "entry_file_tokens": 911,
+          "caller_callee_files_tokens": 911
+        },
+        {
+          "symbol": "BaseAdapter.__init__",
+          "file": "src/requests/adapters.py",
+          "line": 125,
+          "payload_tokens": 458,
+          "entry_file_tokens": 5953,
+          "caller_callee_files_tokens": 5953
+        },
+        {
+          "symbol": "is_prepared",
+          "file": "src/requests/_types.py",
+          "line": 47,
+          "payload_tokens": 6021,
+          "entry_file_tokens": 1466,
+          "caller_callee_files_tokens": 19661
+        },
+        {
+          "symbol": "HTTPAdapter.proxy_manager_for",
+          "file": "src/requests/adapters.py",
+          "line": 269,
+          "payload_tokens": 4078,
+          "entry_file_tokens": 5953,
+          "caller_callee_files_tokens": 14571
+        },
+        {
+          "symbol": "MockRequest.add_unredirected_header",
+          "file": "src/requests/cookies.py",
+          "line": 95,
+          "payload_tokens": 242,
+          "entry_file_tokens": 4906,
+          "caller_callee_files_tokens": 4906
+        },
+        {
+          "symbol": "MockRequest.get_new_headers",
+          "file": "src/requests/cookies.py",
+          "line": 98,
+          "payload_tokens": 3585,
+          "entry_file_tokens": 4906,
+          "caller_callee_files_tokens": 4906
+        },
+        {
+          "symbol": "RequestEncodingMixin.path_url",
+          "file": "src/requests/models.py",
+          "line": 111,
+          "payload_tokens": 378,
+          "entry_file_tokens": 9114,
+          "caller_callee_files_tokens": 9114
+        },
+        {
+          "symbol": "Response.text",
+          "file": "src/requests/models.py",
+          "line": 1053,
+          "payload_tokens": 542,
+          "entry_file_tokens": 9114,
+          "caller_callee_files_tokens": 9114
+        },
+        {
+          "symbol": "unquote_header_value",
+          "file": "src/requests/utils.py",
+          "line": 475,
+          "payload_tokens": 2681,
+          "entry_file_tokens": 8618,
+          "caller_callee_files_tokens": 16561
+        },
+        {
+          "symbol": "Response.content",
+          "file": "src/requests/models.py",
+          "line": 1034,
+          "payload_tokens": 5216,
+          "entry_file_tokens": 9114,
+          "caller_callee_files_tokens": 9114
+        },
+        {
+          "symbol": "HTTPProxyAuth.__call__",
+          "file": "src/requests/auth.py",
+          "line": 119,
+          "payload_tokens": 4347,
+          "entry_file_tokens": 2846,
+          "caller_callee_files_tokens": 2846
+        },
+        {
+          "symbol": "session",
+          "file": "src/requests/sessions.py",
+          "line": 908,
+          "payload_tokens": 5790,
+          "entry_file_tokens": 7336,
+          "caller_callee_files_tokens": 32610
+        },
+        {
+          "symbol": "Session.mount",
+          "file": "src/requests/sessions.py",
+          "line": 888,
+          "payload_tokens": 1534,
+          "entry_file_tokens": 7336,
+          "caller_callee_files_tokens": 7336
+        },
+        {
+          "symbol": "SessionRedirectMixin.send",
+          "file": "src/requests/sessions.py",
+          "line": 132,
+          "payload_tokens": 5986,
+          "entry_file_tokens": 7336,
+          "caller_callee_files_tokens": 7336
+        }
+      ]
+    },
+    "typescript": {
+      "repo": "zod",
+      "sha": "ca42965df46b2f7e2747db29c40a26bcb32a51d5",
+      "symbols": 30,
+      "payload_tokens": {
+        "median": 1977.0,
+        "p10": 234.0,
+        "p90": 4938.0
+      },
+      "entry_file_tokens": {
+        "median": 39169.0,
+        "p10": 1195.0,
+        "p90": 39169.0
+      },
+      "caller_callee_files_tokens": {
+        "median": 39169.0,
+        "p10": 1195.0,
+        "p90": 40544.0
+      },
+      "rows": [
+        {
+          "symbol": "ZodAny.create",
+          "file": "src/types.ts",
+          "line": 2043,
+          "payload_tokens": 4652,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "quotelessJson",
+          "file": "src/ZodError.ts",
+          "line": 175,
+          "payload_tokens": 240,
+          "entry_file_tokens": 2385,
+          "caller_callee_files_tokens": 2385
+        },
+        {
+          "symbol": "ZodNever.create",
+          "file": "src/types.ts",
+          "line": 2098,
+          "payload_tokens": 4750,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodLazy.create",
+          "file": "src/types.ts",
+          "line": 4078,
+          "payload_tokens": 4164,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodFunction._parse",
+          "file": "src/types.ts",
+          "line": 3886,
+          "payload_tokens": 4504,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 42929
+        },
+        {
+          "symbol": "ZodBigInt.lte",
+          "file": "src/types.ts",
+          "line": 1637,
+          "payload_tokens": 4938,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "errorMap",
+          "file": "src/locales/en.ts",
+          "line": 4,
+          "payload_tokens": 1627,
+          "entry_file_tokens": 1195,
+          "caller_callee_files_tokens": 1195
+        },
+        {
+          "symbol": "ZodType.parseAsync",
+          "file": "src/types.ts",
+          "line": 265,
+          "payload_tokens": 1695,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ParseStatus.mergeObjectSync",
+          "file": "src/helpers/parseUtil.ts",
+          "line": 134,
+          "payload_tokens": 2340,
+          "entry_file_tokens": 1375,
+          "caller_callee_files_tokens": 40544
+        },
+        {
+          "symbol": "floatSafeRemainder",
+          "file": "src/types.ts",
+          "line": 1249,
+          "payload_tokens": 1284,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodString.duration",
+          "file": "src/types.ts",
+          "line": 1064,
+          "payload_tokens": 5498,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "Mocker.booleanOptional",
+          "file": "src/__tests__/Mocker.ts",
+          "line": 48,
+          "payload_tokens": 350,
+          "entry_file_tokens": 295,
+          "caller_callee_files_tokens": 295
+        },
+        {
+          "symbol": "Mocker.booleanNullable",
+          "file": "src/__tests__/Mocker.ts",
+          "line": 51,
+          "payload_tokens": 350,
+          "entry_file_tokens": 295,
+          "caller_callee_files_tokens": 295
+        },
+        {
+          "symbol": "isAsync",
+          "file": "src/helpers/parseUtil.ts",
+          "line": 189,
+          "payload_tokens": 2122,
+          "entry_file_tokens": 1375,
+          "caller_callee_files_tokens": 40544
+        },
+        {
+          "symbol": "ZodEnum.exclude",
+          "file": "src/types.ts",
+          "line": 4260,
+          "payload_tokens": 466,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodFunction.returnType",
+          "file": "src/types.ts",
+          "line": 3982,
+          "payload_tokens": 227,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodType._getOrReturnCtx",
+          "file": "src/types.ts",
+          "line": 188,
+          "payload_tokens": 4655,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 40726
+        },
+        {
+          "symbol": "oboolean",
+          "file": "src/types.ts",
+          "line": 5241,
+          "payload_tokens": 201,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "Mocker.bigint",
+          "file": "src/__tests__/Mocker.ts",
+          "line": 18,
+          "payload_tokens": 234,
+          "entry_file_tokens": 295,
+          "caller_callee_files_tokens": 295
+        },
+        {
+          "symbol": "ZodType.superRefine",
+          "file": "src/types.ts",
+          "line": 393,
+          "payload_tokens": 4902,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodDiscriminatedUnion.optionsMap",
+          "file": "src/types.ts",
+          "line": 3168,
+          "payload_tokens": 234,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodString.date",
+          "file": "src/types.ts",
+          "line": 1037,
+          "payload_tokens": 5498,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodEnum.extract",
+          "file": "src/types.ts",
+          "line": 4250,
+          "payload_tokens": 406,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodString.isEmoji",
+          "file": "src/types.ts",
+          "line": 1177,
+          "payload_tokens": 240,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "deepPartialify",
+          "file": "src/types.ts",
+          "line": 2382,
+          "payload_tokens": 1832,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodNull.create",
+          "file": "src/types.ts",
+          "line": 2018,
+          "payload_tokens": 4249,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodError.constructor",
+          "file": "src/ZodError.ts",
+          "line": 204,
+          "payload_tokens": 305,
+          "entry_file_tokens": 2385,
+          "caller_callee_files_tokens": 2385
+        },
+        {
+          "symbol": "ZodBoolean.create",
+          "file": "src/types.ts",
+          "line": 1769,
+          "payload_tokens": 4295,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodObject.merge",
+          "file": "src/types.ts",
+          "line": 2654,
+          "payload_tokens": 4650,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        },
+        {
+          "symbol": "ZodBigInt.setLimit",
+          "file": "src/types.ts",
+          "line": 1646,
+          "payload_tokens": 4958,
+          "entry_file_tokens": 39169,
+          "caller_callee_files_tokens": 39169
+        }
+      ]
+    }
+  }
+}
