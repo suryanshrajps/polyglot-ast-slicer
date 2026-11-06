@@ -1140,3 +1140,29 @@ def test_ts_dotted_specifier_basenames_resolve(tmp_path: Path) -> None:
         edges = _call_edges(engine)
         assert expected in edges, (name, sorted(edges))
         engine.close()
+
+
+def test_js_property_assigned_functions_are_symbols(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "app.js": (
+                "function helper() { return 1; }\n"
+                "const app = {};\n"
+                "app.set = function set() { return helper(); };\n"
+                "module.exports = app;\n"
+            ),
+            "widget.js": (
+                "function helper() { return 2; }\n"
+                "function Widget() {}\n"
+                "Widget.prototype.render = function render() { return helper(); };\n"
+                "module.exports = Widget;\n"
+            ),
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    edges = _call_edges(engine)
+    assert ("app.set", "helper") in edges, sorted(edges)
+    assert ("Widget.prototype.render", "helper") in edges, sorted(edges)
+    engine.close()

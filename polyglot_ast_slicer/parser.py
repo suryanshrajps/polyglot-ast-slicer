@@ -976,6 +976,38 @@ class PolyglotASTParser:
                                 is_default=True,
                             )
                         )
+                    elif (
+                        left is not None
+                        and left.type == "member_expression"
+                        and right is not None
+                        and right.type
+                        in ("function_expression", "generator_function", "arrow_function")
+                    ):
+                        # ``app.set = function set() {}`` / ``Foo.prototype.run = ...``:
+                        # CommonJS object methods. Without a symbol their bodies have no
+                        # caller, so every call they make is missing from the graph.
+                        lhs = self._text(left, source)
+                        prop = lhs.rsplit(".", 1)[-1].strip()
+                        if prop and not lhs.startswith("this."):
+                            calls, type_refs, local_types = self._analyze_body(
+                                right, source, language
+                            )
+                            out.append(
+                                self._make_symbol(
+                                    name=prop,
+                                    qualified=lhs,
+                                    kind="function",
+                                    span=child,
+                                    source=source,
+                                    file_path=file_path,
+                                    language=language,
+                                    calls=calls,
+                                    type_refs=type_refs,
+                                    local_types=local_types,
+                                    doc=self._leading_comment_doc(span, source),
+                                    exported=False,
+                                )
+                            )
 
             elif child.type == "statement_block":
                 self._walk_ts(
