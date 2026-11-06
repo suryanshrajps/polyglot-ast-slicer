@@ -60,3 +60,47 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
   callees, 6/30 self/attribute chains. The single fix was module-scope imports hidden under
   `if TYPE_CHECKING:`/try-except (the largest concrete receiver-typing defect); it added 19
   correct edges overall (requests +3, click +13, flask +3). No further tuning.
+
+## TS/JS correctness and ground truth — 2026-11-06
+- Fixes, one commit each, each with a regression test: default imports `47cbf95`;
+  emitted-specifier mapping `./u.js` -> `u.ts`/`u.tsx` and `.mjs`/`.cjs`/`.jsx`
+  `e261292`; `super.m()` against bases before the enclosing class `ae0a9ea`;
+  test-only coverage for `this.m()`, annotated `this.field.m()`,
+  `export { a as b } from`, `import type`, `a?.b()`, and imports in
+  conditional/try blocks `b3f5f1d` (all passed before the test commit).
+- New exhaustive harness `benchmarks/ground_truth/ts_eval.mjs` (TypeScript
+  5.9.3): every call, `new`, and JSX tag resolved with
+  `checker.getSymbolAtLocation`, aliases followed. Five pinned repos:
+  zod `ca42965` (src, no tests/benchmarks), nest `416830c` (packages, no
+  tests/specs; class-based + tsconfig paths), bulletproof-react `9506629`
+  (apps/react-vite/src, no tests/stories), node-fetch `8b3320d` (src, ESM),
+  express `1faf228` (lib, CommonJS). Scope assumption: production source only,
+  matching the Python harness's `src/`-only scope.
+- Before the cause-driven fix cycle: TS+TSX 2768 sites, 2148 correct, 0 wrong,
+  620 missed; precision 100.0%, high-confidence 100.0% (1823/1823), recall
+  77.6% (95% CI 76.0-79.1%). JS+JSX 136 sites, 86 correct, 0 wrong, 50 missed;
+  precision 100.0%, high-confidence 100.0% (86/86), recall 63.2%
+  (95% CI 54.9-70.9%).
+- 30 sampled misses per group. TS top cause (17/30): import basenames containing
+  a dot (`shared.utils`, `validation.pipe`, `http.exception`) were treated as
+  files with an unknown extension, so `.ts` was never tried; fix `371448e`.
+  JS top cause (18/30): `app.set = function`, `Foo.prototype.m = function` had
+  no symbol, so their bodies had no caller; fix `653a0b3`.
+- First hand audit found 5/30 compiler-unjudged edges wrong (`send` ->
+  `res.send`, `resolve` -> `View.prototype.resolve`, `accepts`, `vary`);
+  fix `41b7477` (property assignments are methods; unresolved external import
+  bindings are not same-file definitions; Python path unchanged).
+- After: TS+TSX 2768 sites, 2394 correct, 0 wrong, 374 missed; precision 100.0%
+  (95% CI 99.8-100.0%), high-confidence 100.0% (2018/2018), recall 86.5%
+  (95% CI 85.2-87.7%). JS+JSX 156 sites, 105 correct, 0 wrong, 51 missed;
+  precision 100.0% (95% CI 96.5-100.0%), high-confidence 100.0% (104/104),
+  recall 67.3% (95% CI 59.6-74.2%). Per repo: zod 81.1%, nest 89.2%,
+  bulletproof-react 74.6%, node-fetch 94.4%, express 31.3%.
+- Gate (high-confidence precision >=95%, overall >=90%, recall >=50%):
+  TS+TSX PASS, JS+JSX PASS. Final hand audit: 30/30 compiler-unjudged edges
+  correct, cited by file:line in `metrics/ts_ground_truth.json`.
+- Python ground truth re-ran unchanged: precision 99.9% (1038/1039 correct,
+  356 missed of 1395), high-confidence 99.9% (910/911), recall 74.4%.
+  `metrics/python_ground_truth.json` has no diff.
+- Artifact `metrics/ts_ground_truth.json`; rendered into `METRICS.md`;
+  `scripts/generate_metrics.py --check` passes.
