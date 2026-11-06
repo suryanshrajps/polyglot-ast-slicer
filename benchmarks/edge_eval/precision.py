@@ -84,12 +84,20 @@ def main() -> None:
         for site in sites:
             if not 1 <= site.line <= len(lines_of(source.file_path)):
                 continue
-            for column in positions(lines_of(source.file_path)[site.line - 1], target.name):
+            for column in positions(lines_of(source.file_path)[site.line - 1], site.name):
                 try:
-                    names = script_for(source.file_path).goto(site.line, column)
+                    names = list(script_for(source.file_path).goto(site.line, column))
                 except Exception:
                     continue
+                expanded = list(names)
                 for name in names:
+                    if name.name == target.name:
+                        continue
+                    try:
+                        expanded.extend(name.goto())
+                    except Exception:
+                        continue
+                for name in {id(item): item for item in expanded}.values():
                     if not name.module_path or not in_repo(name.module_path):
                         continue
                     if name.name not in (target.name, data.get("name")):
