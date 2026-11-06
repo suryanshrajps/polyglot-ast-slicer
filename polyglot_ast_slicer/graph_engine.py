@@ -382,6 +382,12 @@ class GraphEngine:
         with self.lock:
             started = time.perf_counter()
             resolved = str(Path(file_path).resolve())
+            # A single-file refresh is only sound if the set of modules is unchanged:
+            # imports resolve through ``_module_to_file``, so a module added, deleted or
+            # renamed since the last index must be reconciled before relinking.
+            current_files = {str(path) for path in self.discover_source_files()}
+            if current_files != set(self._by_file):
+                self.index_repository(force_rebuild=False)
             if resolved not in self._by_file and not Path(resolved).exists():
                 self.cache.remove_file(resolved)
                 return {"file_path": resolved, "status": "deleted", "elapsed_ms": 0.0}

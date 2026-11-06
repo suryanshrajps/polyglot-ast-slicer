@@ -519,3 +519,63 @@ def test_commonjs_exports_and_require_destructuring(tmp_path: Path) -> None:
         for v in engine.graph.successors(run.symbol_id)
     )
     engine.close()
+
+
+def test_refresh_relinks_module_add_delete_rename_from_importer(tmp_path: Path) -> None:
+    """Adding/deleting/renaming a module must be visible when only its importer is refreshed."""
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "a.py": "from b import thing\n\n\ndef use() -> int:\n    return thing()\n",
+            "b.py": "def thing() -> int:\n    return 1\n",
+        },
+    )
+    incremental = GraphEngine(repo)
+    incremental.index_repository(force_rebuild=True)
+
+    def edges(engine: GraphEngine) -> set[tuple[str, str, str]]:
+        return {
+            (u, v, data["relation"])
+            for u, v, data in engine.graph.edges(data=True)
+            if data["relation"] in ("calls", "constructs")
+        }
+
+    def assert_matches_rebuild() -> None:
+        fresh = GraphEngine(repo)
+        fresh.index_repository(force_rebuild=True)
+        assert edges(incremental) == edges(fresh)
+        fresh.close()
+
+    # Add a module the importer is edited to use; refresh only the importer.
+    (repo / "c.py").write_text("def other() -> int:\n    return 2\n", encoding="utf-8")
+    (repo / "a.py").write_text(
+        "from c import other\n\n\ndef use() -> int:\n    return other()\n", encoding="utf-8"
+    )
+    incremental.refresh_file(repo / "a.py")
+    assert ("use", "calls", "other") in {
+        (incremental._symbols[u].qualified_name, rel, incremental._symbols[v].qualified_name)
+        for u, v, rel in edges(incremental)
+    }
+    assert_matches_rebuild()
+
+    # Delete the module; refresh only the importer.
+    (repo / "c.py").unlink()
+    (repo / "a.py").write_text(
+        "from b import thing\n\n\ndef use() -> int:\n    return thing()\n", encoding="utf-8"
+    )
+    incremental.refresh_file(repo / "a.py")
+    assert all(
+        incremental._symbols[v].qualified_name != "other"
+        for _, v, _ in edges(incremental)
+    )
+    assert_matches_rebuild()
+
+    # Rename the module; refresh only the importer.
+    (repo / "b.py").rename(repo / "d.py")
+    (repo / "d.py").write_text("def thing() -> int:\n    return 3\n", encoding="utf-8")
+    (repo / "a.py").write_text(
+        "from d import thing\n\n\ndef use() -> int:\n    return thing()\n", encoding="utf-8"
+    )
+    incremental.refresh_file(repo / "a.py")
+    assert_matches_rebuild()
+    incremental.close()
