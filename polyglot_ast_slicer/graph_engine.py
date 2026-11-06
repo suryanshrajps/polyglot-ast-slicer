@@ -692,11 +692,15 @@ class GraphEngine:
         }
         suffix = Path(base).suffix.lower()
         candidates: list[str] = []
-        if suffix:
+        if suffix in rewritten:
             stem = base[: -len(suffix)]
-            candidates += [stem + extension for extension in rewritten.get(suffix, ())]
+            candidates += [stem + extension for extension in rewritten[suffix]]
+            candidates.append(base)
+        elif suffix in extensions:
             candidates.append(base)
         else:
+            # A dot in the basename (``shared.utils``, ``validation.pipe``) is not a file
+            # extension; without this branch those imports never try ``.ts``.
             candidates += [base + extension for extension in extensions]
             candidates += [os.path.join(base, f"index{ext}") for ext in extensions]
         for candidate in candidates:

@@ -1093,3 +1093,50 @@ def test_ts_call_forms_and_nested_imports_resolve(tmp_path: Path) -> None:
         edges = _call_edges(engine)
         assert expected in edges, (name, sorted(edges))
         engine.close()
+
+
+def test_ts_dotted_specifier_basenames_resolve(tmp_path: Path) -> None:
+    cases = {
+        "relative": (
+            {
+                "shared.utils.ts": "export function helper(): number { return 1; }\n",
+                "i.ts": (
+                    'import { helper } from "./shared.utils";\n'
+                    "export function run(): number { return helper(); }\n"
+                ),
+            },
+            ("run", "helper"),
+        ),
+        "alias": (
+            {
+                "tsconfig.json": (
+                    '{"compilerOptions": {"baseUrl": ".", "paths": {"@/*": ["./src/*"]}}}'
+                ),
+                "src/utils/format.util.ts": (
+                    "export function helper(): number { return 1; }\n"
+                ),
+                "src/i.ts": (
+                    'import { helper } from "@/utils/format.util";\n'
+                    "export function run(): number { return helper(); }\n"
+                ),
+            },
+            ("run", "helper"),
+        ),
+        "class_new": (
+            {
+                "validation.pipe.ts": "export class ValidationPipe {}\n",
+                "i.ts": (
+                    'import { ValidationPipe } from "./validation.pipe";\n'
+                    "export function run() { return new ValidationPipe(); }\n"
+                ),
+            },
+            ("run", "ValidationPipe"),
+        ),
+    }
+    for name, (files, expected) in cases.items():
+        repo = _repo(tmp_path / name, files)
+        engine = GraphEngine(repo)
+        engine.index_repository(force_rebuild=True)
+        edges = _call_edges(engine)
+        assert expected in edges, (name, sorted(edges))
+        engine.close()
