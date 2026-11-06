@@ -701,3 +701,48 @@ def test_module_scope_call_outside_main_guard_is_attributed(tmp_path: Path) -> N
     assert module is not None and work is not None
     assert engine.graph.has_edge(module.symbol_id, work.symbol_id)
     engine.close()
+
+
+def test_property_getter_setter_and_overloads_keep_combined_spans(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "m.py": (
+                "from typing import overload\n\n\n"
+                "class C:\n"
+                "    @property\n"
+                "    def value(self) -> int:\n"
+                "        return self._v\n\n"
+                "    @value.setter\n"
+                "    def value(self, v: int) -> None:\n"
+                "        self._v = v\n\n"
+                "    @overload\n"
+                "    def parse(self, x: int) -> int: ...\n\n"
+                "    @overload\n"
+                "    def parse(self, x: str) -> str: ...\n\n"
+                "    def parse(self, x):\n"
+                "        return x\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    assert engine.resolve_strict("C.value")[0] is not None
+    value = engine.resolve_strict("C.value")[0]
+    assert value is not None
+    assert value.start_line == 5
+    assert value.end_line == 11
+
+    value_slice = engine.get_ast_call_slice("C.value", hops=1)
+    assert value_slice["compiled_context"].count("@property") == 1
+    assert value_slice["compiled_context"].count("@value.setter") == 1
+
+    parsed = engine.resolve_strict("C.parse")[0]
+    assert parsed is not None
+    assert parsed.start_line == 13
+    assert parsed.end_line == 20
+    parse_slice = engine.get_ast_call_slice("C.parse", hops=1)
+    assert parse_slice["compiled_context"].count("@overload") == 2
+    assert parse_slice["compiled_context"].count("def parse") == 3
+    engine.close()

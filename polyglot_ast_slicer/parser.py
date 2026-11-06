@@ -475,6 +475,7 @@ class PolyglotASTParser:
             module_symbol = self._python_module_symbol(root, source_bytes, resolved, language)
             if module_symbol is not None:
                 symbols.append(module_symbol)
+            symbols = self._merge_duplicate_python_symbols(symbols)
         else:
             self._walk_ts(root, source_bytes, resolved, language, [], None, False, symbols)
 
@@ -488,6 +489,40 @@ class PolyglotASTParser:
         )
 
     # ------------------------------------------------------------------ python
+
+    @staticmethod
+    def _merge_duplicate_python_symbols(symbols: list[SymbolNode]) -> list[SymbolNode]:
+        """Merges definitions that share one qualified name into a combined span.
+
+        ``@property``/``@setter`` and ``@overload``/implementation pairs are one Python
+        name. Keeping only the last definition silently dropped the first body; a combined
+        span keeps every implementation sliceable while preserving one symbol identity.
+        """
+        merged: dict[str, SymbolNode] = {}
+        ordered: list[SymbolNode] = []
+        for symbol in symbols:
+            previous = merged.get(symbol.symbol_id)
+            if previous is None:
+                merged[symbol.symbol_id] = symbol
+                ordered.append(symbol)
+                continue
+            previous.start_line = min(previous.start_line, symbol.start_line)
+            previous.start_byte = min(previous.start_byte, symbol.start_byte)
+            previous.end_line = max(previous.end_line, symbol.end_line)
+            previous.end_byte = max(previous.end_byte, symbol.end_byte)
+            seen_calls = {(call.name, call.receiver) for call in previous.calls}
+            for call in symbol.calls:
+                if (call.name, call.receiver) not in seen_calls:
+                    previous.calls.append(call)
+                    seen_calls.add((call.name, call.receiver))
+            for name in symbol.type_refs:
+                if name not in previous.type_refs:
+                    previous.type_refs.append(name)
+            for key, value in symbol.local_types.items():
+                previous.local_types.setdefault(key, value)
+            if not previous.doc:
+                previous.doc = symbol.doc
+        return ordered
 
     def _python_module_symbol(
         self,
