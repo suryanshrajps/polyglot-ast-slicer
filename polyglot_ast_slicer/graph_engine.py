@@ -912,34 +912,54 @@ class GraphEngine:
         if not name:
             return []
 
+        if receiver in ("super", "super()") and symbol.language == "python":
+            # ``super().m()`` must bind to a base member, never to the enclosing class:
+            # checking the enclosing class first made ``Child.greet -> Child.greet``.
+            for enclosing in self._enclosing_classes(symbol):
+                for base in enclosing.bases:
+                    for base_id, _, _ in self._resolve_type_candidates(base, symbol):
+                        inherited = self._find_member(self._symbols[base_id], name)
+                        if inherited is not None:
+                            return [
+                                (
+                                    inherited,
+                                    0.85,
+                                    f"super:{self._symbols[base_id].qualified_name}",
+                                )
+                            ]
+            return []
+
         if receiver in ("self", "this", "cls", "super"):
             for enclosing in self._enclosing_classes(symbol):
                 found = self._find_member(enclosing, name)
                 if found is not None:
                     return [(found, 0.95, f"enclosing_member:{enclosing.qualified_name}")]
-                if receiver == "super":
-                    for base in enclosing.bases:
-                        for base_id, _, _ in self._resolve_type_candidates(base, symbol):
-                            inherited = self._find_member(self._symbols[base_id], name)
-                            if inherited is not None:
-                                return [
-                                    (
-                                        inherited,
-                                        0.85,
-                                        f"super:{self._symbols[base_id].qualified_name}",
-                                    )
-                                ]
+
+        if receiver and symbol.language == "python" and receiver.endswith(")"):
+            # ``A().run()``: the receiver is a constructor call, not a binding.
+            head = str(receiver).split("(", 1)[0].strip()
+            if head[:1].isupper() and "." not in head:
+                for type_id, confidence, _ in self._resolve_type_candidates(head, symbol):
+                    found = self._find_member(self._symbols[type_id], name)
+                    if found is not None:
+                        return [
+                            (
+                                found,
+                                min(confidence, 0.90),
+                                f"constructed_receiver:{head}",
+                            )
+                        ]
 
         if receiver:
-            type_id = self._resolve_receiver_type(receiver, symbol)
-            if type_id is not None:
-                found = self._find_member(self._symbols[type_id], name)
+            resolved_type = self._resolve_receiver_type(receiver, symbol)
+            if resolved_type is not None:
+                found = self._find_member(self._symbols[resolved_type], name)
                 if found is not None:
                     return [
                         (
                             found,
                             0.90,
-                            f"typed_receiver:{receiver}->{self._symbols[type_id].qualified_name}",
+                            f"typed_receiver:{receiver}->{self._symbols[resolved_type].qualified_name}",
                         )
                     ]
             for module_file in self._resolve_receiver_modules(receiver, symbol):

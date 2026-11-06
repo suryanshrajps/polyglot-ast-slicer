@@ -746,3 +746,53 @@ def test_property_getter_setter_and_overloads_keep_combined_spans(tmp_path: Path
     assert parse_slice["compiled_context"].count("@overload") == 2
     assert parse_slice["compiled_context"].count("def parse") == 3
     engine.close()
+
+
+def test_super_init_and_constructed_receiver_calls_resolve(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "m.py": (
+                "class A:\n"
+                "    def __init__(self) -> None:\n"
+                "        self.x = 1\n\n"
+                "    def run(self) -> int:\n"
+                "        return self.x\n\n\n"
+                "class B(A):\n"
+                "    def __init__(self) -> None:\n"
+                "        super().__init__()\n\n\n"
+                "class C:\n"
+                "    def run(self) -> int:\n"
+                "        return A().run()\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+
+    b_init = engine.resolve_strict("B.__init__")[0]
+    a_init = engine.resolve_strict("A.__init__")[0]
+    assert b_init is not None and a_init is not None
+    edge = engine.graph.get_edge_data(b_init.symbol_id, a_init.symbol_id)
+    assert edge is not None
+    assert edge["relation"] == "calls"
+    assert edge["resolution"] == "super:A"
+
+    c_run = engine.resolve_strict("C.run")[0]
+    a_run = engine.resolve_strict("A.run")[0]
+    assert c_run is not None and a_run is not None
+    edge = engine.graph.get_edge_data(c_run.symbol_id, a_run.symbol_id)
+    assert edge is not None
+    assert edge["relation"] == "calls"
+    assert edge["resolution"] == "constructed_receiver:A"
+
+    cycles = engine.find_circular_dependencies()
+    assert cycles["symbol_cycle_count"] == 0
+    assert cycles["self_recursive_count"] == 0
+
+    blast = engine.get_blast_radius("A.__init__")
+    assert "B.__init__" in [item["qualified_name"] for item in blast["dependents_by_hop"][1]]
+    explained = engine.explain_edge("B.__init__", "A.__init__")
+    assert explained["exists"] is True
+    assert explained["call_site"]["line"] == 11
+    engine.close()
