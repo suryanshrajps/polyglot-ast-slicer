@@ -579,3 +579,69 @@ def test_refresh_relinks_module_add_delete_rename_from_importer(tmp_path: Path) 
     incremental.refresh_file(repo / "a.py")
     assert_matches_rebuild()
     incremental.close()
+
+
+def test_call_and_type_edges_to_one_target_both_survive(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "m.py": (
+                "class Foo:\n"
+                "    pass\n\n\n"
+                "def make() -> Foo:\n"
+                "    return Foo()\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    make = engine.resolve_strict("make")[0]
+    foo = engine.resolve_strict("Foo")[0]
+    assert make is not None and foo is not None
+
+    edge = engine.graph.get_edge_data(make.symbol_id, foo.symbol_id)
+    assert edge is not None
+    relations = set(edge.get("relations") or [edge["relation"]])
+    assert {"constructs", "uses_type"} <= relations
+
+    explained = engine.explain_edge("m.py::make", "m.py::Foo")
+    assert explained["exists"] is True
+    assert {"constructs", "uses_type"} <= set(explained["relations"])
+
+    sliced = engine.get_ast_call_slice("make", hops=1, include_metadata=True)
+    assert "Foo" in [item["qualified_name"] for item in sliced["downstream_callees"]]
+
+    blast = engine.get_blast_radius("Foo")
+    assert "make" in [item["qualified_name"] for item in blast["dependents_by_hop"][1]]
+
+    cycles = engine.find_circular_dependencies()
+    assert cycles["symbol_cycle_count"] == 0
+    assert cycles["self_recursive_count"] == 0
+    engine.close()
+
+
+def test_cycle_detection_counts_each_pair_once_with_two_relations(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "m.py": (
+                "class Ping:\n"
+                "    pass\n\n\n"
+                "class Pong:\n"
+                "    pass\n\n\n"
+                "def ping(n: int) -> Pong:\n"
+                "    return pong(n)\n\n\n"
+                "def pong(n: int) -> Ping:\n"
+                "    return ping(n)\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    cycles = engine.find_circular_dependencies()
+    assert cycles["symbol_cycle_count"] == 1
+    assert sorted(item["qualified_name"] for item in cycles["symbol_cycles"][0]) == [
+        "ping",
+        "pong",
+    ]
+    engine.close()

@@ -65,6 +65,15 @@ CALL_RELATIONS: frozenset[str] = frozenset({"calls", "constructs"})
 TYPE_RELATIONS: frozenset[str] = frozenset({"uses_type", "inherits"})
 ALL_RELATIONS: frozenset[str] = frozenset(CALL_RELATIONS | TYPE_RELATIONS)
 
+
+def _edge_relations(edge: dict[str, Any]) -> set[str]:
+    """All relations carried by one graph edge (older edges have only ``relation``)."""
+    stored = edge.get("relations")
+    if stored:
+        return set(stored)
+    relation = edge.get("relation")
+    return {relation} if relation else set()
+
 MAX_SOURCE_BYTES = 1_500_000
 
 #: Default cap on the JSON payload returned to an agent. Overridable per query.
@@ -771,6 +780,59 @@ class GraphEngine:
         self._pending.setdefault(name, set()).add(symbol_id)
         self._pending_by_caller.setdefault(symbol_id, set()).add(name)
 
+    def _add_relation(
+        self,
+        source: str,
+        target: str,
+        *,
+        relation: str,
+        confidence: float,
+        resolution: str,
+        line: int | None,
+        receiver: str | None,
+        name: str,
+    ) -> None:
+        """Adds an edge, merging a call and a type reference between the same pair.
+
+        ``DiGraph`` stores one edge per ordered pair. A call and a ``-> Foo`` annotation
+        are independent facts, so the edge carries every relation it has; the call
+        relation stays primary because traversal, blast radius and explain_edge need its
+        call-site metadata.
+        """
+        existing = self.graph.get_edge_data(source, target)
+        if existing is None:
+            self.graph.add_edge(
+                source,
+                target,
+                relation=relation,
+                relations=(relation,),
+                confidence=confidence,
+                resolution=resolution,
+                line=line,
+                receiver=receiver,
+                name=name,
+            )
+            return
+
+        relations = _edge_relations(existing)
+        relations.add(relation)
+        existing["relations"] = tuple(sorted(relations))
+        current = existing.get("relation")
+        replace = False
+        if relation in CALL_RELATIONS and current not in CALL_RELATIONS:
+            replace = True
+        elif (relation in CALL_RELATIONS) == (current in CALL_RELATIONS):
+            replace = confidence > float(existing.get("confidence", 0.0))
+        if replace:
+            existing.update(
+                relation=relation,
+                confidence=confidence,
+                resolution=resolution,
+                line=line,
+                receiver=receiver,
+                name=name,
+            )
+
     def _link_symbol_edges(self, symbol: SymbolNode) -> None:
         if symbol.symbol_id not in self.graph:
             return
@@ -795,7 +857,7 @@ class GraphEngine:
                     continue
                 relation = "constructs" if target.is_type else "calls"
                 # Self edges are kept: direct recursion must be visible to cycle detection.
-                self.graph.add_edge(
+                self._add_relation(
                     symbol.symbol_id,
                     target_id,
                     relation=relation,
@@ -809,7 +871,7 @@ class GraphEngine:
         for type_name in symbol.type_refs:
             for target_id, confidence, path in self._resolve_type_candidates(type_name, symbol):
                 if target_id != symbol.symbol_id:
-                    self.graph.add_edge(
+                    self._add_relation(
                         symbol.symbol_id,
                         target_id,
                         relation="uses_type",
@@ -823,7 +885,7 @@ class GraphEngine:
         for base_name in symbol.bases:
             for target_id, confidence, path in self._resolve_type_candidates(base_name, symbol):
                 if target_id != symbol.symbol_id:
-                    self.graph.add_edge(
+                    self._add_relation(
                         symbol.symbol_id,
                         target_id,
                         relation="inherits",
@@ -1204,7 +1266,7 @@ class GraphEngine:
                 for node_id in sorted(core):
                     for successor in sorted(self.graph.successors(node_id)):
                         edge = self.graph.get_edge_data(node_id, successor) or {}
-                        if edge.get("relation") in TYPE_RELATIONS and successor not in core:
+                        if _edge_relations(edge) & TYPE_RELATIONS and successor not in core:
                             type_ids.add(successor)
             type_omitted = max(0, len(type_ids) - 10)
             for node_id in sorted(type_ids)[10:]:
@@ -1431,7 +1493,7 @@ class GraphEngine:
                     if direction == "up"
                     else self.graph.get_edge_data(current, neighbour)
                 ) or {}
-                if edge.get("relation") not in CALL_RELATIONS or neighbour in visited:
+                if not (_edge_relations(edge) & CALL_RELATIONS) or neighbour in visited:
                     continue
                 visited.add(neighbour)
                 distances[neighbour] = depth + 1
@@ -1614,7 +1676,7 @@ class GraphEngine:
                     continue
                 for caller in sorted(self.graph.predecessors(current)):
                     edge = self.graph.get_edge_data(caller, current) or {}
-                    if edge.get("relation") not in relations or caller in visited:
+                    if not (_edge_relations(edge) & relations) or caller in visited:
                         continue
                     visited.add(caller)
                     symbol = self._symbols[caller]
@@ -1624,6 +1686,7 @@ class GraphEngine:
                         {
                             **self._symbol_meta(symbol, include_doc=False),
                             "relation": edge.get("relation", "calls"),
+                            "relations": sorted(_edge_relations(edge)),
                             "confidence": edge.get("confidence", 0.5),
                         }
                     )
@@ -1747,6 +1810,7 @@ class GraphEngine:
                 "source": self._symbol_meta(source_symbol, include_doc=False),
                 "target": self._symbol_meta(target_symbol, include_doc=False),
                 "relation": edge.get("relation"),
+                "relations": sorted(_edge_relations(edge)),
                 "confidence": edge.get("confidence"),
                 "resolution": edge.get("resolution"),
                 "call_site": call_site,
@@ -1857,7 +1921,7 @@ class GraphEngine:
                 continue
             for caller in sorted(self.graph.predecessors(current)):
                 edge = self.graph.get_edge_data(caller, current) or {}
-                if edge.get("relation") not in CALL_RELATIONS or caller in visited:
+                if not (_edge_relations(edge) & CALL_RELATIONS) or caller in visited:
                     continue
                 visited.add(caller)
                 found[caller] = depth + 1
