@@ -960,3 +960,35 @@ def test_ts_specifier_extension_mapping(tmp_path: Path) -> None:
         source = "run" if name in ("cjs_to_cts", "jsx_to_tsx", "directory_index") else "esm"
         assert (source, "helper") in edges, (name, sorted(edges))
         engine.close()
+
+
+def test_ts_super_resolves_against_base_before_enclosing_class(tmp_path: Path) -> None:
+    repo = _repo(
+        tmp_path / "r",
+        {
+            "u.ts": (
+                "export class A {\n"
+                "  greet() { return 1; }\n"
+                "}\n"
+                "export class B extends A {\n"
+                "  greet() { return super.greet() + 1; }\n"
+                "}\n"
+                "export class C extends B {\n"
+                "  greet() { return super.greet() + 2; }\n"
+                "  hi() { return this.greet(); }\n"
+                "}\n"
+            )
+        },
+    )
+    engine = GraphEngine(repo)
+    engine.index_repository(force_rebuild=True)
+    edges = _call_edges(engine)
+
+    assert ("C.greet", "B.greet") in edges, sorted(edges)
+    assert ("B.greet", "A.greet") in edges, sorted(edges)
+    assert ("C.greet", "C.greet") not in edges
+    assert ("B.greet", "B.greet") not in edges
+    assert ("C.hi", "C.greet") in edges
+    cycles = engine.find_circular_dependencies()
+    assert cycles["self_recursive_count"] == 0, cycles["self_recursive"]
+    engine.close()

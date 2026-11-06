@@ -926,8 +926,8 @@ class GraphEngine:
         if not name:
             return []
 
-        if receiver in ("super", "super()") and symbol.language == "python":
-            # ``super().m()`` must bind to a base member, never to the enclosing class:
+        if receiver in ("super", "super()"):
+            # ``super.m()`` must bind to a base member, never to the enclosing class:
             # checking the enclosing class first made ``Child.greet -> Child.greet``.
             for enclosing in self._enclosing_classes(symbol):
                 for base in enclosing.bases:
@@ -943,7 +943,7 @@ class GraphEngine:
                             ]
             return []
 
-        if receiver in ("self", "this", "cls", "super"):
+        if receiver in ("self", "this", "cls"):
             for enclosing in self._enclosing_classes(symbol):
                 found = self._find_member(enclosing, name)
                 if found is not None:
