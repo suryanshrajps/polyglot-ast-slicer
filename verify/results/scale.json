@@ -1,0 +1,69 @@
+{
+  "results": {
+    "synthetic-5000": {
+      "files": 5000,
+      "symbols": 5000,
+      "edges": 5000,
+      "cold_ms": 1918.6,
+      "warm_ms": 1307.0,
+      "warm_cache_hits": 5000,
+      "incremental_p95_ms": 541.59,
+      "query_ms": 4.1,
+      "query_symbol": "fn_0",
+      "query_ok": true,
+      "peak_rss_mb": 130.2
+    },
+    "synthetic-20000": {
+      "files": 20000,
+      "symbols": 20000,
+      "edges": 20000,
+      "cold_ms": 9761.3,
+      "warm_ms": 5624.2,
+      "warm_cache_hits": 20000,
+      "incremental_p95_ms": 2609.09,
+      "query_ms": 42.7,
+      "query_symbol": "fn_0",
+      "query_ok": true,
+      "peak_rss_mb": 243.9
+    },
+    "synthetic-50000": {
+      "files": 50000,
+      "symbols": 50000,
+      "edges": 50000,
+      "cold_ms": 23531.6,
+      "warm_ms": 14054.9,
+      "warm_cache_hits": 50000,
+      "incremental_p95_ms": 5477.02,
+      "query_ms": 16.9,
+      "query_symbol": "fn_0",
+      "query_ok": true,
+      "peak_rss_mb": 448.0
+    },
+    "python-requests": {
+      "files": 37,
+      "symbols": 801,
+      "edges": 854,
+      "cold_ms": 240.9,
+      "warm_ms": 72.0,
+      "warm_cache_hits": 37,
+      "incremental_p95_ms": 43.34,
+      "query_ms": 2.4,
+      "query_symbol": "_check_cryptography",
+      "query_ok": true,
+      "peak_rss_mb": 103.0
+    },
+    "ts-zod": {
+      "files": 169,
+      "symbols": 1044,
+      "edges": 1126,
+      "cold_ms": 390.8,
+      "warm_ms": 59.8,
+      "warm_cache_hits": 169,
+      "incremental_p95_ms": 20.28,
+      "query_ms": 0.9,
+      "query_symbol": "join",
+      "query_ok": true,
+      "peak_rss_mb": 105.7
+    }
+  }
+}

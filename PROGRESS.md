@@ -150,3 +150,23 @@ v1.0.0 is **not tagged**; the per-language precision/recall gates have not been 
 - Symlink test skips when the platform cannot create symlinks (Windows CI).
 - CI has NOT been executed. Push commands: `git push origin main` (triggers the push
   workflow) or `gh workflow run ci.yml`.
+
+## Final verification suite — 2026-11-06
+Scripts committed under `verify/`; raw results in `verify/results/*.json`.
+- Scale (`scale_probe.py`, fresh process per corpus): 5k files cold 1918.6 ms, warm
+  1307.0 ms, incremental p95 541.59 ms, query 4.1 ms, peak RSS 130.2 MB; 20k: 9761.3 /
+  5624.2 / 2609.09 / 42.7 / 243.9 MB; 50k: 23531.6 / 14054.9 / 5477.02 / 16.9 / 448.0 MB.
+  Real: requests (37 files) 240.9 / 72.0 / 43.34 / 2.4 ms / 103.0 MB; zod (169 files)
+  390.8 / 59.8 / 20.28 / 0.9 ms / 105.7 MB.
+- Incremental differential (`incremental_probe.py`): 20 random add/delete/rename edits on
+  each of requests and zod; 0 graph mismatches vs from-scratch rebuild.
+- Watcher (`watcher_probe.py`): edit reflected; survives injected exception; deleted file
+  reflected; post-delete stats OK. PASS.
+- No network at query time (`network_probe.py`): sockets blocked after indexing; all eight
+  queries pass. PASS.
+- MCP through `uv tool run --from dist/*.whl` (`mcp_e2e.py`): 8 tools on Python, TS and
+  mixed repos; no cross-language edge; monorepo boundary holds. PASS (7/7 checks).
+- Robustness (`robustness_probe.py`): empty/broken/non-UTF-8/deep/huge single-line index,
+  binary and 5 MB skipped, symlink loop tolerated, read-only checkout indexes. PASS.
+- Dogfood (`dogfood_probe.py`): self-index 56 files / 532 symbols / 988 edges; five own
+  functions sliced. PASS.

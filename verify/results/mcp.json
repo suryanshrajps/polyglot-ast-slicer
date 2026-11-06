@@ -1,0 +1,933 @@
+{
+  "checks": {
+    "tools_8": true,
+    "python_edge": true,
+    "ts_edge": true,
+    "mixed_both_languages": true,
+    "no_cross_language": true,
+    "monorepo_boundary": true,
+    "no_errors": true
+  },
+  "pass": true,
+  "results": {
+    "python": {
+      "tools": [
+        "explain_edge",
+        "find_circular_dependencies",
+        "get_ast_call_slice",
+        "get_blast_radius",
+        "get_index_stats",
+        "impact_of_diff",
+        "index_codebase",
+        "search_symbols"
+      ],
+      "index_codebase": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python",
+        "files_indexed": 2,
+        "cache_hits": 2,
+        "cache_misses": 0,
+        "total_symbols": 2,
+        "total_edges": 1,
+        "skipped_files": {},
+        "elapsed_ms": 0.69
+      },
+      "get_index_stats": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python",
+        "files_indexed": 2,
+        "cache_hits": 2,
+        "cache_misses": 0,
+        "total_symbols": 2,
+        "total_edges": 1,
+        "skipped_files": {},
+        "elapsed_ms": 0.69,
+        "languages": {
+          "python": 2
+        },
+        "total_source_tokens": 26,
+        "unresolved_call_sites": 0,
+        "files_with_parse_errors": [],
+        "cache": {
+          "path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/cache/9358ec670fe65cb0.db",
+          "files": 2,
+          "schema_version": 2
+        },
+        "indexed_at": 1793974238.655767
+      },
+      "search_symbols": {
+        "query": "helper",
+        "count": 1,
+        "results": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/util.py::helper",
+            "qualified_name": "helper",
+            "kind": "function",
+            "file_path": "util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper() -> int:",
+            "exported": true
+          }
+        ]
+      },
+      "get_ast_call_slice": {
+        "compiled_context": "### app.py:4-5 [run] (target)\n# import: from util import helper\ndef run() -> int:\n    return helper()\n\n### util.py:1-2 [helper] (downstream_callee)\ndef helper() -> int:\n    return 1",
+        "token_metrics": {
+          "slice_tokens": 57,
+          "payload_tokens": 556,
+          "budget_tokens": 6000,
+          "touched_files_tokens": 26,
+          "full_repo_tokens": 26,
+          "reduction_vs_touched_files_pct": -119.23,
+          "reduction_vs_full_repo_pct": -119.23,
+          "files_in_slice": 2
+        },
+        "diagnostics": {
+          "truncated": false,
+          "omitted": {
+            "upstream": 0,
+            "downstream": 0,
+            "types": 0
+          },
+          "expand_hint": "Omitted items are the lowest-ranked by hop and degree. Raise max_tokens or hops, or add include_metadata=true to see what was left out.",
+          "unresolved_project_calls_in_slice": 0,
+          "parse_errors": []
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/app.py::run",
+          "qualified_name": "run",
+          "kind": "function",
+          "file_path": "app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run() -> int:",
+          "exported": true
+        },
+        "hops": 2,
+        "upstream_callers": [],
+        "downstream_callees": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/util.py::helper",
+            "qualified_name": "helper",
+            "kind": "function",
+            "file_path": "util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper() -> int:",
+            "exported": true,
+            "role": "downstream_callee",
+            "hop_distance": 1
+          }
+        ],
+        "relevant_types_and_schemas": [],
+        "regions": [
+          {
+            "file_path": "app.py",
+            "lines": "4-5",
+            "byte_range": [
+              26,
+              63
+            ],
+            "symbols": [
+              "run"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/app.py::run"
+            ],
+            "roles": [
+              "target"
+            ]
+          },
+          {
+            "file_path": "util.py",
+            "lines": "1-2",
+            "byte_range": [
+              0,
+              33
+            ],
+            "symbols": [
+              "helper"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/util.py::helper"
+            ],
+            "roles": [
+              "downstream_callee"
+            ]
+          }
+        ]
+      },
+      "get_blast_radius": {
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/app.py::run",
+          "qualified_name": "run",
+          "kind": "function",
+          "file_path": "app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run() -> int:",
+          "exported": true
+        },
+        "risk_level": "NONE",
+        "total_impacted_symbols": 0,
+        "impacted_files_count": 0,
+        "impacted_files": [],
+        "dependents_by_hop": {}
+      },
+      "find_circular_dependencies": {
+        "symbol_cycle_count": 0,
+        "symbol_cycles": [],
+        "self_recursive_count": 0,
+        "self_recursive": [],
+        "file_cycle_count": 0,
+        "file_cycles": [],
+        "note": "file_cycles are derived from import statements, not call edges."
+      },
+      "explain_edge": {
+        "exists": true,
+        "source": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/app.py::run",
+          "qualified_name": "run",
+          "kind": "function",
+          "file_path": "app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run() -> int:",
+          "exported": true
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/python/util.py::helper",
+          "qualified_name": "helper",
+          "kind": "function",
+          "file_path": "util.py",
+          "lines": "1-2",
+          "language": "python",
+          "signature": "def helper() -> int:",
+          "exported": true
+        },
+        "relation": "calls",
+        "relations": [
+          "calls"
+        ],
+        "confidence": 0.95,
+        "resolution": "import:util.py",
+        "call_site": {
+          "line": 5,
+          "text": "return helper()",
+          "receiver": null,
+          "name": "helper"
+        }
+      },
+      "impact_of_diff": {
+        "source": "provided diff",
+        "base": "HEAD~1",
+        "head": "HEAD",
+        "changed_files": [
+          "app.py"
+        ],
+        "changed_symbols": [],
+        "impacted_symbols": [],
+        "total_changed_symbols": 0,
+        "total_impacted_symbols": 0,
+        "risk_level": "NONE",
+        "note": "Impact is upstream call-graph reachability over calls/constructs."
+      }
+    },
+    "ts": {
+      "tools": [
+        "explain_edge",
+        "find_circular_dependencies",
+        "get_ast_call_slice",
+        "get_blast_radius",
+        "get_index_stats",
+        "impact_of_diff",
+        "index_codebase",
+        "search_symbols"
+      ],
+      "index_codebase": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts",
+        "files_indexed": 2,
+        "cache_hits": 2,
+        "cache_misses": 0,
+        "total_symbols": 2,
+        "total_edges": 1,
+        "skipped_files": {},
+        "elapsed_ms": 0.57
+      },
+      "get_index_stats": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts",
+        "files_indexed": 2,
+        "cache_hits": 2,
+        "cache_misses": 0,
+        "total_symbols": 2,
+        "total_edges": 1,
+        "skipped_files": {},
+        "elapsed_ms": 0.57,
+        "languages": {
+          "typescript": 2
+        },
+        "total_source_tokens": 29,
+        "unresolved_call_sites": 0,
+        "files_with_parse_errors": [],
+        "cache": {
+          "path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/cache/1f408cab20a18c83.db",
+          "files": 2,
+          "schema_version": 2
+        },
+        "indexed_at": 1793974239.957977
+      },
+      "search_symbols": {
+        "query": "helper",
+        "count": 1,
+        "results": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/util.ts::helper",
+            "qualified_name": "helper",
+            "kind": "function",
+            "file_path": "util.ts",
+            "lines": "1-1",
+            "language": "typescript",
+            "signature": "export function helper(): number { return 1; }",
+            "exported": true
+          }
+        ]
+      },
+      "get_ast_call_slice": {
+        "compiled_context": "### app.ts:2-2 [run] (target)\n# import: from ./util import helper\nexport function run(): number { return helper(); }\n\n### util.ts:1-1 [helper] (downstream_callee)\nexport function helper(): number { return 1; }",
+        "token_metrics": {
+          "slice_tokens": 59,
+          "payload_tokens": 566,
+          "budget_tokens": 6000,
+          "touched_files_tokens": 29,
+          "full_repo_tokens": 29,
+          "reduction_vs_touched_files_pct": -103.45,
+          "reduction_vs_full_repo_pct": -103.45,
+          "files_in_slice": 2
+        },
+        "diagnostics": {
+          "truncated": false,
+          "omitted": {
+            "upstream": 0,
+            "downstream": 0,
+            "types": 0
+          },
+          "expand_hint": "Omitted items are the lowest-ranked by hop and degree. Raise max_tokens or hops, or add include_metadata=true to see what was left out.",
+          "unresolved_project_calls_in_slice": 0,
+          "parse_errors": []
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/app.ts::run",
+          "qualified_name": "run",
+          "kind": "function",
+          "file_path": "app.ts",
+          "lines": "2-2",
+          "language": "typescript",
+          "signature": "export function run(): number { return helper(); }",
+          "exported": true
+        },
+        "hops": 2,
+        "upstream_callers": [],
+        "downstream_callees": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/util.ts::helper",
+            "qualified_name": "helper",
+            "kind": "function",
+            "file_path": "util.ts",
+            "lines": "1-1",
+            "language": "typescript",
+            "signature": "export function helper(): number { return 1; }",
+            "exported": true,
+            "role": "downstream_callee",
+            "hop_distance": 1
+          }
+        ],
+        "relevant_types_and_schemas": [],
+        "regions": [
+          {
+            "file_path": "app.ts",
+            "lines": "2-2",
+            "byte_range": [
+              33,
+              83
+            ],
+            "symbols": [
+              "run"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/app.ts::run"
+            ],
+            "roles": [
+              "target"
+            ]
+          },
+          {
+            "file_path": "util.ts",
+            "lines": "1-1",
+            "byte_range": [
+              0,
+              46
+            ],
+            "symbols": [
+              "helper"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/util.ts::helper"
+            ],
+            "roles": [
+              "downstream_callee"
+            ]
+          }
+        ]
+      },
+      "get_blast_radius": {
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/app.ts::run",
+          "qualified_name": "run",
+          "kind": "function",
+          "file_path": "app.ts",
+          "lines": "2-2",
+          "language": "typescript",
+          "signature": "export function run(): number { return helper(); }",
+          "exported": true
+        },
+        "risk_level": "NONE",
+        "total_impacted_symbols": 0,
+        "impacted_files_count": 0,
+        "impacted_files": [],
+        "dependents_by_hop": {}
+      },
+      "find_circular_dependencies": {
+        "symbol_cycle_count": 0,
+        "symbol_cycles": [],
+        "self_recursive_count": 0,
+        "self_recursive": [],
+        "file_cycle_count": 0,
+        "file_cycles": [],
+        "note": "file_cycles are derived from import statements, not call edges."
+      },
+      "explain_edge": {
+        "exists": true,
+        "source": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/app.ts::run",
+          "qualified_name": "run",
+          "kind": "function",
+          "file_path": "app.ts",
+          "lines": "2-2",
+          "language": "typescript",
+          "signature": "export function run(): number { return helper(); }",
+          "exported": true
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/ts/util.ts::helper",
+          "qualified_name": "helper",
+          "kind": "function",
+          "file_path": "util.ts",
+          "lines": "1-1",
+          "language": "typescript",
+          "signature": "export function helper(): number { return 1; }",
+          "exported": true
+        },
+        "relation": "calls",
+        "relations": [
+          "calls"
+        ],
+        "confidence": 0.95,
+        "resolution": "import:util.ts",
+        "call_site": {
+          "line": 2,
+          "text": "export function run(): number { return helper(); }",
+          "receiver": null,
+          "name": "helper"
+        }
+      },
+      "impact_of_diff": {
+        "source": "provided diff",
+        "base": "HEAD~1",
+        "head": "HEAD",
+        "changed_files": [
+          "app.py"
+        ],
+        "changed_symbols": [],
+        "impacted_symbols": [],
+        "total_changed_symbols": 0,
+        "total_impacted_symbols": 0,
+        "risk_level": "NONE",
+        "note": "Impact is upstream call-graph reachability over calls/constructs."
+      }
+    },
+    "mixed": {
+      "tools": [
+        "explain_edge",
+        "find_circular_dependencies",
+        "get_ast_call_slice",
+        "get_blast_radius",
+        "get_index_stats",
+        "impact_of_diff",
+        "index_codebase",
+        "search_symbols"
+      ],
+      "index_codebase": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed",
+        "files_indexed": 5,
+        "cache_hits": 5,
+        "cache_misses": 0,
+        "total_symbols": 4,
+        "total_edges": 2,
+        "skipped_files": {},
+        "elapsed_ms": 1.45
+      },
+      "get_index_stats": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed",
+        "files_indexed": 5,
+        "cache_hits": 5,
+        "cache_misses": 0,
+        "total_symbols": 4,
+        "total_edges": 2,
+        "skipped_files": {},
+        "elapsed_ms": 1.45,
+        "languages": {
+          "python": 2,
+          "typescript": 2
+        },
+        "total_source_tokens": 64,
+        "unresolved_call_sites": 0,
+        "files_with_parse_errors": [],
+        "cache": {
+          "path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/cache/319547bd1f724867.db",
+          "files": 5,
+          "schema_version": 2
+        },
+        "indexed_at": 1793974240.740989
+      },
+      "search_symbols": {
+        "query": "helper",
+        "count": 2,
+        "results": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/util.py::helper_py",
+            "qualified_name": "helper_py",
+            "kind": "function",
+            "file_path": "py/util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper_py() -> int:",
+            "exported": true
+          },
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/ts/util.ts::helper_ts",
+            "qualified_name": "helper_ts",
+            "kind": "function",
+            "file_path": "ts/util.ts",
+            "lines": "1-1",
+            "language": "typescript",
+            "signature": "export function helper_ts(): number { return 1; }",
+            "exported": true
+          }
+        ]
+      },
+      "get_ast_call_slice": {
+        "compiled_context": "### py/app.py:4-5 [run_py] (target)\n# import: from py.util import helper_py\ndef run_py() -> int:\n    return helper_py()\n\n### py/util.py:1-2 [helper_py] (downstream_callee)\ndef helper_py() -> int:\n    return 1",
+        "token_metrics": {
+          "slice_tokens": 66,
+          "payload_tokens": 587,
+          "budget_tokens": 6000,
+          "touched_files_tokens": 31,
+          "full_repo_tokens": 64,
+          "reduction_vs_touched_files_pct": -112.9,
+          "reduction_vs_full_repo_pct": -3.12,
+          "files_in_slice": 2
+        },
+        "diagnostics": {
+          "truncated": false,
+          "omitted": {
+            "upstream": 0,
+            "downstream": 0,
+            "types": 0
+          },
+          "expand_hint": "Omitted items are the lowest-ranked by hop and degree. Raise max_tokens or hops, or add include_metadata=true to see what was left out.",
+          "unresolved_project_calls_in_slice": 0,
+          "parse_errors": []
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/app.py::run_py",
+          "qualified_name": "run_py",
+          "kind": "function",
+          "file_path": "py/app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run_py() -> int:",
+          "exported": true
+        },
+        "hops": 2,
+        "upstream_callers": [],
+        "downstream_callees": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/util.py::helper_py",
+            "qualified_name": "helper_py",
+            "kind": "function",
+            "file_path": "py/util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper_py() -> int:",
+            "exported": true,
+            "role": "downstream_callee",
+            "hop_distance": 1
+          }
+        ],
+        "relevant_types_and_schemas": [],
+        "regions": [
+          {
+            "file_path": "py/app.py",
+            "lines": "4-5",
+            "byte_range": [
+              32,
+              75
+            ],
+            "symbols": [
+              "run_py"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/app.py::run_py"
+            ],
+            "roles": [
+              "target"
+            ]
+          },
+          {
+            "file_path": "py/util.py",
+            "lines": "1-2",
+            "byte_range": [
+              0,
+              36
+            ],
+            "symbols": [
+              "helper_py"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/util.py::helper_py"
+            ],
+            "roles": [
+              "downstream_callee"
+            ]
+          }
+        ]
+      },
+      "get_blast_radius": {
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/app.py::run_py",
+          "qualified_name": "run_py",
+          "kind": "function",
+          "file_path": "py/app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run_py() -> int:",
+          "exported": true
+        },
+        "risk_level": "NONE",
+        "total_impacted_symbols": 0,
+        "impacted_files_count": 0,
+        "impacted_files": [],
+        "dependents_by_hop": {}
+      },
+      "find_circular_dependencies": {
+        "symbol_cycle_count": 0,
+        "symbol_cycles": [],
+        "self_recursive_count": 0,
+        "self_recursive": [],
+        "file_cycle_count": 0,
+        "file_cycles": [],
+        "note": "file_cycles are derived from import statements, not call edges."
+      },
+      "explain_edge": {
+        "exists": true,
+        "source": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/app.py::run_py",
+          "qualified_name": "run_py",
+          "kind": "function",
+          "file_path": "py/app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run_py() -> int:",
+          "exported": true
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/mixed/py/util.py::helper_py",
+          "qualified_name": "helper_py",
+          "kind": "function",
+          "file_path": "py/util.py",
+          "lines": "1-2",
+          "language": "python",
+          "signature": "def helper_py() -> int:",
+          "exported": true
+        },
+        "relation": "calls",
+        "relations": [
+          "calls"
+        ],
+        "confidence": 0.95,
+        "resolution": "import:py/util.py",
+        "call_site": {
+          "line": 5,
+          "text": "return helper_py()",
+          "receiver": null,
+          "name": "helper_py"
+        }
+      },
+      "impact_of_diff": {
+        "source": "provided diff",
+        "base": "HEAD~1",
+        "head": "HEAD",
+        "changed_files": [
+          "app.py"
+        ],
+        "changed_symbols": [],
+        "impacted_symbols": [],
+        "total_changed_symbols": 0,
+        "total_impacted_symbols": 0,
+        "risk_level": "NONE",
+        "note": "Impact is upstream call-graph reachability over calls/constructs."
+      }
+    },
+    "monorepo": {
+      "tools": [
+        "explain_edge",
+        "find_circular_dependencies",
+        "get_ast_call_slice",
+        "get_blast_radius",
+        "get_index_stats",
+        "impact_of_diff",
+        "index_codebase",
+        "search_symbols"
+      ],
+      "index_codebase": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo",
+        "files_indexed": 7,
+        "cache_hits": 7,
+        "cache_misses": 0,
+        "total_symbols": 4,
+        "total_edges": 1,
+        "skipped_files": {},
+        "elapsed_ms": 2.05
+      },
+      "get_index_stats": {
+        "repo_path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo",
+        "files_indexed": 7,
+        "cache_hits": 7,
+        "cache_misses": 0,
+        "total_symbols": 4,
+        "total_edges": 1,
+        "skipped_files": {},
+        "elapsed_ms": 2.05,
+        "languages": {
+          "python": 4
+        },
+        "total_source_tokens": 56,
+        "unresolved_call_sites": 0,
+        "files_with_parse_errors": [],
+        "cache": {
+          "path": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/cache/0f492f0e5fa53fb8.db",
+          "files": 7,
+          "schema_version": 2
+        },
+        "indexed_at": 1793974241.5192251
+      },
+      "search_symbols": {
+        "query": "helper",
+        "count": 3,
+        "results": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/util.py::helper_alpha",
+            "qualified_name": "helper_alpha",
+            "kind": "function",
+            "file_path": "services/alpha/util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper_alpha() -> int:",
+            "exported": true
+          },
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/beta/app.py::helper_beta",
+            "qualified_name": "helper_beta",
+            "kind": "function",
+            "file_path": "services/beta/app.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper_beta() -> int:",
+            "exported": true
+          },
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/beta/util.py::helper_beta",
+            "qualified_name": "helper_beta",
+            "kind": "function",
+            "file_path": "services/beta/util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper_beta() -> int:",
+            "exported": true
+          }
+        ]
+      },
+      "get_ast_call_slice": {
+        "compiled_context": "### services/alpha/app.py:4-5 [run_alpha] (target)\n# import: from services.alpha.util import helper_alpha\ndef run_alpha() -> int:\n    return helper_alpha()\n\n### services/alpha/util.py:1-2 [helper_alpha] (downstream_callee)\ndef helper_alpha() -> int:\n    return 1",
+        "token_metrics": {
+          "slice_tokens": 71,
+          "payload_tokens": 616,
+          "budget_tokens": 6000,
+          "touched_files_tokens": 32,
+          "full_repo_tokens": 56,
+          "reduction_vs_touched_files_pct": -121.88,
+          "reduction_vs_full_repo_pct": -26.79,
+          "files_in_slice": 2
+        },
+        "diagnostics": {
+          "truncated": false,
+          "omitted": {
+            "upstream": 0,
+            "downstream": 0,
+            "types": 0
+          },
+          "expand_hint": "Omitted items are the lowest-ranked by hop and degree. Raise max_tokens or hops, or add include_metadata=true to see what was left out.",
+          "unresolved_project_calls_in_slice": 0,
+          "parse_errors": []
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/app.py::run_alpha",
+          "qualified_name": "run_alpha",
+          "kind": "function",
+          "file_path": "services/alpha/app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run_alpha() -> int:",
+          "exported": true
+        },
+        "hops": 2,
+        "upstream_callers": [],
+        "downstream_callees": [
+          {
+            "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/util.py::helper_alpha",
+            "qualified_name": "helper_alpha",
+            "kind": "function",
+            "file_path": "services/alpha/util.py",
+            "lines": "1-2",
+            "language": "python",
+            "signature": "def helper_alpha() -> int:",
+            "exported": true,
+            "role": "downstream_callee",
+            "hop_distance": 1
+          }
+        ],
+        "relevant_types_and_schemas": [],
+        "regions": [
+          {
+            "file_path": "services/alpha/app.py",
+            "lines": "4-5",
+            "byte_range": [
+              47,
+              96
+            ],
+            "symbols": [
+              "run_alpha"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/app.py::run_alpha"
+            ],
+            "roles": [
+              "target"
+            ]
+          },
+          {
+            "file_path": "services/alpha/util.py",
+            "lines": "1-2",
+            "byte_range": [
+              0,
+              39
+            ],
+            "symbols": [
+              "helper_alpha"
+            ],
+            "symbol_ids": [
+              "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/util.py::helper_alpha"
+            ],
+            "roles": [
+              "downstream_callee"
+            ]
+          }
+        ]
+      },
+      "get_blast_radius": {
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/app.py::run_alpha",
+          "qualified_name": "run_alpha",
+          "kind": "function",
+          "file_path": "services/alpha/app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run_alpha() -> int:",
+          "exported": true
+        },
+        "risk_level": "NONE",
+        "total_impacted_symbols": 0,
+        "impacted_files_count": 0,
+        "impacted_files": [],
+        "dependents_by_hop": {}
+      },
+      "find_circular_dependencies": {
+        "symbol_cycle_count": 0,
+        "symbol_cycles": [],
+        "self_recursive_count": 0,
+        "self_recursive": [],
+        "file_cycle_count": 0,
+        "file_cycles": [],
+        "note": "file_cycles are derived from import statements, not call edges."
+      },
+      "explain_edge": {
+        "exists": true,
+        "source": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/app.py::run_alpha",
+          "qualified_name": "run_alpha",
+          "kind": "function",
+          "file_path": "services/alpha/app.py",
+          "lines": "4-5",
+          "language": "python",
+          "signature": "def run_alpha() -> int:",
+          "exported": true
+        },
+        "target": {
+          "symbol_id": "/private/var/folders/_n/2nvln_qs6qx10pv45ntzwk0w0000gn/T/ast-mcp-1k40pe47/monorepo/services/alpha/util.py::helper_alpha",
+          "qualified_name": "helper_alpha",
+          "kind": "function",
+          "file_path": "services/alpha/util.py",
+          "lines": "1-2",
+          "language": "python",
+          "signature": "def helper_alpha() -> int:",
+          "exported": true
+        },
+        "relation": "calls",
+        "relations": [
+          "calls"
+        ],
+        "confidence": 0.95,
+        "resolution": "import:services/alpha/util.py",
+        "call_site": {
+          "line": 5,
+          "text": "return helper_alpha()",
+          "receiver": null,
+          "name": "helper_alpha"
+        }
+      },
+      "impact_of_diff": {
+        "source": "provided diff",
+        "base": "HEAD~1",
+        "head": "HEAD",
+        "changed_files": [
+          "app.py"
+        ],
+        "changed_symbols": [],
+        "impacted_symbols": [],
+        "total_changed_symbols": 0,
+        "total_impacted_symbols": 0,
+        "risk_level": "NONE",
+        "note": "Impact is upstream call-graph reachability over calls/constructs."
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "files": 56,
+  "symbols": 532,
+  "edges": 988,
+  "slices": [
+    {
+      "symbol": "ASTSQLiteCache.__enter__",
+      "file": "polyglot_ast_slicer/cache.py",
+      "line": 328,
+      "ok": true,
+      "payload_tokens": 2347,
+      "has_target": true
+    },
+    {
+      "symbol": "ASTSQLiteCache.__exit__",
+      "file": "polyglot_ast_slicer/cache.py",
+      "line": 331,
+      "ok": true,
+      "payload_tokens": 279,
+      "has_target": true
+    },
+    {
+      "symbol": "ASTSQLiteCache.__init__",
+      "file": "polyglot_ast_slicer/cache.py",
+      "line": 100,
+      "ok": true,
+      "payload_tokens": 624,
+      "has_target": true
+    },
+    {
+      "symbol": "ASTSQLiteCache._columns_match",
+      "file": "polyglot_ast_slicer/cache.py",
+      "line": 138,
+      "ok": true,
+      "payload_tokens": 571,
+      "has_target": true
+    },
+    {
+      "symbol": "ASTSQLiteCache._commit",
+      "file": "polyglot_ast_slicer/cache.py",
+      "line": 165,
+      "ok": true,
+      "payload_tokens": 1458,
+      "has_target": true
+    }
+  ],
+  "pass": true
+}

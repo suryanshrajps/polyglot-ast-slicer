@@ -1,0 +1,58 @@
+{
+  "results": {
+    "python-requests": {
+      "repo": "python-requests",
+      "edits": 20,
+      "mismatches": [],
+      "operations": [
+        "append:docs/conf.py",
+        "rename:src/requests/hooks.py->src/requests/renamed_1.py",
+        "delete:src/requests/api.py",
+        "append:tests/testserver/server.py",
+        "append:tests/test_lowlevel.py",
+        "append:docs/conf.py",
+        "append:src/requests/help.py",
+        "delete:tests/test_utils.py",
+        "append:src/requests/exceptions.py",
+        "add:added_9.py",
+        "add:added_10.py",
+        "append:src/requests/auth.py",
+        "add:added_12.py",
+        "rename:src/requests/_types.py->src/requests/renamed_13.py",
+        "delete:src/requests/status_codes.py",
+        "append:setup.py",
+        "add:added_16.py",
+        "rename:src/requests/structures.py->src/requests/renamed_17.py",
+        "rename:added_16.py->renamed_18.py",
+        "add:added_19.py"
+      ]
+    },
+    "ts-zod": {
+      "repo": "ts-zod",
+      "edits": 20,
+      "mismatches": [],
+      "operations": [
+        "append:deno/lib/__tests__/Mocker.ts",
+        "rename:deno/lib/__tests__/validations.test.ts->deno/lib/__tests__/renamed_1.ts",
+        "delete:deno/lib/__tests__/masking.test.ts",
+        "append:src/__tests__/recursive.test.ts",
+        "append:src/benchmarks/index.ts",
+        "add:added_5.ts",
+        "append:deno/lib/__tests__/default.test.ts",
+        "delete:deno/lib/__tests__/string.test.ts",
+        "append:src/__tests__/string.test.ts",
+        "delete:src/index.ts",
+        "add:added_10.ts",
+        "add:added_11.ts",
+        "rename:.eslintrc.js->renamed_12.js",
+        "delete:src/__tests__/discriminated-unions.test.ts",
+        "rename:deno/lib/benchmarks/string.ts->deno/lib/benchmarks/renamed_14.ts",
+        "delete:deno/lib/__tests__/recursive.test.ts",
+        "rename:deno/lib/__tests__/discriminated-unions.test.ts->deno/lib/__tests__/renamed_16.ts",
+        "append:src/__tests__/branded.test.ts",
+        "append:src/__tests__/anyunknown.test.ts",
+        "rename:src/benchmarks/primitives.ts->src/benchmarks/renamed_19.ts"
+      ]
+    }
+  }
+}

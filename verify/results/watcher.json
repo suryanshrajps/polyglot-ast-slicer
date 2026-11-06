@@ -1,0 +1,9 @@
+{
+  "initial": true,
+  "after_edit": true,
+  "after_exception": true,
+  "exception_seen": true,
+  "after_delete": true,
+  "post_delete_stats_ok": true,
+  "pass": true
+}

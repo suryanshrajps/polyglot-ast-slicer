@@ -1,0 +1,13 @@
+{
+  "checks": {
+    "slice_py": true,
+    "slice_ts": true,
+    "blast": true,
+    "cycles": true,
+    "search": true,
+    "stats": true,
+    "explain": true,
+    "diff": true
+  },
+  "pass": true
+}
