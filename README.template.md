@@ -31,8 +31,29 @@ repository.
 
 ## MCP configuration
 
-Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`) and Claude Code
-(`.mcp.json` in a project) use the same server entry:
+`serve` uses `--repo` when given, otherwise `POLYGLOT_AST_REPO`, otherwise the current
+working directory. A project-level Cursor config (`.cursor/mcp.json`) can therefore omit
+the repository:
+
+```json
+{
+  "mcpServers": {
+    "polyglot-ast-slicer": {
+      "command": "uvx",
+      "args": ["polyglot-ast-slicer", "serve"]
+    }
+  }
+}
+```
+
+Claude Code:
+
+```bash
+claude mcp add polyglot-ast-slicer -- uvx polyglot-ast-slicer serve
+```
+
+Claude Desktop does not guarantee the server's working directory, so pass the repository
+explicitly in `claude_desktop_config.json`:
 
 ```json
 {
@@ -40,20 +61,12 @@ Cursor (`~/.cursor/mcp.json`), Claude Desktop (`claude_desktop_config.json`) and
     "polyglot-ast-slicer": {
       "command": "uvx",
       "args": [
-        "--from", "polyglot-ast-slicer",
         "polyglot-ast-slicer", "serve",
         "--repo", "/absolute/path/to/your/repo"
       ]
     }
   }
 }
-```
-
-Claude Code can add it directly:
-
-```bash
-claude mcp add polyglot-ast-slicer -- \
-  uvx --from polyglot-ast-slicer polyglot-ast-slicer serve --repo /absolute/path/to/your/repo
 ```
 
 ## Worked example: Python

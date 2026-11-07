@@ -105,3 +105,90 @@ def test_no_subcommand_starts_mcp(monkeypatch: pytest.MonkeyPatch, repo: Path) -
     monkeypatch.chdir(repo)
     server.main([])
     assert started == {"transport": "stdio"}
+
+
+def _payload(result: object) -> dict:
+    data = getattr(result, "data", None)
+    if isinstance(data, dict):
+        return data
+    structured = getattr(result, "structured_content", None)
+    if isinstance(structured, dict):
+        return structured
+    return {}
+
+
+def test_serve_without_repo_uses_cwd(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    import asyncio
+    import os
+    import sys
+
+    from fastmcp import Client
+    from fastmcp.client.transports import StdioTransport
+
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    (repo / "app.py").write_text(
+        "def helper() -> int:\n    return 1\n\n\ndef run() -> int:\n    return helper()\n",
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("POLYGLOT_AST_REPO", raising=False)
+    env = dict(
+        os.environ,
+        POLYGLOT_AST_WATCH="0",
+        POLYGLOT_AST_CACHE_DIR=str(tmp_path / "cache"),
+    )
+
+    async def probe() -> tuple[dict, dict, dict]:
+        transport = StdioTransport(
+            command=sys.executable,
+            args=["-m", "polyglot_ast_slicer", "serve"],
+            env=env,
+            cwd=str(repo),
+        )
+        async with Client(transport) as client:
+            indexed = _payload(await client.call_tool("index_codebase", {}))
+            sliced = _payload(
+                await client.call_tool(
+                    "get_ast_call_slice", {"symbol_name": "run", "hops": 1}
+                )
+            )
+            blast = _payload(
+                await client.call_tool("get_blast_radius", {"symbol_name": "helper"})
+            )
+        return indexed, sliced, blast
+
+    indexed, sliced, blast = asyncio.run(probe())
+    assert indexed["files_indexed"] == 1
+    assert "error" not in sliced and "helper" in sliced["compiled_context"]
+    assert blast["total_impacted_symbols"] >= 1
+
+
+def test_serve_refuses_implicit_home_or_root(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.delenv("POLYGLOT_AST_REPO", raising=False)
+    for location in (Path.home(), Path("/")):
+        monkeypatch.chdir(location)
+        with pytest.raises(SystemExit) as exc:
+            server.main(["serve"])
+        assert exc.value.code == 2
+        assert "--repo" in capsys.readouterr().err
+
+
+def test_repo_precedence(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    explicit = tmp_path / "explicit"
+    from_env = tmp_path / "from_env"
+    cwd = tmp_path / "cwd"
+    for path in (explicit, from_env, cwd):
+        path.mkdir()
+    monkeypatch.setenv("POLYGLOT_AST_REPO", str(from_env))
+    assert server._resolve_repo(str(explicit)) == explicit.resolve()
+    assert server._resolve_repo(None) == from_env.resolve()
+
+    monkeypatch.delenv("POLYGLOT_AST_REPO")
+    monkeypatch.chdir(cwd)
+    assert server._resolve_repo(None) == cwd.resolve()
+    assert server._resolve_repo(str(explicit)) == explicit.resolve()
+
+    # An explicit path is honoured even when it is the home directory.
+    assert server._resolve_repo(str(Path.home())) == Path.home().resolve()

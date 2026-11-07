@@ -229,3 +229,14 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
 - Rebuilt 1.0.0 wheel/sdist from the fixed commit and re-ran the clean-venv Python/TS
   smoke; PyPI name still HTTP 404.
 - Tag `v1.0.0` moved to the gated commit (local only).
+
+## Default repository — 2026-11-07
+- `serve` and all tools now resolve the repository as: explicit `--repo`/argument, then
+  `POLYGLOT_AST_REPO`, then the current directory. The CLI `--repo` default is `None` so it
+  no longer masks the environment variable.
+- If neither is supplied and the resolved path is the filesystem root or the user's home,
+  serve exits 2 with a message telling the user to pass `--repo` (or set the env var).
+- Tests: real MCP client against a subprocess started with cwd=temp repo and no `--repo`
+  (index, slice, blast), guard for home/root, and precedence for explicit/env/cwd.
+- README: short Cursor project config and Claude Code command without `--repo`; Claude
+  Desktop keeps `--repo` because its working directory is not guaranteed.

@@ -43,7 +43,18 @@ WATCH_ENV = "POLYGLOT_AST_WATCH"
 
 
 def _resolve_repo(repo_path: str | None) -> Path:
-    candidate = repo_path or os.environ.get(DEFAULT_REPO_ENV) or "."
+    candidate = repo_path
+    if not candidate:
+        candidate = os.environ.get(DEFAULT_REPO_ENV)
+        if not candidate:
+            resolved = Path.cwd().resolve()
+            home = Path.home().resolve()
+            if resolved == home or resolved.parent == resolved:
+                raise ValueError(
+                    f"refusing to use {resolved} as the repository; "
+                    "pass --repo (or set POLYGLOT_AST_REPO)"
+                )
+            return resolved
     return Path(candidate).expanduser().resolve()
 
 
@@ -99,7 +110,7 @@ def _watch_loop(repo_path: str, engine: GraphEngine) -> None:
 
 
 @mcp.tool()
-def index_codebase(repo_path: str = ".", force_rebuild: bool = False) -> dict[str, Any]:
+def index_codebase(repo_path: str = "", force_rebuild: bool = False) -> dict[str, Any]:
     """Index a Python/TypeScript repository into a call graph and warm the SQLite cache.
 
     Call this once per session (or after large refactors) before slicing. Incremental
@@ -114,7 +125,7 @@ def index_codebase(repo_path: str = ".", force_rebuild: bool = False) -> dict[st
 
 @mcp.tool()
 def search_symbols(
-    repo_path: str = ".", query: str = "", kind: str | None = None, limit: int = 20
+    repo_path: str = "", query: str = "", kind: str | None = None, limit: int = 20
 ) -> dict[str, Any]:
     """Find symbols by name. Use this when you are unsure of the exact qualified name.
 
@@ -128,7 +139,7 @@ def search_symbols(
 
 @mcp.tool()
 def get_ast_call_slice(
-    repo_path: str = ".",
+    repo_path: str = "",
     symbol_name: str = "",
     hops: int = 2,
     include_types: bool = True,
@@ -158,7 +169,7 @@ def get_ast_call_slice(
 
 @mcp.tool()
 def get_blast_radius(
-    repo_path: str = ".", symbol_name: str = "", max_depth: int = 5, include_types: bool = False
+    repo_path: str = "", symbol_name: str = "", max_depth: int = 5, include_types: bool = False
 ) -> dict[str, Any]:
     """List every dependent that could break if this symbol's signature or behaviour changes.
 
@@ -173,7 +184,7 @@ def get_blast_radius(
 
 
 @mcp.tool()
-def find_circular_dependencies(repo_path: str = ".") -> dict[str, Any]:
+def find_circular_dependencies(repo_path: str = "") -> dict[str, Any]:
     """Detect circular imports and mutual recursion with Tarjan's strongly connected components."""
     try:
         return _get_engine(repo_path).find_circular_dependencies()
@@ -182,7 +193,7 @@ def find_circular_dependencies(repo_path: str = ".") -> dict[str, Any]:
 
 
 @mcp.tool()
-def explain_edge(repo_path: str = ".", source: str = "", target: str = "") -> dict[str, Any]:
+def explain_edge(repo_path: str = "", source: str = "", target: str = "") -> dict[str, Any]:
     """Explain why an edge exists: call-site line, confidence and resolution path."""
     try:
         return _get_engine(repo_path).explain_edge(source, target)
@@ -192,7 +203,7 @@ def explain_edge(repo_path: str = ".", source: str = "", target: str = "") -> di
 
 @mcp.tool()
 def impact_of_diff(
-    repo_path: str = ".",
+    repo_path: str = "",
     base: str = "HEAD~1",
     head: str = "HEAD",
     diff: str | None = None,
@@ -208,7 +219,7 @@ def impact_of_diff(
 
 
 @mcp.tool()
-def get_index_stats(repo_path: str = ".") -> dict[str, Any]:
+def get_index_stats(repo_path: str = "") -> dict[str, Any]:
     """Report index size, language mix, token totals, cache health, and unresolved call sites."""
     try:
         return _get_engine(repo_path).get_index_stats()
@@ -342,10 +353,18 @@ def _cmd_stats(args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_serve(args: argparse.Namespace) -> int:
-    _get_engine(args.repo)
+def _serve(repo_path: str | None) -> int:
+    try:
+        _get_engine(repo_path)
+    except ValueError as error:
+        print(f"error: {error}", file=sys.stderr)
+        return 2
     mcp.run(transport="stdio")
     return 0
+
+
+def _cmd_serve(args: argparse.Namespace) -> int:
+    return _serve(args.repo)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -357,7 +376,11 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command")
 
     common = argparse.ArgumentParser(add_help=False)
-    common.add_argument("--repo", default=".", help="Repository root (default: .)")
+    common.add_argument(
+        "--repo",
+        default=None,
+        help="Repository root (default: POLYGLOT_AST_REPO, else the current directory)",
+    )
     common.add_argument("--json", action="store_true", help="Emit machine-readable JSON")
 
     p_index = sub.add_parser("index", parents=[common], help="Index a repository")
@@ -410,7 +433,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> None:
     arguments = list(sys.argv[1:] if argv is None else argv)
     if not arguments:
-        _cmd_serve(argparse.Namespace(repo="."))
+        code = _serve(None)
+        if code:
+            raise SystemExit(code)
         return
 
     parser = build_parser()
