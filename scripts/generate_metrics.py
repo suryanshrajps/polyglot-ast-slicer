@@ -995,20 +995,43 @@ def render_readme(data: dict[str, object]) -> str:
         )
 
     size_lines = [
-        "| Language | Symbols | Payload tokens p10 / median / p90 | "
+        "| Language / repo | Symbols | Payload tokens p10 / median / p90 | "
         "Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |",
         "|---|---:|---|---|---|",
     ]
-    for language, entry in sizes["per_language"].items():
+
+    def size_cells(entry: dict) -> list[str]:
         cells = []
         for key in ("payload_tokens", "entry_file_tokens", "caller_callee_files_tokens"):
             quantile = entry[key]
             cells.append(
                 f"{quantile['p10']:.0f} / {quantile['median']:.0f} / {quantile['p90']:.0f}"
             )
+        return cells
+
+    large_files: list[tuple[str, str, int]] = []
+    for language, entry in sizes["per_language"].items():
+        cells = size_cells(entry)
         size_lines.append(
-            f"| {language} | {entry['symbols']} | {cells[0]} | {cells[1]} | {cells[2]} |"
+            f"| **{language} (all)** | {entry['symbols']} | {cells[0]} | {cells[1]} | "
+            f"{cells[2]} |"
         )
+        for repo_name, repo_entry in entry["repos"].items():
+            repo_cells = size_cells(repo_entry)
+            size_lines.append(
+                f"| {language} / `{repo_name}` | {repo_entry['symbols']} | "
+                f"{repo_cells[0]} | {repo_cells[1]} | {repo_cells[2]} |"
+            )
+            for item in repo_entry["large_files"]:
+                large_files.append((language, item["file"], item["tokens"]))
+    if large_files:
+        size_lines += [
+            "",
+            "Files above 20k tokens among the sampled entry files: "
+            + ", ".join(f"`{file}` ({tokens:,} tokens, {language})"
+                        for language, file, tokens in large_files)
+            + ".",
+        ]
 
     language_lines = [
         "| Extension | Language | Tree-sitter grammar |",

@@ -105,8 +105,9 @@ corpora use seed 42.
 ## Slice size comparison
 
 Default slice payload tokens (tiktoken on the exact JSON), the entry symbol's whole file, and
-every unique file containing its callers and callees. Thirty random symbols per language,
-seed 42. These are sizes only; they do not show that a slice is sufficient.
+every unique file containing its callers and callees. Thirty symbols per language,
+stratified as 10 per repository (seed 42). These are sizes only; they do not show that a
+slice is sufficient.
 
 {{size_table}}
 

@@ -253,3 +253,13 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
   plus one first-write outlier. `verify/scale_probe.py` now edits 30 distinct files and
   reports median, p95 and the slowest file; README performance table regenerated with no
   fixed-latency claim.
+
+## Stratified size comparison — 2026-11-07
+- Cause of the repeated TypeScript 39,169-token median/p90: `src/types.ts` in zod; every
+  sampled zod symbol lives in that file. Python has an analogous outlier,
+  `src/click/core.py` (33,701 tokens).
+- `benchmarks/size_compare.py` now samples 10 symbols per repo: requests/click/flask and
+  zod/nest/bulletproof-react. Overall and per-repo p10/median/p90 are rendered, with an
+  explicit note naming entry files above 20k tokens.
+- TypeScript overall entry file p10/median/p90: 182 / 1,032 / 39,169 tokens; Python:
+  1,254 / 4,906 / 14,296. Sizes-only wording retained.

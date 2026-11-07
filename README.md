@@ -152,13 +152,22 @@ corpora use seed 42.
 ## Slice size comparison
 
 Default slice payload tokens (tiktoken on the exact JSON), the entry symbol's whole file, and
-every unique file containing its callers and callees. Thirty random symbols per language,
-seed 42. These are sizes only; they do not show that a slice is sufficient.
+every unique file containing its callers and callees. Thirty symbols per language,
+stratified as 10 per repository (seed 42). These are sizes only; they do not show that a
+slice is sufficient.
 
-| Language | Symbols | Payload tokens p10 / median / p90 | Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |
+| Language / repo | Symbols | Payload tokens p10 / median / p90 | Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |
 |---|---:|---|---|---|
-| python | 30 | 242 / 3473 / 5934 | 1466 / 5953 / 9114 | 2846 / 8694 / 31961 |
-| typescript | 30 | 234 / 1977 / 4938 | 1195 / 39169 / 39169 | 1195 / 39169 / 40544 |
+| **python (all)** | 30 | 259 / 522 / 5422 | 1254 / 4906 / 14296 | 1254 / 5430 / 31961 |
+| python / `requests` | 10 | 238 / 1990 / 5422 | 1025 / 3876 / 5953 | 1025 / 4906 / 10580 |
+| python / `click` | 10 | 264 / 643 / 2613 | 2060 / 4729 / 33701 | 2060 / 5284 / 33701 |
+| python / `flask` | 10 | 298 / 522 / 2406 | 1633 / 6154 / 8430 | 1633 / 7900 / 13256 |
+| **typescript (all)** | 30 | 256 / 2323 / 5506 | 182 / 1032 / 39169 | 539 / 2404 / 39169 |
+| typescript / `zod` | 10 | 1284 / 3725 / 5508 | 39169 / 39169 / 39169 | 39169 / 39169 / 39169 |
+| typescript / `nest` | 10 | 256 / 672 / 2597 | 153 / 929 / 1447 | 832 / 1369 / 4591 |
+| typescript / `bulletproof-react` | 10 | 269 / 2624 / 3749 | 182 / 418 / 918 | 198 / 1834 / 2765 |
+
+Files above 20k tokens among the sampled entry files: `src/click/core.py` (33,701 tokens, python), `src/types.ts` (39,169 tokens, typescript).
 
 ## Languages
 

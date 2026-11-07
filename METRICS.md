@@ -128,8 +128,8 @@ Default slice payload tokens vs the entry symbol's whole file vs every unique fi
 
 | Language | Symbols | Payload tokens p10 / median / p90 | Entry file p10 / median / p90 | Caller+callee files p10 / median / p90 |
 |---|---:|---|---|---|
-| python | 30 | 242 / 3473 / 5934 | 1466 / 5953 / 9114 | 2846 / 8694 / 31961 |
-| typescript | 30 | 234 / 1977 / 4938 | 1195 / 39169 / 39169 | 1195 / 39169 / 40544 |
+| python | 30 | 259 / 522 / 5422 | 1254 / 4906 / 14296 | 1254 / 5430 / 31961 |
+| typescript | 30 | 256 / 2323 / 5506 | 182 / 1032 / 39169 | 539 / 2404 / 39169 |
 
 ## Synthetic token benchmark (hops=2)
 
