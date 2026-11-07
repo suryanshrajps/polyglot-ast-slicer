@@ -359,7 +359,7 @@ def _serve(repo_path: str | None) -> int:
     except ValueError as error:
         print(f"error: {error}", file=sys.stderr)
         return 2
-    mcp.run(transport="stdio")
+    mcp.run(transport="stdio", show_banner=False)
     return 0
 
 

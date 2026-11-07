@@ -96,15 +96,16 @@ def test_cli_version_flag(capsys: pytest.CaptureFixture[str]) -> None:
 
 
 def test_no_subcommand_starts_mcp(monkeypatch: pytest.MonkeyPatch, repo: Path) -> None:
-    started: dict[str, str] = {}
+    started: dict[str, object] = {}
 
-    def fake_run(*, transport: str) -> None:
+    def fake_run(*, transport: str, show_banner: bool) -> None:
         started["transport"] = transport
+        started["show_banner"] = show_banner
 
     monkeypatch.setattr(server.mcp, "run", fake_run)
     monkeypatch.chdir(repo)
     server.main([])
-    assert started == {"transport": "stdio"}
+    assert started == {"transport": "stdio", "show_banner": False}
 
 
 def _payload(result: object) -> dict:
