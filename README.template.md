@@ -3,8 +3,8 @@
 A local call-graph context tool for AI coding agents.
 It parses Python and TypeScript/JavaScript with tree-sitter, builds a directed call graph, and
 returns byte-exact source slices over MCP.
-It does not execute code, has no network calls at query time, and keeps its index outside the
-repository.
+It does not execute code, makes no network calls after the first run, and keeps its index
+outside the repository. No code leaves your machine.
 
 ## What it does
 
@@ -26,8 +26,9 @@ Or install the command:
 uv tool install polyglot-ast-slicer
 ```
 
-Requires Python 3.12+. The SQLite index lives in the OS cache directory, never in the
-repository.
+Requires Python 3.12+. The first run downloads the tree-sitter grammars, so it needs
+internet once; after that it runs offline. The SQLite index lives in the OS cache directory,
+never in the repository.
 
 ## MCP configuration
 

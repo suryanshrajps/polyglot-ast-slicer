@@ -43,6 +43,11 @@ drifts. Parameters such as the 6,000-token payload cap are code constants, not m
 - `benchmarks/stage_b/run.py`, `benchmarks/fault/run_click.py` and the Stage B METRICS
   section.
 
+### Notes
+
+- The first run downloads the tree-sitter grammars, so it needs internet once; after that
+  indexing and queries run offline. No code leaves the machine.
+
 ### Measured
 
 See `METRICS.md`.

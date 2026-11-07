@@ -263,3 +263,10 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
   explicit note naming entry files above 20k tokens.
 - TypeScript overall entry file p10/median/p90: 182 / 1,032 / 39,169 tokens; Python:
   1,254 / 4,906 / 14,296. Sizes-only wording retained.
+
+## Network wording — 2026-11-07
+- README: first run downloads grammars (internet once), later runs offline; replaced
+  "no network calls at query time" with "no network calls after the first run, and no code
+  leaves your machine". Same note added to CHANGELOG 1.0.0.
+- `verify/network_probe.py` already indexes first, then blocks sockets for all eight query
+  paths, so it supports the wording.
