@@ -12,6 +12,7 @@ import json
 import os
 import random
 import resource
+import statistics
 import subprocess
 import sys
 import tempfile
@@ -49,15 +50,16 @@ def measure(root: Path, cache: Path) -> dict[str, object]:
 
     files = engine.discover_source_files()
     rng = random.Random(7)
-    latencies: list[float] = []
-    for path in rng.sample(files, min(20, len(files))):
+    refreshes: list[dict[str, object]] = []
+    for path in rng.sample(files, min(30, len(files))):
         original = path.read_bytes()
-        path.write_bytes(original + b"\n# touch\n")
-        latencies.append(float(engine.refresh_file(path)["elapsed_ms"]))
+        path.write_bytes(original + b"\n# one-line edit\n")
+        elapsed = float(engine.refresh_file(path)["elapsed_ms"])
         path.write_bytes(original)
         engine.refresh_file(path)
-    latencies.sort()
-    p95 = latencies[min(len(latencies) - 1, int(len(latencies) * 0.95))]
+        refreshes.append({"file": engine._rel(path), "ms": round(elapsed, 3)})
+    times = sorted(float(row["ms"]) for row in refreshes)
+    slowest = sorted(refreshes, key=lambda row: -float(row["ms"]))[:3]
 
     target = next(
         (s.qualified_name for s in sorted(engine._symbols.values(), key=lambda s: s.symbol_id)
@@ -74,7 +76,10 @@ def measure(root: Path, cache: Path) -> dict[str, object]:
         "cold_ms": round(cold_ms, 1),
         "warm_ms": round(warm_ms, 1),
         "warm_cache_hits": warm["cache_hits"],
-        "incremental_p95_ms": round(p95, 2),
+        "refresh_median_ms": round(float(statistics.median(times)), 2),
+        "refresh_p95_ms": round(times[min(len(times) - 1, int(len(times) * 0.95))], 2),
+        "refresh_slowest": slowest,
+        "refresh_files": refreshes,
         "query_ms": round(query_ms, 1),
         "query_symbol": target,
         "query_ok": "error" not in result,

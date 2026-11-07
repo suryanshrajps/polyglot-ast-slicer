@@ -981,13 +981,17 @@ def render_readme(data: dict[str, object]) -> str:
         )
 
     performance_lines = [
-        "| Corpus | Files | Cold ms | Warm ms | Incremental p95 ms | Query ms | Peak RSS MB |",
-        "|---|---:|---:|---:|---:|---:|---:|",
+        "| Corpus | Files | Cold ms | Warm ms | Refresh median ms | Refresh p95 ms | "
+        "Slowest refresh file | Query ms | Peak RSS MB |",
+        "|---|---:|---:|---:|---:|---:|---|---:|---:|",
     ]
     for name, row in performance["results"].items():
+        slowest = row["refresh_slowest"][0]
         performance_lines.append(
             f"| {name} | {row['files']} | {row['cold_ms']} | {row['warm_ms']} | "
-            f"{row['incremental_p95_ms']} | {row['query_ms']} | {row['peak_rss_mb']} |"
+            f"{row['refresh_median_ms']} | {row['refresh_p95_ms']} | "
+            f"`{slowest['file']}` ({slowest['ms']} ms) | {row['query_ms']} | "
+            f"{row['peak_rss_mb']} |"
         )
 
     size_lines = [

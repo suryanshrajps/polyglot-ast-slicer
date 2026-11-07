@@ -240,3 +240,16 @@ Scripts committed under `verify/`; raw results in `verify/results/*.json`.
   (index, slice, blast), guard for home/root, and precedence for explicit/env/cwd.
 - README: short Cursor project config and Claude Code command without `--repo`; Claude
   Desktop keeps `--repo` because its working directory is not guaranteed.
+
+## Refresh variance — 2026-11-07
+- 30 distinct files per corpus, each after a real one-line edit; per-file times are in
+  `verify/results/scale.json` (`refresh_files`).
+- 5k: median 0.44 ms, p95 0.79 ms; slowest 29.914 / 0.789 / 0.680 ms. The 29.9 ms outlier
+  is the first cache write after indexing; profiling it after the cache is warm shows ~1 ms.
+- requests: median 4.52 ms, p95 37.81 ms; slowest `tests/test_requests.py` 254.54,
+  `src/requests/models.py` 37.81, `src/requests/sessions.py` 27.05 ms. Profiling the test
+  file: 0.169 s total, cache read + parse 0.101 s, parse alone 0.087 s, relink 0.062 s.
+- No whole-repo or importer-proportional defect found; the spread is file-size parse cost
+  plus one first-write outlier. `verify/scale_probe.py` now edits 30 distinct files and
+  reports median, p95 and the slowest file; README performance table regenerated with no
+  fixed-latency claim.

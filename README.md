@@ -137,15 +137,17 @@ recall counts resolved sites as missed when the tool reports no edge.
 ## Performance
 
 Measured by `verify/scale_probe.py` on the development machine, one process per corpus.
-Synthetic corpora use seed 42. Latency is machine-dependent.
+Each refresh is a one-line edit to one of 30 distinct files; latency varies with file size
+and disk state, so the table reports median and p95 rather than a fixed promise. Synthetic
+corpora use seed 42.
 
-| Corpus | Files | Cold ms | Warm ms | Incremental p95 ms | Query ms | Peak RSS MB |
-|---|---:|---:|---:|---:|---:|---:|
-| synthetic-5000 | 5000 | 2036.2 | 1389.4 | 26.17 | 1.9 | 126.9 |
-| synthetic-20000 | 20000 | 9690.2 | 5679.1 | 1.98 | 4.8 | 228.1 |
-| synthetic-50000 | 50000 | 23951.2 | 14564.7 | 1.51 | 12.5 | 441.4 |
-| python-requests | 37 | 211.8 | 70.0 | 38.28 | 2.0 | 101.8 |
-| ts-zod | 169 | 450.4 | 61.0 | 2.5 | 0.9 | 108.4 |
+| Corpus | Files | Cold ms | Warm ms | Refresh median ms | Refresh p95 ms | Slowest refresh file | Query ms | Peak RSS MB |
+|---|---:|---:|---:|---:|---:|---|---:|---:|
+| synthetic-5000 | 5000 | 2063.7 | 1352.1 | 0.44 | 0.79 | `pkg0012/mod001235.py` (29.914 ms) | 2.0 | 107.2 |
+| synthetic-20000 | 20000 | 9617.6 | 5765.1 | 0.46 | 0.57 | `pkg0106/mod010611.py` (1.936 ms) | 7.5 | 210.8 |
+| synthetic-50000 | 50000 | 24140.5 | 14901.1 | 0.63 | 1.55 | `pkg0212/mod021222.py` (1.711 ms) | 17.7 | 425.0 |
+| python-requests | 37 | 210.8 | 76.4 | 4.52 | 37.81 | `tests/test_requests.py` (254.54 ms) | 2.1 | 105.7 |
+| ts-zod | 169 | 393.9 | 60.4 | 1.69 | 11.8 | `deno/lib/__tests__/default.test.ts` (14.059 ms) | 1.1 | 108.1 |
 
 ## Slice size comparison
 

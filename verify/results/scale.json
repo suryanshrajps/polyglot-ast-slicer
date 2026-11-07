@@ -4,66 +4,751 @@
       "files": 5000,
       "symbols": 5000,
       "edges": 5000,
-      "cold_ms": 2036.2,
-      "warm_ms": 1389.4,
+      "cold_ms": 2063.7,
+      "warm_ms": 1352.1,
       "warm_cache_hits": 5000,
-      "incremental_p95_ms": 26.17,
-      "query_ms": 1.9,
+      "refresh_median_ms": 0.44,
+      "refresh_p95_ms": 0.79,
+      "refresh_slowest": [
+        {
+          "file": "pkg0012/mod001235.py",
+          "ms": 29.914
+        },
+        {
+          "file": "pkg0026/mod002652.py",
+          "ms": 0.789
+        },
+        {
+          "file": "pkg0007/mod000704.py",
+          "ms": 0.68
+        }
+      ],
+      "refresh_files": [
+        {
+          "file": "pkg0026/mod002652.py",
+          "ms": 0.789
+        },
+        {
+          "file": "pkg0012/mod001235.py",
+          "ms": 29.914
+        },
+        {
+          "file": "pkg0032/mod003234.py",
+          "ms": 0.477
+        },
+        {
+          "file": "pkg0003/mod000395.py",
+          "ms": 0.466
+        },
+        {
+          "file": "pkg0005/mod000593.py",
+          "ms": 0.442
+        },
+        {
+          "file": "pkg0043/mod004389.py",
+          "ms": 0.45
+        },
+        {
+          "file": "pkg0007/mod000771.py",
+          "ms": 0.436
+        },
+        {
+          "file": "pkg0029/mod002995.py",
+          "ms": 0.438
+        },
+        {
+          "file": "pkg0047/mod004774.py",
+          "ms": 0.432
+        },
+        {
+          "file": "pkg0004/mod000475.py",
+          "ms": 0.473
+        },
+        {
+          "file": "pkg0041/mod004156.py",
+          "ms": 0.441
+        },
+        {
+          "file": "pkg0017/mod001758.py",
+          "ms": 0.436
+        },
+        {
+          "file": "pkg0003/mod000307.py",
+          "ms": 0.455
+        },
+        {
+          "file": "pkg0007/mod000704.py",
+          "ms": 0.68
+        },
+        {
+          "file": "pkg0035/mod003552.py",
+          "ms": 0.459
+        },
+        {
+          "file": "pkg0034/mod003425.py",
+          "ms": 0.446
+        },
+        {
+          "file": "pkg0005/mod000572.py",
+          "ms": 0.45
+        },
+        {
+          "file": "pkg0019/mod001971.py",
+          "ms": 0.435
+        },
+        {
+          "file": "pkg0007/mod000743.py",
+          "ms": 0.426
+        },
+        {
+          "file": "pkg0045/mod004514.py",
+          "ms": 0.44
+        },
+        {
+          "file": "pkg0034/mod003477.py",
+          "ms": 0.42
+        },
+        {
+          "file": "pkg0004/mod000484.py",
+          "ms": 0.426
+        },
+        {
+          "file": "pkg0046/mod004632.py",
+          "ms": 0.426
+        },
+        {
+          "file": "pkg0010/mod001014.py",
+          "ms": 0.422
+        },
+        {
+          "file": "pkg0018/mod001828.py",
+          "ms": 0.42
+        },
+        {
+          "file": "pkg0047/mod004775.py",
+          "ms": 0.444
+        },
+        {
+          "file": "pkg0005/mod000506.py",
+          "ms": 0.419
+        },
+        {
+          "file": "pkg0047/mod004727.py",
+          "ms": 0.436
+        },
+        {
+          "file": "pkg0047/mod004796.py",
+          "ms": 0.446
+        },
+        {
+          "file": "pkg0032/mod003249.py",
+          "ms": 0.58
+        }
+      ],
+      "query_ms": 2.0,
       "query_symbol": "fn_0",
       "query_ok": true,
-      "peak_rss_mb": 126.9
+      "peak_rss_mb": 107.2
     },
     "synthetic-20000": {
       "files": 20000,
       "symbols": 20000,
       "edges": 20000,
-      "cold_ms": 9690.2,
-      "warm_ms": 5679.1,
+      "cold_ms": 9617.6,
+      "warm_ms": 5765.1,
       "warm_cache_hits": 20000,
-      "incremental_p95_ms": 1.98,
-      "query_ms": 4.8,
+      "refresh_median_ms": 0.46,
+      "refresh_p95_ms": 0.57,
+      "refresh_slowest": [
+        {
+          "file": "pkg0106/mod010611.py",
+          "ms": 1.936
+        },
+        {
+          "file": "pkg0180/mod018056.py",
+          "ms": 0.572
+        },
+        {
+          "file": "pkg0129/mod012937.py",
+          "ms": 0.567
+        }
+      ],
+      "refresh_files": [
+        {
+          "file": "pkg0106/mod010611.py",
+          "ms": 1.936
+        },
+        {
+          "file": "pkg0049/mod004943.py",
+          "ms": 0.496
+        },
+        {
+          "file": "pkg0129/mod012937.py",
+          "ms": 0.567
+        },
+        {
+          "file": "pkg0015/mod001582.py",
+          "ms": 0.524
+        },
+        {
+          "file": "pkg0023/mod002373.py",
+          "ms": 0.494
+        },
+        {
+          "file": "pkg0175/mod017559.py",
+          "ms": 0.485
+        },
+        {
+          "file": "pkg0030/mod003084.py",
+          "ms": 0.566
+        },
+        {
+          "file": "pkg0119/mod011982.py",
+          "ms": 0.48
+        },
+        {
+          "file": "pkg0190/mod019096.py",
+          "ms": 0.463
+        },
+        {
+          "file": "pkg0019/mod001900.py",
+          "ms": 0.477
+        },
+        {
+          "file": "pkg0166/mod016627.py",
+          "ms": 0.465
+        },
+        {
+          "file": "pkg0070/mod007035.py",
+          "ms": 0.455
+        },
+        {
+          "file": "pkg0012/mod001228.py",
+          "ms": 0.455
+        },
+        {
+          "file": "pkg0028/mod002816.py",
+          "ms": 0.447
+        },
+        {
+          "file": "pkg0142/mod014209.py",
+          "ms": 0.467
+        },
+        {
+          "file": "pkg0137/mod013702.py",
+          "ms": 0.448
+        },
+        {
+          "file": "pkg0022/mod002289.py",
+          "ms": 0.442
+        },
+        {
+          "file": "pkg0078/mod007886.py",
+          "ms": 0.456
+        },
+        {
+          "file": "pkg0029/mod002972.py",
+          "ms": 0.435
+        },
+        {
+          "file": "pkg0180/mod018056.py",
+          "ms": 0.572
+        },
+        {
+          "file": "pkg0139/mod013910.py",
+          "ms": 0.55
+        },
+        {
+          "file": "pkg0019/mod001936.py",
+          "ms": 0.482
+        },
+        {
+          "file": "pkg0185/mod018528.py",
+          "ms": 0.484
+        },
+        {
+          "file": "pkg0040/mod004056.py",
+          "ms": 0.457
+        },
+        {
+          "file": "pkg0073/mod007315.py",
+          "ms": 0.448
+        },
+        {
+          "file": "pkg0191/mod019103.py",
+          "ms": 0.449
+        },
+        {
+          "file": "pkg0020/mod002027.py",
+          "ms": 0.433
+        },
+        {
+          "file": "pkg0189/mod018910.py",
+          "ms": 0.447
+        },
+        {
+          "file": "pkg0191/mod019187.py",
+          "ms": 0.439
+        },
+        {
+          "file": "pkg0129/mod012998.py",
+          "ms": 0.443
+        }
+      ],
+      "query_ms": 7.5,
       "query_symbol": "fn_0",
       "query_ok": true,
-      "peak_rss_mb": 228.1
+      "peak_rss_mb": 210.8
     },
     "synthetic-50000": {
       "files": 50000,
       "symbols": 50000,
       "edges": 50000,
-      "cold_ms": 23951.2,
-      "warm_ms": 14564.7,
+      "cold_ms": 24140.5,
+      "warm_ms": 14901.1,
       "warm_cache_hits": 50000,
-      "incremental_p95_ms": 1.51,
-      "query_ms": 12.5,
+      "refresh_median_ms": 0.63,
+      "refresh_p95_ms": 1.55,
+      "refresh_slowest": [
+        {
+          "file": "pkg0212/mod021222.py",
+          "ms": 1.711
+        },
+        {
+          "file": "pkg0381/mod038193.py",
+          "ms": 1.549
+        },
+        {
+          "file": "pkg0056/mod005632.py",
+          "ms": 1.212
+        }
+      ],
+      "refresh_files": [
+        {
+          "file": "pkg0212/mod021222.py",
+          "ms": 1.711
+        },
+        {
+          "file": "pkg0098/mod009886.py",
+          "ms": 1.16
+        },
+        {
+          "file": "pkg0258/mod025875.py",
+          "ms": 0.735
+        },
+        {
+          "file": "pkg0426/mod042659.py",
+          "ms": 0.704
+        },
+        {
+          "file": "pkg0031/mod003164.py",
+          "ms": 0.832
+        },
+        {
+          "file": "pkg0047/mod004747.py",
+          "ms": 0.631
+        },
+        {
+          "file": "pkg0351/mod035119.py",
+          "ms": 0.662
+        },
+        {
+          "file": "pkg0061/mod006168.py",
+          "ms": 0.634
+        },
+        {
+          "file": "pkg0239/mod023965.py",
+          "ms": 0.778
+        },
+        {
+          "file": "pkg0381/mod038193.py",
+          "ms": 1.549
+        },
+        {
+          "file": "pkg0038/mod003801.py",
+          "ms": 0.671
+        },
+        {
+          "file": "pkg0332/mod033255.py",
+          "ms": 0.625
+        },
+        {
+          "file": "pkg0140/mod014070.py",
+          "ms": 0.568
+        },
+        {
+          "file": "pkg0024/mod002457.py",
+          "ms": 0.575
+        },
+        {
+          "file": "pkg0056/mod005632.py",
+          "ms": 1.212
+        },
+        {
+          "file": "pkg0284/mod028419.py",
+          "ms": 0.583
+        },
+        {
+          "file": "pkg0274/mod027405.py",
+          "ms": 0.597
+        },
+        {
+          "file": "pkg0045/mod004578.py",
+          "ms": 0.534
+        },
+        {
+          "file": "pkg0157/mod015772.py",
+          "ms": 0.566
+        },
+        {
+          "file": "pkg0059/mod005944.py",
+          "ms": 0.706
+        },
+        {
+          "file": "pkg0361/mod036113.py",
+          "ms": 0.628
+        },
+        {
+          "file": "pkg0278/mod027821.py",
+          "ms": 0.547
+        },
+        {
+          "file": "pkg0038/mod003873.py",
+          "ms": 0.498
+        },
+        {
+          "file": "pkg0370/mod037057.py",
+          "ms": 0.524
+        },
+        {
+          "file": "pkg0081/mod008113.py",
+          "ms": 0.542
+        },
+        {
+          "file": "pkg0146/mod014630.py",
+          "ms": 0.648
+        },
+        {
+          "file": "pkg0413/mod041328.py",
+          "ms": 0.558
+        },
+        {
+          "file": "pkg0411/mod041119.py",
+          "ms": 0.672
+        },
+        {
+          "file": "pkg0382/mod038207.py",
+          "ms": 0.486
+        },
+        {
+          "file": "pkg0040/mod004054.py",
+          "ms": 0.501
+        }
+      ],
+      "query_ms": 17.7,
       "query_symbol": "fn_0",
       "query_ok": true,
-      "peak_rss_mb": 441.4
+      "peak_rss_mb": 425.0
     },
     "python-requests": {
       "files": 37,
       "symbols": 801,
       "edges": 854,
-      "cold_ms": 211.8,
-      "warm_ms": 70.0,
+      "cold_ms": 210.8,
+      "warm_ms": 76.4,
       "warm_cache_hits": 37,
-      "incremental_p95_ms": 38.28,
-      "query_ms": 2.0,
+      "refresh_median_ms": 4.52,
+      "refresh_p95_ms": 37.81,
+      "refresh_slowest": [
+        {
+          "file": "tests/test_requests.py",
+          "ms": 254.54
+        },
+        {
+          "file": "src/requests/models.py",
+          "ms": 37.808
+        },
+        {
+          "file": "src/requests/sessions.py",
+          "ms": 27.053
+        }
+      ],
+      "refresh_files": [
+        {
+          "file": "src/requests/structures.py",
+          "ms": 13.794
+        },
+        {
+          "file": "src/requests/auth.py",
+          "ms": 10.671
+        },
+        {
+          "file": "tests/test_adapters.py",
+          "ms": 0.584
+        },
+        {
+          "file": "src/requests/__init__.py",
+          "ms": 4.781
+        },
+        {
+          "file": "src/requests/__version__.py",
+          "ms": 0.834
+        },
+        {
+          "file": "src/requests/_types.py",
+          "ms": 10.197
+        },
+        {
+          "file": "src/requests/compat.py",
+          "ms": 4.25
+        },
+        {
+          "file": "src/requests/sessions.py",
+          "ms": 27.053
+        },
+        {
+          "file": "docs/conf.py",
+          "ms": 2.86
+        },
+        {
+          "file": "src/requests/models.py",
+          "ms": 37.808
+        },
+        {
+          "file": "tests/test_structures.py",
+          "ms": 2.114
+        },
+        {
+          "file": "tests/test_lowlevel.py",
+          "ms": 6.718
+        },
+        {
+          "file": "setup.py",
+          "ms": 0.496
+        },
+        {
+          "file": "src/requests/exceptions.py",
+          "ms": 7.139
+        },
+        {
+          "file": "tests/compat.py",
+          "ms": 0.853
+        },
+        {
+          "file": "tests/conftest.py",
+          "ms": 18.304
+        },
+        {
+          "file": "src/requests/adapters.py",
+          "ms": 19.464
+        },
+        {
+          "file": "src/requests/utils.py",
+          "ms": 23.714
+        },
+        {
+          "file": "src/requests/packages.py",
+          "ms": 0.967
+        },
+        {
+          "file": "tests/__init__.py",
+          "ms": 0.686
+        },
+        {
+          "file": "tests/testserver/__init__.py",
+          "ms": 0.22
+        },
+        {
+          "file": "tests/test_utils.py",
+          "ms": 23.228
+        },
+        {
+          "file": "src/requests/hooks.py",
+          "ms": 3.1
+        },
+        {
+          "file": "src/requests/certs.py",
+          "ms": 0.675
+        },
+        {
+          "file": "tests/test_packages.py",
+          "ms": 0.331
+        },
+        {
+          "file": "tests/testserver/server.py",
+          "ms": 5.916
+        },
+        {
+          "file": "docs/_themes/flask_theme_support.py",
+          "ms": 1.633
+        },
+        {
+          "file": "tests/test_requests.py",
+          "ms": 254.54
+        },
+        {
+          "file": "tests/test_help.py",
+          "ms": 1.23
+        },
+        {
+          "file": "src/requests/cookies.py",
+          "ms": 22.495
+        }
+      ],
+      "query_ms": 2.1,
       "query_symbol": "_check_cryptography",
       "query_ok": true,
-      "peak_rss_mb": 101.8
+      "peak_rss_mb": 105.7
     },
     "ts-zod": {
       "files": 169,
       "symbols": 1044,
       "edges": 1126,
-      "cold_ms": 450.4,
-      "warm_ms": 61.0,
+      "cold_ms": 393.9,
+      "warm_ms": 60.4,
       "warm_cache_hits": 169,
-      "incremental_p95_ms": 2.5,
-      "query_ms": 0.9,
+      "refresh_median_ms": 1.69,
+      "refresh_p95_ms": 11.8,
+      "refresh_slowest": [
+        {
+          "file": "deno/lib/__tests__/default.test.ts",
+          "ms": 14.059
+        },
+        {
+          "file": "deno/lib/__tests__/array.test.ts",
+          "ms": 11.799
+        },
+        {
+          "file": "src/__tests__/function.test.ts",
+          "ms": 9.449
+        }
+      ],
+      "refresh_files": [
+        {
+          "file": "deno/lib/locales/en.ts",
+          "ms": 2.586
+        },
+        {
+          "file": "deno/lib/__tests__/nativeEnum.test.ts",
+          "ms": 0.986
+        },
+        {
+          "file": "src/__tests__/custom.test.ts",
+          "ms": 0.48
+        },
+        {
+          "file": "deno/lib/__tests__/base.test.ts",
+          "ms": 0.527
+        },
+        {
+          "file": "deno/lib/__tests__/crazySchema.ts",
+          "ms": 0.655
+        },
+        {
+          "file": "src/__tests__/readonly.test.ts",
+          "ms": 2.137
+        },
+        {
+          "file": "deno/lib/__tests__/discriminated-unions.test.ts",
+          "ms": 2.93
+        },
+        {
+          "file": "src/__tests__/async-refinements.test.ts",
+          "ms": 1.432
+        },
+        {
+          "file": "src/benchmarks/datetime.ts",
+          "ms": 1.798
+        },
+        {
+          "file": "deno/lib/__tests__/branded.test.ts",
+          "ms": 1.461
+        },
+        {
+          "file": "src/__tests__/parseUtil.test.ts",
+          "ms": 1.743
+        },
+        {
+          "file": "deno/lib/__tests__/recursive.test.ts",
+          "ms": 8.627
+        },
+        {
+          "file": "deno/lib/__tests__/array.test.ts",
+          "ms": 11.799
+        },
+        {
+          "file": "deno/lib/__tests__/default.test.ts",
+          "ms": 14.059
+        },
+        {
+          "file": "src/__tests__/function.test.ts",
+          "ms": 9.449
+        },
+        {
+          "file": "src/__tests__/enum.test.ts",
+          "ms": 3.848
+        },
+        {
+          "file": "deno/lib/__tests__/complex.test.ts",
+          "ms": 0.805
+        },
+        {
+          "file": "deno/lib/__tests__/unions.test.ts",
+          "ms": 0.975
+        },
+        {
+          "file": "deno/lib/__tests__/description.test.ts",
+          "ms": 0.62
+        },
+        {
+          "file": "src/__tests__/safeparse.test.ts",
+          "ms": 0.538
+        },
+        {
+          "file": "src/__tests__/error.test.ts",
+          "ms": 5.536
+        },
+        {
+          "file": "deno/lib/__tests__/catch.test.ts",
+          "ms": 2.272
+        },
+        {
+          "file": "src/__tests__/transformer.test.ts",
+          "ms": 2.051
+        },
+        {
+          "file": "deno/lib/__tests__/instanceof.test.ts",
+          "ms": 0.679
+        },
+        {
+          "file": "deno/lib/__tests__/set.test.ts",
+          "ms": 3.595
+        },
+        {
+          "file": "src/__tests__/validations.test.ts",
+          "ms": 1.633
+        },
+        {
+          "file": "src/index.ts",
+          "ms": 1.643
+        },
+        {
+          "file": "src/helpers/util.ts",
+          "ms": 6.007
+        },
+        {
+          "file": "deno/lib/__tests__/safeparse.test.ts",
+          "ms": 0.554
+        },
+        {
+          "file": "deno/lib/__tests__/async-refinements.test.ts",
+          "ms": 0.893
+        }
+      ],
+      "query_ms": 1.1,
       "query_symbol": "join",
       "query_ok": true,
-      "peak_rss_mb": 108.4
+      "peak_rss_mb": 108.1
     }
   }
 }

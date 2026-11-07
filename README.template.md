@@ -96,7 +96,9 @@ recall counts resolved sites as missed when the tool reports no edge.
 ## Performance
 
 Measured by `verify/scale_probe.py` on the development machine, one process per corpus.
-Synthetic corpora use seed 42. Latency is machine-dependent.
+Each refresh is a one-line edit to one of 30 distinct files; latency varies with file size
+and disk state, so the table reports median and p95 rather than a fixed promise. Synthetic
+corpora use seed 42.
 
 {{performance_table}}
 
