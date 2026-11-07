@@ -4,6 +4,10 @@ Measured numbers are not stored here. They live in `METRICS.md`, which is genera
 `python scripts/generate_metrics.py` from the committed evaluation scripts, and CI fails if it
 drifts. Parameters such as the 6,000-token payload cap are code constants, not measurements.
 
+## 1.0.1 — 2026-11-07
+
+- Fix project URLs in package metadata.
+
 ## 1.0.0 — 2026-11-06
 
 ### Added

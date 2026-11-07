@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "polyglot-ast-slicer"
-version = "1.0.0"
+version = "1.0.1"
 description = "Deterministic, token-efficient AST call-graph slicing for AI coding agents, exposed as a local MCP server."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -37,8 +37,8 @@ dev = ["pytest>=8.3.0", "pytest-cov>=5.0.0", "mypy>=1.11.0", "ruff>=0.6.0", "jed
 polyglot-ast-slicer = "polyglot_ast_slicer.server:main"
 
 [project.urls]
-Homepage = "https://github.com/suryanshraj/polyglot-ast-slicer"
-Issues = "https://github.com/suryanshraj/polyglot-ast-slicer/issues"
+Homepage = "https://github.com/suryanshrajps/polyglot-ast-slicer"
+Issues = "https://github.com/suryanshrajps/polyglot-ast-slicer/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["polyglot_ast_slicer"]
